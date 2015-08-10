@@ -1,3 +1,3 @@
 language: cpp
 compiler: clang
-script: cmake --build QuestWeaver --target all
+script: cmake --build . --target all
