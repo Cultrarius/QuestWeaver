@@ -1,3 +1,0 @@
-language: cpp
-compiler: clang
-script: cmake --build . --target all
