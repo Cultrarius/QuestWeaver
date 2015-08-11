@@ -4,6 +4,10 @@
 
 #pragma once
 
-class QuestModel {
+#include <list>
+#include "Quest.h"
 
+class QuestModel {
+public:
+    std::list<Quest> getActiveQuests() const;
 };
