@@ -10,4 +10,9 @@
 class QuestModel {
 public:
     std::list<Quest> getActiveQuests() const;
+
+    void addQuest(Quest newQuest);
+
+private:
+    std::list<Quest> quests;
 };

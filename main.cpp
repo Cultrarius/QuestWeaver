@@ -4,7 +4,8 @@
 using namespace std;
 
 int main() {
-    QuestWeaver weaver();
-    cout << "Hello, World!" << endl;
+    QuestWeaver weaver;
+
+    cout << "Size: " << weaver.getActiveQuests().size() << endl;
     return 0;
 }
