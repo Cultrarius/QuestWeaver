@@ -3,3 +3,7 @@
 //
 
 #include "TemplateEngine.h"
+
+Template TemplateEngine::GetTemplateForNewQuest() {
+    return Template();
+}

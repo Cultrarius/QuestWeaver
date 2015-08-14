@@ -4,6 +4,9 @@
 
 #pragma once
 
-class TemplateEngine {
+#include "Template.h"
 
+class TemplateEngine {
+public:
+    Template GetTemplateForNewQuest();
 };

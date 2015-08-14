@@ -16,10 +16,16 @@ class QuestWeaver {
 public:
     QuestWeaver();
 
-    std::list<Quest> getActiveQuests() const;
+    std::list<Quest> GetActiveQuests() const;
+
+    Quest CreateNewQuest();
 private:
     std::unique_ptr<WeaverEngine> engine;
     std::unique_ptr<QuestModel> quests;
     std::unique_ptr<TemplateEngine> templates;
     std::unique_ptr<WorldModel> world;
+
+    void fillTemplate(Template &questTemplate);
+
+    void updateWorld(Quest &quest);
 };

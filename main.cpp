@@ -5,7 +5,7 @@ using namespace std;
 
 int main() {
     QuestWeaver weaver;
-
-    cout << "Size: " << weaver.getActiveQuests().size() << endl;
+    Quest newQuest = weaver.CreateNewQuest();
+    cout << "Quest: " << newQuest.getTitle() << endl;
     return 0;
 }
