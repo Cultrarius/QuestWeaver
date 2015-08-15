@@ -2,31 +2,22 @@
 // Created by michael on 10.08.15.
 //
 
-#include <iostream>
-#include <fstream>
-#include "TemplateEngine.h"
-#include "../json/json.h"
 
-using namespace Json;
-using namespace std;
+#include "TemplateEngine.h"
 
 Template TemplateEngine::GetTemplateForNewQuest() {
-    Value root;
-    CharReaderBuilder readBuilder;
-    readBuilder["collectComments"] = false;
-    readBuilder["rejectDupKeys"] = true;
-    string errorMessage;
-    ifstream inStream;
-    inStream.open("testTemplate.qt");
-    if (!Json::parseFromStream(readBuilder, inStream, &root, &errorMessage)) {
-        cerr << "Error parsing template file: " << errorMessage;
-    } else {
-        cout << "Success parsing file! Template Key: " << root["key"].asString() << endl;
-        const Json::Value descriptions = root["descriptions"];
-        for (int i = 0; i < descriptions.size(); ++i) {
-            const Json::Value description = descriptions[i];
-            cout << description["text"].asString() << endl;
+    return Template();
+}
+
+void TemplateEngine::RefreshTemplates() {
+
+}
+
+void TemplateEngine::RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory) {
+    for (auto f : factories) {
+        if (f.get() == factory.get()) {
+            return;
         }
     }
-    return Template();
+    factories.push_back(factory);
 }

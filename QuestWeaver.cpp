@@ -3,6 +3,7 @@
 //
 
 #include "QuestWeaver.h"
+#include "Template/Space/SpaceQuestTemplateFactory.h"
 
 using namespace std;
 
@@ -11,6 +12,9 @@ QuestWeaver::QuestWeaver() {
     quests = unique_ptr<QuestModel>(new QuestModel());
     templates = unique_ptr<TemplateEngine>(new TemplateEngine());
     world = unique_ptr<WorldModel>(new WorldModel());
+
+    shared_ptr<TemplateFactory> spaceFactory = make_shared<SpaceQuestTemplateFactory>();
+    templates->RegisterTemplateFactory(spaceFactory);
 }
 
 std::list<Quest> QuestWeaver::GetActiveQuests() const {

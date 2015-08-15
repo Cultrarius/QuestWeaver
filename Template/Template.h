@@ -8,7 +8,8 @@
 
 class Template {
 public:
-    Quest ToQuest();
+    virtual Quest ToQuest();
+
 };
 
 

@@ -5,14 +5,14 @@
 #pragma once
 
 #include <list>
+#include <vector>
 #include "Quest.h"
 
 class QuestModel {
 public:
     std::list<Quest> getActiveQuests() const;
-
     void addQuest(Quest newQuest);
 
 private:
-    std::list<Quest> quests;
+    std::vector<Quest> quests;
 };
