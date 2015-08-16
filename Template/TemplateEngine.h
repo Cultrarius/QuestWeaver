@@ -12,8 +12,6 @@ class TemplateEngine {
 public:
     Template GetTemplateForNewQuest();
 
-    void RefreshTemplates();
-
     void RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory);
 
 private:

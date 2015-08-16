@@ -4,13 +4,20 @@
 
 
 #include "TemplateEngine.h"
+#include <iostream>
+
+using namespace std;
 
 Template TemplateEngine::GetTemplateForNewQuest() {
-    return Template();
-}
+    shared_ptr<TemplateFactory> factory = factories[0]; //TODO choose factory
+    auto factoryKeys = factory->GetTemplateKeys();
+    Template result;
+    for (auto key : factoryKeys) {
+        cout << "Creating template with key: " << key << endl;
+        result = factory->CreateTemplate(key);
+    }
 
-void TemplateEngine::RefreshTemplates() {
-
+    return result;
 }
 
 void TemplateEngine::RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory) {

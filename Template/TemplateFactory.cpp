@@ -19,19 +19,20 @@ Json::Value TemplateFactory::readTemplateFile(const char *fileName) {
 
     inStream.open(fileName);
     if (!Json::parseFromStream(readBuilder, inStream, &root, &errorMessage)) {
-        cerr << "Error parsing template file: " << errorMessage;
+        cerr << "Error parsing template file: " << errorMessage << endl;
+        throw new runtime_error(errorMessage);
     } else {
-        cout << "Success parsing file! Template Key: " << root["key"].asString() << endl;
         //TODO check root value for consistency
-        const Json::Value descriptions = root["descriptions"];
-        for (int i = 0; i < descriptions.size(); ++i) {
-            const Json::Value description = descriptions[i];
-            cout << description["text"].asString() << endl;
-        }
     }
     return root;
 }
 
-TemplateFactory::TemplateFactory() {
+vector<string> TemplateFactory::GetTemplateKeys() {
+    vector<string> keys;
+    keys.reserve(templateMap.size());
 
+    for (auto kv : templateMap) {
+        keys.push_back(kv.first);
+    }
+    return keys;
 }

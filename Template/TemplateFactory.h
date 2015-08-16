@@ -4,16 +4,19 @@
 
 #pragma once
 
+#include <unordered_map>
 #include "../json/json.h"
+#include "Template.h"
 
 class TemplateFactory {
 public:
-    TemplateFactory();
+    virtual std::vector<std::string> GetTemplateKeys();
 
-    virtual std::vector<std::string> GetTemplateKeys() = 0;
-
+    virtual Template CreateTemplate(std::string templateKey) = 0;
 protected:
     Json::Value readTemplateFile(const char *fileName);
+
+    std::unordered_map<std::string, Json::Value> templateMap;
 };
 
 

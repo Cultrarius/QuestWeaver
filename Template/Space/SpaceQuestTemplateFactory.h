@@ -9,7 +9,9 @@
 
 class SpaceQuestTemplateFactory : public TemplateFactory {
 public:
-    std::vector<std::string> GetTemplateKeys();
+    SpaceQuestTemplateFactory();
+
+    Template CreateTemplate(std::string templateKey);
 };
 
 
