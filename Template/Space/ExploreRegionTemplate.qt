@@ -12,14 +12,14 @@
   ],
   "descriptions": [
     {
-      "condition": [
+      "conditions": [
         "location",
         "sponsor"
       ],
       "text": "%sponsor generously asks you to explore %location and inform them about anything interesting you find."
     },
     {
-      "condition": [
+      "conditions": [
         "location"
       ],
       "text": "An anonymous source asks you to explore %location. Transmit your findings to the attached address."

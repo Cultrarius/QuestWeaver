@@ -28,6 +28,19 @@ SpaceQuestTemplateFactory::SpaceQuestTemplateFactory() {
     templateMap[root["key"].asString()] = root;
 }
 
-Template SpaceQuestTemplateFactory::CreateTemplate(std::string templateKey) {
-    return ExploreRegionTemplate();
+std::shared_ptr<Template> SpaceQuestTemplateFactory::CreateTemplate(std::string templateKey) {
+    auto mapEntry = templateMap.find(templateKey);
+    if (mapEntry == templateMap.end()) {
+        throw new runtime_error("Cannot find template for key " + templateKey + "\n");
+    }
+    std::vector<std::string> titles;
+    std::vector<TemplateQuestProperty> properties;
+    std::vector<TemplateQuestDescription> descriptions;
+    if (mapEntry->first.compare("ExploreRegionQuest") == 0) {
+        auto exploreTemplate = make_shared<ExploreRegionTemplate>(titles, properties, descriptions);
+
+        return exploreTemplate;
+    } else {
+        throw new runtime_error("Unknown Space template key " + templateKey + "\n");
+    }
 }

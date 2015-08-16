@@ -10,7 +10,7 @@
 
 class TemplateEngine {
 public:
-    Template GetTemplateForNewQuest();
+    std::shared_ptr<Template> GetTemplateForNewQuest();
 
     void RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory);
 

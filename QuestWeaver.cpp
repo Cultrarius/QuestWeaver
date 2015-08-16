@@ -22,15 +22,15 @@ std::list<Quest> QuestWeaver::GetActiveQuests() const {
 }
 
 Quest QuestWeaver::CreateNewQuest() {
-    Template questTemplate = templates->GetTemplateForNewQuest();
+    auto questTemplate = templates->GetTemplateForNewQuest();
     fillTemplate(questTemplate);
-    Quest newQuest = questTemplate.ToQuest();
+    Quest newQuest = questTemplate->ToQuest();
     //TODO create quest-variants and choose the best one
     updateWorld(newQuest);
     return newQuest;
 }
 
-void QuestWeaver::fillTemplate(Template &questTemplate) {
+void QuestWeaver::fillTemplate(shared_ptr<Template> &questTemplate) {
 
 }
 

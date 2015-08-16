@@ -11,7 +11,7 @@ class SpaceQuestTemplateFactory : public TemplateFactory {
 public:
     SpaceQuestTemplateFactory();
 
-    Template CreateTemplate(std::string templateKey);
+    std::shared_ptr<Template> CreateTemplate(std::string templateKey);
 };
 
 

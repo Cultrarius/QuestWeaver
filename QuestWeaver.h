@@ -25,6 +25,7 @@ private:
     std::unique_ptr<TemplateEngine> templates;
     std::unique_ptr<WorldModel> world;
 
-    void fillTemplate(Template &questTemplate);
     void updateWorld(Quest &quest);
+
+    void fillTemplate(std::shared_ptr<Template> &questTemplate);
 };
