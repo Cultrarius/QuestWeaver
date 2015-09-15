@@ -1,15 +1,18 @@
 {
   "parent": "Space",
-  "key": "ExploreRegionQuest",
+  "key": "SavePersonQuest",
   "mandatory": [
+    "friend",
     "location"
   ],
   "optional": [
-    "sponsor"
+    "sponsor",
+    "reason",
+    "kidnapper"
   ],
   "titles": [
-    "Explore region of space",
-    "Travel to %location"
+    "Save your friend!",
+    "Travel to %location to save %friend"
   ],
   "descriptions": [
     {
