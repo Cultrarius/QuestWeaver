@@ -8,7 +8,7 @@ using namespace std;
 
 list<Quest> QuestModel::getActiveQuests() const {
     list<Quest> result;
-    for (auto quest : quests) {
+    for (auto &quest : quests) {
         if (quest.getState() == Active) {
             result.push_back(quest);
         }

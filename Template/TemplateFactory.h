@@ -13,11 +13,15 @@ class TemplateFactory {
 public:
     virtual std::vector<std::string> GetTemplateKeys();
 
-    virtual std::shared_ptr<Template> CreateTemplate(std::string templateKey) = 0;
+    std::shared_ptr<Template> CreateTemplate(std::string templateKey) const;
 protected:
+    virtual std::shared_ptr<Template> CreateTemplate(const Json::Value &root) const = 0;
     Json::Value readTemplateFile(const char *fileName);
-
     std::unordered_map<std::string, Json::Value> templateMap;
+
+    std::vector<TemplateQuestProperty> extractProperties(const Json::Value &root) const;
+    std::vector<TemplateQuestDescription> extractDescriptions(const Json::Value &root) const;
+    std::vector<std::string> extractTitles(const Json::Value &root) const;
 };
 
 

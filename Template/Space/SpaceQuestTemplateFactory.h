@@ -11,7 +11,7 @@ class SpaceQuestTemplateFactory : public TemplateFactory {
 public:
     SpaceQuestTemplateFactory();
 
-    std::shared_ptr<Template> CreateTemplate(std::string templateKey);
+    std::shared_ptr<Template> CreateTemplate(const Json::Value &root) const;
 };
 
 

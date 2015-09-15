@@ -20,23 +20,16 @@ SpaceQuestTemplateFactory::SpaceQuestTemplateFactory() {
         throw new runtime_error(errorMessage);
     }
 
-//    const Json::Value descriptions = root["descriptions"];
-//    for (int i = 0; i < descriptions.size(); ++i) {
-//        const Json::Value description = descriptions[i];
-//        cout << description["text"].asString() << endl;
-//    }
     templateMap[root["key"].asString()] = root;
 }
 
-std::shared_ptr<Template> SpaceQuestTemplateFactory::CreateTemplate(std::string templateKey) {
-    auto mapEntry = templateMap.find(templateKey);
-    if (mapEntry == templateMap.end()) {
-        throw new runtime_error("Cannot find template for key " + templateKey + "\n");
-    }
-    std::vector<std::string> titles;
-    std::vector<TemplateQuestProperty> properties;
-    std::vector<TemplateQuestDescription> descriptions;
-    if (mapEntry->first.compare("ExploreRegionQuest") == 0) {
+std::shared_ptr<Template> SpaceQuestTemplateFactory::CreateTemplate(const Json::Value &root) const {
+    vector<string> titles = extractTitles(root);
+    vector<TemplateQuestProperty> properties = extractProperties(root);
+    vector<TemplateQuestDescription> descriptions = extractDescriptions(root);
+
+    const string &templateKey = root["key"].asString();
+    if (templateKey.compare("ExploreRegionQuest") == 0) {
         auto exploreTemplate = make_shared<ExploreRegionTemplate>(titles, properties, descriptions);
 
         return exploreTemplate;
