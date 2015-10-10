@@ -41,7 +41,7 @@ vector<string> TemplateFactory::extractTitles(const Json::Value &root) const {
     vector<string> titles;
     const Value jsonTitles = root["titles"];
     for (int i = 0; i < jsonTitles.size(); ++i) {
-        titles.push_back(jsonTitles[i].asString());
+        titles.push_back(std::move(jsonTitles[i].asString()));
     }
     return titles;
 }
@@ -54,10 +54,10 @@ vector<TemplateQuestDescription> TemplateFactory::extractDescriptions(const Json
         vector<string> conditions;
         const Value jsonConditions = root["conditions"];
         for (int k = 0; k < jsonConditions.size(); ++k) {
-            conditions.push_back(jsonConditions[k].asString());
+            conditions.push_back(std::move(jsonConditions[k].asString()));
         }
         TemplateQuestDescription description(conditions, jsonDescription["text"].asString());
-        descriptions.push_back(description);
+        descriptions.push_back(std::move(description));
     }
     return descriptions;
 }
@@ -65,22 +65,22 @@ vector<TemplateQuestDescription> TemplateFactory::extractDescriptions(const Json
 vector<TemplateQuestProperty> TemplateFactory::extractProperties(const Value &root) const {
     vector<TemplateQuestProperty> properties;
     const Value jsonMandatory = root["mandatory"];
-    extractProperties(properties, jsonMandatory, true);
+    extractProperties(&properties, jsonMandatory, true);
     const Value jsonOptional = root["optional"];
-    extractProperties(properties, jsonOptional, false);
+    extractProperties(&properties, jsonOptional, false);
     return properties;
 }
 
-void TemplateFactory::extractProperties(vector<TemplateQuestProperty> &properties, const Value &jsonMandatory,
+void TemplateFactory::extractProperties(vector<TemplateQuestProperty> *properties, const Value &jsonMandatory,
                                         bool isMandatory) const {
     for (int i = 0; i < jsonMandatory.size(); ++i) {
         string name = jsonMandatory[i].asString();
         TemplateQuestProperty property(isMandatory, name);
-        properties.push_back(property);
+        properties->push_back(std::move(property));
     }
 }
 
-std::shared_ptr<Template> TemplateFactory::CreateTemplate(std::string templateKey) const {
+std::shared_ptr<Template> TemplateFactory::CreateTemplate(const std::string &templateKey) const {
     auto mapEntry = templateMap.find(templateKey);
     if (mapEntry == templateMap.end()) {
         throw new runtime_error("Cannot find template for key " + templateKey + "\n");

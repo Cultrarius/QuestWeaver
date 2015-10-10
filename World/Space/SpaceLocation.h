@@ -7,5 +7,5 @@
 #include "../WorldEntity.h"
 
 class SpaceLocation : public WorldEntity {
-
 };
+

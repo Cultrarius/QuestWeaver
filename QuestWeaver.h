@@ -18,6 +18,7 @@ public:
     QuestWeaver();
 
     std::list<Quest> GetActiveQuests() const;
+
     Quest CreateNewQuest();
 
 private:
@@ -26,7 +27,7 @@ private:
     std::unique_ptr<TemplateEngine> templates;
     std::unique_ptr<WorldModel> world;
 
-    void updateWorld(Quest &quest);
+    void updateWorld(Quest quest);
 
-    std::vector<QuestPropertyValue> fillTemplate(std::shared_ptr<Template> &questTemplate);
+    std::vector<QuestPropertyValue> fillTemplate(std::shared_ptr<Template> questTemplate);
 };

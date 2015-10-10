@@ -5,5 +5,5 @@
 #pragma once
 
 class WorldEntity {
-
 };
+

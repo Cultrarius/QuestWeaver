@@ -12,13 +12,14 @@ enum ActionType {
 };
 
 class ModelAction {
-
 private:
     ActionType actionType;
     std::shared_ptr<WorldEntity> entity;
 
 public:
-    ModelAction(const ActionType &actionType, const std::shared_ptr<WorldEntity> entity) : actionType(actionType), entity(entity) { }
+    ModelAction(const ActionType &actionType,
+                const std::shared_ptr<WorldEntity> entity) :
+            actionType(actionType), entity(entity) { }
 
     ActionType GetActionType() const;
 

@@ -32,7 +32,7 @@ Quest QuestWeaver::CreateNewQuest() {
     return newQuest;
 }
 
-vector<QuestPropertyValue> QuestWeaver::fillTemplate(shared_ptr<Template> &questTemplate) {
+vector<QuestPropertyValue> QuestWeaver::fillTemplate(shared_ptr<Template> questTemplate) {
     // TODO insert fancy algorithm
     vector<QuestPropertyValue> returnValues;
     vector<TemplateQuestProperty> propertiesToCreate;
@@ -54,5 +54,5 @@ vector<QuestPropertyValue> QuestWeaver::fillTemplate(shared_ptr<Template> &quest
     return returnValues;
 }
 
-void QuestWeaver::updateWorld(Quest &quest) {
+void QuestWeaver::updateWorld(Quest quest) {
 }

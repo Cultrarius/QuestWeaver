@@ -16,9 +16,10 @@ ExploreRegionTemplate::ExploreRegionTemplate(vector<string> titles,
 vector<ModelAction> ExploreRegionTemplate::GetPropertyCandidates(const TemplateQuestProperty &property,
                                                                  const WorldModel &worldModel) const {
     vector<ModelAction> properties;
-    const SpaceWorldModel& spaceModel = (const SpaceWorldModel &) worldModel;
-    const ModelAction modelAction = ModelAction(ActionType::CREATE, spaceModel.CreateLocation());
-    properties.push_back(modelAction);
+    const SpaceWorldModel &spaceModel = (const SpaceWorldModel &) worldModel;
+    const shared_ptr<SpaceLocation> &location = spaceModel.CreateLocation();
+    ModelAction modelAction(ActionType::CREATE, location);
+    properties.push_back(std::move(modelAction));
     return properties;
 }
 

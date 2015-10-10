@@ -7,5 +7,4 @@
 #include <memory>
 
 class WorldModel {
-
 };

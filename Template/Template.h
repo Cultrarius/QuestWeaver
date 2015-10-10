@@ -12,7 +12,7 @@
 
 class TemplateQuestProperty {
 public:
-    TemplateQuestProperty(bool isMandatory, std::string &name);
+    TemplateQuestProperty(bool isMandatory, const std::string name);
 
     bool IsMandatory() const;
 
@@ -25,7 +25,7 @@ private:
 
 class QuestPropertyValue {
 public:
-    QuestPropertyValue(TemplateQuestProperty &property, std::shared_ptr<WorldEntity> value);
+    QuestPropertyValue(const TemplateQuestProperty property, std::shared_ptr<WorldEntity> value);
 
     TemplateQuestProperty GetProperty() const;
 
@@ -58,7 +58,7 @@ public:
     virtual Quest ToQuest(std::vector<QuestPropertyValue> questPropertyValues) const = 0;
 
     virtual std::vector<ModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
-                                                           const WorldModel& worldModel) const = 0;
+                                                           const WorldModel &worldModel) const = 0;
 
     std::vector<std::string> GetTitles() const;
 

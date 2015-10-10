@@ -18,7 +18,7 @@ string TemplateQuestProperty::GetName() const {
     return name;
 }
 
-TemplateQuestProperty::TemplateQuestProperty(bool isMandatory, string& name) {
+TemplateQuestProperty::TemplateQuestProperty(bool isMandatory, const string name) {
     this->isMandatory = isMandatory;
     this->name = name;
 }
@@ -51,7 +51,7 @@ Template::Template(vector<string> titles, vector<TemplateQuestProperty> properti
     this->descriptions = descriptions;
 }
 
-QuestPropertyValue::QuestPropertyValue(TemplateQuestProperty &property,
+QuestPropertyValue::QuestPropertyValue(const TemplateQuestProperty property,
                                        shared_ptr<WorldEntity> value) :
         property(property), value(value) {
 }

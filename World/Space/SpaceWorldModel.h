@@ -10,5 +10,5 @@
 class SpaceWorldModel : public WorldModel {
 public:
     std::shared_ptr<SpaceLocation> CreateLocation() const;
-
 };
+
