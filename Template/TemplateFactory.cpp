@@ -22,7 +22,7 @@ Json::Value TemplateFactory::readTemplateFile(const char *fileName) {
         cerr << "Error parsing template file: " << errorMessage << endl;
         throw new runtime_error(errorMessage);
     } else {
-        //TODO check root value for consistency
+        // TODO check root value for consistency
     }
     return root;
 }

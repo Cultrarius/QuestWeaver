@@ -5,5 +5,4 @@
 #pragma once
 
 class WeaverEngine {
-
 };

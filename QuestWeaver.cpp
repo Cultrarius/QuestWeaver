@@ -3,9 +3,9 @@
 //
 
 #include "QuestWeaver.h"
-#include "Template/Space/SpaceQuestTemplateFactory.h"
 #include <algorithm>
 #include <iostream>
+#include "Template/Space/SpaceQuestTemplateFactory.h"
 
 using namespace std;
 
@@ -27,20 +27,20 @@ Quest QuestWeaver::CreateNewQuest() {
     auto questTemplate = templates->GetTemplateForNewQuest();
     vector<QuestPropertyValue> questPropertyValues = fillTemplate(questTemplate);
     Quest newQuest = questTemplate->ToQuest(questPropertyValues);
-    //TODO create quest-variants and choose the best one
+    // TODO create quest-variants and choose the best one
     updateWorld(newQuest);
     return newQuest;
 }
 
 vector<QuestPropertyValue> QuestWeaver::fillTemplate(shared_ptr<Template> &questTemplate) {
-    //TODO insert fancy algorithm
+    // TODO insert fancy algorithm
     vector<QuestPropertyValue> returnValues;
     vector<TemplateQuestProperty> propertiesToCreate;
-    for (auto property : questTemplate->GetProperties()) {
-        if (property.IsMandatory() || rand() % 100 < 50) {
-            propertiesToCreate.push_back(property);
+    for (TemplateQuestProperty questProperty : questTemplate->GetProperties()) {
+        if (questProperty.IsMandatory() || rand() % 100 < 50) {
+            propertiesToCreate.push_back(questProperty);
         } else {
-            cout << "Omitting property " << property.GetName() << endl;
+            cout << "Omitting property " << questProperty.GetName() << endl;
         }
     }
 
@@ -55,5 +55,4 @@ vector<QuestPropertyValue> QuestWeaver::fillTemplate(shared_ptr<Template> &quest
 }
 
 void QuestWeaver::updateWorld(Quest &quest) {
-
 }

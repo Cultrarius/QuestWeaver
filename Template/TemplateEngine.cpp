@@ -9,7 +9,8 @@
 using namespace std;
 
 shared_ptr<Template> TemplateEngine::GetTemplateForNewQuest() {
-    shared_ptr<TemplateFactory> factory = factories[0]; //TODO choose factory
+    // TODO choose factory
+    shared_ptr<TemplateFactory> factory = factories[0];
     auto factoryKeys = factory->GetTemplateKeys();
     for (auto key : factoryKeys) {
         cout << "Creating template with key: " << key << endl;

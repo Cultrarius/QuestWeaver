@@ -51,8 +51,9 @@ Template::Template(vector<string> titles, vector<TemplateQuestProperty> properti
     this->descriptions = descriptions;
 }
 
-QuestPropertyValue::QuestPropertyValue(TemplateQuestProperty &property, shared_ptr<WorldEntity> value) : property(property), value(value) {
-
+QuestPropertyValue::QuestPropertyValue(TemplateQuestProperty &property,
+                                       shared_ptr<WorldEntity> value) :
+        property(property), value(value) {
 }
 
 TemplateQuestProperty QuestPropertyValue::GetProperty() const {

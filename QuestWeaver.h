@@ -19,6 +19,7 @@ public:
 
     std::list<Quest> GetActiveQuests() const;
     Quest CreateNewQuest();
+
 private:
     std::unique_ptr<WeaverEngine> engine;
     std::unique_ptr<QuestModel> quests;
