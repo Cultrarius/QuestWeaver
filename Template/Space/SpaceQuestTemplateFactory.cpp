@@ -12,7 +12,7 @@ using namespace Json;
 SpaceQuestTemplateFactory::SpaceQuestTemplateFactory() {
     templateMap.clear();
 
-    const char *fileName = "ExploreRegionTemplate.qt";
+    const char *fileName = "../Template/Space/ExploreRegionTemplate.qt";
     auto root = readTemplateFile(fileName);
     if (root["parent"].asString().compare("Space") != 0) {
         string errorMessage = string("Template file has incompatible parent: ") + fileName + "\n";
