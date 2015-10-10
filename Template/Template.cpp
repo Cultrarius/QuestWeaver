@@ -4,7 +4,9 @@
 
 #include "Template.h"
 
-std::vector<std::string> Template::GetTitles() const {
+using namespace std;
+
+vector<string> Template::GetTitles() const {
     return titles;
 }
 
@@ -12,39 +14,51 @@ bool TemplateQuestProperty::IsMandatory() const {
     return isMandatory;
 }
 
-std::string TemplateQuestProperty::GetName() const {
+string TemplateQuestProperty::GetName() const {
     return name;
 }
 
-TemplateQuestProperty::TemplateQuestProperty(bool isMandatory, std::string name) {
+TemplateQuestProperty::TemplateQuestProperty(bool isMandatory, string& name) {
     this->isMandatory = isMandatory;
     this->name = name;
 }
 
-std::vector<TemplateQuestProperty> Template::GetProperties() const {
+vector<TemplateQuestProperty> Template::GetProperties() const {
     return properties;
 }
 
-std::vector<std::string> TemplateQuestDescription::GetConditions() const {
+vector<string> TemplateQuestDescription::GetConditions() const {
     return conditions;
 }
 
-std::string TemplateQuestDescription::GetText() const {
+string TemplateQuestDescription::GetText() const {
     return text;
 }
 
-TemplateQuestDescription::TemplateQuestDescription(std::vector<std::string> conditions, std::string text) {
+TemplateQuestDescription::TemplateQuestDescription(vector<string> conditions, string text) {
     this->conditions = conditions;
     this->text = text;
 }
 
-std::vector<TemplateQuestDescription> Template::GetDescriptions() const {
+vector<TemplateQuestDescription> Template::GetDescriptions() const {
     return descriptions;
 }
 
-Template::Template(std::vector<std::string> titles, std::vector<TemplateQuestProperty> properties,
-                   std::vector<TemplateQuestDescription> descriptions) {
+Template::Template(vector<string> titles, vector<TemplateQuestProperty> properties,
+                   vector<TemplateQuestDescription> descriptions) {
     this->titles = titles;
     this->properties = properties;
     this->descriptions = descriptions;
+}
+
+QuestPropertyValue::QuestPropertyValue(TemplateQuestProperty &property, shared_ptr<WorldEntity> value) : property(property), value(value) {
+
+}
+
+TemplateQuestProperty QuestPropertyValue::GetProperty() const {
+    return property;
+}
+
+shared_ptr<WorldEntity> QuestPropertyValue::GetValue() const {
+    return value;
 }

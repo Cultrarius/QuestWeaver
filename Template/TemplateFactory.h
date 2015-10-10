@@ -22,6 +22,9 @@ protected:
     std::vector<TemplateQuestProperty> extractProperties(const Json::Value &root) const;
     std::vector<TemplateQuestDescription> extractDescriptions(const Json::Value &root) const;
     std::vector<std::string> extractTitles(const Json::Value &root) const;
+
+    void extractProperties(std::vector<TemplateQuestProperty> &properties, const Json::Value &jsonMandatory,
+                           bool isMandatory) const;
 };
 
 

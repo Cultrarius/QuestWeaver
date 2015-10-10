@@ -27,5 +27,5 @@ private:
 
     void updateWorld(Quest &quest);
 
-    void fillTemplate(std::shared_ptr<Template> &questTemplate);
+    std::vector<QuestPropertyValue> fillTemplate(std::shared_ptr<Template> &questTemplate);
 };

@@ -1,0 +1,7 @@
+* Add logger
+* Quest Generation Algorithm (AI?, Tree Search?)
+* UE4 Bindings
+* World Model Classes
+* Quest Templates
+* Actor Classes (Persons in the world/quests)
+* Actor Generation Algorithm

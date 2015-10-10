@@ -65,19 +65,19 @@ vector<TemplateQuestDescription> TemplateFactory::extractDescriptions(const Json
 vector<TemplateQuestProperty> TemplateFactory::extractProperties(const Value &root) const {
     vector<TemplateQuestProperty> properties;
     const Value jsonMandatory = root["mandatory"];
+    extractProperties(properties, jsonMandatory, true);
+    const Value jsonOptional = root["optional"];
+    extractProperties(properties, jsonOptional, false);
+    return properties;
+}
+
+void TemplateFactory::extractProperties(vector<TemplateQuestProperty> &properties, const Value &jsonMandatory,
+                                        bool isMandatory) const {
     for (int i = 0; i < jsonMandatory.size(); ++i) {
         string name = jsonMandatory[i].asString();
-        TemplateQuestProperty property(true, name);
+        TemplateQuestProperty property(isMandatory, name);
         properties.push_back(property);
     }
-
-    const Value jsonOptional = root["optional"];
-    for (int i = 0; i < jsonOptional.size(); ++i) {
-        string name = jsonOptional[i].asString();
-        TemplateQuestProperty property(false, name);
-        properties.push_back(property);
-    }
-    return properties;
 }
 
 std::shared_ptr<Template> TemplateFactory::CreateTemplate(std::string templateKey) const {

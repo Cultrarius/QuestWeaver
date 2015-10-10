@@ -4,7 +4,6 @@
 
 #pragma once
 
-
 #include "../TemplateFactory.h"
 
 class SpaceQuestTemplateFactory : public TemplateFactory {
