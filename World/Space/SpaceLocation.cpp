@@ -3,3 +3,7 @@
 //
 
 #include "SpaceLocation.h"
+
+std::string SpaceLocation::toString() const {
+    return "Location XYZ Test";
+}

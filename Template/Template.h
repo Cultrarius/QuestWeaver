@@ -12,7 +12,7 @@
 
 class TemplateQuestProperty {
 public:
-    TemplateQuestProperty(bool isMandatory, const std::string name);
+    TemplateQuestProperty(bool isMandatory, const std::string &name);
 
     bool IsMandatory() const;
 
@@ -25,7 +25,7 @@ private:
 
 class QuestPropertyValue {
 public:
-    QuestPropertyValue(const TemplateQuestProperty property, std::shared_ptr<WorldEntity> value);
+    QuestPropertyValue(const TemplateQuestProperty &property, std::shared_ptr<WorldEntity> value);
 
     TemplateQuestProperty GetProperty() const;
 
@@ -38,9 +38,9 @@ private:
 
 class TemplateQuestDescription {
 public:
-    TemplateQuestDescription(std::vector<std::string> conditions, std::string text);
+    TemplateQuestDescription(const std::vector<std::string> &conditions, const std::string &text);
 
-    std::vector<std::string> GetConditions() const;
+    bool SupportsCondition(const std::string &condition) const;
 
     std::string GetText() const;
 
@@ -55,7 +55,7 @@ public:
              std::vector<TemplateQuestProperty> properties,
              std::vector<TemplateQuestDescription> descriptions);
 
-    virtual Quest ToQuest(std::vector<QuestPropertyValue> questPropertyValues) const = 0;
+    virtual Quest ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const = 0;
 
     virtual std::vector<ModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
                                                            const WorldModel &worldModel) const = 0;
@@ -65,6 +65,9 @@ public:
     std::vector<TemplateQuestProperty> GetProperties() const;
 
     std::vector<TemplateQuestDescription> GetDescriptions() const;
+
+protected:
+    std::string getBestFittingDescription(const std::vector<QuestPropertyValue> &questPropertyValues) const;
 
 private:
     std::vector<std::string> titles;

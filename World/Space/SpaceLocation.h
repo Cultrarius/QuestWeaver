@@ -7,5 +7,6 @@
 #include "../WorldEntity.h"
 
 class SpaceLocation : public WorldEntity {
+    std::string toString() const;
 };
 

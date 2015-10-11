@@ -16,7 +16,7 @@ std::string Quest::getDescription() const {
     return description;
 }
 
-Quest::Quest(QuestState state, std::string title, std::string description) {
+Quest::Quest(QuestState state, const std::string &title, const std::string &description) {
     this->state = state;
     this->title = title;
     this->description = description;

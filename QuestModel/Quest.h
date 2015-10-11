@@ -13,8 +13,8 @@ enum QuestState {
 class Quest {
 public:
     Quest(QuestState state,
-          std::string title,
-          std::string description);
+          const std::string &title,
+          const std::string &description);
 
     QuestState getState() const;
 

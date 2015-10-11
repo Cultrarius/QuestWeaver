@@ -8,7 +8,7 @@
 
 class ExploreRegionTemplate : public Template {
 public:
-    Quest ToQuest(std::vector<QuestPropertyValue> questPropertyValues) const;
+    Quest ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const;
 
     std::vector<ModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
                                                    const WorldModel &worldModel) const;

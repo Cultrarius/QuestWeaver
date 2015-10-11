@@ -23,6 +23,7 @@ vector<ModelAction> ExploreRegionTemplate::GetPropertyCandidates(const TemplateQ
     return properties;
 }
 
-Quest ExploreRegionTemplate::ToQuest(vector<QuestPropertyValue> questPropertyValues) const {
-    return Quest(Proposed, "Title", "Descr");
+Quest ExploreRegionTemplate::ToQuest(const vector<QuestPropertyValue> &questPropertyValues) const {
+    const string &description = getBestFittingDescription(questPropertyValues);
+    return Quest(Proposed, "Title", description);
 }
