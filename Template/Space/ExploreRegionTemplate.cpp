@@ -6,6 +6,7 @@
 #include "../../World/Space/SpaceWorldModel.h"
 
 using namespace std;
+using namespace weave;
 
 ExploreRegionTemplate::ExploreRegionTemplate(vector<string> titles,
                                              vector<TemplateQuestProperty> properties,

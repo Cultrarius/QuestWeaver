@@ -6,24 +6,26 @@
 
 #include <string>
 
-enum QuestState {
-    Active, Proposed, Failed, Success
-};
+namespace weave {
+    enum QuestState {
+        Active, Proposed, Failed, Success
+    };
 
-class Quest {
-public:
-    Quest(QuestState state,
-          const std::string &title,
-          const std::string &description);
+    class Quest {
+    public:
+        Quest(QuestState state,
+              const std::string &title,
+              const std::string &description);
 
-    QuestState getState() const;
+        QuestState getState() const;
 
-    std::string getTitle() const;
+        std::string getTitle() const;
 
-    std::string getDescription() const;
+        std::string getDescription() const;
 
-private:
-    QuestState state;
-    std::string title;
-    std::string description;
-};
+    private:
+        QuestState state;
+        std::string title;
+        std::string description;
+    };
+}

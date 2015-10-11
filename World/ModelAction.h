@@ -7,21 +7,24 @@
 #include "WorldEntity.h"
 #include <memory>
 
-enum ActionType {
-    KEEP, CREATE, DELETE
-};
+namespace weave {
 
-class ModelAction {
-private:
-    ActionType actionType;
-    std::shared_ptr<WorldEntity> entity;
+    enum ActionType {
+        KEEP, CREATE, DELETE
+    };
 
-public:
-    ModelAction(const ActionType &actionType,
-                const std::shared_ptr<WorldEntity> entity) :
-            actionType(actionType), entity(entity) { }
+    class ModelAction {
+    private:
+        ActionType actionType;
+        std::shared_ptr<WorldEntity> entity;
 
-    ActionType GetActionType() const;
+    public:
+        ModelAction(const ActionType &actionType,
+                    const std::shared_ptr<WorldEntity> entity) :
+                actionType(actionType), entity(entity) { }
 
-    std::shared_ptr<WorldEntity> GetEntity() const;
-};
+        ActionType GetActionType() const;
+
+        std::shared_ptr<WorldEntity> GetEntity() const;
+    };
+}

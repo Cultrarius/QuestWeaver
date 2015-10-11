@@ -5,6 +5,7 @@
 #include "QuestModel.h"
 
 using namespace std;
+using namespace weave;
 
 list<Quest> QuestModel::getActiveQuests() const {
     list<Quest> result;

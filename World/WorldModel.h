@@ -6,5 +6,9 @@
 
 #include <memory>
 
-class WorldModel {
-};
+namespace weave {
+
+    class WorldModel {
+    };
+
+}

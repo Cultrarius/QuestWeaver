@@ -2,6 +2,7 @@
 #include "QuestWeaver.h"
 
 using namespace std;
+using namespace weave;
 
 int main() {
     QuestWeaver weaver;

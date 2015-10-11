@@ -8,12 +8,14 @@
 #include "TemplateFactory.h"
 #include <memory>
 
-class TemplateEngine {
-public:
-    std::shared_ptr<Template> GetTemplateForNewQuest();
+namespace weave {
+    class TemplateEngine {
+    public:
+        std::shared_ptr<Template> GetTemplateForNewQuest();
 
-    void RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory);
+        void RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory);
 
-private:
-    std::vector<std::shared_ptr<TemplateFactory>> factories;
-};
+    private:
+        std::vector<std::shared_ptr<TemplateFactory>> factories;
+    };
+}

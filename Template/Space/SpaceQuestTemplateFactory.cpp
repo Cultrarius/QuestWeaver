@@ -8,6 +8,7 @@
 
 using namespace std;
 using namespace Json;
+using namespace weave;
 
 SpaceQuestTemplateFactory::SpaceQuestTemplateFactory() {
     templateMap.clear();

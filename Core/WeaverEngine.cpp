@@ -3,3 +3,30 @@
 //
 
 #include "WeaverEngine.h"
+#include <iostream>
+
+using namespace std;
+using namespace weave;
+
+vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> questTemplate,
+                                                      const WorldModel &worldModel) {
+    // TODO insert fancy algorithm
+    vector<QuestPropertyValue> returnValues;
+    vector<TemplateQuestProperty> propertiesToCreate;
+    for (const TemplateQuestProperty &questProperty : questTemplate->GetProperties()) {
+        if (questProperty.IsMandatory() || rand() % 100 < 50) {
+            propertiesToCreate.push_back(questProperty);
+        } else {
+            cout << "Omitting property " << questProperty.GetName() << endl;
+        }
+    }
+
+    for (const auto &property : propertiesToCreate) {
+        const vector<ModelAction> candidates = questTemplate->GetPropertyCandidates(property, worldModel);
+
+        shared_ptr<WorldEntity> entity = candidates[0].GetEntity();
+        QuestPropertyValue questValue(property, entity);
+    }
+
+    return returnValues;
+}

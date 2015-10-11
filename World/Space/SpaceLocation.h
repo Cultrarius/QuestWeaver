@@ -6,7 +6,11 @@
 
 #include "../WorldEntity.h"
 
-class SpaceLocation : public WorldEntity {
-    std::string toString() const;
-};
+namespace weave {
+
+    class SpaceLocation : public WorldEntity {
+        std::string toString() const;
+    };
+}
+
 

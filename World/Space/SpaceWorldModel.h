@@ -7,8 +7,9 @@
 #include "../WorldModel.h"
 #include "SpaceLocation.h"
 
-class SpaceWorldModel : public WorldModel {
-public:
-    std::shared_ptr<SpaceLocation> CreateLocation() const;
-};
-
+namespace weave {
+    class SpaceWorldModel : public WorldModel {
+    public:
+        std::shared_ptr<SpaceLocation> CreateLocation() const;
+    };
+}

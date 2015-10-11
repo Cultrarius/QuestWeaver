@@ -4,5 +4,12 @@
 
 #pragma once
 
-class WeaverEngine {
-};
+#include "../Template/Template.h"
+
+namespace weave {
+    class WeaverEngine {
+    public:
+        std::vector<QuestPropertyValue> fillTemplate(std::shared_ptr<Template> questTemplate,
+                                                     const WorldModel &worldModel);
+    };
+}

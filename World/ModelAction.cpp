@@ -4,6 +4,8 @@
 
 #include "ModelAction.h"
 
+using namespace weave;
+
 ActionType ModelAction::GetActionType() const {
     return actionType;
 }

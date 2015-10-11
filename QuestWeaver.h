@@ -13,21 +13,21 @@
 #include "World/WorldModel.h"
 #include "QuestModel/Quest.h"
 
-class QuestWeaver {
-public:
-    QuestWeaver();
+namespace weave {
+    class QuestWeaver {
+    public:
+        QuestWeaver();
 
-    std::list<Quest> GetActiveQuests() const;
+        std::list<Quest> GetActiveQuests() const;
 
-    Quest CreateNewQuest();
+        Quest CreateNewQuest();
 
-private:
-    std::unique_ptr<WeaverEngine> engine;
-    std::unique_ptr<QuestModel> quests;
-    std::unique_ptr<TemplateEngine> templates;
-    std::unique_ptr<WorldModel> world;
+    private:
+        std::unique_ptr<WeaverEngine> engine;
+        std::unique_ptr<QuestModel> quests;
+        std::unique_ptr<TemplateEngine> templates;
+        std::unique_ptr<WorldModel> world;
 
-    void updateWorld(Quest quest);
-
-    std::vector<QuestPropertyValue> fillTemplate(std::shared_ptr<Template> questTemplate);
-};
+        void updateWorld(Quest quest);
+    };
+}

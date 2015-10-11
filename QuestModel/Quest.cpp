@@ -4,6 +4,8 @@
 
 #include "Quest.h"
 
+using namespace weave;
+
 QuestState Quest::getState() const {
     return state;
 }

@@ -8,6 +8,7 @@
 
 using namespace std;
 using namespace Json;
+using namespace weave;
 
 Json::Value TemplateFactory::readTemplateFile(const char *fileName) {
     Value root;

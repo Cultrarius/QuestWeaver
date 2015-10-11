@@ -4,6 +4,8 @@
 
 #include "ExploreRegionQuest.h"
 
+using namespace weave;
+
 ExploreRegionQuest::ExploreRegionQuest(QuestState state,
                                        const std::string &title,
                                        const std::string &description) :

@@ -6,16 +6,17 @@
 
 #include "../Template.h"
 
-class ExploreRegionTemplate : public Template {
-public:
-    Quest ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const;
+namespace weave {
+    class ExploreRegionTemplate : public Template {
+    public:
+        Quest ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const;
 
-    std::vector<ModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
-                                                   const WorldModel &worldModel) const;
+        std::vector<ModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
+                                                       const WorldModel &worldModel) const;
 
-    ExploreRegionTemplate(std::vector<std::string> titles,
-                          std::vector<TemplateQuestProperty> properties,
-                          std::vector<TemplateQuestDescription> descriptions);
-};
-
+        ExploreRegionTemplate(std::vector<std::string> titles,
+                              std::vector<TemplateQuestProperty> properties,
+                              std::vector<TemplateQuestDescription> descriptions);
+    };
+}
 

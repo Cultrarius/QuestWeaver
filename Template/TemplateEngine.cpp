@@ -7,6 +7,7 @@
 #include <iostream>
 
 using namespace std;
+using namespace weave;
 
 shared_ptr<Template> TemplateEngine::GetTemplateForNewQuest() {
     // TODO choose factory

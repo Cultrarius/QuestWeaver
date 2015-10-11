@@ -4,6 +4,8 @@
 
 #include "SpaceLocation.h"
 
+using namespace weave;
+
 std::string SpaceLocation::toString() const {
     return "Location XYZ Test";
 }

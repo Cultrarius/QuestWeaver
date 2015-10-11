@@ -7,6 +7,7 @@
 #include "../Core/WeaverUtils.h"
 
 using namespace std;
+using namespace weave;
 
 vector<string> Template::GetTitles() const {
     return titles;

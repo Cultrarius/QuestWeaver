@@ -8,6 +8,7 @@
 #include "Template/Space/SpaceQuestTemplateFactory.h"
 
 using namespace std;
+using namespace weave;
 
 QuestWeaver::QuestWeaver() {
     engine.reset(new WeaverEngine());
@@ -25,33 +26,11 @@ std::list<Quest> QuestWeaver::GetActiveQuests() const {
 
 Quest QuestWeaver::CreateNewQuest() {
     auto questTemplate = templates->GetTemplateForNewQuest();
-    vector<QuestPropertyValue> questPropertyValues = fillTemplate(questTemplate);
+    vector<QuestPropertyValue> questPropertyValues = engine->fillTemplate(questTemplate, *world);
     Quest newQuest = questTemplate->ToQuest(questPropertyValues);
     // TODO create quest-variants and choose the best one
     updateWorld(newQuest);
     return newQuest;
-}
-
-vector<QuestPropertyValue> QuestWeaver::fillTemplate(shared_ptr<Template> questTemplate) {
-    // TODO insert fancy algorithm
-    vector<QuestPropertyValue> returnValues;
-    vector<TemplateQuestProperty> propertiesToCreate;
-    for (TemplateQuestProperty questProperty : questTemplate->GetProperties()) {
-        if (questProperty.IsMandatory() || rand() % 100 < 50) {
-            propertiesToCreate.push_back(questProperty);
-        } else {
-            cout << "Omitting property " << questProperty.GetName() << endl;
-        }
-    }
-
-    for (auto property : propertiesToCreate) {
-        const vector<ModelAction> candidates = questTemplate->GetPropertyCandidates(property, *world);
-
-        shared_ptr<WorldEntity> entity = candidates[0].GetEntity();
-        QuestPropertyValue questValue(property, entity);
-    }
-
-    return returnValues;
 }
 
 void QuestWeaver::updateWorld(Quest quest) {

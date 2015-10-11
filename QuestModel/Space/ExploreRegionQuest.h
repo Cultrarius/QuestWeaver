@@ -6,7 +6,9 @@
 
 #include "../Quest.h"
 
-class ExploreRegionQuest : Quest {
-public:
-    ExploreRegionQuest(QuestState state, const std::string &title, const std::string &description);
-};
+namespace weave {
+    class ExploreRegionQuest : Quest {
+    public:
+        ExploreRegionQuest(QuestState state, const std::string &title, const std::string &description);
+    };
+}

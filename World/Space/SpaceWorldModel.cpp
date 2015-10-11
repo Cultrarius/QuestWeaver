@@ -5,6 +5,7 @@
 #include "SpaceWorldModel.h"
 
 using namespace std;
+using namespace weave;
 
 shared_ptr<SpaceLocation> SpaceWorldModel::CreateLocation() const {
     return make_shared<SpaceLocation>();

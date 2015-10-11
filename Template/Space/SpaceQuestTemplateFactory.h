@@ -6,11 +6,12 @@
 
 #include "../TemplateFactory.h"
 
-class SpaceQuestTemplateFactory : public TemplateFactory {
-public:
-    SpaceQuestTemplateFactory();
+namespace weave {
+    class SpaceQuestTemplateFactory : public TemplateFactory {
+    public:
+        SpaceQuestTemplateFactory();
 
-    std::shared_ptr<Template> CreateTemplate(const Json::Value &root) const;
-};
-
+        std::shared_ptr<Template> CreateTemplate(const Json::Value &root) const;
+    };
+}
 

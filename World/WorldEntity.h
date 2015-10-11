@@ -6,8 +6,12 @@
 
 #include <string>
 
-class WorldEntity {
-public:
-    virtual std::string toString() const = 0;
-};
+namespace weave {
+
+    class WorldEntity {
+    public:
+        virtual std::string toString() const = 0;
+    };
+}
+
 
