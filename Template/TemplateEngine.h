@@ -12,7 +12,7 @@
 namespace weave {
     class TemplateEngine {
     public:
-        std::shared_ptr<Template> GetTemplateForNewQuest(weave::RandomStream *randomStream);
+        std::shared_ptr<Template> GetTemplateForNewQuest(std::shared_ptr<RandomStream> randomStream);
 
         void RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory);
 

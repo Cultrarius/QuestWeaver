@@ -10,7 +10,7 @@ using namespace weave;
 
 vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> questTemplate,
                                                       const WorldModel &worldModel,
-                                                      weave::RandomStream *randomStream) const {
+                                                      std::shared_ptr<RandomStream> randomStream) const {
     // TODO insert fancy algorithm
     vector<QuestPropertyValue> returnValues;
     vector<TemplateQuestProperty> propertiesToCreate;
@@ -23,7 +23,7 @@ vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> quest
     }
 
     for (const auto &property : propertiesToCreate) {
-        const vector<ModelAction> candidates = questTemplate->GetPropertyCandidates(property, worldModel);
+        const vector<ModelAction> candidates = questTemplate->GetPropertyCandidates(property, worldModel, randomStream);
 
         shared_ptr<WorldEntity> entity = candidates[0].GetEntity();
         QuestPropertyValue questValue(property, entity);

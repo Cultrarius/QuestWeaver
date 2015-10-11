@@ -15,7 +15,8 @@ ExploreRegionTemplate::ExploreRegionTemplate(vector<string> titles,
 }
 
 vector<ModelAction> ExploreRegionTemplate::GetPropertyCandidates(const TemplateQuestProperty &property,
-                                                                 const WorldModel &worldModel) const {
+                                                                 const WorldModel &worldModel,
+                                                                 std::shared_ptr<RandomStream> randomStream) const {
     vector<ModelAction> properties;
     const SpaceWorldModel &spaceModel = (const SpaceWorldModel &) worldModel;
     const shared_ptr<SpaceLocation> &location = spaceModel.CreateLocation();

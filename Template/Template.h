@@ -9,6 +9,7 @@
 #include "../QuestModel/Quest.h"
 #include "../World/ModelAction.h"
 #include "../World/WorldModel.h"
+#include "../Core/WeaverUtils.h"
 
 namespace weave {
     class TemplateQuestProperty {
@@ -59,7 +60,8 @@ namespace weave {
         virtual Quest ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const = 0;
 
         virtual std::vector<ModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
-                                                               const WorldModel &worldModel) const = 0;
+                                                               const WorldModel &worldModel,
+                                                               std::shared_ptr<RandomStream> randomStream) const = 0;
 
         std::vector<std::string> GetTitles() const;
 

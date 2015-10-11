@@ -17,7 +17,7 @@
 namespace weave {
     class QuestWeaver {
     public:
-        QuestWeaver();
+        explicit QuestWeaver(uint64_t seed);
 
         std::list<Quest> GetActiveQuests() const;
 
@@ -28,7 +28,7 @@ namespace weave {
         std::unique_ptr<QuestModel> quests;
         std::unique_ptr<TemplateEngine> templates;
         std::unique_ptr<WorldModel> world;
-        std::unique_ptr<RandomStream> randomStream;
+        std::shared_ptr<RandomStream> randomStream;
 
         void updateWorld(Quest quest);
     };

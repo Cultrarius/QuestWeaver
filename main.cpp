@@ -5,7 +5,7 @@ using namespace std;
 using namespace weave;
 
 int main() {
-    QuestWeaver weaver;
+    QuestWeaver weaver(42);
     Quest newQuest = weaver.CreateNewQuest();
     cout << "Quest: " << newQuest.getTitle() << endl;
     return 0;

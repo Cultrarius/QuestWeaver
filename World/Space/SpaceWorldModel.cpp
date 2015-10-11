@@ -10,3 +10,6 @@ using namespace weave;
 shared_ptr<SpaceLocation> SpaceWorldModel::CreateLocation() const {
     return make_shared<SpaceLocation>();
 }
+
+SpaceWorldModel::SpaceWorldModel(std::shared_ptr<RandomStream> randomStream) : rs(randomStream) {
+}

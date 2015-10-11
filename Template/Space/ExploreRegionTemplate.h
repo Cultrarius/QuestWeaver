@@ -12,7 +12,8 @@ namespace weave {
         Quest ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const;
 
         std::vector<ModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
-                                                       const WorldModel &worldModel) const;
+                                                       const WorldModel &worldModel,
+                                                       std::shared_ptr<RandomStream> randomStream) const;
 
         ExploreRegionTemplate(std::vector<std::string> titles,
                               std::vector<TemplateQuestProperty> properties,

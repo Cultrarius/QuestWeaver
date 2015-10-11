@@ -9,7 +9,7 @@
 using namespace std;
 using namespace weave;
 
-shared_ptr<Template> TemplateEngine::GetTemplateForNewQuest(RandomStream *randomStream) {
+shared_ptr<Template> TemplateEngine::GetTemplateForNewQuest(std::shared_ptr<RandomStream> randomStream) {
     if (factories.size() == 0) {
         throw new runtime_error("No factory defined to create template.\n");
     }
