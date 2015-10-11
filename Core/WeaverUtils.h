@@ -5,28 +5,36 @@
 #pragma once
 
 #include <string>
+#include <random>
 
 namespace weave {
 
-    bool replace(std::string *str, const std::string &from, const std::string &to) {
-        size_t start_pos = str->find(from);
-        if (start_pos == std::string::npos) {
-            return false;
+    class RandomStream {
+    private:
+        std::uniform_int_distribution<int> defaultDistribution;
+        std::default_random_engine generator;
+    public:
+        explicit RandomStream(uint64_t seed) {
+            generator.seed(seed);
         }
-        str->replace(start_pos, from.length(), to);
-        return true;
-    }
 
-    void replaceAll(std::string *str, const std::string &from, const std::string &to) {
-        if (from.empty()) {
-            return;
+        virtual int RandomInt() {
+            return defaultDistribution(generator);
         }
-        size_t start_pos = 0;
-        while ((start_pos = str->find(from, start_pos)) != std::string::npos) {
-            str->replace(start_pos, from.length(), to);
-            start_pos += to.length();
+
+        virtual int RandomIntRange(int start, int end) {
+            std::uniform_int_distribution<int> limitedDist(start, end);
+            return limitedDist(generator);
         }
-    }
+
+        virtual void Seed(uint64_t seed) {
+            generator.seed(seed);
+        }
+    };
+
+    bool replace(std::string *str, const std::string &from, const std::string &to);
+
+    void replaceAll(std::string *str, const std::string &from, const std::string &to);
 
 
 }  // namespace weave

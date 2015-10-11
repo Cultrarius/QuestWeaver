@@ -15,6 +15,7 @@ QuestWeaver::QuestWeaver() {
     quests.reset(new QuestModel());
     templates.reset(new TemplateEngine());
     world.reset(new WorldModel());
+    randomStream.reset(new RandomStream(42));
 
     shared_ptr<TemplateFactory> spaceFactory = make_shared<SpaceQuestTemplateFactory>();
     templates->RegisterTemplateFactory(spaceFactory);

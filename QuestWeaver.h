@@ -12,6 +12,7 @@
 #include "Template/TemplateEngine.h"
 #include "World/WorldModel.h"
 #include "QuestModel/Quest.h"
+#include "Core/WeaverUtils.h"
 
 namespace weave {
     class QuestWeaver {
@@ -27,6 +28,7 @@ namespace weave {
         std::unique_ptr<QuestModel> quests;
         std::unique_ptr<TemplateEngine> templates;
         std::unique_ptr<WorldModel> world;
+        std::unique_ptr<RandomStream> randomStream;
 
         void updateWorld(Quest quest);
     };
