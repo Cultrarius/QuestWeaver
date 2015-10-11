@@ -6,12 +6,13 @@
 
 #include "Template.h"
 #include "TemplateFactory.h"
+#include "../Core/WeaverUtils.h"
 #include <memory>
 
 namespace weave {
     class TemplateEngine {
     public:
-        std::shared_ptr<Template> GetTemplateForNewQuest();
+        std::shared_ptr<Template> GetTemplateForNewQuest(weave::RandomStream *randomStream);
 
         void RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory);
 

@@ -6,6 +6,7 @@
 
 #include <string>
 #include <random>
+#include <stdexcept>
 
 namespace weave {
 
@@ -18,11 +19,14 @@ namespace weave {
             generator.seed(seed);
         }
 
-        virtual int RandomInt() {
+        virtual int GetInt() {
             return defaultDistribution(generator);
         }
 
-        virtual int RandomIntRange(int start, int end) {
+        virtual int GetIntInRange(int start, int end) {
+            if (end < start) {
+                throw new std::runtime_error("(End < Start) for random distribution in range.\n");
+            }
             std::uniform_int_distribution<int> limitedDist(start, end);
             return limitedDist(generator);
         }

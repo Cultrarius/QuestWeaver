@@ -9,12 +9,13 @@ using namespace std;
 using namespace weave;
 
 vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> questTemplate,
-                                                      const WorldModel &worldModel) {
+                                                      const WorldModel &worldModel,
+                                                      weave::RandomStream *randomStream) const {
     // TODO insert fancy algorithm
     vector<QuestPropertyValue> returnValues;
     vector<TemplateQuestProperty> propertiesToCreate;
     for (const TemplateQuestProperty &questProperty : questTemplate->GetProperties()) {
-        if (questProperty.IsMandatory() || rand() % 100 < 50) {
+        if (questProperty.IsMandatory() || randomStream->GetIntInRange(0, 100) < 50) {
             propertiesToCreate.push_back(questProperty);
         } else {
             cout << "Omitting property " << questProperty.GetName() << endl;

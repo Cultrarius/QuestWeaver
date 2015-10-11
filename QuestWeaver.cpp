@@ -11,11 +11,11 @@ using namespace std;
 using namespace weave;
 
 QuestWeaver::QuestWeaver() {
+    randomStream.reset(new RandomStream(42));
     engine.reset(new WeaverEngine());
     quests.reset(new QuestModel());
     templates.reset(new TemplateEngine());
     world.reset(new WorldModel());
-    randomStream.reset(new RandomStream(42));
 
     shared_ptr<TemplateFactory> spaceFactory = make_shared<SpaceQuestTemplateFactory>();
     templates->RegisterTemplateFactory(spaceFactory);
@@ -26,8 +26,8 @@ std::list<Quest> QuestWeaver::GetActiveQuests() const {
 }
 
 Quest QuestWeaver::CreateNewQuest() {
-    auto questTemplate = templates->GetTemplateForNewQuest();
-    vector<QuestPropertyValue> questPropertyValues = engine->fillTemplate(questTemplate, *world);
+    auto questTemplate = templates->GetTemplateForNewQuest(randomStream.get());
+    vector<QuestPropertyValue> questPropertyValues = engine->fillTemplate(questTemplate, *world, randomStream.get());
     Quest newQuest = questTemplate->ToQuest(questPropertyValues);
     // TODO create quest-variants and choose the best one
     updateWorld(newQuest);
