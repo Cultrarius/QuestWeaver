@@ -9,7 +9,7 @@
   ],
   "titles": [
     "Explore region of space",
-    "Travel to %location"
+    "Travel to the coordinates %location"
   ],
   "descriptions": [
     {
@@ -17,13 +17,13 @@
         "location",
         "sponsor"
       ],
-      "text": "%sponsor generously asks you to explore %location and inform them about anything interesting you find."
+      "text": "%sponsor generously asks you to explore the solar system found at the coordinates %location. Make haste and inform them about anything interesting you find."
     },
     {
       "conditions": [
         "location"
       ],
-      "text": "An anonymous source asks you to explore %location. Transmit your findings to the attached address."
+      "text": "An anonymous source asks you to explore the solar system found at the coordinates %location. Transmit your findings to the attached address."
     }
   ],
   "objectives": [
