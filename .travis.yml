@@ -5,7 +5,7 @@ compiler:
 
 before_script:
   - mkdir bin
-  - cd bin
-  - cmake ..
 
-script: make
+script:
+  - cmake --build ./bin --target QuestWeaver -- -j 8
+  - cmake --build ./bin --target QuestWeaverTest -- -j 8
