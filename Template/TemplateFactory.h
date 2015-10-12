@@ -12,6 +12,8 @@
 namespace weave {
     class TemplateFactory {
     public:
+        explicit TemplateFactory(std::shared_ptr<RandomStream> randomStream) : randomStream(randomStream) { }
+
         virtual std::vector<std::string> GetTemplateKeys();
 
         std::shared_ptr<Template> CreateTemplate(const std::string &templateKey) const;
@@ -27,11 +29,14 @@ namespace weave {
 
         std::vector<TemplateQuestDescription> extractDescriptions(const Json::Value &root) const;
 
-        std::vector<std::string> extractTitles(const Json::Value &root) const;
+        std::string extractTitle(const Json::Value &root) const;
 
         void extractProperties(std::vector<TemplateQuestProperty> *properties,
                                const Json::Value &jsonMandatory,
                                bool isMandatory) const;
+
+    private:
+        std::shared_ptr<RandomStream> randomStream;
     };
 }
 

@@ -9,7 +9,7 @@
 namespace weave {
     class SpaceQuestTemplateFactory : public TemplateFactory {
     public:
-        SpaceQuestTemplateFactory();
+        explicit SpaceQuestTemplateFactory(std::shared_ptr<RandomStream> randomStream);
 
         std::shared_ptr<Template> CreateTemplate(const Json::Value &root) const;
     };

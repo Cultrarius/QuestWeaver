@@ -10,7 +10,8 @@ using namespace std;
 using namespace Json;
 using namespace weave;
 
-SpaceQuestTemplateFactory::SpaceQuestTemplateFactory() {
+SpaceQuestTemplateFactory::SpaceQuestTemplateFactory(std::shared_ptr<RandomStream> randomStream)
+        : TemplateFactory(randomStream) {
     templateMap.clear();
 
     const char *fileName = "../Template/Space/ExploreRegionTemplate.qt";
@@ -25,13 +26,13 @@ SpaceQuestTemplateFactory::SpaceQuestTemplateFactory() {
 }
 
 std::shared_ptr<Template> SpaceQuestTemplateFactory::CreateTemplate(const Json::Value &root) const {
-    vector<string> titles = extractTitles(root);
+    string title = extractTitle(root);
     vector<TemplateQuestProperty> properties = extractProperties(root);
     vector<TemplateQuestDescription> descriptions = extractDescriptions(root);
 
     const string &templateKey = root["key"].asString();
     if (templateKey.compare("ExploreRegionQuest") == 0) {
-        auto exploreTemplate = make_shared<ExploreRegionTemplate>(titles, properties, descriptions);
+        auto exploreTemplate = make_shared<ExploreRegionTemplate>(title, properties, descriptions);
 
         return exploreTemplate;
     } else {

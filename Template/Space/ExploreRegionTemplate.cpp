@@ -8,10 +8,10 @@
 using namespace std;
 using namespace weave;
 
-ExploreRegionTemplate::ExploreRegionTemplate(vector<string> titles,
+ExploreRegionTemplate::ExploreRegionTemplate(string title,
                                              vector<TemplateQuestProperty> properties,
                                              vector<TemplateQuestDescription> descriptions)
-        : Template(titles, properties, descriptions) {
+        : Template(title, properties, descriptions) {
 }
 
 vector<ModelAction> ExploreRegionTemplate::GetPropertyCandidates(const TemplateQuestProperty &property,
@@ -26,5 +26,6 @@ vector<ModelAction> ExploreRegionTemplate::GetPropertyCandidates(const TemplateQ
 
 Quest ExploreRegionTemplate::ToQuest(const vector<QuestPropertyValue> &questPropertyValues) const {
     const string &description = getBestFittingDescription(questPropertyValues);
-    return Quest(Proposed, "Title", description);
+    const string &title = getTitle(questPropertyValues);
+    return Quest(Proposed, title, description);
 }

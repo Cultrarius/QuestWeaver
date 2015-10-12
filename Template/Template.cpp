@@ -4,14 +4,9 @@
 
 #include "Template.h"
 #include <algorithm>
-#include "../Core/WeaverUtils.h"
 
 using namespace std;
 using namespace weave;
-
-vector<string> Template::GetTitles() const {
-    return titles;
-}
 
 bool TemplateQuestProperty::IsMandatory() const {
     return isMandatory;
@@ -40,13 +35,9 @@ TemplateQuestDescription::TemplateQuestDescription(const vector<string> &conditi
     this->text = text;
 }
 
-vector<TemplateQuestDescription> Template::GetDescriptions() const {
-    return descriptions;
-}
-
-Template::Template(vector<string> titles, vector<TemplateQuestProperty> properties,
+Template::Template(string title, vector<TemplateQuestProperty> properties,
                    vector<TemplateQuestDescription> descriptions) {
-    this->titles = titles;
+    this->title = title;
     this->properties = properties;
     this->descriptions = descriptions;
 }
@@ -90,4 +81,14 @@ std::string Template::getBestFittingDescription(const std::vector<QuestPropertyV
 
 bool TemplateQuestDescription::SupportsCondition(const string &condition) const {
     return binary_search(conditions.begin(), conditions.end(), condition);
+}
+
+std::string Template::getTitle(const std::vector<QuestPropertyValue> &questPropertyValues) const {
+    string titleText = this->title;
+    for (const auto &questProperty : questPropertyValues) {
+        const string &conditionLabel = "%" + questProperty.GetProperty().GetName();
+        const string &conditionValue = questProperty.GetValue()->toString();
+        weave::replaceAll(&titleText, conditionLabel, conditionValue);
+    }
+    return titleText;
 }

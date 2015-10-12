@@ -14,6 +14,7 @@ namespace weave {
     private:
         std::uniform_int_distribution<int> defaultDistribution;
         std::default_random_engine generator;
+
     public:
         explicit RandomStream(uint64_t seed) {
             generator.seed(seed);
@@ -33,6 +34,10 @@ namespace weave {
 
         virtual void Seed(uint64_t seed) {
             generator.seed(seed);
+        }
+
+        virtual int GetRandomIndex(uint64_t collectionSize) {
+            return GetIntInRange(0, static_cast<int>(collectionSize - 1));
         }
     };
 

@@ -24,9 +24,10 @@ vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> quest
 
     for (const auto &property : propertiesToCreate) {
         const vector<ModelAction> candidates = questTemplate->GetPropertyCandidates(property, worldModel);
-
-        shared_ptr<WorldEntity> entity = candidates[0].GetEntity();
+        int index = randomStream->GetRandomIndex(candidates.size());
+        shared_ptr<WorldEntity> entity = candidates[index].GetEntity();
         QuestPropertyValue questValue(property, entity);
+        returnValues.push_back(std::move(questValue));
     }
 
     return returnValues;

@@ -38,13 +38,14 @@ vector<string> TemplateFactory::GetTemplateKeys() {
     return keys;
 }
 
-vector<string> TemplateFactory::extractTitles(const Json::Value &root) const {
+string TemplateFactory::extractTitle(const Json::Value &root) const {
     vector<string> titles;
     const Value jsonTitles = root["titles"];
     for (int i = 0; i < jsonTitles.size(); ++i) {
         titles.push_back(std::move(jsonTitles[i].asString()));
     }
-    return titles;
+    int index = randomStream->GetIntInRange(0, static_cast<int>(titles.size() - 1));
+    return titles[index];
 }
 
 vector<TemplateQuestDescription> TemplateFactory::extractDescriptions(const Json::Value &root) const {
@@ -53,7 +54,7 @@ vector<TemplateQuestDescription> TemplateFactory::extractDescriptions(const Json
     for (int i = 0; i < jsonDescriptions.size(); ++i) {
         const Value jsonDescription = jsonDescriptions[i];
         vector<string> conditions;
-        const Value jsonConditions = root["conditions"];
+        const Value jsonConditions = jsonDescription["conditions"];
         for (int k = 0; k < jsonConditions.size(); ++k) {
             conditions.push_back(std::move(jsonConditions[k].asString()));
         }

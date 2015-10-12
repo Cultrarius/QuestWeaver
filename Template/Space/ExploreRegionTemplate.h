@@ -14,7 +14,7 @@ namespace weave {
         std::vector<ModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
                                                        const WorldModel &worldModel) const;
 
-        ExploreRegionTemplate(std::vector<std::string> titles,
+        ExploreRegionTemplate(std::string title,
                               std::vector<TemplateQuestProperty> properties,
                               std::vector<TemplateQuestDescription> descriptions);
     };

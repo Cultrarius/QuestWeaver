@@ -53,7 +53,7 @@ namespace weave {
 
     class Template {
     public:
-        Template(std::vector<std::string> titles,
+        Template(std::string title,
                  std::vector<TemplateQuestProperty> properties,
                  std::vector<TemplateQuestDescription> descriptions);
 
@@ -62,17 +62,15 @@ namespace weave {
         virtual std::vector<ModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
                                                                const WorldModel &worldModel) const = 0;
 
-        std::vector<std::string> GetTitles() const;
-
         std::vector<TemplateQuestProperty> GetProperties() const;
-
-        std::vector<TemplateQuestDescription> GetDescriptions() const;
 
     protected:
         std::string getBestFittingDescription(const std::vector<QuestPropertyValue> &questPropertyValues) const;
 
+        std::string getTitle(const std::vector<QuestPropertyValue> &questPropertyValues) const;
+
     private:
-        std::vector<std::string> titles;
+        std::string title;
         std::vector<TemplateQuestProperty> properties;
         std::vector<TemplateQuestDescription> descriptions;
     };
