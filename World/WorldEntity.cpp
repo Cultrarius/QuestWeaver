@@ -3,3 +3,7 @@
 //
 
 #include "WorldEntity.h"
+
+uint64_t weave::WorldEntity::GetId() {
+    return id;
+}

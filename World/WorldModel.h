@@ -9,6 +9,11 @@
 namespace weave {
 
     class WorldModel {
+    protected:
+        uint64_t NewId();
+
+    private:
+        uint64_t idCounter = 0;
     };
 
 }

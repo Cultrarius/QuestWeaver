@@ -10,7 +10,18 @@ namespace weave {
 
     class WorldEntity {
     public:
+        const uint64_t NoID = 0;
+
+        explicit WorldEntity(uint64_t id) : id(id) { }
+
+        WorldEntity() : WorldEntity(NoID) { }
+
+        uint64_t GetId();
+
         virtual std::string toString() const = 0;
+
+    private:
+        uint64_t id;
     };
 }
 

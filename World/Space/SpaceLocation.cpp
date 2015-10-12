@@ -7,5 +7,11 @@
 using namespace weave;
 
 std::string SpaceLocation::toString() const {
-    return "Location XYZ Test";
+    return "(Location)";
+}
+
+SpaceLocation::SpaceLocation(uint64_t id, double x, double y, double z) : WorldEntity(id), X(x), Y(y), Z(z) {
+}
+
+SpaceLocation::SpaceLocation(double x, double y, double z) : SpaceLocation(NoID, x, y, z) {
 }

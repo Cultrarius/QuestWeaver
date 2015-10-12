@@ -18,7 +18,7 @@ vector<ModelAction> ExploreRegionTemplate::GetPropertyCandidates(const TemplateQ
                                                                  const WorldModel &worldModel) const {
     vector<ModelAction> properties;
     const SpaceWorldModel &spaceModel = (const SpaceWorldModel &) worldModel;
-    const shared_ptr<SpaceLocation> &location = spaceModel.CreateLocation();
+    shared_ptr<SpaceLocation> location = spaceModel.CreateLocation();
     ModelAction modelAction(ActionType::CREATE, location);
     properties.push_back(std::move(modelAction));
     return properties;

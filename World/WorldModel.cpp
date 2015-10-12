@@ -3,3 +3,8 @@
 //
 
 #include "WorldModel.h"
+
+uint64_t weave::WorldModel::NewId() {
+ idCounter++;
+ return idCounter;
+}
