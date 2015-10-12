@@ -9,8 +9,9 @@ compiler:
   - gcc
 
 before_script:
-  - mkdir bin
-  - export PATH=$PATH:$HOME/cmake/
+  - mkdir -p bin
+  - cmake -version
+  - export PATH=$HOME/cmake/:$PATH
   - cmake -version
   - cmake .
 
