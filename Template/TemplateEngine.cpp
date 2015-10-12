@@ -13,13 +13,13 @@ shared_ptr<Template> TemplateEngine::GetTemplateForNewQuest(std::shared_ptr<Rand
     if (factories.size() == 0) {
         throw new runtime_error("No factory defined to create template.\n");
     }
-    int factoryIndex = randomStream->GetIntInRange(0, static_cast<int>(factories.size()) - 1);
+    int factoryIndex = randomStream->GetRandomIndex(factories.size());
     shared_ptr<TemplateFactory> factory = factories[factoryIndex];
     auto factoryKeys = factory->GetTemplateKeys();
     if (factoryKeys.size() == 0) {
         throw new runtime_error("No templates defined in template factory.\n");
     }
-    int templateIndex = randomStream->GetIntInRange(0, static_cast<int>(factoryKeys.size()) - 1);
+    int templateIndex = randomStream->GetRandomIndex(factoryKeys.size());
     auto key = factoryKeys[templateIndex];
     cout << "Creating template with key: " << key << endl;
     return factory->CreateTemplate(key);
