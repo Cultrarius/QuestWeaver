@@ -5,14 +5,15 @@
 #pragma once
 
 #include "../WorldEntity.h"
-#include "SpaceLocation.h"
 
 namespace weave {
 
-    struct SolarSystem : public WorldEntity {
-        SpaceLocation Location;
+    struct SpaceAgent : public WorldEntity {
         std::string Name;
-        // TODO add planet infos?
+
+        explicit SpaceAgent(std::string name);
+
+        SpaceAgent(uint64_t id, std::string name);
 
         std::string ToString() const;
     };

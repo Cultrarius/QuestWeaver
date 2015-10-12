@@ -24,3 +24,7 @@ ModelParameters SpaceWorldModel::GetParameters() {
 void SpaceWorldModel::SetParameters(ModelParameters parameters) {
     this->param = parameters;
 }
+
+std::shared_ptr<SpaceAgent> SpaceWorldModel::CreateAgent() const {
+    return make_shared<SpaceAgent>("Peter Parker");
+}

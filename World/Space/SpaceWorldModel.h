@@ -7,6 +7,7 @@
 #include "../WorldModel.h"
 #include "SpaceLocation.h"
 #include "../../Core/WeaverUtils.h"
+#include "SpaceAgent.h"
 
 namespace weave {
     struct ModelParameters {
@@ -25,6 +26,8 @@ namespace weave {
         // entity creation methods
 
         std::shared_ptr<SpaceLocation> CreateLocation() const;
+
+        std::shared_ptr<SpaceAgent> CreateAgent() const;
 
     private:
         std::shared_ptr<RandomStream> rs;

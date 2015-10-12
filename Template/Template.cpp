@@ -69,7 +69,7 @@ std::string Template::getBestFittingDescription(const std::vector<QuestPropertyV
             string descriptionText = description.GetText();
             for (const auto &questProperty : questPropertyValues) {
                 const string &conditionLabel = "%" + questProperty.GetProperty().GetName();
-                const string &conditionValue = questProperty.GetValue()->toString();
+                const string &conditionValue = questProperty.GetValue()->ToString();
                 weave::replaceAll(&descriptionText, conditionLabel, conditionValue);
             }
             return descriptionText;
@@ -87,7 +87,7 @@ std::string Template::getTitle(const std::vector<QuestPropertyValue> &questPrope
     string titleText = this->title;
     for (const auto &questProperty : questPropertyValues) {
         const string &conditionLabel = "%" + questProperty.GetProperty().GetName();
-        const string &conditionValue = questProperty.GetValue()->toString();
+        const string &conditionValue = questProperty.GetValue()->ToString();
         weave::replaceAll(&titleText, conditionLabel, conditionValue);
     }
     return titleText;

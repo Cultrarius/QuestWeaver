@@ -18,7 +18,7 @@ namespace weave {
 
         uint64_t GetId();
 
-        virtual std::string toString() const = 0;
+        virtual std::string ToString() const = 0;
 
     private:
         uint64_t id;

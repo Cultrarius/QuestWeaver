@@ -6,7 +6,7 @@
 
 using namespace weave;
 
-std::string SpaceLocation::toString() const {
+std::string SpaceLocation::ToString() const {
     return "(Location)";
 }
 

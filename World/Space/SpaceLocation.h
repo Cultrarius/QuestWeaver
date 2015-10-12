@@ -17,7 +17,7 @@ namespace weave {
 
         SpaceLocation(uint64_t id, double x, double y, double z);
 
-        std::string toString() const;
+        std::string ToString() const;
     };
 }
 

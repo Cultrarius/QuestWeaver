@@ -4,6 +4,6 @@
 
 #include "SolarSystem.h"
 
-std::string weave::SolarSystem::toString() const {
+std::string weave::SolarSystem::ToString() const {
     return Name;
 }
