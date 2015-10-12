@@ -1,5 +1,23 @@
 language: cpp
 
+os:
+  - linux
+  - osx
+
+install:
+  - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
+         sudo add-apt-repository ppa:george-edison55/cmake-3.x
+      && sudo apt-get -qq remove cmake
+      && sudo apt-get -qq update
+      && sudo apt-get -qq install cmake
+      ;
+    else
+         brew update
+      && brew unlink cmake
+      && brew install -v cmake
+      ;
+    fi
+
 compiler:
   - gcc
 
@@ -7,4 +25,6 @@ before_script:
   - mkdir bin
   - cmake .
 
-script: make
+script:
+  - make
+  - ./bin/QuestWeaverTest
