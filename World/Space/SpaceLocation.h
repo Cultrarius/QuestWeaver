@@ -9,13 +9,13 @@
 namespace weave {
 
     struct SpaceLocation : public WorldEntity {
-        double X;
-        double Y;
-        double Z;
+        int X;
+        int Y;
+        int Z;
 
-        SpaceLocation(double x, double y, double z);
+        SpaceLocation(int x, int y, int z);
 
-        SpaceLocation(uint64_t id, double x, double y, double z);
+        SpaceLocation(uint64_t id, int x, int y, int z);
 
         std::string ToString() const;
     };

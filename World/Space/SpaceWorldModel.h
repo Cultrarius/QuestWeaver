@@ -11,7 +11,7 @@
 
 namespace weave {
     struct ModelParameters {
-        int minLocation = -1000;
+        int minLocation = 0;
         int maxLocation = 1000;
     };
 

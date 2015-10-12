@@ -16,7 +16,7 @@ SpaceQuestTemplateFactory::SpaceQuestTemplateFactory(std::shared_ptr<RandomStrea
 
     const char *fileName = "../Template/Space/ExploreRegionTemplate.qt";
     auto root = readTemplateFile(fileName);
-    if (root["parent"].asString().compare("Space") != 0) {
+    if (root["parent"].asString() != "Space") {
         string errorMessage = string("Template file has incompatible parent: ") + fileName + "\n";
         cerr << errorMessage;
         throw new runtime_error(errorMessage);
@@ -31,7 +31,7 @@ std::shared_ptr<Template> SpaceQuestTemplateFactory::CreateTemplate(const Json::
     vector<TemplateQuestDescription> descriptions = extractDescriptions(root);
 
     const string &templateKey = root["key"].asString();
-    if (templateKey.compare("ExploreRegionQuest") == 0) {
+    if (templateKey == "ExploreRegionQuest") {
         auto exploreTemplate = make_shared<ExploreRegionTemplate>(title, properties, descriptions);
 
         return exploreTemplate;

@@ -42,12 +42,12 @@ namespace weave {
     public:
         TemplateQuestDescription(const std::vector<std::string> &conditions, const std::string &text);
 
-        bool SupportsCondition(const std::string &condition) const;
+        bool SupportsConditions(const std::vector<std::string> &conditions) const;
 
         std::string GetText() const;
 
     private:
-        std::vector<std::string> conditions;
+        std::vector<std::string> descriptionConditions;
         std::string text;
     };
 

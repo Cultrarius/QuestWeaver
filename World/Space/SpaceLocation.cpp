@@ -5,13 +5,14 @@
 #include "SpaceLocation.h"
 
 using namespace weave;
+using namespace std;
 
 std::string SpaceLocation::ToString() const {
-    return "(Location)";
+    return "(" + to_string(X) + ", " + to_string(Y) + ", " + to_string(Z) + ")";
 }
 
-SpaceLocation::SpaceLocation(uint64_t id, double x, double y, double z) : WorldEntity(id), X(x), Y(y), Z(z) {
+SpaceLocation::SpaceLocation(uint64_t id, int x, int y, int z) : WorldEntity(id), X(x), Y(y), Z(z) {
 }
 
-SpaceLocation::SpaceLocation(double x, double y, double z) : SpaceLocation(NoID, x, y, z) {
+SpaceLocation::SpaceLocation(int x, int y, int z) : SpaceLocation(NoID, x, y, z) {
 }

@@ -30,8 +30,8 @@ string TemplateQuestDescription::GetText() const {
 }
 
 TemplateQuestDescription::TemplateQuestDescription(const vector<string> &conditions, const string &text) {
-    this->conditions = conditions;
-    sort(this->conditions.begin(), this->conditions.end());
+    this->descriptionConditions = conditions;
+    sort(this->descriptionConditions.begin(), this->descriptionConditions.end());
     this->text = text;
 }
 
@@ -56,16 +56,13 @@ shared_ptr<WorldEntity> QuestPropertyValue::GetValue() const {
 }
 
 std::string Template::getBestFittingDescription(const std::vector<QuestPropertyValue> &questPropertyValues) const {
+    std::vector<std::string> sortedConditions;
+    for (auto propertyValue : questPropertyValues) {
+        sortedConditions.push_back(propertyValue.GetProperty().GetName());
+    }
+    sort(sortedConditions.begin(), sortedConditions.end());
     for (const auto &description : descriptions) {
-        bool isFitting = true;
-        for (const auto &questProperty : questPropertyValues) {
-            const string &conditionName = questProperty.GetProperty().GetName();
-            if (!description.SupportsCondition(conditionName)) {
-                isFitting = false;
-                break;
-            }
-        }
-        if (isFitting) {
+        if (description.SupportsConditions(sortedConditions)) {
             string descriptionText = description.GetText();
             for (const auto &questProperty : questPropertyValues) {
                 const string &conditionLabel = "%" + questProperty.GetProperty().GetName();
@@ -79,8 +76,9 @@ std::string Template::getBestFittingDescription(const std::vector<QuestPropertyV
     throw new runtime_error("Unable to find description fitting the supplied quest properties.");
 }
 
-bool TemplateQuestDescription::SupportsCondition(const string &condition) const {
-    return binary_search(conditions.begin(), conditions.end(), condition);
+bool TemplateQuestDescription::SupportsConditions(const std::vector<std::string> &conditions) const {
+    return includes(conditions.begin(), conditions.end(),
+                    descriptionConditions.begin(), descriptionConditions.end());
 }
 
 std::string Template::getTitle(const std::vector<QuestPropertyValue> &questPropertyValues) const {
