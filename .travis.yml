@@ -3,7 +3,7 @@ language: cpp
 install:
   - wget http://www.cmake.org/files/v3.3/cmake-3.3.2.tar.gz
   - tar -xzvf cmake-3.3.2.tar.gz
-  - cd cmake-3.3.2 && ./configure && make && make install
+  - cd cmake-3.3.2 && ./configure --prefix=$HOME/cmake && make && make install
 
 compiler:
   - gcc
@@ -13,5 +13,6 @@ before_script:
   - cmake .
 
 script:
+  - ls -la $HOME/cmake
   - make
   - ./bin/QuestWeaverTest
