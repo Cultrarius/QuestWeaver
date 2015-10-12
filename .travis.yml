@@ -10,9 +10,10 @@ compiler:
 
 before_script:
   - mkdir bin
+  - export PATH=$PATH:$HOME/cmake/
+  - cmake -version
   - cmake .
 
 script:
-  - ls -la $HOME/cmake
   - make
   - ./bin/QuestWeaverTest
