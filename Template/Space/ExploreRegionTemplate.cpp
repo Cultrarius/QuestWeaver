@@ -19,9 +19,9 @@ vector<ModelAction> ExploreRegionTemplate::GetPropertyCandidates(const TemplateQ
     vector<ModelAction> properties;
     const SpaceWorldModel &spaceModel = (const SpaceWorldModel &) worldModel;
     std::shared_ptr<WorldEntity> entity;
-    if (property.GetName().compare("location") == 0) {
+    if (property.GetName() == "location") {
         entity = spaceModel.CreateLocation();
-    } else if (property.GetName().compare("sponsor") == 0) {
+    } else if (property.GetName() == "sponsor") {
         entity = spaceModel.CreateAgent();
     }
     ModelAction modelAction(ActionType::CREATE, entity);
