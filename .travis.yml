@@ -11,8 +11,9 @@ compiler:
 before_script:
   - mkdir -p bin
   - $HOME/cmake/bin/cmake -version
-  - $HOME/cmake/bin/cmake ($pwd)
+  - $HOME/cmake/bin/cmake $HOME/Cultrarius/QuestWeaver
 
 script:
+  - cd $HOME/Cultrarius/QuestWeaver
   - make
   - ./bin/QuestWeaverTest
