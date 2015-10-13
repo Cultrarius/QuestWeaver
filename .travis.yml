@@ -9,6 +9,7 @@ compiler:
   - gcc
 
 before_script:
+  - cd $HOME/build/Cultrarius/QuestWeaver
   - mkdir -p bin
   - $HOME/cmake/bin/cmake -version
   - $HOME/cmake/bin/cmake $HOME/build/Cultrarius/QuestWeaver
