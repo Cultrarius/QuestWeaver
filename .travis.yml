@@ -3,16 +3,9 @@ language: cpp
 notifications:
   email: false
   
-install:
-  - wget http://www.cmake.org/files/v3.3/cmake-3.3.2.tar.gz
-  - tar -xzvf cmake-3.3.2.tar.gz
-  - cd cmake-3.3.2 && ./configure --prefix=$HOME/cmake && make && make install
-
 compiler:
   - gcc
   - clang
-install:
-- if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
   
 addons:
   apt:
@@ -22,7 +15,13 @@ addons:
     - gcc-4.8
     - g++-4.8
     - clang
-  
+
+install:
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
+  - wget http://www.cmake.org/files/v3.3/cmake-3.3.2.tar.gz
+  - tar -xzvf cmake-3.3.2.tar.gz
+  - cd cmake-3.3.2 && ./configure --prefix=$HOME/cmake && make && make install
+
 before_script:
   - cd $HOME/build/Cultrarius/QuestWeaver
   - mkdir -p bin
