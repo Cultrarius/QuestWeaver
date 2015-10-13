@@ -12,8 +12,8 @@ before_script:
   - mkdir -p bin
   - cd bin
   - cmake -version
-  - $HOME/cmake/cmake -version
-  - $HOME/cmake/cmake ..
+  - $HOME/cmake/bin/cmake -version
+  - $HOME/cmake/bin/cmake ..
 
 script:
   - make
