@@ -30,4 +30,5 @@ before_script:
 
 script:
   - make
-  - ./bin/QuestWeaverTest
+  - cd bin
+  - ./QuestWeaverTest
