@@ -10,11 +10,9 @@ compiler:
 
 before_script:
   - mkdir -p bin
-  - cd bin
-  - cmake -version
   - $HOME/cmake/bin/cmake -version
-  - $HOME/cmake/bin/cmake ..
+  - $HOME/cmake/bin/cmake ($pwd)
 
 script:
   - make
-  - ./QuestWeaverTest
+  - ./bin/QuestWeaverTest
