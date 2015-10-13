@@ -1,4 +1,4 @@
-# QuestWeaver
+# QuestWeaver <img src="https://travis-ci.org/Cultrarius/QuestWeaver.svg">
 Procedurally generated quests and stories for computer games.
 
 This project is still in its early stages and under heavy development!
