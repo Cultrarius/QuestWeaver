@@ -30,29 +30,4 @@ TEST_CASE("Template factory is tested", "[template]") {
             REQUIRE(hasKey);
         }
     }
-
-    /*
-    SECTION("create random integers") {
-        int a = rs.GetInt();
-        int b = rs.GetInt();
-        REQUIRE(a != b);
-    }
-
-    SECTION("create integers with the same seed") {
-        rs.Seed(1337);
-        int a = rs.GetInt();
-        rs.Seed(1337);
-        int b = rs.GetInt();
-        REQUIRE(a == b);
-    }
-
-    SECTION("reseeding the stream") {
-        rs.Seed(42);
-        REQUIRE(rs.GetIntInRange(1, 10) == 1);
-    }
-
-    SECTION("creating indices") {
-        REQUIRE(rs.GetRandomIndex(1) == 0);
-        REQUIRE(rs.GetRandomIndex(10) == 7);
-    }*/
 }
