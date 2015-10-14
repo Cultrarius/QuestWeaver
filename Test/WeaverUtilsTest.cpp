@@ -9,7 +9,7 @@
 using namespace weave;
 using namespace std;
 
-TEST_CASE("Random Stream is tested", "[utils]") {
+TEST_CASE("Random Stream", "[utils]") {
     RandomStream rs(42);
     REQUIRE(rs.GetIntInRange(1, 10) == 1);
 
@@ -42,7 +42,7 @@ TEST_CASE("Random Stream is tested", "[utils]") {
     }
 }
 
-TEST_CASE("Simple string substitution is tested", "[utils]") {
+TEST_CASE("Simple string substitution", "[utils]") {
     string s1 = "Hello World ASD FASD";
     string s3 = "Complex %bla with another %bling and %bla bla";
     string s4 = "Unicode! $&#+*^°ö%blaóäÜÖÄò";
@@ -79,7 +79,7 @@ TEST_CASE("Simple string substitution is tested", "[utils]") {
     }
 }
 
-TEST_CASE("Full string substitution is tested", "[utils]") {
+TEST_CASE("Full string substitution", "[utils]") {
     string s1 = "Hello World ASD FASD";
     string s3 = "Complex %bla with another %bling and %bla bla";
     string s4 = "Unicode! $&#+*^°ö%blaóäÜÖÄò%bla";

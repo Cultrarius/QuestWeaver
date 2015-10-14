@@ -11,7 +11,7 @@
 using namespace weave;
 using namespace std;
 
-TEST_CASE("Template factory is tested", "[template]") {
+TEST_CASE("Template factory", "[template]") {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     SpaceQuestTemplateFactory factory(rs);
     REQUIRE(factory.GetTemplateKeys().size() == 1);
