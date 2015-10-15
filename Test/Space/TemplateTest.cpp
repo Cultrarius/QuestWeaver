@@ -78,7 +78,6 @@ TEST_CASE("Templates", "[template]") {
             rs->Seed(i);
             for (string templateKey : factory.GetTemplateKeys()) {
                 auto tp = factory.CreateTemplate(templateKey);
-                bool hasMandatoryProperty = false;
                 for (auto property : tp->GetProperties()) {
                     INFO("Template Key: " + templateKey + ", Property: " + property.GetName() + ", Seed: " +
                          to_string(i));
@@ -94,7 +93,6 @@ TEST_CASE("Templates", "[template]") {
             rs->Seed(i);
             for (string templateKey : factory.GetTemplateKeys()) {
                 auto tp = factory.CreateTemplate(templateKey);
-                bool hasMandatoryProperty = false;
                 for (auto property : tp->GetProperties()) {
                     auto candidates = tp->GetPropertyCandidates(property, *worldModel);
                     INFO("Template Key: " + templateKey + ", Property: " + property.GetName() + ", Seed: " +
@@ -111,7 +109,6 @@ TEST_CASE("Templates", "[template]") {
             rs->Seed(i);
             for (string templateKey : factory.GetTemplateKeys()) {
                 auto tp = factory.CreateTemplate(templateKey);
-                bool hasMandatoryProperty = false;
                 for (auto property : tp->GetProperties()) {
                     auto candidates = tp->GetPropertyCandidates(property, *worldModel);
                     for (auto candidate : candidates) {
@@ -121,6 +118,29 @@ TEST_CASE("Templates", "[template]") {
                         REQUIRE(candidate.GetEntity().get() != nullptr);
                     }
                 }
+            }
+        }
+    }
+
+    SECTION("Checking quest creation") {
+        WorldModel *worldModel = new SpaceWorldModel(rs);
+        for (int i = 0; i < testSize; i++) {
+            rs->Seed(i);
+            for (string templateKey : factory.GetTemplateKeys()) {
+                auto tp = factory.CreateTemplate(templateKey);
+                vector<QuestPropertyValue> questValues;
+                for (auto property : tp->GetProperties()) {
+                    auto candidates = tp->GetPropertyCandidates(property, *worldModel);
+                    for (auto candidate : candidates) {
+                        questValues.push_back(QuestPropertyValue(property, candidate.GetEntity()));
+                    }
+                }
+                auto quest = tp->ToQuest(questValues);
+                INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));
+
+                REQUIRE(!quest.getDescription().empty());
+                REQUIRE(quest.getState() == QuestState::Proposed);
+                REQUIRE(!quest.getTitle().empty());
             }
         }
     }
