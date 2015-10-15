@@ -88,5 +88,5 @@ std::shared_ptr<Template> TemplateFactory::CreateTemplate(const std::string &tem
         throw new runtime_error("Cannot find template for key " + templateKey + "\n");
     }
     const Value root = mapEntry->second;
-    return CreateTemplate(root);
+    return createFromJsonValues(root);
 }

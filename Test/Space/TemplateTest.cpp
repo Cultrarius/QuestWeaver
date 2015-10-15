@@ -14,7 +14,7 @@ using namespace std;
 TEST_CASE("Template factory", "[template]") {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     SpaceQuestTemplateFactory factory(rs);
-    REQUIRE(factory.GetTemplateKeys().size() == 1);
+    REQUIRE(factory.GetTemplateKeys().size() >= 1);
 
 
     SECTION("checking the keys") {
@@ -28,6 +28,13 @@ TEST_CASE("Template factory", "[template]") {
                 }
             }
             REQUIRE(hasKey);
+        }
+    }
+
+    SECTION("Retrieving template for every key") {
+        for (string templateKey : factory.GetTemplateKeys()) {
+            auto temp = factory.CreateTemplate(templateKey);
+            REQUIRE(temp.get() != nullptr);
         }
     }
 }

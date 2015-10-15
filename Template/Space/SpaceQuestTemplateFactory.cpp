@@ -25,7 +25,7 @@ SpaceQuestTemplateFactory::SpaceQuestTemplateFactory(std::shared_ptr<RandomStrea
     templateMap[root["key"].asString()] = root;
 }
 
-std::shared_ptr<Template> SpaceQuestTemplateFactory::CreateTemplate(const Json::Value &root) const {
+std::shared_ptr<Template> SpaceQuestTemplateFactory::createFromJsonValues(const Json::Value &root) const {
     string title = extractTitle(root);
     vector<TemplateQuestProperty> properties = extractProperties(root);
     vector<TemplateQuestDescription> descriptions = extractDescriptions(root);

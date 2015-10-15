@@ -11,7 +11,7 @@ namespace weave {
     public:
         explicit SpaceQuestTemplateFactory(std::shared_ptr<RandomStream> randomStream);
 
-        std::shared_ptr<Template> CreateTemplate(const Json::Value &root) const;
+        std::shared_ptr<Template> createFromJsonValues(const Json::Value &root) const;
     };
 }
 

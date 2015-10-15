@@ -19,7 +19,7 @@ namespace weave {
         std::shared_ptr<Template> CreateTemplate(const std::string &templateKey) const;
 
     protected:
-        virtual std::shared_ptr<Template> CreateTemplate(const Json::Value &root) const = 0;
+        virtual std::shared_ptr<Template> createFromJsonValues(const Json::Value &root) const = 0;
 
         Json::Value readTemplateFile(const char *fileName);
 
