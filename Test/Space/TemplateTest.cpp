@@ -104,4 +104,24 @@ TEST_CASE("Templates", "[template]") {
             }
         }
     }
+
+    SECTION("Checking model actions on empty model ") {
+        WorldModel *worldModel = new SpaceWorldModel(rs);
+        for (int i = 0; i < testSize; i++) {
+            rs->Seed(i);
+            for (string templateKey : factory.GetTemplateKeys()) {
+                auto tp = factory.CreateTemplate(templateKey);
+                bool hasMandatoryProperty = false;
+                for (auto property : tp->GetProperties()) {
+                    auto candidates = tp->GetPropertyCandidates(property, *worldModel);
+                    for (auto candidate : candidates) {
+                        INFO("Template Key: " + templateKey + ", Property: " + property.GetName() + ", Seed: " +
+                             to_string(i));
+                        REQUIRE(candidate.GetActionType() == ActionType::CREATE);
+                        REQUIRE(candidate.GetEntity().get() != nullptr);
+                    }
+                }
+            }
+        }
+    }
 }
