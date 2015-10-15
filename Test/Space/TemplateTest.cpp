@@ -40,51 +40,67 @@ TEST_CASE("Template factory", "[template]") {
 }
 
 TEST_CASE("Templates", "[template]") {
+    int testSize = 100;
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     SpaceQuestTemplateFactory factory(rs);
 
     SECTION("Checking properties size") {
-        for (string templateKey : factory.GetTemplateKeys()) {
-            auto tp = factory.CreateTemplate(templateKey);
-            REQUIRE(tp->GetProperties().size() > 0);
+        for (int i = 0; i < testSize; i++) {
+            rs->Seed(i);
+            for (string templateKey : factory.GetTemplateKeys()) {
+                auto tp = factory.CreateTemplate(templateKey);
+                INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));
+                REQUIRE(tp->GetProperties().size() > 0);
+            }
         }
     }
 
     SECTION("Checking mandatory property exists") {
-        for (string templateKey : factory.GetTemplateKeys()) {
-            auto tp = factory.CreateTemplate(templateKey);
-            bool hasMandatoryProperty = false;
-            for (auto property : tp->GetProperties()) {
-                if (property.IsMandatory()) {
-                    hasMandatoryProperty = true;
-                    break;
+        for (int i = 0; i < testSize; i++) {
+            rs->Seed(i);
+            for (string templateKey : factory.GetTemplateKeys()) {
+                auto tp = factory.CreateTemplate(templateKey);
+                bool hasMandatoryProperty = false;
+                for (auto property : tp->GetProperties()) {
+                    if (property.IsMandatory()) {
+                        hasMandatoryProperty = true;
+                        break;
+                    }
                 }
+                INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));
+                REQUIRE(hasMandatoryProperty);
             }
-            INFO(templateKey);
-            REQUIRE(hasMandatoryProperty);
         }
     }
 
     SECTION("Checking property names") {
-        for (string templateKey : factory.GetTemplateKeys()) {
-            auto tp = factory.CreateTemplate(templateKey);
-            bool hasMandatoryProperty = false;
-            for (auto property : tp->GetProperties()) {
-                INFO(property.GetName());
-                REQUIRE(!property.GetName().empty());
+        for (int i = 0; i < testSize; i++) {
+            rs->Seed(i);
+            for (string templateKey : factory.GetTemplateKeys()) {
+                auto tp = factory.CreateTemplate(templateKey);
+                bool hasMandatoryProperty = false;
+                for (auto property : tp->GetProperties()) {
+                    INFO("Template Key: " + templateKey + ", Property: " + property.GetName() + ", Seed: " +
+                         to_string(i));
+                    REQUIRE(!property.GetName().empty());
+                }
             }
         }
     }
 
     SECTION("Checking property candidates") {
         WorldModel *worldModel = new SpaceWorldModel(rs);
-        for (string templateKey : factory.GetTemplateKeys()) {
-            auto tp = factory.CreateTemplate(templateKey);
-            bool hasMandatoryProperty = false;
-            for (auto property : tp->GetProperties()) {
-                auto candidates = tp->GetPropertyCandidates(property, *worldModel);
-                INFO(templateKey + " / " + property.GetName());
-                REQUIRE(candidates.size() > 0);
+        for (int i = 0; i < testSize; i++) {
+            rs->Seed(i);
+            for (string templateKey : factory.GetTemplateKeys()) {
+                auto tp = factory.CreateTemplate(templateKey);
+                bool hasMandatoryProperty = false;
+                for (auto property : tp->GetProperties()) {
+                    auto candidates = tp->GetPropertyCandidates(property, *worldModel);
+                    INFO("Template Key: " + templateKey + ", Property: " + property.GetName() + ", Seed: " +
+                         to_string(i));
+                    REQUIRE(candidates.size() > 0);
+                }
             }
         }
     }
