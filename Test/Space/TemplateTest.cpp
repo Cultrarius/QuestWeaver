@@ -122,7 +122,7 @@ TEST_CASE("Templates", "[template]") {
         }
     }
 
-    SECTION("Checking quest creation") {
+    SECTION("Checking quest creation all candidates") {
         WorldModel *worldModel = new SpaceWorldModel(rs);
         for (int i = 0; i < testSize; i++) {
             rs->Seed(i);
@@ -135,6 +135,33 @@ TEST_CASE("Templates", "[template]") {
                         questValues.push_back(QuestPropertyValue(property, candidate.GetEntity()));
                     }
                 }
+                auto quest = tp->ToQuest(questValues);
+                INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));
+
+                REQUIRE(!quest.getDescription().empty());
+                REQUIRE(quest.getState() == QuestState::Proposed);
+                REQUIRE(!quest.getTitle().empty());
+            }
+        }
+    }
+
+    SECTION("Checking quest creation only mandatory candidates") {
+        WorldModel *worldModel = new SpaceWorldModel(rs);
+        for (int i = 0; i < testSize; i++) {
+            rs->Seed(i);
+            for (string templateKey : factory.GetTemplateKeys()) {
+                auto tp = factory.CreateTemplate(templateKey);
+                vector<QuestPropertyValue> questValues;
+                for (auto property : tp->GetProperties()) {
+                    if (!property.IsMandatory()) {
+                        continue;
+                    }
+                    auto candidates = tp->GetPropertyCandidates(property, *worldModel);
+                    for (auto candidate : candidates) {
+                        questValues.push_back(QuestPropertyValue(property, candidate.GetEntity()));
+                    }
+                }
+
                 auto quest = tp->ToQuest(questValues);
                 INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));
 
