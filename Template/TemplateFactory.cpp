@@ -21,7 +21,7 @@ Json::Value TemplateFactory::readTemplateFile(const char *fileName) {
     inStream.open(fileName);
     if (!Json::parseFromStream(readBuilder, inStream, &root, &errorMessage)) {
         cerr << "Error parsing template file: " << errorMessage << endl;
-        throw new runtime_error(errorMessage);
+        throw errorMessage;
     } else {
         // TODO check root value for consistency
     }
@@ -85,7 +85,7 @@ void TemplateFactory::extractProperties(vector<TemplateQuestProperty> *propertie
 std::shared_ptr<Template> TemplateFactory::CreateTemplate(const std::string &templateKey) const {
     auto mapEntry = templateMap.find(templateKey);
     if (mapEntry == templateMap.end()) {
-        throw new runtime_error("Cannot find template for key " + templateKey + "\n");
+        throw "Cannot find template for key " + templateKey + "\n";
     }
     const Value root = mapEntry->second;
     return createFromJsonValues(root);

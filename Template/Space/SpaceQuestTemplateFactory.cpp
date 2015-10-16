@@ -19,7 +19,7 @@ SpaceQuestTemplateFactory::SpaceQuestTemplateFactory(std::shared_ptr<RandomStrea
     if (root["parent"].asString() != "Space") {
         string errorMessage = string("Template file has incompatible parent: ") + fileName + "\n";
         cerr << errorMessage;
-        throw new runtime_error(errorMessage);
+        throw errorMessage;
     }
 
     templateMap[root["key"].asString()] = root;
@@ -36,6 +36,6 @@ std::shared_ptr<Template> SpaceQuestTemplateFactory::createFromJsonValues(const 
 
         return exploreTemplate;
     } else {
-        throw new runtime_error("Unknown Space template key " + templateKey + "\n");
+        throw "Unknown Space template key " + templateKey + "\n";
     }
 }
