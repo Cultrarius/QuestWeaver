@@ -36,7 +36,7 @@ namespace weave {
               const std::string &title,
               const std::string &description);
 
-        virtual std::shared_ptr<Quest> setState(QuestState newState) const = 0;
+        virtual std::shared_ptr<Quest> setStateAndId(ID newId, QuestState newState) const = 0;
 
     private:
         ID id;

@@ -18,9 +18,15 @@ list<std::shared_ptr<Quest>> QuestModel::getActiveQuests() const {
 }
 
 shared_ptr<Quest> QuestModel::registerQuest(const Quest &newQuest) {
-    // TODO check the quest is not already registered
-    // TODO create ID
-    shared_ptr<Quest> registeredQuest = newQuest.setState(QuestState::Inactive);
+    // check the quest is not already registered
+    for (auto &quest : quests) {
+        if (quest->GetId() == newQuest.GetId()) {
+            throw ContractFailedException("Quest with id " + to_string(quest->GetId()) + " already registered!");
+        }
+    }
+
+    idGenerator++;
+    shared_ptr<Quest> registeredQuest = newQuest.setStateAndId(idGenerator, QuestState::Inactive);
     quests.push_back(registeredQuest);
     return registeredQuest;
 }

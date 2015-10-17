@@ -17,5 +17,7 @@ namespace weave {
 
     private:
         std::vector<std::shared_ptr<Quest>> quests;
+
+        ID idGenerator = 0;
     };
 }
