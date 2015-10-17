@@ -12,7 +12,11 @@ ExploreRegionQuest::ExploreRegionQuest(const std::string &title,
         Quest(title, description) {
 }
 
-std::shared_ptr<Quest> ExploreRegionQuest::setStateAndId(QuestState newState) const {
-    auto newQuest = make_shared<ExploreRegionQuest>(GetTitle(), GetDescription());
-    return newQuest;
+ExploreRegionQuest::ExploreRegionQuest(ID id, QuestState state, const std::string &title,
+                                       const std::string &description) : Quest(id, state, title, description) {
+}
+
+std::shared_ptr<Quest> ExploreRegionQuest::setStateAndId(ID newId, QuestState newState) const {
+    auto quest = new ExploreRegionQuest(newId, newState, GetTitle(), GetDescription());
+    return shared_ptr<ExploreRegionQuest>(quest);
 }

@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <cereal/access.hpp>
 #include <string>
 #include <memory>
 #include "../Core/WeaverTypes.h"
@@ -38,10 +39,19 @@ namespace weave {
 
         virtual std::shared_ptr<Quest> setStateAndId(ID newId, QuestState newState) const = 0;
 
+
     private:
         ID id;
         QuestState state;
         std::string title;
         std::string description;
+
+        friend class cereal::access;
+
+        // serialization
+        template<class Archive>
+        void serialize(Archive &archive) {
+            archive(id, state, title, description);
+        }
     };
 }

@@ -4,7 +4,7 @@
 
 #include "WorldModel.h"
 
-ID weave::WorldModel::NewId() {
+weave::ID weave::WorldModel::NewId() {
     idGenerator++;
     return idGenerator;
 }

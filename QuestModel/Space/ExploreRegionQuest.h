@@ -12,6 +12,11 @@ namespace weave {
         ExploreRegionQuest(const std::string &title, const std::string &description);
 
     private:
-        std::shared_ptr<Quest> setStateAndId(QuestState newState) const;
+        ExploreRegionQuest(ID id,
+                           QuestState state,
+                           const std::string &title,
+                           const std::string &description);
+
+        std::shared_ptr<Quest> setStateAndId(ID newId, QuestState newState) const;
     };
 }
