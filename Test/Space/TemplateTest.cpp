@@ -138,9 +138,9 @@ TEST_CASE("Templates", "[template]") {
                 auto quest = tp->ToQuest(questValues);
                 INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));
 
-                REQUIRE(!quest.getDescription().empty());
-                REQUIRE(quest.getState() == QuestState::Proposed);
-                REQUIRE(!quest.getTitle().empty());
+                REQUIRE(!quest->GetDescription().empty());
+                REQUIRE(quest->GetState() == QuestState::Proposed);
+                REQUIRE(!quest->GetTitle().empty());
             }
         }
     }
@@ -165,9 +165,9 @@ TEST_CASE("Templates", "[template]") {
                 auto quest = tp->ToQuest(questValues);
                 INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));
 
-                REQUIRE(!quest.getDescription().empty());
-                REQUIRE(quest.getState() == QuestState::Proposed);
-                REQUIRE(!quest.getTitle().empty());
+                REQUIRE(!quest->GetDescription().empty());
+                REQUIRE(quest->GetState() == QuestState::Proposed);
+                REQUIRE(!quest->GetTitle().empty());
             }
         }
     }

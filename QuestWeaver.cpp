@@ -22,18 +22,18 @@ QuestWeaver::QuestWeaver(uint64_t seed) {
     templates->RegisterTemplateFactory(spaceFactory);
 }
 
-std::list<Quest> QuestWeaver::GetActiveQuests() const {
+list<shared_ptr<Quest>> QuestWeaver::GetActiveQuests() const {
     return quests->getActiveQuests();
 }
 
-Quest QuestWeaver::CreateNewQuest() {
+shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
     auto questTemplate = templates->GetTemplateForNewQuest(randomStream);
     vector<QuestPropertyValue> questPropertyValues = engine->fillTemplate(questTemplate, *world, randomStream);
-    Quest newQuest = questTemplate->ToQuest(questPropertyValues);
+    shared_ptr<Quest> newQuest = questTemplate->ToQuest(questPropertyValues);
     // TODO create quest-variants and choose the best one
-    updateWorld(newQuest);
+    updateWorld(*newQuest);
     return newQuest;
 }
 
-void QuestWeaver::updateWorld(Quest quest) {
+void QuestWeaver::updateWorld(const Quest& quest) {
 }

@@ -7,8 +7,11 @@
 #include "../Quest.h"
 
 namespace weave {
-    class ExploreRegionQuest : Quest {
+    class ExploreRegionQuest : public Quest {
     public:
-        ExploreRegionQuest(QuestState state, const std::string &title, const std::string &description);
+        ExploreRegionQuest(const std::string &title, const std::string &description);
+
+    private:
+        std::shared_ptr<Quest> setState(QuestState newState) const;
     };
 }

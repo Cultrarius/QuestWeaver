@@ -7,16 +7,20 @@
 using namespace std;
 using namespace weave;
 
-list<Quest> QuestModel::getActiveQuests() const {
-    list<Quest> result;
+list<std::shared_ptr<Quest>> QuestModel::getActiveQuests() const {
+    list<std::shared_ptr<Quest>> result;
     for (auto &quest : quests) {
-        if (quest.getState() == Active) {
+        if (quest->GetState() == Active) {
             result.push_back(quest);
         }
     }
     return result;
 }
 
-void QuestModel::addQuest(Quest newQuest) {
-    quests.push_back(newQuest);
+shared_ptr<Quest> QuestModel::registerQuest(const Quest &newQuest) {
+    // TODO check the quest is not already registered
+    // TODO create ID
+    shared_ptr<Quest> registeredQuest = newQuest.setState(QuestState::Inactive);
+    quests.push_back(registeredQuest);
+    return registeredQuest;
 }

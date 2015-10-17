@@ -11,11 +11,11 @@
 namespace weave {
     class QuestModel {
     public:
-        std::list<Quest> getActiveQuests() const;
+        std::list<std::shared_ptr<Quest>> getActiveQuests() const;
 
-        void addQuest(Quest newQuest);
+        std::shared_ptr<Quest> registerQuest(const Quest &newQuest);
 
     private:
-        std::vector<Quest> quests;
+        std::vector<std::shared_ptr<Quest>> quests;
     };
 }

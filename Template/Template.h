@@ -57,7 +57,7 @@ namespace weave {
                  std::vector<TemplateQuestProperty> properties,
                  std::vector<TemplateQuestDescription> descriptions);
 
-        virtual Quest ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const = 0;
+        virtual std::shared_ptr<Quest> ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const = 0;
 
         virtual std::vector<ModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
                                                                const WorldModel &worldModel) const = 0;

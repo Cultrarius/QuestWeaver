@@ -4,6 +4,7 @@
 
 #include "ExploreRegionTemplate.h"
 #include "../../World/Space/SpaceWorldModel.h"
+#include "../../QuestModel/Space/ExploreRegionQuest.h"
 
 using namespace std;
 using namespace weave;
@@ -29,8 +30,8 @@ vector<ModelAction> ExploreRegionTemplate::GetPropertyCandidates(const TemplateQ
     return properties;
 }
 
-Quest ExploreRegionTemplate::ToQuest(const vector<QuestPropertyValue> &questPropertyValues) const {
+shared_ptr<Quest> ExploreRegionTemplate::ToQuest(const vector<QuestPropertyValue> &questPropertyValues) const {
     const string &description = getBestFittingDescription(questPropertyValues);
     const string &title = getTitle(questPropertyValues);
-    return Quest(Proposed, title, description);
+    return make_shared<ExploreRegionQuest>(title, description);
 }

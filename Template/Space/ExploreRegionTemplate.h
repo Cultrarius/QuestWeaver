@@ -9,7 +9,7 @@
 namespace weave {
     class ExploreRegionTemplate : public Template {
     public:
-        Quest ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const;
+        std::shared_ptr<Quest> ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const;
 
         std::vector<ModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
                                                        const WorldModel &worldModel) const;

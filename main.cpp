@@ -6,10 +6,10 @@ using namespace weave;
 
 int main() {
     QuestWeaver weaver(42);
-    Quest newQuest = weaver.CreateNewQuest();
+    std::shared_ptr<Quest> newQuest = weaver.CreateNewQuest();
     cout << "New Quest created!" << endl;
-    cout << "Title: " << newQuest.getTitle() << endl;
-    cout << "Description: " << newQuest.getDescription() << endl;
-    cout << "State: " << newQuest.getState() << endl;
+    cout << "Title: " << newQuest->GetTitle() << endl;
+    cout << "Description: " << newQuest->GetDescription() << endl;
+    cout << "State: " << newQuest->GetState() << endl;
     return 0;
 }

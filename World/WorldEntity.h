@@ -5,23 +5,24 @@
 #pragma once
 
 #include <string>
+#include "../Core/WeaverTypes.h"
 
 namespace weave {
 
     class WorldEntity {
     public:
-        const uint64_t NoID = 0;
+        const ID NoID = 0;
 
-        explicit WorldEntity(uint64_t id) : id(id) { }
+        explicit WorldEntity(ID id) : id(id) { }
 
         WorldEntity() : WorldEntity(NoID) { }
 
-        uint64_t GetId();
+        ID GetId();
 
         virtual std::string ToString() const = 0;
 
     private:
-        uint64_t id;
+        ID id;
     };
 }
 

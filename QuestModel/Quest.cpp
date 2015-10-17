@@ -6,20 +6,30 @@
 
 using namespace weave;
 
-QuestState Quest::getState() const {
+QuestState Quest::GetState() const {
     return state;
 }
 
-std::string Quest::getTitle() const {
+std::string Quest::GetTitle() const {
     return title;
 }
 
-std::string Quest::getDescription() const {
+std::string Quest::GetDescription() const {
     return description;
 }
 
-Quest::Quest(QuestState state, const std::string &title, const std::string &description) {
+Quest::Quest(const std::string &title, const std::string &description) :
+        Quest(NoID, QuestState::Proposed, title, description) {
+}
+
+Quest::Quest(ID id, QuestState state, const std::string &title, const std::string &description) {
+    this->id = id;
     this->state = state;
     this->title = title;
     this->description = description;
+}
+
+
+ID Quest::GetId() const {
+    return id;
 }
