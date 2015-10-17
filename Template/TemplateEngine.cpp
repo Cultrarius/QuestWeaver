@@ -11,13 +11,13 @@ using namespace weave;
 
 shared_ptr<Template> TemplateEngine::GetTemplateForNewQuest(std::shared_ptr<RandomStream> randomStream) {
     if (factories.size() == 0) {
-        throw "No factory defined to create template.\n";
+        throw ContractFailedException("No factory defined to create template.\n");
     }
     int factoryIndex = randomStream->GetRandomIndex(factories.size());
     shared_ptr<TemplateFactory> factory = factories[factoryIndex];
     auto factoryKeys = factory->GetTemplateKeys();
     if (factoryKeys.size() == 0) {
-        throw "No templates defined in template factory.\n";
+        throw ContractFailedException("No templates defined in template factory.\n");
     }
     int templateIndex = randomStream->GetRandomIndex(factoryKeys.size());
     auto key = factoryKeys[templateIndex];

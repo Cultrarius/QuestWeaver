@@ -85,7 +85,7 @@ void TemplateFactory::extractProperties(vector<TemplateQuestProperty> *propertie
 std::shared_ptr<Template> TemplateFactory::CreateTemplate(const std::string &templateKey) const {
     auto mapEntry = templateMap.find(templateKey);
     if (mapEntry == templateMap.end()) {
-        throw "Cannot find template for key " + templateKey + "\n";
+        throw ContractFailedException("Cannot find template for key " + templateKey + "\n");
     }
     const Value root = mapEntry->second;
     return createFromJsonValues(root);

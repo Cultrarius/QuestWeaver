@@ -6,6 +6,7 @@
 
 #include <string>
 #include <random>
+#include "WeaverTypes.h"
 
 namespace weave {
 
@@ -25,7 +26,7 @@ namespace weave {
 
         virtual int GetIntInRange(int start, int end) {
             if (end < start) {
-                throw "(End < Start) for random distribution in range.\n";
+                throw ContractFailedException("(End < Start) for random distribution in range.\n");
             }
             std::uniform_int_distribution<int> limitedDist(start, end);
             return limitedDist(generator);

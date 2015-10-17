@@ -3,7 +3,8 @@
 //
 
 #include "WorldEntity.h"
-#include "../Core/WeaverTypes.h"
+
+using namespace weave;
 
 ID weave::WorldEntity::GetId() {
     return id;
