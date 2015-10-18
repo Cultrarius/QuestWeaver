@@ -18,20 +18,23 @@ int main() {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(11);
     SpaceWorldModel testModel(rs);
     auto location = testModel.CreateLocation();
+    ModelAction locationToAdd(ActionType::CREATE, location);
+    vector<ModelAction> modelActions;
+    modelActions.push_back(locationToAdd);
+    testModel.Execute(modelActions);
+
     stringstream ss;
     {
         cereal::JSONOutputArchive outputArchive(ss);
-        outputArchive(location);
+        outputArchive(testModel);
     }
 
     cout << ss.str() << endl;
 
     {
         cereal::JSONInputArchive inputArchive(ss);
-        inputArchive(location);
+        inputArchive(testModel);
     }
-
-    cout << location->GetId() << ", " << location->Z;
 
     return 0;
 }

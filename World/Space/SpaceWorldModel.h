@@ -41,7 +41,7 @@ namespace weave {
 
         template<class Archive>
         void serialize(Archive &ar) {
-            ar(cereal::base_class<WorldModel>(this), CEREAL_NVP(param));
+            ar(make_nvp("base", cereal::base_class<WorldModel>(this)), CEREAL_NVP(param));
         }
     };
 }

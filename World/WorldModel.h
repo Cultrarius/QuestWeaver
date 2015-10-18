@@ -8,12 +8,17 @@
 #include "../Core/WeaverTypes.h"
 #include "../Core/WeaverUtils.h"
 #include "WorldEntity.h"
+#include "ModelAction.h"
 
 namespace weave {
 
     class WorldModel {
     public:
         explicit WorldModel(std::shared_ptr<RandomStream> rs);
+
+        void Execute(std::vector<ModelAction> modelActions);
+
+        std::shared_ptr<WorldEntity> GetEntityById(ID id);
 
     protected:
         ID NewId();
