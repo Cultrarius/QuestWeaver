@@ -148,5 +148,9 @@ TEST_CASE("Serialize Quests", "[serialize]") {
         }
 
         REQUIRE(deserializedModel.GetQuests().size() == questModel.GetQuests().size());
+
+        for (int i = 0; i < testSize; i++) {
+            REQUIRE(deserializedModel.GetQuests()[i]->GetId() == questModel.GetQuests()[i]->GetId());
+        }
     }
 }
