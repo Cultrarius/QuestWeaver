@@ -1,6 +1,7 @@
 #include "cereal.h"
 #include "QuestWeaver.h"
 #include "QuestModel/Space/ExploreRegionQuest.h"
+#include "World/Space/SpaceWorldModel.h"
 
 using namespace std;
 using namespace weave;
@@ -14,14 +15,23 @@ int main() {
     cout << "Description: " << newQuest->GetDescription() << endl;
     cout << "State: " << newQuest->GetState() << endl;
 
-    QuestModel testModel;
-    shared_ptr<Quest> registeredQuest = testModel.RegisterQuest(*newQuest);
+    shared_ptr<RandomStream> rs = make_shared<RandomStream>(11);
+    SpaceWorldModel testModel(rs);
+    auto location = testModel.CreateLocation();
     stringstream ss;
     {
         cereal::JSONOutputArchive outputArchive(ss);
-        outputArchive(testModel);
+        outputArchive(location);
     }
-    cout << ss.str();
+
+    cout << ss.str() << endl;
+
+    {
+        cereal::JSONInputArchive inputArchive(ss);
+        inputArchive(location);
+    }
+
+    cout << location->GetId() << ", " << location->Z;
 
     return 0;
 }

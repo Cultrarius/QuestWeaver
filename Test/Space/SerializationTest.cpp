@@ -3,7 +3,6 @@
 //
 
 #include <fstream>
-#include <stdio.h>
 #include "../../QuestWeaver.h"
 #include "../catch.hpp"
 #include "../../Template/Space/SpaceQuestTemplateFactory.h"

@@ -13,6 +13,11 @@ namespace weave {
     struct ModelParameters {
         int minLocation = 0;
         int maxLocation = 1000;
+
+        template<class Archive>
+        void serialize(Archive &ar) {
+            ar(CEREAL_NVP(minLocation), CEREAL_NVP(maxLocation));
+        }
     };
 
     class SpaceWorldModel : public WorldModel {
@@ -30,7 +35,13 @@ namespace weave {
         std::shared_ptr<SpaceAgent> CreateAgent() const;
 
     private:
-        std::shared_ptr<RandomStream> rs;
         ModelParameters param;
+
+        friend class cereal::access;
+
+        template<class Archive>
+        void serialize(Archive &ar) {
+            ar(cereal::base_class<WorldModel>(this), CEREAL_NVP(param));
+        }
     };
 }

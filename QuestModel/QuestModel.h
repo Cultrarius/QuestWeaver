@@ -4,8 +4,6 @@
 
 #pragma once
 
-#include <list>
-#include <vector>
 #include "Quest.h"
 
 namespace weave {

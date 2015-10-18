@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <string>
 #include "../Core/WeaverTypes.h"
+#include "cereal.h"
 
 namespace weave {
 
@@ -23,6 +23,14 @@ namespace weave {
 
     private:
         ID id;
+
+        // serialization
+        friend class cereal::access;
+
+        template<class Archive>
+        void serialize(Archive &archive) {
+            archive(CEREAL_NVP(id));
+        }
     };
 }
 

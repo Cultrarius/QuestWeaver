@@ -51,16 +51,5 @@ namespace weave {
         void serialize(Archive &archive) {
             archive(CEREAL_NVP(id), CEREAL_NVP(state), CEREAL_NVP(title), CEREAL_NVP(description));
         }
-
-        template<class Archive>
-        static void load_and_construct(Archive &ar, cereal::construct<Quest> &construct) {
-            ID id;
-            QuestState state;
-            std::string title;
-            std::string description;
-
-            ar(id, state, title, description);
-            construct(id, state, title, description);
-        }
     };
 }

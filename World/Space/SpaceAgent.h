@@ -16,5 +16,25 @@ namespace weave {
         SpaceAgent(uint64_t id, std::string name);
 
         std::string ToString() const;
+
+    private:
+        //serialization
+        friend class cereal::access;
+
+        template<class Archive>
+        void serialize(Archive &archive) {
+            archive(cereal::make_nvp("id", GetId()), CEREAL_NVP(Name));
+        }
+
+        template<class Archive>
+        static void load_and_construct(Archive &ar, cereal::construct<SpaceAgent> &construct) {
+            ID id;
+            std::string name;
+
+            ar(id, name);
+            construct(id, name);
+        }
     };
 }
+
+CEREAL_REGISTER_TYPE(weave::SpaceAgent);

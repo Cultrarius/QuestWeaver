@@ -8,3 +8,6 @@ weave::ID weave::WorldModel::NewId() {
     idGenerator++;
     return idGenerator;
 }
+
+weave::WorldModel::WorldModel(std::shared_ptr<RandomStream> rs) : rs(rs) {
+}
