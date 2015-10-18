@@ -40,7 +40,7 @@ void WorldModel::Execute(vector<ModelAction> modelActions) {
     }
 }
 
-shared_ptr<WorldEntity> WorldModel::GetEntityById(ID id) {
+shared_ptr<WorldEntity> WorldModel::GetEntityById(ID id) const {
     for (auto entity : entities) {
         if (entity->GetId() == id) {
             return entity;

@@ -18,7 +18,7 @@ namespace weave {
 
         void Execute(std::vector<ModelAction> modelActions);
 
-        std::shared_ptr<WorldEntity> GetEntityById(ID id);
+        std::shared_ptr<WorldEntity> GetEntityById(ID id) const;
 
     protected:
         ID NewId();
@@ -34,7 +34,7 @@ namespace weave {
 
         template<class Archive>
         void serialize(Archive &archive) {
-            archive(CEREAL_NVP(idGenerator), CEREAL_NVP(entities));
+            archive(CEREAL_NVP(idGenerator), CEREAL_NVP(entities), CEREAL_NVP(rs));
         }
     };
 }

@@ -31,10 +31,15 @@ int main() {
 
     cout << ss.str() << endl;
 
+    shared_ptr<RandomStream> rs2 = make_shared<RandomStream>(21);
+    SpaceWorldModel deserializedModel(rs2);
     {
         cereal::JSONInputArchive inputArchive(ss);
-        inputArchive(testModel);
+        inputArchive(deserializedModel);
     }
+
+    cout << testModel.CreateLocation()->X << " ";
+    cout << deserializedModel.CreateLocation()->X << endl;
 
     return 0;
 }
