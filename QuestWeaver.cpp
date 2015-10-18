@@ -22,8 +22,8 @@ QuestWeaver::QuestWeaver(uint64_t seed) {
     templates->RegisterTemplateFactory(spaceFactory);
 }
 
-list<shared_ptr<Quest>> QuestWeaver::GetActiveQuests() const {
-    return quests->getActiveQuests();
+vector<shared_ptr<Quest>> QuestWeaver::GetActiveQuests() const {
+    return quests->GetActiveQuests();
 }
 
 shared_ptr<Quest> QuestWeaver::CreateNewQuest() {

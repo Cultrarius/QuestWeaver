@@ -14,7 +14,7 @@ namespace weave {
 
     class Quest {
     public:
-        const ID NoID = 0;
+        static const ID NoID = 0;
 
         Quest(const std::string &title,
               const std::string &description);

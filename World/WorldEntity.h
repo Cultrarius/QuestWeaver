@@ -11,7 +11,7 @@ namespace weave {
 
     class WorldEntity {
     public:
-        const ID NoID = 0;
+        static const ID NoID = 0;
 
         explicit WorldEntity(ID id) : id(id) { }
 

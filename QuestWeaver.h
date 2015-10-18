@@ -19,7 +19,7 @@ namespace weave {
     public:
         explicit QuestWeaver(uint64_t seed);
 
-        std::list<std::shared_ptr<Quest>> GetActiveQuests() const;
+        std::vector<std::shared_ptr<Quest>> GetActiveQuests() const;
 
         std::shared_ptr<Quest> CreateNewQuest();
 

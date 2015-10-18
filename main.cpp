@@ -15,7 +15,7 @@ int main() {
     cout << "State: " << newQuest->GetState() << endl;
 
     QuestModel testModel;
-    shared_ptr<Quest> registeredQuest = testModel.registerQuest(*newQuest);
+    shared_ptr<Quest> registeredQuest = testModel.RegisterQuest(*newQuest);
     stringstream ss;
     {
         cereal::JSONOutputArchive outputArchive(ss);

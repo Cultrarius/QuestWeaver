@@ -22,11 +22,8 @@ Quest::Quest(const std::string &title, const std::string &description) :
         Quest(NoID, QuestState::Proposed, title, description) {
 }
 
-Quest::Quest(ID id, QuestState state, const std::string &title, const std::string &description) {
-    this->id = id;
-    this->state = state;
-    this->title = title;
-    this->description = description;
+Quest::Quest(ID newId, QuestState state, const std::string &title, const std::string &description) :
+        id(newId), state(state), title(title), description(description) {
 }
 
 

@@ -7,8 +7,8 @@
 using namespace std;
 using namespace weave;
 
-list<std::shared_ptr<Quest>> QuestModel::getActiveQuests() const {
-    list<std::shared_ptr<Quest>> result;
+vector<std::shared_ptr<Quest>> QuestModel::GetActiveQuests() const {
+    vector<std::shared_ptr<Quest>> result;
     for (auto &quest : quests) {
         if (quest->GetState() == Active) {
             result.push_back(quest);
@@ -17,7 +17,7 @@ list<std::shared_ptr<Quest>> QuestModel::getActiveQuests() const {
     return result;
 }
 
-shared_ptr<Quest> QuestModel::registerQuest(const Quest &newQuest) {
+shared_ptr<Quest> QuestModel::RegisterQuest(const Quest &newQuest) {
     // check the quest is not already registered
     for (auto &quest : quests) {
         if (quest->GetId() == newQuest.GetId()) {
@@ -29,4 +29,8 @@ shared_ptr<Quest> QuestModel::registerQuest(const Quest &newQuest) {
     shared_ptr<Quest> registeredQuest = newQuest.setStateAndId(idGenerator, QuestState::Inactive);
     quests.push_back(registeredQuest);
     return registeredQuest;
+}
+
+std::vector<std::shared_ptr<Quest>> QuestModel::GetQuests() const {
+    return quests;
 }

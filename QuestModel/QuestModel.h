@@ -11,9 +11,11 @@
 namespace weave {
     class QuestModel {
     public:
-        std::list<std::shared_ptr<Quest>> getActiveQuests() const;
+        std::vector<std::shared_ptr<Quest>> GetActiveQuests() const;
 
-        std::shared_ptr<Quest> registerQuest(const Quest &newQuest);
+        std::vector<std::shared_ptr<Quest>> GetQuests() const;
+
+        std::shared_ptr<Quest> RegisterQuest(const Quest &newQuest);
 
     private:
         std::vector<std::shared_ptr<Quest>> quests;
@@ -25,7 +27,7 @@ namespace weave {
 
         template<class Archive>
         void serialize(Archive &archive) {
-            archive(CEREAL_NVP(quests));
+            archive(CEREAL_NVP(idGenerator), CEREAL_NVP(quests));
         }
     };
 }
