@@ -135,12 +135,16 @@ TEST_CASE("Templates", "[template]") {
                         questValues.push_back(QuestPropertyValue(property, candidate.GetEntity()));
                     }
                 }
-                auto quest = tp->ToQuest(questValues);
-                INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));
 
-                REQUIRE(!quest->GetDescription().empty());
-                REQUIRE(quest->GetState() == QuestState::Proposed);
-                REQUIRE(!quest->GetTitle().empty());
+                INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));
+                try {
+                    auto quest = tp->ToQuest(questValues);
+                    REQUIRE(!quest->GetDescription().empty());
+                    REQUIRE(quest->GetState() == QuestState::Proposed);
+                    REQUIRE(!quest->GetTitle().empty());
+                } catch (ContractFailedException ex) {
+                    FAIL(ex.what());
+                }
             }
         }
     }
@@ -162,12 +166,15 @@ TEST_CASE("Templates", "[template]") {
                     }
                 }
 
-                auto quest = tp->ToQuest(questValues);
                 INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));
-
-                REQUIRE(!quest->GetDescription().empty());
-                REQUIRE(quest->GetState() == QuestState::Proposed);
-                REQUIRE(!quest->GetTitle().empty());
+                try {
+                    auto quest = tp->ToQuest(questValues);
+                    REQUIRE(!quest->GetDescription().empty());
+                    REQUIRE(quest->GetState() == QuestState::Proposed);
+                    REQUIRE(!quest->GetTitle().empty());
+                } catch (ContractFailedException ex) {
+                    FAIL(ex.what());
+                }
             }
         }
     }
