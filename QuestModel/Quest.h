@@ -4,10 +4,8 @@
 
 #pragma once
 
-#include <cereal/access.hpp>
-#include <string>
-#include <memory>
 #include "../Core/WeaverTypes.h"
+#include "cereal.h"
 
 namespace weave {
     enum QuestState {
@@ -46,12 +44,23 @@ namespace weave {
         std::string title;
         std::string description;
 
+        // serialization
         friend class cereal::access;
 
-        // serialization
         template<class Archive>
         void serialize(Archive &archive) {
-            archive(id, state, title, description);
+            archive(CEREAL_NVP(id), CEREAL_NVP(state), CEREAL_NVP(title), CEREAL_NVP(description));
+        }
+
+        template<class Archive>
+        static void load_and_construct(Archive &ar, cereal::construct<Quest> &construct) {
+            ID id;
+            QuestState state;
+            std::string title;
+            std::string description;
+
+            ar(id, state, title, description);
+            construct(id, state, title, description);
         }
     };
 }

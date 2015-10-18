@@ -1,7 +1,6 @@
-#include <cereal/cereal.hpp>
-#include <cereal/archives/portable_binary.hpp>
-#include <cereal/archives/json.hpp>
+#include "cereal.h"
 #include "QuestWeaver.h"
+#include "QuestModel/Space/ExploreRegionQuest.h"
 
 using namespace std;
 using namespace weave;
@@ -9,16 +8,18 @@ using namespace cereal;
 
 int main() {
     QuestWeaver weaver(42);
-    std::shared_ptr<Quest> newQuest = weaver.CreateNewQuest();
+    shared_ptr<Quest> newQuest = weaver.CreateNewQuest();
     cout << "New Quest created!" << endl;
     cout << "Title: " << newQuest->GetTitle() << endl;
     cout << "Description: " << newQuest->GetDescription() << endl;
     cout << "State: " << newQuest->GetState() << endl;
 
+    QuestModel testModel;
+    shared_ptr<Quest> registeredQuest = testModel.registerQuest(*newQuest);
     stringstream ss;
     {
         cereal::JSONOutputArchive outputArchive(ss);
-        outputArchive(*newQuest);
+        outputArchive(testModel);
     }
     cout << ss.str();
 

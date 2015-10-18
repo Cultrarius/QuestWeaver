@@ -19,5 +19,13 @@ namespace weave {
         std::vector<std::shared_ptr<Quest>> quests;
 
         ID idGenerator = 0;
+
+        // serialization
+        friend class cereal::access;
+
+        template<class Archive>
+        void serialize(Archive &archive) {
+            archive(CEREAL_NVP(quests));
+        }
     };
 }

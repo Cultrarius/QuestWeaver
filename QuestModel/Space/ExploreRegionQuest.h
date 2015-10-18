@@ -18,5 +18,20 @@ namespace weave {
                            const std::string &description);
 
         std::shared_ptr<Quest> setStateAndId(ID newId, QuestState newState) const;
+
+        friend class cereal::access;
+
+        template<class Archive>
+        static void load_and_construct(Archive &ar, cereal::construct<ExploreRegionQuest> &construct) {
+            ID id;
+            QuestState state;
+            std::string title;
+            std::string description;
+
+            ar(id, state, title, description);
+            construct(id, state, title, description);
+        }
     };
 }
+
+CEREAL_REGISTER_TYPE(weave::ExploreRegionQuest);

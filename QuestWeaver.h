@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <memory>
-#include <list>
+#include "Core/WeaverTypes.h"
+#include "cereal.h"
 #include "json/json.h"
 #include "Core/WeaverEngine.h"
 #include "QuestModel/QuestModel.h"

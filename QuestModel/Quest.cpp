@@ -33,3 +33,4 @@ Quest::Quest(ID id, QuestState state, const std::string &title, const std::strin
 ID Quest::GetId() const {
     return id;
 }
+
