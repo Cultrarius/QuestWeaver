@@ -22,7 +22,7 @@ namespace weave {
     private:
         SpaceLocation(ID id, int x, int y, int z);
 
-        //serialization
+        // serialization
         friend class cereal::access;
 
         template<class Archive>
@@ -36,12 +36,15 @@ namespace weave {
         template<class Archive>
         static void load_and_construct(Archive &ar, cereal::construct<SpaceLocation> &construct) {
             ID id;
-            int x;
-            int y;
-            int z;
+            int X;
+            int Y;
+            int Z;
 
-            ar(id, x, y, z);
-            construct(id, x, y, z);
+            ar(cereal::make_nvp("id", id),
+               CEREAL_NVP(X),
+               CEREAL_NVP(Y),
+               CEREAL_NVP(Z));
+            construct(id, X, Y, Z);
         }
     };
 }

@@ -10,20 +10,20 @@
 namespace weave {
 
     struct SolarSystem : public WorldEntity {
-        SpaceLocation Location;
+        std::shared_ptr<SpaceLocation> Location;
         std::string Name;
         // TODO add planet infos?
 
         SolarSystem();
 
-        SolarSystem(std::string Name, SpaceLocation Location);
+        SolarSystem(std::string Name, std::shared_ptr<SpaceLocation> Location);
 
         std::string ToString() const;
 
     private:
-        SolarSystem(ID id, std::string Name, SpaceLocation Location);
+        SolarSystem(ID id, std::string Name, std::shared_ptr<SpaceLocation> Location);
 
-        //serialization
+        // serialization
         friend class cereal::access;
 
         template<class Archive>
@@ -34,13 +34,17 @@ namespace weave {
         }
 
         template<class Archive>
-        static void load_and_construct(Archive &ar, cereal::construct<SpaceLocation> &construct) {
+        static void load_and_construct(Archive &archive, cereal::construct<SolarSystem> &construct) {
             ID id;
-            std::string name;
-            SpaceLocation location;
+            std::string Name;
+            std::shared_ptr<SpaceLocation> Location;
 
-            ar(id, name, location);
-            construct(id, name, location);
+            archive(cereal::make_nvp("id", id),
+                    CEREAL_NVP(Name),
+                    CEREAL_NVP(Location));
+            construct(id, Name, Location);
         }
     };
 }
+
+CEREAL_REGISTER_TYPE(weave::SolarSystem);

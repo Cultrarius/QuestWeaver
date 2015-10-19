@@ -2,6 +2,7 @@
 #include "QuestWeaver.h"
 #include "QuestModel/Space/ExploreRegionQuest.h"
 #include "World/Space/SpaceWorldModel.h"
+#include "World/Space/SolarSystem.h"
 
 using namespace std;
 using namespace weave;
@@ -18,7 +19,8 @@ int main() {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(11);
     SpaceWorldModel testModel(rs);
     auto location = testModel.CreateLocation();
-    ModelAction locationToAdd(ActionType::CREATE, location);
+    auto solar = make_shared<SolarSystem>();
+    ModelAction locationToAdd(ActionType::CREATE, solar);
     vector<ModelAction> modelActions;
     modelActions.push_back(locationToAdd);
     testModel.Execute(modelActions);

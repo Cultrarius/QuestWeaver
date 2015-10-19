@@ -37,6 +37,7 @@ namespace weave {
     private:
         ModelParameters param;
 
+        // serialization
         friend class cereal::access;
 
         template<class Archive>

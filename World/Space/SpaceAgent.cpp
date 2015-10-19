@@ -13,3 +13,4 @@ weave::SpaceAgent::SpaceAgent(uint64_t id, std::string name) : WorldEntity(id), 
 std::string weave::SpaceAgent::ToString() const {
     return Name;
 }
+

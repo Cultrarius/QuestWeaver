@@ -4,18 +4,21 @@
 
 #include "SolarSystem.h"
 
-std::string weave::SolarSystem::ToString() const {
+using namespace weave;
+using namespace std;
+
+string SolarSystem::ToString() const {
     return Name;
 }
 
-weave::SolarSystem::SolarSystem(weave::ID id, std::string Name, weave::SpaceLocation Location) :
+SolarSystem::SolarSystem(ID id, string Name, shared_ptr<SpaceLocation> Location) :
         WorldEntity(id), Name(Name), Location(Location) {
 }
 
-weave::SolarSystem::SolarSystem(std::string Name, weave::SpaceLocation Location) :
+SolarSystem::SolarSystem(string Name, shared_ptr<SpaceLocation> Location) :
         SolarSystem(NoID, Name, Location) {
 }
 
-weave::SolarSystem::SolarSystem() :
-        SolarSystem(NoID, "", weave::SpaceLocation()) {
+SolarSystem::SolarSystem() :
+        SolarSystem(NoID, "", make_shared<SpaceLocation>()) {
 }

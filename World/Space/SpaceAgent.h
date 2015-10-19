@@ -18,7 +18,7 @@ namespace weave {
     private:
         SpaceAgent(uint64_t id, std::string name);
 
-        //serialization
+        // serialization
         friend class cereal::access;
 
         template<class Archive>
