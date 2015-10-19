@@ -9,17 +9,19 @@
 namespace weave {
 
     struct SpaceLocation : public WorldEntity {
-        int X;
-        int Y;
-        int Z;
+        const int X;
+        const int Y;
+        const int Z;
+
+        SpaceLocation();
 
         SpaceLocation(int x, int y, int z);
-
-        SpaceLocation(ID id, int x, int y, int z);
 
         std::string ToString() const;
 
     private:
+        SpaceLocation(ID id, int x, int y, int z);
+
         //serialization
         friend class cereal::access;
 

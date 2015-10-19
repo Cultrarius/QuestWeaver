@@ -29,6 +29,12 @@ void WorldModel::Execute(vector<ModelAction> modelActions) {
                 throw ContractFailedException(
                         "Unable to execute model action create: entity with id " + to_string(id) + " already exists.");
             }
+            if (id != WorldEntity::NoID) {
+                throw ContractFailedException(
+                        "Unable to execute model action create: entity already has an ID: " + to_string(id));
+            }
+
+            action.GetEntity()->id = NewId();
             entities.push_back(action.GetEntity());
         } else if (action.GetActionType() == ActionType::DELETE) {
             if (entity.get() == nullptr) {

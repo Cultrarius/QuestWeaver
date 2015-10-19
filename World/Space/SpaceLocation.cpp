@@ -16,3 +16,7 @@ SpaceLocation::SpaceLocation(uint64_t id, int x, int y, int z) : WorldEntity(id)
 
 SpaceLocation::SpaceLocation(int x, int y, int z) : SpaceLocation(NoID, x, y, z) {
 }
+
+SpaceLocation::SpaceLocation() : SpaceLocation(0, 0, 0) {
+
+}

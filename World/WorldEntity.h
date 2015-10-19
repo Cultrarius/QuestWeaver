@@ -13,15 +13,18 @@ namespace weave {
     public:
         static const ID NoID = 0;
 
-        explicit WorldEntity(ID id) : id(id) { }
-
         WorldEntity() : WorldEntity(NoID) { }
 
         ID GetId();
 
         virtual std::string ToString() const = 0;
 
+    protected:
+        explicit WorldEntity(ID id) : id(id) { }
+
     private:
+        friend class WorldModel;
+
         ID id;
 
         // serialization
