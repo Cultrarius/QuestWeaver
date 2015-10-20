@@ -16,7 +16,7 @@ namespace weave {
         std::string ToString() const;
 
     private:
-        SpaceAgent(uint64_t id, std::string name);
+        SpaceAgent(ID id, std::string name);
 
         // serialization
         friend class cereal::access;

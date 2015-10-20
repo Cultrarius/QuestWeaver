@@ -7,7 +7,7 @@
 weave::SpaceAgent::SpaceAgent(std::string name) : SpaceAgent(NoID, name) {
 }
 
-weave::SpaceAgent::SpaceAgent(uint64_t id, std::string name) : WorldEntity(id), Name(name) {
+weave::SpaceAgent::SpaceAgent(ID id, std::string name) : WorldEntity(id), Name(name) {
 }
 
 std::string weave::SpaceAgent::ToString() const {

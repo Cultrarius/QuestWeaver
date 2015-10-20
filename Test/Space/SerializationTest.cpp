@@ -153,3 +153,83 @@ TEST_CASE("Serialize Quests", "[serialize]") {
         }
     }
 }
+
+TEST_CASE("Serialize Entities", "[serialize]") {
+    int testSize = 100;
+    shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
+    shared_ptr<RandomStream> rx = make_shared<RandomStream>(7);
+    SpaceWorldModel testModel(rs);
+
+    SECTION("Serialize and deserialize empty model") {
+        stringstream ss;
+        {
+            cereal::JSONOutputArchive outputArchive(ss);
+            outputArchive(testModel);
+        }
+        string serialized = ss.str();
+        REQUIRE(!serialized.empty());
+
+        SpaceWorldModel deserializedModel(rx);
+        {
+            cereal::JSONInputArchive inputArchive(ss);
+            inputArchive(deserializedModel);
+        }
+
+        REQUIRE(testModel.GetEntities().size() == deserializedModel.GetEntities().size());
+    }
+
+    SECTION("Serialize and deserialize a list of entities") {
+        vector<shared_ptr<WorldEntity>> entities;
+
+        entities.push_back(testModel.CreateAgent());
+        entities.push_back(testModel.CreateLocation());
+        entities.push_back(testModel.CreateSolarSystem());
+
+        stringstream ss;
+        {
+            cereal::JSONOutputArchive outputArchive(ss);
+            outputArchive(entities);
+        }
+        string serialized = ss.str();
+        REQUIRE(!serialized.empty());
+
+        vector<shared_ptr<WorldEntity>> deserialized;
+        {
+            cereal::JSONInputArchive inputArchive(ss);
+            inputArchive(deserialized);
+        }
+        REQUIRE(entities.size() == deserialized.size());
+
+        /*
+        for (int i = 0; i < entities.size(); i++) {
+            REQUIRE(typeof(*deserialized[i])  == typeof(*deserialized[i]));
+        }*/
+    }
+
+    SECTION("Serialize and deserialize a full world model") {
+        vector<ModelAction> actions;
+
+        actions.push_back(ModelAction(ActionType::CREATE, testModel.CreateAgent()));
+        actions.push_back(ModelAction(ActionType::CREATE, testModel.CreateLocation()));
+        actions.push_back(ModelAction(ActionType::CREATE, testModel.CreateSolarSystem()));
+
+        testModel.Execute(actions);
+        REQUIRE(testModel.GetEntities().size() == actions.size());
+
+        stringstream ss;
+        {
+            cereal::JSONOutputArchive outputArchive(ss);
+            outputArchive(testModel);
+        }
+        string serialized = ss.str();
+        REQUIRE(!serialized.empty());
+
+        SpaceWorldModel deserializedModel(rx);
+        {
+            cereal::JSONInputArchive inputArchive(ss);
+            inputArchive(deserializedModel);
+        }
+
+        REQUIRE(testModel.GetEntities().size() == deserializedModel.GetEntities().size());
+    }
+}

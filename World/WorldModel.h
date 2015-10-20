@@ -20,6 +20,8 @@ namespace weave {
 
         std::shared_ptr<WorldEntity> GetEntityById(ID id) const;
 
+        std::vector<std::shared_ptr<WorldEntity>> GetEntities() const;
+
     protected:
         ID NewId();
 

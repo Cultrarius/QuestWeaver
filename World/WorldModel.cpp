@@ -54,3 +54,7 @@ shared_ptr<WorldEntity> WorldModel::GetEntityById(ID id) const {
     }
     return shared_ptr<WorldEntity>();
 }
+
+std::vector<std::shared_ptr<WorldEntity>> WorldModel::GetEntities() const {
+    return entities;
+}

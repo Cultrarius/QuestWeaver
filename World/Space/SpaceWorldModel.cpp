@@ -28,3 +28,7 @@ void SpaceWorldModel::SetParameters(ModelParameters parameters) {
 std::shared_ptr<SpaceAgent> SpaceWorldModel::CreateAgent() const {
     return make_shared<SpaceAgent>("Peter Parker");
 }
+
+std::shared_ptr<SolarSystem> SpaceWorldModel::CreateSolarSystem() const {
+    return make_shared<SolarSystem>("Andromeda", CreateLocation());
+}

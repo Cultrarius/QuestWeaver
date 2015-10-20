@@ -8,6 +8,7 @@
 #include "SpaceLocation.h"
 #include "../../Core/WeaverUtils.h"
 #include "SpaceAgent.h"
+#include "SolarSystem.h"
 
 namespace weave {
     struct ModelParameters {
@@ -33,6 +34,8 @@ namespace weave {
         std::shared_ptr<SpaceLocation> CreateLocation() const;
 
         std::shared_ptr<SpaceAgent> CreateAgent() const;
+
+        std::shared_ptr<SolarSystem> CreateSolarSystem() const;
 
     private:
         ModelParameters param;
