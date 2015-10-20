@@ -7,10 +7,10 @@
 using namespace std;
 using namespace weave;
 
-vector<std::shared_ptr<Quest>> QuestModel::GetActiveQuests() const {
+vector<std::shared_ptr<Quest>> QuestModel::GetQuestsWithState(QuestState state) const {
     vector<std::shared_ptr<Quest>> result;
     for (auto &quest : quests) {
-        if (quest->GetState() == Active) {
+        if (quest->GetState() == state) {
             result.push_back(quest);
         }
     }

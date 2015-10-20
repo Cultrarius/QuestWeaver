@@ -42,6 +42,8 @@ void WorldModel::Execute(vector<ModelAction> modelActions) {
                         "Unable to execute model action delete: entity with id " + to_string(id) + " not found.");
             }
             // TODO delete
+        } else {
+            throw ContractFailedException("Illegal action type.");
         }
     }
 }

@@ -8,7 +8,7 @@
 #include "cereal.h"
 
 namespace weave {
-    enum QuestState {
+    enum class QuestState {
         Proposed, Inactive, Active, Failed, Success
     };
 

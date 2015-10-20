@@ -9,7 +9,7 @@
 namespace weave {
     class QuestModel {
     public:
-        std::vector<std::shared_ptr<Quest>> GetActiveQuests() const;
+        std::vector<std::shared_ptr<Quest>> GetQuestsWithState(QuestState state) const;
 
         std::vector<std::shared_ptr<Quest>> GetQuests() const;
 

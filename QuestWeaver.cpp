@@ -23,7 +23,7 @@ QuestWeaver::QuestWeaver(uint64_t seed) {
 }
 
 vector<shared_ptr<Quest>> QuestWeaver::GetActiveQuests() const {
-    return quests->GetActiveQuests();
+    return quests->GetQuestsWithState(QuestState::Active);
 }
 
 shared_ptr<Quest> QuestWeaver::CreateNewQuest() {

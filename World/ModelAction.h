@@ -9,7 +9,7 @@
 
 namespace weave {
 
-    enum ActionType {
+    enum class ActionType {
         KEEP, CREATE, DELETE
     };
 
