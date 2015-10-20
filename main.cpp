@@ -14,7 +14,6 @@ int main() {
     cout << "New Quest created!" << endl;
     cout << "Title: " << newQuest->GetTitle() << endl;
     cout << "Description: " << newQuest->GetDescription() << endl;
-    cout << "State: " << newQuest->GetState() << endl;
 
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(11);
     SpaceWorldModel testModel(rs);
