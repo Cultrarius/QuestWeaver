@@ -10,8 +10,9 @@ using namespace weave;
 
 vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> questTemplate,
                                                       const WorldModel &worldModel,
-                                                      std::shared_ptr<RandomStream> randomStream) const {
-    // TODO insert fancy algorithm
+                                                      std::shared_ptr<RandomStream> randomStream,
+                                                      std::vector<ModelAction> *modelActions) const {
+    // TODO insert fancy algorithm instead of just random dice rolling
     vector<QuestPropertyValue> returnValues;
     vector<TemplateQuestProperty> propertiesToCreate;
     for (const TemplateQuestProperty &questProperty : questTemplate->GetProperties()) {
@@ -26,6 +27,9 @@ vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> quest
         const vector<ModelAction> candidates = questTemplate->GetPropertyCandidates(property, worldModel);
         int index = randomStream->GetRandomIndex(candidates.size());
         shared_ptr<WorldEntity> entity = candidates[index].GetEntity();
+        if (modelActions != nullptr) {
+            modelActions->push_back(candidates[index]);
+        }
         QuestPropertyValue questValue(property, entity);
         returnValues.push_back(std::move(questValue));
     }

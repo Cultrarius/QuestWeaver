@@ -12,6 +12,7 @@ namespace weave {
     public:
         std::vector<QuestPropertyValue> fillTemplate(std::shared_ptr<Template> questTemplate,
                                                      const WorldModel &worldModel,
-                                                     std::shared_ptr<RandomStream> randomStream) const;
+                                                     std::shared_ptr<RandomStream> randomStream,
+                                                     std::vector<ModelAction> *modelActions) const;
     };
 }

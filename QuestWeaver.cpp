@@ -28,12 +28,16 @@ vector<shared_ptr<Quest>> QuestWeaver::GetActiveQuests() const {
 
 shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
     auto questTemplate = templates->GetTemplateForNewQuest(randomStream);
-    vector<QuestPropertyValue> questPropertyValues = engine->fillTemplate(questTemplate, *world, randomStream);
+    std::vector<ModelAction> modelActions;
+    vector<QuestPropertyValue> questPropertyValues = engine->fillTemplate(questTemplate, *world, randomStream,
+                                                                          &modelActions);
     shared_ptr<Quest> newQuest = questTemplate->ToQuest(questPropertyValues);
-    // TODO create quest-variants and choose the best one
-    updateWorld(*newQuest);
+    // TODO create quest-variants and choose the best one?
+    updateWorld(modelActions, *newQuest);
     return newQuest;
 }
 
-void QuestWeaver::updateWorld(const Quest& quest) {
+void QuestWeaver::updateWorld(const std::vector<ModelAction> &modelActions, const Quest &quest) {
+    world->Execute(modelActions);
+    quests->RegisterQuest(quest);
 }
