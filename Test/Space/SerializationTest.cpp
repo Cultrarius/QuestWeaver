@@ -3,6 +3,7 @@
 //
 
 #include <fstream>
+#include <typeinfo>
 #include "../../QuestWeaver.h"
 #include "../catch.hpp"
 #include "../../Template/Space/SpaceQuestTemplateFactory.h"
@@ -200,10 +201,9 @@ TEST_CASE("Serialize Entities", "[serialize]") {
         }
         REQUIRE(entities.size() == deserialized.size());
 
-        /*
         for (int i = 0; i < entities.size(); i++) {
-            REQUIRE(typeof(*deserialized[i])  == typeof(*deserialized[i]));
-        }*/
+            REQUIRE(typeid(*(deserialized[i])) == typeid(*(deserialized[i])));
+        }
     }
 
     SECTION("Serialize and deserialize a full world model") {
@@ -231,5 +231,9 @@ TEST_CASE("Serialize Entities", "[serialize]") {
         }
 
         REQUIRE(testModel.GetEntities().size() == deserializedModel.GetEntities().size());
+
+        for (int i = 0; i < testModel.GetEntities().size(); i++) {
+            REQUIRE(typeid(*(testModel.GetEntities()[i])) == typeid(*(deserializedModel.GetEntities()[i])));
+        }
     }
 }
