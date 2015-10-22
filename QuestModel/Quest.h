@@ -6,6 +6,7 @@
 
 #include "../Core/WeaverTypes.h"
 #include "cereal.h"
+#include "../World/ModelAction.h"
 
 namespace weave {
     enum class QuestState {
@@ -27,8 +28,12 @@ namespace weave {
 
         ID GetId() const;
 
+        virtual std::string GetType() const = 0;
+
     protected:
         friend class QuestModel;
+
+        friend class QuestWeaver;
 
         Quest(ID id,
               QuestState state,
@@ -37,6 +42,7 @@ namespace weave {
 
         virtual std::shared_ptr<Quest> setStateAndId(ID newId, QuestState newState) const = 0;
 
+        virtual std::vector<ModelAction> Tick(float delta);
 
     private:
         ID id;

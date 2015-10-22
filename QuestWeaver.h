@@ -19,9 +19,11 @@ namespace weave {
     public:
         explicit QuestWeaver(uint64_t seed);
 
-        std::vector<std::shared_ptr<Quest>> GetActiveQuests() const;
+        std::vector<std::shared_ptr<Quest>> GetQuestsWithState(QuestState state) const;
 
         std::shared_ptr<Quest> CreateNewQuest();
+
+        void Tick(float delta);
 
     private:
         std::unique_ptr<WeaverEngine> engine;

@@ -31,3 +31,6 @@ ID Quest::GetId() const {
     return id;
 }
 
+std::vector<ModelAction> Quest::Tick(float delta) {
+    return std::vector<ModelAction>();
+}

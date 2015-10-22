@@ -11,6 +11,8 @@ namespace weave {
     public:
         ExploreRegionQuest(const std::string &title, const std::string &description);
 
+        std::string GetType() const;
+
     private:
         ExploreRegionQuest(ID id,
                            QuestState state,

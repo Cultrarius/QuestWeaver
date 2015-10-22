@@ -10,7 +10,7 @@
 namespace weave {
 
     enum class ActionType {
-        KEEP, CREATE, DELETE
+        KEEP, CREATE, DELETE, UPDATE
     };
 
     class ModelAction {

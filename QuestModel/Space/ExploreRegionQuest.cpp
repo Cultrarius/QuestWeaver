@@ -20,3 +20,7 @@ std::shared_ptr<Quest> ExploreRegionQuest::setStateAndId(ID newId, QuestState ne
     auto quest = new ExploreRegionQuest(newId, newState, GetTitle(), GetDescription());
     return shared_ptr<ExploreRegionQuest>(quest);
 }
+
+string ExploreRegionQuest::GetType() const {
+    return "Space::ExploreRegion";
+}

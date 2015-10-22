@@ -22,10 +22,6 @@ QuestWeaver::QuestWeaver(uint64_t seed) {
     templates->RegisterTemplateFactory(spaceFactory);
 }
 
-vector<shared_ptr<Quest>> QuestWeaver::GetActiveQuests() const {
-    return quests->GetQuestsWithState(QuestState::Active);
-}
-
 shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
     auto questTemplate = templates->GetTemplateForNewQuest(randomStream);
     std::vector<ModelAction> modelActions;
@@ -40,4 +36,21 @@ shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
 void QuestWeaver::updateWorld(const std::vector<ModelAction> &modelActions, const Quest &quest) {
     world->Execute(modelActions);
     quests->RegisterQuest(quest);
+}
+
+std::vector<std::shared_ptr<Quest>> QuestWeaver::GetQuestsWithState(QuestState state) const {
+    return quests->GetQuestsWithState(state);
+}
+
+void QuestWeaver::Tick(float delta) {
+    std::vector<ModelAction> actions;
+    for (const auto &quest : quests->GetQuests()) {
+        for (const auto &change : quest->Tick(delta)) {
+            actions.push_back(move(change));
+        }
+    }
+
+    if (actions.size() > 0) {
+        world->Execute(actions);
+    }
 }
