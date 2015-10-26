@@ -9,6 +9,7 @@
 #include "../Core/WeaverUtils.h"
 #include "WorldEntity.h"
 #include "ModelAction.h"
+#include "MetaData.h"
 
 namespace weave {
 
@@ -30,13 +31,14 @@ namespace weave {
     private:
         ID idGenerator = 0;
         std::vector<std::shared_ptr<WorldEntity>> entities;
+        std::map<ID, MetaData> metaData;
 
         // serialization
         friend class cereal::access;
 
         template<class Archive>
         void serialize(Archive &archive) {
-            archive(CEREAL_NVP(idGenerator), CEREAL_NVP(entities), CEREAL_NVP(rs));
+            archive(CEREAL_NVP(idGenerator), CEREAL_NVP(entities), CEREAL_NVP(rs), CEREAL_NVP(metaData));
         }
     };
 }

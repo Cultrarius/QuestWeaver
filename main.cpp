@@ -15,6 +15,8 @@ int main() {
     cout << "Title: " << newQuest->GetTitle() << endl;
     cout << "Description: " << newQuest->GetDescription() << endl;
 
+    weaver.Tick(1);
+
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(11);
     SpaceWorldModel testModel(rs);
     auto location = testModel.CreateLocation();
