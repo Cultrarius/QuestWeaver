@@ -216,6 +216,10 @@ TEST_CASE("Serialize Entities", "[serialize]") {
         testModel.Execute(actions);
         REQUIRE(testModel.GetEntities().size() == actions.size());
 
+        testModel.GetMetaData(1).SetValue("Size", 7);
+        testModel.GetMetaData(1).SetValue("Age", 42);
+        testModel.GetMetaData(2).SetValue("Age", 43);
+
         stringstream ss;
         {
             cereal::JSONOutputArchive outputArchive(ss);
@@ -235,5 +239,8 @@ TEST_CASE("Serialize Entities", "[serialize]") {
         for (int i = 0; i < testModel.GetEntities().size(); i++) {
             REQUIRE(typeid(*(testModel.GetEntities()[i])) == typeid(*(deserializedModel.GetEntities()[i])));
         }
+        REQUIRE(deserializedModel.GetMetaData(1).GetValue("Size") == 7);
+        REQUIRE(deserializedModel.GetMetaData(1).GetValue("Age") == 42);
+        REQUIRE(deserializedModel.GetMetaData(2).GetValue("Age") == 43);
     }
 }
