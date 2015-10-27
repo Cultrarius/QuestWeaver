@@ -26,6 +26,9 @@ int main() {
     modelActions.push_back(locationToAdd);
     testModel.Execute(modelActions);
 
+    testModel.GetMetaData(1).SetValue("Bla", 9);
+    testModel.GetMetaData(1).SetValue("Whoop", 42);
+
     stringstream ss;
     {
         cereal::JSONOutputArchive outputArchive(ss);
@@ -41,6 +44,8 @@ int main() {
         inputArchive(deserializedModel);
     }
 
+    cout << "Has: " << deserializedModel.GetMetaData(1).HasValue("Bla") << endl;
+    cout << "Val: " << deserializedModel.GetMetaData(1).GetValue("Bla") << endl;
     cout << testModel.CreateLocation()->X << " ";
     cout << deserializedModel.CreateLocation()->X << endl;
 

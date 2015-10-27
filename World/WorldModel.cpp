@@ -34,7 +34,8 @@ void WorldModel::Execute(vector<ModelAction> modelActions) {
                         "Unable to execute model action create: entity already has an ID: " + to_string(id));
             }
 
-            action.GetEntity()->id = NewId();
+            ID newId = NewId();
+            action.GetEntity()->id = newId;
             entities.push_back(action.GetEntity());
         } else if (action.GetActionType() == ActionType::DELETE) {
             if (entity.get() == nullptr) {
@@ -59,4 +60,8 @@ shared_ptr<WorldEntity> WorldModel::GetEntityById(ID id) const {
 
 std::vector<std::shared_ptr<WorldEntity>> WorldModel::GetEntities() const {
     return entities;
+}
+
+MetaData &WorldModel::GetMetaData(ID entityId) {
+    return metaData[entityId];
 }

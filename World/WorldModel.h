@@ -23,15 +23,17 @@ namespace weave {
 
         std::vector<std::shared_ptr<WorldEntity>> GetEntities() const;
 
-    protected:
-        ID NewId();
+        MetaData &GetMetaData(ID entityId);
 
+    protected:
         std::shared_ptr<RandomStream> rs;
+        std::map<ID, MetaData> metaData;
+
+        ID NewId();
 
     private:
         ID idGenerator = 0;
         std::vector<std::shared_ptr<WorldEntity>> entities;
-        std::map<ID, MetaData> metaData;
 
         // serialization
         friend class cereal::access;
