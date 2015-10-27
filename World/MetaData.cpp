@@ -22,3 +22,11 @@ int MetaData::GetValue(const std::string &name) const {
 void MetaData::SetValue(const std::string &name, int value) {
     data[name] = value;
 }
+
+vector<string> MetaData::GetValueNames() const {
+    vector<string> names;
+    for (auto pair : data) {
+        names.push_back(pair.first);
+    }
+    return names;
+}

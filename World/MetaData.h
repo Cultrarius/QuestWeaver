@@ -18,6 +18,8 @@ namespace weave {
 
         void SetValue(const std::string &name, int value);
 
+        std::vector<std::string> GetValueNames() const;
+
     private:
         std::map<std::string, int> data;
 

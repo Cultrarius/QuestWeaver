@@ -13,3 +13,7 @@ ActionType ModelAction::GetActionType() const {
 std::shared_ptr<WorldEntity> ModelAction::GetEntity() const {
     return entity;
 }
+
+MetaData ModelAction::GetMetaData() const {
+    return metaData;
+}

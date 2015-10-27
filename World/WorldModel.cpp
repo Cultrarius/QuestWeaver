@@ -37,6 +37,7 @@ void WorldModel::Execute(vector<ModelAction> modelActions) {
             ID newId = NewId();
             action.GetEntity()->id = newId;
             entities.push_back(action.GetEntity());
+            updateMetaDataForId(newId, action.GetMetaData());
         } else if (action.GetActionType() == ActionType::DELETE) {
             if (entity.get() == nullptr) {
                 throw ContractFailedException(
@@ -46,6 +47,12 @@ void WorldModel::Execute(vector<ModelAction> modelActions) {
         } else {
             throw ContractFailedException("Illegal action type.");
         }
+    }
+}
+
+void WorldModel::updateMetaDataForId(ID newId, const MetaData &newData) {
+    for (string name : newData.GetValueNames()) {
+        metaData[newId].SetValue(name, newData.GetValue(name));
     }
 }
 
