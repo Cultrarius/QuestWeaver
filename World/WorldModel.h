@@ -33,9 +33,11 @@ namespace weave {
 
     private:
         ID idGenerator = 0;
-        std::vector<std::shared_ptr<WorldEntity>> entities;
+        std::map<ID, std::shared_ptr<WorldEntity>> entities;
 
         void updateMetaDataForId(ID newId, const MetaData &newData);
+
+        bool hasEntityWithId(ID id) const;
 
         // serialization
         friend class cereal::access;

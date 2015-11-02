@@ -55,4 +55,15 @@ TEST_CASE("World Model", "[model]") {
         REQUIRE(testModel.GetEntities().size() == 1);
         REQUIRE(entity->GetId() != 0);
     }
+
+    SECTION("Checking create and keep entity") {
+        vector<ModelAction> actions;
+        ModelAction action(ActionType::CREATE, entity);
+        actions.push_back(action);
+        testModel.Execute(actions);
+        actions[0] = ModelAction(ActionType::DELETE, entity);
+        testModel.Execute(actions);
+        REQUIRE(testModel.GetEntities().size() == 0);
+        REQUIRE(entity->GetId() == 0);
+    }
 }

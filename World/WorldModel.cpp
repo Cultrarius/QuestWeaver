@@ -36,14 +36,17 @@ void WorldModel::Execute(vector<ModelAction> modelActions) {
 
             ID newId = NewId();
             action.GetEntity()->id = newId;
-            entities.push_back(action.GetEntity());
+            entities[newId] = action.GetEntity();
             updateMetaDataForId(newId, action.GetMetaData());
         } else if (action.GetActionType() == ActionType::DELETE) {
             if (entity.get() == nullptr) {
                 throw ContractFailedException(
                         "Unable to execute model action delete: entity with id " + to_string(id) + " not found.");
             }
-            // TODO delete
+            ID oldId = action.GetEntity()->GetId();
+            action.GetEntity()->id = WorldEntity::NoID;
+            entities.erase(oldId);
+            metaData.erase(oldId);
         } else {
             throw ContractFailedException("Illegal action type.");
         }
@@ -57,16 +60,19 @@ void WorldModel::updateMetaDataForId(ID newId, const MetaData &newData) {
 }
 
 shared_ptr<WorldEntity> WorldModel::GetEntityById(ID id) const {
-    for (auto entity : entities) {
-        if (entity->GetId() == id) {
-            return entity;
-        }
-    }
-    return shared_ptr<WorldEntity>();
+    return hasEntityWithId(id) ? entities.find(id)->second : shared_ptr<WorldEntity>();
 }
 
-std::vector<std::shared_ptr<WorldEntity>> WorldModel::GetEntities() const {
-    return entities;
+bool WorldModel::hasEntityWithId(ID id) const {
+    return id != 0 && entities.find(id) != entities.end();
+}
+
+vector<shared_ptr<WorldEntity>> WorldModel::GetEntities() const {
+    vector<shared_ptr<WorldEntity>> result;
+    for (auto pair : entities) {
+        result.push_back(pair.second);
+    }
+    return result;
 }
 
 MetaData &WorldModel::GetMetaData(ID entityId) {
