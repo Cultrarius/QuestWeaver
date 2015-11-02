@@ -209,16 +209,17 @@ TEST_CASE("Serialize Entities", "[serialize]") {
     SECTION("Serialize and deserialize a full world model") {
         vector<ModelAction> actions;
 
-        actions.push_back(ModelAction(ActionType::CREATE, testModel.CreateAgent()));
-        actions.push_back(ModelAction(ActionType::CREATE, testModel.CreateLocation()));
+        MetaData metaData1, metaData2;
+        metaData1.SetValue("Size", 7).SetValue("Age", 42);
+        metaData2.SetValue("Age", 43);
+        auto entity1 = testModel.CreateAgent();
+        auto entity2 = testModel.CreateLocation();
+        actions.push_back(ModelAction(ActionType::CREATE, entity1, metaData1));
+        actions.push_back(ModelAction(ActionType::CREATE, entity2, metaData2));
         actions.push_back(ModelAction(ActionType::CREATE, testModel.CreateSolarSystem()));
 
         testModel.Execute(actions);
         REQUIRE(testModel.GetEntities().size() == actions.size());
-
-        testModel.GetMetaData(1).SetValue("Size", 7);
-        testModel.GetMetaData(1).SetValue("Age", 42);
-        testModel.GetMetaData(2).SetValue("Age", 43);
 
         stringstream ss;
         {
@@ -239,8 +240,8 @@ TEST_CASE("Serialize Entities", "[serialize]") {
         for (int i = 0; i < testModel.GetEntities().size(); i++) {
             REQUIRE(typeid(*(testModel.GetEntities()[i])) == typeid(*(deserializedModel.GetEntities()[i])));
         }
-        REQUIRE(deserializedModel.GetMetaData(1).GetValue("Size") == 7);
-        REQUIRE(deserializedModel.GetMetaData(1).GetValue("Age") == 42);
-        REQUIRE(deserializedModel.GetMetaData(2).GetValue("Age") == 43);
+        REQUIRE(deserializedModel.GetMetaData(entity1->GetId()).GetValue("Size") == 7);
+        REQUIRE(deserializedModel.GetMetaData(entity1->GetId()).GetValue("Age") == 42);
+        REQUIRE(deserializedModel.GetMetaData(entity2->GetId()).GetValue("Age") == 43);
     }
 }

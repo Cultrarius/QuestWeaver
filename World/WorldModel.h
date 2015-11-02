@@ -23,7 +23,7 @@ namespace weave {
 
         std::vector<std::shared_ptr<WorldEntity>> GetEntities() const;
 
-        MetaData &GetMetaData(ID entityId);
+        MetaData GetMetaData(ID entityId) const;
 
     protected:
         std::shared_ptr<RandomStream> rs;

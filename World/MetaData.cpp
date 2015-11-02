@@ -19,8 +19,9 @@ int MetaData::GetValue(const std::string &name) const {
     }
 }
 
-void MetaData::SetValue(const std::string &name, int value) {
+MetaData &MetaData::SetValue(const std::string &name, int value) {
     data[name] = value;
+    return *this;
 }
 
 vector<string> MetaData::GetValueNames() const {

@@ -83,28 +83,28 @@ TEST_CASE("Metadata", "[model]") {
     }
 
     SECTION("Empty Metadata") {
-        MetaData &metadata = testModel.GetMetaData(entity->GetId());
+        MetaData metadata = testModel.GetMetaData(entity->GetId());
         REQUIRE(metadata.GetValueNames().size() == 0);
     }
 
     SECTION("Get does not create metadata") {
-        MetaData &metadata = testModel.GetMetaData(entity->GetId());
+        MetaData metadata = testModel.GetMetaData(entity->GetId());
         REQUIRE(!metadata.HasValue("Test123"));
         metadata.GetValue("Test123");
         REQUIRE(!metadata.HasValue("Test123"));
     }
 
-    SECTION("Edit metadata simple") {
-        MetaData &metadata = testModel.GetMetaData(entity->GetId());
+    SECTION("Edit metadata immutablility") {
+        MetaData metadata = testModel.GetMetaData(entity->GetId());
         REQUIRE(!metadata.HasValue("Test123"));
         metadata.SetValue("Test123", 137);
         REQUIRE(metadata.HasValue("Test123"));
-        REQUIRE(metadata.GetValue("Test123") == 137);
+        REQUIRE(!testModel.GetMetaData(entity->GetId()).HasValue("Test123"));
     }
 
     SECTION("delete entity with metadata") {
         ID id = entity->GetId();
-        MetaData &metadata = testModel.GetMetaData(id);
+        MetaData metadata = testModel.GetMetaData(id);
         REQUIRE(!metadata.HasValue("Test123"));
         metadata.SetValue("Test123", 100);
         REQUIRE(metadata.HasValue("Test123"));

@@ -16,7 +16,7 @@ namespace weave {
 
         int GetValue(const std::string &name) const;
 
-        void SetValue(const std::string &name, int value);
+        MetaData &SetValue(const std::string &name, int value);
 
         std::vector<std::string> GetValueNames() const;
 
