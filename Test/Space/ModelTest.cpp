@@ -38,11 +38,37 @@ TEST_CASE("Model Actions", "[model]") {
         REQUIRE_THROWS_AS(testModel.Execute(actions), ContractFailedException);
     }
 
-    SECTION("KEEP unknown entity") {
+    SECTION("KEEP known entity") {
+        vector<ModelAction> actions;
+        ModelAction action(ActionType::CREATE, entity);
+        actions.push_back(action);
+        testModel.Execute(actions);
+        actions[0] = ModelAction(ActionType::KEEP, entity);
+        testModel.Execute(actions);
+    }
+
+    SECTION("KEEP unknown entity without id") {
         vector<ModelAction> actions;
         ModelAction action(ActionType::KEEP, entity);
         actions.push_back(action);
         REQUIRE_THROWS_AS(testModel.Execute(actions), ContractFailedException);
+    }
+
+    SECTION("UPDATE unknown entity") {
+        vector<ModelAction> actions;
+        ModelAction action(ActionType::UPDATE, entity);
+        actions.push_back(action);
+        REQUIRE_THROWS_AS(testModel.Execute(actions), ContractFailedException);
+    }
+
+    SECTION("UPDATE unknown entity with id") {
+        vector<ModelAction> actions;
+        ModelAction action(ActionType::CREATE, entity);
+        actions.push_back(action);
+        testModel.Execute(actions);
+        actions[0] = ModelAction(ActionType::UPDATE, entity);
+        SpaceWorldModel otherModel(rs);
+        REQUIRE_THROWS_AS(otherModel.Execute(actions), ContractFailedException);
     }
 
     SECTION("create and keep entity") {
@@ -102,14 +128,74 @@ TEST_CASE("Metadata", "[model]") {
         REQUIRE(!testModel.GetMetaData(entity->GetId()).HasValue("Test123"));
     }
 
+    SECTION("Create metadata entry") {
+        SpaceWorldModel metaDataModel(rs);
+        shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
+        MetaData metaData;
+        metaData.SetValue("Test123", 142);
+        actions[0] = ModelAction(ActionType::CREATE, metaEntity, metaData);
+        metaDataModel.Execute(actions);
+        MetaData modelData = metaDataModel.GetMetaData(metaEntity->GetId());
+        REQUIRE(modelData.HasValue("Test123"));
+        REQUIRE(modelData.GetValue("Test123") == 142);
+    }
+
     SECTION("delete entity with metadata") {
-        ID id = entity->GetId();
-        MetaData metadata = testModel.GetMetaData(id);
-        REQUIRE(!metadata.HasValue("Test123"));
-        metadata.SetValue("Test123", 100);
-        REQUIRE(metadata.HasValue("Test123"));
-        actions[0] = ModelAction(ActionType::DELETE, entity);
-        testModel.Execute(actions);
-        REQUIRE(!testModel.GetMetaData(id).HasValue("Test123"));
+        SpaceWorldModel metaDataModel(rs);
+        shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
+        MetaData metaData;
+        metaData.SetValue("Test123", 142);
+        actions[0] = ModelAction(ActionType::CREATE, metaEntity, metaData);
+        metaDataModel.Execute(actions);
+        ID id = metaEntity->GetId();
+        REQUIRE(metaDataModel.GetMetaData(id).HasValue("Test123"));
+        actions[0] = ModelAction(ActionType::DELETE, metaEntity);
+        metaDataModel.Execute(actions);
+        REQUIRE(!metaDataModel.GetMetaData(id).HasValue("Test123"));
+    }
+
+    SECTION("update entity with metadata") {
+        SpaceWorldModel metaDataModel(rs);
+        shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
+        MetaData metaData;
+        metaData.SetValue("Test123", 142);
+        actions[0] = ModelAction(ActionType::CREATE, metaEntity, metaData);
+        metaDataModel.Execute(actions);
+        ID id = metaEntity->GetId();
+        REQUIRE(metaDataModel.GetMetaData(id).GetValue("Test123") == 142);
+        metaData.SetValue("Test123", 191);
+        actions[0] = ModelAction(ActionType::UPDATE, metaEntity, metaData);
+        metaDataModel.Execute(actions);
+        REQUIRE(metaDataModel.GetMetaData(id).GetValue("Test123") == 191);
+    }
+
+    SECTION("update metadata key addition") {
+        SpaceWorldModel metaDataModel(rs);
+        shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
+        MetaData metaData;
+        metaData.SetValue("Test123", 142);
+        actions[0] = ModelAction(ActionType::CREATE, metaEntity, metaData);
+        metaDataModel.Execute(actions);
+        ID id = metaEntity->GetId();
+        REQUIRE(!metaDataModel.GetMetaData(id).HasValue("Test456"));
+        metaData.SetValue("Test456", 191);
+        actions[0] = ModelAction(ActionType::UPDATE, metaEntity, metaData);
+        metaDataModel.Execute(actions);
+        REQUIRE(metaDataModel.GetMetaData(id).GetValue("Test123") == 142);
+        REQUIRE(metaDataModel.GetMetaData(id).GetValue("Test456") == 191);
+    }
+
+    SECTION("update metadata no key deletion") {
+        SpaceWorldModel metaDataModel(rs);
+        shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
+        MetaData metaData;
+        metaData.SetValue("Test123", 142);
+        actions[0] = ModelAction(ActionType::CREATE, metaEntity, metaData);
+        metaDataModel.Execute(actions);
+        ID id = metaEntity->GetId();
+        REQUIRE(metaDataModel.GetMetaData(id).GetValue("Test123") == 142);
+        actions[0] = ModelAction(ActionType::UPDATE, metaEntity, MetaData());
+        metaDataModel.Execute(actions);
+        REQUIRE(metaDataModel.GetMetaData(id).GetValue("Test123") == 142);
     }
 }
