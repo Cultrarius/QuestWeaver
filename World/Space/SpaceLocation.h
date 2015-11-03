@@ -19,7 +19,7 @@ namespace weave {
 
         std::string ToString() const;
 
-        std::string GetType() const
+        std::string GetType() const;
 
     private:
         SpaceLocation(ID id, int x, int y, int z);

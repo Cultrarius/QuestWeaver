@@ -17,19 +17,30 @@ ExploreRegionTemplate::ExploreRegionTemplate(string title,
 
 vector<ModelAction> ExploreRegionTemplate::GetPropertyCandidates(const TemplateQuestProperty &property,
                                                                  const WorldModel &worldModel) const {
-    vector<ModelAction> properties;
+    vector<ModelAction> actions;
     const SpaceWorldModel &spaceModel = (const SpaceWorldModel &) worldModel;
-    std::shared_ptr<WorldEntity> entity;
+    std::shared_ptr<WorldEntity> newEntity;
     MetaData metaData;
     if (property.GetName() == "location") {
-        entity = spaceModel.CreateLocation();
+        newEntity = spaceModel.CreateLocation();
         metaData.SetValue("explored", 0);
+        metaData.SetValue("explorationQuestLock", 1);  // so it does not get picked by another exploration quest
+
+        for (auto entity : spaceModel.GetEntities()) {
+            if (entity->GetType() == "location") {
+                auto entityData = spaceModel.GetMetaData(entity->GetId());
+                if (!entityData.HasValue("explorationQuestLock") && entityData.GetValue("explored") == 0) {
+                    ModelAction modelAction(ActionType::UPDATE, entity, metaData);
+                    actions.push_back(std::move(modelAction));
+                }
+            }
+        }
     } else if (property.GetName() == "sponsor") {
-        entity = spaceModel.CreateAgent();
+        newEntity = spaceModel.CreateAgent();
     }
-    ModelAction modelAction(ActionType::CREATE, entity, metaData);
-    properties.push_back(std::move(modelAction));
-    return properties;
+    ModelAction modelAction(ActionType::CREATE, newEntity, metaData);
+    actions.push_back(std::move(modelAction));
+    return actions;
 }
 
 shared_ptr<Quest> ExploreRegionTemplate::ToQuest(const vector<QuestPropertyValue> &questPropertyValues) const {
