@@ -27,7 +27,8 @@ namespace weave {
 
     protected:
         std::shared_ptr<RandomStream> rs;
-        std::map<ID, MetaData> metaData;
+        std::unordered_map<ID, MetaData> metaData;
+        std::vector<ModelAction> actionHistory;
 
         ID NewId();
 
@@ -44,7 +45,8 @@ namespace weave {
 
         template<class Archive>
         void serialize(Archive &archive) {
-            archive(CEREAL_NVP(idGenerator), CEREAL_NVP(entities), CEREAL_NVP(rs), CEREAL_NVP(metaData));
+            archive(CEREAL_NVP(idGenerator), CEREAL_NVP(entities), CEREAL_NVP(rs), CEREAL_NVP(metaData),
+                    CEREAL_NVP(actionHistory));
         }
     };
 }

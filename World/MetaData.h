@@ -21,7 +21,7 @@ namespace weave {
         std::vector<std::string> GetValueNames() const;
 
     private:
-        std::map<std::string, int> data;
+        std::unordered_map<std::string, int> data;
 
         // serialization
         friend class cereal::access;

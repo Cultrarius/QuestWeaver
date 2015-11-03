@@ -13,6 +13,7 @@ ID WorldModel::NewId() {
 }
 
 WorldModel::WorldModel(shared_ptr<RandomStream> rs) : rs(rs) {
+    actionHistory.reserve(10000);
 }
 
 void WorldModel::Execute(vector<ModelAction> modelActions) {
@@ -48,6 +49,11 @@ void WorldModel::Execute(vector<ModelAction> modelActions) {
             updateMetaDataForId(id, action.GetMetaData());
         } else {
             throw ContractFailedException("Illegal action type.");
+        }
+
+        // update change history
+        if (action.GetActionType() != ActionType::KEEP) {
+            actionHistory.push_back(action);
         }
     }
 }

@@ -4,9 +4,11 @@
 
 #pragma once
 
+#include <memory>
+#include "cereal.h"
 #include "WorldEntity.h"
 #include "MetaData.h"
-#include <memory>
+
 
 namespace weave {
 
@@ -15,12 +17,10 @@ namespace weave {
     };
 
     class ModelAction {
-    private:
-        ActionType actionType;
-        std::shared_ptr<WorldEntity> entity;
-        MetaData metaData;
-
     public:
+        ModelAction() :
+                actionType(ActionType::KEEP) { }
+
         ModelAction(const ActionType &actionType,
                     const std::shared_ptr<WorldEntity> entity) :
                 actionType(actionType), entity(entity) { }
@@ -35,5 +35,18 @@ namespace weave {
         std::shared_ptr<WorldEntity> GetEntity() const;
 
         MetaData GetMetaData() const;
+
+    private:
+        ActionType actionType;
+        std::shared_ptr<WorldEntity> entity;
+        MetaData metaData;
+
+        // serialization
+        friend class cereal::access;
+
+        template<class Archive>
+        void serialize(Archive &archive) {
+            archive(CEREAL_NVP(actionType), CEREAL_NVP(entity), CEREAL_NVP(metaData));
+        }
     };
 }
