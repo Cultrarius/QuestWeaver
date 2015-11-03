@@ -5,6 +5,7 @@
 #pragma once
 
 #include "../Template.h"
+#include "../../World/Space/SpaceWorldModel.h"
 
 namespace weave {
     class ExploreRegionTemplate : public Template {
@@ -17,6 +18,11 @@ namespace weave {
         ExploreRegionTemplate(std::string title,
                               std::vector<TemplateQuestProperty> properties,
                               std::vector<TemplateQuestDescription> descriptions);
+
+    private:
+        void gatherLocationEntities(std::vector<ModelAction> *actions, const weave::SpaceWorldModel &spaceModel) const;
+
+        void gatherSponsorEntities(std::vector<ModelAction> *actions, const SpaceWorldModel &spaceModel) const;
     };
 }
 
