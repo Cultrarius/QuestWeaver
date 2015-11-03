@@ -134,17 +134,32 @@ TEST_CASE("Serialize Quests", "[serialize]") {
         }
 
         stringstream ss;
-        {
-            cereal::JSONOutputArchive outputArchive(ss);
-            outputArchive(questModel);
-        }
-        string serialized = ss.str();
-        REQUIRE(!serialized.empty());
-
         QuestModel deserializedModel;
-        {
-            cereal::JSONInputArchive inputArchive(ss);
-            inputArchive(deserializedModel);
+
+        SECTION("Using JSON format") {
+            {
+                cereal::JSONOutputArchive outputArchive(ss);
+                outputArchive(questModel);
+            }
+            string serialized = ss.str();
+            REQUIRE(!serialized.empty());
+            {
+                cereal::JSONInputArchive inputArchive(ss);
+                inputArchive(deserializedModel);
+            }
+        }
+
+        SECTION("Using binary format") {
+            {
+                cereal::PortableBinaryOutputArchive outputArchive(ss);
+                outputArchive(questModel);
+            }
+            string serialized = ss.str();
+            REQUIRE(!serialized.empty());
+            {
+                cereal::PortableBinaryInputArchive inputArchive(ss);
+                inputArchive(deserializedModel);
+            }
         }
 
         REQUIRE(deserializedModel.GetQuests().size() == questModel.GetQuests().size());
@@ -220,21 +235,34 @@ TEST_CASE("Serialize Entities", "[serialize]") {
 
         testModel.Execute(actions);
         REQUIRE(testModel.GetEntities().size() == actions.size());
-
-        stringstream ss;
-        {
-            cereal::JSONOutputArchive outputArchive(ss);
-            outputArchive(testModel);
-        }
-        string serialized = ss.str();
-        REQUIRE(!serialized.empty());
-
         SpaceWorldModel deserializedModel(rx);
-        {
-            cereal::JSONInputArchive inputArchive(ss);
-            inputArchive(deserializedModel);
+        stringstream ss;
+
+        SECTION("Using JSON format") {
+            {
+                cereal::JSONOutputArchive outputArchive(ss);
+                outputArchive(testModel);
+            }
+            string serialized = ss.str();
+            REQUIRE(!serialized.empty());
+            {
+                cereal::JSONInputArchive inputArchive(ss);
+                inputArchive(deserializedModel);
+            }
         }
 
+        SECTION("Using binary format") {
+            {
+                cereal::PortableBinaryOutputArchive outputArchive(ss);
+                outputArchive(testModel);
+            }
+            string serialized = ss.str();
+            REQUIRE(!serialized.empty());
+            {
+                cereal::PortableBinaryInputArchive inputArchive(ss);
+                inputArchive(deserializedModel);
+            }
+        }
         REQUIRE(testModel.GetEntities().size() == deserializedModel.GetEntities().size());
 
         for (int i = 0; i < testModel.GetEntities().size(); i++) {
