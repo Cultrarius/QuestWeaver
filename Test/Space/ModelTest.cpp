@@ -103,6 +103,24 @@ TEST_CASE("Metadata", "[model]") {
     actions.push_back(action);
     testModel.Execute(actions);
 
+    SECTION("Empty metadata test") {
+        MetaData metaData;
+        REQUIRE(metaData.GetValueNames().size() == 0);
+        REQUIRE(metaData.GetValue("Test123") == 0);
+        REQUIRE(!metaData.HasValue("Test123"));
+    }
+
+    SECTION("Metadata set and get test") {
+        MetaData metaData;
+        metaData.SetValue("Test123", 42);
+        metaData.SetValue("Test456", 43);
+        REQUIRE(metaData.GetValueNames().size() == 2);
+        REQUIRE(metaData.HasValue("Test123"));
+        REQUIRE(metaData.HasValue("Test456"));
+        REQUIRE(metaData.GetValue("Test123") == 42);
+        REQUIRE(metaData.GetValue("Test456") == 43);
+    }
+
     SECTION("Empty model metadata") {
         SpaceWorldModel emptyModel(rs);
         REQUIRE(emptyModel.GetMetaData(2).GetValueNames().size() == 0);
@@ -185,7 +203,7 @@ TEST_CASE("Metadata", "[model]") {
         REQUIRE(metaDataModel.GetMetaData(id).GetValue("Test456") == 191);
     }
 
-    SECTION("update metadata no key deletion") {
+    SECTION("empty update must not delete keys") {
         SpaceWorldModel metaDataModel(rs);
         shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
         MetaData metaData;
