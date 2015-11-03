@@ -14,3 +14,6 @@ std::string weave::SpaceAgent::ToString() const {
     return Name;
 }
 
+std::string weave::SpaceAgent::GetType() const {
+    return "agent";
+}

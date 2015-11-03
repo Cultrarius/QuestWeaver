@@ -20,6 +20,8 @@ namespace weave {
 
         std::string ToString() const;
 
+        std::string GetType() const;
+
     private:
         SolarSystem(ID id, std::string Name, std::shared_ptr<SpaceLocation> Location);
 

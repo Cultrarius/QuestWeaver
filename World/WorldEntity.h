@@ -17,6 +17,8 @@ namespace weave {
 
         ID GetId();
 
+        virtual std::string GetType() const = 0;
+
         virtual std::string ToString() const = 0;
 
     protected:

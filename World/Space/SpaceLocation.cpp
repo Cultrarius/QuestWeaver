@@ -19,3 +19,7 @@ SpaceLocation::SpaceLocation(int x, int y, int z) : SpaceLocation(NoID, x, y, z)
 
 SpaceLocation::SpaceLocation() : SpaceLocation(0, 0, 0) {
 }
+
+std::string SpaceLocation::GetType() const {
+    return "location";
+}

@@ -15,6 +15,8 @@ namespace weave {
 
         std::string ToString() const;
 
+        std::string GetType() const;
+
     private:
         SpaceAgent(ID id, std::string name);
 

@@ -22,3 +22,7 @@ SolarSystem::SolarSystem(string Name, shared_ptr<SpaceLocation> Location) :
 SolarSystem::SolarSystem() :
         SolarSystem(NoID, "", make_shared<SpaceLocation>()) {
 }
+
+std::string SolarSystem::GetType() const {
+    return "solarSystem";
+}
