@@ -3,6 +3,7 @@
 //
 
 #include "WeaverEngine.h"
+#include "Graph/WeaverGraph.h"
 #include <iostream>
 
 using namespace std;
@@ -24,6 +25,14 @@ vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> quest
                 mandatory.insert(questProperty.GetName());
             }
         }
+
+        WeaverGraph graph;
+        for (auto pair : candidates) {
+            for (auto candidate : pair.second) {
+                graph.addNode(Node(pair.first, candidate.GetEntity()->GetId()));
+            }
+        }
+
 
         // build "graph" of candidates
         // each edge (+weight) is determined by the following:
