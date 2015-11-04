@@ -28,8 +28,11 @@ vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> quest
 
         WeaverGraph graph;
         for (auto pair : candidates) {
+            auto groupName = pair.first;
+            bool isMandatory = mandatory.find(groupName) != mandatory.end();
+            graph.createNodeGroup(groupName, isMandatory);
             for (auto candidate : pair.second) {
-                graph.addNode(Node(pair.first, candidate.GetEntity()->GetId()));
+                graph.addNode(Node(groupName, candidate.GetEntity()->GetId()));
             }
         }
 

@@ -19,3 +19,11 @@ weave::ID weave::Node::GetId() const {
 
 weave::Node::Node() : group(""), id(0) {
 }
+
+bool weave::Node::operator==(const weave::Node &other) const {
+    return group == other.group && id == other.id;
+}
+
+bool weave::Node::operator<(const weave::Node &other) const {
+    return group < other.group || id < other.id;
+}

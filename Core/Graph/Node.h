@@ -17,6 +17,10 @@ namespace weave {
 
         ID GetId() const;
 
+        bool operator==(const Node &other) const;
+
+        bool operator<(const Node &other) const;
+
     private:
         std::string group;
         ID id;

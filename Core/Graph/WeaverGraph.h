@@ -6,17 +6,19 @@
 
 #include <map>
 #include <vector>
+#include <unordered_set>
+#include <unordered_map>
 #include "Node.h"
 
 namespace weave {
     class WeaverGraph {
     public:
-        //void addGroup(const std::string &groupName, bool isMandatory);
+        void createNodeGroup(const std::string &groupName, bool isMandatory);
         void addNode(const Node &node);
 
     private:
-        //same entity in different groups??
-        std::map<ID, Node> nodes;
-        std::map<std::string, std::vector<Node>> groups;
+        std::unordered_map<ID, std::vector<Node>> nodes;
+        std::unordered_map<std::string, std::vector<Node>> groups;
+        std::unordered_set<std::string> mandatoryGroups;
     };
 }

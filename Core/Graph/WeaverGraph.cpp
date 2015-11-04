@@ -8,12 +8,19 @@ using namespace std;
 using namespace weave;
 
 void WeaverGraph::addNode(const Node &node) {
-    if (nodes.find(node.GetId()) != nodes.end()) {
-        throw ContractFailedException("Node with the given id already exists in graph.");
+    if (groups.find(node.GetGroup()) == groups.end()) {
+        throw ContractFailedException("Unknown node group " + node.GetGroup());
     }
-    nodes[node.GetId()] = node;
-    /*if (groups.find(node.GetGroup()) == groups.end()) {
-        groups[node.GetGroup()] = vector<Node>();
-    }*/
+    nodes[node.GetId()].push_back(node);
     groups[node.GetGroup()].push_back(node);
+}
+
+void WeaverGraph::createNodeGroup(const string &groupName, bool isMandatory) {
+    if (groups.find(groupName) != groups.end()) {
+        throw ContractFailedException("Group " + groupName + " already exists in graph");
+    }
+    groups[groupName] = vector<Node>();
+    if (isMandatory) {
+        mandatoryGroups.insert(groupName);
+    }
 }
