@@ -20,6 +20,8 @@ namespace weave {
 
         std::string GetName() const;
 
+        bool operator==(const TemplateQuestProperty &other) const;
+
     private:
         bool isMandatory;
         std::string name;

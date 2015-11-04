@@ -90,3 +90,7 @@ std::string Template::getTitle(const std::vector<QuestPropertyValue> &questPrope
     }
     return titleText;
 }
+
+bool TemplateQuestProperty::operator==(const TemplateQuestProperty &other) const {
+    return name == other.name;
+}

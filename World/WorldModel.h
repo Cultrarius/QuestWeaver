@@ -25,6 +25,10 @@ namespace weave {
 
         MetaData GetMetaData(ID entityId) const;
 
+        std::vector<ModelAction> GetHistory() const;
+
+        std::vector<ModelAction> GetMetaDataHistoryForId(ID id) const;
+
     protected:
         std::shared_ptr<RandomStream> rs;
         std::unordered_map<ID, MetaData> metaData;

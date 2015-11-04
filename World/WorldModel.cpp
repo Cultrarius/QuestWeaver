@@ -84,3 +84,17 @@ MetaData WorldModel::GetMetaData(ID entityId) const {
     auto mapEntry = metaData.find(entityId);
     return mapEntry == metaData.end() ? MetaData() : mapEntry->second;
 }
+
+std::vector<ModelAction> WorldModel::GetMetaDataHistoryForId(ID id) const {
+    vector<ModelAction> result;
+    for (auto action : actionHistory) {
+        if (action.GetEntity()->GetId() == id && action.GetMetaData().GetValueNames().size() > 0) {
+            result.push_back(action);
+        }
+    }
+    return result;
+}
+
+std::vector<ModelAction> WorldModel::GetHistory() const {
+    return actionHistory;
+}
