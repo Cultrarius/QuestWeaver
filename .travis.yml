@@ -16,7 +16,7 @@ addons:
 
 install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
-  - wget https://cmake.org/files/v3.3/cmake-3.3.2.tar.gz
+  - wget --no-check-certificate https://cmake.org/files/v3.3/cmake-3.3.2.tar.gz
   - tar -xzvf cmake-3.3.2.tar.gz > /dev/null
   - cd cmake-3.3.2
   - ./configure --prefix=$HOME/cmake > /dev/null
