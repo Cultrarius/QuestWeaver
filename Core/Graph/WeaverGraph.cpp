@@ -26,6 +26,9 @@ void WeaverGraph::CreateNodeGroup(const string &groupName, bool isMandatory) {
 }
 
 void WeaverGraph::AddEdge(Edge edge) {
+    if (nodes.find(edge.id1) == nodes.end() || nodes.find(edge.id2) == nodes.end()) {
+        throw ContractFailedException("Can not create edge to unknown graph node!");
+    }
     auto entry = edges.find(edge);
     if (entry == edges.end()) {
         edges.insert(edge);
