@@ -8,6 +8,9 @@ using namespace std;
 using namespace weave;
 
 void WeaverGraph::AddNode(const Node &node) {
+    if (node.GetGroup() == "") {
+        throw ContractFailedException("Can not add node with empty group!");
+    }
     if (groups.find(node.GetGroup()) == groups.end()) {
         throw ContractFailedException("Unknown node group " + node.GetGroup());
     }
