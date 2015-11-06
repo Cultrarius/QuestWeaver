@@ -25,17 +25,18 @@ QuestWeaver::QuestWeaver(uint64_t seed) {
 shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
     auto questTemplate = templates->GetTemplateForNewQuest(randomStream);
     std::vector<ModelAction> modelActions;
-    vector<QuestPropertyValue> questPropertyValues = engine->fillTemplate(questTemplate, *world, randomStream,
+    vector<QuestPropertyValue> questPropertyValues = engine->fillTemplate(questTemplate, *quests, *world, randomStream,
                                                                           &modelActions);
     shared_ptr<Quest> newQuest = questTemplate->ToQuest(questPropertyValues);
     // TODO create quest-variants and choose the best one?
-    updateWorld(modelActions, *newQuest);
+    updateWorld(modelActions, *newQuest, questPropertyValues);
     return newQuest;
 }
 
-void QuestWeaver::updateWorld(const std::vector<ModelAction> &modelActions, const Quest &quest) {
+void QuestWeaver::updateWorld(const std::vector<ModelAction> &modelActions, const Quest &quest,
+                              const std::vector<QuestPropertyValue> &questProperties) {
     world->Execute(modelActions);
-    quests->RegisterQuest(quest);
+    quests->RegisterQuest(quest, questProperties);
 }
 
 std::vector<std::shared_ptr<Quest>> QuestWeaver::GetQuestsWithState(QuestState state) const {

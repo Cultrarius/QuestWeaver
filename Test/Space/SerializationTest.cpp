@@ -126,7 +126,7 @@ TEST_CASE("Serialize Quests", "[serialize]") {
                 INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));
                 try {
                     auto quest = tp->ToQuest(questValues);
-                    questModel.RegisterQuest(*quest);
+                    questModel.RegisterQuest(*quest, questValues);
                 } catch (ContractFailedException ex) {
                     FAIL(ex.what());
                 }

@@ -2,14 +2,15 @@
 // Created by michael on 10.08.15.
 //
 
+#include <iostream>
 #include "WeaverEngine.h"
 #include "Graph/WeaverGraph.h"
-#include <iostream>
 
 using namespace std;
 using namespace weave;
 
 vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> questTemplate,
+                                                      const QuestModel &questModel,
                                                       const WorldModel &worldModel,
                                                       std::shared_ptr<RandomStream> randomStream,
                                                       std::vector<ModelAction> *modelActions) const {
@@ -27,12 +28,39 @@ vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> quest
         }
 
         WeaverGraph graph;
+        unordered_set<ID> candidateIds;
         for (auto pair : candidates) {
             auto groupName = pair.first;
             bool isMandatory = mandatory.find(groupName) != mandatory.end();
-            graph.createNodeGroup(groupName, isMandatory);
+            graph.CreateNodeGroup(groupName, isMandatory);
             for (auto candidate : pair.second) {
-                graph.addNode(Node(groupName, candidate.GetEntity()->GetId()));
+                graph.AddNode(Node(groupName, candidate.GetEntity()->GetId()));
+                candidateIds.insert(candidate.GetEntity()->GetId());
+            }
+        }
+
+        for (auto quest : questModel.GetQuests()) {
+            auto questEntities = questModel.GetQuestEntities(quest->GetId());
+
+            // add direct connection history
+            unordered_set<ID> entityIds;
+            for (auto entity : questEntities) {
+                ID id = entity->GetId();
+                if (candidateIds.find(id) == candidateIds.end()) {
+                    continue;
+                }
+                entityIds.insert(id);
+            }
+            unordered_set<ID> seenIds;
+            for (ID id1 : entityIds) {
+                seenIds.insert(id1);
+                for (ID id2 : entityIds) {
+                    if (seenIds.find(id2) != seenIds.end()) {
+                        continue;
+                    }
+                    Edge edge(id1, id2, EdgeType::DIRECT);
+                    graph.AddEdge(edge);
+                }
             }
         }
 

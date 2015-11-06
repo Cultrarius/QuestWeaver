@@ -7,7 +7,7 @@
 using namespace std;
 using namespace weave;
 
-void WeaverGraph::addNode(const Node &node) {
+void WeaverGraph::AddNode(const Node &node) {
     if (groups.find(node.GetGroup()) == groups.end()) {
         throw ContractFailedException("Unknown node group " + node.GetGroup());
     }
@@ -15,12 +15,23 @@ void WeaverGraph::addNode(const Node &node) {
     groups[node.GetGroup()].push_back(node);
 }
 
-void WeaverGraph::createNodeGroup(const string &groupName, bool isMandatory) {
+void WeaverGraph::CreateNodeGroup(const string &groupName, bool isMandatory) {
     if (groups.find(groupName) != groups.end()) {
         throw ContractFailedException("Group " + groupName + " already exists in graph");
     }
     groups[groupName] = vector<Node>();
     if (isMandatory) {
         mandatoryGroups.insert(groupName);
+    }
+}
+
+void WeaverGraph::AddEdge(Edge edge) {
+    auto entry = edges.find(edge);
+    if (entry == edges.end()) {
+        edges.insert(edge);
+    } else {
+        edge.addTypesFrom(*entry);
+        edges.erase(entry);
+        edges.insert(edge);
     }
 }

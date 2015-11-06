@@ -6,6 +6,7 @@
 
 #include "../Template/Template.h"
 #include "WeaverUtils.h"
+#include "../QuestModel/QuestModel.h"
 
 namespace weave {
     struct EngineParameters {
@@ -30,6 +31,7 @@ namespace weave {
     class WeaverEngine {
     public:
         std::vector<QuestPropertyValue> fillTemplate(std::shared_ptr<Template> questTemplate,
+                                                     const QuestModel &questModel,
                                                      const WorldModel &worldModel,
                                                      std::shared_ptr<RandomStream> randomStream,
                                                      std::vector<ModelAction> *modelActions) const;
