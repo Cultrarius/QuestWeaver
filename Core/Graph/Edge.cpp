@@ -4,25 +4,31 @@
 
 #include "Edge.h"
 
-weave::Edge::Edge(weave::ID nodeId1, weave::ID nodeId2, weave::EdgeType type) {
+using namespace std;
+using namespace weave;
+
+Edge::Edge(ID nodeId1, ID nodeId2, EdgeType type) {
+    if (nodeId1 == nodeId2) {
+        throw ContractFailedException("Can not create an edge between the same nodes!");
+    }
     id1 = nodeId1;
     id2 = nodeId2;
     types.push_back(type);
 }
 
-const std::vector<weave::EdgeType> &weave::Edge::GetTypes() const {
+const vector<EdgeType> &Edge::GetTypes() const {
     return types;
 }
 
-weave::ID weave::Edge::Get(weave::ID startId) const {
+ID Edge::Get(ID startId) const {
     return (startId == id1) ? id2 : ((startId == id2) ? id1 : 0);
 }
 
-bool weave::Edge::operator==(const weave::Edge &other) const {
+bool Edge::operator==(const Edge &other) const {
     return (id1 == other.id1 && id2 == other.id2) || (id1 == other.id2 && id2 == other.id1);
 }
 
-void weave::Edge::addTypesFrom(const weave::Edge &other) {
+void Edge::addTypesFrom(const Edge &other) {
     if (!this->operator==(other)) {
         throw ContractFailedException("unable to combine edges from different nodes!");
     }
@@ -31,6 +37,6 @@ void weave::Edge::addTypesFrom(const weave::Edge &other) {
     }
 }
 
-bool weave::Edge::operator<(const weave::Edge &other) const {
+bool Edge::operator<(const Edge &other) const {
     return (id1 + id2) < (other.id1 + other.id2);
 }
