@@ -7,6 +7,7 @@
 #include "../Template/Template.h"
 #include "WeaverUtils.h"
 #include "../QuestModel/QuestModel.h"
+#include "Graph/WeaverGraph.h"
 
 namespace weave {
     struct EngineParameters {
@@ -47,5 +48,8 @@ namespace weave {
                                                            const WorldModel &worldModel,
                                                            std::shared_ptr<RandomStream> randomStream,
                                                            std::vector<ModelAction> *modelActions) const;
+
+        weave::WeaverGraph createGraph(const QuestModel &questModel, const WorldModel &worldModel,
+                                       std::shared_ptr<Template> questTemplate) const;
     };
 }

@@ -5,6 +5,7 @@
 #include <iostream>
 #include "WeaverEngine.h"
 #include "Graph/WeaverGraph.h"
+#include "GraphAnalyzer.h"
 
 using namespace std;
 using namespace weave;
@@ -17,60 +18,8 @@ vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> quest
     if (parameters.useDice) {
         return fillWithRandomDice(questTemplate, worldModel, randomStream, modelActions);
     } else {
-        vector<QuestPropertyValue> returnValues;
-        unordered_set<string> mandatory;
-        map<string, vector<ModelAction>> candidates;
-        for (const TemplateQuestProperty &questProperty : questTemplate->GetProperties()) {
-            candidates[questProperty.GetName()] = questTemplate->GetPropertyCandidates(questProperty, worldModel);
-            if (questProperty.IsMandatory()) {
-                mandatory.insert(questProperty.GetName());
-            }
-        }
-
-        WeaverGraph graph;
-        unordered_set<ID> candidateIds;
-        for (auto pair : candidates) {
-            auto groupName = pair.first;
-            bool isMandatory = mandatory.find(groupName) != mandatory.end();
-            graph.CreateNodeGroup(groupName, isMandatory);
-            for (auto candidate : pair.second) {
-                ID id = candidate.GetEntity()->GetId();
-
-                vector<MetaData> metaData;
-                for (auto action : worldModel.GetMetaDataHistoryForId(id)) {
-                    metaData.push_back(action.GetMetaData());
-                }
-
-                graph.AddNode(Node(groupName, id, metaData));
-                candidateIds.insert(id);
-            }
-        }
-
-        for (auto quest : questModel.GetQuests()) {
-            auto questEntities = questModel.GetQuestEntities(quest->GetId());
-
-            // add direct connection history
-            unordered_set<ID> entityIds;
-            for (auto entity : questEntities) {
-                ID id = entity->GetId();
-                if (candidateIds.find(id) == candidateIds.end()) {
-                    continue;
-                }
-                entityIds.insert(id);
-            }
-            unordered_set<ID> seenIds;
-            for (ID id1 : entityIds) {
-                seenIds.insert(id1);
-                for (ID id2 : entityIds) {
-                    if (seenIds.find(id2) != seenIds.end()) {
-                        continue;
-                    }
-                    Edge edge(id1, id2, EdgeType::DIRECT);
-                    graph.AddEdge(edge);
-                }
-            }
-        }
-
+        WeaverGraph graph = createGraph(questModel, worldModel, questTemplate);
+        GraphAnalyzer::SolveGraph(&graph);
 
         // build "graph" of candidates
         // each edge (+weight) is determined by the following:
@@ -89,8 +38,68 @@ vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> quest
         // e.g. "Ever since the incident on planet Aurelius, your reputation with the Xerxes group
         // has been steadily declining. Now they are out to get you..."
 
+        vector<QuestPropertyValue> returnValues;
         return returnValues;
     }
+}
+
+WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldModel &worldModel,
+                                      shared_ptr<Template> questTemplate) const {
+    unordered_set<string> mandatory;
+    map<string, vector<ModelAction>> candidates;
+    for (const TemplateQuestProperty &questProperty : questTemplate->GetProperties()) {
+        candidates[questProperty.GetName()] = questTemplate->GetPropertyCandidates(questProperty, worldModel);
+        if (questProperty.IsMandatory()) {
+            mandatory.insert(questProperty.GetName());
+        }
+    }
+
+    WeaverGraph graph;
+    unordered_set<ID> candidateIds;
+    for (auto pair : candidates) {
+        auto groupName = pair.first;
+        bool isMandatory = mandatory.find(groupName) != mandatory.end();
+        graph.CreateNodeGroup(groupName, isMandatory);
+        for (auto candidate : pair.second) {
+            ID id = candidate.GetEntity()->GetId();
+
+            // add metadata for node
+            vector<MetaData> metaData;
+            for (auto action : worldModel.GetMetaDataHistoryForId(id)) {
+                metaData.push_back(action.GetMetaData());
+            }
+
+            graph.AddNode(Node(groupName, id, metaData));
+            candidateIds.insert(id);
+        }
+    }
+
+    for (auto quest : questModel.GetQuests()) {
+        auto questEntities = questModel.GetQuestEntities(quest->GetId());
+
+        // add direct connection history
+        unordered_set<ID> entityIds;
+        for (auto entity : questEntities) {
+            ID id = entity->GetId();
+            if (candidateIds.find(id) == candidateIds.end()) {
+                continue;
+            }
+            entityIds.insert(id);
+        }
+        unordered_set<ID> seenIds;
+        for (ID id1 : entityIds) {
+            seenIds.insert(id1);
+            for (ID id2 : entityIds) {
+                if (seenIds.find(id2) != seenIds.end()) {
+                    continue;
+                }
+                Edge edge(id1, id2, EdgeType::DIRECT);
+                graph.AddEdge(edge);
+            }
+        }
+    }
+
+    return graph;
 }
 
 vector<QuestPropertyValue> WeaverEngine::fillWithRandomDice(const shared_ptr<Template> &questTemplate,
