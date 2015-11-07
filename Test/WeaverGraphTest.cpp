@@ -97,11 +97,14 @@ TEST_CASE("API check", "[graph]") {
     }
 
     WeaverGraph graph;
-    string group = "TestGroup";
+    string group1 = "TestGroup";
+    string group2 = "TestGroup2";
+    string group3 = "TestGroup3";
     Edge edge1(1, 2, EdgeType::DIRECT);
-    Node node1 = Node(group, 1);
-    Node node2 = Node(group, 2);
-    graph.CreateNodeGroup(group, false)
+    Node node1 = Node(group1, 1);
+    Node node2 = Node(group2, 2);
+    graph.CreateNodeGroup(group1, false)
+            .CreateNodeGroup(group2, true)
             .AddNode(node1)
             .AddNode(node2)
             .AddEdge(edge1);
@@ -120,11 +123,21 @@ TEST_CASE("API check", "[graph]") {
         REQUIRE(graph.GetEdges().begin()->Count(EdgeType::TRANSITIVE) == 0);
     }
 
-    SECTION("Graph edge getter two edges ") {
-        Node node3 = Node(group, 3);
+    SECTION("Graph edge getter two edges") {
+        Node node3 = Node(group3, 3);
         Edge edge2(2, 3, EdgeType::DIRECT);
-        graph.AddNode(node3).AddEdge(edge2);
+        graph.CreateNodeGroup(group3, true).AddNode(node3).AddEdge(edge2);
 
         REQUIRE(graph.GetEdges().size() == 2);
+    }
+
+    SECTION("Graph discard edge between nodes of same group") {
+        Node node3 = Node(group2, 3);
+        Edge edge2(2, 3, EdgeType::TRANSITIVE);
+        graph.CreateNodeGroup(group3, true).AddNode(node3).AddEdge(edge2);
+
+        REQUIRE(graph.GetEdges().size() == 1);
+        REQUIRE(graph.GetEdges().begin()->Count(EdgeType::DIRECT) == 1);
+        REQUIRE(graph.GetEdges().begin()->Count(EdgeType::TRANSITIVE) == 0);
     }
 }

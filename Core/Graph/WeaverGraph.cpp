@@ -31,9 +31,25 @@ WeaverGraph &WeaverGraph::CreateNodeGroup(const string &groupName, bool isMandat
 }
 
 WeaverGraph &WeaverGraph::AddEdge(Edge edge) {
-    if (nodes.find(edge.id1) == nodes.end() || nodes.find(edge.id2) == nodes.end()) {
+    // check if the edge nodes are added to the graph
+    auto nodeIt1 = nodes.find(edge.id1);
+    auto nodeIt2 = nodes.find(edge.id2);
+    if (nodeIt1 == nodes.end() || nodeIt2 == nodes.end()) {
         throw ContractFailedException("Can not create edge to unknown graph node!");
     }
+
+    // check if the edge connects two nodes from the same node group. If so, silently drop it.
+    unordered_set<string> nodeGroups;
+    for (Node node : nodeIt1->second) {
+        nodeGroups.insert(node.GetGroup());
+    }
+    for (Node node : nodeIt2->second) {
+        if (nodeGroups.find(node.GetGroup()) != nodeGroups.end()) {
+            return *this;
+        }
+    }
+
+    // add the edge to the graph
     auto entry = edges.find(edge);
     if (entry == edges.end()) {
         edges.insert(edge);
