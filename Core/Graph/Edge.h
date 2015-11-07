@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <unordered_map>
 #include "../WeaverTypes.h"
 #include "Node.h"
 
@@ -17,7 +18,7 @@ namespace weave {
     public:
         Edge(ID nodeId1, ID nodeId2, EdgeType type);
 
-        const std::vector<EdgeType> &GetTypes() const;
+        uint32_t Count(EdgeType type) const;
 
         ID Get(ID startId) const;
 
@@ -30,7 +31,7 @@ namespace weave {
 
         ID id1;
         ID id2;
-        std::vector<EdgeType> types;
+        std::unordered_map<EdgeType, uint32_t, EnumClassHash> types;
 
         void addTypesFrom(const Edge &other);
     };

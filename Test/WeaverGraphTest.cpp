@@ -31,8 +31,7 @@ TEST_CASE("Graph failures", "[graph]") {
     }
 
     SECTION("Add edge with unknown nodes") {
-        graph.CreateNodeGroup("TestGroup", false);
-        graph.AddNode(Node("TestGroup", 7));
+        graph.CreateNodeGroup("TestGroup", false).AddNode(Node("TestGroup", 7));
         REQUIRE_THROWS_AS(graph.AddEdge(Edge(4, 7, EdgeType::DIRECT)), ContractFailedException);
     }
 
@@ -42,7 +41,7 @@ TEST_CASE("Graph failures", "[graph]") {
 }
 
 TEST_CASE("API check", "[graph]") {
-    SECTION("Node equality check") {
+    SECTION("Node equality") {
         Node emptyNode;
         Node node1("GroupX", 3);
         Node node2("GroupX", 3);
@@ -57,7 +56,7 @@ TEST_CASE("API check", "[graph]") {
         REQUIRE(!(node3 == node4));
     }
 
-    SECTION("Edge equality check") {
+    SECTION("Edge equality") {
         Edge edge1(1, 2, EdgeType::DIRECT);
         Edge edge2(1, 2, EdgeType::TRANSITIVE);
         Edge edge3(2, 1, EdgeType::DIRECT);
@@ -69,5 +68,63 @@ TEST_CASE("API check", "[graph]") {
         REQUIRE(!(edge1 == edge4));
         REQUIRE(!(edge2 == edge4));
         REQUIRE(!(edge3 == edge4));
+    }
+
+    SECTION("Edge id getter") {
+        Edge edge1(1, 2, EdgeType::DIRECT);
+        Edge edge2(2, 1, EdgeType::DIRECT);
+
+        REQUIRE(edge1.Get(1) == 2);
+        REQUIRE(edge1.Get(2) == 1);
+        REQUIRE(edge2.Get(1) == 2);
+        REQUIRE(edge2.Get(2) == 1);
+    }
+
+    SECTION("Edge id getter") {
+        Edge edge1(1, 2, EdgeType::DIRECT);
+        Edge edge2(2, 1, EdgeType::DIRECT);
+
+        REQUIRE(edge1.Get(1) == 2);
+        REQUIRE(edge1.Get(2) == 1);
+        REQUIRE(edge2.Get(1) == 2);
+        REQUIRE(edge2.Get(2) == 1);
+    }
+
+    SECTION("Edge type count") {
+        Edge edge1(1, 2, EdgeType::DIRECT);
+        REQUIRE(edge1.Count(EdgeType::DIRECT) == 1);
+        REQUIRE(edge1.Count(EdgeType::TRANSITIVE) == 0);
+    }
+
+    WeaverGraph graph;
+    string group = "TestGroup";
+    Edge edge1(1, 2, EdgeType::DIRECT);
+    Node node1 = Node(group, 1);
+    Node node2 = Node(group, 2);
+    graph.CreateNodeGroup(group, false)
+            .AddNode(node1)
+            .AddNode(node2)
+            .AddEdge(edge1);
+
+    SECTION("Graph edge getter one edge") {
+        REQUIRE(graph.GetEdges().size() == 1);
+        REQUIRE(*graph.GetEdges().begin() == edge1);
+    }
+
+    SECTION("Graph edge getter double edge") {
+        Edge edge2(2, 1, EdgeType::DIRECT);
+        graph.AddEdge(edge2);
+
+        REQUIRE(graph.GetEdges().size() == 1);
+        REQUIRE(graph.GetEdges().begin()->Count(EdgeType::DIRECT) == 2);
+        REQUIRE(graph.GetEdges().begin()->Count(EdgeType::TRANSITIVE) == 0);
+    }
+
+    SECTION("Graph edge getter two edges ") {
+        Node node3 = Node(group, 3);
+        Edge edge2(2, 3, EdgeType::DIRECT);
+        graph.AddNode(node3).AddEdge(edge2);
+
+        REQUIRE(graph.GetEdges().size() == 2);
     }
 }

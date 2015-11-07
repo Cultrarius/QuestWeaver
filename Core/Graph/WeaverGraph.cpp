@@ -7,7 +7,7 @@
 using namespace std;
 using namespace weave;
 
-void WeaverGraph::AddNode(const Node &node) {
+WeaverGraph &WeaverGraph::AddNode(const Node &node) {
     if (node.GetGroup() == "") {
         throw ContractFailedException("Can not add node with empty group!");
     }
@@ -16,9 +16,10 @@ void WeaverGraph::AddNode(const Node &node) {
     }
     nodes[node.GetId()].push_back(node);
     groups[node.GetGroup()].push_back(node);
+    return *this;
 }
 
-void WeaverGraph::CreateNodeGroup(const string &groupName, bool isMandatory) {
+WeaverGraph &WeaverGraph::CreateNodeGroup(const string &groupName, bool isMandatory) {
     if (groups.find(groupName) != groups.end()) {
         throw ContractFailedException("Group " + groupName + " already exists in graph");
     }
@@ -26,9 +27,10 @@ void WeaverGraph::CreateNodeGroup(const string &groupName, bool isMandatory) {
     if (isMandatory) {
         mandatoryGroups.insert(groupName);
     }
+    return *this;
 }
 
-void WeaverGraph::AddEdge(Edge edge) {
+WeaverGraph &WeaverGraph::AddEdge(Edge edge) {
     if (nodes.find(edge.id1) == nodes.end() || nodes.find(edge.id2) == nodes.end()) {
         throw ContractFailedException("Can not create edge to unknown graph node!");
     }
@@ -40,4 +42,9 @@ void WeaverGraph::AddEdge(Edge edge) {
         edges.erase(entry);
         edges.insert(edge);
     }
+    return *this;
+}
+
+const std::set<Edge> &WeaverGraph::GetEdges() {
+    return edges;
 }

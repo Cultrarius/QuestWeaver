@@ -20,4 +20,11 @@ namespace weave {
 
         const char *what() const throw() { return s.c_str(); }
     };
+
+    struct EnumClassHash {
+        template<typename T>
+        std::size_t operator()(T t) const {
+            return static_cast<std::size_t>(t);
+        }
+    };
 }

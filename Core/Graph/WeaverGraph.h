@@ -15,11 +15,13 @@
 namespace weave {
     class WeaverGraph {
     public:
-        void CreateNodeGroup(const std::string &groupName, bool isMandatory);
+        WeaverGraph &CreateNodeGroup(const std::string &groupName, bool isMandatory);
 
-        void AddNode(const Node &node);
+        WeaverGraph &AddNode(const Node &node);
 
-        void AddEdge(Edge edge);
+        WeaverGraph &AddEdge(Edge edge);
+
+        const std::set<Edge> &GetEdges();
 
     private:
         std::unordered_map<ID, std::vector<Node>> nodes;

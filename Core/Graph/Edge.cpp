@@ -13,11 +13,7 @@ Edge::Edge(ID nodeId1, ID nodeId2, EdgeType type) {
     }
     id1 = nodeId1;
     id2 = nodeId2;
-    types.push_back(type);
-}
-
-const vector<EdgeType> &Edge::GetTypes() const {
-    return types;
+    types[type] = 1;
 }
 
 ID Edge::Get(ID startId) const {
@@ -33,10 +29,18 @@ void Edge::addTypesFrom(const Edge &other) {
         throw ContractFailedException("unable to combine edges from different nodes!");
     }
     for (auto type : other.types) {
-        types.push_back(type);
+        types[type.first] += type.second;
     }
 }
 
 bool Edge::operator<(const Edge &other) const {
     return (id1 + id2) < (other.id1 + other.id2);
+}
+
+uint32_t Edge::Count(EdgeType type) const {
+    auto it = types.find(type);
+    if (it == types.end()) {
+        return 0;
+    }
+    return it->second;
 }
