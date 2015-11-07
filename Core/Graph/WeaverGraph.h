@@ -21,12 +21,23 @@ namespace weave {
 
         WeaverGraph &AddEdge(Edge edge);
 
+        void activateNode(const Node &node);
+
+        bool deactivateNode(const Node &node);
+
         const std::set<Edge> &GetEdges() const;
+
+        std::vector<std::string> GetGroups() const;
+
+        std::vector<std::string> GetMandatoryGroups() const;
+
+        const std::vector<Node> &GetNodes(const std::string &groupName) const;
 
     private:
         std::unordered_map<ID, std::vector<Node>> nodes;
         std::unordered_map<std::string, std::vector<Node>> groups;
         std::unordered_set<std::string> mandatoryGroups;
         std::set<Edge> edges;
+        std::set<Node> activeNodes;
     };
 }

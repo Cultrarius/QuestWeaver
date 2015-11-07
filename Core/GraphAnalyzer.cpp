@@ -7,6 +7,12 @@
 using namespace std;
 using namespace weave;
 
-void weave::GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph) {
+unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph) {
+    unordered_map<string, Node> results;
 
+    int score = 0;
+    auto groups = graph->GetGroups();
+
+
+    return results;
 }

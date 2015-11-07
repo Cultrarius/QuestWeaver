@@ -64,3 +64,50 @@ WeaverGraph &WeaverGraph::AddEdge(Edge edge) {
 const std::set<Edge> &WeaverGraph::GetEdges() const {
     return edges;
 }
+
+std::vector<std::string> WeaverGraph::GetGroups() const {
+    vector<string> groupNames;
+    for (auto group : groups) {
+        groupNames.push_back(group.first);
+    }
+    return groupNames;
+}
+
+std::vector<std::string> WeaverGraph::GetMandatoryGroups() const {
+    vector<string> groupNames;
+    for (auto group : mandatoryGroups) {
+        groupNames.push_back(group);
+    }
+    return groupNames;
+}
+
+const std::vector<Node> &WeaverGraph::GetNodes(const std::string &groupName) const {
+    auto iter = groups.find(groupName);
+    if (iter == groups.end()) {
+        throw ContractFailedException("Unable to get nodes for unknown group name!");
+    }
+    return iter->second;
+}
+
+void WeaverGraph::activateNode(const Node &node) {
+    auto iter = groups.find(node.GetGroup());
+    if (iter == groups.end()) {
+        throw ContractFailedException("Unable to activate node from unknown group!");
+    }
+    for (Node groupNode : iter->second) {
+        activeNodes.erase(groupNode);
+    }
+    activeNodes.insert(node);
+}
+
+bool WeaverGraph::deactivateNode(const Node &node) {
+    auto iter = groups.find(node.GetGroup());
+    if (iter == groups.end()) {
+        throw ContractFailedException("Unable to deactivate node from unknown group!");
+    }
+    if (mandatoryGroups.find(node.GetGroup()) != mandatoryGroups.end()) {
+        return false;
+    }
+    activeNodes.erase(node);
+    return true;
+}
