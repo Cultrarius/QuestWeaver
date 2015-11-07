@@ -19,7 +19,7 @@ vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> quest
         return fillWithRandomDice(questTemplate, worldModel, randomStream, modelActions);
     } else {
         WeaverGraph graph = createGraph(questModel, worldModel, questTemplate);
-        auto setProperties = GraphAnalyzer::SolveGraph(&graph);
+        auto setProperties = GraphAnalyzer::SolveGraph(&graph, randomStream);
 
         // build "graph" of candidates
         // each edge (+weight) is determined by the following:

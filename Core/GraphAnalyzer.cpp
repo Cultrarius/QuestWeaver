@@ -7,12 +7,17 @@
 using namespace std;
 using namespace weave;
 
-unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph) {
-    unordered_map<string, Node> results;
+unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph,
+                                                      shared_ptr<RandomStream> rs) {
+    // activate random mandatory nodes, so the graph is in a consistent state
+    for (auto group : graph->GetMandatoryGroups()) {
+        auto nodes = graph->GetNodes(group);
+        int index = rs->GetRandomIndex(nodes.size());
+        graph->activateNode(nodes[index]);
+    }
+
 
     int score = 0;
-    auto groups = graph->GetGroups();
-
-
+    unordered_map<string, Node> results;
     return results;
 }

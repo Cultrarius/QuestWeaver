@@ -9,6 +9,7 @@
 namespace weave {
     class GraphAnalyzer {
     public:
-        static std::unordered_map<std::string, Node> SolveGraph(WeaverGraph *graph);
+        static std::unordered_map<std::string, Node> SolveGraph(WeaverGraph *graph,
+                                                                std::shared_ptr<RandomStream> randomStream);
     };
 }
