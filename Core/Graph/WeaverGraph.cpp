@@ -45,6 +45,6 @@ WeaverGraph &WeaverGraph::AddEdge(Edge edge) {
     return *this;
 }
 
-const std::set<Edge> &WeaverGraph::GetEdges() {
+const std::set<Edge> &WeaverGraph::GetEdges() const {
     return edges;
 }

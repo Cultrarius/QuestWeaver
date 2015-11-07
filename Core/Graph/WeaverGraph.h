@@ -21,7 +21,7 @@ namespace weave {
 
         WeaverGraph &AddEdge(Edge edge);
 
-        const std::set<Edge> &GetEdges();
+        const std::set<Edge> &GetEdges() const;
 
     private:
         std::unordered_map<ID, std::vector<Node>> nodes;

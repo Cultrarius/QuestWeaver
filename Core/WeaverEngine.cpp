@@ -34,8 +34,15 @@ vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> quest
             bool isMandatory = mandatory.find(groupName) != mandatory.end();
             graph.CreateNodeGroup(groupName, isMandatory);
             for (auto candidate : pair.second) {
-                graph.AddNode(Node(groupName, candidate.GetEntity()->GetId()));
-                candidateIds.insert(candidate.GetEntity()->GetId());
+                ID id = candidate.GetEntity()->GetId();
+
+                vector<MetaData> metaData;
+                for (auto action : worldModel.GetMetaDataHistoryForId(id)) {
+                    metaData.push_back(action.GetMetaData());
+                }
+
+                graph.AddNode(Node(groupName, id, metaData));
+                candidateIds.insert(id);
             }
         }
 

@@ -5,6 +5,7 @@
 #pragma once
 
 #include "../WeaverTypes.h"
+#include "../../World/MetaData.h"
 
 namespace weave {
     class Node {
@@ -13,9 +14,13 @@ namespace weave {
 
         Node(const std::string &groupName, ID nodeId);
 
+        Node(const std::string &groupName, ID nodeId, const std::vector<MetaData> &history);
+
         std::string GetGroup() const;
 
         ID GetId() const;
+
+        const std::vector<MetaData> &GetHistory() const;
 
         bool operator==(const Node &other) const;
 
@@ -24,5 +29,6 @@ namespace weave {
     private:
         std::string group;
         ID id;
+        std::vector<MetaData> history;
     };
 }
