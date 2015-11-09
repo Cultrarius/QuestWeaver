@@ -33,6 +33,8 @@ namespace weave {
 
         const std::vector<Node> &GetNodes(const std::string &groupName) const;
 
+        const std::set<Node> &GetActiveNodes() const;
+
     private:
         std::unordered_map<ID, std::vector<Node>> nodes;
         std::unordered_map<std::string, std::vector<Node>> groups;

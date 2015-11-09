@@ -19,5 +19,8 @@ unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph,
 
     int score = 0;
     unordered_map<string, Node> results;
+    for (auto node : graph->GetActiveNodes()) {
+        results[node.GetGroup()] = node;
+    }
     return results;
 }

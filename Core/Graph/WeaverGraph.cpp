@@ -11,8 +11,14 @@ WeaverGraph &WeaverGraph::AddNode(const Node &node) {
     if (node.GetGroup() == "") {
         throw ContractFailedException("Can not add node with empty group!");
     }
-    if (groups.find(node.GetGroup()) == groups.end()) {
+    auto iter = groups.find(node.GetGroup());
+    if (iter == groups.end()) {
         throw ContractFailedException("Unknown node group " + node.GetGroup());
+    }
+    for (auto addedNode : iter->second) {
+        if (node == addedNode) {
+            throw ContractFailedException("Can not add the same node twice to graph!");
+        }
     }
     nodes[node.GetId()].push_back(node);
     groups[node.GetGroup()].push_back(node);
@@ -116,4 +122,8 @@ bool WeaverGraph::DeactivateNode(const Node &node) {
     }
     activeNodes.erase(node);
     return true;
+}
+
+const std::set<Node> &WeaverGraph::GetActiveNodes() const {
+    return activeNodes;
 }

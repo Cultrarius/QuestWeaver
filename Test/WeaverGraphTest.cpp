@@ -18,6 +18,11 @@ TEST_CASE("Graph failures", "[graph]") {
         REQUIRE_THROWS_AS(graph.CreateNodeGroup("TestGroup", false), ContractFailedException);
     }
 
+    SECTION("Create identical node") {
+        graph.CreateNodeGroup("TestGroup", false).AddNode(Node("TestGroup", 7));
+        REQUIRE_THROWS_AS(graph.AddNode(Node("TestGroup", 7)), ContractFailedException);
+    }
+
     SECTION("Add node with empty group") {
         REQUIRE_THROWS_AS(graph.AddNode(Node()), ContractFailedException);
     }
