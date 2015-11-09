@@ -13,7 +13,7 @@ unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph,
     for (auto group : graph->GetMandatoryGroups()) {
         auto nodes = graph->GetNodes(group);
         int index = rs->GetRandomIndex(nodes.size());
-        graph->activateNode(nodes[index]);
+        graph->ActivateNode(nodes[index]);
     }
 
 

@@ -38,6 +38,24 @@ TEST_CASE("Graph failures", "[graph]") {
     SECTION("Create edge between the same nodes") {
         REQUIRE_THROWS_AS(Edge(4, 4, EdgeType::DIRECT), ContractFailedException);
     }
+
+    SECTION("Activate unknown node") {
+        REQUIRE_THROWS_AS(graph.ActivateNode(Node("Test", 2)), ContractFailedException);
+    }
+
+    SECTION("Deactivate unknown node") {
+        REQUIRE_THROWS_AS(graph.DeactivateNode(Node("Test", 2)), ContractFailedException);
+    }
+
+    SECTION("Activate node from unknown group") {
+        graph.CreateNodeGroup("Test123", false).AddNode(Node("Test123", 2));
+        REQUIRE_THROWS_AS(graph.ActivateNode(Node("Test", 2)), ContractFailedException);
+    }
+
+    SECTION("Deactivate node from unknown group") {
+        graph.CreateNodeGroup("Test123", false).AddNode(Node("Test123", 2));
+        REQUIRE_THROWS_AS(graph.DeactivateNode(Node("Test", 2)), ContractFailedException);
+    }
 }
 
 TEST_CASE("API check", "[graph]") {

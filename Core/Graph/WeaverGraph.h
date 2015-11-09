@@ -21,9 +21,9 @@ namespace weave {
 
         WeaverGraph &AddEdge(Edge edge);
 
-        void activateNode(const Node &node);
+        void ActivateNode(const Node &node);
 
-        bool deactivateNode(const Node &node);
+        bool DeactivateNode(const Node &node);
 
         const std::set<Edge> &GetEdges() const;
 

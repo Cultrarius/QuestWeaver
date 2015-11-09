@@ -89,7 +89,10 @@ const std::vector<Node> &WeaverGraph::GetNodes(const std::string &groupName) con
     return iter->second;
 }
 
-void WeaverGraph::activateNode(const Node &node) {
+void WeaverGraph::ActivateNode(const Node &node) {
+    if (nodes.find(node.GetId()) == nodes.end()) {
+        throw ContractFailedException("Unable to activate unknown node!");
+    }
     auto iter = groups.find(node.GetGroup());
     if (iter == groups.end()) {
         throw ContractFailedException("Unable to activate node from unknown group!");
@@ -100,7 +103,10 @@ void WeaverGraph::activateNode(const Node &node) {
     activeNodes.insert(node);
 }
 
-bool WeaverGraph::deactivateNode(const Node &node) {
+bool WeaverGraph::DeactivateNode(const Node &node) {
+    if (nodes.find(node.GetId()) == nodes.end()) {
+        throw ContractFailedException("Unable to deactivate unknown node!");
+    }
     auto iter = groups.find(node.GetGroup());
     if (iter == groups.end()) {
         throw ContractFailedException("Unable to deactivate node from unknown group!");
