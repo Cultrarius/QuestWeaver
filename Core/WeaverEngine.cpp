@@ -18,8 +18,39 @@ vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> quest
     if (parameters.useDice) {
         return fillWithRandomDice(questTemplate, worldModel, randomStream, modelActions);
     } else {
-        WeaverGraph graph = createGraph(questModel, worldModel, questTemplate);
-        auto setProperties = GraphAnalyzer::SolveGraph(&graph, randomStream);
+        unordered_set<string> mandatory;
+        map<string, vector<ModelAction>> candidates;
+        for (const TemplateQuestProperty &questProperty : questTemplate->GetProperties()) {
+            candidates[questProperty.GetName()] = questTemplate->GetPropertyCandidates(questProperty, worldModel);
+            if (questProperty.IsMandatory()) {
+                mandatory.insert(questProperty.GetName());
+            }
+        }
+
+        WeaverGraph graph = createGraph(questModel, worldModel, mandatory, candidates);
+        auto propertyMap = GraphAnalyzer::SolveGraph(&graph, randomStream);
+
+        vector<QuestPropertyValue> returnValues;
+        for (auto &questProperty : questTemplate->GetProperties()) {
+            const string &propertyName = questProperty.GetName();
+            auto iter = propertyMap.find(propertyName);
+            if (iter == propertyMap.end()) {
+                if (questProperty.IsMandatory()) {
+                    throw ContractFailedException("Graph result must contain results for mandatory quest properties.");
+                }
+                continue;
+            }
+            ID nodeId = iter->second.GetId();
+            for (auto candidate : candidates[propertyName]) {
+                if (candidate.GetEntity()->GetId() == nodeId) {
+                    if (modelActions != nullptr) {
+                        modelActions->push_back(candidate);
+                    }
+                    QuestPropertyValue questValue(questProperty, candidate.GetEntity());
+                    returnValues.push_back(move(questValue));
+                }
+            }
+        }
 
         // build "graph" of candidates
         // each edge (+weight) is determined by the following:
@@ -38,22 +69,14 @@ vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> quest
         // e.g. "Ever since the incident on planet Aurelius, your reputation with the Xerxes group
         // has been steadily declining. Now they are out to get you..."
 
-        vector<QuestPropertyValue> returnValues;
+
         return returnValues;
     }
 }
 
 WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldModel &worldModel,
-                                      shared_ptr<Template> questTemplate) const {
-    unordered_set<string> mandatory;
-    map<string, vector<ModelAction>> candidates;
-    for (const TemplateQuestProperty &questProperty : questTemplate->GetProperties()) {
-        candidates[questProperty.GetName()] = questTemplate->GetPropertyCandidates(questProperty, worldModel);
-        if (questProperty.IsMandatory()) {
-            mandatory.insert(questProperty.GetName());
-        }
-    }
-
+                                      unordered_set<string> mandatory,
+                                      map<string, vector<ModelAction>> candidates) const {
     WeaverGraph graph;
     unordered_set<ID> candidateIds;
     for (auto pair : candidates) {

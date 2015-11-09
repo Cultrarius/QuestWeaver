@@ -49,7 +49,8 @@ namespace weave {
                                                            std::shared_ptr<RandomStream> randomStream,
                                                            std::vector<ModelAction> *modelActions) const;
 
-        weave::WeaverGraph createGraph(const QuestModel &questModel, const WorldModel &worldModel,
-                                       std::shared_ptr<Template> questTemplate) const;
+        WeaverGraph createGraph(const QuestModel &questModel, const WorldModel &worldModel,
+                                std::unordered_set<std::string> mandatoryProperties,
+                                std::map<std::string, std::vector<ModelAction>> candidates) const;
     };
 }
