@@ -6,8 +6,6 @@
 #include <memory>
 #include "catch.hpp"
 #include "../Core/WeaverUtils.h"
-#include "../Template/Space/SpaceQuestTemplateFactory.h"
-#include "../World/Space/SpaceWorldModel.h"
 #include "../Core/GraphAnalyzer.h"
 
 using namespace weave;
@@ -31,5 +29,21 @@ TEST_CASE("Graph analyzer", "[graph analyzer]") {
         auto properties = GraphAnalyzer::SolveGraph(&graph, rs);
         REQUIRE(properties.size() == 1);
         REQUIRE(properties[groupA] == node1);
+    }
+
+    Node node2(groupA, 2);
+    graph.AddNode(node2);
+
+    SECTION("Solve graph with two nodes") {
+        auto properties = GraphAnalyzer::SolveGraph(&graph, rs);
+        REQUIRE(properties.size() == 1);
+        REQUIRE(((properties[groupA] == node1) || (properties[groupA] == node2)));
+    }
+
+    string groupB = "entityB";
+    graph.CreateNodeGroup(groupB, true);
+
+    SECTION("Error on missing required node") {
+        REQUIRE_THROWS_AS(GraphAnalyzer::SolveGraph(&graph, rs), ContractFailedException);
     }
 }
