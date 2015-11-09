@@ -37,9 +37,9 @@ namespace weave {
 
         bool IsNodeActive(const Node &node) const;
 
-        bool HasActiveNode(std::string groupName);
+        bool HasActiveNode(std::string groupName) const;
 
-        const Node &GetActiveNode(std::string groupName);
+        const Node &GetActiveNode(std::string groupName) const;
 
     private:
         std::unordered_map<ID, std::vector<Node>> nodes;

@@ -128,7 +128,7 @@ bool WeaverGraph::IsNodeActive(const Node &node) const {
     return activeNodes.find(node) != activeNodes.end();
 }
 
-const Node &WeaverGraph::GetActiveNode(string groupName) {
+const Node &WeaverGraph::GetActiveNode(string groupName) const {
     for (auto &node : GetNodes(groupName)) {
         if (IsNodeActive(node)) {
             return node;
@@ -137,6 +137,6 @@ const Node &WeaverGraph::GetActiveNode(string groupName) {
     throw ContractFailedException("Unable to find active node for group!");
 }
 
-bool WeaverGraph::HasActiveNode(std::string groupName) {
+bool WeaverGraph::HasActiveNode(std::string groupName) const {
     return activeGroups.find(groupName) != activeGroups.end();
 }
