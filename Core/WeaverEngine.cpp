@@ -4,8 +4,6 @@
 
 #include <iostream>
 #include "WeaverEngine.h"
-#include "Graph/WeaverGraph.h"
-#include "GraphAnalyzer.h"
 
 using namespace std;
 using namespace weave;

@@ -79,12 +79,8 @@ std::vector<std::string> WeaverGraph::GetGroups() const {
     return groupNames;
 }
 
-std::vector<std::string> WeaverGraph::GetMandatoryGroups() const {
-    vector<string> groupNames;
-    for (auto group : mandatoryGroups) {
-        groupNames.push_back(group);
-    }
-    return groupNames;
+const std::unordered_set<std::string> WeaverGraph::GetMandatoryGroups() const {
+    return mandatoryGroups;
 }
 
 const std::vector<Node> &WeaverGraph::GetNodes(const std::string &groupName) const {
@@ -126,4 +122,21 @@ bool WeaverGraph::DeactivateNode(const Node &node) {
 
 const std::set<Node> &WeaverGraph::GetActiveNodes() const {
     return activeNodes;
+}
+
+bool WeaverGraph::IsNodeActive(const Node &node) const {
+    return activeNodes.find(node) != activeNodes.end();
+}
+
+const Node &WeaverGraph::GetActiveNode(string groupName) {
+    for (auto &node : GetNodes(groupName)) {
+        if (IsNodeActive(node)) {
+            return node;
+        }
+    }
+    throw ContractFailedException("Unable to find active node for group!");
+}
+
+bool WeaverGraph::HasActiveNode(std::string groupName) {
+    return activeGroups.find(groupName) != activeGroups.end();
 }

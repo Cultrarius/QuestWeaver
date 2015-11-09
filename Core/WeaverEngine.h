@@ -8,15 +8,17 @@
 #include "WeaverUtils.h"
 #include "../QuestModel/QuestModel.h"
 #include "Graph/WeaverGraph.h"
+#include "GraphAnalyzer.h"
 
 namespace weave {
     struct EngineParameters {
         float chooseOldOverNew = 0.9;
         bool useDice = false;
+        AnalyzerParameters analyzerParameters;
 
         template<class Archive>
         void serialize(Archive &ar) {
-            ar(CEREAL_NVP(chooseOldOverNew));
+            ar(CEREAL_NVP(chooseOldOverNew), CEREAL_NVP(analyzerParameters));
         }
     };
 
