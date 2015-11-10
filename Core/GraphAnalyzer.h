@@ -12,6 +12,7 @@ namespace weave {
     struct AnalyzerParameters {
         float optionalNodePenalty = -100;
         float previousQuestBonus = 50;
+        float transitiveQuestBonus = 10;
 
         template<class Archive>
         void serialize(Archive &ar) {
@@ -41,14 +42,20 @@ namespace weave {
         static std::unordered_map<std::string, Node> SolveGraph(WeaverGraph *graph,
                                                                 std::shared_ptr<RandomStream> randomStream);
 
+        static std::unordered_map<std::string, Node> SolveGraph(WeaverGraph *graph,
+                                                                std::shared_ptr<RandomStream> randomStream,
+                                                                AnalyzerParameters parameters);
+
     private:
-        static bool fillActionMap(WeaverGraph *graph, std::map<GraphAction, float> *map);
+        static bool fillActionMap(WeaverGraph *graph, std::map<GraphAction, float> *map,
+                                  const AnalyzerParameters &param);
 
-        static float getGraphScore(WeaverGraph *graph);
+        static float getGraphScore(WeaverGraph *graph, const AnalyzerParameters &param);
 
-        static float tryMandatoryNode(WeaverGraph *graph, const std::string &group, const Node &node);
+        static float tryMandatoryNode(WeaverGraph *graph, const std::string &group, const Node &node,
+                                      const AnalyzerParameters &param);
 
         static float tryOptionalNode(WeaverGraph *graph, const std::string &group, const Node &node, bool isActive,
-                                     bool hasActiveNode);
+                                     bool hasActiveNode, const AnalyzerParameters &param);
     };
 }

@@ -22,6 +22,10 @@ namespace weave {
 
         ID Get(ID startId) const;
 
+        ID GetNode1() const;
+
+        ID GetNode2() const;
+
         bool operator==(const Edge &other) const;
 
         bool operator<(const Edge &other) const;

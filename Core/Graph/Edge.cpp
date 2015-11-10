@@ -44,3 +44,11 @@ uint32_t Edge::Count(EdgeType type) const {
     }
     return it->second;
 }
+
+ID Edge::GetNode1() const {
+    return id1;
+}
+
+ID Edge::GetNode2() const {
+    return id2;
+}

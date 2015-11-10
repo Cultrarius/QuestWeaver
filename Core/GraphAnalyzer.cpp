@@ -8,7 +8,8 @@ using namespace std;
 using namespace weave;
 
 unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph,
-                                                      shared_ptr<RandomStream> rs) {
+                                                      shared_ptr<RandomStream> rs,
+                                                      AnalyzerParameters param) {
     // activate random mandatory nodes, so the graph is in a consistent state
     for (auto group : graph->GetMandatoryGroups()) {
         auto nodes = graph->GetNodes(group);
@@ -17,13 +18,14 @@ unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph,
     }
 
     map<GraphAction, float> actionMap;
-    while (fillActionMap(graph, &actionMap)) {
+    while (fillActionMap(graph, &actionMap, param)) {
         auto action = actionMap.begin()->first;
         if (action.IsActivate()) {
             graph->ActivateNode(action.GetNode());
         } else {
             graph->DeactivateNode(action.GetNode());
         }
+        actionMap.clear();
     }
 
     unordered_map<string, Node> results;
@@ -49,9 +51,8 @@ bool GraphAction::operator<(const GraphAction &other) const {
     return node < other.node && isActivate == other.isActivate;
 }
 
-bool GraphAnalyzer::fillActionMap(WeaverGraph *graph,
-                                  map<GraphAction, float> *map) {
-    float startScore = getGraphScore(graph);
+bool GraphAnalyzer::fillActionMap(WeaverGraph *graph, map<GraphAction, float> *map, const AnalyzerParameters &param) {
+    float startScore = getGraphScore(graph, param);
 
     auto mandatoryGroups = graph->GetMandatoryGroups();
     for (string group : graph->GetGroups()) {
@@ -67,9 +68,9 @@ bool GraphAnalyzer::fillActionMap(WeaverGraph *graph,
                     // we can not deactivate nodes in mandatory groups
                     continue;
                 }
-                actionScore = tryMandatoryNode(graph, group, node);
+                actionScore = tryMandatoryNode(graph, group, node, param);
             } else {
-                actionScore = tryOptionalNode(graph, group, node, isActive, hasActiveNode);
+                actionScore = tryOptionalNode(graph, group, node, isActive, hasActiveNode, param);
             }
 
             if (actionScore > startScore) {
@@ -82,31 +83,56 @@ bool GraphAnalyzer::fillActionMap(WeaverGraph *graph,
 }
 
 float GraphAnalyzer::tryOptionalNode(WeaverGraph *graph, const string &group, const Node &node, bool isActive,
-                                     bool hasActiveNode) {
+                                     bool hasActiveNode, const AnalyzerParameters &param) {
     float actionScore = 0;
     if (isActive) {
         graph->DeactivateNode(node);
-        actionScore = getGraphScore(graph);
+        actionScore = getGraphScore(graph, param);
         graph->ActivateNode(node);
+    } else if (hasActiveNode) {
+        auto originalActiveNode = graph->GetActiveNode(group);
+        graph->ActivateNode(node);
+        actionScore = getGraphScore(graph, param);
+        graph->ActivateNode(originalActiveNode);
     } else {
         graph->ActivateNode(node);
-        actionScore = getGraphScore(graph);
-        if (hasActiveNode) {
-            graph->DeactivateNode(node);
-        } else {
-            graph->ActivateNode(graph->GetActiveNode(group));
-        }
+        actionScore = getGraphScore(graph, param);
+        graph->DeactivateNode(node);
     }
     return actionScore;
 }
 
-float GraphAnalyzer::tryMandatoryNode(WeaverGraph *graph, const string &group, const Node &node) {
+float GraphAnalyzer::tryMandatoryNode(WeaverGraph *graph, const string &group, const Node &node,
+                                      const AnalyzerParameters &param) {
+    auto originalActiveNode = graph->GetActiveNode(group);
     graph->ActivateNode(node);
-    float actionScore = getGraphScore(graph);
-    graph->ActivateNode(graph->GetActiveNode(group));
+    float actionScore = getGraphScore(graph, param);
+    graph->ActivateNode(originalActiveNode);
     return actionScore;
 }
 
-float GraphAnalyzer::getGraphScore(WeaverGraph *graph) {
-    return 0;
+float GraphAnalyzer::getGraphScore(WeaverGraph *graph, const AnalyzerParameters &param) {
+    float score = 0;
+    auto mandatory = graph->GetMandatoryGroups();
+    unordered_set<ID> activeNodeIds;
+
+    for (auto node : graph->GetActiveNodes()) {
+        activeNodeIds.insert(node.GetId());
+        if (mandatory.find(node.GetGroup()) == mandatory.end()) {
+            score += param.optionalNodePenalty;
+        }
+    }
+    for (auto edge : graph->GetEdges()) {
+        if ((activeNodeIds.find(edge.GetNode1()) != activeNodeIds.end()) &&
+            (activeNodeIds.find(edge.GetNode2()) != activeNodeIds.end())) {
+            score += edge.Count(EdgeType::DIRECT) * param.previousQuestBonus;
+            score += edge.Count(EdgeType::TRANSITIVE) * param.transitiveQuestBonus;
+        }
+    }
+    return score;
+}
+
+std::unordered_map<std::string, Node> GraphAnalyzer::SolveGraph(WeaverGraph *graph,
+                                                                std::shared_ptr<RandomStream> randomStream) {
+    return SolveGraph(graph, randomStream, AnalyzerParameters());
 }
