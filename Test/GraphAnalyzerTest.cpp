@@ -74,4 +74,26 @@ TEST_CASE("Graph analyzer", "[graph analyzer]") {
         REQUIRE((properties[groupA] == node2));
         REQUIRE((properties[groupB] == node3));
     }
+
+    Edge edge13(1, 3, EdgeType::TRANSITIVE);
+    string groupC = "entityC";
+    Node node4(groupC, 4);
+    graph.AddEdge(edge13).CreateNodeGroup(groupC, false).AddNode(node4);
+
+    SECTION("Solve graph with four nodes / one optional") {
+        auto properties = GraphAnalyzer::SolveGraph(&graph, rs);
+        REQUIRE(properties.size() == 2);
+        REQUIRE((properties[groupA] == node1));
+        REQUIRE((properties[groupB] == node3));
+    }
+
+    Edge edge23(2, 3, EdgeType::DIRECT);
+    graph.AddEdge(edge23);
+
+    SECTION("Solve graph with two edges / direct edge takes precedence") {
+        auto properties = GraphAnalyzer::SolveGraph(&graph, rs);
+        REQUIRE(properties.size() == 2);
+        REQUIRE((properties[groupA] == node2));
+        REQUIRE((properties[groupB] == node3));
+    }
 }
