@@ -2,6 +2,7 @@
 // Created by michael on 07.11.15.
 //
 
+#include <assert.h>
 #include "GraphAnalyzer.h"
 
 using namespace std;
@@ -18,9 +19,26 @@ unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph,
     }
 
     map<GraphAction, float> actionMap;
-    while (fillActionMap(graph, &actionMap, param)) {
-        auto action = actionMap.begin()->first;
-        action.Apply(graph);
+    while (fillActionMap(graph, &actionMap, param, rs)) {
+        float minScore = 0;
+        float maxScore = 0;
+        for (auto pair : actionMap) {
+            minScore = minScore < pair.second ? minScore : pair.second;
+            maxScore = maxScore > pair.second ? maxScore : pair.second;
+        }
+
+        float currentMax = 0;
+        const GraphAction *action = nullptr;
+        for (auto pair : actionMap) {
+            float percent = (pair.second - minScore) / maxScore;
+            float random = rs->GetIntInRange(0, 9000) * percent + rs->GetIntInRange(0, 1000);
+            if (random >= currentMax) {
+                currentMax = random;
+                action = &pair.first;
+            }
+        }
+        assert(action != nullptr);
+        action->Apply(graph);
         actionMap.clear();
     }
 
@@ -47,7 +65,8 @@ bool GraphAction::operator<(const GraphAction &other) const {
     return (nodeActivations.size() < otherActivations.size());
 }
 
-bool GraphAnalyzer::fillActionMap(WeaverGraph *graph, map<GraphAction, float> *map, const AnalyzerParameters &param) {
+bool GraphAnalyzer::fillActionMap(WeaverGraph *graph, map<GraphAction, float> *map, const AnalyzerParameters &param,
+                                  shared_ptr<RandomStream> rs) {
     float startScore = getGraphScore(graph, param);
 
     auto mandatoryGroups = graph->GetMandatoryGroups();
@@ -69,6 +88,27 @@ bool GraphAnalyzer::fillActionMap(WeaverGraph *graph, map<GraphAction, float> *m
             if (actionScore > startScore) {
                 (*map)[action] = actionScore;
             }
+        }
+    }
+    for (Edge edge : graph->GetEdges()) {
+        auto nodes1 = graph->GetNodesWithId(edge.GetNode1());
+        auto nodes2 = graph->GetNodesWithId(edge.GetNode2());
+        if (nodes1.empty() || nodes2.empty()) {
+            continue;
+        }
+        auto node1 = nodes1[rs->GetRandomIndex(nodes1.size())];
+        auto node2 = nodes2[rs->GetRandomIndex(nodes2.size())];
+        std::map<Node, bool> activeNodes;
+        activeNodes[node1] = true;
+        activeNodes[node2] = true;
+
+        WeaverGraph graphCopy = *graph;
+        GraphAction action(activeNodes);
+        action.Apply(&graphCopy);
+        float actionScore = getGraphScore(&graphCopy, param);
+
+        if (actionScore > startScore) {
+            (*map)[action] = actionScore;
         }
     }
 

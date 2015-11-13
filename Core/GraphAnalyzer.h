@@ -47,7 +47,7 @@ namespace weave {
 
     private:
         static bool fillActionMap(WeaverGraph *graph, std::map<GraphAction, float> *map,
-                                  const AnalyzerParameters &param);
+                                  const AnalyzerParameters &param, std::shared_ptr<RandomStream> rs);
 
         static float getGraphScore(WeaverGraph *graph, const AnalyzerParameters &param);
     };
