@@ -22,19 +22,18 @@ namespace weave {
 
     class GraphAction {
     public:
-        GraphAction(bool isActivate, const Node &node) : isActivate(isActivate), node(node) { }
+        GraphAction(bool isActivate, const Node &node);
 
-        const Node &GetNode() const;
+        explicit GraphAction(std::map<Node, bool> nodeActivations) : nodeActivations(nodeActivations) { }
 
-        bool IsActivate() const;
+        void Apply(WeaverGraph *graph) const;
 
         bool operator==(const GraphAction &other) const;
 
         bool operator<(const GraphAction &other) const;
 
     private:
-        bool isActivate;
-        const Node node;
+        std::map<Node, bool> nodeActivations;
     };
 
     class GraphAnalyzer {
@@ -51,11 +50,5 @@ namespace weave {
                                   const AnalyzerParameters &param);
 
         static float getGraphScore(WeaverGraph *graph, const AnalyzerParameters &param);
-
-        static float tryMandatoryNode(WeaverGraph *graph, const std::string &group, const Node &node,
-                                      const AnalyzerParameters &param);
-
-        static float tryOptionalNode(WeaverGraph *graph, const std::string &group, const Node &node, bool isActive,
-                                     bool hasActiveNode, const AnalyzerParameters &param);
     };
 }
