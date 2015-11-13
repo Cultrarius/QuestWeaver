@@ -67,29 +67,10 @@ bool GraphAction::operator<(const GraphAction &other) const {
 
 bool GraphAnalyzer::fillActionMap(WeaverGraph *graph, map<GraphAction, float> *map, const AnalyzerParameters &param,
                                   shared_ptr<RandomStream> rs) {
+
+    getSingleNodeActions(graph, map, param);
+
     float startScore = getGraphScore(graph, param);
-
-    auto mandatoryGroups = graph->GetMandatoryGroups();
-    for (string group : graph->GetGroups()) {
-        bool isMandatory = mandatoryGroups.find(group) != mandatoryGroups.end();
-        for (auto &node : graph->GetNodes(group)) {
-            // this is not the best solution for performance, but has better readability
-            WeaverGraph graphCopy = *graph;
-            auto isActive = graph->IsNodeActive(node);
-
-            GraphAction action(!isActive, node);
-            if (isMandatory && isActive) {
-                // we can not deactivate nodes in mandatory groups
-                continue;
-            }
-            action.Apply(&graphCopy);
-            float actionScore = getGraphScore(&graphCopy, param);
-
-            if (actionScore > startScore) {
-                (*map)[action] = actionScore;
-            }
-        }
-    }
     for (Edge edge : graph->GetEdges()) {
         auto nodes1 = graph->GetNodesWithId(edge.GetNode1());
         auto nodes2 = graph->GetNodesWithId(edge.GetNode2());
@@ -151,6 +132,32 @@ void GraphAction::Apply(WeaverGraph *graph) const {
             graph->ActivateNode(pair.first);
         } else {
             graph->DeactivateNode(pair.first);
+        }
+    }
+}
+
+void GraphAnalyzer::getSingleNodeActions(WeaverGraph *graph, std::map<GraphAction, float> *map,
+                                         const AnalyzerParameters &param) {
+    float startScore = getGraphScore(graph, param);
+    auto mandatoryGroups = graph->GetMandatoryGroups();
+    for (string group : graph->GetGroups()) {
+        bool isMandatory = mandatoryGroups.find(group) != mandatoryGroups.end();
+        for (auto &node : graph->GetNodes(group)) {
+            // this is not the best solution for performance, but has better readability
+            WeaverGraph graphCopy = *graph;
+            auto isActive = graph->IsNodeActive(node);
+
+            GraphAction action(!isActive, node);
+            if (isMandatory && isActive) {
+                // we can not deactivate nodes in mandatory groups
+                continue;
+            }
+            action.Apply(&graphCopy);
+            float actionScore = getGraphScore(&graphCopy, param);
+
+            if (actionScore > startScore) {
+                (*map)[action] = actionScore;
+            }
         }
     }
 }

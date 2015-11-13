@@ -50,5 +50,8 @@ namespace weave {
                                   const AnalyzerParameters &param, std::shared_ptr<RandomStream> rs);
 
         static float getGraphScore(WeaverGraph *graph, const AnalyzerParameters &param);
+
+        static void getSingleNodeActions(WeaverGraph *graph, std::map<GraphAction, float> *map,
+                                         const AnalyzerParameters &param);
     };
 }
