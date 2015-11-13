@@ -67,32 +67,8 @@ bool GraphAction::operator<(const GraphAction &other) const {
 
 bool GraphAnalyzer::fillActionMap(WeaverGraph *graph, map<GraphAction, float> *map, const AnalyzerParameters &param,
                                   shared_ptr<RandomStream> rs) {
-
     getSingleNodeActions(graph, map, param);
-
-    float startScore = getGraphScore(graph, param);
-    for (Edge edge : graph->GetEdges()) {
-        auto nodes1 = graph->GetNodesWithId(edge.GetNode1());
-        auto nodes2 = graph->GetNodesWithId(edge.GetNode2());
-        if (nodes1.empty() || nodes2.empty()) {
-            continue;
-        }
-        auto node1 = nodes1[rs->GetRandomIndex(nodes1.size())];
-        auto node2 = nodes2[rs->GetRandomIndex(nodes2.size())];
-        std::map<Node, bool> activeNodes;
-        activeNodes[node1] = true;
-        activeNodes[node2] = true;
-
-        WeaverGraph graphCopy = *graph;
-        GraphAction action(activeNodes);
-        action.Apply(&graphCopy);
-        float actionScore = getGraphScore(&graphCopy, param);
-
-        if (actionScore > startScore) {
-            (*map)[action] = actionScore;
-        }
-    }
-
+    getEdgeActions(graph, map, param, rs);
     return !map->empty();
 }
 
@@ -158,6 +134,32 @@ void GraphAnalyzer::getSingleNodeActions(WeaverGraph *graph, std::map<GraphActio
             if (actionScore > startScore) {
                 (*map)[action] = actionScore;
             }
+        }
+    }
+}
+
+void GraphAnalyzer::getEdgeActions(WeaverGraph *graph, std::map<GraphAction, float> *map,
+                                   const AnalyzerParameters &param, shared_ptr<RandomStream> rs) {
+    float startScore = getGraphScore(graph, param);
+    for (Edge edge : graph->GetEdges()) {
+        auto nodes1 = graph->GetNodesWithId(edge.GetNode1());
+        auto nodes2 = graph->GetNodesWithId(edge.GetNode2());
+        if (nodes1.empty() || nodes2.empty()) {
+            continue;
+        }
+        auto node1 = nodes1[rs->GetRandomIndex(nodes1.size())];
+        auto node2 = nodes2[rs->GetRandomIndex(nodes2.size())];
+        std::map<Node, bool> activeNodes;
+        activeNodes[node1] = true;
+        activeNodes[node2] = true;
+
+        WeaverGraph graphCopy = *graph;
+        GraphAction action(activeNodes);
+        action.Apply(&graphCopy);
+        float actionScore = getGraphScore(&graphCopy, param);
+
+        if (actionScore > startScore) {
+            (*map)[action] = actionScore;
         }
     }
 }

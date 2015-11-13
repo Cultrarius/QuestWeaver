@@ -53,5 +53,8 @@ namespace weave {
 
         static void getSingleNodeActions(WeaverGraph *graph, std::map<GraphAction, float> *map,
                                          const AnalyzerParameters &param);
+
+        static void getEdgeActions(WeaverGraph *graph, std::map<GraphAction, float> *map,
+                                   const AnalyzerParameters &param, std::shared_ptr<RandomStream> rs);
     };
 }
