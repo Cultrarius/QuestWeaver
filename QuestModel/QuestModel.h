@@ -19,6 +19,12 @@ namespace weave {
 
         std::set<std::shared_ptr<WorldEntity>> GetQuestEntities(ID questId) const;
 
+        bool ActivateQuest(ID questId);
+
+        bool FailQuest(ID questId);
+
+        bool SucceedQuest(ID questId);
+
     private:
         std::vector<std::shared_ptr<Quest>> quests;
 
@@ -33,5 +39,7 @@ namespace weave {
         void serialize(Archive &archive) {
             archive(CEREAL_NVP(idGenerator), CEREAL_NVP(quests), CEREAL_NVP(questEntities));
         }
+
+        bool setNewQuestState(ID questId, const QuestState &requiredState, const QuestState &newState);
     };
 }
