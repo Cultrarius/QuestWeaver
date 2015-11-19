@@ -67,11 +67,11 @@ WeaverGraph &WeaverGraph::AddEdge(Edge edge) {
     return *this;
 }
 
-const std::set<Edge> &WeaverGraph::GetEdges() const {
+const set<Edge> &WeaverGraph::GetEdges() const {
     return edges;
 }
 
-std::vector<std::string> WeaverGraph::GetGroups() const {
+vector<string> WeaverGraph::GetGroups() const {
     vector<string> groupNames;
     for (auto group : groups) {
         groupNames.push_back(group.first);
@@ -79,11 +79,11 @@ std::vector<std::string> WeaverGraph::GetGroups() const {
     return groupNames;
 }
 
-const std::unordered_set<std::string> WeaverGraph::GetMandatoryGroups() const {
+const unordered_set<string> WeaverGraph::GetMandatoryGroups() const {
     return mandatoryGroups;
 }
 
-const std::vector<Node> &WeaverGraph::GetNodes(const std::string &groupName) const {
+const vector<Node> &WeaverGraph::GetNodes(const string &groupName) const {
     auto iter = groups.find(groupName);
     if (iter == groups.end()) {
         throw ContractFailedException("Unable to get nodes for unknown group name!");
@@ -120,7 +120,7 @@ bool WeaverGraph::DeactivateNode(const Node &node) {
     return true;
 }
 
-const std::set<Node> &WeaverGraph::GetActiveNodes() const {
+const set<Node> &WeaverGraph::GetActiveNodes() const {
     return activeNodes;
 }
 
@@ -128,7 +128,7 @@ bool WeaverGraph::IsNodeActive(const Node &node) const {
     return activeNodes.find(node) != activeNodes.end();
 }
 
-const std::vector<Node> &WeaverGraph::GetNodesWithId(ID id) const {
+const vector<Node> &WeaverGraph::GetNodesWithId(ID id) const {
     auto iter = nodes.find(id);
     if (iter == nodes.end()) {
         return empty;

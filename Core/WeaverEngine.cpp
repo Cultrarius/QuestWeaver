@@ -11,8 +11,8 @@ using namespace weave;
 vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> questTemplate,
                                                       const QuestModel &questModel,
                                                       const WorldModel &worldModel,
-                                                      std::shared_ptr<RandomStream> randomStream,
-                                                      std::vector<ModelAction> *modelActions) const {
+                                                      shared_ptr<RandomStream> randomStream,
+                                                      vector<ModelAction> *modelActions) const {
     if (parameters.useDice) {
         return fillWithRandomDice(questTemplate, worldModel, randomStream, modelActions);
     } else {
