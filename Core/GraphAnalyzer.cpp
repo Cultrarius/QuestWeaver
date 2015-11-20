@@ -50,8 +50,8 @@ void GraphAnalyzer::initializeMandatoryNodes(WeaverGraph *graph, shared_ptr<Rand
     // activate random mandatory nodes, so the graph is in a consistent state
     for (auto group : graph->GetMandatoryGroups()) {
         auto nodes = graph->GetNodes(group);
-        int index = rs->GetRandomIndex(nodes.size());
-        graph->ActivateNode(nodes[index]);
+        auto index = rs->GetRandomIndex(nodes.size());
+        graph->ActivateNode(nodes.at(index));
     }
 }
 
@@ -153,8 +153,8 @@ void GraphAnalyzer::getEdgeActions(WeaverGraph *graph, std::map<GraphAction, flo
         if (nodes1.empty() || nodes2.empty()) {
             continue;
         }
-        auto node1 = nodes1[rs->GetRandomIndex(nodes1.size())];
-        auto node2 = nodes2[rs->GetRandomIndex(nodes2.size())];
+        auto node1 = nodes1.at(rs->GetRandomIndex(nodes1.size()));
+        auto node2 = nodes2.at(rs->GetRandomIndex(nodes2.size()));
         std::map<Node, bool> activeNodes;
         activeNodes[node1] = true;
         activeNodes[node2] = true;

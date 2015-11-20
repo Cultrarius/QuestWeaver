@@ -139,8 +139,8 @@ vector<QuestPropertyValue> WeaverEngine::fillWithRandomDice(const shared_ptr<Tem
 
     for (const auto &property : propertiesToCreate) {
         const vector<ModelAction> candidates = questTemplate->GetPropertyCandidates(property, worldModel);
-        int index = randomStream->GetRandomIndex(candidates.size());
-        shared_ptr<WorldEntity> entity = candidates[index].GetEntity();
+        auto index = randomStream->GetRandomIndex(candidates.size());
+        shared_ptr<WorldEntity> entity = candidates.at(index).GetEntity();
         if (modelActions != nullptr) {
             modelActions->push_back(candidates[index]);
         }

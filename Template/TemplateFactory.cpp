@@ -44,8 +44,8 @@ string TemplateFactory::extractTitle(const Json::Value &root) const {
     for (int i = 0; i < jsonTitles.size(); ++i) {
         titles.push_back(std::move(jsonTitles[i].asString()));
     }
-    int index = randomStream->GetRandomIndex(titles.size());
-    return titles[index];
+    auto index = randomStream->GetRandomIndex(titles.size());
+    return titles.at(index);
 }
 
 vector<TemplateQuestDescription> TemplateFactory::extractDescriptions(const Json::Value &root) const {

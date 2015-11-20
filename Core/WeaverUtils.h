@@ -33,12 +33,23 @@ namespace weave {
             return limitedDist(generator);
         }
 
+        virtual uint64_t GetULongInRange(uint64_t start, uint64_t end) {
+            if (end < start) {
+                throw ContractFailedException("(End < Start) for random distribution in range.\n");
+            }
+            std::uniform_int_distribution<uint64_t> limitedDist(start, end);
+            return limitedDist(generator);
+        }
+
         virtual void Seed(uint64_t seed) {
             generator.seed(seed);
         }
 
-        virtual int GetRandomIndex(uint64_t collectionSize) {
-            return GetIntInRange(0, static_cast<int>(collectionSize - 1));
+        virtual uint64_t GetRandomIndex(uint64_t collectionSize) {
+            if (collectionSize == 0) {
+                throw ContractFailedException("Collection Size = 0 for random index.\n");
+            }
+            return GetULongInRange(0, collectionSize - 1);
         }
 
     private:
