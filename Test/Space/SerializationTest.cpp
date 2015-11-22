@@ -222,16 +222,16 @@ TEST_CASE("Serialize Entities", "[serialize]") {
     }
 
     SECTION("Serialize and deserialize a full world model") {
-        vector<ModelAction> actions;
+        vector<WorldModelAction> actions;
 
         MetaData metaData1, metaData2;
         metaData1.SetValue("Size", 7).SetValue("Age", 42);
         metaData2.SetValue("Age", 43);
         auto entity1 = testModel.CreateAgent();
         auto entity2 = testModel.CreateLocation();
-        actions.push_back(ModelAction(ActionType::CREATE, entity1, metaData1));
-        actions.push_back(ModelAction(ActionType::CREATE, entity2, metaData2));
-        actions.push_back(ModelAction(ActionType::CREATE, testModel.CreateSolarSystem()));
+        actions.push_back(WorldModelAction(WorldActionType::CREATE, entity1, metaData1));
+        actions.push_back(WorldModelAction(WorldActionType::CREATE, entity2, metaData2));
+        actions.push_back(WorldModelAction(WorldActionType::CREATE, testModel.CreateSolarSystem()));
 
         testModel.Execute(actions);
         REQUIRE(testModel.GetEntities().size() == actions.size());

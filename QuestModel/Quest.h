@@ -6,7 +6,7 @@
 
 #include "../Core/WeaverTypes.h"
 #include "cereal.h"
-#include "../World/ModelAction.h"
+#include "../World/WorldModelAction.h"
 
 namespace weave {
     enum class QuestState {
@@ -44,7 +44,7 @@ namespace weave {
 
         virtual std::shared_ptr<Quest> setStateAndId(ID newId, QuestState newState) const = 0;
 
-        virtual std::vector<ModelAction> Tick(float delta);
+        virtual std::vector<WorldModelAction> Tick(float delta);
 
     private:
         ID id;

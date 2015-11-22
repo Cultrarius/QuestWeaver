@@ -12,12 +12,12 @@ vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> quest
                                                       const QuestModel &questModel,
                                                       const WorldModel &worldModel,
                                                       shared_ptr<RandomStream> randomStream,
-                                                      vector<ModelAction> *modelActions) const {
+                                                      vector<WorldModelAction> *modelActions) const {
     if (parameters.useDice) {
         return fillWithRandomDice(questTemplate, worldModel, randomStream, modelActions);
     } else {
         unordered_set<string> mandatory;
-        map<string, vector<ModelAction>> candidates;
+        map<string, vector<WorldModelAction>> candidates;
         for (const TemplateQuestProperty &questProperty : questTemplate->GetProperties()) {
             candidates[questProperty.GetName()] = questTemplate->GetPropertyCandidates(questProperty, worldModel);
             if (questProperty.IsMandatory()) {
@@ -74,7 +74,7 @@ vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> quest
 
 WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldModel &worldModel,
                                       unordered_set<string> mandatory,
-                                      map<string, vector<ModelAction>> candidates) const {
+                                      map<string, vector<WorldModelAction>> candidates) const {
     WeaverGraph graph;
     unordered_set<ID> candidateIds;
     for (auto pair : candidates) {
@@ -126,7 +126,7 @@ WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldM
 vector<QuestPropertyValue> WeaverEngine::fillWithRandomDice(const shared_ptr<Template> &questTemplate,
                                                             const WorldModel &worldModel,
                                                             shared_ptr<RandomStream> randomStream,
-                                                            vector<ModelAction> *modelActions) const {
+                                                            vector<WorldModelAction> *modelActions) const {
     vector<QuestPropertyValue> returnValues;
     vector<TemplateQuestProperty> propertiesToCreate;
     for (const TemplateQuestProperty &questProperty : questTemplate->GetProperties()) {
@@ -138,7 +138,7 @@ vector<QuestPropertyValue> WeaverEngine::fillWithRandomDice(const shared_ptr<Tem
     }
 
     for (const auto &property : propertiesToCreate) {
-        const vector<ModelAction> candidates = questTemplate->GetPropertyCandidates(property, worldModel);
+        const vector<WorldModelAction> candidates = questTemplate->GetPropertyCandidates(property, worldModel);
         auto index = randomStream->GetRandomIndex(candidates.size());
         shared_ptr<WorldEntity> entity = candidates.at(index).GetEntity();
         if (modelActions != nullptr) {

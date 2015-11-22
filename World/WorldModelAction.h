@@ -12,32 +12,32 @@
 
 namespace weave {
 
-    enum class ActionType {
+    enum class WorldActionType {
         KEEP, CREATE, DELETE, UPDATE
     };
 
-    class ModelAction {
+    class WorldModelAction {
     public:
-        ModelAction() :
-                actionType(ActionType::KEEP) { }
+        WorldModelAction() :
+                actionType(WorldActionType::KEEP) { }
 
-        ModelAction(const ActionType &actionType,
-                    const std::shared_ptr<WorldEntity> entity) :
+        WorldModelAction(const WorldActionType &actionType,
+                         const std::shared_ptr<WorldEntity> entity) :
                 actionType(actionType), entity(entity) { }
 
-        ModelAction(const ActionType &actionType,
-                    const std::shared_ptr<WorldEntity> entity,
-                    const MetaData metaData) :
+        WorldModelAction(const WorldActionType &actionType,
+                         const std::shared_ptr<WorldEntity> entity,
+                         const MetaData metaData) :
                 actionType(actionType), entity(entity), metaData(metaData) { }
 
-        ActionType GetActionType() const;
+        WorldActionType GetActionType() const;
 
         std::shared_ptr<WorldEntity> GetEntity() const;
 
         MetaData GetMetaData() const;
 
     private:
-        ActionType actionType;
+        WorldActionType actionType;
         std::shared_ptr<WorldEntity> entity;
         MetaData metaData;
 

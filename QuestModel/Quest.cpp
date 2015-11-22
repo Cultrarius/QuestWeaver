@@ -31,8 +31,8 @@ ID Quest::GetId() const {
     return id;
 }
 
-std::vector<ModelAction> Quest::Tick(float delta) {
-    return std::vector<ModelAction>();
+std::vector<WorldModelAction> Quest::Tick(float delta) {
+    return std::vector<WorldModelAction>();
 }
 
 bool Quest::operator==(const Quest &other) const {

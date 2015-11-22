@@ -16,17 +16,17 @@ WorldModel::WorldModel(shared_ptr<RandomStream> rs) : rs(rs) {
     actionHistory.reserve(10000);
 }
 
-void WorldModel::Execute(vector<ModelAction> modelActions) {
+void WorldModel::Execute(vector<WorldModelAction> modelActions) {
     for (auto action : modelActions) {
         ID id = action.GetEntity()->GetId();
         auto entity = GetEntityById(id);
-        if (entity.get() == nullptr && action.GetActionType() != ActionType::CREATE) {
+        if (entity.get() == nullptr && action.GetActionType() != WorldActionType::CREATE) {
             throw ContractFailedException(
                     "Unable to execute model action: entity with id " + to_string(id) + " not found.");
         }
-        if (action.GetActionType() == ActionType::KEEP) {
+        if (action.GetActionType() == WorldActionType::KEEP) {
             // doing nothing
-        } else if (action.GetActionType() == ActionType::CREATE) {
+        } else if (action.GetActionType() == WorldActionType::CREATE) {
             if (id != WorldEntity::NoID) {
                 throw ContractFailedException(
                         "Unable to execute model action create: entity already has an ID: " + to_string(id));
@@ -36,12 +36,12 @@ void WorldModel::Execute(vector<ModelAction> modelActions) {
             action.GetEntity()->id = newId;
             entities[newId] = action.GetEntity();
             updateMetaDataForId(newId, action.GetMetaData());
-        } else if (action.GetActionType() == ActionType::DELETE) {
+        } else if (action.GetActionType() == WorldActionType::DELETE) {
             ID oldId = action.GetEntity()->GetId();
             action.GetEntity()->id = WorldEntity::NoID;
             entities.erase(oldId);
             metaData.erase(oldId);
-        } else if (action.GetActionType() == ActionType::UPDATE) {
+        } else if (action.GetActionType() == WorldActionType::UPDATE) {
             if (id == WorldEntity::NoID) {
                 throw ContractFailedException(
                         "Unable to execute model action update: entity is not registered with world model.");
@@ -52,7 +52,7 @@ void WorldModel::Execute(vector<ModelAction> modelActions) {
         }
 
         // update change history
-        if (action.GetActionType() != ActionType::KEEP) {
+        if (action.GetActionType() != WorldActionType::KEEP) {
             actionHistory.push_back(action);
         }
     }
@@ -85,8 +85,8 @@ MetaData WorldModel::GetMetaData(ID entityId) const {
     return mapEntry == metaData.end() ? MetaData() : mapEntry->second;
 }
 
-std::vector<ModelAction> WorldModel::GetMetaDataHistoryForId(ID id) const {
-    vector<ModelAction> result;
+std::vector<WorldModelAction> WorldModel::GetMetaDataHistoryForId(ID id) const {
+    vector<WorldModelAction> result;
     for (auto action : actionHistory) {
         if (action.GetEntity()->GetId() == id && action.GetMetaData().GetValueNames().size() > 0) {
             result.push_back(action);
@@ -95,6 +95,6 @@ std::vector<ModelAction> WorldModel::GetMetaDataHistoryForId(ID id) const {
     return result;
 }
 
-std::vector<ModelAction> WorldModel::GetHistory() const {
+std::vector<WorldModelAction> WorldModel::GetHistory() const {
     return actionHistory;
 }

@@ -16,14 +16,14 @@ TEST_CASE("Model Actions", "[model]") {
     REQUIRE(entity->GetId() == 0);
 
     SECTION("Empty list of actions") {
-        vector<ModelAction> noActions;
+        vector<WorldModelAction> noActions;
         testModel.Execute(noActions);
         REQUIRE(testModel.GetEntities().size() == 0);
     }
 
     SECTION("CREATE model action") {
-        vector<ModelAction> actions;
-        ModelAction action(ActionType::CREATE, entity);
+        vector<WorldModelAction> actions;
+        WorldModelAction action(WorldActionType::CREATE, entity);
         actions.push_back(action);
         testModel.Execute(actions);
         REQUIRE(testModel.GetEntities().size() == 1);
@@ -31,63 +31,63 @@ TEST_CASE("Model Actions", "[model]") {
     }
 
     SECTION("CREATE twice action") {
-        vector<ModelAction> actions;
-        ModelAction action(ActionType::CREATE, entity);
+        vector<WorldModelAction> actions;
+        WorldModelAction action(WorldActionType::CREATE, entity);
         actions.push_back(action);
         testModel.Execute(actions);
         REQUIRE_THROWS_AS(testModel.Execute(actions), ContractFailedException);
     }
 
     SECTION("KEEP known entity") {
-        vector<ModelAction> actions;
-        ModelAction action(ActionType::CREATE, entity);
+        vector<WorldModelAction> actions;
+        WorldModelAction action(WorldActionType::CREATE, entity);
         actions.push_back(action);
         testModel.Execute(actions);
-        actions[0] = ModelAction(ActionType::KEEP, entity);
+        actions[0] = WorldModelAction(WorldActionType::KEEP, entity);
         testModel.Execute(actions);
     }
 
     SECTION("KEEP unknown entity without id") {
-        vector<ModelAction> actions;
-        ModelAction action(ActionType::KEEP, entity);
+        vector<WorldModelAction> actions;
+        WorldModelAction action(WorldActionType::KEEP, entity);
         actions.push_back(action);
         REQUIRE_THROWS_AS(testModel.Execute(actions), ContractFailedException);
     }
 
     SECTION("UPDATE unknown entity") {
-        vector<ModelAction> actions;
-        ModelAction action(ActionType::UPDATE, entity);
+        vector<WorldModelAction> actions;
+        WorldModelAction action(WorldActionType::UPDATE, entity);
         actions.push_back(action);
         REQUIRE_THROWS_AS(testModel.Execute(actions), ContractFailedException);
     }
 
     SECTION("UPDATE unknown entity with id") {
-        vector<ModelAction> actions;
-        ModelAction action(ActionType::CREATE, entity);
+        vector<WorldModelAction> actions;
+        WorldModelAction action(WorldActionType::CREATE, entity);
         actions.push_back(action);
         testModel.Execute(actions);
-        actions[0] = ModelAction(ActionType::UPDATE, entity);
+        actions[0] = WorldModelAction(WorldActionType::UPDATE, entity);
         SpaceWorldModel otherModel(rs);
         REQUIRE_THROWS_AS(otherModel.Execute(actions), ContractFailedException);
     }
 
     SECTION("create and keep entity") {
-        vector<ModelAction> actions;
-        ModelAction action(ActionType::CREATE, entity);
+        vector<WorldModelAction> actions;
+        WorldModelAction action(WorldActionType::CREATE, entity);
         actions.push_back(action);
         testModel.Execute(actions);
-        actions[0] = ModelAction(ActionType::KEEP, entity);
+        actions[0] = WorldModelAction(WorldActionType::KEEP, entity);
         testModel.Execute(actions);
         REQUIRE(testModel.GetEntities().size() == 1);
         REQUIRE(entity->GetId() != 0);
     }
 
     SECTION("create and delete entity") {
-        vector<ModelAction> actions;
-        ModelAction action(ActionType::CREATE, entity);
+        vector<WorldModelAction> actions;
+        WorldModelAction action(WorldActionType::CREATE, entity);
         actions.push_back(action);
         testModel.Execute(actions);
-        actions[0] = ModelAction(ActionType::DELETE, entity);
+        actions[0] = WorldModelAction(WorldActionType::DELETE, entity);
         testModel.Execute(actions);
         REQUIRE(testModel.GetEntities().size() == 0);
         REQUIRE(entity->GetId() == 0);
@@ -98,8 +98,8 @@ TEST_CASE("Metadata", "[model]") {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(44);
     SpaceWorldModel testModel(rs);
     shared_ptr<WorldEntity> entity = testModel.CreateAgent();
-    vector<ModelAction> actions;
-    ModelAction action(ActionType::CREATE, entity);
+    vector<WorldModelAction> actions;
+    WorldModelAction action(WorldActionType::CREATE, entity);
     actions.push_back(action);
     testModel.Execute(actions);
 
@@ -151,7 +151,7 @@ TEST_CASE("Metadata", "[model]") {
         shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
         MetaData metaData;
         metaData.SetValue("Test123", 142);
-        actions[0] = ModelAction(ActionType::CREATE, metaEntity, metaData);
+        actions[0] = WorldModelAction(WorldActionType::CREATE, metaEntity, metaData);
         metaDataModel.Execute(actions);
         MetaData modelData = metaDataModel.GetMetaData(metaEntity->GetId());
         REQUIRE(modelData.HasValue("Test123"));
@@ -163,11 +163,11 @@ TEST_CASE("Metadata", "[model]") {
         shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
         MetaData metaData;
         metaData.SetValue("Test123", 142);
-        actions[0] = ModelAction(ActionType::CREATE, metaEntity, metaData);
+        actions[0] = WorldModelAction(WorldActionType::CREATE, metaEntity, metaData);
         metaDataModel.Execute(actions);
         ID id = metaEntity->GetId();
         REQUIRE(metaDataModel.GetMetaData(id).HasValue("Test123"));
-        actions[0] = ModelAction(ActionType::DELETE, metaEntity);
+        actions[0] = WorldModelAction(WorldActionType::DELETE, metaEntity);
         metaDataModel.Execute(actions);
         REQUIRE(!metaDataModel.GetMetaData(id).HasValue("Test123"));
     }
@@ -177,12 +177,12 @@ TEST_CASE("Metadata", "[model]") {
         shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
         MetaData metaData;
         metaData.SetValue("Test123", 142);
-        actions[0] = ModelAction(ActionType::CREATE, metaEntity, metaData);
+        actions[0] = WorldModelAction(WorldActionType::CREATE, metaEntity, metaData);
         metaDataModel.Execute(actions);
         ID id = metaEntity->GetId();
         REQUIRE(metaDataModel.GetMetaData(id).GetValue("Test123") == 142);
         metaData.SetValue("Test123", 191);
-        actions[0] = ModelAction(ActionType::UPDATE, metaEntity, metaData);
+        actions[0] = WorldModelAction(WorldActionType::UPDATE, metaEntity, metaData);
         metaDataModel.Execute(actions);
         REQUIRE(metaDataModel.GetMetaData(id).GetValue("Test123") == 191);
     }
@@ -192,12 +192,12 @@ TEST_CASE("Metadata", "[model]") {
         shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
         MetaData metaData;
         metaData.SetValue("Test123", 142);
-        actions[0] = ModelAction(ActionType::CREATE, metaEntity, metaData);
+        actions[0] = WorldModelAction(WorldActionType::CREATE, metaEntity, metaData);
         metaDataModel.Execute(actions);
         ID id = metaEntity->GetId();
         REQUIRE(!metaDataModel.GetMetaData(id).HasValue("Test456"));
         metaData.SetValue("Test456", 191);
-        actions[0] = ModelAction(ActionType::UPDATE, metaEntity, metaData);
+        actions[0] = WorldModelAction(WorldActionType::UPDATE, metaEntity, metaData);
         metaDataModel.Execute(actions);
         REQUIRE(metaDataModel.GetMetaData(id).GetValue("Test123") == 142);
         REQUIRE(metaDataModel.GetMetaData(id).GetValue("Test456") == 191);
@@ -208,11 +208,11 @@ TEST_CASE("Metadata", "[model]") {
         shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
         MetaData metaData;
         metaData.SetValue("Test123", 142);
-        actions[0] = ModelAction(ActionType::CREATE, metaEntity, metaData);
+        actions[0] = WorldModelAction(WorldActionType::CREATE, metaEntity, metaData);
         metaDataModel.Execute(actions);
         ID id = metaEntity->GetId();
         REQUIRE(metaDataModel.GetMetaData(id).GetValue("Test123") == 142);
-        actions[0] = ModelAction(ActionType::UPDATE, metaEntity, MetaData());
+        actions[0] = WorldModelAction(WorldActionType::UPDATE, metaEntity, MetaData());
         metaDataModel.Execute(actions);
         REQUIRE(metaDataModel.GetMetaData(id).GetValue("Test123") == 142);
     }

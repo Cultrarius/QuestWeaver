@@ -12,17 +12,18 @@ namespace weave {
     public:
         std::shared_ptr<Quest> ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const;
 
-        std::vector<ModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
-                                                       const WorldModel &worldModel) const;
+        std::vector<WorldModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
+                                                            const WorldModel &worldModel) const;
 
         ExploreRegionTemplate(std::string title,
                               std::vector<TemplateQuestProperty> properties,
                               std::vector<TemplateQuestDescription> descriptions);
 
     private:
-        void gatherLocationEntities(std::vector<ModelAction> *actions, const weave::SpaceWorldModel &spaceModel) const;
+        void gatherLocationEntities(std::vector<WorldModelAction> *actions,
+                                    const weave::SpaceWorldModel &spaceModel) const;
 
-        void gatherSponsorEntities(std::vector<ModelAction> *actions, const SpaceWorldModel &spaceModel) const;
+        void gatherSponsorEntities(std::vector<WorldModelAction> *actions, const SpaceWorldModel &spaceModel) const;
     };
 }
 

@@ -23,12 +23,13 @@ namespace weave {
     };
 
     struct PropertyCandidate {
-        PropertyCandidate(const TemplateQuestProperty &property, ModelAction action, std::vector<ModelAction> history)
+        PropertyCandidate(const TemplateQuestProperty &property, WorldModelAction action,
+                          std::vector<WorldModelAction> history)
                 : property(property), action(action), history(history) { }
 
         TemplateQuestProperty property;
-        ModelAction action;
-        std::vector<ModelAction> history;
+        WorldModelAction action;
+        std::vector<WorldModelAction> history;
     };
 
     class WeaverEngine {
@@ -37,7 +38,7 @@ namespace weave {
                                                      const QuestModel &questModel,
                                                      const WorldModel &worldModel,
                                                      std::shared_ptr<RandomStream> randomStream,
-                                                     std::vector<ModelAction> *modelActions) const;
+                                                     std::vector<WorldModelAction> *modelActions) const;
 
         EngineParameters GetParameters();
 
@@ -49,10 +50,10 @@ namespace weave {
         std::vector<QuestPropertyValue> fillWithRandomDice(const std::shared_ptr<Template> &questTemplate,
                                                            const WorldModel &worldModel,
                                                            std::shared_ptr<RandomStream> randomStream,
-                                                           std::vector<ModelAction> *modelActions) const;
+                                                           std::vector<WorldModelAction> *modelActions) const;
 
         WeaverGraph createGraph(const QuestModel &questModel, const WorldModel &worldModel,
                                 std::unordered_set<std::string> mandatoryProperties,
-                                std::map<std::string, std::vector<ModelAction>> candidates) const;
+                                std::map<std::string, std::vector<WorldModelAction>> candidates) const;
     };
 }

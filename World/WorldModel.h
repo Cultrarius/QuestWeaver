@@ -8,7 +8,7 @@
 #include "../Core/WeaverTypes.h"
 #include "../Core/WeaverUtils.h"
 #include "WorldEntity.h"
-#include "ModelAction.h"
+#include "WorldModelAction.h"
 #include "MetaData.h"
 
 namespace weave {
@@ -17,7 +17,7 @@ namespace weave {
     public:
         explicit WorldModel(std::shared_ptr<RandomStream> rs);
 
-        void Execute(std::vector<ModelAction> modelActions);
+        void Execute(std::vector<WorldModelAction> modelActions);
 
         std::shared_ptr<WorldEntity> GetEntityById(ID id) const;
 
@@ -25,14 +25,14 @@ namespace weave {
 
         MetaData GetMetaData(ID entityId) const;
 
-        std::vector<ModelAction> GetHistory() const;
+        std::vector<WorldModelAction> GetHistory() const;
 
-        std::vector<ModelAction> GetMetaDataHistoryForId(ID id) const;
+        std::vector<WorldModelAction> GetMetaDataHistoryForId(ID id) const;
 
     protected:
         std::shared_ptr<RandomStream> rs;
         std::unordered_map<ID, MetaData> metaData;
-        std::vector<ModelAction> actionHistory;
+        std::vector<WorldModelAction> actionHistory;
 
         ID NewId();
 

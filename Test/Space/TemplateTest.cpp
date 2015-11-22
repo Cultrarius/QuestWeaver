@@ -114,7 +114,7 @@ TEST_CASE("Templates", "[template]") {
                     for (auto candidate : candidates) {
                         INFO("Template Key: " + templateKey + ", Property: " + property.GetName() + ", Seed: " +
                              to_string(i));
-                        REQUIRE(candidate.GetActionType() == ActionType::CREATE);
+                        REQUIRE(candidate.GetActionType() == WorldActionType::CREATE);
                         REQUIRE(candidate.GetEntity().get() != nullptr);
                     }
                 }

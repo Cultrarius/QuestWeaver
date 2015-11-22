@@ -21,8 +21,8 @@ int main() {
     SpaceWorldModel testModel(rs);
     auto location = testModel.CreateLocation();
     auto solar = make_shared<SolarSystem>();
-    ModelAction locationToAdd(ActionType::CREATE, solar);
-    vector<ModelAction> modelActions;
+    WorldModelAction locationToAdd(WorldActionType::CREATE, solar);
+    vector<WorldModelAction> modelActions;
     modelActions.push_back(locationToAdd);
     testModel.Execute(modelActions);
 
