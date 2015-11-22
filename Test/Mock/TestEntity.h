@@ -30,9 +30,6 @@ namespace weave {
         template<class Archive>
         static void load_and_construct(Archive &ar, cereal::construct<TestEntity> &construct) {
             ID id;
-            int X;
-            int Y;
-            int Z;
 
             ar(cereal::make_nvp("id", id));
             construct(id);
