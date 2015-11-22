@@ -6,6 +6,7 @@
 
 #include "Quest.h"
 #include "../Template/Template.h"
+#include "QuestModelAction.h"
 
 namespace weave {
     class QuestModel {
@@ -14,23 +15,27 @@ namespace weave {
 
         std::vector<std::shared_ptr<Quest>> GetQuests() const;
 
-        std::shared_ptr<Quest> RegisterQuest(const Quest &newQuest,
-                                             const std::vector<QuestPropertyValue> &questProperties);
-
         std::set<std::shared_ptr<WorldEntity>> GetQuestEntities(ID questId) const;
 
-        bool ActivateQuest(ID questId);
-
-        bool FailQuest(ID questId);
-
-        bool SucceedQuest(ID questId);
+        std::shared_ptr<Quest> Execute(const QuestModelAction &modelAction);
 
     private:
-        std::vector<std::shared_ptr<Quest>> quests;
+        std::map<ID, std::shared_ptr<Quest>> quests;
 
         std::map<ID, std::set<std::shared_ptr<WorldEntity>>> questEntities;
 
+        std::vector<QuestModelAction> actionHistory;
+
         ID idGenerator = 0;
+
+        std::shared_ptr<Quest> registerQuest(std::shared_ptr<Quest> newQuest,
+                                             const std::vector<QuestPropertyValue> &questProperties);
+
+        bool activateQuest(ID questId);
+
+        bool failQuest(ID questId);
+
+        bool succeedQuest(ID questId);
 
         // serialization
         friend class cereal::access;

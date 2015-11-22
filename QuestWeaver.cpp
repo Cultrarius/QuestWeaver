@@ -29,14 +29,15 @@ shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
                                                                           &modelActions);
     shared_ptr<Quest> newQuest = questTemplate->ToQuest(questPropertyValues);
     // TODO create quest-variants and choose the best one?
-    updateWorld(modelActions, *newQuest, questPropertyValues);
+
+    updateWorld(modelActions, QuestModelAction(QuestActionType::REGISTER, newQuest, questPropertyValues));
     return newQuest;
 }
 
-void QuestWeaver::updateWorld(const std::vector<ModelAction> &modelActions, const Quest &quest,
-                              const std::vector<QuestPropertyValue> &questProperties) {
+void QuestWeaver::updateWorld(const vector<ModelAction> &modelActions,
+                              const QuestModelAction &questModelAction) {
     world->Execute(modelActions);
-    quests->RegisterQuest(quest, questProperties);
+    quests->Execute(questModelAction);
 }
 
 std::vector<std::shared_ptr<Quest>> QuestWeaver::GetQuestsWithState(QuestState state) const {

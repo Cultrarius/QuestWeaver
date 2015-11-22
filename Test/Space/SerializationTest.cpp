@@ -126,7 +126,7 @@ TEST_CASE("Serialize Quests", "[serialize]") {
                 INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));
                 try {
                     auto quest = tp->ToQuest(questValues);
-                    questModel.RegisterQuest(*quest, questValues);
+                    questModel.Execute(QuestModelAction(QuestActionType::REGISTER, quest, questValues));
                 } catch (ContractFailedException ex) {
                     FAIL(ex.what());
                 }
@@ -216,7 +216,7 @@ TEST_CASE("Serialize Entities", "[serialize]") {
         }
         REQUIRE(entities.size() == deserialized.size());
 
-        for (int i = 0; i < entities.size(); i++) {
+        for (unsigned int i = 0; i < entities.size(); i++) {
             REQUIRE(typeid(*(deserialized[i])) == typeid(*(deserialized[i])));
         }
     }
@@ -265,7 +265,7 @@ TEST_CASE("Serialize Entities", "[serialize]") {
         }
         REQUIRE(testModel.GetEntities().size() == deserializedModel.GetEntities().size());
 
-        for (int i = 0; i < testModel.GetEntities().size(); i++) {
+        for (unsigned int i = 0; i < testModel.GetEntities().size(); i++) {
             REQUIRE(typeid(*(testModel.GetEntities()[i])) == typeid(*(deserializedModel.GetEntities()[i])));
         }
         REQUIRE(deserializedModel.GetMetaData(entity1->GetId()).GetValue("Size") == 7);

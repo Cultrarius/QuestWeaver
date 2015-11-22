@@ -28,6 +28,8 @@ namespace weave {
 
         ID GetId() const;
 
+        bool operator==(const Quest &other) const;
+
         virtual std::string GetType() const = 0;
 
     protected:

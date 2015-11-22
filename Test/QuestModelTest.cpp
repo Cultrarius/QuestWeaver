@@ -20,64 +20,68 @@ TEST_CASE("Quest Model", "[model]") {
     }
 
     vector<QuestPropertyValue> properties;
-    TestQuest newQuest("TestTitle", "Blabla");
+    shared_ptr<Quest> newQuest = make_shared<TestQuest>("TestTitle", "Blabla");
 
     SECTION("Register quest") {
-        REQUIRE(newQuest.GetId() == 0);
-        REQUIRE(newQuest.GetState() == QuestState::Proposed);
-        REQUIRE(newQuest.GetTitle() == "TestTitle");
-        REQUIRE(newQuest.GetDescription() == "Blabla");
-        auto quest = model.RegisterQuest(newQuest, properties);
+        REQUIRE(newQuest->GetId() == 0);
+        REQUIRE(newQuest->GetState() == QuestState::Proposed);
+        REQUIRE(newQuest->GetTitle() == "TestTitle");
+        REQUIRE(newQuest->GetDescription() == "Blabla");
+        auto quest = model.Execute(QuestModelAction(QuestActionType::REGISTER, newQuest, properties));
         REQUIRE(quest->GetId() != 0);
         REQUIRE(quest->GetState() == QuestState::Inactive);
         REQUIRE(quest->GetTitle() == "TestTitle");
         REQUIRE(quest->GetDescription() == "Blabla");
     }
 
-    auto quest = model.RegisterQuest(newQuest, properties);
+    auto quest = model.Execute(QuestModelAction(QuestActionType::REGISTER, newQuest, properties));
     REQUIRE(quest->GetId() != 0);
 
     SECTION("Model with single inactive quest") {
         REQUIRE(model.GetQuests().size() == 1);
         REQUIRE(model.GetQuestsWithState(QuestState::Inactive).size() == 1);
 
+        QuestModelAction activateAction(QuestActionType::ACTIVATE, quest);
+        QuestModelAction failAction(QuestActionType::FAIL, quest);
+        QuestModelAction succeedAction(QuestActionType::SUCCEED, quest);
+
         SECTION("activate quest") {
-            REQUIRE(!model.FailQuest(quest->GetId()));
+            REQUIRE(!model.Execute(failAction));
             REQUIRE(model.GetQuestsWithState(QuestState::Inactive).size() == 1);
             REQUIRE(model.GetQuestsWithState(QuestState::Failed).size() == 0);
 
-            REQUIRE(!model.SucceedQuest(quest->GetId()));
+            REQUIRE(!model.Execute(succeedAction));
             REQUIRE(model.GetQuestsWithState(QuestState::Inactive).size() == 1);
             REQUIRE(model.GetQuestsWithState(QuestState::Success).size() == 0);
 
-            REQUIRE(model.ActivateQuest(quest->GetId()));
+            REQUIRE(model.Execute(activateAction));
             REQUIRE(model.GetQuestsWithState(QuestState::Inactive).size() == 0);
             REQUIRE(model.GetQuestsWithState(QuestState::Active).size() == 1);
         }
 
         SECTION("Fail quest") {
-            REQUIRE(model.ActivateQuest(quest->GetId()));
-            REQUIRE(model.FailQuest(quest->GetId()));
+            REQUIRE(model.Execute(activateAction));
+            REQUIRE(model.Execute(failAction));
             REQUIRE(model.GetQuestsWithState(QuestState::Inactive).size() == 0);
             REQUIRE(model.GetQuestsWithState(QuestState::Active).size() == 0);
             REQUIRE(model.GetQuestsWithState(QuestState::Failed).size() == 1);
         }
 
         SECTION("Success quest") {
-            REQUIRE(model.ActivateQuest(quest->GetId()));
-            REQUIRE(model.SucceedQuest(quest->GetId()));
+            REQUIRE(model.Execute(activateAction));
+            REQUIRE(model.Execute(succeedAction));
             REQUIRE(model.GetQuestsWithState(QuestState::Inactive).size() == 0);
             REQUIRE(model.GetQuestsWithState(QuestState::Active).size() == 0);
             REQUIRE(model.GetQuestsWithState(QuestState::Success).size() == 1);
         }
     }
 
-    TestQuest newQuest2("TestTitle2", "Blabla2");
+    shared_ptr<Quest> newQuest2 = make_shared<TestQuest>("TestTitle2", "Blabla2");
     TemplateQuestProperty templateValue(true, "testProperty");
     shared_ptr<WorldEntity> entity = make_shared<TestEntity>();
     QuestPropertyValue value(templateValue, entity);
     properties.push_back(value);
-    auto quest2 = model.RegisterQuest(newQuest2, properties);
+    auto quest2 = model.Execute(QuestModelAction(QuestActionType::REGISTER, newQuest2, properties));
     REQUIRE(quest2->GetId() != 0);
 
     SECTION("Get quest entities") {
