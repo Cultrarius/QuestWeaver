@@ -22,20 +22,36 @@ TEST_CASE("Quest Model", "[model]") {
     vector<QuestPropertyValue> properties;
     shared_ptr<Quest> newQuest = make_shared<TestQuest>("TestTitle", "Blabla");
 
+    SECTION("Keep unknown quest") {
+        auto keepAction = QuestModelAction(QuestActionType::KEEP, newQuest, properties);
+        REQUIRE_THROWS_AS(model.Execute(keepAction), ContractFailedException);
+    }
+
+    auto registerAction = QuestModelAction(QuestActionType::REGISTER, newQuest, properties);
     SECTION("Register quest") {
         REQUIRE(newQuest->GetId() == 0);
         REQUIRE(newQuest->GetState() == QuestState::Proposed);
         REQUIRE(newQuest->GetTitle() == "TestTitle");
         REQUIRE(newQuest->GetDescription() == "Blabla");
-        auto quest = model.Execute(QuestModelAction(QuestActionType::REGISTER, newQuest, properties));
+        auto quest = model.Execute(registerAction);
         REQUIRE(quest->GetId() != 0);
         REQUIRE(quest->GetState() == QuestState::Inactive);
         REQUIRE(quest->GetTitle() == "TestTitle");
         REQUIRE(quest->GetDescription() == "Blabla");
     }
 
-    auto quest = model.Execute(QuestModelAction(QuestActionType::REGISTER, newQuest, properties));
+    auto quest = model.Execute(registerAction);
     REQUIRE(quest->GetId() != 0);
+
+    SECTION("Register quest twice") {
+        registerAction = QuestModelAction(QuestActionType::REGISTER, quest, properties);
+        REQUIRE_THROWS_AS(model.Execute(registerAction), ContractFailedException);
+    }
+
+    SECTION("Keep known quest") {
+        auto keepAction = QuestModelAction(QuestActionType::KEEP, quest, properties);
+        REQUIRE(model.Execute(keepAction) == quest);
+    }
 
     SECTION("Model with single inactive quest") {
         REQUIRE(model.GetQuests().size() == 1);

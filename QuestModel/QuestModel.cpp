@@ -7,8 +7,8 @@
 using namespace std;
 using namespace weave;
 
-vector<std::shared_ptr<Quest>> QuestModel::GetQuestsWithState(QuestState state) const {
-    vector<std::shared_ptr<Quest>> result;
+vector<shared_ptr<Quest>> QuestModel::GetQuestsWithState(QuestState state) const {
+    vector<shared_ptr<Quest>> result;
     for (auto &quest : quests) {
         if (quest.second->GetState() == state) {
             result.push_back(quest.second);
@@ -17,8 +17,8 @@ vector<std::shared_ptr<Quest>> QuestModel::GetQuestsWithState(QuestState state) 
     return result;
 }
 
-shared_ptr<Quest> QuestModel::registerQuest(std::shared_ptr<Quest> newQuest,
-                                            const std::vector<QuestPropertyValue> &questProperties) {
+shared_ptr<Quest> QuestModel::registerQuest(shared_ptr<Quest> newQuest,
+                                            const vector<QuestPropertyValue> &questProperties) {
     // check the quest is not already registered
     if (quests.find(newQuest->GetId()) != quests.end() || newQuest->GetState() != QuestState::Proposed) {
         throw ContractFailedException("Quest with id " + to_string(newQuest->GetId()) + " already registered!");
@@ -33,8 +33,8 @@ shared_ptr<Quest> QuestModel::registerQuest(std::shared_ptr<Quest> newQuest,
     return registeredQuest;
 }
 
-std::vector<std::shared_ptr<Quest>> QuestModel::GetQuests() const {
-    vector<std::shared_ptr<Quest>> result;
+vector<shared_ptr<Quest>> QuestModel::GetQuests() const {
+    vector<shared_ptr<Quest>> result;
     for (auto &quest : quests) {
         result.push_back(quest.second);
     }
@@ -44,7 +44,7 @@ std::vector<std::shared_ptr<Quest>> QuestModel::GetQuests() const {
 set<shared_ptr<WorldEntity>> QuestModel::GetQuestEntities(ID questId) const {
     auto result = questEntities.find(questId);
     if (result == questEntities.end()) {
-        return set<shared_ptr<WorldEntity>>();
+        return set<shared_ptr<WorldEntity >>();
     } else {
         return result->second;
     }
@@ -75,28 +75,30 @@ bool QuestModel::succeedQuest(ID questId) {
     return setNewQuestState(questId, QuestState::Active, QuestState::Success);
 }
 
-std::shared_ptr<Quest> QuestModel::Execute(const QuestModelAction &modelAction) {
+shared_ptr<Quest> QuestModel::Execute(const QuestModelAction &modelAction) {
     shared_ptr<Quest> result;
     QuestActionType actionType = modelAction.GetActionType();
     auto actionQuest = modelAction.GetQuest();
+    auto iter = quests.find(actionQuest->GetId());
 
     if (actionType == QuestActionType::REGISTER) {
         result = registerQuest(actionQuest, modelAction.GetProperties());
     } else if (actionType == QuestActionType::KEEP) {
-        if (quests.find(actionQuest->GetId()) == quests.end()) {
-            throw ContractFailedException("Quest with id " + to_string(actionQuest->GetId()) + " not found in model!");
+        if (iter == quests.end()) {
+            throw ContractFailedException("Quest id " + to_string(actionQuest->GetId()) + " not found in model!");
         }
+        result = iter->second;
     } else if (actionType == QuestActionType::ACTIVATE) {
         if (activateQuest(actionQuest->GetId())) {
-            result = quests.find(actionQuest->GetId())->second;
+            result = iter->second;
         }
     } else if (actionType == QuestActionType::FAIL) {
         if (failQuest(actionQuest->GetId())) {
-            result = quests.find(actionQuest->GetId())->second;
+            result = iter->second;
         }
     } else if (actionType == QuestActionType::SUCCEED) {
         if (succeedQuest(actionQuest->GetId())) {
-            result = quests.find(actionQuest->GetId())->second;
+            result = iter->second;
         }
     } else {
         throw ContractFailedException("Unknown quest model action type");
