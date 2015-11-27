@@ -32,7 +32,6 @@ namespace weave {
         std::unique_ptr<WorldModel> world;
         std::shared_ptr<RandomStream> randomStream;
 
-        void updateWorld(const std::vector<WorldModelAction> &modelActions,
-                         const QuestModelAction &questModelAction);
+        void updateWorld(const std::vector<WorldModelAction> &modelActions);
     };
 }

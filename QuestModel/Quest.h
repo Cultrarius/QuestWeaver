@@ -7,10 +7,26 @@
 #include "../Core/WeaverTypes.h"
 #include "cereal.h"
 #include "../World/WorldModelAction.h"
+#include "QuestModelAction.h"
 
 namespace weave {
     enum class QuestState {
         Proposed, Inactive, Active, Failed, Success
+    };
+
+    class QuestTickResult {
+    public:
+        QuestTickResult();
+
+        QuestTickResult(std::vector<WorldModelAction> worldChanges, QuestModelAction questChanges);
+
+        std::vector<WorldModelAction> GetWorldChanges() const;
+
+        QuestModelAction GetQuestChanges() const;
+
+    private:
+        std::vector<WorldModelAction> worldChanges;
+        QuestModelAction questChanges;
     };
 
     class Quest {
@@ -44,7 +60,7 @@ namespace weave {
 
         virtual std::shared_ptr<Quest> setStateAndId(ID newId, QuestState newState) const = 0;
 
-        virtual std::vector<WorldModelAction> Tick(float delta);
+        virtual QuestTickResult Tick(float delta);
 
     private:
         ID id;

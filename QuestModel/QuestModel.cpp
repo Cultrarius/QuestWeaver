@@ -17,8 +17,8 @@ vector<shared_ptr<Quest>> QuestModel::GetQuestsWithState(QuestState state) const
     return result;
 }
 
-shared_ptr<Quest> QuestModel::registerQuest(shared_ptr<Quest> newQuest,
-                                            const vector<QuestPropertyValue> &questProperties) {
+shared_ptr<Quest> QuestModel::RegisterNew(shared_ptr<Quest> newQuest,
+                                          const vector<QuestPropertyValue> &questProperties) {
     // check the quest is not already registered
     if (quests.find(newQuest->GetId()) != quests.end() || newQuest->GetState() != QuestState::Proposed) {
         throw ContractFailedException("Quest with id " + to_string(newQuest->GetId()) + " already registered!");
@@ -76,29 +76,25 @@ bool QuestModel::succeedQuest(ID questId) {
 }
 
 shared_ptr<Quest> QuestModel::Execute(const QuestModelAction &modelAction) {
-    shared_ptr<Quest> result;
     QuestActionType actionType = modelAction.GetActionType();
-    auto actionQuest = modelAction.GetQuest();
-    auto iter = quests.find(actionQuest->GetId());
-
-    if (actionType == QuestActionType::REGISTER) {
-        result = registerQuest(actionQuest, modelAction.GetProperties());
-    } else if (actionType == QuestActionType::KEEP) {
+    ID questId = modelAction.GetQuestId();
+    auto iter = quests.find(questId);
+    shared_ptr<Quest> result = iter->second;
+    if (actionType == QuestActionType::KEEP) {
         if (iter == quests.end()) {
-            throw ContractFailedException("Quest id " + to_string(actionQuest->GetId()) + " not found in model!");
+            throw ContractFailedException("Quest id " + to_string(questId) + " not found in model!");
         }
-        result = iter->second;
     } else if (actionType == QuestActionType::ACTIVATE) {
-        if (activateQuest(actionQuest->GetId())) {
-            result = iter->second;
+        if (!activateQuest(questId)) {
+            result = nullptr;
         }
     } else if (actionType == QuestActionType::FAIL) {
-        if (failQuest(actionQuest->GetId())) {
-            result = iter->second;
+        if (!failQuest(questId)) {
+            result = nullptr;
         }
     } else if (actionType == QuestActionType::SUCCEED) {
-        if (succeedQuest(actionQuest->GetId())) {
-            result = iter->second;
+        if (!succeedQuest(questId)) {
+            result = nullptr;
         }
     } else {
         throw ContractFailedException("Unknown quest model action type");

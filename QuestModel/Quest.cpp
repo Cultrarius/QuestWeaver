@@ -5,24 +5,25 @@
 #include "Quest.h"
 
 using namespace weave;
+using namespace std;
 
 QuestState Quest::GetState() const {
     return state;
 }
 
-std::string Quest::GetTitle() const {
+string Quest::GetTitle() const {
     return title;
 }
 
-std::string Quest::GetDescription() const {
+string Quest::GetDescription() const {
     return description;
 }
 
-Quest::Quest(const std::string &title, const std::string &description) :
+Quest::Quest(const string &title, const string &description) :
         Quest(NoID, QuestState::Proposed, title, description) {
 }
 
-Quest::Quest(ID newId, QuestState state, const std::string &title, const std::string &description) :
+Quest::Quest(ID newId, QuestState state, const string &title, const string &description) :
         id(newId), state(state), title(title), description(description) {
 }
 
@@ -31,10 +32,24 @@ ID Quest::GetId() const {
     return id;
 }
 
-std::vector<WorldModelAction> Quest::Tick(float delta) {
-    return std::vector<WorldModelAction>();
+QuestTickResult Quest::Tick(float delta) {
+    vector<WorldModelAction> emptyChanges;
+    QuestModelAction emptyAction(QuestActionType::KEEP, id);
+    return QuestTickResult(emptyChanges, emptyAction);
 }
 
 bool Quest::operator==(const Quest &other) const {
     return id == other.id;
+}
+
+QuestTickResult::QuestTickResult(vector<WorldModelAction> worldChanges, QuestModelAction questChanges) :
+        worldChanges(worldChanges), questChanges(questChanges) {
+}
+
+vector<WorldModelAction> QuestTickResult::GetWorldChanges() const {
+    return worldChanges;
+}
+
+QuestModelAction QuestTickResult::GetQuestChanges() const {
+    return questChanges;
 }

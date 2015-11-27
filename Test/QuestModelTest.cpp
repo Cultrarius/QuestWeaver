@@ -23,33 +23,31 @@ TEST_CASE("Quest Model", "[model]") {
     shared_ptr<Quest> newQuest = make_shared<TestQuest>("TestTitle", "Blabla");
 
     SECTION("Keep unknown quest") {
-        auto keepAction = QuestModelAction(QuestActionType::KEEP, newQuest, properties);
+        auto keepAction = QuestModelAction(QuestActionType::KEEP, 123);
         REQUIRE_THROWS_AS(model.Execute(keepAction), ContractFailedException);
     }
 
-    auto registerAction = QuestModelAction(QuestActionType::REGISTER, newQuest, properties);
     SECTION("Register quest") {
         REQUIRE(newQuest->GetId() == 0);
         REQUIRE(newQuest->GetState() == QuestState::Proposed);
         REQUIRE(newQuest->GetTitle() == "TestTitle");
         REQUIRE(newQuest->GetDescription() == "Blabla");
-        auto quest = model.Execute(registerAction);
+        auto quest = model.RegisterNew(newQuest, properties);
         REQUIRE(quest->GetId() != 0);
         REQUIRE(quest->GetState() == QuestState::Inactive);
         REQUIRE(quest->GetTitle() == "TestTitle");
         REQUIRE(quest->GetDescription() == "Blabla");
     }
 
-    auto quest = model.Execute(registerAction);
+    auto quest = model.RegisterNew(newQuest, properties);
     REQUIRE(quest->GetId() != 0);
 
     SECTION("Register quest twice") {
-        registerAction = QuestModelAction(QuestActionType::REGISTER, quest, properties);
-        REQUIRE_THROWS_AS(model.Execute(registerAction), ContractFailedException);
+        REQUIRE_THROWS_AS(model.RegisterNew(quest, properties), ContractFailedException);
     }
 
     SECTION("Keep known quest") {
-        auto keepAction = QuestModelAction(QuestActionType::KEEP, quest, properties);
+        auto keepAction = QuestModelAction(QuestActionType::KEEP, quest->GetId());
         REQUIRE(model.Execute(keepAction) == quest);
     }
 
@@ -57,9 +55,9 @@ TEST_CASE("Quest Model", "[model]") {
         REQUIRE(model.GetQuests().size() == 1);
         REQUIRE(model.GetQuestsWithState(QuestState::Inactive).size() == 1);
 
-        QuestModelAction activateAction(QuestActionType::ACTIVATE, quest);
-        QuestModelAction failAction(QuestActionType::FAIL, quest);
-        QuestModelAction succeedAction(QuestActionType::SUCCEED, quest);
+        QuestModelAction activateAction(QuestActionType::ACTIVATE, quest->GetId());
+        QuestModelAction failAction(QuestActionType::FAIL, quest->GetId());
+        QuestModelAction succeedAction(QuestActionType::SUCCEED, quest->GetId());
 
         SECTION("activate quest") {
             REQUIRE(!model.Execute(failAction));
@@ -97,7 +95,7 @@ TEST_CASE("Quest Model", "[model]") {
     shared_ptr<WorldEntity> entity = make_shared<TestEntity>();
     QuestPropertyValue value(templateValue, entity);
     properties.push_back(value);
-    auto quest2 = model.Execute(QuestModelAction(QuestActionType::REGISTER, newQuest2, properties));
+    auto quest2 = model.RegisterNew(newQuest2, properties);
     REQUIRE(quest2->GetId() != 0);
 
     SECTION("Get quest entities") {

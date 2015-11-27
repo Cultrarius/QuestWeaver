@@ -6,13 +6,12 @@
 
 #include <memory>
 #include "cereal.h"
-#include "Quest.h"
-#include "../Template/Template.h"
+#include "../Core/WeaverTypes.h"
 
 namespace weave {
 
     enum class QuestActionType {
-        KEEP, REGISTER, ACTIVATE, FAIL, SUCCEED
+        KEEP, ACTIVATE, FAIL, SUCCEED
     };
 
     class QuestModelAction {
@@ -20,33 +19,23 @@ namespace weave {
         QuestModelAction() :
                 actionType(QuestActionType::KEEP) { }
 
-        QuestModelAction(const QuestActionType &actionType,
-                         const std::shared_ptr<Quest> quest) :
-                actionType(actionType), quest(quest) { }
-
-        QuestModelAction(const QuestActionType &actionType,
-                         const std::shared_ptr<Quest> quest,
-                         const std::vector<QuestPropertyValue> &questProperties) :
-                actionType(actionType), quest(quest), questProperties(questProperties) { }
+        QuestModelAction(const QuestActionType &actionType, ID questId) :
+                actionType(actionType), questId(questId) { }
 
         QuestActionType GetActionType() const;
 
-        std::shared_ptr<Quest> GetQuest() const;
-
-        std::vector<QuestPropertyValue> GetProperties() const;
+        ID GetQuestId() const;
 
     private:
         QuestActionType actionType;
-        std::shared_ptr<Quest> quest;
-        std::vector<QuestPropertyValue> questProperties;
+        ID questId;
 
         // serialization
         friend class cereal::access;
 
         template<class Archive>
         void serialize(Archive &archive) {
-            archive(CEREAL_NVP(actionType), CEREAL_NVP(quest), CEREAL_NVP(questProperties));
+            archive(CEREAL_NVP(actionType), CEREAL_NVP(questId));
         }
     };
 }
-

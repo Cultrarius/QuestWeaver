@@ -19,6 +19,9 @@ namespace weave {
 
         std::shared_ptr<Quest> Execute(const QuestModelAction &modelAction);
 
+        std::shared_ptr<Quest> RegisterNew(std::shared_ptr<Quest> newQuest,
+                                           const std::vector<QuestPropertyValue> &questProperties);
+
     private:
         std::map<ID, std::shared_ptr<Quest>> quests;
 
@@ -27,9 +30,6 @@ namespace weave {
         std::vector<QuestModelAction> actionHistory;
 
         ID idGenerator = 0;
-
-        std::shared_ptr<Quest> registerQuest(std::shared_ptr<Quest> newQuest,
-                                             const std::vector<QuestPropertyValue> &questProperties);
 
         bool activateQuest(ID questId);
 

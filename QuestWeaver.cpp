@@ -30,14 +30,13 @@ shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
     shared_ptr<Quest> newQuest = questTemplate->ToQuest(questPropertyValues);
     // TODO create quest-variants and choose the best one?
 
-    updateWorld(modelActions, QuestModelAction(QuestActionType::REGISTER, newQuest, questPropertyValues));
+    updateWorld(modelActions);
+    quests->RegisterNew(newQuest, questPropertyValues);
     return newQuest;
 }
 
-void QuestWeaver::updateWorld(const vector<WorldModelAction> &modelActions,
-                              const QuestModelAction &questModelAction) {
+void QuestWeaver::updateWorld(const vector<WorldModelAction> &modelActions) {
     world->Execute(modelActions);
-    quests->Execute(questModelAction);
 }
 
 std::vector<std::shared_ptr<Quest>> QuestWeaver::GetQuestsWithState(QuestState state) const {
@@ -45,14 +44,9 @@ std::vector<std::shared_ptr<Quest>> QuestWeaver::GetQuestsWithState(QuestState s
 }
 
 void QuestWeaver::Tick(float delta) {
-    std::vector<WorldModelAction> actions;
     for (const auto &quest : quests->GetQuests()) {
-        for (const auto &change : quest->Tick(delta)) {
-            actions.push_back(move(change));
-        }
-    }
-
-    if (actions.size() > 0) {
-        world->Execute(actions);
+        const auto &change = quest->Tick(delta);
+        world->Execute(change.GetWorldChanges());
+        quests->Execute(change.GetQuestChanges());
     }
 }

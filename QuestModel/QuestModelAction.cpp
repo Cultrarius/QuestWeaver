@@ -11,10 +11,6 @@ QuestActionType QuestModelAction::GetActionType() const {
     return actionType;
 }
 
-shared_ptr<Quest> QuestModelAction::GetQuest() const {
-    return quest;
-}
-
-vector<QuestPropertyValue> QuestModelAction::GetProperties() const {
-    return questProperties;
+ID QuestModelAction::GetQuestId() const {
+    return questId;
 }
