@@ -13,10 +13,12 @@ namespace weave {
         float optionalNodePenalty = -100;
         float previousQuestBonus = 50;
         float transitiveQuestBonus = 10;
+        float MetaDataActivityBonus = 5;
+        float PlayerRelationshipBonus = 50;
 
         template<class Archive>
         void serialize(Archive &ar) {
-            ar(CEREAL_NVP(optionalNodePenalty), CEREAL_NVP(previousQuestBonus));
+            ar(CEREAL_NVP(optionalNodePenalty), CEREAL_NVP(previousQuestBonus), CEREAL_NVP(transitiveQuestBonus));
         }
     };
 
@@ -46,15 +48,15 @@ namespace weave {
                                                                 AnalyzerParameters parameters);
 
     private:
-        static bool fillActionMap(WeaverGraph *graph, std::map<GraphAction, float> *map,
+        static bool fillActionMap(const WeaverGraph &graph, std::map<GraphAction, float> *map,
                                   const AnalyzerParameters &param, std::shared_ptr<RandomStream> rs);
 
-        static float getGraphScore(WeaverGraph *graph, const AnalyzerParameters &param);
+        static float getGraphScore(const WeaverGraph &graph, const AnalyzerParameters &param);
 
-        static void getSingleNodeActions(WeaverGraph *graph, std::map<GraphAction, float> *map,
+        static void getSingleNodeActions(const WeaverGraph &graph, std::map<GraphAction, float> *map,
                                          const AnalyzerParameters &param);
 
-        static void getEdgeActions(WeaverGraph *graph, std::map<GraphAction, float> *map,
+        static void getEdgeActions(const WeaverGraph &graph, std::map<GraphAction, float> *map,
                                    const AnalyzerParameters &param, std::shared_ptr<RandomStream> rs);
 
         static void initializeMandatoryNodes(WeaverGraph *graph, std::shared_ptr<RandomStream> rs);

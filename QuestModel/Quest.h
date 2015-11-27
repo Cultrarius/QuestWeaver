@@ -16,8 +16,6 @@ namespace weave {
 
     class QuestTickResult {
     public:
-        QuestTickResult();
-
         QuestTickResult(std::vector<WorldModelAction> worldChanges, QuestModelAction questChanges);
 
         std::vector<WorldModelAction> GetWorldChanges() const;

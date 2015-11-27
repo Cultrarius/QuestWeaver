@@ -14,7 +14,7 @@ unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph,
     initializeMandatoryNodes(graph, rs);
 
     map<GraphAction, float> actionMap;
-    while (fillActionMap(graph, &actionMap, param, rs)) {
+    while (fillActionMap(*graph, &actionMap, param, rs)) {
         // search for a random action from the action map
         // actions with a higher score are more likely to be chosen
         float minScore = 0;
@@ -71,25 +71,46 @@ bool GraphAction::operator<(const GraphAction &other) const {
     return (nodeActivations.size() < otherActivations.size());
 }
 
-bool GraphAnalyzer::fillActionMap(WeaverGraph *graph, map<GraphAction, float> *map, const AnalyzerParameters &param,
+bool GraphAnalyzer::fillActionMap(const WeaverGraph &graph, map<GraphAction, float> *map,
+                                  const AnalyzerParameters &param,
                                   shared_ptr<RandomStream> rs) {
     getSingleNodeActions(graph, map, param);
     getEdgeActions(graph, map, param, rs);
     return !map->empty();
 }
 
-float GraphAnalyzer::getGraphScore(WeaverGraph *graph, const AnalyzerParameters &param) {
+float GraphAnalyzer::getGraphScore(const WeaverGraph &graph, const AnalyzerParameters &param) {
     float score = 0;
-    auto mandatory = graph->GetMandatoryGroups();
+    auto mandatory = graph.GetMandatoryGroups();
     unordered_set<ID> activeNodeIds;
 
-    for (auto node : graph->GetActiveNodes()) {
+    // weigh the nodes
+    for (auto node : graph.GetActiveNodes()) {
         activeNodeIds.insert(node.GetId());
+
+        // penalty for optional nodes
         if (mandatory.find(node.GetGroup()) == mandatory.end()) {
             score += param.optionalNodePenalty;
         }
+
+        // check for metaData activity on the node
+        unordered_map<string, int> metaDataValues;
+        for (auto metaData : node.GetHistory()) {
+            for (string name : metaData.GetValueNames()) {
+                auto iter = metaDataValues.find(name);
+                int newValue = metaData.GetValue(name);
+                if (iter == metaDataValues.end() || iter->second != newValue) {
+                    score += param.MetaDataActivityBonus;
+                }
+            }
+        }
+
+        // check for common current metaData values
+        score += abs(metaDataValues["relationToPlayer"]) / 100.0 * param.PlayerRelationshipBonus;
     }
-    for (auto edge : graph->GetEdges()) {
+
+    // weigh the edges
+    for (auto edge : graph.GetEdges()) {
         if ((activeNodeIds.find(edge.GetNode1()) != activeNodeIds.end()) &&
             (activeNodeIds.find(edge.GetNode2()) != activeNodeIds.end())) {
             score += edge.Count(EdgeType::DIRECT) * param.previousQuestBonus;
@@ -118,16 +139,17 @@ void GraphAction::Apply(WeaverGraph *graph) const {
     }
 }
 
-void GraphAnalyzer::getSingleNodeActions(WeaverGraph *graph, std::map<GraphAction, float> *map,
+void GraphAnalyzer::getSingleNodeActions(const WeaverGraph &graph, std::map<GraphAction, float> *map,
                                          const AnalyzerParameters &param) {
     float startScore = getGraphScore(graph, param);
-    auto mandatoryGroups = graph->GetMandatoryGroups();
-    for (string group : graph->GetGroups()) {
+    auto mandatoryGroups = graph.GetMandatoryGroups();
+    for (string group : graph.GetGroups()) {
         bool isMandatory = mandatoryGroups.find(group) != mandatoryGroups.end();
-        for (auto &node : graph->GetNodes(group)) {
-            // this is not the best solution for performance, but has better readability
-            WeaverGraph graphCopy = *graph;
-            auto isActive = graph->IsNodeActive(node);
+        for (auto &node : graph.GetNodes(group)) {
+            // this copy of the complete graph is not the best solution for performance,
+            // but has better readability than mutating the graph all the time
+            WeaverGraph graphCopy = graph;
+            auto isActive = graph.IsNodeActive(node);
 
             GraphAction action(!isActive, node);
             if (isMandatory && isActive) {
@@ -135,7 +157,7 @@ void GraphAnalyzer::getSingleNodeActions(WeaverGraph *graph, std::map<GraphActio
                 continue;
             }
             action.Apply(&graphCopy);
-            float actionScore = getGraphScore(&graphCopy, param);
+            float actionScore = getGraphScore(graphCopy, param);
 
             if (actionScore > startScore) {
                 (*map)[action] = actionScore;
@@ -144,12 +166,12 @@ void GraphAnalyzer::getSingleNodeActions(WeaverGraph *graph, std::map<GraphActio
     }
 }
 
-void GraphAnalyzer::getEdgeActions(WeaverGraph *graph, std::map<GraphAction, float> *map,
+void GraphAnalyzer::getEdgeActions(const WeaverGraph &graph, std::map<GraphAction, float> *map,
                                    const AnalyzerParameters &param, shared_ptr<RandomStream> rs) {
     float startScore = getGraphScore(graph, param);
-    for (Edge edge : graph->GetEdges()) {
-        auto nodes1 = graph->GetNodesWithId(edge.GetNode1());
-        auto nodes2 = graph->GetNodesWithId(edge.GetNode2());
+    for (Edge edge : graph.GetEdges()) {
+        auto nodes1 = graph.GetNodesWithId(edge.GetNode1());
+        auto nodes2 = graph.GetNodesWithId(edge.GetNode2());
         if (nodes1.empty() || nodes2.empty()) {
             continue;
         }
@@ -159,10 +181,10 @@ void GraphAnalyzer::getEdgeActions(WeaverGraph *graph, std::map<GraphAction, flo
         activeNodes[node1] = true;
         activeNodes[node2] = true;
 
-        WeaverGraph graphCopy = *graph;
+        WeaverGraph graphCopy = graph;
         GraphAction action(activeNodes);
         action.Apply(&graphCopy);
-        float actionScore = getGraphScore(&graphCopy, param);
+        float actionScore = getGraphScore(graphCopy, param);
 
         if (actionScore > startScore) {
             (*map)[action] = actionScore;
