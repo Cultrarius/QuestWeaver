@@ -22,7 +22,7 @@ namespace weave {
 
         std::vector<WorldModelAction> GetWorldChanges() const;
 
-        QuestModelAction GetQuestChanges() const;
+        QuestModelAction GetQuestChange() const;
 
     private:
         std::vector<WorldModelAction> worldChanges;

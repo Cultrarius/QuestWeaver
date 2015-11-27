@@ -50,6 +50,6 @@ vector<WorldModelAction> QuestTickResult::GetWorldChanges() const {
     return worldChanges;
 }
 
-QuestModelAction QuestTickResult::GetQuestChanges() const {
+QuestModelAction QuestTickResult::GetQuestChange() const {
     return questChanges;
 }
