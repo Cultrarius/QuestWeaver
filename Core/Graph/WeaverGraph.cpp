@@ -180,6 +180,8 @@ void WeaverGraph::Finalize() {
     for (auto edge1 : edges) {
         seenEdges.insert(edge1);
         ID shadowId, nodeId;
+
+        // check if the edge has a shadow node
         if (isShadowNode(edge1.id1)) {
             shadowId = edge1.id1;
             nodeId = edge1.id2;
@@ -189,6 +191,8 @@ void WeaverGraph::Finalize() {
         } else {
             continue;
         }
+
+        // check if other edges are connected to the shadow node
         for (auto edge2 : edges) {
             if (seenEdges.find(edge2) != seenEdges.end()) {
                 continue;
@@ -203,5 +207,5 @@ void WeaverGraph::Finalize() {
         }
     }
 
-    //TODO this has a bad performance - loop over the shadow nodes, not the edges
+    // TODO this has a bad performance - loop over the shadow nodes, not the edges
 }
