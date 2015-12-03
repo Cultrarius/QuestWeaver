@@ -11,8 +11,6 @@ using namespace weave;
 unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph,
                                                       shared_ptr<RandomStream> rs,
                                                       AnalyzerParameters param) {
-    initializeMandatoryNodes(graph, rs);
-
     map<GraphAction, float> actionMap;
     while (fillActionMap(*graph, &actionMap, param, rs)) {
         // search for a random action from the action map
@@ -44,15 +42,6 @@ unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph,
         results[node.GetGroup()] = node;
     }
     return results;
-}
-
-void GraphAnalyzer::initializeMandatoryNodes(WeaverGraph *graph, shared_ptr<RandomStream> rs) {
-    // activate random mandatory nodes, so the graph is in a consistent state
-    for (auto group : graph->GetMandatoryGroups()) {
-        auto nodes = graph->GetNodes(group);
-        auto index = rs->GetRandomIndex(nodes.size());
-        graph->ActivateNode(nodes.at(index));
-    }
 }
 
 bool GraphAction::operator==(const GraphAction &other) const {

@@ -95,6 +95,13 @@ WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldM
         }
     }
 
+    addGraphEdges(questModel, graph, candidateIds);
+    graph.Finalize();
+    return graph;
+}
+
+void WeaverEngine::addGraphEdges(const QuestModel &questModel, WeaverGraph &graph,
+                                 unordered_set<ID> &candidateIds) const {
     for (auto quest : questModel.GetQuests()) {
         auto questEntities = questModel.GetQuestEntities(quest->GetId());
 
@@ -128,8 +135,6 @@ WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldM
             }
         }
     }
-
-    return graph;
 }
 
 vector<QuestPropertyValue> WeaverEngine::fillWithRandomDice(const shared_ptr<Template> &questTemplate,

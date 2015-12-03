@@ -23,6 +23,8 @@ namespace weave {
 
         WeaverGraph &AddShadowNode(ID shadowNodeId);
 
+        void Finalize();
+
         void ActivateNode(const Node &node);
 
         bool DeactivateNode(const Node &node);

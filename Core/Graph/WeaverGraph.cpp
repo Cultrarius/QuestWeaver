@@ -159,3 +159,38 @@ WeaverGraph &WeaverGraph::AddShadowNode(ID shadowNodeId) {
 }
 
 bool WeaverGraph::isShadowNode(ID shadowNodeId) const { return shadowNodes.find(shadowNodeId) != shadowNodes.end(); }
+
+void WeaverGraph::Finalize() {
+    // activate a node from each mandatory group, so the graph is in a consistent state
+    for (auto group : mandatoryGroups) {
+        auto nodes = GetNodes(group);
+        if (nodes.size() > 0) {
+            ActivateNode(nodes.at(0));
+        } else {
+            throw ContractFailedException("Missing nodes for mandatory group!");
+        }
+    }
+
+    // calculate the transitive edges
+    for (auto edge1 : edges) {
+        ID shadowId, nodeId;
+        if (isShadowNode(edge1.id1)) {
+            shadowId = edge1.id1;
+            nodeId = edge1.id2;
+        } else if (isShadowNode(edge1.id1)) {
+            shadowId = edge1.id2;
+            nodeId = edge1.id1;
+        } else {
+            continue;
+        }
+        for (auto edge2 : edges) {
+            if (edge2.id1 == shadowId && edge2.id2 != nodeId) {
+                edges.insert(Edge(nodeId, edge2.id2, EdgeType::TRANSITIVE));
+            } else if (edge2.id2 == shadowId && edge2.id1 != nodeId) {
+                edges.insert(Edge(nodeId, edge2.id1, EdgeType::TRANSITIVE));
+            }
+        }
+    }
+
+    //TODO this has a bad performance - loop over the shadow nodes, not the edges
+}
