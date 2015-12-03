@@ -11,8 +11,8 @@ Edge::Edge(ID nodeId1, ID nodeId2, EdgeType type) {
     if (nodeId1 == nodeId2) {
         throw ContractFailedException("Can not create an edge between the same nodes!");
     }
-    id1 = nodeId1;
-    id2 = nodeId2;
+    id1 = min(nodeId1, nodeId2);
+    id2 = max(nodeId1, nodeId2);
     types[type] = 1;
 }
 
@@ -34,7 +34,7 @@ void Edge::addTypesFrom(const Edge &other) {
 }
 
 bool Edge::operator<(const Edge &other) const {
-    return (id1 + id2) < (other.id1 + other.id2);
+    return id1 < other.id1 || (id1 == other.id1 && id2 < other.id2);
 }
 
 uint32_t Edge::Count(EdgeType type) const {
