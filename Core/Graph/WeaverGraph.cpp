@@ -17,7 +17,7 @@ WeaverGraph &WeaverGraph::AddNode(const Node &node) {
     }
     for (auto addedNode : iter->second) {
         if (node == addedNode) {
-            throw ContractFailedException("Can not add the same node twice to graph!");
+            throw ContractFailedException("Can not add the same node twice to a graph!");
         }
     }
     nodes[node.GetId()].push_back(node);
@@ -151,6 +151,10 @@ const vector<Node> &WeaverGraph::GetNodesWithId(ID id) const {
 }
 
 WeaverGraph &WeaverGraph::AddShadowNode(ID shadowNodeId) {
+    if (nodes.find(shadowNodeId) != nodes.end()) {
+        throw ContractFailedException("Cannot add shadow node with id " + to_string(shadowNodeId) +
+                                      ", because a regular node with the same id already exists!");
+    }
     if (isShadowNode(shadowNodeId)) {
         throw ContractFailedException("Shadow node with id " + to_string(shadowNodeId) + " already present in graph!");
     }

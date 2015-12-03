@@ -103,4 +103,26 @@ TEST_CASE("Graph analyzer", "[graph analyzer]") {
         REQUIRE((properties[groupA] == node2));
         REQUIRE((properties[groupB] == node3));
     }
+
+    graph.AddShadowNode(5);
+
+    SECTION("Error on double shadow node edge") {
+        graph.AddShadowNode(6);
+        Edge edge56(5, 6, EdgeType::DIRECT);
+        REQUIRE_THROWS_AS(graph.AddEdge(edge56), ContractFailedException);
+    }
+
+    Edge edge15(1, 5, EdgeType::DIRECT);
+    Edge edge25(5, 2, EdgeType::DIRECT);
+    graph.AddEdge(edge15);
+    graph.AddEdge(edge25);
+
+    SECTION("Single transitive edge") {
+        graph.Finalize();
+        Edge searchEdge(1, 2, EdgeType::TRANSITIVE);
+        auto edges = graph.GetEdges();
+        auto iter = edges.find(searchEdge);
+        REQUIRE(iter != edges.end());
+        REQUIRE(iter->Count(EdgeType::TRANSITIVE) == 1);
+    }
 }
