@@ -176,22 +176,29 @@ void WeaverGraph::Finalize() {
     }
 
     // calculate the transitive edges
+    set<Edge> seenEdges;
     for (auto edge1 : edges) {
+        seenEdges.insert(edge1);
         ID shadowId, nodeId;
         if (isShadowNode(edge1.id1)) {
             shadowId = edge1.id1;
             nodeId = edge1.id2;
-        } else if (isShadowNode(edge1.id1)) {
+        } else if (isShadowNode(edge1.id2)) {
             shadowId = edge1.id2;
             nodeId = edge1.id1;
         } else {
             continue;
         }
         for (auto edge2 : edges) {
+            if (seenEdges.find(edge2) != seenEdges.end()) {
+                continue;
+            }
             if (edge2.id1 == shadowId && edge2.id2 != nodeId) {
-                edges.insert(Edge(nodeId, edge2.id2, EdgeType::TRANSITIVE));
+                Edge newEdge(nodeId, edge2.id2, EdgeType::TRANSITIVE);
+                mergeAddEdge(newEdge);
             } else if (edge2.id2 == shadowId && edge2.id1 != nodeId) {
-                edges.insert(Edge(nodeId, edge2.id1, EdgeType::TRANSITIVE));
+                Edge newEdge(nodeId, edge2.id1, EdgeType::TRANSITIVE);
+                mergeAddEdge(newEdge);
             }
         }
     }
