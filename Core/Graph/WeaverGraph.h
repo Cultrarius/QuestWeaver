@@ -21,6 +21,8 @@ namespace weave {
 
         WeaverGraph &AddEdge(Edge edge);
 
+        WeaverGraph &AddShadowNode(ID shadowNodeId);
+
         void ActivateNode(const Node &node);
 
         bool DeactivateNode(const Node &node);
@@ -41,10 +43,15 @@ namespace weave {
 
     private:
         std::unordered_map<ID, std::vector<Node>> nodes;
+        std::unordered_set<ID> shadowNodes;
         std::unordered_map<std::string, std::vector<Node>> groups;
         std::unordered_set<std::string> mandatoryGroups;
         std::set<Edge> edges;
         std::set<Node> activeNodes;
         std::vector<Node> empty;
+
+        bool isShadowNode(ID shadowNodeId) const;
+
+        void mergeAddEdge(Edge &edge);
     };
 }

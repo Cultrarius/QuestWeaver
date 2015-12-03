@@ -38,9 +38,18 @@ WeaverGraph &WeaverGraph::CreateNodeGroup(const string &groupName, bool isMandat
 
 WeaverGraph &WeaverGraph::AddEdge(Edge edge) {
     // check if the edge nodes are added to the graph
+    // if not, check if they are shadow nodes
     auto nodeIt1 = nodes.find(edge.id1);
     auto nodeIt2 = nodes.find(edge.id2);
     if (nodeIt1 == nodes.end() || nodeIt2 == nodes.end()) {
+        if ((isShadowNode(edge.id1) && nodeIt2 != nodes.end()) ||
+            (isShadowNode(edge.id2) && nodeIt1 != nodes.end())) {
+            mergeAddEdge(edge);
+            return *this;
+        }
+        if (isShadowNode(edge.id1) && isShadowNode(edge.id2)) {
+            throw ContractFailedException("Can not add edge between two shadow nodes!");
+        }
         throw ContractFailedException("Can not create edge to unknown graph node!");
     }
 
@@ -56,6 +65,11 @@ WeaverGraph &WeaverGraph::AddEdge(Edge edge) {
     }
 
     // add the edge to the graph
+    mergeAddEdge(edge);
+    return *this;
+}
+
+void WeaverGraph::mergeAddEdge(Edge &edge) {
     auto entry = edges.find(edge);
     if (entry == edges.end()) {
         edges.insert(edge);
@@ -64,7 +78,6 @@ WeaverGraph &WeaverGraph::AddEdge(Edge edge) {
         edges.erase(entry);
         edges.insert(edge);
     }
-    return *this;
 }
 
 const set<Edge> &WeaverGraph::GetEdges() const {
@@ -136,3 +149,13 @@ const vector<Node> &WeaverGraph::GetNodesWithId(ID id) const {
         return iter->second;
     }
 }
+
+WeaverGraph &WeaverGraph::AddShadowNode(ID shadowNodeId) {
+    if (isShadowNode(shadowNodeId)) {
+        throw ContractFailedException("Shadow node with id " + to_string(shadowNodeId) + " already present in graph!");
+    }
+    shadowNodes.insert(shadowNodeId);
+    return *this;
+}
+
+bool WeaverGraph::isShadowNode(ID shadowNodeId) const { return shadowNodes.find(shadowNodeId) != shadowNodes.end(); }

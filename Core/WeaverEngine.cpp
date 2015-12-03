@@ -100,9 +100,14 @@ WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldM
 
         // add direct connection history
         unordered_set<ID> entityIds;
+        unordered_set<ID> shadowIds;
         for (auto entity : questEntities) {
             ID id = entity->GetId();
             if (candidateIds.find(id) == candidateIds.end()) {
+                if (shadowIds.find(id) == shadowIds.end()) {
+                    graph.AddShadowNode(id);
+                    shadowIds.insert(id);
+                }
                 continue;
             }
             entityIds.insert(id);
@@ -114,6 +119,10 @@ WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldM
                 if (seenIds.find(id2) != seenIds.end()) {
                     continue;
                 }
+                Edge edge(id1, id2, EdgeType::DIRECT);
+                graph.AddEdge(edge);
+            }
+            for (ID id2 : shadowIds) {
                 Edge edge(id1, id2, EdgeType::DIRECT);
                 graph.AddEdge(edge);
             }
