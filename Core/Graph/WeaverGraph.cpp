@@ -176,36 +176,22 @@ void WeaverGraph::Finalize() {
     }
 
     // calculate the transitive edges
-    set<Edge> seenEdges;
-    for (auto edge1 : edges) {
-        seenEdges.insert(edge1);
-        ID shadowId, nodeId;
-
-        // check if the edge has a shadow node
-        if (isShadowNode(edge1.id1)) {
-            shadowId = edge1.id1;
-            nodeId = edge1.id2;
-        } else if (isShadowNode(edge1.id2)) {
-            shadowId = edge1.id2;
-            nodeId = edge1.id1;
-        } else {
-            continue;
-        }
-
-        // check if other edges are connected to the shadow node
-        for (auto edge2 : edges) {
-            if (seenEdges.find(edge2) != seenEdges.end()) {
-                continue;
+    for (ID shadowId : shadowNodes) {
+        vector<Edge> nodeEdges;
+        for (auto edge : edges) {
+            if (edge.id1 == shadowId || edge.id2 == shadowId) {
+                nodeEdges.push_back(edge);
             }
-            if (edge2.id1 == shadowId && edge2.id2 != nodeId) {
-                Edge newEdge(nodeId, edge2.id2, EdgeType::TRANSITIVE);
-                mergeAddEdge(newEdge);
-            } else if (edge2.id2 == shadowId && edge2.id1 != nodeId) {
-                Edge newEdge(nodeId, edge2.id1, EdgeType::TRANSITIVE);
+        }
+        for (uint64_t i = 0; i < nodeEdges.size(); i++) {
+            for (uint64_t k = i + 1; k < nodeEdges.size(); k++) {
+                Edge edge1 = nodeEdges[i];
+                Edge edge2 = nodeEdges[k];
+                ID nodeId1 = edge1.id1 == shadowId ? edge1.id2 : edge1.id1;
+                ID nodeId2 = edge2.id1 == shadowId ? edge2.id2 : edge2.id1;
+                Edge newEdge(nodeId1, nodeId2, EdgeType::TRANSITIVE);
                 mergeAddEdge(newEdge);
             }
         }
     }
-
-    // TODO this has a bad performance - loop over the shadow nodes, not the edges
 }
