@@ -120,6 +120,33 @@ TEST_CASE("Graph analyzer", "[graph analyzer]") {
         REQUIRE_THROWS_AS(graph.AddEdge(edge542), ContractFailedException);
     }
 
+    SECTION("Error on add node to finalized graph") {
+        graph.Finalize();
+        Node nodeX(groupA, 123);
+        REQUIRE_THROWS_AS(graph.AddNode(nodeX), ContractFailedException);
+        return;
+    }
+
+    SECTION("Error on add shadow node to finalized graph") {
+        graph.Finalize();
+        REQUIRE_THROWS_AS(graph.AddShadowNode(123), ContractFailedException);
+        return;
+    }
+
+    SECTION("Error on add node group to finalized graph") {
+        graph.Finalize();
+        Node nodeX(groupA, 123);
+        REQUIRE_THROWS_AS(graph.CreateNodeGroup("hi", false), ContractFailedException);
+        return;
+    }
+
+    SECTION("Error on add edge to finalized graph") {
+        graph.Finalize();
+        Edge edge15(1, 5, EdgeType::DIRECT);
+        REQUIRE_THROWS_AS(graph.AddEdge(edge15), ContractFailedException);
+        return;
+    }
+
     Edge edge15(1, 5, EdgeType::DIRECT);
     Edge edge25(5, 2, EdgeType::DIRECT);
     graph.AddEdge(edge15);
