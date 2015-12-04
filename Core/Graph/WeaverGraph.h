@@ -55,5 +55,9 @@ namespace weave {
         bool isShadowNode(ID shadowNodeId) const;
 
         void mergeAddEdge(Edge &edge);
+
+        void addTransitiveEdges();
+
+        void activateMandatoryGroups();
     };
 }

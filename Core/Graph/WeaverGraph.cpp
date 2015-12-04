@@ -162,20 +162,38 @@ WeaverGraph &WeaverGraph::AddShadowNode(ID shadowNodeId) {
     return *this;
 }
 
-bool WeaverGraph::isShadowNode(ID shadowNodeId) const { return shadowNodes.find(shadowNodeId) != shadowNodes.end(); }
+bool WeaverGraph::isShadowNode(ID shadowNodeId) const {
+    return shadowNodes.find(shadowNodeId) != shadowNodes.end();
+}
 
 void WeaverGraph::Finalize() {
-    // activate a node from each mandatory group, so the graph is in a consistent state
+    activateMandatoryGroups();
+    addTransitiveEdges();
+}
+
+/**
+ * activate a node from each mandatory group, so the graph is in a consistent state
+ */
+void WeaverGraph::activateMandatoryGroups() {
     for (auto group : mandatoryGroups) {
         auto nodes = GetNodes(group);
-        if (nodes.size() > 0) {
-            ActivateNode(nodes.at(0));
-        } else {
+        if (nodes.size() == 0) {
             throw ContractFailedException("Missing nodes for mandatory group!");
         }
+        bool hasActive = false;
+        for (auto node : nodes) {
+            if (IsNodeActive(node)) {
+                hasActive = true;
+                break;
+            }
+        }
+        if (!hasActive) {
+            ActivateNode(nodes.at(0));
+        }
     }
+}
 
-    // calculate the transitive edges
+void WeaverGraph::addTransitiveEdges() {
     for (ID shadowId : shadowNodes) {
         vector<Edge> nodeEdges;
         for (auto edge : edges) {
