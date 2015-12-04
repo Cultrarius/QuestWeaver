@@ -51,6 +51,7 @@ namespace weave {
         std::set<Edge> edges;
         std::set<Node> activeNodes;
         std::vector<Node> empty;
+        bool isFinalized = false;
 
         bool isShadowNode(ID shadowNodeId) const;
 
@@ -59,5 +60,7 @@ namespace weave {
         void addTransitiveEdges();
 
         void activateMandatoryGroups();
+
+        void checkUnfinalized() const;
     };
 }

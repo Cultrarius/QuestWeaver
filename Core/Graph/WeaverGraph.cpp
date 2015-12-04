@@ -8,6 +8,7 @@ using namespace std;
 using namespace weave;
 
 WeaverGraph &WeaverGraph::AddNode(const Node &node) {
+    checkUnfinalized();
     if (node.GetGroup() == "") {
         throw ContractFailedException("Can not add node with empty group!");
     }
@@ -26,6 +27,7 @@ WeaverGraph &WeaverGraph::AddNode(const Node &node) {
 }
 
 WeaverGraph &WeaverGraph::CreateNodeGroup(const string &groupName, bool isMandatory) {
+    checkUnfinalized();
     if (groups.find(groupName) != groups.end()) {
         throw ContractFailedException("Group " + groupName + " already exists in graph");
     }
@@ -37,6 +39,7 @@ WeaverGraph &WeaverGraph::CreateNodeGroup(const string &groupName, bool isMandat
 }
 
 WeaverGraph &WeaverGraph::AddEdge(Edge edge) {
+    checkUnfinalized();
     // check if the edge nodes are added to the graph
     // if not, check if they are shadow nodes
     auto nodeIt1 = nodes.find(edge.id1);
@@ -151,6 +154,7 @@ const vector<Node> &WeaverGraph::GetNodesWithId(ID id) const {
 }
 
 WeaverGraph &WeaverGraph::AddShadowNode(ID shadowNodeId) {
+    checkUnfinalized();
     if (nodes.find(shadowNodeId) != nodes.end()) {
         throw ContractFailedException("Cannot add shadow node with id " + to_string(shadowNodeId) +
                                       ", because a regular node with the same id already exists!");
@@ -167,8 +171,10 @@ bool WeaverGraph::isShadowNode(ID shadowNodeId) const {
 }
 
 void WeaverGraph::Finalize() {
+    checkUnfinalized();
     activateMandatoryGroups();
     addTransitiveEdges();
+    isFinalized = true;
 }
 
 /**
@@ -211,5 +217,11 @@ void WeaverGraph::addTransitiveEdges() {
                 mergeAddEdge(newEdge);
             }
         }
+    }
+}
+
+void WeaverGraph::checkUnfinalized() const {
+    if (isFinalized) {
+        throw ContractFailedException("Graph was already finalized");
     }
 }

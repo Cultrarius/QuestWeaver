@@ -30,6 +30,7 @@ TEST_CASE("Graph analyzer", "[graph analyzer]") {
         auto properties = GraphAnalyzer::SolveGraph(&graph, rs);
         REQUIRE(properties.size() == 1);
         REQUIRE(properties[groupA] == node1);
+        return;
     }
 
     Node node2(groupA, 2);
@@ -40,6 +41,7 @@ TEST_CASE("Graph analyzer", "[graph analyzer]") {
         auto properties = GraphAnalyzer::SolveGraph(&graph, rs);
         REQUIRE(properties.size() == 1);
         REQUIRE(((properties[groupA] == node1) || (properties[groupA] == node2)));
+        return;
     }
 
     string groupB = "entityB";
@@ -47,6 +49,7 @@ TEST_CASE("Graph analyzer", "[graph analyzer]") {
 
     SECTION("Error on missing required node") {
         REQUIRE_THROWS_AS(graph.Finalize(), ContractFailedException);
+        return;
     }
 
     Node node3(groupB, 3);
@@ -58,6 +61,7 @@ TEST_CASE("Graph analyzer", "[graph analyzer]") {
         REQUIRE(properties.size() == 2);
         REQUIRE(((properties[groupA] == node1) || (properties[groupA] == node2)));
         REQUIRE((properties[groupB] == node3));
+        return;
     }
 
     SECTION("Solve graph with three nodes / two groups / edge1-3") {
@@ -68,6 +72,7 @@ TEST_CASE("Graph analyzer", "[graph analyzer]") {
         REQUIRE(properties.size() == 2);
         REQUIRE((properties[groupA] == node1));
         REQUIRE((properties[groupB] == node3));
+        return;
     }
 
     SECTION("Solve graph with three nodes / two groups / edge2-3") {
@@ -78,6 +83,7 @@ TEST_CASE("Graph analyzer", "[graph analyzer]") {
         REQUIRE(properties.size() == 2);
         REQUIRE((properties[groupA] == node2));
         REQUIRE((properties[groupB] == node3));
+        return;
     }
 
     Edge edge13(1, 3, EdgeType::TRANSITIVE);
@@ -91,6 +97,7 @@ TEST_CASE("Graph analyzer", "[graph analyzer]") {
         REQUIRE(properties.size() == 2);
         REQUIRE((properties[groupA] == node1));
         REQUIRE((properties[groupB] == node3));
+        return;
     }
 
     Edge edge23(2, 3, EdgeType::DIRECT);
@@ -102,6 +109,7 @@ TEST_CASE("Graph analyzer", "[graph analyzer]") {
         REQUIRE(properties.size() == 2);
         REQUIRE((properties[groupA] == node2));
         REQUIRE((properties[groupB] == node3));
+        return;
     }
 
     graph.AddShadowNode(5);
@@ -124,6 +132,7 @@ TEST_CASE("Graph analyzer", "[graph analyzer]") {
         auto iter = edges.find(searchEdge);
         REQUIRE(iter != edges.end());
         REQUIRE(iter->Count(EdgeType::TRANSITIVE) == 1);
+        return;
     }
 
     graph.AddShadowNode(6);
@@ -139,5 +148,6 @@ TEST_CASE("Graph analyzer", "[graph analyzer]") {
         auto iter = edges.find(searchEdge);
         REQUIRE(iter != edges.end());
         REQUIRE(iter->Count(EdgeType::TRANSITIVE) == 2);
+        return;
     }
 }
