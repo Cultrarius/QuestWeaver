@@ -26,7 +26,7 @@ namespace weave {
 
         void Tick(float delta);
 
-        void RegisterWorldListener(WorldListener *listener);
+        void RegisterWorldListener(std::shared_ptr<WorldListener> listener);
 
     private:
         std::unique_ptr<WeaverEngine> engine;

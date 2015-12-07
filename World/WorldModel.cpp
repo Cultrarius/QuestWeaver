@@ -100,9 +100,8 @@ std::vector<WorldModelAction> WorldModel::GetHistory() const {
     return actionHistory;
 }
 
-void WorldModel::AddListener(WorldListener *listener) {
-    std::unique_ptr<WorldListener> listenerPtr(listener);
-    listeners.push_back(std::move(listenerPtr));
+void WorldModel::AddListener(std::shared_ptr<WorldListener> listener) {
+    listeners.push_back(listener);
 }
 
 void WorldModel::informListeners(const std::vector<WorldModelAction> &actions) {

@@ -47,6 +47,6 @@ void QuestWeaver::Tick(float delta) {
     }
 }
 
-void QuestWeaver::RegisterWorldListener(WorldListener *listener) {
+void QuestWeaver::RegisterWorldListener(std::shared_ptr<WorldListener> listener) {
     world->AddListener(listener);
 }
