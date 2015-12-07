@@ -13,6 +13,7 @@
 #include "World/WorldModel.h"
 #include "QuestModel/Quest.h"
 #include "Core/WeaverUtils.h"
+#include "World/WorldListener.h"
 
 namespace weave {
     class QuestWeaver {
@@ -25,13 +26,13 @@ namespace weave {
 
         void Tick(float delta);
 
+        void RegisterWorldListener(WorldListener *listener);
+
     private:
         std::unique_ptr<WeaverEngine> engine;
         std::unique_ptr<QuestModel> quests;
         std::unique_ptr<TemplateEngine> templates;
         std::unique_ptr<WorldModel> world;
         std::shared_ptr<RandomStream> randomStream;
-
-        void updateWorld(const std::vector<WorldModelAction> &modelActions);
     };
 }

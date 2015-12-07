@@ -56,6 +56,7 @@ void WorldModel::Execute(vector<WorldModelAction> modelActions) {
             actionHistory.push_back(action);
         }
     }
+    informListeners(modelActions);
 }
 
 void WorldModel::updateMetaDataForId(ID newId, const MetaData &newData) {
@@ -97,4 +98,15 @@ std::vector<WorldModelAction> WorldModel::GetMetaDataHistoryForId(ID id) const {
 
 std::vector<WorldModelAction> WorldModel::GetHistory() const {
     return actionHistory;
+}
+
+void WorldModel::AddListener(WorldListener *listener) {
+    std::unique_ptr<WorldListener> listenerPtr(listener);
+    listeners.push_back(std::move(listenerPtr));
+}
+
+void WorldModel::informListeners(const std::vector<WorldModelAction> &actions) {
+    for (auto &listener : listeners) {
+        listener->WorldChanged(actions);
+    }
 }

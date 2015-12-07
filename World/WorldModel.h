@@ -10,6 +10,7 @@
 #include "WorldEntity.h"
 #include "WorldModelAction.h"
 #include "MetaData.h"
+#include "WorldListener.h"
 
 namespace weave {
 
@@ -29,6 +30,8 @@ namespace weave {
 
         std::vector<WorldModelAction> GetMetaDataHistoryForId(ID id) const;
 
+        void AddListener(WorldListener *listener);
+
     protected:
         std::shared_ptr<RandomStream> rs;
         std::unordered_map<ID, MetaData> metaData;
@@ -39,10 +42,13 @@ namespace weave {
     private:
         ID idGenerator = 0;
         std::map<ID, std::shared_ptr<WorldEntity>> entities;
+        std::vector<std::unique_ptr<WorldListener>> listeners;
 
         void updateMetaDataForId(ID newId, const MetaData &newData);
 
         bool hasEntityWithId(ID id) const;
+
+        void informListeners(const std::vector<WorldModelAction> &actions);
 
         // serialization
         friend class cereal::access;
