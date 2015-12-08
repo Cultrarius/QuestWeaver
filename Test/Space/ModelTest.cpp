@@ -5,13 +5,16 @@
 #include "../catch.hpp"
 #include "../../Core/WeaverUtils.h"
 #include "../../World/Space/SpaceWorldModel.h"
+#include "../Mock/TestWorldListener.h"
 
 using namespace weave;
 using namespace std;
 
 TEST_CASE("Model Actions", "[model]") {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(43);
+    shared_ptr<TestWorldListener> listener = make_shared<TestWorldListener>();
     SpaceWorldModel testModel(rs);
+    testModel.AddListener(listener);
     shared_ptr<WorldEntity> entity = testModel.CreateLocation();
     REQUIRE(entity->GetId() == 0);
 
@@ -19,6 +22,9 @@ TEST_CASE("Model Actions", "[model]") {
         vector<WorldModelAction> noActions;
         testModel.Execute(noActions);
         REQUIRE(testModel.GetEntities().size() == 0);
+        SECTION("Empty listener") {
+            REQUIRE(listener->calledActions.size() == 0);
+        }
     }
 
     SECTION("CREATE model action") {
@@ -28,6 +34,9 @@ TEST_CASE("Model Actions", "[model]") {
         testModel.Execute(actions);
         REQUIRE(testModel.GetEntities().size() == 1);
         REQUIRE(entity->GetId() != 0);
+        SECTION("Single listener action") {
+            REQUIRE(listener->calledActions.size() == 1);
+        }
     }
 
     SECTION("CREATE twice action") {
@@ -91,6 +100,11 @@ TEST_CASE("Model Actions", "[model]") {
         testModel.Execute(actions);
         REQUIRE(testModel.GetEntities().size() == 0);
         REQUIRE(entity->GetId() == 0);
+        SECTION("Two listener actions") {
+            REQUIRE(listener->calledActions.size() == 2);
+            REQUIRE(listener->calledActions[0].GetActionType() == WorldActionType::CREATE);
+            REQUIRE(listener->calledActions[1].GetActionType() == WorldActionType::DELETE);
+        }
     }
 }
 
