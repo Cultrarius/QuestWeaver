@@ -27,7 +27,6 @@ Quest::Quest(ID newId, QuestState state, const string &title, const string &desc
         id(newId), state(state), title(title), description(description) {
 }
 
-
 ID Quest::GetId() const {
     return id;
 }

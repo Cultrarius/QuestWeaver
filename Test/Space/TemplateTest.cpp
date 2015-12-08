@@ -134,6 +134,7 @@ TEST_CASE("Templates", "[template]") {
                     for (auto candidate : candidates) {
                         questValues.push_back(QuestPropertyValue(property, candidate.GetEntity()));
                     }
+                    worldModel->Execute(candidates);
                 }
 
                 INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));
@@ -164,6 +165,7 @@ TEST_CASE("Templates", "[template]") {
                     for (auto candidate : candidates) {
                         questValues.push_back(QuestPropertyValue(property, candidate.GetEntity()));
                     }
+                    worldModel->Execute(candidates);
                 }
 
                 INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));

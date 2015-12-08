@@ -60,6 +60,23 @@ namespace weave {
 
         virtual QuestTickResult Tick(float delta);
 
+    protected:
+        auto getCerealId() const {
+            return cereal::make_nvp("id", id);
+        }
+
+        auto getCerealTitle() const {
+            return cereal::make_nvp("title", title);
+        }
+
+        auto getCerealState() const {
+            return cereal::make_nvp("state", state);
+        }
+
+        auto getCerealDescription() const {
+            return cereal::make_nvp("description", description);
+        }
+
     private:
         ID id;
         QuestState state;
@@ -71,7 +88,7 @@ namespace weave {
 
         template<class Archive>
         void serialize(Archive &archive) {
-            archive(CEREAL_NVP(id), CEREAL_NVP(state), CEREAL_NVP(title), CEREAL_NVP(description));
+            archive(getCerealId(), getCerealState(), getCerealTitle(), getCerealDescription());
         }
     };
 }

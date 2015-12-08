@@ -70,6 +70,9 @@ namespace weave {
 
         std::string getTitle(const std::vector<QuestPropertyValue> &questPropertyValues) const;
 
+        static ID getEntityIdFromProperty(std::string propertyName,
+                                          const std::vector<QuestPropertyValue> &questPropertyValues);
+
     private:
         std::string title;
         std::vector<TemplateQuestProperty> properties;

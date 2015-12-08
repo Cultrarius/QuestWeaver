@@ -94,3 +94,13 @@ std::string Template::getTitle(const std::vector<QuestPropertyValue> &questPrope
 bool TemplateQuestProperty::operator==(const TemplateQuestProperty &other) const {
     return name == other.name;
 }
+
+ID Template::getEntityIdFromProperty(std::string propertyName,
+                                     const std::vector<QuestPropertyValue> &questPropertyValues) {
+    for (auto propertyValue : questPropertyValues) {
+        if (propertyValue.GetProperty().GetName() == propertyName) {
+            return propertyValue.GetValue()->GetId();
+        }
+    }
+    return 0;
+}

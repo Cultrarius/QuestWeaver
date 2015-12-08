@@ -3,7 +3,6 @@
 //
 
 #include "ExploreRegionTemplate.h"
-#include "../../World/Space/SpaceWorldModel.h"
 #include "../../QuestModel/Space/ExploreRegionQuest.h"
 
 using namespace std;
@@ -29,7 +28,7 @@ vector<WorldModelAction> ExploreRegionTemplate::GetPropertyCandidates(const Temp
 
 void ExploreRegionTemplate::gatherSponsorEntities(vector<WorldModelAction> *actions,
                                                   const SpaceWorldModel &spaceModel) const {
-    shared_ptr<WorldEntity> newEntity = spaceModel.CreateAgent();
+    shared_ptr<SpaceAgent> newEntity = spaceModel.CreateAgent();
     MetaData metaData;
     metaData.SetValue("relationToPlayer", 10);
     WorldModelAction modelAction(WorldActionType::CREATE, newEntity, metaData);
@@ -48,7 +47,7 @@ void ExploreRegionTemplate::gatherSponsorEntities(vector<WorldModelAction> *acti
 
 void ExploreRegionTemplate::gatherLocationEntities(vector<WorldModelAction> *actions,
                                                    const SpaceWorldModel &spaceModel) const {
-    shared_ptr<WorldEntity> newEntity = spaceModel.CreateLocation();
+    shared_ptr<SpaceLocation> newEntity = spaceModel.CreateLocation();
     MetaData metaData;
     metaData.SetValue("explored", 0);
     metaData.SetValue("explorationQuestLock", 1);  // so it does not get picked by another exploration quest
@@ -69,5 +68,8 @@ void ExploreRegionTemplate::gatherLocationEntities(vector<WorldModelAction> *act
 shared_ptr<Quest> ExploreRegionTemplate::ToQuest(const vector<QuestPropertyValue> &questPropertyValues) const {
     const string &description = getBestFittingDescription(questPropertyValues);
     const string &title = getTitle(questPropertyValues);
-    return make_shared<ExploreRegionQuest>(title, description);
+
+    ID location = getEntityIdFromProperty("location", questPropertyValues);
+    ID sponsor = getEntityIdFromProperty("sponsor", questPropertyValues);
+    return make_shared<ExploreRegionQuest>(title, description, location, sponsor);
 }

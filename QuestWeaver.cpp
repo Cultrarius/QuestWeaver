@@ -27,10 +27,8 @@ shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
     std::vector<WorldModelAction> modelActions;
     vector<QuestPropertyValue> questPropertyValues = engine->fillTemplate(questTemplate, *quests, *world, randomStream,
                                                                           &modelActions);
-    shared_ptr<Quest> newQuest = questTemplate->ToQuest(questPropertyValues);
-    // TODO create quest-variants and choose the best one?
-
     world->Execute(modelActions);
+    shared_ptr<Quest> newQuest = questTemplate->ToQuest(questPropertyValues);
     quests->RegisterNew(newQuest, questPropertyValues);
     return newQuest;
 }
