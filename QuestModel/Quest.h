@@ -46,6 +46,7 @@ namespace weave {
 
         virtual std::string GetType() const = 0;
 
+
     protected:
         friend class QuestModel;
 
@@ -60,7 +61,6 @@ namespace weave {
 
         virtual QuestTickResult Tick(float delta);
 
-    protected:
         auto getCerealId() const {
             return cereal::make_nvp("id", id);
         }

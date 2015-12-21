@@ -51,11 +51,7 @@ set<shared_ptr<WorldEntity>> QuestModel::GetQuestEntities(ID questId) const {
 }
 
 bool QuestModel::setNewQuestState(ID questId, const QuestState &requiredState, const QuestState &newState) {
-    auto iter = quests.find(questId);
-    if (iter == quests.end()) {
-        throw ContractFailedException("Quest with id " + to_string(questId) + " not found in model!");
-    }
-    shared_ptr<Quest> quest = iter->second;
+    shared_ptr<Quest> quest = GetQuest(questId);
     if (quest->GetState() != requiredState) {
         return false;
     }
@@ -102,4 +98,12 @@ shared_ptr<Quest> QuestModel::Execute(const QuestModelAction &modelAction) {
 
     actionHistory.push_back(modelAction);
     return result;
+}
+
+std::shared_ptr<Quest> QuestModel::GetQuest(ID questId) const {
+    auto iter = quests.find(questId);
+    if (iter == quests.end()) {
+        throw ContractFailedException("Quest with id " + to_string(questId) + " not found in model!");
+    }
+    return iter->second;
 }

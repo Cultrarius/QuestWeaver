@@ -22,11 +22,17 @@ namespace weave {
 
         std::vector<std::shared_ptr<Quest>> GetQuestsWithState(QuestState state) const;
 
+        std::vector<std::shared_ptr<Quest>> GetAllQuests() const;
+
         std::shared_ptr<Quest> CreateNewQuest();
+
+        std::shared_ptr<Quest> GetQuest(ID questId) const;
 
         void Tick(float delta);
 
         void RegisterWorldListener(std::shared_ptr<WorldListener> listener);
+
+        std::shared_ptr<Quest> ChangeQuestState(QuestModelAction questAction);
 
     private:
         std::unique_ptr<WeaverEngine> engine;

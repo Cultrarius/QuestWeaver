@@ -11,9 +11,20 @@
 namespace weave {
     class QuestModel {
     public:
+        /**
+         * The returned quest pointers are valid ONLY to the next Execute()-call, which is usually a single Tick.
+         */
         std::vector<std::shared_ptr<Quest>> GetQuestsWithState(QuestState state) const;
 
+        /**
+         * The returned quest pointers are valid ONLY to the next Execute()-call, which is usually a single Tick.
+         */
         std::vector<std::shared_ptr<Quest>> GetQuests() const;
+
+        /**
+         * The returned quest pointer is valid ONLY to the next Tick()-call.
+         */
+        std::shared_ptr<Quest> GetQuest(ID questId) const;
 
         std::set<std::shared_ptr<WorldEntity>> GetQuestEntities(ID questId) const;
 

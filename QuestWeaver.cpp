@@ -29,8 +29,7 @@ shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
                                                                           &modelActions);
     world->Execute(modelActions);
     shared_ptr<Quest> newQuest = questTemplate->ToQuest(questPropertyValues);
-    quests->RegisterNew(newQuest, questPropertyValues);
-    return newQuest;
+    return quests->RegisterNew(newQuest, questPropertyValues);
 }
 
 std::vector<std::shared_ptr<Quest>> QuestWeaver::GetQuestsWithState(QuestState state) const {
@@ -47,4 +46,16 @@ void QuestWeaver::Tick(float delta) {
 
 void QuestWeaver::RegisterWorldListener(std::shared_ptr<WorldListener> listener) {
     world->AddListener(listener);
+}
+
+std::vector<std::shared_ptr<Quest>> QuestWeaver::GetAllQuests() const {
+    return quests->GetQuests();
+}
+
+shared_ptr<Quest> QuestWeaver::GetQuest(ID questId) const {
+    return quests->GetQuest(questId);
+}
+
+std::shared_ptr<Quest> QuestWeaver::ChangeQuestState(QuestModelAction questAction) {
+    return quests->Execute(questAction);
 }
