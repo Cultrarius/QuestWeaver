@@ -6,7 +6,8 @@
 #include <memory>
 #include "catch.hpp"
 #include "../Core/WeaverUtils.h"
-#include "../Core/GraphAnalyzer.h"
+#include "../Core/Graph/WeaverGraph.h"
+#include "../Core/Graph/GraphAnalyzer.h"
 
 using namespace weave;
 using namespace std;

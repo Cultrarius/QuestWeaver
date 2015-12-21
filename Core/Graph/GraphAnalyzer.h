@@ -5,8 +5,9 @@
 #pragma once
 
 #include <unordered_map>
-#include "WeaverTypes.h"
-#include "Graph/WeaverGraph.h"
+#include "../WeaverTypes.h"
+#include "WeaverGraph.h"
+#include "Node.h"
 
 namespace weave {
     struct AnalyzerParameters {

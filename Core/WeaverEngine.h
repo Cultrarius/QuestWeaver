@@ -8,7 +8,7 @@
 #include "WeaverUtils.h"
 #include "../QuestModel/QuestModel.h"
 #include "Graph/WeaverGraph.h"
-#include "GraphAnalyzer.h"
+#include "Graph/GraphAnalyzer.h"
 
 namespace weave {
     struct EngineParameters {
