@@ -8,68 +8,43 @@
 using namespace std;
 using namespace weave;
 
-vector<QuestPropertyValue> WeaverEngine::fillTemplate(shared_ptr<Template> questTemplate,
-                                                      const QuestModel &questModel,
-                                                      const WorldModel &worldModel,
-                                                      shared_ptr<RandomStream> randomStream,
-                                                      vector<WorldModelAction> *modelActions) const {
-    if (parameters.useDice) {
-        return fillWithRandomDice(questTemplate, worldModel, randomStream, modelActions);
-    } else {
-        unordered_set<string> mandatory;
-        map<string, vector<WorldModelAction>> candidates;
-        for (const TemplateQuestProperty &questProperty : questTemplate->GetProperties()) {
-            candidates[questProperty.GetName()] = questTemplate->GetPropertyCandidates(questProperty, worldModel);
-            if (questProperty.IsMandatory()) {
-                mandatory.insert(questProperty.GetName());
-            }
+EngineResult WeaverEngine::fillTemplate(shared_ptr<Template> questTemplate,
+                                        const QuestModel &questModel,
+                                        const WorldModel &worldModel) const {
+    unordered_set<string> mandatory;
+    map<string, vector<WorldModelAction>> candidates;
+    for (const TemplateQuestProperty &questProperty : questTemplate->GetProperties()) {
+        candidates[questProperty.GetName()] = questTemplate->GetPropertyCandidates(questProperty, worldModel);
+        if (questProperty.IsMandatory()) {
+            mandatory.insert(questProperty.GetName());
         }
-
-        WeaverGraph graph = createGraph(questModel, worldModel, mandatory, candidates);
-        auto propertyMap = GraphAnalyzer::SolveGraph(&graph, randomStream);
-
-        vector<QuestPropertyValue> returnValues;
-        for (auto &questProperty : questTemplate->GetProperties()) {
-            const string &propertyName = questProperty.GetName();
-            auto iter = propertyMap.find(propertyName);
-            if (iter == propertyMap.end()) {
-                if (questProperty.IsMandatory()) {
-                    throw ContractFailedException("Graph result must contain results for mandatory quest properties.");
-                }
-                continue;
-            }
-            ID nodeId = iter->second.GetId();
-            for (auto candidate : candidates[propertyName]) {
-                if (candidate.GetEntity()->GetId() == nodeId) {
-                    if (modelActions != nullptr) {
-                        modelActions->push_back(candidate);
-                    }
-                    QuestPropertyValue questValue(questProperty, candidate.GetEntity());
-                    returnValues.push_back(move(questValue));
-                }
-            }
-        }
-
-        // build "graph" of candidates
-        // each edge (+weight) is determined by the following:
-        //   * direct quest history (both candidate entities were present in a past quest)
-        //   * indirect quest history (first grade transitive relation)
-        //   * candidates competing with each other have no edges (duh!)
-        // each node weight is determined by the following:
-        //   * metadata history of the entity (a lot of history = better)
-        //   * specific current metadata? e.g. relationship to player
-        //   * quest history of the entity
-        // edges might have their own type and weight depending on the metadata and the action
-        // search for a node/edge configuration that has a high weight
-        //   * activating one node deactivates all other nodes competing for the same property
-        //
-        // optional: create some kind of "fluff" from the decision to add to the quest description
-        // e.g. "Ever since the incident on planet Aurelius, your reputation with the Xerxes group
-        // has been steadily declining. Now they are out to get you..."
-
-
-        return returnValues;
     }
+
+    WeaverGraph graph = createGraph(questModel, worldModel, mandatory, candidates);
+    auto propertyMap = GraphAnalyzer::SolveGraph(&graph, randomStream);
+
+    vector<QuestPropertyValue> propertyValues;
+    vector<WorldModelAction> modelActions;
+    for (auto &questProperty : questTemplate->GetProperties()) {
+        const string &propertyName = questProperty.GetName();
+        auto iter = propertyMap.find(propertyName);
+        if (iter == propertyMap.end()) {
+            if (questProperty.IsMandatory()) {
+                throw ContractFailedException("Graph result must contain results for mandatory quest properties.");
+            }
+            continue;
+        }
+        ID nodeId = iter->second.GetId();
+        for (auto candidate : candidates[propertyName]) {
+            if (candidate.GetEntity()->GetId() == nodeId) {
+                modelActions.push_back(candidate);
+                QuestPropertyValue questValue(questProperty, candidate.GetEntity());
+                propertyValues.push_back(move(questValue));
+            }
+        }
+    }
+    string story = "";
+    return EngineResult(modelActions, propertyValues, story);
 }
 
 WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldModel &worldModel,
@@ -137,38 +112,32 @@ void WeaverEngine::addGraphEdges(const QuestModel &questModel, WeaverGraph &grap
     }
 }
 
-vector<QuestPropertyValue> WeaverEngine::fillWithRandomDice(const shared_ptr<Template> &questTemplate,
-                                                            const WorldModel &worldModel,
-                                                            shared_ptr<RandomStream> randomStream,
-                                                            vector<WorldModelAction> *modelActions) const {
-    vector<QuestPropertyValue> returnValues;
-    vector<TemplateQuestProperty> propertiesToCreate;
-    for (const TemplateQuestProperty &questProperty : questTemplate->GetProperties()) {
-        if (questProperty.IsMandatory() || randomStream->GetIntInRange(0, 100) < 50) {
-            propertiesToCreate.push_back(questProperty);
-        } else {
-            cout << "Omitting property " << questProperty.GetName() << endl;
-        }
-    }
-
-    for (const auto &property : propertiesToCreate) {
-        const vector<WorldModelAction> candidates = questTemplate->GetPropertyCandidates(property, worldModel);
-        auto index = randomStream->GetRandomIndex(candidates.size());
-        shared_ptr<WorldEntity> entity = candidates.at(index).GetEntity();
-        if (modelActions != nullptr) {
-            modelActions->push_back(candidates[index]);
-        }
-        QuestPropertyValue questValue(property, entity);
-        returnValues.push_back(move(questValue));
-    }
-
-    return returnValues;
-}
-
 EngineParameters WeaverEngine::GetParameters() {
     return parameters;
 }
 
 void WeaverEngine::SetParameters(EngineParameters parameters) {
     this->parameters = parameters;
+}
+
+WeaverEngine::WeaverEngine(std::shared_ptr<RandomStream> rs) {
+    this->randomStream = rs;
+    storyWriter = make_unique<StoryWriter>();
+}
+
+EngineResult::EngineResult(const std::vector<WorldModelAction> &actions,
+                           const std::vector<QuestPropertyValue> &propertyValues,
+                           const std::string &story) : actions(actions), propertyValues(propertyValues), story(story) {
+}
+
+const std::vector<WorldModelAction> &EngineResult::GetModelActions() const {
+    return actions;
+}
+
+const std::vector<QuestPropertyValue> &EngineResult::GetQuestPropertyValues() const {
+    return propertyValues;
+}
+
+const std::string &EngineResult::GetStory() const {
+    return story;
 }

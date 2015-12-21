@@ -6,14 +6,15 @@
 
 #include "../Template/Template.h"
 #include "WeaverUtils.h"
+#include "WeaverTypes.h"
 #include "../QuestModel/QuestModel.h"
 #include "Graph/WeaverGraph.h"
 #include "Graph/GraphAnalyzer.h"
+#include "Story/StoryWriter.h"
 
 namespace weave {
     struct EngineParameters {
         float chooseOldOverNew = 0.9;
-        bool useDice = false;
         AnalyzerParameters analyzerParameters;
 
         template<class Archive>
@@ -32,13 +33,31 @@ namespace weave {
         std::vector<WorldModelAction> history;
     };
 
+    class EngineResult {
+    public:
+        EngineResult(const std::vector<WorldModelAction> &actions,
+                     const std::vector<QuestPropertyValue> &propertyValues,
+                     const std::string &story);
+
+        const std::vector<WorldModelAction> &GetModelActions() const;
+
+        const std::vector<QuestPropertyValue> &GetQuestPropertyValues() const;
+
+        const std::string &GetStory() const;
+
+    private:
+        std::vector<WorldModelAction> actions;
+        std::vector<QuestPropertyValue> propertyValues;
+        std::string story;
+    };
+
     class WeaverEngine {
     public:
-        std::vector<QuestPropertyValue> fillTemplate(std::shared_ptr<Template> questTemplate,
-                                                     const QuestModel &questModel,
-                                                     const WorldModel &worldModel,
-                                                     std::shared_ptr<RandomStream> randomStream,
-                                                     std::vector<WorldModelAction> *modelActions) const;
+        explicit WeaverEngine(std::shared_ptr<RandomStream> randomStream);
+
+        EngineResult fillTemplate(std::shared_ptr<Template> questTemplate,
+                                  const QuestModel &questModel,
+                                  const WorldModel &worldModel) const;
 
         EngineParameters GetParameters();
 
@@ -46,11 +65,8 @@ namespace weave {
 
     private:
         EngineParameters parameters;
-
-        std::vector<QuestPropertyValue> fillWithRandomDice(const std::shared_ptr<Template> &questTemplate,
-                                                           const WorldModel &worldModel,
-                                                           std::shared_ptr<RandomStream> randomStream,
-                                                           std::vector<WorldModelAction> *modelActions) const;
+        std::shared_ptr<RandomStream> randomStream;
+        std::unique_ptr<StoryWriter> storyWriter;
 
         WeaverGraph createGraph(const QuestModel &questModel, const WorldModel &worldModel,
                                 std::unordered_set<std::string> mandatoryProperties,

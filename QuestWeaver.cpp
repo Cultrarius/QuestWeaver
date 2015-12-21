@@ -13,7 +13,7 @@ using namespace weave;
 
 QuestWeaver::QuestWeaver(uint64_t seed) {
     randomStream.reset(new RandomStream(seed));
-    engine.reset(new WeaverEngine());
+    engine.reset(new WeaverEngine(randomStream));
     quests.reset(new QuestModel());
     templates.reset(new TemplateEngine());
     world.reset(new SpaceWorldModel(randomStream));
@@ -24,12 +24,10 @@ QuestWeaver::QuestWeaver(uint64_t seed) {
 
 shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
     auto questTemplate = templates->GetTemplateForNewQuest(randomStream);
-    std::vector<WorldModelAction> modelActions;
-    vector<QuestPropertyValue> questPropertyValues = engine->fillTemplate(questTemplate, *quests, *world, randomStream,
-                                                                          &modelActions);
-    world->Execute(modelActions);
-    shared_ptr<Quest> newQuest = questTemplate->ToQuest(questPropertyValues);
-    return quests->RegisterNew(newQuest, questPropertyValues);
+    EngineResult result = engine->fillTemplate(questTemplate, *quests, *world);
+    world->Execute(result.GetModelActions());
+    shared_ptr<Quest> newQuest = questTemplate->ToQuest(result.GetQuestPropertyValues());
+    return quests->RegisterNew(newQuest, result.GetQuestPropertyValues());
 }
 
 std::vector<std::shared_ptr<Quest>> QuestWeaver::GetQuestsWithState(QuestState state) const {
