@@ -11,14 +11,17 @@
 using namespace std;
 using namespace weave;
 
-QuestWeaver::QuestWeaver(uint64_t seed) {
+QuestWeaver::QuestWeaver(uint64_t seed) : QuestWeaver(seed, Directories()) {
+}
+
+QuestWeaver::QuestWeaver(uint64_t seed, Directories directories) {
     randomStream.reset(new RandomStream(seed));
     engine.reset(new WeaverEngine(randomStream));
     quests.reset(new QuestModel());
     templates.reset(new TemplateEngine());
     world.reset(new SpaceWorldModel(randomStream));
 
-    shared_ptr<TemplateFactory> spaceFactory = make_shared<SpaceQuestTemplateFactory>(randomStream);
+    shared_ptr<TemplateFactory> spaceFactory = make_shared<SpaceQuestTemplateFactory>(randomStream, directories);
     templates->RegisterTemplateFactory(spaceFactory);
 }
 

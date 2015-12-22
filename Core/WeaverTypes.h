@@ -27,4 +27,10 @@ namespace weave {
             return static_cast<std::size_t>(t);
         }
     };
+
+    struct Directories {
+        std::string templateDirectory = "../Template/";
+
+        std::string modDirectory = "../Mods/Template/";
+    };
 }

@@ -15,16 +15,17 @@ namespace weave {
     public:
         explicit TemplateFactory(std::shared_ptr<RandomStream> randomStream) : randomStream(randomStream) { }
 
-        virtual std::vector<std::string> GetTemplateKeys();
+        TemplateFactory(std::shared_ptr<RandomStream> randomStream, Directories directories) :
+                randomStream(randomStream), dirs(directories) { }
 
-        std::shared_ptr<Template> CreateTemplate(const std::string &templateKey) const;
+        std::vector<std::string> GetTemplateKeys();
 
-        void SetTemplateDirectory(std::string templateDirectory);
-
-        void SetModDirectory(std::string modDirectory);
+        std::shared_ptr<Template> CreateTemplate(const std::string &templateKey);
 
     protected:
         virtual std::shared_ptr<Template> createFromJsonValues(const Json::Value &root) const = 0;
+
+        virtual const char *getTemplateFile() const = 0;
 
         Json::Value readTemplateFile(const char *fileName);
 
@@ -45,9 +46,11 @@ namespace weave {
 
         void openFile(const char *name, std::ifstream *stream);
 
-        std::string templateDirectory = "../Data/Template/";
+        Directories dirs;
 
-        std::string modDirectory = "../Mods/Template/";
+        bool isInitialized = false;
+
+        void initialize();
     };
 }
 

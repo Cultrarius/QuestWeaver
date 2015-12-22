@@ -20,6 +20,8 @@ namespace weave {
     public:
         explicit QuestWeaver(uint64_t seed);
 
+        QuestWeaver(uint64_t seed, Directories directories);
+
         std::vector<std::shared_ptr<Quest>> GetQuestsWithState(QuestState state) const;
 
         std::vector<std::shared_ptr<Quest>> GetAllQuests() const;

@@ -12,17 +12,11 @@ using namespace weave;
 
 SpaceQuestTemplateFactory::SpaceQuestTemplateFactory(std::shared_ptr<RandomStream> randomStream)
         : TemplateFactory(randomStream) {
-    templateMap.clear();
+}
 
-    const char *fileName = "../Template/Space/ExploreRegionTemplate.qt";
-    auto root = readTemplateFile(fileName);
-    if (root["parent"].asString() != "Space") {
-        string errorMessage = string("Template file has incompatible parent: ") + fileName + "\n";
-        cerr << errorMessage;
-        throw ContractFailedException(errorMessage);
-    }
-
-    templateMap[root["key"].asString()] = root;
+SpaceQuestTemplateFactory::SpaceQuestTemplateFactory(std::shared_ptr<RandomStream> randomStream,
+                                                     Directories directories) :
+        TemplateFactory(randomStream, directories) {
 }
 
 std::shared_ptr<Template> SpaceQuestTemplateFactory::createFromJsonValues(const Json::Value &root) const {
@@ -39,3 +33,9 @@ std::shared_ptr<Template> SpaceQuestTemplateFactory::createFromJsonValues(const 
         throw ContractFailedException("Unknown Space template key " + templateKey + "\n");
     }
 }
+
+const char *SpaceQuestTemplateFactory::getTemplateFile() const {
+    return "Space/ExploreRegionTemplate.qt";
+}
+
+

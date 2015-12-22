@@ -26,6 +26,7 @@ Json::Value TemplateFactory::readTemplateFile(const char *fileName) {
 }
 
 vector<string> TemplateFactory::GetTemplateKeys() {
+    initialize();
     vector<string> keys;
     keys.reserve(templateMap.size());
 
@@ -79,7 +80,8 @@ void TemplateFactory::extractProperties(vector<TemplateQuestProperty> *propertie
     }
 }
 
-std::shared_ptr<Template> TemplateFactory::CreateTemplate(const std::string &templateKey) const {
+std::shared_ptr<Template> TemplateFactory::CreateTemplate(const std::string &templateKey) {
+    initialize();
     auto mapEntry = templateMap.find(templateKey);
     if (mapEntry == templateMap.end()) {
         throw ContractFailedException("Cannot find template for key " + templateKey + "\n");
@@ -89,8 +91,8 @@ std::shared_ptr<Template> TemplateFactory::CreateTemplate(const std::string &tem
 }
 
 void TemplateFactory::openFile(const char *fileName, ifstream *inStream) {
-    string modDir(modDirectory);
-    string dataDir(templateDirectory);
+    string modDir(dirs.modDirectory);
+    string dataDir(dirs.templateDirectory);
 
     // try to use the mods directory
     const char *moddedFile = modDir.append(fileName).c_str();
@@ -112,16 +114,26 @@ void TemplateFactory::openFile(const char *fileName, ifstream *inStream) {
         return;
     }
     std::string errorMsg =
-            "Unable to find file in any of the following directories: [., " + templateDirectory + ", " + modDirectory +
+            "Unable to find file in any of the following directories: [., " + dirs.templateDirectory + ", " +
+            dirs.modDirectory +
             "]";
     throw ContractFailedException(errorMsg);
 }
 
-void TemplateFactory::SetTemplateDirectory(std::string templateDirectory) {
-    this->templateDirectory = templateDirectory;
-}
+void TemplateFactory::initialize() {
+    if (isInitialized) {
+        return;
+    }
+    isInitialized = true;
+    templateMap.clear();
 
-void TemplateFactory::SetModDirectory(std::string modDirectory) {
-    this->modDirectory = modDirectory;
-}
+    const char *fileName = getTemplateFile();
+    auto root = readTemplateFile(fileName);
+    if (root["parent"].asString() != "Space") {
+        string errorMessage = string("Template file has incompatible parent: ") + fileName + "\n";
+        cerr << errorMessage;
+        throw ContractFailedException(errorMessage);
+    }
 
+    templateMap[root["key"].asString()] = root;
+}
