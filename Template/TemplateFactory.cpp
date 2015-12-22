@@ -3,8 +3,6 @@
 //
 
 #include "TemplateFactory.h"
-#include <iostream>
-#include <fstream>
 
 using namespace std;
 using namespace Json;
@@ -17,8 +15,7 @@ Json::Value TemplateFactory::readTemplateFile(const char *fileName) {
     readBuilder["rejectDupKeys"] = true;
     string errorMessage;
     ifstream inStream;
-
-    inStream.open(fileName);
+    openFile(fileName, &inStream);
     if (!Json::parseFromStream(readBuilder, inStream, &root, &errorMessage)) {
         cerr << "Error parsing template file: " << errorMessage << endl;
         throw errorMessage;
@@ -90,3 +87,41 @@ std::shared_ptr<Template> TemplateFactory::CreateTemplate(const std::string &tem
     const Value root = mapEntry->second;
     return createFromJsonValues(root);
 }
+
+void TemplateFactory::openFile(const char *fileName, ifstream *inStream) {
+    string modDir(modDirectory);
+    string dataDir(templateDirectory);
+
+    // try to use the mods directory
+    const char *moddedFile = modDir.append(fileName).c_str();
+    inStream->open(moddedFile);
+    if (!inStream->fail()) {
+        return;
+    }
+
+    // try to use the regular directory
+    const char *templateFile = dataDir.append(fileName).c_str();
+    inStream->open(templateFile);
+    if (!inStream->fail()) {
+        return;
+    }
+
+    // try to open the file as it is
+    inStream->open(fileName);
+    if (!inStream->fail()) {
+        return;
+    }
+    std::string errorMsg =
+            "Unable to find file in any of the following directories: [., " + templateDirectory + ", " + modDirectory +
+            "]";
+    throw ContractFailedException(errorMsg);
+}
+
+void TemplateFactory::SetTemplateDirectory(std::string templateDirectory) {
+    this->templateDirectory = templateDirectory;
+}
+
+void TemplateFactory::SetModDirectory(std::string modDirectory) {
+    this->modDirectory = modDirectory;
+}
+

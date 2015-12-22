@@ -6,6 +6,7 @@
 
 #include <memory>
 #include <unordered_map>
+#include <fstream>
 #include "../json/json.h"
 #include "Template.h"
 
@@ -17,6 +18,10 @@ namespace weave {
         virtual std::vector<std::string> GetTemplateKeys();
 
         std::shared_ptr<Template> CreateTemplate(const std::string &templateKey) const;
+
+        void SetTemplateDirectory(std::string templateDirectory);
+
+        void SetModDirectory(std::string modDirectory);
 
     protected:
         virtual std::shared_ptr<Template> createFromJsonValues(const Json::Value &root) const = 0;
@@ -37,6 +42,12 @@ namespace weave {
 
     private:
         std::shared_ptr<RandomStream> randomStream;
+
+        void openFile(const char *name, std::ifstream *stream);
+
+        std::string templateDirectory = "../Data/Template/";
+
+        std::string modDirectory = "../Mods/Template/";
     };
 }
 
