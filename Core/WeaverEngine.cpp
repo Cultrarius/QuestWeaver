@@ -10,7 +10,8 @@ using namespace weave;
 
 EngineResult WeaverEngine::fillTemplate(shared_ptr<Template> questTemplate,
                                         const QuestModel &questModel,
-                                        const WorldModel &worldModel) const {
+                                        const WorldModel &worldModel,
+                                        const StoryWriter &storyWriter) const {
     unordered_set<string> mandatory;
     map<string, vector<WorldModelAction>> candidates;
     for (const TemplateQuestProperty &questProperty : questTemplate->GetProperties()) {
@@ -43,7 +44,7 @@ EngineResult WeaverEngine::fillTemplate(shared_ptr<Template> questTemplate,
             }
         }
     }
-    string story = storyWriter->CreateStory(graph, questModel);
+    string story = storyWriter.CreateStory(graph);
     return EngineResult(modelActions, propertyValues, story);
 }
 
@@ -126,7 +127,6 @@ void WeaverEngine::SetParameters(EngineParameters parameters) {
 
 WeaverEngine::WeaverEngine(std::shared_ptr<RandomStream> rs) {
     this->randomStream = rs;
-    storyWriter = make_unique<StoryWriter>(rs);
 }
 
 EngineResult::EngineResult(const std::vector<WorldModelAction> &actions,

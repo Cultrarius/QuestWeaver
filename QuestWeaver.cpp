@@ -20,6 +20,7 @@ QuestWeaver::QuestWeaver(uint64_t seed, Directories directories) {
     quests.reset(new QuestModel());
     templates.reset(new TemplateEngine());
     world.reset(new SpaceWorldModel(randomStream));
+    stories.reset(new StoryWriter(randomStream, *quests, *templates));
 
     shared_ptr<TemplateFactory> spaceFactory = make_shared<SpaceQuestTemplateFactory>(randomStream, directories);
     templates->RegisterTemplateFactory(spaceFactory);
@@ -27,7 +28,7 @@ QuestWeaver::QuestWeaver(uint64_t seed, Directories directories) {
 
 shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
     auto questTemplate = templates->GetTemplateForNewQuest(randomStream);
-    EngineResult result = engine->fillTemplate(questTemplate, *quests, *world);
+    EngineResult result = engine->fillTemplate(questTemplate, *quests, *world, *stories);
     world->Execute(result.GetModelActions());
     shared_ptr<Quest> newQuest = questTemplate->ToQuest(result.GetQuestPropertyValues());
     return quests->RegisterNew(newQuest, result.GetQuestPropertyValues());

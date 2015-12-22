@@ -57,7 +57,8 @@ namespace weave {
 
         EngineResult fillTemplate(std::shared_ptr<Template> questTemplate,
                                   const QuestModel &questModel,
-                                  const WorldModel &worldModel) const;
+                                  const WorldModel &worldModel,
+                                  const StoryWriter &storyWriter) const;
 
         EngineParameters GetParameters();
 
@@ -66,7 +67,6 @@ namespace weave {
     private:
         EngineParameters parameters;
         std::shared_ptr<RandomStream> randomStream;
-        std::unique_ptr<StoryWriter> storyWriter;
 
         WeaverGraph createGraph(const QuestModel &questModel, const WorldModel &worldModel,
                                 std::unordered_set<std::string> mandatoryProperties,

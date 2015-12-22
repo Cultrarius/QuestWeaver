@@ -7,9 +7,20 @@
 using namespace std;
 using namespace weave;
 
-string StoryWriter::CreateStory(const WeaverGraph &graph, const QuestModel &model) {
+string StoryWriter::CreateStory(const WeaverGraph &graph) const {
+    initialize();
     return "";
 }
 
-StoryWriter::StoryWriter(std::shared_ptr<RandomStream> randomStream) : rs(randomStream) {
+void StoryWriter::initialize() const {
+    if (isInitialized) {
+        return;
+    }
+    isInitialized = true;
 }
+
+StoryWriter::StoryWriter(std::shared_ptr<RandomStream> randomStream, const weave::QuestModel &model,
+                         const weave::TemplateEngine &templateEngine) :
+        rs(randomStream), model(model), templateEngine(templateEngine) {
+}
+

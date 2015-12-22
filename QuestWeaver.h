@@ -41,6 +41,7 @@ namespace weave {
         std::unique_ptr<QuestModel> quests;
         std::unique_ptr<TemplateEngine> templates;
         std::unique_ptr<WorldModel> world;
+        std::unique_ptr<StoryWriter> stories;
         std::shared_ptr<RandomStream> randomStream;
     };
 }
