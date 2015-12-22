@@ -43,7 +43,7 @@ EngineResult WeaverEngine::fillTemplate(shared_ptr<Template> questTemplate,
             }
         }
     }
-    string story = "";
+    string story = storyWriter->CreateStory(graph, questModel);
     return EngineResult(modelActions, propertyValues, story);
 }
 
@@ -78,13 +78,15 @@ WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldM
 void WeaverEngine::addGraphEdges(const QuestModel &questModel, WeaverGraph &graph,
                                  unordered_set<ID> &candidateIds) const {
     for (auto quest : questModel.GetQuests()) {
-        auto questEntities = questModel.GetQuestEntities(quest->GetId());
+        ID questId = quest->GetId();
+        auto questEntities = questModel.GetQuestEntities(questId);
 
-        // add direct connection history
         unordered_set<ID> entityIds;
         unordered_set<ID> shadowIds;
         for (auto entity : questEntities) {
             ID id = entity->GetId();
+            // add unknown entities as shadow node, the graph will use them
+            // to create the transitive edges between the nodes
             if (candidateIds.find(id) == candidateIds.end()) {
                 if (shadowIds.find(id) == shadowIds.end()) {
                     graph.AddShadowNode(id);
@@ -94,6 +96,8 @@ void WeaverEngine::addGraphEdges(const QuestModel &questModel, WeaverGraph &grap
             }
             entityIds.insert(id);
         }
+
+        // add direct connection history
         unordered_set<ID> seenIds;
         for (ID id1 : entityIds) {
             seenIds.insert(id1);
@@ -101,11 +105,11 @@ void WeaverEngine::addGraphEdges(const QuestModel &questModel, WeaverGraph &grap
                 if (seenIds.find(id2) != seenIds.end()) {
                     continue;
                 }
-                Edge edge(id1, id2, EdgeType::DIRECT);
+                Edge edge(id1, id2, EdgeType::DIRECT, questId);
                 graph.AddEdge(edge);
             }
             for (ID id2 : shadowIds) {
-                Edge edge(id1, id2, EdgeType::DIRECT);
+                Edge edge(id1, id2, EdgeType::DIRECT, questId);
                 graph.AddEdge(edge);
             }
         }
@@ -122,7 +126,7 @@ void WeaverEngine::SetParameters(EngineParameters parameters) {
 
 WeaverEngine::WeaverEngine(std::shared_ptr<RandomStream> rs) {
     this->randomStream = rs;
-    storyWriter = make_unique<StoryWriter>();
+    storyWriter = make_unique<StoryWriter>(rs);
 }
 
 EngineResult::EngineResult(const std::vector<WorldModelAction> &actions,

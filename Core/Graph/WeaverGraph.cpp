@@ -78,6 +78,7 @@ void WeaverGraph::mergeAddEdge(Edge &edge) {
         edges.insert(edge);
     } else {
         edge.addTypesFrom(*entry);
+        edge.addQuestIdsFrom(*entry);
         edges.erase(entry);
         edges.insert(edge);
     }

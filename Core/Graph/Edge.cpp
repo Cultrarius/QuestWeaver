@@ -7,13 +7,19 @@
 using namespace std;
 using namespace weave;
 
-Edge::Edge(ID nodeId1, ID nodeId2, EdgeType type) {
+Edge::Edge(ID nodeId1, ID nodeId2, EdgeType type) : Edge(nodeId1, nodeId2, type, 0) {
+}
+
+Edge::Edge(ID nodeId1, ID nodeId2, EdgeType type, ID questId) {
     if (nodeId1 == nodeId2) {
         throw ContractFailedException("Can not create an edge between the same nodes!");
     }
     id1 = min(nodeId1, nodeId2);
     id2 = max(nodeId1, nodeId2);
     types[type] = 1;
+    if (questId != 0) {
+        questIds.insert(questId);
+    }
 }
 
 ID Edge::Get(ID startId) const {
@@ -51,4 +57,17 @@ ID Edge::GetNode1() const {
 
 ID Edge::GetNode2() const {
     return id2;
+}
+
+std::unordered_set<ID> Edge::GetQuestIds() const {
+    return questIds;
+}
+
+void Edge::addQuestIdsFrom(const Edge &other) {
+    if (!this->operator==(other)) {
+        throw ContractFailedException("unable to combine edges from different nodes!");
+    }
+    for (ID id : other.questIds) {
+        questIds.insert(id);
+    }
 }

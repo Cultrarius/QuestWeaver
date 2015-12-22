@@ -18,6 +18,8 @@ namespace weave {
     public:
         Edge(ID nodeId1, ID nodeId2, EdgeType type);
 
+        Edge(ID nodeId1, ID nodeId2, EdgeType type, ID questId);
+
         uint32_t Count(EdgeType type) const;
 
         ID Get(ID startId) const;
@@ -25,6 +27,8 @@ namespace weave {
         ID GetNode1() const;
 
         ID GetNode2() const;
+
+        std::unordered_set<ID> GetQuestIds() const;
 
         bool operator==(const Edge &other) const;
 
@@ -36,7 +40,10 @@ namespace weave {
         ID id1;
         ID id2;
         std::unordered_map<EdgeType, uint32_t, EnumClassHash> types;
+        std::unordered_set<ID> questIds;
 
         void addTypesFrom(const Edge &other);
+
+        void addQuestIdsFrom(const Edge &other);
     };
 }
