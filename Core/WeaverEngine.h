@@ -10,7 +10,7 @@
 #include "../QuestModel/QuestModel.h"
 #include "Graph/WeaverGraph.h"
 #include "Graph/GraphAnalyzer.h"
-#include "Story/StoryWriter.h"
+#include "../Story/StoryWriter.h"
 
 namespace weave {
     struct EngineParameters {

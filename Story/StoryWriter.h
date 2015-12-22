@@ -2,10 +2,10 @@
 // Created by michael on 21.12.15.
 //
 
-#include "../WeaverTypes.h"
-#include "../WeaverUtils.h"
-#include "../Graph/WeaverGraph.h"
-#include "../../QuestModel/QuestModel.h"
+
+#include "../Core/WeaverUtils.h"
+#include "../Core/Graph/WeaverGraph.h"
+#include "../QuestModel/QuestModel.h"
 
 namespace weave {
     class StoryWriter {
