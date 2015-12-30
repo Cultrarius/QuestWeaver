@@ -28,7 +28,8 @@
 */
 #ifndef CEREAL_CEREAL_HPP_
 #define CEREAL_CEREAL_HPP_
-
+#pragma GCC system_header
+#pragma clang system_header
 #include <type_traits>
 #include <string>
 #include <memory>

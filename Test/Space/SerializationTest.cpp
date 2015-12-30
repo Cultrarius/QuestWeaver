@@ -220,7 +220,7 @@ TEST_CASE("Serialize Entities", "[serialize]") {
         REQUIRE(entities.size() == deserialized.size());
 
         for (unsigned int i = 0; i < entities.size(); i++) {
-            REQUIRE(typeid(*(deserialized[i])) == typeid(*(deserialized[i])));
+            REQUIRE(typeid(*(entities[i])) == typeid(*(deserialized[i])));
         }
     }
 

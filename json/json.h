@@ -70,7 +70,8 @@ license you like.
 
 
 
-
+#pragma GCC system_header
+#pragma clang system_header
 
 #ifndef JSON_AMALGATED_H_INCLUDED
 # define JSON_AMALGATED_H_INCLUDED
