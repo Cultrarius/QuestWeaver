@@ -2,6 +2,7 @@
 // Created by michael on 06.11.15.
 //
 
+#include <algorithm>
 #include "Edge.h"
 
 using namespace std;
