@@ -5,7 +5,7 @@
 #pragma once
 
 #include "Core/WeaverTypes.h"
-#include "serialization/cereal.h"
+#include "cereal.h"
 #include "json/json.h"
 #include "Core/WeaverEngine.h"
 #include "QuestModel/QuestModel.h"

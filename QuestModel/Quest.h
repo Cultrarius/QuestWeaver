@@ -5,7 +5,7 @@
 #pragma once
 
 #include "../Core/WeaverTypes.h"
-#include "cereal.h"
+#include "../cereal.h"
 #include "../World/WorldModelAction.h"
 #include "QuestModelAction.h"
 
