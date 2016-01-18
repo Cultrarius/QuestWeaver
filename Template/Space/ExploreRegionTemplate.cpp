@@ -65,11 +65,12 @@ void ExploreRegionTemplate::gatherLocationEntities(vector<WorldModelAction> *act
     }
 }
 
-shared_ptr<Quest> ExploreRegionTemplate::ToQuest(const vector<QuestPropertyValue> &questPropertyValues) const {
+shared_ptr<Quest> ExploreRegionTemplate::ToQuest(const vector<QuestPropertyValue> &questPropertyValues,
+                                                 const std::string &questStory) const {
     const string &description = getBestFittingDescription(questPropertyValues);
     const string &title = getTitle(questPropertyValues);
 
     ID location = getEntityIdFromProperty("location", questPropertyValues);
     ID sponsor = getEntityIdFromProperty("sponsor", questPropertyValues);
-    return make_shared<ExploreRegionQuest>(title, description, location, sponsor);
+    return make_shared<ExploreRegionQuest>(title, description, questStory, location, sponsor);
 }

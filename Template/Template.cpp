@@ -104,3 +104,7 @@ ID Template::getEntityIdFromProperty(std::string propertyName,
     }
     return 0;
 }
+
+std::shared_ptr<Quest> Template::ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const {
+    return ToQuest(questPropertyValues, "");
+}

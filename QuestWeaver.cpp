@@ -30,7 +30,7 @@ shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
     auto questTemplate = templates->GetTemplateForNewQuest(randomStream);
     EngineResult result = engine->fillTemplate(questTemplate, *quests, *world, *stories);
     world->Execute(result.GetModelActions());
-    shared_ptr<Quest> newQuest = questTemplate->ToQuest(result.GetQuestPropertyValues());
+    shared_ptr<Quest> newQuest = questTemplate->ToQuest(result.GetQuestPropertyValues(), result.GetStory());
     return quests->RegisterNew(newQuest, result.GetQuestPropertyValues());
 }
 

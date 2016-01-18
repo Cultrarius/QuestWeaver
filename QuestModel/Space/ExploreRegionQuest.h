@@ -11,7 +11,8 @@
 namespace weave {
     class ExploreRegionQuest : public Quest {
     public:
-        ExploreRegionQuest(const std::string &title, const std::string &description, ID locationId, ID sponsorId);
+        ExploreRegionQuest(const std::string &title, const std::string &description, const std::string &story,
+                           ID locationId, ID sponsorId);
 
         std::string GetType() const;
 
@@ -29,7 +30,7 @@ namespace weave {
         ID sponsor;
 
         ExploreRegionQuest(ID id, QuestState state, const std::string &title, const std::string &description,
-                           ID location, ID sponsor);
+                           const std::string &story, ID location, ID sponsor);
 
         std::shared_ptr<Quest> setStateAndId(ID newId, QuestState newState) const;
 
@@ -37,8 +38,8 @@ namespace weave {
 
         template<class Archive>
         void serialize(Archive &archive) {
-            archive(getCerealId(), getCerealState(), getCerealTitle(), getCerealDescription(), getCerealLocation(),
-                    getCerealSponsor());
+            archive(getCerealId(), getCerealState(), getCerealTitle(), getCerealDescription(), getCerealStory(),
+                    getCerealLocation(), getCerealSponsor());
         }
 
         template<class Archive>
@@ -47,11 +48,12 @@ namespace weave {
             QuestState state;
             std::string title;
             std::string description;
+            std::string story;
             ID location;
             ID sponsor;
 
-            ar(id, state, title, description, location, sponsor);
-            construct(id, state, title, description, location, sponsor);
+            ar(id, state, title, description, story, location, sponsor);
+            construct(id, state, title, description, story, location, sponsor);
         }
     };
 }

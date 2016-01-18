@@ -20,11 +20,16 @@ string Quest::GetDescription() const {
 }
 
 Quest::Quest(const string &title, const string &description) :
-        Quest(NoID, QuestState::Proposed, title, description) {
+        Quest(NoID, QuestState::Proposed, title, description, "") {
 }
 
-Quest::Quest(ID newId, QuestState state, const string &title, const string &description) :
-        id(newId), state(state), title(title), description(description) {
+Quest::Quest(ID newId, QuestState state, const string &title, const string &description, const std::string& story) :
+        id(newId), state(state), title(title), description(description), story(story) {
+}
+
+
+Quest::Quest(const std::string &title, const std::string &description, const std::string &story):
+        Quest(NoID, QuestState::Proposed, title, description, story) {
 }
 
 ID Quest::GetId() const {
@@ -51,4 +56,8 @@ vector<WorldModelAction> QuestTickResult::GetWorldChanges() const {
 
 QuestModelAction QuestTickResult::GetQuestChange() const {
     return questChanges;
+}
+
+std::string Quest::GetStory() const {
+    return story;
 }

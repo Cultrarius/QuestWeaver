@@ -11,7 +11,7 @@ TestQuest::TestQuest(const string &title, const string &description) : Quest(tit
 }
 
 TestQuest::TestQuest(ID id, QuestState state, const string &title, const string &description)
-        : Quest(id, state, title, description) {
+        : Quest(id, state, title, description, "Once upon a time...") {
 }
 
 std::string TestQuest::GetType() const {

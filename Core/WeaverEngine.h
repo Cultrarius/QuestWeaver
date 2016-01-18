@@ -23,16 +23,6 @@ namespace weave {
         }
     };
 
-    struct PropertyCandidate {
-        PropertyCandidate(const TemplateQuestProperty &property, WorldModelAction action,
-                          std::vector<WorldModelAction> history)
-                : property(property), action(action), history(history) { }
-
-        TemplateQuestProperty property;
-        WorldModelAction action;
-        std::vector<WorldModelAction> history;
-    };
-
     class EngineResult {
     public:
         EngineResult(const std::vector<WorldModelAction> &actions,

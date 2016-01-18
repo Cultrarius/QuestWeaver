@@ -34,11 +34,17 @@ namespace weave {
         Quest(const std::string &title,
               const std::string &description);
 
+        Quest(const std::string &title,
+              const std::string &description,
+              const std::string &story);
+
         QuestState GetState() const;
 
         std::string GetTitle() const;
 
         std::string GetDescription() const;
+
+        std::string GetStory() const;
 
         ID GetId() const;
 
@@ -55,7 +61,8 @@ namespace weave {
         Quest(ID id,
               QuestState state,
               const std::string &title,
-              const std::string &description);
+              const std::string &description,
+              const std::string &story);
 
         virtual std::shared_ptr<Quest> setStateAndId(ID newId, QuestState newState) const = 0;
 
@@ -77,18 +84,23 @@ namespace weave {
             return cereal::make_nvp("description", description);
         }
 
+        auto getCerealStory() const {
+            return cereal::make_nvp("story", story);
+        }
+
     private:
         ID id;
         QuestState state;
         std::string title;
         std::string description;
+        std::string story;
 
         // serialization
         friend class cereal::access;
 
         template<class Archive>
         void serialize(Archive &archive) {
-            archive(getCerealId(), getCerealState(), getCerealTitle(), getCerealDescription());
+            archive(getCerealId(), getCerealState(), getCerealTitle(), getCerealDescription(), getCerealStory());
         }
     };
 }
