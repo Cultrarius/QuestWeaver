@@ -31,6 +31,10 @@ QuestWeaver::QuestWeaver(WeaverConfig config) {
     if (config.debug) {
         shared_ptr<TemplateFactory> spaceFactory = make_shared<SpaceQuestTemplateFactory>(randomStream, config.dirs);
         templates->RegisterTemplateFactory(spaceFactory);
+    } else {
+        for (auto factory : config.templateFactories) {
+            templates->RegisterTemplateFactory(factory);
+        }
     }
 }
 
@@ -52,10 +56,6 @@ void QuestWeaver::Tick(float delta) {
         world->Execute(change.GetWorldChanges());
         quests->Execute(change.GetQuestChange());
     }
-}
-
-void QuestWeaver::RegisterWorldListener(std::shared_ptr<WorldListener> listener) {
-    world->AddListener(listener);
 }
 
 std::vector<std::shared_ptr<Quest>> QuestWeaver::GetAllQuests() const {

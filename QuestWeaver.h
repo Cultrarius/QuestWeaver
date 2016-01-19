@@ -33,8 +33,6 @@ namespace weave {
 
         void Tick(float delta);
 
-        void RegisterWorldListener(std::shared_ptr<WorldListener> listener);
-
         void RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory);
 
         std::shared_ptr<Quest> ChangeQuestState(QuestModelAction questAction);
