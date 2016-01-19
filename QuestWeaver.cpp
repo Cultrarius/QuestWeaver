@@ -7,23 +7,31 @@
 #include <iostream>
 #include "Template/Space/SpaceQuestTemplateFactory.h"
 #include "World/Space/SpaceWorldModel.h"
+#include "WeaverConfig.h"
 
 using namespace std;
 using namespace weave;
 
-QuestWeaver::QuestWeaver(uint64_t seed) : QuestWeaver(seed, Directories()) {
+QuestWeaver::QuestWeaver(uint64_t seed) : QuestWeaver(WeaverConfig(seed)) {
 }
 
-QuestWeaver::QuestWeaver(uint64_t seed, Directories directories) {
-    randomStream.reset(new RandomStream(seed));
+QuestWeaver::QuestWeaver(WeaverConfig config) {
+    randomStream.reset(new RandomStream(config.seed));
     engine.reset(new WeaverEngine(randomStream));
     quests.reset(new QuestModel());
     templates.reset(new TemplateEngine());
-    world.reset(new SpaceWorldModel(randomStream));
+    if (config.worldModel != nullptr) {
+        world.reset(config.worldModel);
+    } else if (config.debug) {
+        world.reset(new SpaceWorldModel(randomStream));
+    } else {
+        throw ContractFailedException("A world model must be provided for the quest system to work.");
+    }
     stories.reset(new StoryWriter(randomStream, *quests, *templates));
-
-    shared_ptr<TemplateFactory> spaceFactory = make_shared<SpaceQuestTemplateFactory>(randomStream, directories);
-    templates->RegisterTemplateFactory(spaceFactory);
+    if (config.debug) {
+        shared_ptr<TemplateFactory> spaceFactory = make_shared<SpaceQuestTemplateFactory>(randomStream, config.dirs);
+        templates->RegisterTemplateFactory(spaceFactory);
+    }
 }
 
 shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
@@ -60,4 +68,8 @@ shared_ptr<Quest> QuestWeaver::GetQuest(ID questId) const {
 
 std::shared_ptr<Quest> QuestWeaver::ChangeQuestState(QuestModelAction questAction) {
     return quests->Execute(questAction);
+}
+
+void QuestWeaver::RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory) {
+    templates->RegisterTemplateFactory(factory);
 }

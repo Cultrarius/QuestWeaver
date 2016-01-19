@@ -14,13 +14,14 @@
 #include "QuestModel/Quest.h"
 #include "Core/WeaverUtils.h"
 #include "World/WorldListener.h"
+#include "WeaverConfig.h"
 
 namespace weave {
     class QuestWeaver {
     public:
         explicit QuestWeaver(uint64_t seed);
 
-        QuestWeaver(uint64_t seed, Directories directories);
+        explicit QuestWeaver(WeaverConfig config);
 
         std::vector<std::shared_ptr<Quest>> GetQuestsWithState(QuestState state) const;
 
@@ -33,6 +34,8 @@ namespace weave {
         void Tick(float delta);
 
         void RegisterWorldListener(std::shared_ptr<WorldListener> listener);
+
+        void RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory);
 
         std::shared_ptr<Quest> ChangeQuestState(QuestModelAction questAction);
 
