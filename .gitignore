@@ -30,3 +30,21 @@ build
 *.exe
 *.out
 *.app
+
+# VS Files
+/.vs/
+/CMakeFiles/
+/Debug/
+/lib/
+/QuestWeaver.dir/
+/QuestWeaverExecutable.dir/
+/QuestWeaverTest.dir/
+/Win32/
+*.vcxproj.filters
+*.VC.opendb
+*.cmake
+*.sdf
+*.sln
+*.vcxproj.user
+*.vcxproj
+/CMakeCache.txt
