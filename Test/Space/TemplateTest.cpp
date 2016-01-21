@@ -4,6 +4,7 @@
 
 #include <string>
 #include <memory>
+#include <Template/TemplateEngine.h>
 #include "../catch.hpp"
 #include "../../Core/WeaverUtils.h"
 #include "../../Template/Space/SpaceQuestTemplateFactory.h"
@@ -14,14 +15,16 @@ using namespace std;
 
 TEST_CASE("Template factory", "[template]") {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
-    SpaceQuestTemplateFactory factory(rs);
-    REQUIRE(factory.GetTemplateKeys().size() >= 1);
+    TemplateEngine engine(rs, Directories());
+    shared_ptr<SpaceQuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
+    engine.RegisterTemplateFactory(factory);
+    REQUIRE(factory->GetTemplateKeys().size() >= 1);
 
     SECTION("Checking the keys") {
         vector<string> keys = {"ExploreRegionQuest"};
         for (string key : keys) {
             bool hasKey = false;
-            for (string templateKey : factory.GetTemplateKeys()) {
+            for (string templateKey : factory->GetTemplateKeys()) {
                 if (key == templateKey) {
                     hasKey = true;
                     break;
@@ -32,8 +35,8 @@ TEST_CASE("Template factory", "[template]") {
     }
 
     SECTION("Retrieving template for every key") {
-        for (string templateKey : factory.GetTemplateKeys()) {
-            auto temp = factory.CreateTemplate(templateKey);
+        for (string templateKey : factory->GetTemplateKeys()) {
+            auto temp = factory->CreateTemplate(templateKey);
             REQUIRE(temp.get() != nullptr);
         }
     }
@@ -42,13 +45,15 @@ TEST_CASE("Template factory", "[template]") {
 TEST_CASE("Templates", "[template]") {
     int testSize = 100;
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
-    SpaceQuestTemplateFactory factory(rs);
+    TemplateEngine engine(rs, Directories());
+    shared_ptr<SpaceQuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
+    engine.RegisterTemplateFactory(factory);
 
     SECTION("Checking properties size") {
         for (int i = 0; i < testSize; i++) {
             rs->Seed(i);
-            for (string templateKey : factory.GetTemplateKeys()) {
-                auto tp = factory.CreateTemplate(templateKey);
+            for (string templateKey : factory->GetTemplateKeys()) {
+                auto tp = factory->CreateTemplate(templateKey);
                 INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));
                 REQUIRE(tp->GetProperties().size() > 0);
             }
@@ -58,8 +63,8 @@ TEST_CASE("Templates", "[template]") {
     SECTION("Checking mandatory property exists") {
         for (int i = 0; i < testSize; i++) {
             rs->Seed(i);
-            for (string templateKey : factory.GetTemplateKeys()) {
-                auto tp = factory.CreateTemplate(templateKey);
+            for (string templateKey : factory->GetTemplateKeys()) {
+                auto tp = factory->CreateTemplate(templateKey);
                 bool hasMandatoryProperty = false;
                 for (auto property : tp->GetProperties()) {
                     if (property.IsMandatory()) {
@@ -76,8 +81,8 @@ TEST_CASE("Templates", "[template]") {
     SECTION("Checking property names") {
         for (int i = 0; i < testSize; i++) {
             rs->Seed(i);
-            for (string templateKey : factory.GetTemplateKeys()) {
-                auto tp = factory.CreateTemplate(templateKey);
+            for (string templateKey : factory->GetTemplateKeys()) {
+                auto tp = factory->CreateTemplate(templateKey);
                 for (auto property : tp->GetProperties()) {
                     INFO("Template Key: " + templateKey + ", Property: " + property.GetName() + ", Seed: " +
                          to_string(i));
@@ -91,8 +96,8 @@ TEST_CASE("Templates", "[template]") {
         WorldModel *worldModel = new SpaceWorldModel(rs);
         for (int i = 0; i < testSize; i++) {
             rs->Seed(i);
-            for (string templateKey : factory.GetTemplateKeys()) {
-                auto tp = factory.CreateTemplate(templateKey);
+            for (string templateKey : factory->GetTemplateKeys()) {
+                auto tp = factory->CreateTemplate(templateKey);
                 for (auto property : tp->GetProperties()) {
                     auto candidates = tp->GetPropertyCandidates(property, *worldModel);
                     INFO("Template Key: " + templateKey + ", Property: " + property.GetName() + ", Seed: " +
@@ -107,8 +112,8 @@ TEST_CASE("Templates", "[template]") {
         WorldModel *worldModel = new SpaceWorldModel(rs);
         for (int i = 0; i < testSize; i++) {
             rs->Seed(i);
-            for (string templateKey : factory.GetTemplateKeys()) {
-                auto tp = factory.CreateTemplate(templateKey);
+            for (string templateKey : factory->GetTemplateKeys()) {
+                auto tp = factory->CreateTemplate(templateKey);
                 for (auto property : tp->GetProperties()) {
                     auto candidates = tp->GetPropertyCandidates(property, *worldModel);
                     for (auto candidate : candidates) {
@@ -126,8 +131,8 @@ TEST_CASE("Templates", "[template]") {
         WorldModel *worldModel = new SpaceWorldModel(rs);
         for (int i = 0; i < testSize; i++) {
             rs->Seed(i);
-            for (string templateKey : factory.GetTemplateKeys()) {
-                auto tp = factory.CreateTemplate(templateKey);
+            for (string templateKey : factory->GetTemplateKeys()) {
+                auto tp = factory->CreateTemplate(templateKey);
                 vector<QuestPropertyValue> questValues;
                 for (auto property : tp->GetProperties()) {
                     auto candidates = tp->GetPropertyCandidates(property, *worldModel);
@@ -154,8 +159,8 @@ TEST_CASE("Templates", "[template]") {
         WorldModel *worldModel = new SpaceWorldModel(rs);
         for (int i = 0; i < testSize; i++) {
             rs->Seed(i);
-            for (string templateKey : factory.GetTemplateKeys()) {
-                auto tp = factory.CreateTemplate(templateKey);
+            for (string templateKey : factory->GetTemplateKeys()) {
+                auto tp = factory->CreateTemplate(templateKey);
                 vector<QuestPropertyValue> questValues;
                 for (auto property : tp->GetProperties()) {
                     if (!property.IsMandatory()) {

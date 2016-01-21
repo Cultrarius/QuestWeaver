@@ -15,14 +15,16 @@ using namespace std;
 TEST_CASE("Serialize Quests", "[serialize]") {
     int testSize = 100;
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
-    SpaceQuestTemplateFactory factory(rs);
+    TemplateEngine engine(rs, Directories());
+    shared_ptr<SpaceQuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
+    engine.RegisterTemplateFactory(factory);
 
     SECTION("Serialize and deserialize JSON in-memory") {
         WorldModel *worldModel = new SpaceWorldModel(rs);
         for (int i = 0; i < testSize; i++) {
             rs->Seed(i);
-            for (string templateKey : factory.GetTemplateKeys()) {
-                auto tp = factory.CreateTemplate(templateKey);
+            for (string templateKey : factory->GetTemplateKeys()) {
+                auto tp = factory->CreateTemplate(templateKey);
                 vector<QuestPropertyValue> questValues;
                 for (auto property : tp->GetProperties()) {
                     if (!property.IsMandatory()) {
@@ -66,8 +68,8 @@ TEST_CASE("Serialize Quests", "[serialize]") {
         const char *fileName = "testSerialization.bin";
         for (int i = 0; i < testSize; i++) {
             rs->Seed(i);
-            for (string templateKey : factory.GetTemplateKeys()) {
-                auto tp = factory.CreateTemplate(templateKey);
+            for (string templateKey : factory->GetTemplateKeys()) {
+                auto tp = factory->CreateTemplate(templateKey);
                 vector<QuestPropertyValue> questValues;
                 for (auto property : tp->GetProperties()) {
                     if (!property.IsMandatory()) {
@@ -112,8 +114,8 @@ TEST_CASE("Serialize Quests", "[serialize]") {
 
         for (int i = 0; i < testSize; i++) {
             rs->Seed(i);
-            for (string templateKey : factory.GetTemplateKeys()) {
-                auto tp = factory.CreateTemplate(templateKey);
+            for (string templateKey : factory->GetTemplateKeys()) {
+                auto tp = factory->CreateTemplate(templateKey);
                 vector<QuestPropertyValue> questValues;
                 for (auto property : tp->GetProperties()) {
                     if (!property.IsMandatory()) {
