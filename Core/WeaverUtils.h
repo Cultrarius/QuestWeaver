@@ -54,7 +54,7 @@ namespace weave {
 
     private:
         std::uniform_int_distribution<int> defaultDistribution;
-        std::default_random_engine generator;
+		std::mt19937 generator;
 
         // serialization
         friend class cereal::access;
