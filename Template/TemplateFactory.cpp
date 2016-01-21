@@ -97,20 +97,22 @@ void TemplateFactory::openFile(const char *fileName, ifstream *inStream) {
 
     // try to use the mods directory
     const char *moddedFile = modDir.append(fileName).c_str();
-    inStream->open(moddedFile);
+    inStream->open(moddedFile, ios::in);
     if (!inStream->fail()) {
         return;
     }
 
     // try to use the regular directory
     const char *templateFile = dataDir.append(fileName).c_str();
-    inStream->open(templateFile);
+    inStream->open(templateFile, ios::in);
     if (!inStream->fail()) {
         return;
     }
 
     // try to open the file as it is
-    inStream->open(fileName);
+	string currentDir("./");
+	const char *localFile = currentDir.append(fileName).c_str();
+    inStream->open(localFile, ios::in);
     if (!inStream->fail()) {
         return;
     }

@@ -6,7 +6,9 @@ using namespace weave;
 using namespace cereal;
 
 int main() {
-    QuestWeaver weaver(42);
+	WeaverConfig config;
+	config.dirs.modDirectory = "./Template/";
+    QuestWeaver weaver(config);
     shared_ptr<Quest> newQuest = weaver.CreateNewQuest();
     cout << "New Quest created!" << endl;
     cout << "Title: " << newQuest->GetTitle() << endl;
@@ -15,12 +17,12 @@ int main() {
     weaver.Tick(1);
 
     stringstream ss;
-    weaver.serialize(ss, StreamType::BINARY);
+    weaver.Serialize(ss, StreamType::JSON);
     cout << ss.str() << endl;
 
     cout << "Hey!" << endl;
 
-    QuestWeaver deserialized = QuestWeaver::deserialize(ss, StreamType::BINARY);
+    QuestWeaver deserialized = QuestWeaver::Deserialize(ss, StreamType::JSON, config.dirs);
     shared_ptr<TemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();;
     deserialized.RegisterTemplateFactory(factory);
     cout << "Woot!" << endl;

@@ -16,7 +16,7 @@ namespace weave {
         uint64_t seed = 0;
 
         /*
-         * The directories the template files and other things can be found in. Also allows to define a mod directory
+         * The directories in which the templates and other files can be found in. Also allows to define a mod directory
          * which can overwrite the default directory for selected files.
          */
         Directories dirs;

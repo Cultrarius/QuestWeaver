@@ -38,3 +38,11 @@ void TemplateEngine::RegisterTemplateFactory(std::shared_ptr<TemplateFactory> fa
 TemplateEngine::TemplateEngine(std::shared_ptr<RandomStream> randomStream, Directories dirs) :
         randomStream(randomStream), dirs(dirs) {
 }
+
+void weave::TemplateEngine::ChangeDirectories(Directories newDirs)
+{
+	dirs = newDirs;
+	for (auto factory : factories) {
+		factory->dirs = dirs;
+	}
+}

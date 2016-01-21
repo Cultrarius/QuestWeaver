@@ -72,7 +72,7 @@ void QuestWeaver::RegisterTemplateFactory(std::shared_ptr<TemplateFactory> facto
     templates->RegisterTemplateFactory(factory);
 }
 
-void QuestWeaver::serialize(std::ostream &outputStream, StreamType type) {
+void QuestWeaver::Serialize(std::ostream &outputStream, StreamType type) {
     if (type == StreamType::JSON) {
         cereal::JSONOutputArchive outputArchive(outputStream);
         outputArchive(*this);
@@ -84,7 +84,7 @@ void QuestWeaver::serialize(std::ostream &outputStream, StreamType type) {
     }
 }
 
-QuestWeaver QuestWeaver::deserialize(std::istream &inputStream, StreamType type) {
+QuestWeaver QuestWeaver::Deserialize(std::istream &inputStream, StreamType type) {
     QuestWeaver deserialized;
     if (type == StreamType::JSON) {
         cereal::JSONInputArchive inputArchive(inputStream);
@@ -98,5 +98,16 @@ QuestWeaver QuestWeaver::deserialize(std::istream &inputStream, StreamType type)
     return deserialized;
 }
 
+QuestWeaver QuestWeaver::Deserialize(std::istream &inputStream, StreamType type, Directories currentDirectories) {
+	QuestWeaver deserialized = Deserialize(inputStream, type);
+	deserialized.ChangeWorkingDirectories(currentDirectories);
+	return deserialized;
+}
+
 QuestWeaver::QuestWeaver() {
+}
+
+void weave::QuestWeaver::ChangeWorkingDirectories(Directories directories)
+{
+	templates->ChangeDirectories(directories);
 }

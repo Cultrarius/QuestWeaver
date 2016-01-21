@@ -41,9 +41,13 @@ namespace weave {
 
         std::shared_ptr<Quest> ChangeQuestState(QuestModelAction questAction);
 
-        void serialize(std::ostream &outputStream, StreamType type);
+		void ChangeWorkingDirectories(Directories directories);
 
-        static QuestWeaver deserialize(std::istream &inputStream, StreamType type);
+        void Serialize(std::ostream &outputStream, StreamType type);
+
+        static QuestWeaver Deserialize(std::istream &inputStream, StreamType type);
+
+		static QuestWeaver Deserialize(std::istream &inputStream, StreamType type, Directories currentDirectories);
 
     private:
         std::unique_ptr<WeaverEngine> engine;
@@ -52,7 +56,6 @@ namespace weave {
         std::unique_ptr<WorldModel> world;
         std::unique_ptr<StoryWriter> stories;
         std::shared_ptr<RandomStream> randomStream;
-        Directories dirs;
 
         // serialization
         friend class cereal::access;
@@ -61,15 +64,15 @@ namespace weave {
 
         template<class Archive>
         void load(Archive &archive) {
-            archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world), CEREAL_NVP(dirs));
+            archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world));
             engine.reset(new WeaverEngine(randomStream));
             stories.reset(new StoryWriter(randomStream, *quests, *templates));
-            templates.reset(new TemplateEngine(randomStream, dirs));
+            templates.reset(new TemplateEngine(randomStream, Directories()));
         }
 
         template<class Archive>
         void save(Archive &archive) const {
-            archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world), CEREAL_NVP(dirs));
+            archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world));
         }
     };
 }

@@ -18,6 +18,8 @@ namespace weave {
 
         void RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory);
 
+		void ChangeDirectories(Directories newDirs);
+
     private:
         std::vector<std::shared_ptr<TemplateFactory>> factories;
 
