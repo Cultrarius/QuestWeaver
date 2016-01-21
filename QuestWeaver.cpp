@@ -4,10 +4,8 @@
 
 #include "QuestWeaver.h"
 #include <algorithm>
-#include <iostream>
 #include "Template/Space/SpaceQuestTemplateFactory.h"
 #include "World/Space/SpaceWorldModel.h"
-#include "WeaverConfig.h"
 
 using namespace std;
 using namespace weave;
@@ -19,7 +17,7 @@ QuestWeaver::QuestWeaver(WeaverConfig config) {
     randomStream.reset(new RandomStream(config.seed));
     engine.reset(new WeaverEngine(randomStream));
     quests.reset(new QuestModel());
-    templates.reset(new TemplateEngine());
+    templates.reset(new TemplateEngine(randomStream, config.dirs));
     if (config.worldModel != nullptr) {
         world.reset(config.worldModel);
     } else if (config.debug) {
@@ -29,7 +27,7 @@ QuestWeaver::QuestWeaver(WeaverConfig config) {
     }
     stories.reset(new StoryWriter(randomStream, *quests, *templates));
     if (config.debug) {
-        shared_ptr<TemplateFactory> spaceFactory = make_shared<SpaceQuestTemplateFactory>(randomStream, config.dirs);
+        shared_ptr<TemplateFactory> spaceFactory = make_shared<SpaceQuestTemplateFactory>();
         templates->RegisterTemplateFactory(spaceFactory);
     } else {
         for (auto factory : config.templateFactories) {
@@ -39,7 +37,7 @@ QuestWeaver::QuestWeaver(WeaverConfig config) {
 }
 
 shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
-    auto questTemplate = templates->GetTemplateForNewQuest(randomStream);
+    auto questTemplate = templates->GetTemplateForNewQuest();
     EngineResult result = engine->fillTemplate(questTemplate, *quests, *world, *stories);
     world->Execute(result.GetModelActions());
     shared_ptr<Quest> newQuest = questTemplate->ToQuest(result.GetQuestPropertyValues(), result.GetStory());
@@ -72,4 +70,33 @@ std::shared_ptr<Quest> QuestWeaver::ChangeQuestState(QuestModelAction questActio
 
 void QuestWeaver::RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory) {
     templates->RegisterTemplateFactory(factory);
+}
+
+void QuestWeaver::serialize(std::ostream &outputStream, StreamType type) {
+    if (type == StreamType::JSON) {
+        cereal::JSONOutputArchive outputArchive(outputStream);
+        outputArchive(*this);
+    } else if (type == StreamType::BINARY) {
+        cereal::PortableBinaryOutputArchive outputArchive(outputStream);
+        outputArchive(*this);
+    } else {
+        throw ContractFailedException("Unknown serialization type!");
+    }
+}
+
+QuestWeaver QuestWeaver::deserialize(std::istream &inputStream, StreamType type) {
+    QuestWeaver deserialized;
+    if (type == StreamType::JSON) {
+        cereal::JSONInputArchive inputArchive(inputStream);
+        inputArchive(deserialized);
+    } else if (type == StreamType::BINARY) {
+        cereal::PortableBinaryInputArchive inputArchive(inputStream);
+        inputArchive(deserialized);
+    } else {
+        throw ContractFailedException("Unknown serialization type!");
+    }
+    return deserialized;
+}
+
+QuestWeaver::QuestWeaver() {
 }

@@ -4,12 +4,11 @@
 
 
 #include "TemplateEngine.h"
-#include <iostream>
 
 using namespace std;
 using namespace weave;
 
-shared_ptr<Template> TemplateEngine::GetTemplateForNewQuest(std::shared_ptr<RandomStream> randomStream) {
+shared_ptr<Template> TemplateEngine::GetTemplateForNewQuest() {
     if (factories.size() == 0) {
         throw ContractFailedException("No factory defined to create template.\n");
     }
@@ -31,5 +30,11 @@ void TemplateEngine::RegisterTemplateFactory(std::shared_ptr<TemplateFactory> fa
             return;
         }
     }
+    factory->randomStream = randomStream;
+    factory->dirs = dirs;
     factories.push_back(factory);
+}
+
+TemplateEngine::TemplateEngine(std::shared_ptr<RandomStream> randomStream, Directories dirs) :
+        randomStream(randomStream), dirs(dirs) {
 }

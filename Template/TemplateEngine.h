@@ -4,19 +4,25 @@
 
 #pragma once
 
-#include "Template.h"
-#include "TemplateFactory.h"
 #include "../Core/WeaverUtils.h"
-#include <memory>
+#include "../Core/WeaverTypes.h"
+#include "TemplateFactory.h"
+#include "Template.h"
 
 namespace weave {
     class TemplateEngine {
     public:
-        std::shared_ptr<Template> GetTemplateForNewQuest(std::shared_ptr<RandomStream> randomStream);
+        TemplateEngine(std::shared_ptr<RandomStream> randomStream, Directories dirs);
+
+        std::shared_ptr<Template> GetTemplateForNewQuest();
 
         void RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory);
 
     private:
         std::vector<std::shared_ptr<TemplateFactory>> factories;
+
+        std::shared_ptr<RandomStream> randomStream;
+
+        Directories dirs;
     };
 }

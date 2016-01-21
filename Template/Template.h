@@ -4,11 +4,10 @@
 
 #pragma once
 
-#include <vector>
-#include <memory>
 #include "../QuestModel/Quest.h"
 #include "../World/WorldModel.h"
 #include "../Core/WeaverUtils.h"
+#include "../Core/WeaverTypes.h"
 
 namespace weave {
     class TemplateQuestProperty {

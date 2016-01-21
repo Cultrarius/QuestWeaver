@@ -37,15 +37,22 @@ namespace weave {
 
         std::shared_ptr<SolarSystem> CreateSolarSystem() const;
 
+    protected:
+        virtual void empty() { }
+
     private:
         ModelParameters param;
 
         // serialization
         friend class cereal::access;
 
+        SpaceWorldModel() : WorldModel(std::shared_ptr<RandomStream>()) { }
+
         template<class Archive>
         void serialize(Archive &ar) {
-            ar(make_nvp("base", cereal::base_class<WorldModel>(this)), CEREAL_NVP(param));
+            ar( cereal::base_class<WorldModel>(this), CEREAL_NVP(param));
         }
     };
 }
+
+CEREAL_REGISTER_TYPE(weave::SpaceWorldModel);

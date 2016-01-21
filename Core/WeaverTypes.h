@@ -4,9 +4,7 @@
 
 #pragma once
 
-#include <stdint.h>
-#include <vector>
-#include <string>
+#include "../cereal.h"
 
 namespace weave {
     typedef uint64_t ID;
@@ -32,5 +30,13 @@ namespace weave {
         std::string templateDirectory = "../Template/";
 
         std::string modDirectory = "../Mods/Template/";
+    private:
+        // serialization
+        friend class cereal::access;
+
+        template<class Archive>
+        void serialize(Archive &archive) {
+            archive(CEREAL_NVP(templateDirectory), CEREAL_NVP(modDirectory));
+        }
     };
 }

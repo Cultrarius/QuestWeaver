@@ -17,6 +17,10 @@
 #include "WeaverConfig.h"
 
 namespace weave {
+    enum class StreamType {
+        JSON, BINARY
+    };
+
     class QuestWeaver {
     public:
         explicit QuestWeaver(uint64_t seed);
@@ -37,6 +41,10 @@ namespace weave {
 
         std::shared_ptr<Quest> ChangeQuestState(QuestModelAction questAction);
 
+        void serialize(std::ostream &outputStream, StreamType type);
+
+        static QuestWeaver deserialize(std::istream &inputStream, StreamType type);
+
     private:
         std::unique_ptr<WeaverEngine> engine;
         std::unique_ptr<QuestModel> quests;
@@ -44,5 +52,24 @@ namespace weave {
         std::unique_ptr<WorldModel> world;
         std::unique_ptr<StoryWriter> stories;
         std::shared_ptr<RandomStream> randomStream;
+        Directories dirs;
+
+        // serialization
+        friend class cereal::access;
+
+        QuestWeaver();
+
+        template<class Archive>
+        void load(Archive &archive) {
+            archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world), CEREAL_NVP(dirs));
+            engine.reset(new WeaverEngine(randomStream));
+            stories.reset(new StoryWriter(randomStream, *quests, *templates));
+            templates.reset(new TemplateEngine(randomStream, dirs));
+        }
+
+        template<class Archive>
+        void save(Archive &archive) const {
+            archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world), CEREAL_NVP(dirs));
+        }
     };
 }

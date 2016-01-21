@@ -4,20 +4,10 @@
 
 #include "SpaceQuestTemplateFactory.h"
 #include "ExploreRegionTemplate.h"
-#include <iostream>
 
 using namespace std;
 using namespace Json;
 using namespace weave;
-
-SpaceQuestTemplateFactory::SpaceQuestTemplateFactory(std::shared_ptr<RandomStream> randomStream)
-        : TemplateFactory(randomStream) {
-}
-
-SpaceQuestTemplateFactory::SpaceQuestTemplateFactory(std::shared_ptr<RandomStream> randomStream,
-                                                     Directories directories) :
-        TemplateFactory(randomStream, directories) {
-}
 
 std::shared_ptr<Template> SpaceQuestTemplateFactory::createFromJsonValues(const Json::Value &root) const {
     string title = extractTitle(root);

@@ -81,6 +81,7 @@ void TemplateFactory::extractProperties(vector<TemplateQuestProperty> *propertie
 }
 
 std::shared_ptr<Template> TemplateFactory::CreateTemplate(const std::string &templateKey) {
+    this->randomStream = randomStream;
     initialize();
     auto mapEntry = templateMap.find(templateKey);
     if (mapEntry == templateMap.end()) {

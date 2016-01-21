@@ -39,6 +39,9 @@ namespace weave {
 
         ID NewId();
 
+        // so the class is abstract, needed for serialization
+        virtual void empty() = 0;
+
     private:
         ID idGenerator = 0;
         std::map<ID, std::shared_ptr<WorldEntity>> entities;

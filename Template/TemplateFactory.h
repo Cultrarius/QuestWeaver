@@ -4,20 +4,15 @@
 
 #pragma once
 
-#include <memory>
-#include <unordered_map>
 #include <fstream>
+#include "../Core/WeaverTypes.h"
+#include "../Core/WeaverUtils.h"
 #include "../json/json.h"
 #include "Template.h"
 
 namespace weave {
     class TemplateFactory {
     public:
-        explicit TemplateFactory(std::shared_ptr<RandomStream> randomStream) : randomStream(randomStream) { }
-
-        TemplateFactory(std::shared_ptr<RandomStream> randomStream, Directories directories) :
-                randomStream(randomStream), dirs(directories) { }
-
         std::vector<std::string> GetTemplateKeys();
 
         std::shared_ptr<Template> CreateTemplate(const std::string &templateKey);
@@ -41,16 +36,17 @@ namespace weave {
                                const Json::Value &jsonMandatory,
                                bool isMandatory) const;
 
-    private:
         std::shared_ptr<RandomStream> randomStream;
 
-        void openFile(const char *name, std::ifstream *stream);
+    private:
+        friend class TemplateEngine;
+
+        bool isInitialized = false;
 
         Directories dirs;
 
-        bool isInitialized = false;
+        void openFile(const char *name, std::ifstream *stream);
 
         void initialize();
     };
 }
-
