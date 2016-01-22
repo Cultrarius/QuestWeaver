@@ -40,6 +40,8 @@ namespace weave {
 
         void ChangeWorkingDirectories(Directories directories);
 
+        const WorldModel &GetWorldModel() const;
+
         /*
          * Serializes the whole quest system including the quest model and world model. Please note that upon
          * deserializing, the template factories and the world model listeners must be registered again as they are not

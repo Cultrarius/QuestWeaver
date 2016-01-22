@@ -30,7 +30,7 @@ namespace weave {
 
         std::vector<WorldModelAction> GetMetaDataHistoryForId(ID id) const;
 
-        void AddListener(std::shared_ptr<WorldListener> listener);
+        void AddListener(std::shared_ptr<WorldListener> listener) const;
 
     protected:
         std::shared_ptr<RandomStream> rs;
@@ -45,7 +45,7 @@ namespace weave {
     private:
         ID idGenerator = 0;
         std::map<ID, std::shared_ptr<WorldEntity>> entities;
-        std::vector<std::shared_ptr<WorldListener>> listeners;
+        mutable std::vector<std::shared_ptr<WorldListener>> listeners;
 
         void updateMetaDataForId(ID newId, const MetaData &newData);
 

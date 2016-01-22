@@ -111,3 +111,7 @@ void weave::QuestWeaver::ChangeWorkingDirectories(Directories directories)
 {
 	templates->ChangeDirectories(directories);
 }
+
+const WorldModel &QuestWeaver::GetWorldModel() const {
+    return *world;
+}
