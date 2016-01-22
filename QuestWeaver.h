@@ -18,7 +18,16 @@
 
 namespace weave {
     enum class StreamType {
-        JSON, BINARY
+        /*
+         * A verbose text format, good for debugging or manual changes.
+         * Big size and slow compared to the binary format.
+         */
+                JSON,
+
+        /*
+         * A compact binary format. Fastest option.
+         */
+                BINARY
     };
 
     class QuestWeaver {
@@ -45,13 +54,29 @@ namespace weave {
 
         /*
          * Serializes the whole quest system including the quest model and world model. Please note that upon
-         * deserializing, the template factories and the world model listeners be registered again as they are not
+         * deserializing, the template factories and the world model listeners must be registered again as they are not
          * serialized.
+         * The data is serialized in a portable way, so no extra steps must be taken to serialize and deserialize
+         * on different platforms.
          */
         void Serialize(std::ostream &outputStream, StreamType type);
 
+        /*
+         * Deserializes the quest system including the quest model and world model. Please note that upon
+         * deserializing, the template factories and the world model listeners must be registered again as they are not
+         * serialized. In addition, the current working directory info must be updated or the default is used.
+         *
+         * The StreamType parameter must be the same as the one used to serialize the data.
+         */
         static QuestWeaver Deserialize(std::istream &inputStream, StreamType type);
 
+        /*
+         * Deserializes the quest system including the quest model and world model. Please note that upon
+         * deserializing, the template factories and the world model listeners must be registered again as they are not
+         * serialized.
+         *
+         * The StreamType parameter must be the same as the one used to serialize the data.
+         */
         static QuestWeaver Deserialize(std::istream &inputStream, StreamType type, Directories currentDirectories);
 
     private:
