@@ -11,10 +11,10 @@ using namespace std;
 
 TEST_CASE("Random Stream", "[utils]") {
     RandomStream rs(42);
-    REQUIRE(rs.GetIntInRange(1, 10) == 1);
+    REQUIRE(rs.GetIntInRange(1, 10) == 4);
 
     SECTION("reusing the stream") {
-        REQUIRE(rs.GetIntInRange(1, 10) == 6);
+        REQUIRE(rs.GetIntInRange(1, 10) == 8);
     }
 
     SECTION("create random integers") {
@@ -33,12 +33,12 @@ TEST_CASE("Random Stream", "[utils]") {
 
     SECTION("reseeding the stream") {
         rs.Seed(42);
-        REQUIRE(rs.GetIntInRange(1, 10) == 1);
+        REQUIRE(rs.GetIntInRange(1, 10) == 4);
     }
 
     SECTION("creating indices") {
         REQUIRE(rs.GetRandomIndex(1) == 0);
-        REQUIRE(rs.GetRandomIndex(10) == 7);
+        REQUIRE(rs.GetRandomIndex(10) == 9);
     }
 }
 

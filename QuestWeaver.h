@@ -41,13 +41,18 @@ namespace weave {
 
         std::shared_ptr<Quest> ChangeQuestState(QuestModelAction questAction);
 
-		void ChangeWorkingDirectories(Directories directories);
+        void ChangeWorkingDirectories(Directories directories);
 
+        /*
+         * Serializes the whole quest system including the quest model and world model. Please note that upon
+         * deserializing, the template factories and the world model listeners be registered again as they are not
+         * serialized.
+         */
         void Serialize(std::ostream &outputStream, StreamType type);
 
         static QuestWeaver Deserialize(std::istream &inputStream, StreamType type);
 
-		static QuestWeaver Deserialize(std::istream &inputStream, StreamType type, Directories currentDirectories);
+        static QuestWeaver Deserialize(std::istream &inputStream, StreamType type, Directories currentDirectories);
 
     private:
         std::unique_ptr<WeaverEngine> engine;
