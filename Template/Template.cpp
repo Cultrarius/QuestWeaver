@@ -72,8 +72,9 @@ std::string Template::getBestFittingDescription(const std::vector<QuestPropertyV
             return descriptionText;
         }
     }
-    // TODO add quest title to error message
-    throw ContractFailedException("Unable to find description fitting the supplied quest properties.");
+    string message = "Unable to find description fitting the supplied quest properties. Quest Title: ";
+    message += title;
+    throw ContractFailedException(message);
 }
 
 bool TemplateQuestDescription::SupportsConditions(const std::vector<std::string> &conditions) const {

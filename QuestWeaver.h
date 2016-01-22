@@ -17,18 +17,6 @@
 #include "WeaverConfig.h"
 
 namespace weave {
-    enum class StreamType {
-        /*
-         * A verbose text format, good for debugging or manual changes.
-         * Big size and slow compared to the binary format.
-         */
-                JSON,
-
-        /*
-         * A compact binary format. Fastest option.
-         */
-                BINARY
-    };
 
     class QuestWeaver {
     public:

@@ -39,4 +39,17 @@ namespace weave {
             archive(CEREAL_NVP(templateDirectory), CEREAL_NVP(modDirectory));
         }
     };
+
+    enum class StreamType {
+        /*
+         * A verbose text format, good for debugging or manual changes.
+         * Big size and slow compared to the binary format.
+         */
+                JSON,
+
+        /*
+         * A compact binary format without compression. Fastest option.
+         */
+                BINARY
+    };
 }

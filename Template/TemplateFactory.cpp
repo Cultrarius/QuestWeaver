@@ -16,11 +16,21 @@ Json::Value TemplateFactory::readTemplateFile(const char *fileName) {
     string errorMessage;
     ifstream inStream;
     openFile(fileName, &inStream);
+    string requiredMembers[] = {"key", "parent", "mandatory", "optional", "titles", "descriptions", "objectives"};
     if (!Json::parseFromStream(readBuilder, inStream, &root, &errorMessage)) {
         cerr << "Error parsing template file: " << errorMessage << endl;
-        throw errorMessage;
-    } else {
-        // TODO check root value for consistency
+        throw ContractFailedException(errorMessage);
+    }
+
+    // quick sanity check
+    for (string member : requiredMembers) {
+        if (!root.isMember(member)) {
+            string errorMessage = "Missing member in template file! MEMBER: <";
+            errorMessage += member;
+            errorMessage += "> / FILE: ";
+            errorMessage += fileName;
+            throw ContractFailedException(errorMessage);
+        }
     }
     return root;
 }
@@ -110,8 +120,8 @@ void TemplateFactory::openFile(const char *fileName, ifstream *inStream) {
     }
 
     // try to open the file as it is
-	string currentDir("./");
-	const char *localFile = currentDir.append(fileName).c_str();
+    string currentDir("./");
+    const char *localFile = currentDir.append(fileName).c_str();
     inStream->open(localFile, ios::in);
     if (!inStream->fail()) {
         return;
