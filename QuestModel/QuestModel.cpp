@@ -75,12 +75,12 @@ shared_ptr<Quest> QuestModel::Execute(const QuestModelAction &modelAction) {
     QuestActionType actionType = modelAction.GetActionType();
     ID questId = modelAction.GetQuestId();
     auto iter = quests.find(questId);
+    if (actionType == QuestActionType::KEEP && iter == quests.end()) {
+        throw ContractFailedException("Quest id " + to_string(questId) + " not found in model!");
+    }
+
     shared_ptr<Quest> result = iter->second;
-    if (actionType == QuestActionType::KEEP) {
-        if (iter == quests.end()) {
-            throw ContractFailedException("Quest id " + to_string(questId) + " not found in model!");
-        }
-    } else if (actionType == QuestActionType::ACTIVATE) {
+    if (actionType == QuestActionType::ACTIVATE) {
         if (!activateQuest(questId)) {
             result = nullptr;
         }
@@ -92,7 +92,7 @@ shared_ptr<Quest> QuestModel::Execute(const QuestModelAction &modelAction) {
         if (!succeedQuest(questId)) {
             result = nullptr;
         }
-    } else {
+    } else if (actionType != QuestActionType::KEEP) {
         throw ContractFailedException("Unknown quest model action type");
     }
 

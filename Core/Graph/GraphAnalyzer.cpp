@@ -13,6 +13,8 @@ unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph,
                                                       AnalyzerParameters param) {
     map<GraphAction, float> actionMap;
     while (fillActionMap(*graph, &actionMap, param, rs)) {
+        assert(!actionMap.empty());
+
         // search for a random action from the action map
         // actions with a higher score are more likely to be chosen
         float minScore = 0;
@@ -23,17 +25,16 @@ unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph,
         }
 
         float currentMax = 0;
-        const GraphAction *action = nullptr;
+        GraphAction action = actionMap.begin()->first;
         for (auto pair : actionMap) {
             float percent = (pair.second - minScore) / maxScore;
             float random = rs->GetIntInRange(0, 9000) * percent + rs->GetIntInRange(0, 1000);
             if (random >= currentMax) {
                 currentMax = random;
-                action = &pair.first;
+                action = pair.first;
             }
         }
-        assert(action != nullptr);
-        action->Apply(graph);
+        action.Apply(graph);
         actionMap.clear();
     }
 

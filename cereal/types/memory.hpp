@@ -260,7 +260,7 @@ namespace cereal {
             //  uninitialized until initialized with placement new
             ptr.reset(reinterpret_cast<T *>( new ST()),
                       [=](T *t) {
-                          if (valid)
+                          if (valid && *valid)
                               t->~T();
 
                           delete reinterpret_cast<ST *>( t );
