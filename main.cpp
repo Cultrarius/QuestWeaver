@@ -17,12 +17,12 @@ int main() {
     weaver.Tick(1);
 
     stringstream ss;
-    weaver.Serialize(ss, StreamType::JSON);
+    weaver.Serialize(ss, StreamType::BINARY);
     cout << ss.str() << endl;
 
     cout << "Hey!" << endl;
 
-    QuestWeaver deserialized = QuestWeaver::Deserialize(ss, StreamType::JSON, config.dirs);
+    QuestWeaver deserialized = QuestWeaver::Deserialize(ss, StreamType::BINARY, config.dirs);
     shared_ptr<TemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();;
     deserialized.RegisterTemplateFactory(factory);
     cout << "Woot!" << endl;
@@ -37,6 +37,10 @@ int main() {
     cout << "Title: " << newQuest->GetTitle() << endl;
     cout << "Description: " << newQuest->GetDescription() << endl;
 
+    cout << weaver.GetWorldModel().GetEntities().size() << endl;
+    cout << deserialized.GetWorldModel().GetEntities().size() << endl;
+    shared_ptr<WorldListener> outputListener;
+    deserialized.GetWorldModel().AddListener(outputListener);
 //    shared_ptr<RandomStream> rs = make_shared<RandomStream>(11);
 //    SpaceWorldModel testModel(rs);
 //    auto location = testModel.CreateLocation();
