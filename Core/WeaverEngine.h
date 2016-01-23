@@ -14,7 +14,7 @@
 
 namespace weave {
     struct EngineParameters {
-        float chooseOldOverNew = 0.9;
+        float chooseOldOverNew = 0.9f;
         AnalyzerParameters analyzerParameters;
 
         template<class Archive>

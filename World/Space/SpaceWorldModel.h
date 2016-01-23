@@ -38,7 +38,7 @@ namespace weave {
         std::shared_ptr<SolarSystem> CreateSolarSystem() const;
 
     protected:
-        virtual void empty() { }
+		void empty() override { }
 
     private:
         ModelParameters param;

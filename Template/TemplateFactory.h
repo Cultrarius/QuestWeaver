@@ -13,6 +13,8 @@
 namespace weave {
     class TemplateFactory {
     public:
+		virtual ~TemplateFactory() {}
+
         std::vector<std::string> GetTemplateKeys();
 
         std::shared_ptr<Template> CreateTemplate(const std::string &templateKey);

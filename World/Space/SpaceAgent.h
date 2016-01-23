@@ -13,9 +13,9 @@ namespace weave {
 
         explicit SpaceAgent(std::string name);
 
-        std::string ToString() const;
+        std::string ToString() const override;
 
-        std::string GetType() const;
+        std::string GetType() const override;
 
     private:
         SpaceAgent(ID id, std::string name);

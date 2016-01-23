@@ -121,8 +121,8 @@ EngineParameters WeaverEngine::GetParameters() {
     return parameters;
 }
 
-void WeaverEngine::SetParameters(EngineParameters parameters) {
-    this->parameters = parameters;
+void WeaverEngine::SetParameters(EngineParameters params) {
+    this->parameters = params;
 }
 
 WeaverEngine::WeaverEngine(std::shared_ptr<RandomStream> rs) {

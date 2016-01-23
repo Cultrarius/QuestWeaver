@@ -18,9 +18,9 @@ namespace weave {
 
         SolarSystem(std::string Name, std::shared_ptr<SpaceLocation> Location);
 
-        std::string ToString() const;
+        std::string ToString() const override;
 
-        std::string GetType() const;
+        std::string GetType() const override;
 
     private:
         SolarSystem(ID id, std::string Name, std::shared_ptr<SpaceLocation> Location);

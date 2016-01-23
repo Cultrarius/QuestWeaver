@@ -15,6 +15,8 @@ namespace weave {
 
         WorldEntity() : WorldEntity(NoID) { }
 
+		virtual ~WorldEntity() {}
+
         ID GetId();
 
         virtual std::string GetType() const = 0;

@@ -21,6 +21,8 @@ namespace weave {
             generator.seed(seed);
         }
 
+		virtual ~RandomStream() {}
+
         virtual int GetInt() {
             return defaultDistribution(generator);
         }

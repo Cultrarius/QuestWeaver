@@ -31,8 +31,8 @@ void ExploreRegionTemplate::gatherSponsorEntities(vector<WorldModelAction> *acti
     shared_ptr<SpaceAgent> newEntity = spaceModel.CreateAgent();
     MetaData metaData;
     metaData.SetValue("relationToPlayer", 10);
-    WorldModelAction modelAction(WorldActionType::CREATE, newEntity, metaData);
-    actions->push_back(move(modelAction));
+    WorldModelAction metaDataAction(WorldActionType::CREATE, newEntity, metaData);
+    actions->push_back(move(metaDataAction));
 
     for (auto entity : spaceModel.GetEntities()) {
         if (entity->GetType() == "agent") {
@@ -51,8 +51,8 @@ void ExploreRegionTemplate::gatherLocationEntities(vector<WorldModelAction> *act
     MetaData metaData;
     metaData.SetValue("explored", 0);
     metaData.SetValue("explorationQuestLock", 1);  // so it does not get picked by another exploration quest
-    WorldModelAction modelAction(WorldActionType::CREATE, newEntity, metaData);
-    actions->push_back(move(modelAction));
+    WorldModelAction metaDataAction(WorldActionType::CREATE, newEntity, metaData);
+    actions->push_back(move(metaDataAction));
 
     for (auto entity : spaceModel.GetEntities()) {
         if (entity->GetType() == "location") {
@@ -68,9 +68,9 @@ void ExploreRegionTemplate::gatherLocationEntities(vector<WorldModelAction> *act
 shared_ptr<Quest> ExploreRegionTemplate::ToQuest(const vector<QuestPropertyValue> &questPropertyValues,
                                                  const std::string &questStory) const {
     const string &description = getBestFittingDescription(questPropertyValues);
-    const string &title = getTitle(questPropertyValues);
+    const string &questTitle = getTitle(questPropertyValues);
 
     ID location = getEntityIdFromProperty("location", questPropertyValues);
     ID sponsor = getEntityIdFromProperty("sponsor", questPropertyValues);
-    return make_shared<ExploreRegionQuest>(title, description, questStory, location, sponsor);
+    return make_shared<ExploreRegionQuest>(questTitle, description, questStory, location, sponsor);
 }

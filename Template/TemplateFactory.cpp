@@ -25,7 +25,7 @@ Json::Value TemplateFactory::readTemplateFile(const char *fileName) {
     // quick sanity check
     for (string member : requiredMembers) {
         if (!root.isMember(member)) {
-            string errorMessage = "Missing member in template file! MEMBER: <";
+            errorMessage = "Missing member in template file! MEMBER: <";
             errorMessage += member;
             errorMessage += "> / FILE: ";
             errorMessage += fileName;

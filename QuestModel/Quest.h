@@ -38,6 +38,8 @@ namespace weave {
               const std::string &description,
               const std::string &story);
 
+		virtual ~Quest() {}
+
         QuestState GetState() const;
 
         std::string GetTitle() const;

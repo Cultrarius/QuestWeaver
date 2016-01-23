@@ -10,6 +10,8 @@
 namespace weave {
     class WorldListener {
     public:
+		virtual ~WorldListener() {}
+
         virtual void WorldChanged(std::vector<WorldModelAction> modelActions) = 0;
     };
 }

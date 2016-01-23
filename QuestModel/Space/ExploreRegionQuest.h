@@ -14,7 +14,7 @@ namespace weave {
         ExploreRegionQuest(const std::string &title, const std::string &description, const std::string &story,
                            ID locationId, ID sponsorId);
 
-        std::string GetType() const;
+        std::string GetType() const override;
 
     protected:
         auto getCerealLocation() const {

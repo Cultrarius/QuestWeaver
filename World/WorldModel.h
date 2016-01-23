@@ -18,6 +18,8 @@ namespace weave {
     public:
         explicit WorldModel(std::shared_ptr<RandomStream> rs);
 
+		virtual ~WorldModel() {}
+
         void Execute(std::vector<WorldModelAction> modelActions);
 
         std::shared_ptr<WorldEntity> GetEntityById(ID id) const;
