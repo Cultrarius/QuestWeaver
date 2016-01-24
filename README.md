@@ -70,15 +70,17 @@ while (true) {
 You can also fully serialize the quest system, e.g. to create a save game or to debug it:
 
 ```cpp
-QuestWeaver weaver(config);
-
-// serialize
-stringstream ss; // can also be a file stream
-weaver.Serialize(ss, StreamType::JSON);
-cout << ss.str() << endl; // or save it to disk
-
-// deserialize - it is important to re-register the template factories and the world model listener!
-QuestWeaver deserialized = QuestWeaver::Deserialize(ss, StreamType::JSON, config.dirs);
-weaver.RegisterTemplateFactory(factory);
-weaver.GetWorldModel().AddListener(myWorldListener);
+void SerialTest() {
+    QuestWeaver weaver = Init();
+    
+    // serialize
+    stringstream ss; // can also be a file stream
+    weaver.Serialize(ss, StreamType::JSON);
+    cout << ss.str() << endl; // or save it to disk
+    
+    // deserialize - it is important to re-register the template factories and the world model listener!
+    QuestWeaver deserialized = QuestWeaver::Deserialize(ss, StreamType::JSON, config.dirs);
+    weaver.RegisterTemplateFactory(factory);
+    weaver.GetWorldModel().AddListener(myWorldListener);
+}
 ```
