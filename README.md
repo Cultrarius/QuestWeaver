@@ -5,6 +5,15 @@ This project is still in its early stages and under heavy development!
 
 This project includes the following JSON parser: https://github.com/open-source-parsers/jsoncpp
 
+## Features
+
+* Fully *portable*, serializable quest system, perfect for use in savegames. Supports JSON and a compact binary format. 
+* Separates quest logic from quest data (such as titles/descriptions) by using *template files*
+* Uses a complex *weighted graph search* to create new quests.
+This results in more interesting and coherent quest stories as world actors and entities are reused when fitting.
+* Supports *mod directories* to overwrite quest templates
+* The game world entities to be used in quests are supplied directly from a game's *custom world model*
+
 ## Usage
 
 The quest system of a game is not an isolated part of the system as it is heavily involved in the current world state and events.
@@ -18,22 +27,26 @@ To use the QuestWeaver system, you have to follow these steps:
 * Register your wold model and template factories with the `QuestWeaver` instance
  
 ```cpp
-// Create your template factories
-shared_ptr<TemplateFactory> factory = make_shared<MyQuestTemplateFactory>();
-
-// Create your world model
-auto worldModel = new MyWorldModel();
-shared_ptr<WorldListener> myWorldListener = make_shared<MyWorldListener>();
-
-// Create Configuration
-WeaverConfig config;
-config.worldModel = worldModel;
-config.dirs.modDirectory = "./Template/";
-
-// Create the quest system
-QuestWeaver weaver(config);
-weaver.RegisterTemplateFactory(factory);
-weaver.GetWorldModel().AddListener(myWorldListener);
+QuestWeaver Init() {
+    // Create your template factories
+    shared_ptr<TemplateFactory> factory = make_shared<MyQuestTemplateFactory>();
+    
+    // Create your world model
+    auto worldModel = new MyWorldModel();
+    shared_ptr<WorldListener> myWorldListener = make_shared<MyWorldListener>();
+    
+    // Create Configuration
+    WeaverConfig config;
+    config.worldModel = worldModel;
+    config.dirs.modDirectory = "./Template/";
+    
+    // Create the quest system
+    QuestWeaver weaver(config);
+    weaver.RegisterTemplateFactory(factory);
+    weaver.GetWorldModel().AddListener(myWorldListener);
+    
+    return weaver;
+}
 
 // Create new quests
 shared_ptr<Quest> newQuest = weaver.CreateNewQuest();
@@ -69,12 +82,3 @@ QuestWeaver deserialized = QuestWeaver::Deserialize(ss, StreamType::JSON, config
 weaver.RegisterTemplateFactory(factory);
 weaver.GetWorldModel().AddListener(myWorldListener);
 ```
-
-## Features
-
-* Fully portable, serializable quest system, perfect for use in savegames. Supports JSON and a compact binary format. 
-* Separates quest logic from quest data (such as titles/descriptions) by using template files
-* Uses a complex weighted graph search to create new quests.
-This results in more interesting and coherent quest stories as world actors and entities are reused when fitting.
-* Supports mod directories to overwrite quest templates
-* The game world entities to be used in quests are supplied directly from a game's custom world model
