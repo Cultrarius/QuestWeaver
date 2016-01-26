@@ -222,7 +222,7 @@ TEST_CASE("Serialize Entities", "[serialize]") {
         REQUIRE(entities.size() == deserialized.size());
 
         for (unsigned int i = 0; i < entities.size(); i++) {
-            REQUIRE(typeid(*(entities[i])) == typeid(*(deserialized[i])));
+            REQUIRE(typeid(entities[i]) == typeid(deserialized[i]));
         }
     }
 
@@ -271,7 +271,7 @@ TEST_CASE("Serialize Entities", "[serialize]") {
         REQUIRE(testModel.GetEntities().size() == deserializedModel.GetEntities().size());
 
         for (unsigned int i = 0; i < testModel.GetEntities().size(); i++) {
-            REQUIRE(typeid(*(testModel.GetEntities()[i])) == typeid(*(deserializedModel.GetEntities()[i])));
+            REQUIRE(typeid(testModel.GetEntities()[i]) == typeid(deserializedModel.GetEntities()[i]));
         }
         REQUIRE(deserializedModel.GetMetaData(entity1->GetId()).GetValue("Size") == 7);
         REQUIRE(deserializedModel.GetMetaData(entity1->GetId()).GetValue("Age") == 42);
