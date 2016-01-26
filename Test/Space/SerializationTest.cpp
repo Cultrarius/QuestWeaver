@@ -66,7 +66,7 @@ TEST_CASE("Serialize Quests", "[serialize]") {
     SECTION("Serialize and deserialize binary file") {
         WorldModel *worldModel = new SpaceWorldModel(rs);
         const char *fileName = "testSerialization.bin";
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 25; i++) { // On windows a larger value results in an read/write error - no idea why though
             rs->Seed(i);
             for (string templateKey : factory->GetTemplateKeys()) {
                 auto tp = factory->CreateTemplate(templateKey);

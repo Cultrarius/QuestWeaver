@@ -22,23 +22,69 @@ namespace weave {
     public:
         explicit QuestWeaver(uint64_t seed);
 
+        /*
+         * Creates a new weaver instance with the given config.
+         * The config needs to contain a valid world model pointer.
+         * The quest weaver instance will take ownership of the world model and delete it when being destroyed.
+         * @param config the config to use - must contain a valid world model
+         */
         explicit QuestWeaver(WeaverConfig config);
 
-        std::vector<std::shared_ptr<Quest>> GetQuestsWithState(QuestState state) const;
-
-        std::vector<std::shared_ptr<Quest>> GetAllQuests() const;
-
-        std::shared_ptr<Quest> CreateNewQuest();
-
-        std::shared_ptr<Quest> GetQuest(ID questId) const;
-
-        void Tick(float delta);
-
+        /*
+         * Registers a new template factory with the quest system.
+         * Usually, the factories are already registered when creating an instance using the WeaverConfig parameter.
+         * However, this is not true when creating a new instance by deserialiation.
+         * This method *MUST* be used on newly deserialized objects, otherwise it is impossible to create new quests
+         */
         void RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory);
 
-        std::shared_ptr<Quest> ChangeQuestState(QuestModelAction questAction);
-
+        /*
+         * Changes the directories used by the quest system to load files such as templates.
+         */
         void ChangeWorkingDirectories(Directories directories);
+
+        /*
+         * Creates a new quest.
+         * This node does not have any input because it is the responsibility of the quest weaver to decide which quest
+         * should be next.
+         * The previously registered template factories and the world model are used to create the quest.
+         *
+         * Once a quest is created, it is active in the world (and most likely already changed it).
+         * The caller of this API cannot decide to undo that or delete the quest, it can only change the state to
+         * a "completed" type.
+         */
+        std::shared_ptr<Quest> CreateNewQuest();
+
+        /*
+         * Advances the quest system state by ticking all quests and executing their desired world and quest changes.
+         * Until this method is called, quests are unable to change the world model or their state.
+         *
+         * *WARNING* After ticking, all objects received via this API might be invalid!
+         * They can still be used, but might contain outdated data.
+         */
+        void Tick(float delta);
+
+        /*
+         * Returns a list of all quests with the given state.
+         */
+        std::vector<std::shared_ptr<Quest>> GetQuestsWithState(QuestState state) const;
+
+        /*
+         * Returns a list of all quests
+         */
+        std::vector<std::shared_ptr<Quest>> GetAllQuests() const;
+
+        /*
+         * Returns the quest with the given ID.
+         */
+        std::shared_ptr<Quest> GetQuest(ID questId) const;
+
+        /*
+         * Directly changes the state of a quest.
+         * A quest can usually change its state once it is ticked,
+         * this method should only be used if that is not possible.
+         */
+        std::shared_ptr<Quest> ChangeQuestState(QuestModelAction questAction);
 
         const WorldModel &GetWorldModel() const;
 
