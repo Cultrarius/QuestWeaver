@@ -14,7 +14,11 @@ QuestWeaver::QuestWeaver(uint64_t seed) : QuestWeaver(WeaverConfig(seed)) {
 }
 
 QuestWeaver::QuestWeaver(WeaverConfig config) {
-    randomStream.reset(new RandomStream(config.seed));
+    if (config.randomStream != nullptr) {
+        randomStream.reset(config.randomStream);
+    } else {
+        randomStream.reset(new RandomStream(config.seed));
+    }
     engine.reset(new WeaverEngine(randomStream));
     quests.reset(new QuestModel());
     templates.reset(new TemplateEngine(randomStream, config.dirs));
