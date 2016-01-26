@@ -18,6 +18,13 @@
 
 namespace weave {
 
+    /*
+     * This class represents a complete quest system and is the main entry point for an application to create and
+     * manage quests. To be usable, the caller has to provide a world model and matching template factories from which
+     * the quest weaver will generate new and interesting quest.
+     *
+     * Instances of this class are not thread safe.
+     */
     class QuestWeaver {
     public:
         explicit QuestWeaver(uint64_t seed);
@@ -86,6 +93,12 @@ namespace weave {
          */
         std::shared_ptr<Quest> ChangeQuestState(QuestModelAction questAction);
 
+        /*
+         * Returns a immutable reference to the world model - to change the world model, use the Tick() method which
+         * gathers changes from the quests.
+         *
+         * After the quest system was deserialized, the world model listener has to be registered again.
+         */
         const WorldModel &GetWorldModel() const;
 
         /*
