@@ -7,8 +7,15 @@
 #include "../cereal.h"
 
 namespace weave {
+
+    /*
+     * Used to identify unique objects in the quest system, i.e. quests or world entities.
+     */
     typedef uint64_t ID;
 
+    /*
+     * The main exception type used by all classes of the QuestWeaver system.
+     */
     struct ContractFailedException : public std::exception {
         std::string s;
 
@@ -19,6 +26,9 @@ namespace weave {
         const char *what() const throw() { return s.c_str(); }
     };
 
+    /*
+     * Operator to enable the use of enums as keys in maps
+     */
     struct EnumClassHash {
         template<typename T>
         std::size_t operator()(T t) const {
@@ -27,8 +37,15 @@ namespace weave {
     };
 
     struct Directories {
+        /*
+         * The base directory which all template factories use to search for template files.
+         */
         std::string templateDirectory = "../Template/";
 
+        /*
+         * Template factories prefer template files found in this directory, so mods can override the templates
+         * in the default directory.
+         */
         std::string modDirectory = "../Mods/Template/";
     private:
         // serialization

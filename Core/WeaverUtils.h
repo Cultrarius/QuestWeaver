@@ -11,6 +11,10 @@
 
 namespace weave {
 
+    /*
+     * Defines a serializable, seeded pseudo-random number generator that is used to generate random numbers for the
+     * quest system.
+     */
     class RandomStream {
     public:
         RandomStream() {
@@ -21,7 +25,7 @@ namespace weave {
             generator.seed(seed);
         }
 
-		virtual ~RandomStream() {}
+        virtual ~RandomStream() = default;
 
         virtual int GetInt() {
             return defaultDistribution(generator);

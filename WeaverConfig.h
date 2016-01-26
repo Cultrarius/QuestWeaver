@@ -8,10 +8,11 @@
 #include <Template/TemplateFactory.h>
 
 namespace weave {
+
     struct WeaverConfig {
         /*
          * The random seed used to create new quests. Quest Systems initialized with the same seed create the same
-         * stream of quests (given they are initialized and completed the same way).
+         * stream of quests (given the quests are initialized and completed the same way).
          */
         uint64_t seed = 0;
 
@@ -23,11 +24,13 @@ namespace weave {
 
         /*
          * The world model is responsible for creating all quest entities and informs about world changes.
+         * MUST be initialized by the caller before creating a new QuestWeaver instance.
          */
         WorldModel *worldModel = nullptr;
 
         /*
          * The template factories used to create new quest templates.
+         * At least one factory has to be registered before trying to create new quests.
          */
         std::vector<std::shared_ptr<TemplateFactory>> templateFactories;
 
@@ -36,7 +39,7 @@ namespace weave {
          */
         bool debug = true;
 
-        WeaverConfig() { }
+        WeaverConfig() = default;
 
         explicit WeaverConfig(uint64_t seed) : seed(seed) { }
     };
