@@ -32,7 +32,7 @@ namespace weave {
         ExploreRegionQuest(ID id, QuestState state, const std::string &title, const std::string &description,
                            const std::string &story, ID location, ID sponsor);
 
-        std::shared_ptr<Quest> setStateAndId(ID newId, QuestState newState) const;
+        std::shared_ptr<Quest> setStateAndId(ID newId, QuestState newState) const override;
 
         friend class cereal::access;
 
