@@ -10,8 +10,41 @@
 #include "QuestModelAction.h"
 
 namespace weave {
+
+    /*
+     * Defines the different states a quest can have.
+     */
     enum class QuestState {
-        Proposed, Inactive, Active, Failed, Success
+        /*
+         * Used only internally for quest candidates that the system uses when creating a new quest.
+         */
+                Proposed,
+
+        /*
+         * The initial state of all newly created quests.
+         * The player has not yet started the quest.
+         *
+         * Quests are only allowed to change their state to Active from this state.
+         */
+                Inactive,
+
+        /*
+         * The player started the quest and is actively pursuing it.
+         * A quest in this state is *not* allowed to go back into the Inactive state.
+         */
+                Active,
+
+        /*
+         * Represents a quest the player has failed.
+         * Final state that cannot be changed any more.
+         */
+                Failed,
+
+        /*
+         * Represents a quest the player has successfully completed.
+         * Final state that cannot be changed any more.
+         */
+                Success
     };
 
     class QuestTickResult {
