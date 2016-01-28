@@ -8,15 +8,6 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib")
 
 include_directories(./include)
 
-set(HEADER_FILES QuestWeaver.h include/Core/WeaverEngine.h include/Template/TemplateEngine.h include/QuestModel/QuestModel.h
-        include/World/WorldModel.h include/QuestModel/Quest.h include/Template/Template.h include/json/json.h include/json/json-forwards.h
-        include/Template/Space/ExploreRegionTemplate.h include/Template/TemplateFactory.h include/Template/Space/SpaceQuestTemplateFactory.h
-        include/World/WorldEntity.h include/World/WorldModelAction.h include/World/Space/SpaceLocation.h include/World/Space/SpaceWorldModel.h
-        include/QuestModel/Space/ExploreRegionQuest.h include/Core/WeaverUtils.h include/World/Space/SpaceAgent.h
-        include/World/Space/SolarSystem.h include/Core/WeaverTypes.h include/cereal.h include/World/MetaData.h
-        include/Core/Graph/WeaverGraph.h include/Core/Graph/Node.h include/Core/Graph/Edge.h include/Core/Graph/GraphAnalyzer.h
-        include/QuestModel/QuestModelAction.h include/World/WorldListener.h include/Story/StoryWriter.h include/WeaverConfig.h)
-
 set(SOURCE_FILES QuestWeaver.cpp Core/WeaverEngine.cpp Template/TemplateEngine.cpp QuestModel/QuestModel.cpp World/WorldModel.cpp
         QuestModel/Quest.cpp Template/Template.cpp include/json/jsoncpp.cpp Template/Space/ExploreRegionTemplate.cpp
         Template/TemplateFactory.cpp Template/Space/SpaceQuestTemplateFactory.cpp World/WorldEntity.cpp
