@@ -2,7 +2,7 @@
 // Created by michael on 21.11.15.
 //
 
-#include "QuestModelAction.h"
+#include <QuestModel/QuestModelAction.h>
 
 using namespace weave;
 using namespace std;

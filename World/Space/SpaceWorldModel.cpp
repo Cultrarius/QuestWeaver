@@ -2,7 +2,7 @@
 // Created by michael on 06.10.15.
 //
 
-#include "SpaceWorldModel.h"
+#include <World/Space/SpaceWorldModel.h>
 
 using namespace std;
 using namespace weave;

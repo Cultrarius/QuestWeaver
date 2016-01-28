@@ -2,7 +2,7 @@
 // Created by michael on 10.10.15.
 //
 
-#include "ExploreRegionQuest.h"
+#include <QuestModel/Space/ExploreRegionQuest.h>
 
 using namespace weave;
 using namespace std;

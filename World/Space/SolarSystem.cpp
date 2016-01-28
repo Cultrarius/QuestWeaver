@@ -2,7 +2,7 @@
 // Created by michael on 12.10.15.
 //
 
-#include "SolarSystem.h"
+#include <World/Space/SolarSystem.h>
 
 using namespace weave;
 using namespace std;

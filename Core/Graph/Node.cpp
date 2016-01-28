@@ -2,7 +2,7 @@
 // Created by michael on 04.11.15.
 //
 
-#include "Node.h"
+#include <Core/Graph/Node.h>
 
 using namespace std;
 using namespace weave;

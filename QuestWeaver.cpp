@@ -2,10 +2,10 @@
 // Created by michael on 10.08.15.
 //
 
-#include "QuestWeaver.h"
 #include <algorithm>
-#include "Template/Space/SpaceQuestTemplateFactory.h"
-#include "World/Space/SpaceWorldModel.h"
+#include <QuestWeaver.h>
+#include <Template/Space/SpaceQuestTemplateFactory.h>
+#include <World/Space/SpaceWorldModel.h>
 
 using namespace std;
 using namespace weave;

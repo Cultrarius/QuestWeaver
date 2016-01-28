@@ -2,8 +2,8 @@
 // Created by michael on 14.08.15.
 //
 
-#include "ExploreRegionTemplate.h"
-#include "../../QuestModel/Space/ExploreRegionQuest.h"
+#include <Template/Space/ExploreRegionTemplate.h>
+#include <QuestModel/Space/ExploreRegionQuest.h>
 
 using namespace std;
 using namespace weave;

@@ -3,7 +3,7 @@
 //
 
 #include <algorithm>
-#include "Edge.h"
+#include <Core/Graph/Edge.h>
 
 using namespace std;
 using namespace weave;

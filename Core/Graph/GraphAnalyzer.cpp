@@ -3,7 +3,7 @@
 //
 
 #include <assert.h>
-#include "GraphAnalyzer.h"
+#include <Core/Graph/GraphAnalyzer.h>
 
 using namespace std;
 using namespace weave;

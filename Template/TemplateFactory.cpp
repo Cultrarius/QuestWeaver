@@ -2,7 +2,7 @@
 // Created by michael on 15.08.15.
 //
 
-#include "TemplateFactory.h"
+#include <Template/TemplateFactory.h>
 
 using namespace std;
 using namespace Json;

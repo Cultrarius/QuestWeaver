@@ -4,17 +4,17 @@
 
 #pragma once
 
-#include "Core/WeaverTypes.h"
-#include "cereal.h"
-#include "json/json.h"
-#include "Core/WeaverEngine.h"
-#include "QuestModel/QuestModel.h"
-#include "Template/TemplateEngine.h"
-#include "World/WorldModel.h"
-#include "QuestModel/Quest.h"
-#include "Core/WeaverUtils.h"
-#include "World/WorldListener.h"
-#include "WeaverConfig.h"
+#include <Core/WeaverTypes.h>
+#include <cereal.h>
+#include <json/json.h>
+#include <Core/WeaverEngine.h>
+#include <QuestModel/QuestModel.h>
+#include <Template/TemplateEngine.h>
+#include <World/WorldModel.h>
+#include <QuestModel/Quest.h>
+#include <Core/WeaverUtils.h>
+#include <World/WorldListener.h>
+#include <WeaverConfig.h>
 
 namespace weave {
 

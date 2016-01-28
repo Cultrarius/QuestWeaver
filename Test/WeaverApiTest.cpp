@@ -4,11 +4,9 @@
 
 #include <string>
 #include "catch.hpp"
-#include "../Core/WeaverUtils.h"
-#include "../QuestModel/QuestModel.h"
+#include <Core/WeaverUtils.h>
+#include <QuestWeaver.h>
 #include "Mock/TestQuest.h"
-#include "Mock/TestEntity.h"
-#include "../QuestWeaver.h"
 
 using namespace weave;
 using namespace std;

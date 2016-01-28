@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include "Quest.h"
-#include "../Template/Template.h"
-#include "QuestModelAction.h"
+#include <QuestModel/Quest.h>
+#include <Template/Template.h>
+#include <QuestModel/QuestModelAction.h>
 
 namespace weave {
     class QuestModel {

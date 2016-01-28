@@ -3,10 +3,10 @@
 //
 
 
-#include "../Core/WeaverUtils.h"
-#include "../Core/Graph/WeaverGraph.h"
-#include "../QuestModel/QuestModel.h"
-#include "../Template/TemplateEngine.h"
+#include <Core/WeaverUtils.h>
+#include <Core/Graph/WeaverGraph.h>
+#include <QuestModel/QuestModel.h>
+#include <Template/TemplateEngine.h>
 
 namespace weave {
     class StoryWriter {

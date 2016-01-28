@@ -2,7 +2,7 @@
 // Created by michael on 11.10.15.
 //
 
-#include "WeaverUtils.h"
+#include <Core/WeaverUtils.h>
 
 void ::weave::replaceAll(std::string *str, const std::string &from, const std::string &to) {
     if (from.empty()) {

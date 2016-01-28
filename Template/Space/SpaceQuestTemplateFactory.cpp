@@ -2,8 +2,8 @@
 // Created by michael on 15.08.15.
 //
 
-#include "SpaceQuestTemplateFactory.h"
-#include "ExploreRegionTemplate.h"
+#include <Template/Space/SpaceQuestTemplateFactory.h>
+#include <Template/Space/ExploreRegionTemplate.h>
 
 using namespace std;
 using namespace Json;

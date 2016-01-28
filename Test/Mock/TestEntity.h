@@ -5,7 +5,7 @@
 #pragma once
 
 
-#include "../../World/WorldEntity.h"
+#include <World/WorldEntity.h>
 
 namespace weave {
 

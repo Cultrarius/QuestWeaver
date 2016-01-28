@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "WeaverEngine.h"
+#include <Core/WeaverEngine.h>
 
 using namespace std;
 using namespace weave;

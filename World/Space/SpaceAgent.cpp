@@ -2,7 +2,7 @@
 // Created by michael on 12.10.15.
 //
 
-#include "SpaceAgent.h"
+#include <World/Space/SpaceAgent.h>
 
 weave::SpaceAgent::SpaceAgent(std::string name) : SpaceAgent(NoID, name) {
 }

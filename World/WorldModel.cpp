@@ -2,7 +2,7 @@
 // Created by michael on 10.08.15.
 //
 
-#include "WorldModel.h"
+#include <World/WorldModel.h>
 
 using namespace weave;
 using namespace std;

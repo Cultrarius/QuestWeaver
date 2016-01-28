@@ -3,9 +3,8 @@
 //
 
 #include <string>
+#include <QuestModel/QuestModel.h>
 #include "catch.hpp"
-#include "../Core/WeaverUtils.h"
-#include "../QuestModel/QuestModel.h"
 #include "Mock/TestQuest.h"
 #include "Mock/TestEntity.h"
 

@@ -2,7 +2,7 @@
 // Created by michael on 11.08.15.
 //
 
-#include "Quest.h"
+#include <QuestModel/Quest.h>
 
 using namespace weave;
 using namespace std;

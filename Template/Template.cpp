@@ -2,8 +2,8 @@
 // Created by michael on 14.08.15.
 //
 
-#include "Template.h"
 #include <algorithm>
+#include <Template/Template.h>
 
 using namespace std;
 using namespace weave;

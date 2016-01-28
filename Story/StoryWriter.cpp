@@ -2,7 +2,7 @@
 // Created by michael on 21.12.15.
 //
 
-#include "StoryWriter.h"
+#include <Story/StoryWriter.h>
 
 using namespace std;
 using namespace weave;

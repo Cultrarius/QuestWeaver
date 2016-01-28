@@ -1,6 +1,15 @@
+* Implement story writer based on graph nodes
+  * Story writer could use templates or modules similar to the quest templates
+  * Use metadata / quest template data
+* More unit tests
+* Support i18n for template files
+* Support i18n for quests (might not be possible once they are serialized)
 * Add logger
+
+# Separate Project
+
 * UE4 Bindings
 * World Model Classes
-* Quest Templates
 * Actor Classes (Persons in the world/quests)
 * Actor Generation Algorithm
+* Quest Templates

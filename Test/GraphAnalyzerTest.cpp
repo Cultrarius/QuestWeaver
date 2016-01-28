@@ -4,10 +4,9 @@
 
 #include <string>
 #include <memory>
+#include <Core/WeaverTypes.h>
+#include <Core/Graph/GraphAnalyzer.h>
 #include "catch.hpp"
-#include "../Core/WeaverUtils.h"
-#include "../Core/Graph/WeaverGraph.h"
-#include "../Core/Graph/GraphAnalyzer.h"
 
 using namespace weave;
 using namespace std;

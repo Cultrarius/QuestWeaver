@@ -5,10 +5,10 @@
 #include <string>
 #include <memory>
 #include <Template/TemplateEngine.h>
+#include <Core/WeaverUtils.h>
+#include <Template/Space/SpaceQuestTemplateFactory.h>
+#include <World/Space/SpaceWorldModel.h>
 #include "../catch.hpp"
-#include "../../Core/WeaverUtils.h"
-#include "../../Template/Space/SpaceQuestTemplateFactory.h"
-#include "../../World/Space/SpaceWorldModel.h"
 
 using namespace weave;
 using namespace std;

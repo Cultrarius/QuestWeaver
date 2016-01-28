@@ -4,13 +4,13 @@
 
 #pragma once
 
-#include "../Template/Template.h"
-#include "WeaverUtils.h"
-#include "WeaverTypes.h"
-#include "../QuestModel/QuestModel.h"
-#include "Graph/WeaverGraph.h"
-#include "Graph/GraphAnalyzer.h"
-#include "../Story/StoryWriter.h"
+#include <Template/Template.h>
+#include <Core/WeaverUtils.h>
+#include <Core/WeaverTypes.h>
+#include <QuestModel/QuestModel.h>
+#include <Core/Graph/WeaverGraph.h>
+#include <Core/Graph/GraphAnalyzer.h>
+#include <Story/StoryWriter.h>
 
 namespace weave {
     struct EngineParameters {

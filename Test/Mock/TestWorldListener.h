@@ -5,7 +5,7 @@
 #pragma once
 
 
-#include "../../World/WorldListener.h"
+#include <World/WorldListener.h>
 
 namespace weave {
     struct TestWorldListener : WorldListener {

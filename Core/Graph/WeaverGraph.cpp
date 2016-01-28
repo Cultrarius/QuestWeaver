@@ -2,7 +2,7 @@
 // Created by michael on 04.11.15.
 //
 
-#include "WeaverGraph.h"
+#include <Core/Graph/WeaverGraph.h>
 
 using namespace std;
 using namespace weave;

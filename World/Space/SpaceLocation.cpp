@@ -2,7 +2,7 @@
 // Created by michael on 06.10.15.
 //
 
-#include "SpaceLocation.h"
+#include <World/Space/SpaceLocation.h>
 
 using namespace weave;
 using namespace std;

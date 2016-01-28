@@ -3,8 +3,9 @@
 //
 
 #include <string>
+#include <Core/WeaverTypes.h>
+#include <Core/WeaverUtils.h>
 #include "catch.hpp"
-#include "../Core/WeaverUtils.h"
 
 using namespace weave;
 using namespace std;

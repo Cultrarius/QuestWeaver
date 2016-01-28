@@ -2,9 +2,8 @@
 // Created by michael on 27.10.15.
 //
 
+#include <World/Space/SpaceWorldModel.h>
 #include "../catch.hpp"
-#include "../../Core/WeaverUtils.h"
-#include "../../World/Space/SpaceWorldModel.h"
 #include "../Mock/TestWorldListener.h"
 
 using namespace weave;

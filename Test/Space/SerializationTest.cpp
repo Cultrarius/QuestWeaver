@@ -4,10 +4,12 @@
 
 #include <fstream>
 #include <typeinfo>
-#include "../../QuestWeaver.h"
+#include <Core/WeaverTypes.h>
+#include <Template/Space/SpaceQuestTemplateFactory.h>
+#include <World/Space/SpaceWorldModel.h>
+#include <Template/TemplateEngine.h>
+#include <QuestModel/QuestModel.h>
 #include "../catch.hpp"
-#include "../../Template/Space/SpaceQuestTemplateFactory.h"
-#include "../../World/Space/SpaceWorldModel.h"
 
 using namespace weave;
 using namespace std;

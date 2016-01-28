@@ -3,9 +3,8 @@
 //
 
 #include <string>
+#include <Core/Graph/WeaverGraph.h>
 #include "catch.hpp"
-#include "../Core/WeaverUtils.h"
-#include "../Core/Graph/WeaverGraph.h"
 
 using namespace weave;
 using namespace std;

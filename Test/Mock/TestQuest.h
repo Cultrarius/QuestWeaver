@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "../../QuestModel/Quest.h"
+#include <QuestModel/Quest.h>
 
 namespace weave {
     class TestQuest : public Quest {
