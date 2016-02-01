@@ -5,7 +5,7 @@
 #pragma once
 
 #include <World/WorldModel.h>
-#include <Template/TemplateFactory.h>
+#include <Template/QuestTemplateFactory.h>
 
 namespace weave {
 
@@ -32,7 +32,7 @@ namespace weave {
          * The template factories used to create new quest templates.
          * At least one factory has to be registered before trying to create new quests.
          */
-        std::vector<std::shared_ptr<TemplateFactory>> questTemplateFactories;
+        std::vector<std::shared_ptr<QuestTemplateFactory>> questTemplateFactories;
 
         /*
          * The template factories used to create the quest stories.

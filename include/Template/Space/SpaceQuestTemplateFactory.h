@@ -4,10 +4,10 @@
 
 #pragma once
 
-#include "../TemplateFactory.h"
+#include "Template/QuestTemplateFactory.h"
 
 namespace weave {
-    class SpaceQuestTemplateFactory : public TemplateFactory {
+    class SpaceQuestTemplateFactory : public QuestTemplateFactory {
     protected:
         std::shared_ptr<Template> createFromJsonValues(const Json::Value &root) const override;
 

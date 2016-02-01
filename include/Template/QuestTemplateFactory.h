@@ -10,9 +10,9 @@
 #include "Template.h"
 
 namespace weave {
-    class TemplateFactory {
+    class QuestTemplateFactory {
     public:
-        virtual ~TemplateFactory() = default;
+        virtual ~QuestTemplateFactory() = default;
 
         std::vector<std::string> GetTemplateKeys();
 

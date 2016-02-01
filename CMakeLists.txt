@@ -10,7 +10,7 @@ include_directories(./include)
 
 set(SOURCE_FILES QuestWeaver.cpp Core/WeaverEngine.cpp Template/TemplateEngine.cpp QuestModel/QuestModel.cpp World/WorldModel.cpp
         QuestModel/Quest.cpp Template/Template.cpp include/json/jsoncpp.cpp Template/Space/ExploreRegionTemplate.cpp
-        Template/TemplateFactory.cpp Template/Space/SpaceQuestTemplateFactory.cpp World/WorldEntity.cpp
+        Template/QuestTemplateFactory.cpp Template/Space/SpaceQuestTemplateFactory.cpp World/WorldEntity.cpp
         World/WorldModelAction.cpp World/Space/SpaceLocation.cpp World/Space/SpaceWorldModel.cpp QuestModel/Space/ExploreRegionQuest.cpp
         Core/WeaverUtils.cpp World/Space/SpaceAgent.cpp World/Space/SolarSystem.cpp World/MetaData.cpp Core/Graph/WeaverGraph.cpp
         Core/Graph/Node.cpp Core/Graph/Edge.cpp Core/Graph/GraphAnalyzer.cpp QuestModel/QuestModelAction.cpp

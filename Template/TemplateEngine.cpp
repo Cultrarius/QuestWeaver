@@ -13,7 +13,7 @@ shared_ptr<Template> TemplateEngine::GetTemplateForNewQuest() {
         throw ContractFailedException("No factory defined to create template.\n");
     }
     auto factoryIndex = randomStream->GetRandomIndex(factories.size());
-    shared_ptr<TemplateFactory> factory = factories.at(factoryIndex);
+    shared_ptr<QuestTemplateFactory> factory = factories.at(factoryIndex);
     auto factoryKeys = factory->GetTemplateKeys();
     if (factoryKeys.size() == 0) {
         throw ContractFailedException("No templates defined in template factory.\n");
@@ -24,7 +24,7 @@ shared_ptr<Template> TemplateEngine::GetTemplateForNewQuest() {
     return factory->CreateTemplate(key);
 }
 
-void TemplateEngine::RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory) {
+void TemplateEngine::RegisterTemplateFactory(std::shared_ptr<QuestTemplateFactory> factory) {
     for (auto f : factories) {
         if (f.get() == factory.get()) {
             return;

@@ -6,7 +6,7 @@
 
 #include "../Core/WeaverUtils.h"
 #include "../Core/WeaverTypes.h"
-#include "TemplateFactory.h"
+#include "QuestTemplateFactory.h"
 #include "Template.h"
 
 namespace weave {
@@ -16,12 +16,12 @@ namespace weave {
 
         std::shared_ptr<Template> GetTemplateForNewQuest();
 
-        void RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory);
+        void RegisterTemplateFactory(std::shared_ptr<QuestTemplateFactory> factory);
 
 		void ChangeDirectories(Directories newDirs);
 
     private:
-        std::vector<std::shared_ptr<TemplateFactory>> factories;
+        std::vector<std::shared_ptr<QuestTemplateFactory>> factories;
 
         std::shared_ptr<RandomStream> randomStream;
 

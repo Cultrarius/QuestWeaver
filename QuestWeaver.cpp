@@ -31,7 +31,7 @@ QuestWeaver::QuestWeaver(WeaverConfig config) {
     }
     stories.reset(new StoryWriter(randomStream, *quests, *templates, config.dirs));
     if (config.debug) {
-        shared_ptr<TemplateFactory> spaceFactory = make_shared<SpaceQuestTemplateFactory>();
+        shared_ptr<QuestTemplateFactory> spaceFactory = make_shared<SpaceQuestTemplateFactory>();
         templates->RegisterTemplateFactory(spaceFactory);
     } else {
         for (auto factory : config.questTemplateFactories) {
@@ -72,7 +72,7 @@ std::shared_ptr<Quest> QuestWeaver::ChangeQuestState(QuestModelAction questActio
     return quests->Execute(questAction);
 }
 
-void QuestWeaver::RegisterTemplateFactory(std::shared_ptr<TemplateFactory> factory) {
+void QuestWeaver::RegisterTemplateFactory(std::shared_ptr<QuestTemplateFactory> factory) {
     templates->RegisterTemplateFactory(factory);
 }
 
