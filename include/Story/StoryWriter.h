@@ -11,6 +11,10 @@
 #include <Story/StoryTemplateFactory.h>
 
 namespace weave {
+    class Nugget {
+
+    };
+
     class StoryWriter {
     public:
         explicit StoryWriter(std::shared_ptr<RandomStream> randomStream, const weave::QuestModel &model,
@@ -27,7 +31,10 @@ namespace weave {
         mutable bool isInitialized = false;
         Directories dirs;
         std::vector<std::shared_ptr<StoryTemplateFactory>> factories;
+        mutable std::vector<Nugget> nuggets;
 
         void initialize() const;
+
+        void readNuggets() const;
     };
 }

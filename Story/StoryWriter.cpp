@@ -17,6 +17,24 @@ void StoryWriter::initialize() const {
         return;
     }
     isInitialized = true;
+    for (auto factory : factories) {
+        factory->initialize();
+    }
+    readNuggets();
+}
+
+void StoryWriter::readNuggets() const {
+    nuggets.clear();
+    set<string> nuggetFolders;
+    for (auto factory : factories) {
+        nuggetFolders.insert(factory->GetNuggetFolder());
+    }
+
+    for (string folder : nuggetFolders) {
+        string file = folder;
+        file += "/Nuggets.st";
+        Json::Value root = readJsonFromFile(file.c_str(), dirs);
+    }
 }
 
 string StoryWriter::CreateStory(const WeaverGraph &graph) const {

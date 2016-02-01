@@ -8,8 +8,8 @@ using namespace weave;
 using namespace std;
 using namespace Json;
 
-shared_ptr<StoryTemplate> StoryTemplateFactory::GetTemplates() {
-    return shared_ptr<StoryTemplate>();
+vector<shared_ptr<StoryTemplate>> StoryTemplateFactory::GetTemplates() {
+    return templates;
 }
 
 void StoryTemplateFactory::initialize() {

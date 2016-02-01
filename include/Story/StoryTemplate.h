@@ -8,5 +8,7 @@ namespace weave {
     class StoryTemplate {
     public:
         StoryTemplate();
+
+        virtual ~StoryTemplate() = default;
     };
 }

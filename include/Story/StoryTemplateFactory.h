@@ -12,7 +12,9 @@ namespace weave {
     public:
         virtual ~StoryTemplateFactory() = default;
 
-        std::shared_ptr<StoryTemplate> GetTemplates();
+        std::vector<std::shared_ptr<StoryTemplate>> GetTemplates();
+
+        virtual std::string GetNuggetFolder() const = 0;
 
     protected:
         virtual std::shared_ptr<StoryTemplate> createFromJsonValues(const Json::Value &root) const = 0;
