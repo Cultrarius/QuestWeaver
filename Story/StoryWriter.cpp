@@ -7,9 +7,9 @@
 using namespace std;
 using namespace weave;
 
-StoryWriter::StoryWriter(std::shared_ptr<RandomStream> randomStream, const weave::QuestModel &model,
-                         const weave::TemplateEngine &templateEngine) :
-        rs(randomStream), model(model), templateEngine(templateEngine) {
+StoryWriter::StoryWriter(shared_ptr<RandomStream> randomStream, const QuestModel &model,
+                         const TemplateEngine &templateEngine, const Directories &dirs) :
+        rs(randomStream), model(model), templateEngine(templateEngine), dirs(dirs) {
 }
 
 void StoryWriter::initialize() const {
@@ -23,5 +23,14 @@ string StoryWriter::CreateStory(const WeaverGraph &graph) const {
     // TODO: the current template might also prove useful at this point to pick a more useful story
 
     initialize();
-    return "In a far away galaxy a long time ago...\nThere were three litte piglets!";
+    return "In a far away galaxy a long time ago...\nThere were three little piglets!";
+}
+
+void StoryWriter::ChangeDirectories(const Directories &newDirs) {
+    dirs = newDirs;
+    isInitialized = false;
+    for (auto factory : factories) {
+        factory->dirs = dirs;
+        factory->isInitialized = false;
+    }
 }

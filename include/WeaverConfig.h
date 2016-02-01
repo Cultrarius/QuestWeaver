@@ -32,7 +32,13 @@ namespace weave {
          * The template factories used to create new quest templates.
          * At least one factory has to be registered before trying to create new quests.
          */
-        std::vector<std::shared_ptr<TemplateFactory>> templateFactories;
+        std::vector<std::shared_ptr<TemplateFactory>> questTemplateFactories;
+
+        /*
+         * The template factories used to create the quest stories.
+         * These are optional, but without them, the quests will be created without a backstory.
+         */
+        std::vector<std::shared_ptr<StoryTemplateFactory>> storyTemplateFactories;
 
         /*
          * True if used for testing and debugging.

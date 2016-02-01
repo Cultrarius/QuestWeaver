@@ -20,6 +20,8 @@ namespace weave {
         virtual const char *getTemplateFile() const = 0;
 
     private:
+        friend class StoryWriter;
+
         bool isInitialized = false;
 
         Directories dirs;

@@ -29,12 +29,12 @@ QuestWeaver::QuestWeaver(WeaverConfig config) {
     } else {
         throw ContractFailedException("A world model must be provided for the quest system to work.");
     }
-    stories.reset(new StoryWriter(randomStream, *quests, *templates));
+    stories.reset(new StoryWriter(randomStream, *quests, *templates, config.dirs));
     if (config.debug) {
         shared_ptr<TemplateFactory> spaceFactory = make_shared<SpaceQuestTemplateFactory>();
         templates->RegisterTemplateFactory(spaceFactory);
     } else {
-        for (auto factory : config.templateFactories) {
+        for (auto factory : config.questTemplateFactories) {
             templates->RegisterTemplateFactory(factory);
         }
     }
@@ -103,17 +103,17 @@ QuestWeaver QuestWeaver::Deserialize(std::istream &inputStream, StreamType type)
 }
 
 QuestWeaver QuestWeaver::Deserialize(std::istream &inputStream, StreamType type, Directories currentDirectories) {
-	QuestWeaver deserialized = Deserialize(inputStream, type);
-	deserialized.ChangeWorkingDirectories(currentDirectories);
-	return deserialized;
+    QuestWeaver deserialized = Deserialize(inputStream, type);
+    deserialized.ChangeWorkingDirectories(currentDirectories);
+    return deserialized;
 }
 
 QuestWeaver::QuestWeaver() {
 }
 
-void weave::QuestWeaver::ChangeWorkingDirectories(Directories directories)
-{
-	templates->ChangeDirectories(directories);
+void weave::QuestWeaver::ChangeWorkingDirectories(Directories directories) {
+    templates->ChangeDirectories(directories);
+    stories->ChangeDirectories(directories);
 }
 
 const WorldModel &QuestWeaver::GetWorldModel() const {

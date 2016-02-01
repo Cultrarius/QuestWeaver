@@ -145,7 +145,7 @@ namespace weave {
         void load(Archive &archive) {
             archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world));
             engine.reset(new WeaverEngine(randomStream));
-            stories.reset(new StoryWriter(randomStream, *quests, *templates));
+            stories.reset(new StoryWriter(randomStream, *quests, *templates, Directories()));
             templates.reset(new TemplateEngine(randomStream, Directories()));
         }
 
