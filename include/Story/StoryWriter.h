@@ -24,13 +24,16 @@ namespace weave {
 
         void ChangeDirectories(const Directories &newDirs);
 
+        void RegisterTemplateFactory(std::shared_ptr<StoryTemplateFactory> factory);
+
     private:
         std::shared_ptr<RandomStream> rs;
         const weave::QuestModel &model;
         const weave::TemplateEngine &templateEngine;
-        mutable bool isInitialized = false;
         Directories dirs;
         std::vector<std::shared_ptr<StoryTemplateFactory>> factories;
+
+        mutable bool isInitialized = false;
         mutable std::vector<Nugget> nuggets;
 
         void initialize() const;

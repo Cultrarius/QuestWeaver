@@ -34,6 +34,7 @@ void StoryWriter::readNuggets() const {
         string file = folder;
         file += "/Nuggets.st";
         Json::Value root = readJsonFromFile(file.c_str(), dirs);
+        // TODO: create nuggets from json
     }
 }
 
@@ -41,6 +42,13 @@ string StoryWriter::CreateStory(const WeaverGraph &graph) const {
     // TODO: the current template might also prove useful at this point to pick a more useful story
 
     initialize();
+
+    for (auto factory : factories) {
+        for (auto storyTemplate : factory->GetTemplates()) {
+            cout << "Required: " << storyTemplate->GetRequiredEntities().size() << endl;
+        }
+    }
+
     return "In a far away galaxy a long time ago...\nThere were three little piglets!";
 }
 
@@ -51,4 +59,8 @@ void StoryWriter::ChangeDirectories(const Directories &newDirs) {
         factory->dirs = dirs;
         factory->isInitialized = false;
     }
+}
+
+void StoryWriter::RegisterTemplateFactory(shared_ptr<StoryTemplateFactory> factory) {
+    factories.push_back(factory);
 }

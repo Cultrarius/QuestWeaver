@@ -4,11 +4,15 @@
 
 #pragma once
 
+#include <Core/WeaverTypes.h>
+
 namespace weave {
     class StoryTemplate {
     public:
         StoryTemplate();
 
         virtual ~StoryTemplate() = default;
+
+        std::vector<std::string> GetRequiredEntities() const;
     };
 }

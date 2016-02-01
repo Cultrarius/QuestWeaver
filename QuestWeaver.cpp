@@ -6,6 +6,7 @@
 #include <QuestWeaver.h>
 #include <Template/Space/SpaceQuestTemplateFactory.h>
 #include <World/Space/SpaceWorldModel.h>
+#include <Story/Space/CommonSpaceStoryFactory.h>
 
 using namespace std;
 using namespace weave;
@@ -31,11 +32,16 @@ QuestWeaver::QuestWeaver(WeaverConfig config) {
     }
     stories.reset(new StoryWriter(randomStream, *quests, *templates, config.dirs));
     if (config.debug) {
-        shared_ptr<QuestTemplateFactory> spaceFactory = make_shared<SpaceQuestTemplateFactory>();
+        auto spaceFactory = make_shared<SpaceQuestTemplateFactory>();
         templates->RegisterTemplateFactory(spaceFactory);
+        auto spaceStoryFactory = make_shared<CommonSpaceStoryFactory>();
+        stories->RegisterTemplateFactory(spaceStoryFactory);
     } else {
         for (auto factory : config.questTemplateFactories) {
             templates->RegisterTemplateFactory(factory);
+        }
+        for (auto factory : config.storyTemplateFactories) {
+            stories->RegisterTemplateFactory(factory);
         }
     }
 }

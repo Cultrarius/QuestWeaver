@@ -1,5 +1,6 @@
 #include <Template/Space/SpaceQuestTemplateFactory.h>
 #include "QuestWeaver.h"
+#include "Story/Space/CommonSpaceStoryFactory.h"
 
 using namespace std;
 using namespace weave;
@@ -23,7 +24,7 @@ int main() {
     cout << "Hey!" << endl;
 
     QuestWeaver deserialized = QuestWeaver::Deserialize(ss, StreamType::BINARY, config.dirs);
-    shared_ptr<TemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();;
+    shared_ptr<QuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();;
     deserialized.RegisterTemplateFactory(factory);
     cout << "Woot!" << endl;
 
