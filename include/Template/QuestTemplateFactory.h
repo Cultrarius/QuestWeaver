@@ -7,7 +7,7 @@
 #include "../Core/WeaverTypes.h"
 #include "../Core/WeaverUtils.h"
 #include "../json/json.h"
-#include "Template.h"
+#include "QuestTemplate.h"
 
 namespace weave {
     class QuestTemplateFactory {
@@ -16,10 +16,10 @@ namespace weave {
 
         std::vector<std::string> GetTemplateKeys();
 
-        std::shared_ptr<Template> CreateTemplate(const std::string &templateKey);
+        std::shared_ptr<QuestTemplate> CreateTemplate(const std::string &templateKey);
 
     protected:
-        virtual std::shared_ptr<Template> createFromJsonValues(const Json::Value &root) const = 0;
+        virtual std::shared_ptr<QuestTemplate> createFromJsonValues(const Json::Value &root) const = 0;
 
         virtual const char *getTemplateFile() const = 0;
 

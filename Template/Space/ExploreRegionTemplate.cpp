@@ -11,7 +11,7 @@ using namespace weave;
 ExploreRegionTemplate::ExploreRegionTemplate(string title,
                                              vector<TemplateQuestProperty> properties,
                                              vector<TemplateQuestDescription> descriptions)
-        : Template(title, properties, descriptions) {
+        : QuestTemplate(title, properties, descriptions) {
 }
 
 vector<WorldModelAction> ExploreRegionTemplate::GetPropertyCandidates(const TemplateQuestProperty &property,

@@ -3,7 +3,7 @@
 //
 
 #include <algorithm>
-#include <Template/Template.h>
+#include <Template/QuestTemplate.h>
 
 using namespace std;
 using namespace weave;
@@ -21,7 +21,7 @@ TemplateQuestProperty::TemplateQuestProperty(bool isMandatory, const string &nam
     this->name = name;
 }
 
-vector<TemplateQuestProperty> Template::GetProperties() const {
+vector<TemplateQuestProperty> QuestTemplate::GetProperties() const {
     return properties;
 }
 
@@ -35,8 +35,8 @@ TemplateQuestDescription::TemplateQuestDescription(const vector<string> &conditi
     this->text = text;
 }
 
-Template::Template(string title, vector<TemplateQuestProperty> properties,
-                   vector<TemplateQuestDescription> descriptions) {
+QuestTemplate::QuestTemplate(string title, vector<TemplateQuestProperty> properties,
+                             vector<TemplateQuestDescription> descriptions) {
     this->title = title;
     this->properties = properties;
     this->descriptions = descriptions;
@@ -55,7 +55,7 @@ shared_ptr<WorldEntity> QuestPropertyValue::GetValue() const {
     return value;
 }
 
-std::string Template::getBestFittingDescription(const std::vector<QuestPropertyValue> &questPropertyValues) const {
+std::string QuestTemplate::getBestFittingDescription(const std::vector<QuestPropertyValue> &questPropertyValues) const {
     std::vector<std::string> sortedConditions;
     for (auto propertyValue : questPropertyValues) {
         sortedConditions.push_back(propertyValue.GetProperty().GetName());
@@ -82,7 +82,7 @@ bool TemplateQuestDescription::SupportsConditions(const std::vector<std::string>
                     descriptionConditions.begin(), descriptionConditions.end());
 }
 
-std::string Template::getTitle(const std::vector<QuestPropertyValue> &questPropertyValues) const {
+std::string QuestTemplate::getTitle(const std::vector<QuestPropertyValue> &questPropertyValues) const {
     string titleText = this->title;
     for (const auto &questProperty : questPropertyValues) {
         const string &conditionLabel = "%" + questProperty.GetProperty().GetName();
@@ -96,8 +96,8 @@ bool TemplateQuestProperty::operator==(const TemplateQuestProperty &other) const
     return name == other.name;
 }
 
-ID Template::getEntityIdFromProperty(std::string propertyName,
-                                     const std::vector<QuestPropertyValue> &questPropertyValues) {
+ID QuestTemplate::getEntityIdFromProperty(std::string propertyName,
+                                          const std::vector<QuestPropertyValue> &questPropertyValues) {
     for (auto propertyValue : questPropertyValues) {
         if (propertyValue.GetProperty().GetName() == propertyName) {
             return propertyValue.GetValue()->GetId();
@@ -106,6 +106,6 @@ ID Template::getEntityIdFromProperty(std::string propertyName,
     return 0;
 }
 
-std::shared_ptr<Quest> Template::ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const {
+std::shared_ptr<Quest> QuestTemplate::ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const {
     return ToQuest(questPropertyValues, "");
 }

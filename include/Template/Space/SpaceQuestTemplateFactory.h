@@ -9,7 +9,7 @@
 namespace weave {
     class SpaceQuestTemplateFactory : public QuestTemplateFactory {
     protected:
-        std::shared_ptr<Template> createFromJsonValues(const Json::Value &root) const override;
+        std::shared_ptr<QuestTemplate> createFromJsonValues(const Json::Value &root) const override;
 
         const char *getTemplateFile() const override;
     };

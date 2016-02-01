@@ -8,7 +8,7 @@
 using namespace std;
 using namespace weave;
 
-EngineResult WeaverEngine::fillTemplate(shared_ptr<Template> questTemplate,
+EngineResult WeaverEngine::fillTemplate(shared_ptr<QuestTemplate> questTemplate,
                                         const QuestModel &questModel,
                                         const WorldModel &worldModel,
                                         const StoryWriter &storyWriter) const {

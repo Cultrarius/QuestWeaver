@@ -5,7 +5,7 @@
 #pragma once
 
 #include <QuestModel/Quest.h>
-#include <Template/Template.h>
+#include <Template/QuestTemplate.h>
 #include <QuestModel/QuestModelAction.h>
 
 namespace weave {

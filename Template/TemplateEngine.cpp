@@ -8,7 +8,7 @@
 using namespace std;
 using namespace weave;
 
-shared_ptr<Template> TemplateEngine::GetTemplateForNewQuest() {
+shared_ptr<QuestTemplate> TemplateEngine::GetTemplateForNewQuest() {
     if (factories.size() == 0) {
         throw ContractFailedException("No factory defined to create template.\n");
     }

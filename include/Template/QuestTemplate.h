@@ -51,13 +51,13 @@ namespace weave {
         std::string text;
     };
 
-    class Template {
+    class QuestTemplate {
     public:
-        Template(std::string title,
-                 std::vector<TemplateQuestProperty> properties,
-                 std::vector<TemplateQuestDescription> descriptions);
+        QuestTemplate(std::string title,
+                      std::vector<TemplateQuestProperty> properties,
+                      std::vector<TemplateQuestDescription> descriptions);
 
-		virtual ~Template() {}
+        virtual ~QuestTemplate() { }
 
         virtual std::shared_ptr<Quest> ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues,
                                                const std::string &questStory) const = 0;

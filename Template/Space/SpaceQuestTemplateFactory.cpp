@@ -9,7 +9,7 @@ using namespace std;
 using namespace Json;
 using namespace weave;
 
-std::shared_ptr<Template> SpaceQuestTemplateFactory::createFromJsonValues(const Json::Value &root) const {
+std::shared_ptr<QuestTemplate> SpaceQuestTemplateFactory::createFromJsonValues(const Json::Value &root) const {
     if (root["parent"].asString() != "Space") {
         string errorMessage = string("Template file has incompatible parent: ") + root["parent"].asString() + "\n";
         cerr << errorMessage;

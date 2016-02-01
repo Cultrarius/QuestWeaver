@@ -4,11 +4,11 @@
 
 #pragma once
 
-#include "../Template.h"
+#include "Template/QuestTemplate.h"
 #include "../../World/Space/SpaceWorldModel.h"
 
 namespace weave {
-    class ExploreRegionTemplate : public Template {
+    class ExploreRegionTemplate : public QuestTemplate {
     public:
         std::shared_ptr<Quest> ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues,
                                        const std::string &questStory) const override;

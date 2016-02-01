@@ -7,14 +7,14 @@
 #include "../Core/WeaverUtils.h"
 #include "../Core/WeaverTypes.h"
 #include "QuestTemplateFactory.h"
-#include "Template.h"
+#include "QuestTemplate.h"
 
 namespace weave {
     class TemplateEngine {
     public:
         TemplateEngine(std::shared_ptr<RandomStream> randomStream, Directories dirs);
 
-        std::shared_ptr<Template> GetTemplateForNewQuest();
+        std::shared_ptr<QuestTemplate> GetTemplateForNewQuest();
 
         void RegisterTemplateFactory(std::shared_ptr<QuestTemplateFactory> factory);
 

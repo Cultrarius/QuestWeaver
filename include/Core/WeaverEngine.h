@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <Template/Template.h>
+#include <Template/QuestTemplate.h>
 #include <Core/WeaverUtils.h>
 #include <Core/WeaverTypes.h>
 #include <QuestModel/QuestModel.h>
@@ -45,7 +45,7 @@ namespace weave {
     public:
         explicit WeaverEngine(std::shared_ptr<RandomStream> randomStream);
 
-        EngineResult fillTemplate(std::shared_ptr<Template> questTemplate,
+        EngineResult fillTemplate(std::shared_ptr<QuestTemplate> questTemplate,
                                   const QuestModel &questModel,
                                   const WorldModel &worldModel,
                                   const StoryWriter &storyWriter) const;

@@ -63,7 +63,7 @@ void QuestTemplateFactory::extractProperties(vector<TemplateQuestProperty> *prop
     }
 }
 
-std::shared_ptr<Template> QuestTemplateFactory::CreateTemplate(const std::string &templateKey) {
+std::shared_ptr<QuestTemplate> QuestTemplateFactory::CreateTemplate(const std::string &templateKey) {
     this->randomStream = randomStream;
     initialize();
     auto mapEntry = templateMap.find(templateKey);
