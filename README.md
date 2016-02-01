@@ -29,7 +29,8 @@ To use the QuestWeaver system, you have to follow these steps:
 ```cpp
 QuestWeaver Init() {
     // Create your template factories
-    shared_ptr<TemplateFactory> factory = make_shared<MyQuestTemplateFactory>();
+    shared_ptr<QuestTemplateFactory> questFactory = make_shared<MyQuestTemplateFactory>();
+    shared_ptr<StoryTemplateFactory> storyFactory = make_shared<MyStoryTemplateFactory>();
     
     // Create your world model
     auto worldModel = new MyWorldModel();
@@ -42,7 +43,8 @@ QuestWeaver Init() {
     
     // Create the quest system
     QuestWeaver weaver(config);
-    weaver.RegisterTemplateFactory(factory);
+    weaver.RegisterQuestTemplateFactory(questFactory);
+    weaver.RegisterStoryTemplateFactory(storyFactory);
     weaver.GetWorldModel().AddListener(myWorldListener);
     
     return weaver;
@@ -80,7 +82,8 @@ void SerialTest() {
     
     // deserialize - it is important to re-register the template factories and the world model listener!
     QuestWeaver deserialized = QuestWeaver::Deserialize(ss, StreamType::JSON, config.dirs);
-    weaver.RegisterTemplateFactory(factory);
+    weaver.RegisterQuestTemplateFactory(questFactory);
+    weaver.RegisterStoryTemplateFactory(storyFactory);
     weaver.GetWorldModel().AddListener(myWorldListener);
 }
 ```

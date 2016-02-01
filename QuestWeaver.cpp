@@ -78,8 +78,12 @@ std::shared_ptr<Quest> QuestWeaver::ChangeQuestState(QuestModelAction questActio
     return quests->Execute(questAction);
 }
 
-void QuestWeaver::RegisterTemplateFactory(std::shared_ptr<QuestTemplateFactory> factory) {
+void QuestWeaver::RegisterQuestTemplateFactory(std::shared_ptr<QuestTemplateFactory> factory) {
     templates->RegisterTemplateFactory(factory);
+}
+
+void QuestWeaver::RegisterStoryTemplateFactory(std::shared_ptr<StoryTemplateFactory> factory) {
+    stories->RegisterTemplateFactory(factory);
 }
 
 void QuestWeaver::Serialize(std::ostream &outputStream, StreamType type) {

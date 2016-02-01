@@ -45,7 +45,7 @@ string StoryWriter::CreateStory(const WeaverGraph &graph) const {
 
     for (auto factory : factories) {
         for (auto storyTemplate : factory->GetTemplates()) {
-            cout << "Required: " << storyTemplate->GetRequiredEntities().size() << endl;
+            //TODO create story
         }
     }
 

@@ -38,12 +38,21 @@ namespace weave {
         explicit QuestWeaver(WeaverConfig config);
 
         /*
-         * Registers a new template factory with the quest system.
+         * Registers a new quest template factory with the quest system.
          * Usually, the factories are already registered when creating an instance using the WeaverConfig parameter.
          * However, this is not true when creating a new instance by deserialiation.
          * This method *MUST* be used on newly deserialized objects, otherwise it is impossible to create new quests
          */
-        void RegisterTemplateFactory(std::shared_ptr<QuestTemplateFactory> factory);
+        void RegisterQuestTemplateFactory(std::shared_ptr<QuestTemplateFactory> factory);
+
+        /*
+         * Registers a new story template factory with the quest system.
+         * Usually, the factories are already registered when creating an instance using the WeaverConfig parameter.
+         * However, this is not true when creating a new instance by deserialiation.
+         * This method *MUST* be used on newly deserialized objects, otherwise new quests will be created without
+         * backstories.
+         */
+        void RegisterStoryTemplateFactory(std::shared_ptr<StoryTemplateFactory> factory);
 
         /*
          * Changes the directories used by the quest system to load files such as templates.

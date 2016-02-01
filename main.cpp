@@ -25,7 +25,7 @@ int main() {
 
     QuestWeaver deserialized = QuestWeaver::Deserialize(ss, StreamType::BINARY, config.dirs);
     shared_ptr<QuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();;
-    deserialized.RegisterTemplateFactory(factory);
+    deserialized.RegisterQuestTemplateFactory(factory);
     cout << "Woot!" << endl;
 
     shared_ptr<Quest> desQuest = deserialized.GetQuest(newQuest->GetId());
