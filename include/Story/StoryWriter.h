@@ -2,6 +2,7 @@
 // Created by michael on 21.12.15.
 //
 
+#pragma once
 
 #include <Core/WeaverUtils.h>
 #include <Core/Graph/WeaverGraph.h>

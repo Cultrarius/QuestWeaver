@@ -41,13 +41,13 @@ namespace weave {
         /*
          * The base directory which all template factories use to search for template files.
          */
-        std::string templateDirectory = "../Template/";
+        std::string templateDirectory = "../Resources/";
 
         /*
          * Template factories prefer template files found in this directory, so mods can override the templates
          * in the default directory.
          */
-        std::string modDirectory = "../Mods/Template/";
+        std::string modDirectory = "../Mods/";
     private:
         // serialization
         friend class cereal::access;

@@ -8,33 +8,6 @@ using namespace std;
 using namespace Json;
 using namespace weave;
 
-Json::Value TemplateFactory::readTemplateFile(const char *fileName) {
-    Value root;
-    CharReaderBuilder readBuilder;
-    readBuilder["collectComments"] = false;
-    readBuilder["rejectDupKeys"] = true;
-    string errorMessage;
-    ifstream inStream;
-    openFile(fileName, &inStream);
-    string requiredMembers[] = {"key", "parent", "mandatory", "optional", "titles", "descriptions", "objectives"};
-    if (!Json::parseFromStream(readBuilder, inStream, &root, &errorMessage)) {
-        cerr << "Error parsing template file: " << errorMessage << endl;
-        throw ContractFailedException(errorMessage);
-    }
-
-    // quick sanity check
-    for (string member : requiredMembers) {
-        if (!root.isMember(member)) {
-            errorMessage = "Missing member in template file! MEMBER: <";
-            errorMessage += member;
-            errorMessage += "> / FILE: ";
-            errorMessage += fileName;
-            throw ContractFailedException(errorMessage);
-        }
-    }
-    return root;
-}
-
 vector<string> TemplateFactory::GetTemplateKeys() {
     initialize();
     vector<string> keys;
@@ -101,38 +74,6 @@ std::shared_ptr<Template> TemplateFactory::CreateTemplate(const std::string &tem
     return createFromJsonValues(root);
 }
 
-void TemplateFactory::openFile(const char *fileName, ifstream *inStream) {
-    string modDir(dirs.modDirectory);
-    string dataDir(dirs.templateDirectory);
-
-    // try to use the mods directory
-    const char *moddedFile = modDir.append(fileName).c_str();
-    inStream->open(moddedFile, ios::in);
-    if (!inStream->fail()) {
-        return;
-    }
-
-    // try to use the regular directory
-    const char *templateFile = dataDir.append(fileName).c_str();
-    inStream->open(templateFile, ios::in);
-    if (!inStream->fail()) {
-        return;
-    }
-
-    // try to open the file as it is
-    string currentDir("./");
-    const char *localFile = currentDir.append(fileName).c_str();
-    inStream->open(localFile, ios::in);
-    if (!inStream->fail()) {
-        return;
-    }
-    std::string errorMsg =
-            "Unable to find file in any of the following directories: [., " + dirs.templateDirectory + ", " +
-            dirs.modDirectory +
-            "]";
-    throw ContractFailedException(errorMsg);
-}
-
 void TemplateFactory::initialize() {
     if (isInitialized) {
         return;
@@ -141,11 +82,18 @@ void TemplateFactory::initialize() {
     templateMap.clear();
 
     const char *fileName = getTemplateFile();
-    auto root = readTemplateFile(fileName);
-    if (root["parent"].asString() != "Space") {
-        string errorMessage = string("Template file has incompatible parent: ") + fileName + "\n";
-        cerr << errorMessage;
-        throw ContractFailedException(errorMessage);
+    Value root = readJsonFromFile(fileName, dirs);
+
+    // quick sanity check
+    string requiredMembers[] = {"key", "parent", "mandatory", "optional", "titles", "descriptions", "objectives"};
+    for (string member : requiredMembers) {
+        if (!root.isMember(member)) {
+            string errorMessage = "Missing member in template file! MEMBER: <";
+            errorMessage += member;
+            errorMessage += "> / FILE: ";
+            errorMessage += fileName;
+            throw ContractFailedException(errorMessage);
+        }
     }
 
     templateMap[root["key"].asString()] = root;

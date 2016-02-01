@@ -4,7 +4,6 @@
 
 #pragma once
 
-#include <fstream>
 #include "../Core/WeaverTypes.h"
 #include "../Core/WeaverUtils.h"
 #include "../json/json.h"
@@ -13,7 +12,7 @@
 namespace weave {
     class TemplateFactory {
     public:
-		virtual ~TemplateFactory() {}
+        virtual ~TemplateFactory() = default;
 
         std::vector<std::string> GetTemplateKeys();
 
@@ -23,8 +22,6 @@ namespace weave {
         virtual std::shared_ptr<Template> createFromJsonValues(const Json::Value &root) const = 0;
 
         virtual const char *getTemplateFile() const = 0;
-
-        Json::Value readTemplateFile(const char *fileName);
 
         std::unordered_map<std::string, Json::Value> templateMap;
 
@@ -46,8 +43,6 @@ namespace weave {
         bool isInitialized = false;
 
         Directories dirs;
-
-        void openFile(const char *name, std::ifstream *stream);
 
         void initialize();
     };
