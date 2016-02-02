@@ -19,5 +19,7 @@ namespace weave {
 
     std::string htmlEncloseWithTag(const std::string &str, const std::string &tag);
 
+    std::string htmlEncloseWithTag(const std::string &str, const std::string &tag, const std::string &cssClass);
+
     Json::Value readJsonFromFile(const char *fileName, const Directories &dirs);
 }

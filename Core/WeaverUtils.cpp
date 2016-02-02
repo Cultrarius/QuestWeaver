@@ -55,6 +55,12 @@ string weave::htmlEncloseWithTag(const string &str, const string &tag, const vec
     return html.str();
 }
 
+std::string weave::htmlEncloseWithTag(const std::string &str, const std::string &tag, const std::string &cssClass) {
+    vector<string> classes;
+    classes.push_back(cssClass);
+    return htmlEncloseWithTag(str, tag, classes);
+}
+
 Value weave::readJsonFromFile(const char *fileName, const Directories &dirs) {
     Value root;
     CharReaderBuilder readBuilder;

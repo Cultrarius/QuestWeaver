@@ -147,6 +147,10 @@ TEST_CASE("HTML tag enclosure", "[utils]") {
         REQUIRE("<div class=\"format\">Hello World</div>" == htmlEncloseWithTag(s1, "div", classOne));
     }
 
+    SECTION("simple tag with class") {
+        REQUIRE("<div class=\"whee\">asd</div>" == htmlEncloseWithTag("asd", "div", "whee"));
+    }
+
     SECTION("simple tag with classes") {
         REQUIRE("<div class=\"overkill xTend\">Hello World</div>" == htmlEncloseWithTag(s1, "div", classTwo));
     }
