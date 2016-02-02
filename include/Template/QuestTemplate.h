@@ -32,7 +32,6 @@ namespace weave {
         TemplateQuestProperty GetProperty() const;
 
         std::shared_ptr<WorldEntity> GetValue() const;
-
     private:
         TemplateQuestProperty property;
         std::shared_ptr<WorldEntity> value;
@@ -83,5 +82,7 @@ namespace weave {
         std::vector<TemplateQuestProperty> properties;
         std::vector<TemplateQuestDescription> descriptions;
         FormatterType formatterType;
+
+        std::vector<std::string> getHtmlClasses(const QuestPropertyValue &value) const;
     };
 }

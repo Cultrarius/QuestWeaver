@@ -70,10 +70,7 @@ std::string QuestTemplate::getBestFittingDescription(const std::vector<QuestProp
                 string conditionValue = questProperty.GetValue()->ToString();
                 if (formatterType == FormatterType::HTML) {
                     vector<string> classes;
-                    classes.push_back("entity");
-                    classes.push_back(questProperty.GetProperty().GetName());
-                    classes.push_back(questProperty.GetProperty().IsMandatory() ? "mandatory" : "optional");
-                    conditionValue = htmlEncloseWithTag(conditionValue, "span", classes);
+                    conditionValue = htmlEncloseWithTag(conditionValue, "span", getHtmlClasses(questProperty));
                 }
                 weave::replaceAll(&descriptionText, conditionLabel, conditionValue);
             }
@@ -93,17 +90,21 @@ bool TemplateQuestDescription::SupportsConditions(const std::vector<std::string>
                     descriptionConditions.begin(), descriptionConditions.end());
 }
 
+vector<string> QuestTemplate::getHtmlClasses(const QuestPropertyValue &questProperty) const {
+    vector<string> classes;
+    classes.push_back("entity");
+    classes.push_back(questProperty.GetProperty().IsMandatory() ? "mandatory" : "optional");
+    classes.push_back(questProperty.GetValue()->GetType());
+    return classes;
+}
+
 std::string QuestTemplate::getTitle(const std::vector<QuestPropertyValue> &questPropertyValues) const {
     string titleText = this->title;
     for (const auto &questProperty : questPropertyValues) {
         const string &conditionLabel = "%" + questProperty.GetProperty().GetName();
         string conditionValue = questProperty.GetValue()->ToString();
         if (formatterType == FormatterType::HTML) {
-            vector<string> classes;
-            classes.push_back("entity");
-            classes.push_back(questProperty.GetProperty().GetName());
-            classes.push_back(questProperty.GetProperty().IsMandatory() ? "mandatory" : "optional");
-            conditionValue = htmlEncloseWithTag(conditionValue, "span", classes);
+            conditionValue = htmlEncloseWithTag(conditionValue, "span", getHtmlClasses(questProperty));
         }
         weave::replaceAll(&titleText, conditionLabel, conditionValue);
     }
