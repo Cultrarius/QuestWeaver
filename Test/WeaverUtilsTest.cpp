@@ -116,3 +116,38 @@ TEST_CASE("Full string substitution", "[utils]") {
         REQUIRE(s4 == "Unicode! $&#+*^°öèṕöóäÜÖÄòèṕö");
     }
 }
+
+TEST_CASE("HTML tag enclosure", "[utils]") {
+    string s1 = "Hello World";
+    string s2 = "Unicode! $&#+*^°ö%blaóäÜÖÄò%bla";
+    vector<string> classOne = {"format"};
+    vector<string> classTwo = {"overkill", "xTend"};
+
+    SECTION("Empty all") {
+        REQUIRE("" == htmlEncloseWithTag("", ""));
+    }
+
+    SECTION("Empty tag") {
+        REQUIRE(s1 == htmlEncloseWithTag(s1, ""));
+    }
+
+    SECTION("Empty tag with class") {
+        REQUIRE(s1 == htmlEncloseWithTag(s1, "", classOne));
+    }
+
+    SECTION("simple tag") {
+        REQUIRE("<div>Hello World</div>" == htmlEncloseWithTag(s1, "div"));
+    }
+
+    SECTION("simple tag on unicode") {
+        REQUIRE("<span>Unicode! $&#+*^°ö%blaóäÜÖÄò%bla</span>" == htmlEncloseWithTag(s2, "span"));
+    }
+
+    SECTION("simple tag with class") {
+        REQUIRE("<div class=\"format\">Hello World</div>" == htmlEncloseWithTag(s1, "div", classOne));
+    }
+
+    SECTION("simple tag with classes") {
+        REQUIRE("<div class=\"overkill xTend\">Hello World</div>" == htmlEncloseWithTag(s1, "div", classTwo));
+    }
+}

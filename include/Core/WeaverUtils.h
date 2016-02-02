@@ -14,5 +14,10 @@ namespace weave {
 
     void replaceAll(std::string *str, const std::string &from, const std::string &to);
 
+    std::string htmlEncloseWithTag(const std::string &str, const std::string &tag,
+                                   const std::vector<std::string> &classes);
+
+    std::string htmlEncloseWithTag(const std::string &str, const std::string &tag);
+
     Json::Value readJsonFromFile(const char *fileName, const Directories &dirs);
 }

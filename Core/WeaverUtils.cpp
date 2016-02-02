@@ -4,31 +4,58 @@
 
 #include <Core/WeaverUtils.h>
 #include <fstream>
+#include <sstream>
 
 using namespace std;
+using namespace weave;
 using namespace Json;
 
-void ::weave::replaceAll(std::string *str, const std::string &from, const std::string &to) {
+void weave::replaceAll(string *str, const string &from, const string &to) {
     if (from.empty()) {
         return;
     }
     size_t start_pos = 0;
-    while ((start_pos = str->find(from, start_pos)) != std::string::npos) {
+    while ((start_pos = str->find(from, start_pos)) != string::npos) {
         str->replace(start_pos, from.length(), to);
         start_pos += to.length();
     }
 }
 
-bool ::weave::replace(std::string *str, const std::string &from, const std::string &to) {
+bool weave::replace(string *str, const string &from, const string &to) {
     size_t start_pos = str->find(from);
-    if (start_pos == std::string::npos) {
+    if (start_pos == string::npos) {
         return false;
     }
     str->replace(start_pos, from.length(), to);
     return true;
 }
 
-Json::Value weave::readJsonFromFile(const char *fileName, const Directories &dirs) {
+string weave::htmlEncloseWithTag(const string &str, const string &tag) {
+    return htmlEncloseWithTag(str, tag, vector<string>());
+}
+
+string weave::htmlEncloseWithTag(const string &str, const string &tag, const vector<string> &classes) {
+    if (tag == "") {
+        return str;
+    }
+    stringstream html;
+    html << "<" << tag;
+    if (classes.size() > 0) {
+        html << " class=\"";
+        for (uint64_t i = 0; i < classes.size(); i++) {
+            html << classes[i];
+            if (i < classes.size() - 1) {
+                html << " ";
+            }
+        }
+        html << "\"";
+    }
+    html << ">" << str;
+    html << "</" << tag << ">";
+    return html.str();
+}
+
+Value weave::readJsonFromFile(const char *fileName, const Directories &dirs) {
     Value root;
     CharReaderBuilder readBuilder;
     readBuilder["collectComments"] = false;
@@ -52,7 +79,7 @@ Json::Value weave::readJsonFromFile(const char *fileName, const Directories &dir
             const char *localFile = currentDir.append(fileName).c_str();
             inStream.open(localFile, ios::in);
             if (inStream.fail()) {
-                std::string errorMsg =
+                string errorMsg =
                         string("Unable to find file in any of the following directories: [., ") +
                         dirs.templateDirectory +
                         ", " + dirs.modDirectory + "]";
@@ -61,7 +88,7 @@ Json::Value weave::readJsonFromFile(const char *fileName, const Directories &dir
         }
     }
 
-    if (!Json::parseFromStream(readBuilder, inStream, &root, &errorMessage)) {
+    if (!parseFromStream(readBuilder, inStream, &root, &errorMessage)) {
         cerr << "Error parsing template file: " << errorMessage << endl;
         throw ContractFailedException(errorMessage);
     }
