@@ -67,8 +67,18 @@ std::string QuestTemplate::getBestFittingDescription(const std::vector<QuestProp
             string descriptionText = description.GetText();
             for (const auto &questProperty : questPropertyValues) {
                 const string &conditionLabel = "%" + questProperty.GetProperty().GetName();
-                const string &conditionValue = questProperty.GetValue()->ToString();
+                string conditionValue = questProperty.GetValue()->ToString();
+                if (formatterType == FormatterType::HTML) {
+                    vector<string> classes;
+                    classes.push_back("entity");
+                    classes.push_back(questProperty.GetProperty().GetName());
+                    classes.push_back(questProperty.GetProperty().IsMandatory() ? "mandatory" : "optional");
+                    conditionValue = htmlEncloseWithTag(conditionValue, "span", classes);
+                }
                 weave::replaceAll(&descriptionText, conditionLabel, conditionValue);
+            }
+            if (formatterType == FormatterType::HTML) {
+                descriptionText = htmlEncloseWithTag(descriptionText, "span", "description");
             }
             return descriptionText;
         }
@@ -87,8 +97,18 @@ std::string QuestTemplate::getTitle(const std::vector<QuestPropertyValue> &quest
     string titleText = this->title;
     for (const auto &questProperty : questPropertyValues) {
         const string &conditionLabel = "%" + questProperty.GetProperty().GetName();
-        const string &conditionValue = questProperty.GetValue()->ToString();
+        string conditionValue = questProperty.GetValue()->ToString();
+        if (formatterType == FormatterType::HTML) {
+            vector<string> classes;
+            classes.push_back("entity");
+            classes.push_back(questProperty.GetProperty().GetName());
+            classes.push_back(questProperty.GetProperty().IsMandatory() ? "mandatory" : "optional");
+            conditionValue = htmlEncloseWithTag(conditionValue, "span", classes);
+        }
         weave::replaceAll(&titleText, conditionLabel, conditionValue);
+    }
+    if (formatterType == FormatterType::HTML) {
+        titleText = htmlEncloseWithTag(titleText, "span", "title");
     }
     return titleText;
 }

@@ -9,6 +9,7 @@ using namespace cereal;
 int main() {
 	WeaverConfig config;
 	config.dirs.modDirectory = "./Template/";
+    config.formatterType = FormatterType::HTML;
     QuestWeaver weaver(config);
     shared_ptr<Quest> newQuest = weaver.CreateNewQuest();
     cout << "New Quest created!" << endl;
