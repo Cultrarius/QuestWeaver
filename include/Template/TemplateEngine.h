@@ -12,7 +12,7 @@
 namespace weave {
     class TemplateEngine {
     public:
-        TemplateEngine(std::shared_ptr<RandomStream> randomStream, Directories dirs);
+        TemplateEngine(std::shared_ptr<RandomStream> randomStream, Directories dirs, FormatterType format);
 
         std::shared_ptr<QuestTemplate> GetTemplateForNewQuest();
 
@@ -20,11 +20,15 @@ namespace weave {
 
 		void ChangeDirectories(Directories newDirs);
 
+        FormatterType GetFormat() const;
+
     private:
         std::vector<std::shared_ptr<QuestTemplateFactory>> factories;
 
         std::shared_ptr<RandomStream> randomStream;
 
         Directories dirs;
+
+        FormatterType format;
     };
 }

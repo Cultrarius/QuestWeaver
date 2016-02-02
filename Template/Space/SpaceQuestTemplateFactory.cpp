@@ -22,7 +22,7 @@ std::shared_ptr<QuestTemplate> SpaceQuestTemplateFactory::createFromJsonValues(c
 
     const string &templateKey = root["key"].asString();
     if (templateKey == "ExploreRegionQuest") {
-        return make_shared<ExploreRegionTemplate>(title, properties, descriptions);
+        return make_shared<ExploreRegionTemplate>(title, properties, descriptions, formatterType);
     } else {
         throw ContractFailedException("Unknown Space template key " + templateKey + "\n");
     }

@@ -32,11 +32,12 @@ void TemplateEngine::RegisterTemplateFactory(std::shared_ptr<QuestTemplateFactor
     }
     factory->randomStream = randomStream;
     factory->dirs = dirs;
+    factory->formatterType = format;
     factories.push_back(factory);
 }
 
-TemplateEngine::TemplateEngine(std::shared_ptr<RandomStream> randomStream, Directories dirs) :
-        randomStream(randomStream), dirs(dirs) {
+TemplateEngine::TemplateEngine(std::shared_ptr<RandomStream> randomStream, Directories dirs, FormatterType format) :
+        randomStream(randomStream), dirs(dirs), format(format) {
 }
 
 void weave::TemplateEngine::ChangeDirectories(Directories newDirs)
@@ -46,3 +47,8 @@ void weave::TemplateEngine::ChangeDirectories(Directories newDirs)
 		factory->dirs = dirs;
 	}
 }
+
+FormatterType TemplateEngine::GetFormat() const {
+    return format;
+}
+

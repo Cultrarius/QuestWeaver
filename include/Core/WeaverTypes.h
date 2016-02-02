@@ -71,6 +71,19 @@ namespace weave {
                 BINARY
     };
 
+    enum class FormatterType {
+        /*
+         * All texts will be created as vanilla texts without any additional formatting markers
+         */
+                TEXT,
+
+        /*
+         * A number of html tags will be injected into the created text to allow the output to be formatted with
+         * css classes.
+         */
+                HTML
+    };
+
     /*
      * Defines a serializable, seeded pseudo-random number generator that is used to generate random numbers for the
      * quest system.

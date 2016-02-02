@@ -55,7 +55,8 @@ namespace weave {
     public:
         QuestTemplate(std::string title,
                       std::vector<TemplateQuestProperty> properties,
-                      std::vector<TemplateQuestDescription> descriptions);
+                      std::vector<TemplateQuestDescription> descriptions,
+                      FormatterType formatterType);
 
         virtual ~QuestTemplate() { }
 
@@ -81,5 +82,6 @@ namespace weave {
         std::string title;
         std::vector<TemplateQuestProperty> properties;
         std::vector<TemplateQuestDescription> descriptions;
+        FormatterType formatterType;
     };
 }

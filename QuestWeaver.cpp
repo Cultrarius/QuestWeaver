@@ -22,7 +22,7 @@ QuestWeaver::QuestWeaver(WeaverConfig config) {
     }
     engine.reset(new WeaverEngine(randomStream));
     quests.reset(new QuestModel());
-    templates.reset(new TemplateEngine(randomStream, config.dirs));
+    templates.reset(new TemplateEngine(randomStream, config.dirs, config.formatterType));
     if (config.worldModel != nullptr) {
         world.reset(config.worldModel);
     } else if (config.debug) {

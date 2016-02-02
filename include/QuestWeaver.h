@@ -152,15 +152,18 @@ namespace weave {
 
         template<class Archive>
         void load(Archive &archive) {
-            archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world));
+            FormatterType format;
+            archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world),
+                    cereal::make_nvp("format", format));
             engine.reset(new WeaverEngine(randomStream));
             stories.reset(new StoryWriter(randomStream, *quests, *templates, Directories()));
-            templates.reset(new TemplateEngine(randomStream, Directories()));
+            templates.reset(new TemplateEngine(randomStream, Directories(), format));
         }
 
         template<class Archive>
         void save(Archive &archive) const {
-            archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world));
+            archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world),
+                    cereal::make_nvp("format", templates->GetFormat()));
         }
     };
 }

@@ -15,7 +15,7 @@ using namespace std;
 
 TEST_CASE("Template factory", "[template]") {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
-    TemplateEngine engine(rs, Directories());
+    TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
     shared_ptr<SpaceQuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
     engine.RegisterTemplateFactory(factory);
     REQUIRE(factory->GetTemplateKeys().size() >= 1);
@@ -45,7 +45,7 @@ TEST_CASE("Template factory", "[template]") {
 TEST_CASE("Templates", "[template]") {
     int testSize = 100;
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
-    TemplateEngine engine(rs, Directories());
+    TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
     shared_ptr<SpaceQuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
     engine.RegisterTemplateFactory(factory);
 

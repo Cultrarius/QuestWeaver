@@ -41,6 +41,12 @@ namespace weave {
         std::vector<std::shared_ptr<StoryTemplateFactory>> storyTemplateFactories;
 
         /*
+         * The formatter type defines how the quest texts such as objectives or description will be formatted.
+         * This value cannot be changed later, so choose wisely.
+         */
+        FormatterType formatterType = FormatterType::TEXT;
+
+        /*
          * True if used for testing and debugging.
          */
         bool debug = true;

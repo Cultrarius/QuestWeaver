@@ -36,10 +36,11 @@ TemplateQuestDescription::TemplateQuestDescription(const vector<string> &conditi
 }
 
 QuestTemplate::QuestTemplate(string title, vector<TemplateQuestProperty> properties,
-                             vector<TemplateQuestDescription> descriptions) {
+                             vector<TemplateQuestDescription> descriptions, FormatterType formatterType) {
     this->title = title;
     this->properties = properties;
     this->descriptions = descriptions;
+    this->formatterType = formatterType;
 }
 
 QuestPropertyValue::QuestPropertyValue(const TemplateQuestProperty &property,

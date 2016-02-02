@@ -10,8 +10,9 @@ using namespace weave;
 
 ExploreRegionTemplate::ExploreRegionTemplate(string title,
                                              vector<TemplateQuestProperty> properties,
-                                             vector<TemplateQuestDescription> descriptions)
-        : QuestTemplate(title, properties, descriptions) {
+                                             vector<TemplateQuestDescription> descriptions,
+                                             FormatterType formatterType)
+        : QuestTemplate(title, properties, descriptions, formatterType) {
 }
 
 vector<WorldModelAction> ExploreRegionTemplate::GetPropertyCandidates(const TemplateQuestProperty &property,

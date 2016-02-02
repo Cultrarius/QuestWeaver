@@ -37,6 +37,8 @@ namespace weave {
 
         std::shared_ptr<RandomStream> randomStream;
 
+        FormatterType formatterType;
+
     private:
         friend class TemplateEngine;
 
