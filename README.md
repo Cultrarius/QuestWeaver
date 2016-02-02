@@ -7,12 +7,13 @@ This project includes the following JSON parser: https://github.com/open-source-
 
 ## Features
 
-* Fully *portable*, serializable quest system, perfect for use in savegames. Supports JSON and a compact binary format. 
-* Separates quest logic from quest data (such as titles/descriptions) by using *template files*
-* Uses a complex *weighted graph search* to create new quests.
-This results in more interesting and coherent quest stories as world actors and entities are reused when fitting.
-* Supports *mod directories* to overwrite quest templates
-* The game world entities to be used in quests are supplied directly from a game's *custom world model*
+* Fully **portable**, **serializable** quest system, perfect for use in savegames. Supports JSON and a compact binary format. 
+* Separates quest logic from quest data (such as titles/descriptions) by using **template files**.
+* Can output the quest properties as simple **text or HTML form** to support rich formatting in the game.
+* Uses a complex **weighted graph search** to create new quests.
+This results in more interesting and coherent quest stories as world actors and entities can be reused when fitting.
+* Supports **mod directories** to overwrite quest templates after deployment.
+* The game world entities to be used in quests are supplied directly from a game's custom world model.
 
 ## Usage
 
