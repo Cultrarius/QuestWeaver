@@ -26,6 +26,13 @@ vector<TemplateQuestProperty> QuestTemplate::GetProperties() const {
 }
 
 string TemplateQuestDescription::GetText() const {
+    return GetText(FormatterType::TEXT);
+}
+
+string TemplateQuestDescription::GetText(FormatterType format) const {
+    if (format == FormatterType::HTML) {
+        return htmlEncloseWithTag(text, "span", "description");
+    }
     return text;
 }
 
@@ -56,26 +63,30 @@ shared_ptr<WorldEntity> QuestPropertyValue::GetValue() const {
     return value;
 }
 
-std::string QuestTemplate::getBestFittingDescription(const std::vector<QuestPropertyValue> &questPropertyValues) const {
-    std::vector<std::string> sortedConditions;
+string QuestPropertyValue::GetValueString(FormatterType format) const {
+    if (format == FormatterType::HTML) {
+        vector<string> classes;
+        classes.push_back("entity");
+        classes.push_back(property.IsMandatory() ? "mandatory" : "optional");
+        classes.push_back(value->GetType());
+        return htmlEncloseWithTag(value->ToString(), "span", classes);
+    }
+    return value->ToString();
+}
+
+string QuestTemplate::getBestFittingDescription(const vector<QuestPropertyValue> &questPropertyValues) const {
+    vector<string> sortedConditions;
     for (auto propertyValue : questPropertyValues) {
         sortedConditions.push_back(propertyValue.GetProperty().GetName());
     }
     sort(sortedConditions.begin(), sortedConditions.end());
     for (const auto &description : descriptions) {
         if (description.SupportsConditions(sortedConditions)) {
-            string descriptionText = description.GetText();
+            string descriptionText = description.GetText(formatterType);
             for (const auto &questProperty : questPropertyValues) {
-                const string &conditionLabel = "%" + questProperty.GetProperty().GetName();
-                string conditionValue = questProperty.GetValue()->ToString();
-                if (formatterType == FormatterType::HTML) {
-                    vector<string> classes;
-                    conditionValue = htmlEncloseWithTag(conditionValue, "span", getHtmlClasses(questProperty));
-                }
+                string conditionLabel = "%" + questProperty.GetProperty().GetName();
+                string conditionValue = questProperty.GetValueString(formatterType);
                 weave::replaceAll(&descriptionText, conditionLabel, conditionValue);
-            }
-            if (formatterType == FormatterType::HTML) {
-                descriptionText = htmlEncloseWithTag(descriptionText, "span", "description");
             }
             return descriptionText;
         }
@@ -85,27 +96,16 @@ std::string QuestTemplate::getBestFittingDescription(const std::vector<QuestProp
     throw ContractFailedException(message);
 }
 
-bool TemplateQuestDescription::SupportsConditions(const std::vector<std::string> &conditions) const {
+bool TemplateQuestDescription::SupportsConditions(const vector<string> &conditions) const {
     return includes(conditions.begin(), conditions.end(),
                     descriptionConditions.begin(), descriptionConditions.end());
 }
 
-vector<string> QuestTemplate::getHtmlClasses(const QuestPropertyValue &questProperty) const {
-    vector<string> classes;
-    classes.push_back("entity");
-    classes.push_back(questProperty.GetProperty().IsMandatory() ? "mandatory" : "optional");
-    classes.push_back(questProperty.GetValue()->GetType());
-    return classes;
-}
-
-std::string QuestTemplate::getTitle(const std::vector<QuestPropertyValue> &questPropertyValues) const {
+string QuestTemplate::getTitle(const vector<QuestPropertyValue> &questPropertyValues) const {
     string titleText = this->title;
     for (const auto &questProperty : questPropertyValues) {
         const string &conditionLabel = "%" + questProperty.GetProperty().GetName();
-        string conditionValue = questProperty.GetValue()->ToString();
-        if (formatterType == FormatterType::HTML) {
-            conditionValue = htmlEncloseWithTag(conditionValue, "span", getHtmlClasses(questProperty));
-        }
+        string conditionValue = questProperty.GetValueString(formatterType);
         weave::replaceAll(&titleText, conditionLabel, conditionValue);
     }
     if (formatterType == FormatterType::HTML) {
@@ -118,8 +118,8 @@ bool TemplateQuestProperty::operator==(const TemplateQuestProperty &other) const
     return name == other.name;
 }
 
-ID QuestTemplate::getEntityIdFromProperty(std::string propertyName,
-                                          const std::vector<QuestPropertyValue> &questPropertyValues) {
+ID QuestTemplate::getEntityIdFromProperty(string propertyName,
+                                          const vector<QuestPropertyValue> &questPropertyValues) {
     for (auto propertyValue : questPropertyValues) {
         if (propertyValue.GetProperty().GetName() == propertyName) {
             return propertyValue.GetValue()->GetId();
@@ -128,6 +128,6 @@ ID QuestTemplate::getEntityIdFromProperty(std::string propertyName,
     return 0;
 }
 
-std::shared_ptr<Quest> QuestTemplate::ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const {
+shared_ptr<Quest> QuestTemplate::ToQuest(const vector<QuestPropertyValue> &questPropertyValues) const {
     return ToQuest(questPropertyValues, "");
 }

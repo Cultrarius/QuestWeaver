@@ -32,6 +32,8 @@ namespace weave {
         TemplateQuestProperty GetProperty() const;
 
         std::shared_ptr<WorldEntity> GetValue() const;
+
+        std::string GetValueString(FormatterType format) const;
     private:
         TemplateQuestProperty property;
         std::shared_ptr<WorldEntity> value;
@@ -44,6 +46,8 @@ namespace weave {
         bool SupportsConditions(const std::vector<std::string> &conditions) const;
 
         std::string GetText() const;
+
+        std::string GetText(FormatterType format) const;
 
     private:
         std::vector<std::string> descriptionConditions;
