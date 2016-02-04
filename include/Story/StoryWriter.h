@@ -12,7 +12,19 @@
 
 namespace weave {
     class Nugget {
+    public:
+        Nugget(std::string key, std::vector<std::string> requiredTypes, std::vector<std::string> texts);
 
+        std::string GetKey();
+
+        std::vector<std::string> GetRequiredTypes();
+
+        std::vector<std::string> GetTexts();
+
+    private:
+        std::string key;
+        std::vector<std::string> requiredTypes;
+        std::vector<std::string> texts;
     };
 
     class StoryWriter {
@@ -34,10 +46,12 @@ namespace weave {
         std::vector<std::shared_ptr<StoryTemplateFactory>> factories;
 
         mutable bool isInitialized = false;
-        mutable std::vector<Nugget> nuggets;
+        mutable std::unordered_map<std::string, Nugget> nuggets;
 
         void initialize() const;
 
         void readNuggets() const;
+
+        void checkValidNuggetJson(Json::Value root, std::string filePath) const;
     };
 }

@@ -6,6 +6,23 @@
 
 using namespace std;
 using namespace weave;
+using namespace Json;
+
+Nugget::Nugget(std::string key, std::vector<std::string> requiredTypes, std::vector<std::string> texts) :
+        key(key), requiredTypes(requiredTypes), texts(texts) {
+}
+
+std::string Nugget::GetKey() {
+    return key;
+}
+
+std::vector<std::string> Nugget::GetRequiredTypes() {
+    return requiredTypes;
+}
+
+std::vector<std::string> Nugget::GetTexts() {
+    return texts;
+}
 
 StoryWriter::StoryWriter(shared_ptr<RandomStream> randomStream, const QuestModel &model,
                          const TemplateEngine &templateEngine, const Directories &dirs) :
@@ -33,8 +50,34 @@ void StoryWriter::readNuggets() const {
     for (string folder : nuggetFolders) {
         string file = folder;
         file += "/Nuggets.st";
-        Json::Value root = readJsonFromFile(file.c_str(), dirs);
-        // TODO: create nuggets from json
+        Value root = readJsonFromFile(file.c_str(), dirs);
+        checkValidNuggetJson(root, file);
+        for (Value nuggetJson : root) {
+//            string name = jsonMandatory[i].asString();
+//            TemplateQuestProperty property(isMandatory, name);
+//            properties->push_back(std::move(property));
+        }
+    }
+}
+
+void StoryWriter::checkValidNuggetJson(Json::Value root, std::string filePath) const {
+    if (!root.isArray()) {
+        throw ContractFailedException("Invalid JSON in nugget file " + filePath + " (no root array)");
+    }
+    for (Value nuggetJson : root) {
+        if (!nuggetJson.isObject()) {
+            throw ContractFailedException("Invalid JSON in nugget file " + filePath + " (no nugget object)");
+        }
+        string requiredMembers[] = {"key", "requiredTypes", "texts"};
+        for (string member : requiredMembers) {
+            if (!nuggetJson.isMember(member)) {
+                string errorMessage = "Missing member in nugget file! MEMBER: <";
+                errorMessage += member;
+                errorMessage += "> / FILE: ";
+                errorMessage += filePath;
+                throw ContractFailedException(errorMessage);
+            }
+        }
     }
 }
 
