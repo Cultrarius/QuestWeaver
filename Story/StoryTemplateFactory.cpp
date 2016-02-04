@@ -9,6 +9,7 @@ using namespace std;
 using namespace Json;
 
 vector<shared_ptr<StoryTemplate>> StoryTemplateFactory::GetTemplates() {
+    initialize();
     return templates;
 }
 

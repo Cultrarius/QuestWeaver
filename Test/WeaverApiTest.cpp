@@ -2,11 +2,9 @@
 // Created by michael on 12.10.15.
 //
 
-#include <string>
 #include "catch.hpp"
 #include <Core/WeaverUtils.h>
 #include <QuestWeaver.h>
-#include "Mock/TestQuest.h"
 
 using namespace weave;
 using namespace std;

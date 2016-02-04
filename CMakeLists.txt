@@ -21,5 +21,5 @@ add_executable(QuestWeaverTest ${SOURCE_FILES} Test/catch.hpp Test/TestRunner.cp
         Test/WeaverUtilsTest.cpp Test/Space/TemplateTest.cpp Test/Space/SerializationTest.cpp Test/Space/ModelTest.cpp
         Test/GraphAnalyzerTest.cpp Test/QuestModelTest.cpp Test/Mock/TestQuest.cpp Test/Mock/TestQuest.h
         Test/Mock/TestEntity.cpp Test/Mock/TestEntity.h Test/Mock/TestWorldListener.cpp Test/Mock/TestWorldListener.h
-        Test/WeaverApiTest.cpp)
+        Test/WeaverApiTest.cpp Test/StoryWriterTest.cpp Test/Mock/TestStoryTemplateFactory.h)
 add_library(QuestWeaver ${SOURCE_FILES})

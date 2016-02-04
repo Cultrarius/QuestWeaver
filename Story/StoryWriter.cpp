@@ -96,6 +96,10 @@ string StoryWriter::CreateStory(const WeaverGraph &graph) const {
 
     initialize();
 
+    if (graph.GetActiveNodes().empty()) {
+        return "";
+    }
+
     for (auto factory : factories) {
         for (auto storyTemplate : factory->GetTemplates()) {
             //TODO create story
@@ -115,5 +119,6 @@ void StoryWriter::ChangeDirectories(const Directories &newDirs) {
 }
 
 void StoryWriter::RegisterTemplateFactory(shared_ptr<StoryTemplateFactory> factory) {
+    factory->dirs = dirs;
     factories.push_back(factory);
 }
