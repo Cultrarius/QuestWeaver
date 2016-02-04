@@ -53,9 +53,19 @@ void StoryWriter::readNuggets() const {
         Value root = readJsonFromFile(file.c_str(), dirs);
         checkValidNuggetJson(root, file);
         for (Value nuggetJson : root) {
-//            string name = jsonMandatory[i].asString();
-//            TemplateQuestProperty property(isMandatory, name);
-//            properties->push_back(std::move(property));
+            string key = nuggetJson["key"].asString();
+            vector<string> requiredTypes;
+            for (Value requiredType : nuggetJson["requiredTypes"]) {
+                requiredTypes.push_back(requiredType.asString());
+            }
+            vector<string> texts;
+            for (Value text : nuggetJson["texts"]) {
+                texts.push_back(text.asString());
+            }
+            if (nuggets.find(key) != nuggets.end()) {
+                throw ContractFailedException("Duplicate nugget key <" + key + ">!");
+            }
+            nuggets[key] = Nugget(key, requiredTypes, texts);
         }
     }
 }
