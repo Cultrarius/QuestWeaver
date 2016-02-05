@@ -31,10 +31,12 @@ namespace weave {
 
     class StoryWriter {
     public:
-        explicit StoryWriter(std::shared_ptr<RandomStream> randomStream, const weave::QuestModel &model,
-                             const weave::TemplateEngine &templateEngine, const Directories &dirs);
+        explicit StoryWriter(std::shared_ptr<RandomStream> randomStream, const weave::QuestModel &questModel,
+                             const weave::TemplateEngine &templateEngine, const weave::WorldModel &worldModel,
+                             const Directories &dirs);
 
-        std::string CreateStory(const weave::WeaverGraph &graph) const;
+        std::string CreateStory(const weave::WeaverGraph &graph,
+                                const std::vector<QuestPropertyValue> &propertyValues) const;
 
         void ChangeDirectories(const Directories &newDirs);
 
@@ -42,7 +44,8 @@ namespace weave {
 
     private:
         std::shared_ptr<RandomStream> rs;
-        const weave::QuestModel &model;
+        const weave::QuestModel &questModel;
+        const weave::WorldModel &worldModel;
         const weave::TemplateEngine &templateEngine;
         Directories dirs;
         std::vector<std::shared_ptr<StoryTemplateFactory>> factories;

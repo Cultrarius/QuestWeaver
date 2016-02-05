@@ -156,7 +156,7 @@ namespace weave {
             archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world),
                     cereal::make_nvp("format", format));
             engine.reset(new WeaverEngine(randomStream));
-            stories.reset(new StoryWriter(randomStream, *quests, *templates, Directories()));
+            stories.reset(new StoryWriter(randomStream, *quests, *templates, *world, Directories()));
             templates.reset(new TemplateEngine(randomStream, Directories(), format));
         }
 

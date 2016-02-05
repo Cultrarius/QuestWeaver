@@ -30,7 +30,7 @@ QuestWeaver::QuestWeaver(WeaverConfig config) {
     } else {
         throw ContractFailedException("A world model must be provided for the quest system to work.");
     }
-    stories.reset(new StoryWriter(randomStream, *quests, *templates, config.dirs));
+    stories.reset(new StoryWriter(randomStream, *quests, *templates, *world, config.dirs));
     if (config.debug) {
         auto spaceFactory = make_shared<SpaceQuestTemplateFactory>();
         templates->RegisterTemplateFactory(spaceFactory);

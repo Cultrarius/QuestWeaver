@@ -44,7 +44,7 @@ EngineResult WeaverEngine::fillTemplate(shared_ptr<QuestTemplate> questTemplate,
             }
         }
     }
-    string story = storyWriter.CreateStory(graph);
+    string story = storyWriter.CreateStory(graph, propertyValues);
     return EngineResult(modelActions, propertyValues, story);
 }
 

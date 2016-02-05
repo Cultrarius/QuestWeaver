@@ -24,9 +24,10 @@ std::vector<std::string> Nugget::GetTexts() {
     return texts;
 }
 
-StoryWriter::StoryWriter(shared_ptr<RandomStream> randomStream, const QuestModel &model,
-                         const TemplateEngine &templateEngine, const Directories &dirs) :
-        rs(randomStream), model(model), templateEngine(templateEngine), dirs(dirs) {
+StoryWriter::StoryWriter(shared_ptr<RandomStream> randomStream, const QuestModel &questModel,
+                         const TemplateEngine &templateEngine, const weave::WorldModel &worldModel,
+                         const Directories &dirs) :
+        rs(randomStream), questModel(questModel), templateEngine(templateEngine), worldModel(worldModel), dirs(dirs) {
 }
 
 void StoryWriter::initialize() const {
@@ -91,7 +92,7 @@ void StoryWriter::checkValidNuggetJson(Json::Value root, std::string filePath) c
     }
 }
 
-string StoryWriter::CreateStory(const WeaverGraph &graph) const {
+string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestPropertyValue> &propertyValues) const {
     // TODO: the current template might also prove useful at this point to pick a more useful story
 
     initialize();
@@ -100,9 +101,13 @@ string StoryWriter::CreateStory(const WeaverGraph &graph) const {
         return "";
     }
 
+    vector<shared_ptr<StoryTemplate>> fittingTemplates;
     for (auto factory : factories) {
         for (auto storyTemplate : factory->GetTemplates()) {
-            //TODO create story
+            bool fits = true;
+            for (string required : storyTemplate->GetRequiredEntities()) {
+
+            }
         }
     }
 
