@@ -13,6 +13,6 @@ namespace weave {
 
         virtual ~StoryTemplate() = default;
 
-        std::vector<std::string> GetRequiredEntities() const;
+        virtual std::vector<std::string> GetRequiredEntities() const = 0;
     };
 }

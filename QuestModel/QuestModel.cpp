@@ -35,7 +35,7 @@ shared_ptr<Quest> QuestModel::RegisterNew(shared_ptr<Quest> newQuest,
 
 vector<shared_ptr<Quest>> QuestModel::GetQuests() const {
     vector<shared_ptr<Quest>> result;
-    for (auto &quest : quests) {
+    for (auto quest : quests) {
         result.push_back(quest.second);
     }
     return result;

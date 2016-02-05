@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Story/StoryTemplateFactory.h>
+#include "TestStoryTemplate.h"
 
 namespace weave {
     class TestStoryTemplateFactory : public StoryTemplateFactory {
@@ -13,13 +14,18 @@ namespace weave {
             this->testFolder = testFolder;
         }
 
+        TestStoryTemplateFactory(const std::string &testFolder, std::vector<std::string> requiredTypes) {
+            this->testFolder = testFolder;
+            this->requiredTypes = requiredTypes;
+        }
+
         std::string GetNuggetFolder() const override {
             return testFolder;
         }
 
     protected:
         std::shared_ptr<StoryTemplate> createFromJsonValues(const Json::Value &root) const {
-            return std::make_shared<StoryTemplate>();
+            return std::make_shared<TestStoryTemplate>(requiredTypes);
         }
 
         const char *getTemplateFile() const {
@@ -28,5 +34,6 @@ namespace weave {
 
     private:
         std::string testFolder;
+        std::vector<std::string> requiredTypes;
     };
 }

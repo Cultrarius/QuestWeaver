@@ -3,12 +3,13 @@
 //
 
 #include <Story/Space/CommonSpaceStoryFactory.h>
+#include "AgentIntroStoryTemplate.h"
 
 using namespace std;
 using namespace weave;
 
 shared_ptr<StoryTemplate> CommonSpaceStoryFactory::createFromJsonValues(const Json::Value &root) const {
-    return std::shared_ptr<StoryTemplate>();
+    return make_shared<AgentIntroStoryTemplate>();
 }
 
 const char *CommonSpaceStoryFactory::getTemplateFile() const {

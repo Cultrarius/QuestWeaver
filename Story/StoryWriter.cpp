@@ -110,6 +110,10 @@ string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestProp
         }
     }
 
+    if (fittingTemplates.empty()) {
+        return "";
+    }
+
     return "In a far away galaxy a long time ago...\nThere were three little piglets!";
 }
 
