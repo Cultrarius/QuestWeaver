@@ -104,14 +104,29 @@ string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestProp
     vector<shared_ptr<StoryTemplate>> fittingTemplates;
     for (auto factory : factories) {
         for (auto storyTemplate : factory->GetTemplates()) {
-            bool fits = true;
-            for (string required : storyTemplate->GetRequiredEntities()) {
-
+            if (hasAll(storyTemplate->GetRequiredEntities(), propertyValues)) {
+                fittingTemplates.push_back(storyTemplate);
             }
         }
     }
 
     return "In a far away galaxy a long time ago...\nThere were three little piglets!";
+}
+
+bool StoryWriter::hasAll(vector<string> requiredEntities, const std::vector<QuestPropertyValue> &propertyValues) const {
+    for (string required : requiredEntities) {
+        bool hasRequired = false;
+        for (auto questProperty : propertyValues) {
+            if (required == questProperty.GetValue()->GetType()) {
+                hasRequired = true;
+                break;
+            }
+        }
+        if (!hasRequired) {
+            return false;
+        }
+    }
+    return true;
 }
 
 void StoryWriter::ChangeDirectories(const Directories &newDirs) {

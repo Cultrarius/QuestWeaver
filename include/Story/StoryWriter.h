@@ -45,8 +45,8 @@ namespace weave {
     private:
         std::shared_ptr<RandomStream> rs;
         const weave::QuestModel &questModel;
-        const weave::WorldModel &worldModel;
         const weave::TemplateEngine &templateEngine;
+        const weave::WorldModel &worldModel;
         Directories dirs;
         std::vector<std::shared_ptr<StoryTemplateFactory>> factories;
 
@@ -58,5 +58,8 @@ namespace weave {
         void readNuggets() const;
 
         void checkValidNuggetJson(Json::Value root, std::string filePath) const;
+
+        bool hasAll(std::vector<std::string> requiredEntities,
+                    const std::vector<QuestPropertyValue> &propertyValues) const;
     };
 }
