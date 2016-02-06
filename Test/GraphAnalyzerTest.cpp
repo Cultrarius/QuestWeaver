@@ -15,6 +15,46 @@ TEST_CASE("Graph analyzer", "[graph analyzer]") {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     WeaverGraph graph;
 
+    SECTION("Graph action equality") {
+        map<Node, bool> nodeActivations;
+        Node node1("abc", 5);
+        Node node2("abc", 5);
+        Node node3("abX", 5);
+        Node node4("abc", 6);
+
+        SECTION("Equal empty actions") {
+            GraphAction action1(nodeActivations);
+            GraphAction action2(nodeActivations);
+            REQUIRE(action1 == action2);
+        }
+
+        SECTION("Equal actions from map") {
+            nodeActivations[node1] = true;
+            nodeActivations[node4] = false;
+            GraphAction action1(nodeActivations);
+            GraphAction action2(nodeActivations);
+            REQUIRE(action1 == action2);
+        }
+
+        SECTION("Equal actions from node") {
+            GraphAction action1(true, node1);
+            GraphAction action2(true, node2);
+            REQUIRE(action1 == action2);
+        }
+
+        SECTION("Unequal actions from node") {
+            GraphAction action1(true, node1);
+            GraphAction action2(true, node3);
+            GraphAction action3(true, node4);
+            GraphAction action4(false, node3);
+            GraphAction action5(false, node4);
+            REQUIRE(!(action1 == action2));
+            REQUIRE(!(action1 == action3));
+            REQUIRE(!(action1 == action4));
+            REQUIRE(!(action1 == action5));
+        }
+    }
+
     SECTION("Solve empty graph") {
         auto properties = GraphAnalyzer::SolveGraph(&graph, rs);
         REQUIRE(properties.size() == 0);

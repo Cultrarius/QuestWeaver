@@ -12,6 +12,7 @@ using namespace std;
 
 TEST_CASE("Nuggets", "[story]") {
     Directories dirs;
+    dirs.templateDirectory = "Test/Resources/";
     dirs.modDirectory = "../Test/Resources/";
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     TemplateEngine engine(rs, dirs, FormatterType::TEXT);

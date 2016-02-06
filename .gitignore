@@ -42,7 +42,6 @@ build
 /Win32/
 *.vcxproj.filters
 *.VC.opendb
-*.cmake
 *.sdf
 *.sln
 *.vcxproj.user

@@ -22,6 +22,10 @@ TEST_CASE("Graph failures", "[graph]") {
         REQUIRE_THROWS_AS(graph.AddNode(Node("TestGroup", 7)), ContractFailedException);
     }
 
+    SECTION("Get from unknown group") {
+        REQUIRE_THROWS_AS(graph.GetNodes("Unknown"), ContractFailedException);
+    }
+
     SECTION("Add node with empty group") {
         REQUIRE_THROWS_AS(graph.AddNode(Node()), ContractFailedException);
     }
@@ -59,6 +63,16 @@ TEST_CASE("Graph failures", "[graph]") {
     SECTION("Deactivate node from unknown group") {
         graph.CreateNodeGroup("Test123", false).AddNode(Node("Test123", 2));
         REQUIRE_THROWS_AS(graph.DeactivateNode(Node("Test", 2)), ContractFailedException);
+    }
+
+    SECTION("Double shadow node") {
+        graph.AddShadowNode(4);
+        REQUIRE_THROWS_AS(graph.AddShadowNode(4), ContractFailedException);
+    }
+
+    SECTION("Shadow node for regular node") {
+        graph.CreateNodeGroup("asd", false).AddNode(Node("asd", 4));
+        REQUIRE_THROWS_AS(graph.AddShadowNode(4), ContractFailedException);
     }
 }
 
@@ -164,5 +178,42 @@ TEST_CASE("API check", "[graph]") {
         REQUIRE(graph.GetEdges().size() == 1);
         REQUIRE(graph.GetEdges().begin()->Count(EdgeType::DIRECT) == 1);
         REQUIRE(graph.GetEdges().begin()->Count(EdgeType::TRANSITIVE) == 0);
+    }
+}
+
+TEST_CASE("Node activation", "[graph]") {
+    WeaverGraph graph;
+
+    SECTION("Get empty node list") {
+        REQUIRE(graph.GetNodesWithId(42).empty());
+    }
+
+    string group1 = "TestGroup";
+    string group2 = "TestGroup2";
+    Node node1 = Node(group1, 1);
+    Node node2 = Node(group2, 2);
+    graph.CreateNodeGroup(group1, false)
+            .CreateNodeGroup(group2, true)
+            .AddNode(node1)
+            .AddNode(node2);
+
+    SECTION("Activate node") {
+        REQUIRE(graph.GetActiveNodes().empty());
+        graph.ActivateNode(node1);
+        REQUIRE(graph.GetActiveNodes().size() == 1);
+    }
+
+    SECTION("Deactivate optional node") {
+        REQUIRE(graph.GetActiveNodes().empty());
+        graph.ActivateNode(node1);
+        REQUIRE(graph.DeactivateNode(node1));
+        REQUIRE(graph.GetActiveNodes().empty());
+    }
+
+    SECTION("Deactivate mandatory node") {
+        REQUIRE(graph.GetActiveNodes().empty());
+        graph.ActivateNode(node2);
+        REQUIRE_FALSE(graph.DeactivateNode(node2));
+        REQUIRE(graph.GetActiveNodes().size() == 1);
     }
 }
