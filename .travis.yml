@@ -38,7 +38,7 @@ script:
   - cd bin
   - ./QuestWeaverTest
   - cd ..
-  - make Weaver_coverage
+  - $HOME/cmake/bin/cmake --build $HOME/build/Cultrarius/QuestWeaver --target Weaver_coverage -- -j 8
 
 after_success:
   - coveralls --exclude lib --exclude Test --exclude include/json --exclude include/cereal
