@@ -86,7 +86,8 @@ Value weave::readJsonFromFile(const char *fileName, const Directories &dirs) {
             inStream.open(localFile, ios::in);
             if (inStream.fail()) {
                 string errorMsg =
-                        string("Unable to find file in any of the following directories: [., ") +
+                        string("Unable to find file [" + string(fileName) +
+                               "] in any of the following directories: [., ") +
                         dirs.templateDirectory +
                         ", " + dirs.modDirectory + "]";
                 throw ContractFailedException(errorMsg);

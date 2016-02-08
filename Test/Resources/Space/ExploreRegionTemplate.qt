@@ -1,0 +1,32 @@
+{
+  "parent": "Space",
+  "key": "ExploreRegionQuest",
+  "mandatory": [
+    "location"
+  ],
+  "optional": [
+    "sponsor"
+  ],
+  "titles": [
+    "Explore region of space",
+    "Travel to the coordinates %location"
+  ],
+  "descriptions": [
+    {
+      "conditions": [
+        "location",
+        "sponsor"
+      ],
+      "text": "%sponsor generously asks you to explore the solar system found at the coordinates %location. Make haste and inform them about anything interesting you find."
+    },
+    {
+      "conditions": [
+        "location"
+      ],
+      "text": "An anonymous source asks you to explore the solar system found at the coordinates %location. Transmit your findings to the attached address."
+    }
+  ],
+  "objectives": [
+    "Travel to the %location region"
+  ]
+}
