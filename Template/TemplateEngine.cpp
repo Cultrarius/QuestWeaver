@@ -20,7 +20,6 @@ shared_ptr<QuestTemplate> TemplateEngine::GetTemplateForNewQuest() {
     }
     auto templateIndex = randomStream->GetRandomIndex(factoryKeys.size());
     auto key = factoryKeys.at(templateIndex);
-    cout << "Creating template with key: " << key << endl;
     return factory->CreateTemplate(key);
 }
 
