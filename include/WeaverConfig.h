@@ -6,6 +6,7 @@
 
 #include <World/WorldModel.h>
 #include <Template/QuestTemplateFactory.h>
+#include <Story/StoryTemplateFactory.h>
 
 namespace weave {
 

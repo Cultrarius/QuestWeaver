@@ -17,6 +17,14 @@ TEST_CASE("Model Actions", "[model]") {
     shared_ptr<WorldEntity> entity = testModel.CreateLocation();
     REQUIRE(entity->GetId() == 0);
 
+    SECTION("Unknown entity") {
+        vector<WorldModelAction> actions;
+        WorldModelAction action(WorldActionType::UPDATE, entity);
+        actions.push_back(action);
+        REQUIRE_THROWS_AS(testModel.Execute(actions), ContractFailedException);
+    }
+
+
     SECTION("Empty list of actions") {
         vector<WorldModelAction> noActions;
         testModel.Execute(noActions);

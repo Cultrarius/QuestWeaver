@@ -9,6 +9,8 @@
 #include <World/Space/SpaceWorldModel.h>
 #include <Template/TemplateEngine.h>
 #include <QuestModel/QuestModel.h>
+#include <WeaverConfig.h>
+#include <QuestWeaver.h>
 #include "../catch.hpp"
 
 using namespace weave;
@@ -279,4 +281,46 @@ TEST_CASE("Serialize Entities", "[serialize]") {
         REQUIRE(deserializedModel.GetMetaData(entity1->GetId()).GetValue("Age") == 42);
         REQUIRE(deserializedModel.GetMetaData(entity2->GetId()).GetValue("Age") == 43);
     }
+}
+
+TEST_CASE("Serialization QuestWeaver", "[serialize]") {
+    WeaverConfig config;
+    config.formatterType = FormatterType::HTML;
+    shared_ptr<QuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
+    QuestWeaver weaver(config);
+    weaver.RegisterQuestTemplateFactory(factory);
+    shared_ptr<Quest> newQuest = weaver.CreateNewQuest();
+    string title = newQuest->GetTitle();
+    REQUIRE_FALSE(title.empty());
+    weaver.Tick(1);
+
+    stringstream ss;
+    StreamType format;
+
+    SECTION("Using JSON format") {
+        format = StreamType::JSON;
+        weaver.Serialize(ss, format);
+    }
+
+    SECTION("Using binary format") {
+        format = StreamType::BINARY;
+        weaver.Serialize(ss, format);
+    }
+
+    string serialized = ss.str();
+    REQUIRE(!serialized.empty());
+    stringstream ss2;
+    ss2 << serialized;
+    ss2.flush();
+
+    QuestWeaver deserialized = QuestWeaver::Deserialize(ss2, format, config.dirs);
+    deserialized.RegisterQuestTemplateFactory(factory);
+    shared_ptr<Quest> desQuest = deserialized.GetQuest(newQuest->GetId());
+    REQUIRE(title == desQuest->GetTitle());
+    REQUIRE(weaver.GetWorldModel().GetEntities().size() == deserialized.GetWorldModel().GetEntities().size());
+    REQUIRE(weaver.GetAllQuests().size() == deserialized.GetAllQuests().size());
+
+    newQuest = deserialized.CreateNewQuest();
+    REQUIRE_FALSE(newQuest->GetTitle().empty());
+    REQUIRE(weaver.GetAllQuests().size() == deserialized.GetAllQuests().size() - 1);
 }
