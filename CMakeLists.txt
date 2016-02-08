@@ -9,11 +9,11 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
 set(CMAKE_BUILD_TYPE "Debug")
 
 INCLUDE(CodeCoverage)
-SETUP_TARGET_FOR_COVERAGE(Weaver_coverage QuestWeaverTest ${PROJECT_SOURCE_DIR}/coverage)
+SETUP_TARGET_FOR_COVERAGE(Weaver_coverage QuestWeaverTest coverage)
 file(COPY Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY Test/Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Test)
 
-include_directories(./include)
+include_directories(${PROJECT_SOURCE_DIR}/include)
 
 set(SOURCE_FILES QuestWeaver.cpp Core/WeaverEngine.cpp Template/TemplateEngine.cpp QuestModel/QuestModel.cpp World/WorldModel.cpp
         QuestModel/Quest.cpp Template/QuestTemplate.cpp include/json/jsoncpp.cpp Template/Space/ExploreRegionTemplate.cpp
