@@ -37,6 +37,7 @@ script:
   - make
   - cd bin
   - ./QuestWeaverTest
+  - cd ..
   - make Weaver_coverage
 
 after_success:
