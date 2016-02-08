@@ -9,7 +9,7 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
 set(CMAKE_BUILD_TYPE "Debug")
 
 INCLUDE(CodeCoverage)
-SETUP_TARGET_FOR_COVERAGE(Weaver_coverage QuestWeaverTest coverage)
+SETUP_TARGET_FOR_COVERAGE(Weaver_coverage QuestWeaverTest ${PROJECT_SOURCE_DIR}/coverage)
 file(COPY Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY Test/Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Test)
 
