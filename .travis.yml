@@ -19,7 +19,7 @@ before_install:
   - pip install --user cpp-coveralls
 
 install:
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
   - wget --no-check-certificate https://cmake.org/files/v3.3/cmake-3.3.2.tar.gz
   - tar -xzvf cmake-3.3.2.tar.gz > /dev/null
   - cd cmake-3.3.2
@@ -33,6 +33,10 @@ before_script:
   - $HOME/cmake/bin/cmake -version
 
 script:
+  - $HOME/cmake/bin/cmake --build $HOME/build/Cultrarius/QuestWeaver --target QuestWeaverTest -- -j 8
+  - cd bin
+  - ./QuestWeaverTest
+  - cd ..
   - $HOME/cmake/bin/cmake --build $HOME/build/Cultrarius/QuestWeaver --target Weaver_coverage -- -j 8
 
 after_success:
