@@ -27,8 +27,6 @@ namespace weave {
      */
     class QuestWeaver {
     public:
-        explicit QuestWeaver(uint64_t seed);
-
         /*
          * Creates a new weaver instance with the given config.
          * The config needs to contain a valid world model pointer.

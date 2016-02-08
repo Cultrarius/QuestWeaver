@@ -11,9 +11,6 @@
 using namespace std;
 using namespace weave;
 
-QuestWeaver::QuestWeaver(uint64_t seed) : QuestWeaver(WeaverConfig(seed)) {
-}
-
 QuestWeaver::QuestWeaver(WeaverConfig config) {
     if (config.worldModel == nullptr) {
         throw ContractFailedException("A world model must be provided for the quest system to work.");
@@ -33,10 +30,10 @@ QuestWeaver::QuestWeaver(WeaverConfig config) {
 
     stories.reset(new StoryWriter(randomStream, *quests, *templates, *world, config.dirs));
     for (auto factory : config.questTemplateFactories) {
-        templates->RegisterTemplateFactory(factory);
+        RegisterQuestTemplateFactory(factory);
     }
     for (auto factory : config.storyTemplateFactories) {
-        stories->RegisterTemplateFactory(factory);
+        RegisterStoryTemplateFactory(factory);
     }
 }
 
