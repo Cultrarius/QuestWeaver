@@ -13,7 +13,8 @@ namespace weave {
     struct WeaverConfig {
         /*
          * The random seed used to create new quests. Quest Systems initialized with the same seed create the same
-         * stream of quests (given the quests are initialized and completed the same way).
+         * stream of quests (given the quests are initialized and completed the same way). If a random stream is
+         * provided instead, the seed is ignored.
          */
         uint64_t seed = 0;
 
@@ -46,11 +47,6 @@ namespace weave {
          * This value cannot be changed later, so choose wisely.
          */
         FormatterType formatterType = FormatterType::TEXT;
-
-        /*
-         * True if used for testing and debugging.
-         */
-        bool debug = true;
 
         /*
          * *OPTIONAL*

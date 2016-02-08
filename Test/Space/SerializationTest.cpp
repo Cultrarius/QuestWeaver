@@ -12,6 +12,7 @@
 #include <WeaverConfig.h>
 #include <QuestWeaver.h>
 #include "../catch.hpp"
+#include "../Mock/TestHelper.h"
 
 using namespace weave;
 using namespace std;
@@ -284,11 +285,9 @@ TEST_CASE("Serialize Entities", "[serialize]") {
 }
 
 TEST_CASE("Serialization QuestWeaver", "[serialize]") {
-    WeaverConfig config;
+    WeaverConfig config = TestHelper::CreateDebugConfig();
     config.formatterType = FormatterType::HTML;
-    shared_ptr<QuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
     QuestWeaver weaver(config);
-    weaver.RegisterQuestTemplateFactory(factory);
     shared_ptr<Quest> newQuest = weaver.CreateNewQuest();
     string title = newQuest->GetTitle();
     REQUIRE_FALSE(title.empty());
@@ -314,6 +313,7 @@ TEST_CASE("Serialization QuestWeaver", "[serialize]") {
     ss2.flush();
 
     QuestWeaver deserialized = QuestWeaver::Deserialize(ss2, format, config.dirs);
+    shared_ptr<QuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
     deserialized.RegisterQuestTemplateFactory(factory);
     shared_ptr<Quest> desQuest = deserialized.GetQuest(newQuest->GetId());
     REQUIRE(title == desQuest->GetTitle());

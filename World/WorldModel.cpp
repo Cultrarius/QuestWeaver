@@ -12,7 +12,8 @@ ID WorldModel::NewId() {
     return idGenerator;
 }
 
-WorldModel::WorldModel(shared_ptr<RandomStream> rs) : rs(rs) {
+WorldModel::WorldModel() {
+    rs = make_shared<RandomStream>(0);
     actionHistory.reserve(10000);
 }
 

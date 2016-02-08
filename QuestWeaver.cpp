@@ -15,6 +15,10 @@ QuestWeaver::QuestWeaver(uint64_t seed) : QuestWeaver(WeaverConfig(seed)) {
 }
 
 QuestWeaver::QuestWeaver(WeaverConfig config) {
+    if (config.worldModel == nullptr) {
+        throw ContractFailedException("A world model must be provided for the quest system to work.");
+    }
+
     if (config.randomStream != nullptr) {
         randomStream.reset(config.randomStream);
     } else {
@@ -23,26 +27,16 @@ QuestWeaver::QuestWeaver(WeaverConfig config) {
     engine.reset(new WeaverEngine(randomStream));
     quests.reset(new QuestModel());
     templates.reset(new TemplateEngine(randomStream, config.dirs, config.formatterType));
-    if (config.worldModel != nullptr) {
-        world.reset(config.worldModel);
-    } else if (config.debug) {
-        world.reset(new SpaceWorldModel(randomStream));
-    } else {
-        throw ContractFailedException("A world model must be provided for the quest system to work.");
-    }
+
+    config.worldModel->rs = randomStream;
+    world.reset(config.worldModel);
+
     stories.reset(new StoryWriter(randomStream, *quests, *templates, *world, config.dirs));
-    if (config.debug) {
-        auto spaceFactory = make_shared<SpaceQuestTemplateFactory>();
-        templates->RegisterTemplateFactory(spaceFactory);
-        auto spaceStoryFactory = make_shared<CommonSpaceStoryFactory>();
-        stories->RegisterTemplateFactory(spaceStoryFactory);
-    } else {
-        for (auto factory : config.questTemplateFactories) {
-            templates->RegisterTemplateFactory(factory);
-        }
-        for (auto factory : config.storyTemplateFactories) {
-            stories->RegisterTemplateFactory(factory);
-        }
+    for (auto factory : config.questTemplateFactories) {
+        templates->RegisterTemplateFactory(factory);
+    }
+    for (auto factory : config.storyTemplateFactories) {
+        stories->RegisterTemplateFactory(factory);
     }
 }
 

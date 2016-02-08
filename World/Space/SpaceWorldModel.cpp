@@ -14,7 +14,8 @@ shared_ptr<SpaceLocation> SpaceWorldModel::CreateLocation() const {
     return make_shared<SpaceLocation>(x, y, z);
 }
 
-SpaceWorldModel::SpaceWorldModel(std::shared_ptr<RandomStream> randomStream) : WorldModel(randomStream) {
+SpaceWorldModel::SpaceWorldModel(std::shared_ptr<RandomStream> randomStream) : WorldModel() {
+    rs = randomStream;
 }
 
 ModelParameters SpaceWorldModel::GetParameters() {

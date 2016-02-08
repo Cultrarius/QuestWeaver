@@ -16,7 +16,7 @@ namespace weave {
 
     class WorldModel {
     public:
-        explicit WorldModel(std::shared_ptr<RandomStream> rs);
+        WorldModel();
 
 		virtual ~WorldModel() {}
 
@@ -35,6 +35,7 @@ namespace weave {
         void AddListener(std::shared_ptr<WorldListener> listener) const;
 
     protected:
+        friend class QuestWeaver;
         std::shared_ptr<RandomStream> rs;
         std::unordered_map<ID, MetaData> metaData;
         std::vector<WorldModelAction> actionHistory;

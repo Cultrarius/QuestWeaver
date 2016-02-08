@@ -5,12 +5,14 @@
 #include "catch.hpp"
 #include <Core/WeaverUtils.h>
 #include <QuestWeaver.h>
+#include "Mock/TestHelper.h"
 
 using namespace weave;
 using namespace std;
 
 TEST_CASE("Weaver Quests", "[weaver]") {
-    QuestWeaver weaver(2);
+    WeaverConfig config = TestHelper::CreateDebugConfig();
+    QuestWeaver weaver(config);
 
     SECTION("Empty weaver test") {
         REQUIRE(weaver.GetAllQuests().size() == 0);

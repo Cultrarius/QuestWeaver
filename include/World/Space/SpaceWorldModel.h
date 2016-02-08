@@ -23,6 +23,8 @@ namespace weave {
 
     class SpaceWorldModel : public WorldModel {
     public:
+        SpaceWorldModel() = default;
+
         explicit SpaceWorldModel(std::shared_ptr<RandomStream> randomStream);
 
         ModelParameters GetParameters();
@@ -45,8 +47,6 @@ namespace weave {
 
         // serialization
         friend class cereal::access;
-
-        SpaceWorldModel() : WorldModel(std::shared_ptr<RandomStream>()) { }
 
         template<class Archive>
         void serialize(Archive &ar) {
