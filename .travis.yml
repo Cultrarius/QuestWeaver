@@ -15,6 +15,9 @@ addons:
     - clang
     - lcov
 
+before_install:
+  - pip install --user cpp-coveralls
+
 install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
   - wget --no-check-certificate https://cmake.org/files/v3.3/cmake-3.3.2.tar.gz
@@ -34,3 +37,7 @@ script:
   - make
   - cd bin
   - ./QuestWeaverTest
+  - make Weaver_coverage
+
+after_success:
+  - coveralls --exclude lib --exclude Test --exclude include/json --exclude include/cereal
