@@ -47,3 +47,4 @@ build
 *.vcxproj.user
 *.vcxproj
 /CMakeCache.txt
+/coverage/
