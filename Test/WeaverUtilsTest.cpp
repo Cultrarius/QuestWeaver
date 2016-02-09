@@ -54,6 +54,11 @@ TEST_CASE("Simple string substitution", "[utils]") {
         REQUIRE(s1 == s2);
     }
 
+    SECTION("Replace from empty") {
+        replace(&s1, "", "this is a long string");
+        REQUIRE(s1 == "this is a long stringHello World ASD FASD");
+    }
+
     SECTION("Replace single simple") {
         replace(&s1, "ASD", "XYZ");
         REQUIRE(s1 == "Hello World XYZ FASD");
@@ -94,6 +99,11 @@ TEST_CASE("Full string substitution", "[utils]") {
     SECTION("Replace simple") {
         replaceAll(&s1, "ASD", "XYZ");
         REQUIRE(s1 == "Hello World XYZ FXYZ");
+    }
+
+    SECTION("Replace from empty") {
+        replaceAll(&s1, "", "this is a long string");
+        REQUIRE(s1 == "Hello World ASD FASD");
     }
 
     SECTION("Replace expand") {
@@ -153,5 +163,14 @@ TEST_CASE("HTML tag enclosure", "[utils]") {
 
     SECTION("simple tag with classes") {
         REQUIRE("<div class=\"overkill xTend\">Hello World</div>" == htmlEncloseWithTag(s1, "div", classTwo));
+    }
+}
+
+TEST_CASE("Json Reader", "[utils]") {
+    SECTION("Read broken JSON") {
+        Directories testDirs;
+        testDirs.templateDirectory = "Test/Resources/";
+        testDirs.modDirectory = "../Test/Resources/";
+        REQUIRE_THROWS_AS(readJsonFromFile("broken.qt", testDirs), ContractFailedException);
     }
 }

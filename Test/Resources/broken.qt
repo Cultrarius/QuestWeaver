@@ -1,0 +1,11 @@
+{
+  "parent": "Space",
+  "key": "ExploreRegionQuest",
+  "mandatory": [
+    X
+    "location"
+  ],
+  "optional": [
+    "sponsor"
+  ]
+}
