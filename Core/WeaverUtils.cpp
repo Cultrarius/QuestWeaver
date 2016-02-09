@@ -62,11 +62,9 @@ std::string weave::htmlEncloseWithTag(const std::string &str, const std::string 
 }
 
 Value weave::readJsonFromFile(const char *fileName, const Directories &dirs) {
-    Value root;
     CharReaderBuilder readBuilder;
     readBuilder["collectComments"] = false;
     readBuilder["rejectDupKeys"] = true;
-    string errorMessage;
     ifstream inStream;
 
     string modDir(dirs.modDirectory);
@@ -95,8 +93,10 @@ Value weave::readJsonFromFile(const char *fileName, const Directories &dirs) {
         }
     }
 
+    Value root;
+    string errorMessage;
     if (!parseFromStream(readBuilder, inStream, &root, &errorMessage)) {
-        cerr << "Error parsing template file: " << errorMessage << endl;
+        errorMessage = "Error parsing template file: " + errorMessage;
         throw ContractFailedException(errorMessage);
     }
 
