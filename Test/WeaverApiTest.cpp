@@ -10,6 +10,15 @@
 using namespace weave;
 using namespace std;
 
+TEST_CASE("Weaver API errors", "[weaver]") {
+    WeaverConfig config = TestHelper::CreateDebugConfig();
+    config.worldModel = nullptr;
+
+    SECTION("No world model") {
+        REQUIRE_THROWS_AS(QuestWeaver weaver(config), ContractFailedException);
+    }
+}
+
 TEST_CASE("Weaver Quests", "[weaver]") {
     WeaverConfig config = TestHelper::CreateDebugConfig();
     QuestWeaver weaver(config);
