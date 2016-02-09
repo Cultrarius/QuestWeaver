@@ -12,10 +12,58 @@ using namespace std;
 
 TEST_CASE("Weaver API errors", "[weaver]") {
     WeaverConfig config = TestHelper::CreateDebugConfig();
-    config.worldModel = nullptr;
 
     SECTION("No world model") {
+        config.worldModel = nullptr;
         REQUIRE_THROWS_AS(QuestWeaver weaver(config), ContractFailedException);
+    }
+
+    SECTION("Unknown serialization type") {
+        QuestWeaver weaver(config);
+        stringstream ss;
+        StreamType type = (StreamType) 100;
+        REQUIRE_THROWS_AS(weaver.Serialize(ss, type), ContractFailedException);
+    }
+
+    SECTION("Unknown deserialization type") {
+        stringstream ss2;
+        QuestWeaver weaver(config);
+        weaver.Serialize(ss2, StreamType::BINARY);
+        string serialized = ss2.str();
+
+        stringstream ss3;
+        ss3 << serialized;
+        ss3.flush();
+        StreamType type = (StreamType) 100;
+        REQUIRE_THROWS_AS(QuestWeaver::Deserialize(ss3, type), ContractFailedException);
+    }
+}
+
+TEST_CASE("Weaver Config", "[weaver]") {
+    WeaverConfig configRs = TestHelper::CreateDebugConfig();
+    configRs.seed = 0;
+    QuestWeaver weaver1(configRs);
+    auto quest1 = weaver1.CreateNewQuest();
+
+    WeaverConfig configSeed = TestHelper::CreateDebugConfig();
+    configSeed.randomStream = nullptr;
+
+    SECTION("Same seed") {
+        configSeed.seed = 42;
+        QuestWeaver weaver2(configSeed);
+        auto quest2 = weaver2.CreateNewQuest();
+
+        REQUIRE(quest1->GetTitle() == quest2->GetTitle());
+        REQUIRE(quest1->GetDescription() == quest2->GetDescription());
+    }
+
+    SECTION("Different seed") {
+        configSeed.seed = 1337;
+        QuestWeaver weaver2(configSeed);
+        auto quest2 = weaver2.CreateNewQuest();
+
+        REQUIRE_FALSE(quest1->GetTitle() == quest2->GetTitle());
+        REQUIRE_FALSE(quest1->GetDescription() == quest2->GetDescription());
     }
 }
 

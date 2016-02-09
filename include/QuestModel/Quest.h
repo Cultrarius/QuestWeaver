@@ -103,6 +103,8 @@ namespace weave {
 
         virtual QuestTickResult Tick(float delta);
 
+        // serialization helpers
+
         auto getCerealId() const {
             return cereal::make_nvp("id", id);
         }
@@ -129,13 +131,5 @@ namespace weave {
         std::string title;
         std::string description;
         std::string story;
-
-        // serialization
-        friend class cereal::access;
-
-        template<class Archive>
-        void serialize(Archive &archive) {
-            archive(getCerealId(), getCerealState(), getCerealTitle(), getCerealDescription(), getCerealStory());
-        }
     };
 }
