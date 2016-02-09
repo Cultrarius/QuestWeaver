@@ -1,0 +1,17 @@
+{
+  "parent": "Space",
+  "key": "ExploreRegionQuest",
+  "mandatory": [
+    "location"
+  ],
+  "optional": [
+    "sponsor"
+  ],
+  "titles": [
+    "Explore region of space",
+    "Travel to the coordinates %location"
+  ],
+  "objectives": [
+    "Travel to the %location region"
+  ]
+}

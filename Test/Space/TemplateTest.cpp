@@ -5,11 +5,12 @@
 #include <string>
 #include <memory>
 #include <Template/TemplateEngine.h>
-#include <Core/WeaverUtils.h>
+#include <Core/WeaverTypes.h>
 #include <Template/Space/SpaceQuestTemplateFactory.h>
 #include <World/Space/SpaceWorldModel.h>
 #include "../catch.hpp"
 #include "../Mock/TestQuestTemplate.h"
+#include "../Mock/TestQuestTemplateFactory.h"
 
 using namespace weave;
 using namespace std;
@@ -45,6 +46,10 @@ TEST_CASE("Template factory", "[template]") {
         }
     }
 
+    SECTION("Retrieve unknown key") {
+        REQUIRE_THROWS_AS(factory->CreateTemplate("SecretTemplate"), ContractFailedException);
+    }
+
     SECTION("Retrieving template for every key") {
         for (string templateKey : factory->GetTemplateKeys()) {
             auto temp = factory->CreateTemplate(templateKey);
@@ -61,7 +66,7 @@ TEST_CASE("Templates", "[template]") {
     engine.RegisterTemplateFactory(factory);
 
     SECTION("Checking properties size") {
-        for (int i = 0; i < testSize; i++) {
+        for (uint64_t i = 0; i < testSize; i++) {
             rs->Seed(i);
             for (string templateKey : factory->GetTemplateKeys()) {
                 auto tp = factory->CreateTemplate(templateKey);
@@ -72,7 +77,7 @@ TEST_CASE("Templates", "[template]") {
     }
 
     SECTION("Checking mandatory property exists") {
-        for (int i = 0; i < testSize; i++) {
+        for (uint64_t i = 0; i < testSize; i++) {
             rs->Seed(i);
             for (string templateKey : factory->GetTemplateKeys()) {
                 auto tp = factory->CreateTemplate(templateKey);
@@ -90,7 +95,7 @@ TEST_CASE("Templates", "[template]") {
     }
 
     SECTION("Checking property names") {
-        for (int i = 0; i < testSize; i++) {
+        for (uint64_t i = 0; i < testSize; i++) {
             rs->Seed(i);
             for (string templateKey : factory->GetTemplateKeys()) {
                 auto tp = factory->CreateTemplate(templateKey);
@@ -105,7 +110,7 @@ TEST_CASE("Templates", "[template]") {
 
     SECTION("Checking property candidates") {
         WorldModel *worldModel = new SpaceWorldModel(rs);
-        for (int i = 0; i < testSize; i++) {
+        for (uint64_t i = 0; i < testSize; i++) {
             rs->Seed(i);
             for (string templateKey : factory->GetTemplateKeys()) {
                 auto tp = factory->CreateTemplate(templateKey);
@@ -121,7 +126,7 @@ TEST_CASE("Templates", "[template]") {
 
     SECTION("Checking model actions on empty model ") {
         WorldModel *worldModel = new SpaceWorldModel(rs);
-        for (int i = 0; i < testSize; i++) {
+        for (uint64_t i = 0; i < testSize; i++) {
             rs->Seed(i);
             for (string templateKey : factory->GetTemplateKeys()) {
                 auto tp = factory->CreateTemplate(templateKey);
@@ -140,7 +145,7 @@ TEST_CASE("Templates", "[template]") {
 
     SECTION("Checking quest creation all candidates") {
         WorldModel *worldModel = new SpaceWorldModel(rs);
-        for (int i = 0; i < testSize; i++) {
+        for (uint64_t i = 0; i < testSize; i++) {
             rs->Seed(i);
             for (string templateKey : factory->GetTemplateKeys()) {
                 auto tp = factory->CreateTemplate(templateKey);
@@ -168,7 +173,7 @@ TEST_CASE("Templates", "[template]") {
 
     SECTION("Checking quest creation only mandatory candidates") {
         WorldModel *worldModel = new SpaceWorldModel(rs);
-        for (int i = 0; i < testSize; i++) {
+        for (uint64_t i = 0; i < testSize; i++) {
             rs->Seed(i);
             for (string templateKey : factory->GetTemplateKeys()) {
                 auto tp = factory->CreateTemplate(templateKey);
@@ -239,6 +244,16 @@ TEST_CASE("Templates", "[template]") {
             propertyValues.push_back(QuestPropertyValue(sandy, entity));
             REQUIRE_THROWS_AS(testTemplate.ToQuest(propertyValues, ""), ContractFailedException);
         }
+    }
+
+    SECTION("Read faulty template file") {
+        Directories dirs;
+        dirs.templateDirectory = "Test/Resources/";
+        dirs.modDirectory = "../Test/Resources/";
+        TemplateEngine tempEngine(rs, dirs, FormatterType::TEXT);
+        auto templateFactory = make_shared<TestQuestTemplateFactory>("missingAttribute.qt");
+        tempEngine.RegisterTemplateFactory(templateFactory);
+        REQUIRE_THROWS_AS(templateFactory->GetTemplateKeys(), ContractFailedException);
     }
 }
 
