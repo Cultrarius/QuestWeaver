@@ -9,6 +9,7 @@
 #include <Template/Space/SpaceQuestTemplateFactory.h>
 #include <World/Space/SpaceWorldModel.h>
 #include "../catch.hpp"
+#include "../Mock/TestQuestTemplate.h"
 
 using namespace weave;
 using namespace std;
@@ -193,6 +194,50 @@ TEST_CASE("Templates", "[template]") {
                     FAIL(ex.what());
                 }
             }
+        }
+    }
+
+    SECTION("Quest descriptions") {
+        SpaceWorldModel *worldModel = new SpaceWorldModel(rs);
+        auto entity = worldModel->CreateLocation();
+
+        vector<TemplateQuestProperty> properties;
+        TemplateQuestProperty mandy(true, "mandy");
+        TemplateQuestProperty sandy(true, "sandy");
+        TemplateQuestProperty opti(false, "opti");
+        TemplateQuestProperty peti(false, "peti");
+        properties.push_back(mandy);
+        properties.push_back(sandy);
+        properties.push_back(opti);
+        properties.push_back(peti);
+
+        vector<TemplateQuestDescription> descriptions;
+        vector<string> conditions;
+        vector<QuestPropertyValue> propertyValues;
+
+
+        SECTION("Normal quest description substitution") {
+            conditions.push_back("mandy");
+            conditions.push_back("sandy");
+            descriptions.push_back(TemplateQuestDescription(conditions, "Why %mandy loves %sandy..."));
+            TestQuestTemplate testTemplate(properties, descriptions);
+            propertyValues.push_back(QuestPropertyValue(mandy, entity));
+            propertyValues.push_back(QuestPropertyValue(sandy, entity));
+            auto quest = testTemplate.ToQuest(propertyValues, "");
+            string description = quest->GetDescription();
+            REQUIRE_FALSE(description.empty());
+            REQUIRE(description.find("mandy") == string::npos);
+            REQUIRE(description.find("sandy") == string::npos);
+        }
+
+        SECTION("Impossible quest description substitution") {
+            conditions.push_back("mandy");
+            conditions.push_back("opti");
+            descriptions.push_back(TemplateQuestDescription(conditions, "Why %mandy loves %opti..."));
+            TestQuestTemplate testTemplate(properties, descriptions);
+            propertyValues.push_back(QuestPropertyValue(mandy, entity));
+            propertyValues.push_back(QuestPropertyValue(sandy, entity));
+            REQUIRE_THROWS_AS(testTemplate.ToQuest(propertyValues, ""), ContractFailedException);
         }
     }
 }
