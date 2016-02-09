@@ -18,8 +18,6 @@ namespace weave {
 
         std::string GetName() const;
 
-        bool operator==(const TemplateQuestProperty &other) const;
-
     private:
         bool isMandatory;
         std::string name;
@@ -44,8 +42,6 @@ namespace weave {
         TemplateQuestDescription(const std::vector<std::string> &conditions, const std::string &text);
 
         bool SupportsConditions(const std::vector<std::string> &conditions) const;
-
-        std::string GetText() const;
 
         std::string GetText(FormatterType format) const;
 

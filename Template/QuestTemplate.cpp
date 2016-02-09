@@ -25,10 +25,6 @@ vector<TemplateQuestProperty> QuestTemplate::GetProperties() const {
     return properties;
 }
 
-string TemplateQuestDescription::GetText() const {
-    return GetText(FormatterType::TEXT);
-}
-
 string TemplateQuestDescription::GetText(FormatterType format) const {
     if (format == FormatterType::HTML) {
         return htmlEncloseWithTag(text, "span", "description");
@@ -112,10 +108,6 @@ string QuestTemplate::getTitle(const vector<QuestPropertyValue> &questPropertyVa
         titleText = htmlEncloseWithTag(titleText, "span", "title");
     }
     return titleText;
-}
-
-bool TemplateQuestProperty::operator==(const TemplateQuestProperty &other) const {
-    return name == other.name;
 }
 
 ID QuestTemplate::getEntityIdFromProperty(string propertyName,
