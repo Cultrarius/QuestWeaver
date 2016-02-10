@@ -4,9 +4,7 @@
 
 #include <algorithm>
 #include <QuestWeaver.h>
-#include <Template/Space/SpaceQuestTemplateFactory.h>
 #include <World/Space/SpaceWorldModel.h>
-#include <Story/Space/CommonSpaceStoryFactory.h>
 
 using namespace std;
 using namespace weave;

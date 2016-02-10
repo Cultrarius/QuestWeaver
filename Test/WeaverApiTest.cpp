@@ -113,7 +113,7 @@ TEST_CASE("Weaver Quests", "[weaver]") {
     SECTION("Tick fail quest") {
         weaver.ChangeQuestState(activateAction);
         weaver.Tick(1);
-        quest = weaver.GetQuest(quest->GetId());
+        weaver.GetQuest(quest->GetId());
         weaver.ChangeQuestState(failAction);
         weaver.Tick(1);
         REQUIRE(weaver.GetAllQuests().size() == 1);

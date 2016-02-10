@@ -15,7 +15,7 @@ TestQuest::TestQuest(ID id, QuestState state, const string &title, const string 
 }
 
 std::string TestQuest::GetType() const {
-    return "Degub::TestQuest";
+    return "Debug::TestQuest";
 }
 
 std::shared_ptr<Quest> TestQuest::setStateAndId(ID newId, QuestState newState) const {

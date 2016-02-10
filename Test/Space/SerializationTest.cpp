@@ -18,7 +18,7 @@ using namespace weave;
 using namespace std;
 
 TEST_CASE("Serialize Quests", "[serialize]") {
-    int testSize = 100;
+    uint64_t testSize = 100;
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
     shared_ptr<SpaceQuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
@@ -26,7 +26,7 @@ TEST_CASE("Serialize Quests", "[serialize]") {
 
     SECTION("Serialize and deserialize JSON in-memory") {
         WorldModel *worldModel = new SpaceWorldModel(rs);
-        for (int i = 0; i < testSize; i++) {
+        for (uint64_t i = 0; i < testSize; i++) {
             rs->Seed(i);
             for (string templateKey : factory->GetTemplateKeys()) {
                 auto tp = factory->CreateTemplate(templateKey);
@@ -71,7 +71,8 @@ TEST_CASE("Serialize Quests", "[serialize]") {
     SECTION("Serialize and deserialize binary file") {
         WorldModel *worldModel = new SpaceWorldModel(rs);
         const char *fileName = "testSerialization.bin";
-        for (int i = 0; i < 25; i++) { // On windows a larger value results in an read/write error - no idea why though
+        for (uint64_t i = 0;
+             i < 25; i++) { // On windows a larger value results in an read/write error - no idea why though
             rs->Seed(i);
             for (string templateKey : factory->GetTemplateKeys()) {
                 auto tp = factory->CreateTemplate(templateKey);
@@ -117,7 +118,7 @@ TEST_CASE("Serialize Quests", "[serialize]") {
         QuestModel questModel;
         WorldModel *worldModel = new SpaceWorldModel(rs);
 
-        for (int i = 0; i < testSize; i++) {
+        for (uint64_t i = 0; i < testSize; i++) {
             rs->Seed(i);
             for (string templateKey : factory->GetTemplateKeys()) {
                 auto tp = factory->CreateTemplate(templateKey);
@@ -174,14 +175,14 @@ TEST_CASE("Serialize Quests", "[serialize]") {
 
         REQUIRE(deserializedModel.GetQuests().size() == questModel.GetQuests().size());
 
-        for (int i = 0; i < testSize; i++) {
+        for (uint64_t i = 0; i < testSize; i++) {
             REQUIRE(deserializedModel.GetQuests()[i]->GetId() == questModel.GetQuests()[i]->GetId());
         }
     }
 }
 
 TEST_CASE("Serialize Entities", "[serialize]") {
-    int testSize = 100;
+    uint64_t testSize = 100;
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     shared_ptr<RandomStream> rx = make_shared<RandomStream>(7);
     SpaceWorldModel testModel(rs);
@@ -226,7 +227,7 @@ TEST_CASE("Serialize Entities", "[serialize]") {
         }
         REQUIRE(entities.size() == deserialized.size());
 
-        for (unsigned int i = 0; i < entities.size(); i++) {
+        for (uint64_t i = 0; i < entities.size(); i++) {
             REQUIRE(typeid(entities[i]) == typeid(deserialized[i]));
         }
     }
@@ -275,7 +276,7 @@ TEST_CASE("Serialize Entities", "[serialize]") {
         }
         REQUIRE(testModel.GetEntities().size() == deserializedModel.GetEntities().size());
 
-        for (unsigned int i = 0; i < testModel.GetEntities().size(); i++) {
+        for (uint64_t i = 0; i < testModel.GetEntities().size(); i++) {
             REQUIRE(typeid(testModel.GetEntities()[i]) == typeid(deserializedModel.GetEntities()[i]));
         }
         REQUIRE(deserializedModel.GetMetaData(entity1->GetId()).GetValue("Size") == 7);

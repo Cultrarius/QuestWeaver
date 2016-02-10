@@ -12,7 +12,7 @@ namespace weave {
     struct SolarSystem : public WorldEntity {
         std::string Name;
         std::shared_ptr<SpaceLocation> Location;
-        // TODO add planet infos?
+        // TODO add planet info?
 
         SolarSystem();
 

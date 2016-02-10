@@ -24,6 +24,12 @@ TEST_CASE("Model Actions", "[model]") {
         REQUIRE_THROWS_AS(testModel.Execute(actions), ContractFailedException);
     }
 
+    SECTION("Unknown action type") {
+        vector<WorldModelAction> actions;
+        WorldModelAction action((WorldActionType) 100, entity);
+        actions.push_back(action);
+        REQUIRE_THROWS_AS(testModel.Execute(actions), ContractFailedException);
+    }
 
     SECTION("Empty list of actions") {
         vector<WorldModelAction> noActions;
@@ -159,7 +165,7 @@ TEST_CASE("Metadata", "[model]") {
         REQUIRE(!metadata.HasValue("Test123"));
     }
 
-    SECTION("Edit metadata immutablility") {
+    SECTION("Edit metadata immutability") {
         MetaData metadata = testModel.GetMetaData(entity->GetId());
         REQUIRE(!metadata.HasValue("Test123"));
         metadata.SetValue("Test123", 137);

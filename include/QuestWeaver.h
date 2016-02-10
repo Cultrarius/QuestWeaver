@@ -38,7 +38,7 @@ namespace weave {
         /*
          * Registers a new quest template factory with the quest system.
          * Usually, the factories are already registered when creating an instance using the WeaverConfig parameter.
-         * However, this is not true when creating a new instance by deserialiation.
+         * However, this is not true when creating a new instance by deserialization.
          * This method *MUST* be used on newly deserialized objects, otherwise it is impossible to create new quests
          */
         void RegisterQuestTemplateFactory(std::shared_ptr<QuestTemplateFactory> factory);
@@ -46,7 +46,7 @@ namespace weave {
         /*
          * Registers a new story template factory with the quest system.
          * Usually, the factories are already registered when creating an instance using the WeaverConfig parameter.
-         * However, this is not true when creating a new instance by deserialiation.
+         * However, this is not true when creating a new instance by deserialization.
          * This method *MUST* be used on newly deserialized objects, otherwise new quests will be created without
          * backstories.
          */
@@ -110,7 +110,7 @@ namespace weave {
 
         /*
          * Serializes the whole quest system including the quest model and world model. Please note that upon
-         * deserializing, the template factories and the world model listeners must be registered again as they are not
+         * deserialization, the template factories and the world model listeners must be registered again as they are not
          * serialized.
          * The data is serialized in a portable way, so no extra steps must be taken to serialize and deserialize
          * on different platforms.
@@ -118,8 +118,8 @@ namespace weave {
         void Serialize(std::ostream &outputStream, StreamType type);
 
         /*
-         * Deserializes the quest system including the quest model and world model. Please note that upon
-         * deserializing, the template factories and the world model listeners must be registered again as they are not
+         * Deserializes the quest system including the quest model and world model. Please note that the template
+         * factories and the world model listeners must be registered again as they are not
          * serialized. In addition, the current working directory info must be updated or the default is used.
          *
          * The StreamType parameter must be the same as the one used to serialize the data.
@@ -127,9 +127,8 @@ namespace weave {
         static QuestWeaver Deserialize(std::istream &inputStream, StreamType type);
 
         /*
-         * Deserializes the quest system including the quest model and world model. Please note that upon
-         * deserializing, the template factories and the world model listeners must be registered again as they are not
-         * serialized.
+         * Deserializes the quest system including the quest model and world model. Please note that the template
+         * factories and the world model listeners must be registered again as they are not serialized.
          *
          * The StreamType parameter must be the same as the one used to serialize the data.
          */

@@ -4,7 +4,6 @@
 
 #include <Core/WeaverUtils.h>
 #include <fstream>
-#include <sstream>
 
 using namespace std;
 using namespace weave;

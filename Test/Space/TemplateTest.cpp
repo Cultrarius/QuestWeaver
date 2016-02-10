@@ -5,7 +5,6 @@
 #include <string>
 #include <memory>
 #include <Template/TemplateEngine.h>
-#include <Core/WeaverTypes.h>
 #include <Template/Space/SpaceQuestTemplateFactory.h>
 #include <World/Space/SpaceWorldModel.h>
 #include "../catch.hpp"

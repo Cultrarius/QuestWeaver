@@ -43,10 +43,6 @@ void WorldModel::Execute(vector<WorldModelAction> modelActions) {
             entities.erase(oldId);
             metaData.erase(oldId);
         } else if (action.GetActionType() == WorldActionType::UPDATE) {
-            if (id == WorldEntity::NoID) {
-                throw ContractFailedException(
-                        "Unable to execute model action update: entity is not registered with world model.");
-            }
             updateMetaDataForId(id, action.GetMetaData());
         } else {
             throw ContractFailedException("Illegal action type.");
