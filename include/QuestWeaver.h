@@ -27,7 +27,7 @@ namespace weave {
      */
     class QuestWeaver {
     public:
-        /*
+        /*!
          * Creates a new weaver instance with the given config.
          * The config needs to contain a valid world model pointer.
          * The quest weaver instance will take ownership of the world model and delete it when being destroyed.
@@ -35,7 +35,7 @@ namespace weave {
          */
         explicit QuestWeaver(WeaverConfig config);
 
-        /*
+        /*!
          * Registers a new quest template factory with the quest system.
          * Usually, the factories are already registered when creating an instance using the WeaverConfig parameter.
          * However, this is not true when creating a new instance by deserialization.
@@ -43,7 +43,7 @@ namespace weave {
          */
         void RegisterQuestTemplateFactory(std::shared_ptr<QuestTemplateFactory> factory);
 
-        /*
+        /*!
          * Registers a new story template factory with the quest system.
          * Usually, the factories are already registered when creating an instance using the WeaverConfig parameter.
          * However, this is not true when creating a new instance by deserialization.
@@ -52,12 +52,12 @@ namespace weave {
          */
         void RegisterStoryTemplateFactory(std::shared_ptr<StoryTemplateFactory> factory);
 
-        /*
+        /*!
          * Changes the directories used by the quest system to load files such as templates.
          */
         void ChangeWorkingDirectories(Directories directories);
 
-        /*
+        /*!
          * Creates a new quest.
          * This node does not have any input because it is the responsibility of the quest weaver to decide which quest
          * should be next.
@@ -69,7 +69,7 @@ namespace weave {
          */
         std::shared_ptr<Quest> CreateNewQuest();
 
-        /*
+        /*!
          * Advances the quest system state by ticking all quests and executing their desired world and quest changes.
          * Until this method is called, quests are unable to change the world model or their state.
          *
@@ -78,29 +78,29 @@ namespace weave {
          */
         void Tick(float delta);
 
-        /*
+        /*!
          * Returns a list of all quests with the given state.
          */
         std::vector<std::shared_ptr<Quest>> GetQuestsWithState(QuestState state) const;
 
-        /*
+        /*!
          * Returns a list of all quests
          */
         std::vector<std::shared_ptr<Quest>> GetAllQuests() const;
 
-        /*
+        /*!
          * Returns the quest with the given ID.
          */
         std::shared_ptr<Quest> GetQuest(ID questId) const;
 
-        /*
+        /*!
          * Directly changes the state of a quest.
          * A quest can usually change its state once it is ticked,
          * this method should only be used if that is not possible.
          */
         std::shared_ptr<Quest> ChangeQuestState(QuestModelAction questAction);
 
-        /*
+        /*!
          * Returns a immutable reference to the world model - to change the world model, use the Tick() method which
          * gathers changes from the quests.
          *
@@ -108,7 +108,7 @@ namespace weave {
          */
         const WorldModel &GetWorldModel() const;
 
-        /*
+        /*!
          * Serializes the whole quest system including the quest model and world model. Please note that upon
          * deserialization, the template factories and the world model listeners must be registered again as they are not
          * serialized.
@@ -117,7 +117,7 @@ namespace weave {
          */
         void Serialize(std::ostream &outputStream, StreamType type);
 
-        /*
+        /*!
          * Deserializes the quest system including the quest model and world model. Please note that the template
          * factories and the world model listeners must be registered again as they are not
          * serialized. In addition, the current working directory info must be updated or the default is used.
@@ -126,7 +126,7 @@ namespace weave {
          */
         static QuestWeaver Deserialize(std::istream &inputStream, StreamType type);
 
-        /*
+        /*!
          * Deserializes the quest system including the quest model and world model. Please note that the template
          * factories and the world model listeners must be registered again as they are not serialized.
          *

@@ -9,12 +9,12 @@
 
 namespace weave {
 
-    /*
+    /*!
      * Used to identify unique objects in the quest system, i.e. quests or world entities.
      */
     typedef uint64_t ID;
 
-    /*
+    /*!
      * The main exception type used by all classes of the QuestWeaver system.
      */
     struct ContractFailedException : public std::exception {
@@ -27,7 +27,7 @@ namespace weave {
         const char *what() const throw() { return s.c_str(); }
     };
 
-    /*
+    /*!
      * Operator to enable the use of enums as keys in maps
      */
     struct EnumClassHash {
@@ -38,12 +38,12 @@ namespace weave {
     };
 
     struct Directories {
-        /*
+        /*!
          * The base directory which all template factories use to search for template files.
          */
         std::string templateDirectory = "Resources/";
 
-        /*
+        /*!
          * Template factories prefer template files found in this directory, so mods can override the templates
          * in the default directory.
          */
@@ -59,32 +59,32 @@ namespace weave {
     };
 
     enum class StreamType {
-        /*
+        /*!
          * A verbose text format, good for debugging or manual changes.
          * Big size and slow compared to the binary format.
          */
                 JSON,
 
-        /*
+        /*!
          * A compact binary format without compression. Fastest option.
          */
                 BINARY
     };
 
     enum class FormatterType {
-        /*
+        /*!
          * All texts will be created as vanilla texts without any additional formatting markers
          */
                 TEXT,
 
-        /*
+        /*!
          * A number of html tags will be injected into the created text to allow the output to be formatted with
          * css classes.
          */
                 HTML
     };
 
-    /*
+    /*!
      * Defines a serializable, seeded pseudo-random number generator that is used to generate random numbers for the
      * quest system.
      */
