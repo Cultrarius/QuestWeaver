@@ -59,7 +59,7 @@ TEST_CASE("Template factory", "[template]") {
 }
 
 TEST_CASE("Templates", "[template]") {
-    int testSize = 100;
+    uint64_t testSize = 100;
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
     shared_ptr<SpaceQuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
@@ -252,6 +252,7 @@ TEST_CASE("Templates", "[template]") {
         dirs.modDirectory = "../Test/Resources/";
         TemplateEngine tempEngine(rs, dirs, FormatterType::TEXT);
         auto templateFactory = make_shared<TestQuestTemplateFactory>("missingAttribute.qt");
+        tempEngine.RegisterTemplateFactory(templateFactory);
         tempEngine.RegisterTemplateFactory(templateFactory);
         REQUIRE_THROWS_AS(templateFactory->GetTemplateKeys(), ContractFailedException);
     }

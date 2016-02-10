@@ -15,9 +15,6 @@ shared_ptr<QuestTemplate> TemplateEngine::GetTemplateForNewQuest() {
     auto factoryIndex = randomStream->GetRandomIndex(factories.size());
     shared_ptr<QuestTemplateFactory> factory = factories.at(factoryIndex);
     auto factoryKeys = factory->GetTemplateKeys();
-    if (factoryKeys.size() == 0) {
-        throw ContractFailedException("No templates defined in template factory.\n");
-    }
     auto templateIndex = randomStream->GetRandomIndex(factoryKeys.size());
     auto key = factoryKeys.at(templateIndex);
     return factory->CreateTemplate(key);

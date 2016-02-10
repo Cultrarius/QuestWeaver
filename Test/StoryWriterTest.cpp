@@ -52,6 +52,18 @@ TEST_CASE("Nuggets", "[story]") {
         REQUIRE_THROWS_AS(writer.CreateStory(graph, values), ContractFailedException);
     }
 
+    SECTION("Invalid nuggets - no outer json array") {
+        shared_ptr<StoryTemplateFactory> templateFactory = make_shared<TestStoryTemplateFactory>("6");
+        writer.RegisterTemplateFactory(templateFactory);
+        REQUIRE_THROWS_AS(writer.CreateStory(graph, values), ContractFailedException);
+    }
+
+    SECTION("Invalid nuggets - no inner json object") {
+        shared_ptr<StoryTemplateFactory> templateFactory = make_shared<TestStoryTemplateFactory>("7");
+        writer.RegisterTemplateFactory(templateFactory);
+        REQUIRE_THROWS_AS(writer.CreateStory(graph, values), ContractFailedException);
+    }
+
     SECTION("Duplicate key") {
         shared_ptr<StoryTemplateFactory> templateFactory = make_shared<TestStoryTemplateFactory>("1");
         shared_ptr<StoryTemplateFactory> templateFactory2 = make_shared<TestStoryTemplateFactory>("5");
