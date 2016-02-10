@@ -26,8 +26,8 @@ TEST_CASE("Model Actions", "[model]") {
 
     SECTION("Unknown action type") {
         vector<WorldModelAction> actions;
-        WorldModelAction action((WorldActionType) 100, entity);
-        actions.push_back(action);
+        actions.push_back(WorldModelAction(WorldActionType::CREATE, entity));
+        actions.push_back(WorldModelAction((WorldActionType) 100, entity));
         REQUIRE_THROWS_AS(testModel.Execute(actions), ContractFailedException);
     }
 
