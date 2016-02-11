@@ -10,6 +10,9 @@
 
 namespace weave {
 
+    /*!
+     *
+     */
     enum class QuestActionType {
         KEEP, ACTIVATE, FAIL, SUCCEED
     };

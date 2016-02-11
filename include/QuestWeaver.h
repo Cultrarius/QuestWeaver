@@ -76,6 +76,7 @@ namespace weave {
          *
          * **WARNING** After ticking, all objects received via this API might be invalid!
          * They can still be used, but might contain outdated data.
+         * @param delta The time elapsed since the last tick.
          */
         void Tick(float delta);
 

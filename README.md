@@ -1,4 +1,7 @@
-# QuestWeaver <a href="https://travis-ci.org/Cultrarius/QuestWeaver"><img src="https://travis-ci.org/Cultrarius/QuestWeaver.svg"></a> [![License](https://img.shields.io/badge/license-CC0-green.svg)](https://creativecommons.org/publicdomain/zero/1.0/deed.de)
+# QuestWeaver
+
+<a href="https://travis-ci.org/Cultrarius/QuestWeaver"><img src="https://travis-ci.org/Cultrarius/QuestWeaver.svg"></a>
+<a href="https://creativecommons.org/publicdomain/zero/1.0/deed.de"><img src="https://img.shields.io/badge/license-CC0-green.svg"></a>
 Procedurally generated quests and stories for computer games.
 
 This project is still in its early stages and under heavy development!
