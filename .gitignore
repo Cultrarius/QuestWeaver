@@ -48,3 +48,4 @@ build
 *.vcxproj
 /CMakeCache.txt
 /coverage/
+/doxygen/
