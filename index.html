@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>QuestWeaver by Cultrarius</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">QuestWeaver</h1>
+      <h2 class="project-tagline">Procedurally generated quests and stories for computer games.</h2>
+      <a href="https://github.com/Cultrarius/QuestWeaver" class="btn">View on GitHub</a>
+      <a href="https://github.com/Cultrarius/QuestWeaver/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/Cultrarius/QuestWeaver/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="questweaver--" class="anchor" href="#questweaver--" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>QuestWeaver <a href="https://travis-ci.org/Cultrarius/QuestWeaver"><img src="https://travis-ci.org/Cultrarius/QuestWeaver.svg"></a> <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.de"><img src="https://img.shields.io/badge/license-CC0-green.svg" alt="License"></a>
+</h1>
+
+<p>Procedurally generated quests and stories for computer games.</p>
+
+<p>This project is still in its early stages and under heavy development!</p>
+
+<p>This project includes the following JSON parser: <a href="https://github.com/open-source-parsers/jsoncpp">https://github.com/open-source-parsers/jsoncpp</a></p>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>Fully <strong>portable</strong>, <strong>serializable</strong> quest system, perfect for use in savegames. Supports JSON and a compact binary format. </li>
+<li>Separates quest logic from quest data (such as titles/descriptions) by using <strong>template files</strong>.</li>
+<li>Can output the quest properties as simple <strong>text or HTML form</strong> to support rich formatting in the game.</li>
+<li>Uses a complex <strong>weighted graph search</strong> to create new quests.
+This results in more interesting and coherent quest stories as world actors and entities can be reused when fitting.</li>
+<li>Supports <strong>mod directories</strong> to overwrite quest templates after deployment.</li>
+<li>The game world entities to be used in quests are supplied directly from a game's custom world model.</li>
+</ul>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>The quest system of a game is not an isolated part of the system as it is heavily involved in the current world state and events.
+Therefore, the game has to provide the quest system with the necessary information about the game's state and has to
+fulfill change requests made by the quest system (otherwise the state will be inconsistent).</p>
+
+<p>To use the QuestWeaver system, you have to follow these steps:</p>
+
+<ul>
+<li>Implement and register custom <code>TemplateFactory</code> classes that read your custom template files</li>
+<li>Implement a custom <code>WorldModel</code> class</li>
+<li>Register your wold model and template factories with the <code>QuestWeaver</code> instance</li>
+</ul>
+
+<div class="highlight highlight-source-c++"><pre>QuestWeaver <span class="pl-en">Init</span>() {
+    <span class="pl-c">// Create your template factories</span>
+    shared_ptr&lt;QuestTemplateFactory&gt; questFactory = make_shared&lt;MyQuestTemplateFactory&gt;();
+    shared_ptr&lt;StoryTemplateFactory&gt; storyFactory = make_shared&lt;MyStoryTemplateFactory&gt;();
+
+    <span class="pl-c">// Create your world model</span>
+    <span class="pl-k">auto</span> worldModel = <span class="pl-k">new</span> <span class="pl-c1">MyWorldModel</span>();
+    shared_ptr&lt;WorldListener&gt; myWorldListener = make_shared&lt;MyWorldListener&gt;();
+
+    <span class="pl-c">// Create Configuration</span>
+    WeaverConfig config;
+    config.<span class="pl-smi">worldModel</span> = worldModel;
+    config.<span class="pl-smi">dirs</span>.<span class="pl-smi">modDirectory</span> = <span class="pl-s"><span class="pl-pds">"</span>./Template/<span class="pl-pds">"</span></span>;
+
+    <span class="pl-c">// Create the quest system</span>
+    QuestWeaver <span class="pl-smi">weaver</span>(config);
+    weaver.<span class="pl-c1">RegisterQuestTemplateFactory</span>(questFactory);
+    weaver.<span class="pl-c1">RegisterStoryTemplateFactory</span>(storyFactory);
+    weaver.<span class="pl-c1">GetWorldModel</span>().<span class="pl-c1">AddListener</span>(myWorldListener);
+
+    <span class="pl-k">return</span> weaver;
+}
+
+<span class="pl-c">// Create new quests</span>
+shared_ptr&lt;Quest&gt; newQuest = weaver.CreateNewQuest();</pre></div>
+
+<p>Quests usually want to change the world state as well as their own state (e.g. when a quest succeeds).
+To do that, you can tick the quest system in your game loop and it will take care of the rest by ticking each quest
+separately.
+The <code>WorldListener</code> allows you to change the game state whenever the world model was changed by the quest system.</p>
+
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">while</span> (<span class="pl-c1">true</span>) {
+   <span class="pl-c">// game loop ...</span>
+
+   weaver.<span class="pl-c1">Tick</span>(delta); <span class="pl-c">// updates the world state </span>
+}</pre></div>
+
+<p>You can also fully serialize the quest system, e.g. to create a save game or to debug it:</p>
+
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">SerialTest</span>() {
+    QuestWeaver weaver = <span class="pl-c1">Init</span>();
+
+    <span class="pl-c">// serialize</span>
+    stringstream ss; <span class="pl-c">// can also be a file stream</span>
+    weaver.<span class="pl-c1">Serialize</span>(ss, StreamType::JSON);
+    cout &lt;&lt; ss.<span class="pl-c1">str</span>() &lt;&lt; endl; <span class="pl-c">// or save it to disk</span>
+
+    <span class="pl-c">// deserialize - it is important to re-register the template factories and the world model listener!</span>
+    QuestWeaver deserialized = <span class="pl-c1">QuestWeaver::Deserialize</span>(ss, StreamType::JSON, config.<span class="pl-smi">dirs</span>);
+    weaver.<span class="pl-c1">RegisterQuestTemplateFactory</span>(questFactory);
+    weaver.<span class="pl-c1">RegisterStoryTemplateFactory</span>(storyFactory);
+    weaver.<span class="pl-c1">GetWorldModel</span>().<span class="pl-c1">AddListener</span>(myWorldListener);
+}</pre></div>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/Cultrarius/QuestWeaver">QuestWeaver</a> is maintained by <a href="https://github.com/Cultrarius">Cultrarius</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-73638234-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
