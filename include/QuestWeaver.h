@@ -18,7 +18,8 @@
 
 namespace weave {
 
-    /*
+    /*!
+     * **Main entry point** for applications using the quest system.
      * This class represents a complete quest system and is the main entry point for an application to create and
      * manage quests. To be usable, the caller has to provide a world model and matching template factories from which
      * the quest weaver will generate new and interesting quest.
@@ -73,7 +74,7 @@ namespace weave {
          * Advances the quest system state by ticking all quests and executing their desired world and quest changes.
          * Until this method is called, quests are unable to change the world model or their state.
          *
-         * *WARNING* After ticking, all objects received via this API might be invalid!
+         * **WARNING** After ticking, all objects received via this API might be invalid!
          * They can still be used, but might contain outdated data.
          */
         void Tick(float delta);
@@ -84,7 +85,7 @@ namespace weave {
         std::vector<std::shared_ptr<Quest>> GetQuestsWithState(QuestState state) const;
 
         /*!
-         * Returns a list of all quests
+         * Returns a list of all quests.
          */
         std::vector<std::shared_ptr<Quest>> GetAllQuests() const;
 
@@ -95,31 +96,31 @@ namespace weave {
 
         /*!
          * Directly changes the state of a quest.
-         * A quest can usually change its state once it is ticked,
-         * this method should only be used if that is not possible.
+         * A quest can usually change its state once it is ticked, this method should only be used if that is not possible.
          */
         std::shared_ptr<Quest> ChangeQuestState(QuestModelAction questAction);
 
         /*!
-         * Returns a immutable reference to the world model - to change the world model, use the Tick() method which
-         * gathers changes from the quests.
+         * Returns a immutable reference to the world model.
+         * To change the world model, use the Tick() method which gathers changes from the quests.
          *
          * After the quest system was deserialized, the world model listener has to be registered again.
          */
         const WorldModel &GetWorldModel() const;
 
         /*!
-         * Serializes the whole quest system including the quest model and world model. Please note that upon
-         * deserialization, the template factories and the world model listeners must be registered again as they are not
-         * serialized.
+         * Serializes the whole quest system including the quest model and world model.
+         *
+         * Please note that upon deserialization, the template factories and the world model listeners must be
+         * registered again as they are not serialized.
          * The data is serialized in a portable way, so no extra steps must be taken to serialize and deserialize
          * on different platforms.
          */
         void Serialize(std::ostream &outputStream, StreamType type);
 
         /*!
-         * Deserializes the quest system including the quest model and world model. Please note that the template
-         * factories and the world model listeners must be registered again as they are not
+         * Deserializes the quest system including the quest model and world model.
+         * Please note that the template factories and the world model listeners must be registered again as they are not
          * serialized. In addition, the current working directory info must be updated or the default is used.
          *
          * The StreamType parameter must be the same as the one used to serialize the data.
@@ -127,8 +128,8 @@ namespace weave {
         static QuestWeaver Deserialize(std::istream &inputStream, StreamType type);
 
         /*!
-         * Deserializes the quest system including the quest model and world model. Please note that the template
-         * factories and the world model listeners must be registered again as they are not serialized.
+         * Deserializes the quest system including the quest model and world model.
+         * Please note that the template factories and the world model listeners must be registered again as they are not serialized.
          *
          * The StreamType parameter must be the same as the one used to serialize the data.
          */

@@ -16,6 +16,9 @@ namespace weave {
 
     /*!
      * The main exception type used by all classes of the QuestWeaver system.
+     *
+     * All wrong API calls or expected problems (e.g. not being able to parse a quest template) will throw this
+     * exception.
      */
     struct ContractFailedException : public std::exception {
         std::string s;
@@ -28,7 +31,7 @@ namespace weave {
     };
 
     /*!
-     * Operator to enable the use of enums as keys in maps
+     * Operator to enable the use of enums as keys in maps.
      */
     struct EnumClassHash {
         template<typename T>
@@ -37,6 +40,9 @@ namespace weave {
         }
     };
 
+    /*!
+     * This struct hold information about the programs file search paths.
+     */
     struct Directories {
         /*!
          * The base directory which all template factories use to search for template files.
@@ -66,7 +72,7 @@ namespace weave {
                 JSON,
 
         /*!
-         * A compact binary format without compression. Fastest option.
+         * A compact binary format without compression; fastest option.
          */
                 BINARY
     };
@@ -85,6 +91,8 @@ namespace weave {
     };
 
     /*!
+     * RNG used by the quest system.
+     *
      * Defines a serializable, seeded pseudo-random number generator that is used to generate random numbers for the
      * quest system.
      */
@@ -101,7 +109,7 @@ namespace weave {
         virtual ~RandomStream() = default;
 
         /*
-         * Returns a random int (without any range limit)
+         * Returns a random int (without any range limit).
          */
         virtual int GetInt() {
             return defaultDistribution(generator);

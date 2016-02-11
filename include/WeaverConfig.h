@@ -12,21 +12,23 @@ namespace weave {
 
     struct WeaverConfig {
         /*!
-         * The random seed used to create new quests. Quest Systems initialized with the same seed create the same
+         * The random seed used to create new quests.
+         *
+         * Quest Systems initialized with the same seed create the same
          * stream of quests (given the quests are initialized and completed the same way). If a random stream is
          * provided instead, the seed is ignored.
          */
         uint64_t seed = 0;
 
         /*!
-         * The directories in which the templates and other files can be found in. Also allows to define a mod directory
-         * which can overwrite the default directory for selected files.
+         * The directories in which the templates and other files can be found in.
+         * Also allows to define a mod directory which can overwrite the default directory for selected files.
          */
         Directories dirs;
 
         /*!
          * The world model is responsible for creating all quest entities and informs about world changes.
-         * MUST be initialized by the caller before creating a new QuestWeaver instance.
+         * **MUST** be initialized by the caller before creating a new QuestWeaver instance.
          */
         WorldModel *worldModel = nullptr;
 
@@ -43,15 +45,15 @@ namespace weave {
         std::vector<std::shared_ptr<StoryTemplateFactory>> storyTemplateFactories;
 
         /*!
-         * The formatter type defines how the quest texts such as objectives or description will be formatted.
+         * Defines how the quest texts such as objectives or description will be formatted.
          * This value cannot be changed later, so choose wisely.
          */
         FormatterType formatterType = FormatterType::TEXT;
 
         /*!
-         * *OPTIONAL*
-         *
+         *  **OPTIONAL**
          * Can be used to supply the quest system with a custom random number generator.
+         *
          * If a nullptr is provided, the default RNG implementation will be used.
          * Please note that the quest system takes ownership over the random stream,
          * so it will delete the stream once it is destroyed.
