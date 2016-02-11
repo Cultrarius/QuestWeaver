@@ -1,0 +1,4 @@
+<map id="weave::WorldModel" name="weave::WorldModel">
+<area shape="rect" id="node3" href="$classweave_1_1_world_model_action.html" title="weave::WorldModelAction" alt="" coords="5,5,180,32"/>
+<area shape="rect" id="node5" href="$classweave_1_1_meta_data.html" title="Holds information about a world entity. " alt="" coords="214,5,339,32"/>
+</map>

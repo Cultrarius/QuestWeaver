@@ -1,0 +1,9 @@
+<map id="weave::WeaverConfig" name="weave::WeaverConfig">
+<area shape="rect" id="node3" href="$classweave_1_1_random_stream.html" title="RNG used by the quest system. " alt="" coords="662,71,821,98"/>
+<area shape="rect" id="node4" href="$classweave_1_1_world_model.html" title="weave::WorldModel" alt="" coords="673,122,810,149"/>
+<area shape="rect" id="node6" href="$classweave_1_1_world_model_action.html" title="weave::WorldModelAction" alt="" coords="5,58,180,85"/>
+<area shape="rect" id="node8" href="$classweave_1_1_meta_data.html" title="Holds information about a world entity. " alt="" coords="30,123,155,150"/>
+<area shape="rect" id="node9" href="$structweave_1_1_directories.html" title="This struct hold information about the programs file search paths. " alt="" coords="676,173,807,199"/>
+<area shape="rect" id="node10" title="STL class. " alt="" coords="331,182,411,209"/>
+<area shape="rect" id="node11" title="STL class. " alt="" coords="29,175,156,216"/>
+</map>
