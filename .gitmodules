@@ -1,0 +1,4 @@
+[submodule "githubPages"]
+	path = githubPages
+	url = https://github.com/Cultrarius/QuestWeaver
+	branch = gh-pages
