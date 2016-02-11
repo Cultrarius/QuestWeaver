@@ -18,6 +18,10 @@ This results in more interesting and coherent quest stories as world actors and 
 * Supports **mod directories** to overwrite quest templates after deployment.
 * The game world entities to be used in quests are supplied directly from a game's custom world model.
 
+## Documentation
+
+Have a look at the [API documentation](http://cultrarius.github.io/QuestWeaver/doxyhtml/)!
+
 ## Usage
 
 The quest system of a game is not an isolated part of the system as it is heavily involved in the current world state and events.
