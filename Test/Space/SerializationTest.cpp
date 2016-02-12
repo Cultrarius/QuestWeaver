@@ -62,7 +62,6 @@ TEST_CASE("Serialize Quests", "[serialize]") {
                 REQUIRE(deserializedQuest.get() != nullptr);
                 REQUIRE(deserializedQuest->GetId() == originalQuest->GetId());
                 REQUIRE(deserializedQuest->GetDescription() == originalQuest->GetDescription());
-                REQUIRE(deserializedQuest->GetState() == originalQuest->GetState());
                 REQUIRE(deserializedQuest->GetTitle() == originalQuest->GetTitle());
             }
         }
@@ -107,7 +106,6 @@ TEST_CASE("Serialize Quests", "[serialize]") {
                 REQUIRE(deserializedQuest.get() != nullptr);
                 REQUIRE(deserializedQuest->GetId() == originalQuest->GetId());
                 REQUIRE(deserializedQuest->GetDescription() == originalQuest->GetDescription());
-                REQUIRE(deserializedQuest->GetState() == originalQuest->GetState());
                 REQUIRE(deserializedQuest->GetTitle() == originalQuest->GetTitle());
             }
         }

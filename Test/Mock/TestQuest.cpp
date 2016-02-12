@@ -10,15 +10,10 @@ using namespace std;
 TestQuest::TestQuest(const string &title, const string &description) : Quest(title, description) {
 }
 
-TestQuest::TestQuest(ID id, QuestState state, const string &title, const string &description)
-        : Quest(id, state, title, description, "Once upon a time...") {
+TestQuest::TestQuest(ID id, const string &title, const string &description)
+        : Quest(id, title, description, "Once upon a time...") {
 }
 
 std::string TestQuest::GetType() const {
     return "Debug::TestQuest";
-}
-
-std::shared_ptr<Quest> TestQuest::setStateAndId(ID newId, QuestState newState) const {
-    auto quest = new TestQuest(newId, newState, GetTitle(), GetDescription());
-    return shared_ptr<TestQuest>(quest);
 }

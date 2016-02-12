@@ -161,7 +161,6 @@ TEST_CASE("Templates", "[template]") {
                 try {
                     auto quest = tp->ToQuest(questValues);
                     REQUIRE(!quest->GetDescription().empty());
-                    REQUIRE(quest->GetState() == QuestState::Proposed);
                     REQUIRE(!quest->GetTitle().empty());
                 } catch (ContractFailedException ex) {
                     FAIL(ex.what());
@@ -192,7 +191,6 @@ TEST_CASE("Templates", "[template]") {
                 try {
                     auto quest = tp->ToQuest(questValues);
                     REQUIRE(!quest->GetDescription().empty());
-                    REQUIRE(quest->GetState() == QuestState::Proposed);
                     REQUIRE(!quest->GetTitle().empty());
                 } catch (ContractFailedException ex) {
                     FAIL(ex.what());

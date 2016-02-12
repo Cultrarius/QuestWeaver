@@ -19,7 +19,7 @@ TEST_CASE("Quest Model", "[model]") {
     }
 
     vector<QuestPropertyValue> properties;
-    shared_ptr<Quest> newQuest = make_shared<TestQuest>("TestTitle", "Blabla");
+
 
     SECTION("Keep unknown quest") {
         auto keepAction = QuestModelAction(QuestActionType::KEEP, 123);
@@ -27,18 +27,24 @@ TEST_CASE("Quest Model", "[model]") {
     }
 
     SECTION("Register quest") {
-        REQUIRE(newQuest->GetId() == 0);
-        REQUIRE(newQuest->GetState() == QuestState::Proposed);
+        shared_ptr<Quest> newQuest = make_shared<TestQuest>("TestTitle", "Blabla");
+        ID questId = newQuest->GetId();
+        REQUIRE(questId == 0);
+        REQUIRE(model.GetState(questId) == QuestState::Unknown);
         REQUIRE(newQuest->GetTitle() == "TestTitle");
         REQUIRE(newQuest->GetDescription() == "Blabla");
-        auto quest = model.RegisterNew(newQuest, properties);
-        REQUIRE(quest->GetId() != 0);
-        REQUIRE(quest->GetState() == QuestState::Inactive);
-        REQUIRE(quest->GetTitle() == "TestTitle");
-        REQUIRE(quest->GetDescription() == "Blabla");
+
+        model.RegisterNew(newQuest, properties);
+
+        questId = newQuest->GetId();
+        REQUIRE(newQuest->GetId() != 0);
+        REQUIRE(model.GetState(questId) == QuestState::Inactive);
+        REQUIRE(newQuest->GetTitle() == "TestTitle");
+        REQUIRE(newQuest->GetDescription() == "Blabla");
     }
 
-    auto quest = model.RegisterNew(newQuest, properties);
+    shared_ptr<Quest> quest = make_shared<TestQuest>("TestTitle", "Blabla");
+    model.RegisterNew(quest, properties);
     REQUIRE(quest->GetId() != 0);
 
     SECTION("Register quest twice") {
@@ -89,12 +95,12 @@ TEST_CASE("Quest Model", "[model]") {
         }
     }
 
-    shared_ptr<Quest> newQuest2 = make_shared<TestQuest>("TestTitle2", "Blabla2");
+    shared_ptr<Quest> quest2 = make_shared<TestQuest>("TestTitle2", "Blabla2");
     TemplateQuestProperty templateValue(true, "testProperty");
     shared_ptr<WorldEntity> entity = make_shared<TestEntity>();
     QuestPropertyValue value(templateValue, entity);
     properties.push_back(value);
-    auto quest2 = model.RegisterNew(newQuest2, properties);
+    model.RegisterNew(quest2, properties);
     REQUIRE(quest2->GetId() != 0);
 
     SECTION("Get quest entities") {

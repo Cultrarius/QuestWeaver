@@ -10,27 +10,29 @@ using namespace weave;
 vector<shared_ptr<Quest>> QuestModel::GetQuestsWithState(QuestState state) const {
     vector<shared_ptr<Quest>> result;
     for (auto &quest : quests) {
-        if (quest.second->GetState() == state) {
+        ID id = quest.second->GetId();
+        if (GetState(id) == state) {
             result.push_back(quest.second);
         }
     }
     return result;
 }
 
-shared_ptr<Quest> QuestModel::RegisterNew(shared_ptr<Quest> newQuest,
-                                          const vector<QuestPropertyValue> &questProperties) {
+void QuestModel::RegisterNew(shared_ptr<Quest> newQuest,
+                             const vector<QuestPropertyValue> &questProperties) {
     // check the quest is not already registered
-    if (quests.find(newQuest->GetId()) != quests.end() || newQuest->GetState() != QuestState::Proposed) {
+    ID id = newQuest->GetId();
+    if (quests.find(id) != quests.end() || questStates.find(id) != questStates.end()) {
         throw ContractFailedException("Quest with id " + to_string(newQuest->GetId()) + " already registered!");
     }
 
     idGenerator++;
-    shared_ptr<Quest> registeredQuest = newQuest->setStateAndId(idGenerator, QuestState::Inactive);
-    quests[idGenerator] = registeredQuest;
+    newQuest->id = idGenerator;
+    quests[idGenerator] = newQuest;
+    questStates[idGenerator] = QuestState::Inactive;
     for (auto property : questProperties) {
         questEntities[idGenerator].insert(property.GetValue());
     }
-    return registeredQuest;
 }
 
 vector<shared_ptr<Quest>> QuestModel::GetQuests() const {
@@ -51,11 +53,10 @@ set<shared_ptr<WorldEntity>> QuestModel::GetQuestEntities(ID questId) const {
 }
 
 bool QuestModel::setNewQuestState(ID questId, const QuestState &requiredState, const QuestState &newState) {
-    shared_ptr<Quest> quest = GetQuest(questId);
-    if (quest->GetState() != requiredState) {
+    if (GetState(questId) != requiredState) {
         return false;
     }
-    quests[questId] = quest->setStateAndId(questId, newState);
+    questStates[questId] = newState;
     return true;
 }
 
@@ -76,7 +77,7 @@ shared_ptr<Quest> QuestModel::Execute(const QuestModelAction &modelAction) {
     ID questId = modelAction.GetQuestId();
     auto iter = quests.find(questId);
     if (actionType == QuestActionType::KEEP && iter == quests.end()) {
-        throw ContractFailedException("Quest id " + to_string(questId) + " not found in model!");
+        throw ContractFailedException("Quest id " + to_string(questId) + " not found in the model!");
     }
 
     shared_ptr<Quest> result = iter->second;
@@ -100,10 +101,18 @@ shared_ptr<Quest> QuestModel::Execute(const QuestModelAction &modelAction) {
     return result;
 }
 
-std::shared_ptr<Quest> QuestModel::GetQuest(ID questId) const {
+shared_ptr<Quest> QuestModel::GetQuest(ID questId) const {
     auto iter = quests.find(questId);
     if (iter == quests.end()) {
-        throw ContractFailedException("Quest with id " + to_string(questId) + " not found in model!");
+        throw ContractFailedException("Quest with id " + to_string(questId) + " not found in the model!");
+    }
+    return iter->second;
+}
+
+QuestState QuestModel::GetState(ID questId) const noexcept {
+    auto iter = questStates.find(questId);
+    if (iter == questStates.end()) {
+        return QuestState::Unknown;
     }
     return iter->second;
 }

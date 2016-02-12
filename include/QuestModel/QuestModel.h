@@ -11,30 +11,25 @@
 namespace weave {
     class QuestModel {
     public:
-        /*!
-         * The returned quest pointers are valid ONLY to the next Execute()-call, which is usually a single Tick.
-         */
         std::vector<std::shared_ptr<Quest>> GetQuestsWithState(QuestState state) const;
 
-        /*!
-         * The returned quest pointers are valid ONLY to the next Execute()-call, which is usually a single Tick.
-         */
         std::vector<std::shared_ptr<Quest>> GetQuests() const;
 
-        /*!
-         * The returned quest pointer is valid ONLY to the next Tick()-call.
-         */
         std::shared_ptr<Quest> GetQuest(ID questId) const;
+
+        QuestState GetState(ID questId) const noexcept;
 
         std::set<std::shared_ptr<WorldEntity>> GetQuestEntities(ID questId) const;
 
         std::shared_ptr<Quest> Execute(const QuestModelAction &modelAction);
 
-        std::shared_ptr<Quest> RegisterNew(std::shared_ptr<Quest> newQuest,
-                                           const std::vector<QuestPropertyValue> &questProperties);
+        void RegisterNew(std::shared_ptr<Quest> newQuest,
+                         const std::vector<QuestPropertyValue> &questProperties);
 
     private:
         std::map<ID, std::shared_ptr<Quest>> quests;
+
+        std::unordered_map<ID, QuestState> questStates;
 
         std::map<ID, std::set<std::shared_ptr<WorldEntity>>> questEntities;
 
@@ -53,7 +48,7 @@ namespace weave {
 
         template<class Archive>
         void serialize(Archive &archive) {
-            archive(CEREAL_NVP(idGenerator), CEREAL_NVP(quests), CEREAL_NVP(questEntities));
+            archive(CEREAL_NVP(idGenerator), CEREAL_NVP(quests), CEREAL_NVP(questStates), CEREAL_NVP(questEntities));
         }
 
         bool setNewQuestState(ID questId, const QuestState &requiredState, const QuestState &newState);

@@ -16,9 +16,9 @@ namespace weave {
      */
     enum class QuestState {
         /*!
-         * Used only internally for quest candidates that the system uses when creating a new quest.
+         * Default value used when the quest system does not know the state for a given quest (e.g. unknown ID).
          */
-                Proposed,
+                Unknown,
 
         /*!
          * The initial state of all newly created quests.
@@ -85,18 +85,12 @@ namespace weave {
               const std::string &description,
               const std::string &story);
 
-		virtual ~Quest() {}
+        virtual ~Quest() { }
 
         /*!
          * Returns the quest's unique ID.
          */
         ID GetId() const;
-
-        /*!
-         * Returns the quest state.
-         * @deprecated use the quest model instead
-         */
-        QuestState GetState() const;
 
         /*!
          * Returns the quest's title.
@@ -125,17 +119,12 @@ namespace weave {
         virtual std::string GetType() const = 0;
 
     protected:
-        friend class QuestModel;
-
         friend class QuestWeaver;
 
         Quest(ID id,
-              QuestState state,
               const std::string &title,
               const std::string &description,
               const std::string &story);
-
-        virtual std::shared_ptr<Quest> setStateAndId(ID newId, QuestState newState) const = 0;
 
         /*!
          * This method is called whenever the main quest system is ticked.
@@ -154,10 +143,6 @@ namespace weave {
             return cereal::make_nvp("title", title);
         }
 
-        auto getCerealState() const {
-            return cereal::make_nvp("state", state);
-        }
-
         auto getCerealDescription() const {
             return cereal::make_nvp("description", description);
         }
@@ -167,8 +152,9 @@ namespace weave {
         }
 
     private:
+        friend class QuestModel;
+
         ID id;
-        QuestState state;
         std::string title;
         std::string description;
         std::string story;

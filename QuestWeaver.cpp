@@ -40,7 +40,8 @@ shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
     EngineResult result = engine->fillTemplate(questTemplate, *quests, *world, *stories);
     world->Execute(result.GetModelActions());
     shared_ptr<Quest> newQuest = questTemplate->ToQuest(result.GetQuestPropertyValues(), result.GetStory());
-    return quests->RegisterNew(newQuest, result.GetQuestPropertyValues());
+    quests->RegisterNew(newQuest, result.GetQuestPropertyValues());
+    return newQuest;
 }
 
 std::vector<std::shared_ptr<Quest>> QuestWeaver::GetQuestsWithState(QuestState state) const {

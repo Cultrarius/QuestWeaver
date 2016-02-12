@@ -97,7 +97,7 @@ namespace weave {
 
         /*!
          * Directly changes the state of a quest.
-         * A quest can usually change its state once it is ticked, this method should only be used if that is not possible.
+         * A quest can change its state once it is ticked, this method should only be used if that is not possible.
          */
         std::shared_ptr<Quest> ChangeQuestState(QuestModelAction questAction);
 
