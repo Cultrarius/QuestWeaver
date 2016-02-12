@@ -10,6 +10,7 @@
 #include "../Core/WeaverTypes.h"
 
 namespace weave {
+
     class TemplateQuestProperty {
     public:
         TemplateQuestProperty(bool isMandatory, const std::string &name);
