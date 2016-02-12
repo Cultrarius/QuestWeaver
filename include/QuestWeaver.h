@@ -72,10 +72,8 @@ namespace weave {
 
         /*!
          * Advances the quest system state by ticking all quests and executing their desired world and quest changes.
-         * Until this method is called, quests are unable to change the world model or their state.
+         * Until this method is called, quests are unable to directly change the world model or their quest state.
          *
-         * **WARNING** After ticking, all objects received via this API might be invalid!
-         * They can still be used, but might contain outdated data.
          * @param delta The time elapsed since the last tick.
          */
         void Tick(float delta);
@@ -97,13 +95,13 @@ namespace weave {
 
         /*!
          * Directly changes the state of a quest.
-         * A quest can change its state once it is ticked, this method should only be used if that is not possible.
+         * A quest itself can change its state once it is ticked, which should be the preferred method.
          * @return true if the action was completed, false if the state change was not permitted.
          */
         bool ChangeQuestState(QuestModelAction questAction);
 
         /*!
-         * Returns a immutable reference to the world model.
+         * Returns an immutable reference to the world model.
          * To change the world model, use the Tick() method which gathers changes from the quests.
          *
          * After the quest system was deserialized, the world model listener has to be registered again.
