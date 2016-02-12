@@ -20,6 +20,10 @@ TEST_CASE("Quest Model", "[model]") {
 
     vector<QuestPropertyValue> properties;
 
+    SECTION("unknown action") {
+        auto unknownAction = QuestModelAction((QuestActionType) 100, 123);
+        REQUIRE_THROWS_AS(model.Execute(unknownAction), ContractFailedException);
+    }
 
     SECTION("Keep unknown quest") {
         auto keepAction = QuestModelAction(QuestActionType::KEEP, 123);
@@ -53,13 +57,14 @@ TEST_CASE("Quest Model", "[model]") {
 
     SECTION("Keep known quest") {
         auto keepAction = QuestModelAction(QuestActionType::KEEP, quest->GetId());
-        REQUIRE(model.Execute(keepAction) == quest);
+        REQUIRE(model.Execute(keepAction));
     }
 
     SECTION("Model with single inactive quest") {
         REQUIRE(model.GetQuests().size() == 1);
         REQUIRE(model.GetQuestsWithState(QuestState::Inactive).size() == 1);
 
+        QuestModelAction keepAction(QuestActionType::KEEP, quest->GetId());
         QuestModelAction activateAction(QuestActionType::ACTIVATE, quest->GetId());
         QuestModelAction failAction(QuestActionType::FAIL, quest->GetId());
         QuestModelAction succeedAction(QuestActionType::SUCCEED, quest->GetId());
@@ -84,6 +89,10 @@ TEST_CASE("Quest Model", "[model]") {
             REQUIRE(model.GetQuestsWithState(QuestState::Inactive).size() == 0);
             REQUIRE(model.GetQuestsWithState(QuestState::Active).size() == 0);
             REQUIRE(model.GetQuestsWithState(QuestState::Failed).size() == 1);
+            SECTION("Final fail 1") { REQUIRE(!model.Execute(activateAction)); }
+            SECTION("Final fail 2") { REQUIRE(!model.Execute(failAction)); }
+            SECTION("Final fail 3") { REQUIRE(!model.Execute(succeedAction)); }
+            SECTION("Final fail 4") { REQUIRE(model.Execute(keepAction)); }
         }
 
         SECTION("Success quest") {
@@ -92,6 +101,12 @@ TEST_CASE("Quest Model", "[model]") {
             REQUIRE(model.GetQuestsWithState(QuestState::Inactive).size() == 0);
             REQUIRE(model.GetQuestsWithState(QuestState::Active).size() == 0);
             REQUIRE(model.GetQuestsWithState(QuestState::Success).size() == 1);
+            REQUIRE(!model.Execute(activateAction));
+            REQUIRE(!model.Execute(succeedAction));
+            SECTION("Final Success 1") { REQUIRE(!model.Execute(activateAction)); }
+            SECTION("Final Success 2") { REQUIRE(!model.Execute(failAction)); }
+            SECTION("Final Success 3") { REQUIRE(!model.Execute(succeedAction)); }
+            SECTION("Final Success 4") { REQUIRE(model.Execute(keepAction)); }
         }
     }
 

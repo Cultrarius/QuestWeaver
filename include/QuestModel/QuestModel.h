@@ -21,7 +21,7 @@ namespace weave {
 
         std::set<std::shared_ptr<WorldEntity>> GetQuestEntities(ID questId) const;
 
-        std::shared_ptr<Quest> Execute(const QuestModelAction &modelAction);
+        bool Execute(const QuestModelAction &modelAction);
 
         void RegisterNew(std::shared_ptr<Quest> newQuest,
                          const std::vector<QuestPropertyValue> &questProperties);

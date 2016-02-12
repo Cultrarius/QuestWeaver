@@ -64,7 +64,7 @@ shared_ptr<Quest> QuestWeaver::GetQuest(ID questId) const {
     return quests->GetQuest(questId);
 }
 
-std::shared_ptr<Quest> QuestWeaver::ChangeQuestState(QuestModelAction questAction) {
+bool QuestWeaver::ChangeQuestState(QuestModelAction questAction) {
     return quests->Execute(questAction);
 }
 
