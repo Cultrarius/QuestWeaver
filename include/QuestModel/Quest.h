@@ -108,11 +108,6 @@ namespace weave {
         std::string GetStory() const;
 
         /*!
-         * Returns true if two quests have the same ID.
-         */
-        bool operator==(const Quest &other) const;
-
-        /*!
          * Returns the type of the quest.
          * This method is implemented by subclasses which return a unique quest type.
          */

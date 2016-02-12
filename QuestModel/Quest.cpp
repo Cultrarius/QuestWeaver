@@ -38,10 +38,6 @@ QuestTickResult Quest::Tick(float delta) {
     return QuestTickResult(emptyChanges, emptyAction);
 }
 
-bool Quest::operator==(const Quest &other) const {
-    return id == other.id;
-}
-
 QuestTickResult::QuestTickResult(vector<WorldModelAction> worldChanges, QuestModelAction questChanges) :
         worldChanges(worldChanges), questChanges(questChanges) {
 }
