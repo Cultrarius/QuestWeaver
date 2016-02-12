@@ -54,11 +54,10 @@ namespace weave {
          *  **OPTIONAL**
          * Can be used to supply the quest system with a custom random number generator.
          *
-         * If a nullptr is provided, the default RNG implementation will be used.
-         * Please note that the quest system takes ownership over the random stream,
-         * so it will delete the stream once it is destroyed.
+         * If a nullptr is provided, the default RNG implementation with the provided seed will be used.
+         * If a custom RNG is provided, the caller is responsible for the initial seeding of the stream.
          */
-        RandomStream *randomStream = nullptr;
+        std::shared_ptr<RandomStream> randomStream;
 
         WeaverConfig() = default;
 

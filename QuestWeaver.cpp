@@ -14,11 +14,7 @@ QuestWeaver::QuestWeaver(WeaverConfig &config) {
         throw ContractFailedException("A world model must be provided for the quest system to work.");
     }
 
-    if (config.randomStream != nullptr) {
-        randomStream.reset(config.randomStream);
-    } else {
-        randomStream.reset(new RandomStream(config.seed));
-    }
+    randomStream = config.randomStream ? config.randomStream : make_shared<RandomStream>(config.seed);
     engine.reset(new WeaverEngine(randomStream));
     quests.reset(new QuestModel());
     templates.reset(new TemplateEngine(randomStream, config.dirs, config.formatterType));

@@ -16,7 +16,7 @@ WeaverConfig TestHelper::CreateDebugConfig() {
     auto spaceStoryFactory = std::make_shared<CommonSpaceStoryFactory>();
 
     WeaverConfig config;
-    config.randomStream = new RandomStream(42);
+    config.randomStream = std::make_shared<RandomStream>(42);
     config.worldModel = std::make_unique<SpaceWorldModel>();
     config.questTemplateFactories.push_back(spaceFactory);
     config.storyTemplateFactories.push_back(spaceStoryFactory);
