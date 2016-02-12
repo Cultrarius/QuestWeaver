@@ -30,11 +30,10 @@ namespace weave {
     public:
         /*!
          * Creates a new weaver instance with the given config.
-         * The config needs to contain a valid world model pointer.
-         * The quest weaver instance will take ownership of the world model and delete it when being destroyed.
+         * The config needs to contain a valid world model or else an exception is thrown.
          * @param config the config to use - must contain a valid world model
          */
-        explicit QuestWeaver(WeaverConfig config);
+        explicit QuestWeaver(WeaverConfig &config);
 
         /*!
          * Registers a new quest template factory with the quest system.

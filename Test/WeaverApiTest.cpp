@@ -14,7 +14,7 @@ TEST_CASE("Weaver API errors", "[weaver]") {
     WeaverConfig config = TestHelper::CreateDebugConfig();
 
     SECTION("No world model") {
-        config.worldModel = nullptr;
+        config.worldModel.reset(nullptr);
         REQUIRE_THROWS_AS(QuestWeaver weaver(config), ContractFailedException);
     }
 

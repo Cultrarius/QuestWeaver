@@ -17,7 +17,7 @@ WeaverConfig TestHelper::CreateDebugConfig() {
 
     WeaverConfig config;
     config.randomStream = new RandomStream(42);
-    config.worldModel = new SpaceWorldModel();
+    config.worldModel = std::make_unique<SpaceWorldModel>();
     config.questTemplateFactories.push_back(spaceFactory);
     config.storyTemplateFactories.push_back(spaceStoryFactory);
 

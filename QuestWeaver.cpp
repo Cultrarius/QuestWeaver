@@ -9,8 +9,8 @@
 using namespace std;
 using namespace weave;
 
-QuestWeaver::QuestWeaver(WeaverConfig config) {
-    if (config.worldModel == nullptr) {
+QuestWeaver::QuestWeaver(WeaverConfig &config) {
+    if (!config.worldModel) {
         throw ContractFailedException("A world model must be provided for the quest system to work.");
     }
 
@@ -24,7 +24,7 @@ QuestWeaver::QuestWeaver(WeaverConfig config) {
     templates.reset(new TemplateEngine(randomStream, config.dirs, config.formatterType));
 
     config.worldModel->rs = randomStream;
-    world.reset(config.worldModel);
+    world = std::move(config.worldModel);
 
     stories.reset(new StoryWriter(randomStream, *quests, *templates, *world, config.dirs));
     for (auto factory : config.questTemplateFactories) {

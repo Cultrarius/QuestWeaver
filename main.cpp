@@ -1,4 +1,5 @@
 #include <Template/Space/SpaceQuestTemplateFactory.h>
+#include <World/Space/SpaceWorldModel.h>
 #include "QuestWeaver.h"
 
 using namespace std;
@@ -8,6 +9,10 @@ using namespace cereal;
 int main() {
 	WeaverConfig config;
     config.formatterType = FormatterType::HTML;
+    config.worldModel = std::make_unique<SpaceWorldModel>();
+    shared_ptr<QuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
+    config.questTemplateFactories.push_back(factory);
+
     QuestWeaver weaver(config);
     shared_ptr<Quest> newQuest = weaver.CreateNewQuest();
     cout << "New Quest created!" << endl;
@@ -23,7 +28,7 @@ int main() {
     cout << "Hey!" << endl;
 
     QuestWeaver deserialized = QuestWeaver::Deserialize(ss, StreamType::BINARY, config.dirs);
-    shared_ptr<QuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();;
+
     deserialized.RegisterQuestTemplateFactory(factory);
     cout << "Woot!" << endl;
 
@@ -41,37 +46,6 @@ int main() {
     cout << deserialized.GetWorldModel().GetEntities().size() << endl;
     shared_ptr<WorldListener> outputListener;
     deserialized.GetWorldModel().AddListener(outputListener);
-//    shared_ptr<RandomStream> rs = make_shared<RandomStream>(11);
-//    SpaceWorldModel testModel(rs);
-//    auto location = testModel.CreateLocation();
-//    auto solar = make_shared<SolarSystem>();
-//    WorldModelAction locationToAdd(WorldActionType::CREATE, solar);
-//    vector<WorldModelAction> modelActions;
-//    modelActions.push_back(locationToAdd);
-//    testModel.Execute(modelActions);
-//
-//    testModel.GetMetaData(1).SetValue("Bla", 9);
-//    testModel.GetMetaData(1).SetValue("Whoop", 42);
-//
-//    stringstream ss;
-//    {
-//        cereal::JSONOutputArchive outputArchive(ss);
-//        outputArchive(testModel);
-//    }
-//
-//    cout << ss.str() << endl;
-//
-//    shared_ptr<RandomStream> rs2 = make_shared<RandomStream>(21);
-//    SpaceWorldModel deserializedModel(rs2);
-//    {
-//        cereal::JSONInputArchive inputArchive(ss);
-//        inputArchive(deserializedModel);
-//    }
-//
-//    cout << "Has: " << deserializedModel.GetMetaData(1).HasValue("Bla") << endl;
-//    cout << "Val: " << deserializedModel.GetMetaData(1).GetValue("Bla") << endl;
-//    cout << testModel.CreateLocation()->X << " ";
-//    cout << deserializedModel.CreateLocation()->X << endl;
 
     return 0;
 }
