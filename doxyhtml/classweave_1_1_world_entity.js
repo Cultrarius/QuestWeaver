@@ -7,5 +7,6 @@ var classweave_1_1_world_entity =
     [ "GetType", "classweave_1_1_world_entity.html#ad3de8ba54854069a255a75eab9f7976f", null ],
     [ "ToString", "classweave_1_1_world_entity.html#a3bb626fcd882f4327ba39c924efd0608", null ],
     [ "cereal::access", "classweave_1_1_world_entity.html#ab2f44cbb59a08132f4c843e5225bba0e", null ],
-    [ "WorldModel", "classweave_1_1_world_entity.html#a1702e650030c9e8cd10f4e18989b809c", null ]
+    [ "WorldModel", "classweave_1_1_world_entity.html#a1702e650030c9e8cd10f4e18989b809c", null ],
+    [ "NoID", "classweave_1_1_world_entity.html#aec244462bebe02b0f19fbee190f9cf8a", null ]
 ];

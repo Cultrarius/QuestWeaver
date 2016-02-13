@@ -47,7 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -110,12 +110,13 @@ $(document).ready(function(){initNavTree('classweave_1_1_quest_template_factory.
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="classweave_1_1_quest_template_factory-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">weave::QuestTemplateFactory Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_quest_template_factory_8h_source.html">QuestTemplateFactory.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for weave::QuestTemplateFactory:</div>
 <div class="dyncontent">
@@ -128,56 +129,323 @@ Collaboration diagram for weave::QuestTemplateFactory:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa74ae5523c9c10ac72d8520261b33ef3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa74ae5523c9c10ac72d8520261b33ef3"></a>
-std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetTemplateKeys</b> ()</td></tr>
-<tr class="separator:aa74ae5523c9c10ac72d8520261b33ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7202fb6b0aa6cd62d650b29b2a07db64"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7202fb6b0aa6cd62d650b29b2a07db64"></a>
-std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest_template.html">QuestTemplate</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>CreateTemplate</b> (const std::string &amp;templateKey)</td></tr>
+<tr class="memitem:a6515d3e3c6f80bbde7bf9db08835ce67"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_template_factory.html#a6515d3e3c6f80bbde7bf9db08835ce67">~QuestTemplateFactory</a> ()=default</td></tr>
+<tr class="separator:a6515d3e3c6f80bbde7bf9db08835ce67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7202fb6b0aa6cd62d650b29b2a07db64"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest_template.html">QuestTemplate</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_template_factory.html#a7202fb6b0aa6cd62d650b29b2a07db64">CreateTemplate</a> (const std::string &amp;templateKey)</td></tr>
 <tr class="separator:a7202fb6b0aa6cd62d650b29b2a07db64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa74ae5523c9c10ac72d8520261b33ef3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_template_factory.html#aa74ae5523c9c10ac72d8520261b33ef3">GetTemplateKeys</a> ()</td></tr>
+<tr class="separator:aa74ae5523c9c10ac72d8520261b33ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a353ad8e6049d73bf73d5a202e32c3e36"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a353ad8e6049d73bf73d5a202e32c3e36"></a>
-virtual std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest_template.html">QuestTemplate</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>createFromJsonValues</b> (const Json::Value &amp;root) const  =0</td></tr>
+<tr class="memitem:a353ad8e6049d73bf73d5a202e32c3e36"><td class="memItemLeft" align="right" valign="top">virtual std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest_template.html">QuestTemplate</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_template_factory.html#a353ad8e6049d73bf73d5a202e32c3e36">createFromJsonValues</a> (const Json::Value &amp;root) const  =0</td></tr>
 <tr class="separator:a353ad8e6049d73bf73d5a202e32c3e36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a25760aa1e0ba1594e9a9341badf2df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a25760aa1e0ba1594e9a9341badf2df"></a>
-virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><b>getTemplateFile</b> () const  =0</td></tr>
-<tr class="separator:a8a25760aa1e0ba1594e9a9341badf2df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cc3652a0d2ddffae69c8c41477777ce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4cc3652a0d2ddffae69c8c41477777ce"></a>
-std::vector&lt; <a class="el" href="classweave_1_1_template_quest_property.html">TemplateQuestProperty</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>extractProperties</b> (const Json::Value &amp;root) const </td></tr>
-<tr class="separator:a4cc3652a0d2ddffae69c8c41477777ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63bc781d0d51d0c22a67cf7baa02d888"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a63bc781d0d51d0c22a67cf7baa02d888"></a>
-std::vector&lt; <a class="el" href="classweave_1_1_template_quest_description.html">TemplateQuestDescription</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>extractDescriptions</b> (const Json::Value &amp;root) const </td></tr>
+<tr class="memitem:a63bc781d0d51d0c22a67cf7baa02d888"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classweave_1_1_template_quest_description.html">TemplateQuestDescription</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_template_factory.html#a63bc781d0d51d0c22a67cf7baa02d888">extractDescriptions</a> (const Json::Value &amp;root) const </td></tr>
 <tr class="separator:a63bc781d0d51d0c22a67cf7baa02d888"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac53ee32b3853c58c366a6f64dd6902a7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac53ee32b3853c58c366a6f64dd6902a7"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>extractTitle</b> (const Json::Value &amp;root) const </td></tr>
-<tr class="separator:ac53ee32b3853c58c366a6f64dd6902a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4ff07cdffff3b2fa3a41cde048baf8d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4ff07cdffff3b2fa3a41cde048baf8d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>extractProperties</b> (std::vector&lt; <a class="el" href="classweave_1_1_template_quest_property.html">TemplateQuestProperty</a> &gt; *properties, const Json::Value &amp;jsonMandatory, bool isMandatory) const </td></tr>
+<tr class="memitem:a4cc3652a0d2ddffae69c8c41477777ce"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classweave_1_1_template_quest_property.html">TemplateQuestProperty</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_template_factory.html#a4cc3652a0d2ddffae69c8c41477777ce">extractProperties</a> (const Json::Value &amp;root) const </td></tr>
+<tr class="separator:a4cc3652a0d2ddffae69c8c41477777ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4ff07cdffff3b2fa3a41cde048baf8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_template_factory.html#af4ff07cdffff3b2fa3a41cde048baf8d">extractProperties</a> (std::vector&lt; <a class="el" href="classweave_1_1_template_quest_property.html">TemplateQuestProperty</a> &gt; *properties, const Json::Value &amp;jsonMandatory, bool isMandatory) const </td></tr>
 <tr class="separator:af4ff07cdffff3b2fa3a41cde048baf8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac53ee32b3853c58c366a6f64dd6902a7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_template_factory.html#ac53ee32b3853c58c366a6f64dd6902a7">extractTitle</a> (const Json::Value &amp;root) const </td></tr>
+<tr class="separator:ac53ee32b3853c58c366a6f64dd6902a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a25760aa1e0ba1594e9a9341badf2df"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_template_factory.html#a8a25760aa1e0ba1594e9a9341badf2df">getTemplateFile</a> () const  =0</td></tr>
+<tr class="separator:a8a25760aa1e0ba1594e9a9341badf2df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aa2c5408181a31ce1d5150972b68a26f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2c5408181a31ce1d5150972b68a26f9"></a>
-std::unordered_map&lt; std::string, Json::Value &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>templateMap</b></td></tr>
-<tr class="separator:aa2c5408181a31ce1d5150972b68a26f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad249b253529f63a955ebf6843fab62d3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad249b253529f63a955ebf6843fab62d3"></a>
-std::shared_ptr&lt; <a class="el" href="classweave_1_1_random_stream.html">RandomStream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>randomStream</b></td></tr>
-<tr class="separator:ad249b253529f63a955ebf6843fab62d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55824bdb9c3f9c65910c13463d7f3b36"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a55824bdb9c3f9c65910c13463d7f3b36"></a>
-FormatterType&#160;</td><td class="memItemRight" valign="bottom"><b>formatterType</b></td></tr>
+<tr class="memitem:a55824bdb9c3f9c65910c13463d7f3b36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceweave.html#ac4254b88961d333d4dd8189d11168576">FormatterType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_template_factory.html#a55824bdb9c3f9c65910c13463d7f3b36">formatterType</a></td></tr>
 <tr class="separator:a55824bdb9c3f9c65910c13463d7f3b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:ab080780bce83bb1963c10971c5e78740"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab080780bce83bb1963c10971c5e78740"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>TemplateEngine</b></td></tr>
-<tr class="separator:ab080780bce83bb1963c10971c5e78740"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad249b253529f63a955ebf6843fab62d3"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classweave_1_1_random_stream.html">RandomStream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_template_factory.html#ad249b253529f63a955ebf6843fab62d3">randomStream</a></td></tr>
+<tr class="separator:ad249b253529f63a955ebf6843fab62d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2c5408181a31ce1d5150972b68a26f9"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, Json::Value &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_template_factory.html#aa2c5408181a31ce1d5150972b68a26f9">templateMap</a></td></tr>
+<tr class="separator:aa2c5408181a31ce1d5150972b68a26f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p>Definition at line <a class="el" href="_quest_template_factory_8h_source.html#l00013">13</a> of file <a class="el" href="_quest_template_factory_8h_source.html">QuestTemplateFactory.h</a>.</p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a6515d3e3c6f80bbde7bf9db08835ce67"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual weave::QuestTemplateFactory::~QuestTemplateFactory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a353ad8e6049d73bf73d5a202e32c3e36"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::shared_ptr&lt;<a class="el" href="classweave_1_1_quest_template.html">QuestTemplate</a>&gt; weave::QuestTemplateFactory::createFromJsonValues </td>
+          <td>(</td>
+          <td class="paramtype">const Json::Value &amp;&#160;</td>
+          <td class="paramname"><em>root</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7202fb6b0aa6cd62d650b29b2a07db64"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classweave_1_1_quest_template.html">QuestTemplate</a>&gt; weave::QuestTemplateFactory::CreateTemplate </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>templateKey</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a63bc781d0d51d0c22a67cf7baa02d888"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classweave_1_1_template_quest_description.html">TemplateQuestDescription</a>&gt; weave::QuestTemplateFactory::extractDescriptions </td>
+          <td>(</td>
+          <td class="paramtype">const Json::Value &amp;&#160;</td>
+          <td class="paramname"><em>root</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4cc3652a0d2ddffae69c8c41477777ce"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classweave_1_1_template_quest_property.html">TemplateQuestProperty</a>&gt; weave::QuestTemplateFactory::extractProperties </td>
+          <td>(</td>
+          <td class="paramtype">const Json::Value &amp;&#160;</td>
+          <td class="paramname"><em>root</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af4ff07cdffff3b2fa3a41cde048baf8d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void weave::QuestTemplateFactory::extractProperties </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classweave_1_1_template_quest_property.html">TemplateQuestProperty</a> &gt; *&#160;</td>
+          <td class="paramname"><em>properties</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Json::Value &amp;&#160;</td>
+          <td class="paramname"><em>jsonMandatory</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isMandatory</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac53ee32b3853c58c366a6f64dd6902a7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string weave::QuestTemplateFactory::extractTitle </td>
+          <td>(</td>
+          <td class="paramtype">const Json::Value &amp;&#160;</td>
+          <td class="paramname"><em>root</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8a25760aa1e0ba1594e9a9341badf2df"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const char* weave::QuestTemplateFactory::getTemplateFile </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa74ae5523c9c10ac72d8520261b33ef3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::string&gt; weave::QuestTemplateFactory::GetTemplateKeys </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a55824bdb9c3f9c65910c13463d7f3b36"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceweave.html#ac4254b88961d333d4dd8189d11168576">FormatterType</a> weave::QuestTemplateFactory::formatterType</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_quest_template_factory_8h_source.html#l00040">40</a> of file <a class="el" href="_quest_template_factory_8h_source.html">QuestTemplateFactory.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad249b253529f63a955ebf6843fab62d3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classweave_1_1_random_stream.html">RandomStream</a>&gt; weave::QuestTemplateFactory::randomStream</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_quest_template_factory_8h_source.html#l00038">38</a> of file <a class="el" href="_quest_template_factory_8h_source.html">QuestTemplateFactory.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa2c5408181a31ce1d5150972b68a26f9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;std::string, Json::Value&gt; weave::QuestTemplateFactory::templateMap</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_quest_template_factory_8h_source.html#l00026">26</a> of file <a class="el" href="_quest_template_factory_8h_source.html">QuestTemplateFactory.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/Template/<a class="el" href="_quest_template_factory_8h_source.html">QuestTemplateFactory.h</a></li>
 </ul>
 </div><!-- contents -->
@@ -185,8 +453,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>TemplateEngine</b></
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>weave</b></li><li class="navelem"><a class="el" href="classweave_1_1_quest_template_factory.html">QuestTemplateFactory</a></li>
-    <li class="footer">Generated on Thu Feb 11 2016 20:27:08 for QuestWeaver by
+    <li class="navelem"><a class="el" href="namespaceweave.html">weave</a></li><li class="navelem"><a class="el" href="classweave_1_1_quest_template_factory.html">QuestTemplateFactory</a></li>
+    <li class="footer">Generated on Sat Feb 13 2016 09:30:18 for QuestWeaver by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>

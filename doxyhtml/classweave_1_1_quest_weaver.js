@@ -1,9 +1,11 @@
 var classweave_1_1_quest_weaver =
 [
-    [ "QuestWeaver", "classweave_1_1_quest_weaver.html#a2ecd33ee303dbd551908caea85fad23f", null ],
-    [ "ChangeQuestState", "classweave_1_1_quest_weaver.html#a6ffcc98dce651a568f8b946640936a57", null ],
+    [ "QuestWeaver", "classweave_1_1_quest_weaver.html#a2435782d500fa31ac91d008fd558954e", null ],
+    [ "ChangeQuestState", "classweave_1_1_quest_weaver.html#a006001f54518fd3c266d1502b17db040", null ],
     [ "ChangeWorkingDirectories", "classweave_1_1_quest_weaver.html#a01debc9fab30def40cf00fc41a303fe5", null ],
     [ "CreateNewQuest", "classweave_1_1_quest_weaver.html#ab4cc3f1ed3b13738547b298ad4f6856a", null ],
+    [ "Deserialize", "classweave_1_1_quest_weaver.html#adc3136568dcad0bd9bb616d60b53f482", null ],
+    [ "Deserialize", "classweave_1_1_quest_weaver.html#a1ad46368163fad6141f8a74537e39d1c", null ],
     [ "GetAllQuests", "classweave_1_1_quest_weaver.html#ae039124d0b281e8d5722282271e516c1", null ],
     [ "GetQuest", "classweave_1_1_quest_weaver.html#ac03a367e700dd770d3c6f6cde28f3b4a", null ],
     [ "GetQuestsWithState", "classweave_1_1_quest_weaver.html#a1260b729344e6e3bfe0a7911665ff8af", null ],

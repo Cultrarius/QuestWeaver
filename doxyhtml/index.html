@@ -47,7 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -102,7 +102,8 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="title">QuestWeaver </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a href="https://travis-ci.org/Cultrarius/QuestWeaver"></a> <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.de"></a> Procedurally generated quests and stories for computer games.</p>
+<div class="textblock"><p><a href="https://travis-ci.org/Cultrarius/QuestWeaver"></a> <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.de"></a></p>
+<p>Procedurally generated quests and stories for computer games.</p>
 <p>This project is still in its early stages and under heavy development!</p>
 <p>This project includes the following JSON parser: <a href="https://github.com/open-source-parsers/jsoncpp">https://github.com/open-source-parsers/jsoncpp</a></p>
 <h2>Features</h2>
@@ -114,6 +115,8 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li>Supports <b>mod directories</b> to overwrite quest templates after deployment.</li>
 <li>The game world entities to be used in quests are supplied directly from a game's custom world model.</li>
 </ul>
+<h2>Documentation</h2>
+<p>Have a look at the <a href="http://cultrarius.github.io/QuestWeaver/doxyhtml/">API documentation</a>!</p>
 <h2>Usage</h2>
 <p>The quest system of a game is not an isolated part of the system as it is heavily involved in the current world state and events. Therefore, the game has to provide the quest system with the necessary information about the game's state and has to fulfill change requests made by the quest system (otherwise the state will be inconsistent).</p>
 <p>To use the QuestWeaver system, you have to follow these steps:</p>
@@ -129,7 +132,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Feb 11 2016 20:27:08 for QuestWeaver by
+    <li class="footer">Generated on Sat Feb 13 2016 09:30:18 for QuestWeaver by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>

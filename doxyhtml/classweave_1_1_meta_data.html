@@ -47,7 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -108,7 +108,6 @@ $(document).ready(function(){initNavTree('classweave_1_1_meta_data.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="classweave_1_1_meta_data-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">weave::MetaData Class Reference</div>  </div>
@@ -122,27 +121,18 @@ $(document).ready(function(){initNavTree('classweave_1_1_meta_data.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9c7a7c554143c9e4038e26453739a5b5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9c7a7c554143c9e4038e26453739a5b5"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_meta_data.html#a9c7a7c554143c9e4038e26453739a5b5">HasValue</a> (const std::string &amp;name) const </td></tr>
-<tr class="memdesc:a9c7a7c554143c9e4038e26453739a5b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if this container holds a value for the given key. <br /></td></tr>
-<tr class="separator:a9c7a7c554143c9e4038e26453739a5b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56dd6e6ce1a2184e4fc0c0972103e0e1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_meta_data.html#a56dd6e6ce1a2184e4fc0c0972103e0e1">GetValue</a> (const std::string &amp;name) const </td></tr>
 <tr class="memdesc:a56dd6e6ce1a2184e4fc0c0972103e0e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value associated with the given key.  <a href="#a56dd6e6ce1a2184e4fc0c0972103e0e1">More...</a><br /></td></tr>
 <tr class="separator:a56dd6e6ce1a2184e4fc0c0972103e0e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af24eb20bba3f5e45bdd4483a8d15ae77"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af24eb20bba3f5e45bdd4483a8d15ae77"></a>
-<a class="el" href="classweave_1_1_meta_data.html">MetaData</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_meta_data.html#af24eb20bba3f5e45bdd4483a8d15ae77">SetValue</a> (const std::string &amp;name, int value)</td></tr>
-<tr class="memdesc:af24eb20bba3f5e45bdd4483a8d15ae77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves a value for the given key in this container. <br /></td></tr>
-<tr class="separator:af24eb20bba3f5e45bdd4483a8d15ae77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61ef992067446ad651573e852e0186ae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a61ef992067446ad651573e852e0186ae"></a>
-std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_meta_data.html#a61ef992067446ad651573e852e0186ae">GetValueNames</a> () const </td></tr>
-<tr class="memdesc:a61ef992067446ad651573e852e0186ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the names of all keys this container has values for. <br /></td></tr>
+<tr class="memitem:a61ef992067446ad651573e852e0186ae"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_meta_data.html#a61ef992067446ad651573e852e0186ae">GetValueNames</a> () const </td></tr>
+<tr class="memdesc:a61ef992067446ad651573e852e0186ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the names of all keys this container has values for.  <a href="#a61ef992067446ad651573e852e0186ae">More...</a><br /></td></tr>
 <tr class="separator:a61ef992067446ad651573e852e0186ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:ab2f44cbb59a08132f4c843e5225bba0e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab2f44cbb59a08132f4c843e5225bba0e"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></td></tr>
-<tr class="separator:ab2f44cbb59a08132f4c843e5225bba0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c7a7c554143c9e4038e26453739a5b5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_meta_data.html#a9c7a7c554143c9e4038e26453739a5b5">HasValue</a> (const std::string &amp;name) const </td></tr>
+<tr class="memdesc:a9c7a7c554143c9e4038e26453739a5b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if this container holds a value for the given key.  <a href="#a9c7a7c554143c9e4038e26453739a5b5">More...</a><br /></td></tr>
+<tr class="separator:a9c7a7c554143c9e4038e26453739a5b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af24eb20bba3f5e45bdd4483a8d15ae77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classweave_1_1_meta_data.html">MetaData</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_meta_data.html#af24eb20bba3f5e45bdd4483a8d15ae77">SetValue</a> (const std::string &amp;name, int value)</td></tr>
+<tr class="memdesc:af24eb20bba3f5e45bdd4483a8d15ae77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves a value for the given key in this container.  <a href="#af24eb20bba3f5e45bdd4483a8d15ae77">More...</a><br /></td></tr>
+<tr class="separator:af24eb20bba3f5e45bdd4483a8d15ae77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Holds information about a world entity. </p>
@@ -169,6 +159,69 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></
 
 </div>
 </div>
+<a class="anchor" id="a61ef992067446ad651573e852e0186ae"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::string&gt; weave::MetaData::GetValueNames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the names of all keys this container has values for. </p>
+
+</div>
+</div>
+<a class="anchor" id="a9c7a7c554143c9e4038e26453739a5b5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool weave::MetaData::HasValue </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns true if this container holds a value for the given key. </p>
+
+</div>
+</div>
+<a class="anchor" id="af24eb20bba3f5e45bdd4483a8d15ae77"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classweave_1_1_meta_data.html">MetaData</a>&amp; weave::MetaData::SetValue </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Saves a value for the given key in this container. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/World/<a class="el" href="_meta_data_8h_source.html">MetaData.h</a></li>
 </ul>
@@ -177,8 +230,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>weave</b></li><li class="navelem"><a class="el" href="classweave_1_1_meta_data.html">MetaData</a></li>
-    <li class="footer">Generated on Thu Feb 11 2016 20:27:08 for QuestWeaver by
+    <li class="navelem"><a class="el" href="namespaceweave.html">weave</a></li><li class="navelem"><a class="el" href="classweave_1_1_meta_data.html">MetaData</a></li>
+    <li class="footer">Generated on Sat Feb 13 2016 09:30:18 for QuestWeaver by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>

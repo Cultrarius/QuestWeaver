@@ -47,7 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -109,41 +109,144 @@ $(document).ready(function(){initNavTree('classweave_1_1_story_template_factory.
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="classweave_1_1_story_template_factory-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">weave::StoryTemplateFactory Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_story_template_factory_8h_source.html">StoryTemplateFactory.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a00f70f06195fadf19f37485a1ac7e814"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a00f70f06195fadf19f37485a1ac7e814"></a>
-std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_story_template.html">StoryTemplate</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetTemplates</b> ()</td></tr>
-<tr class="separator:a00f70f06195fadf19f37485a1ac7e814"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1086a32b5a1097db29a7595292f3637"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af1086a32b5a1097db29a7595292f3637"></a>
-virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetNuggetFolder</b> () const  =0</td></tr>
+<tr class="memitem:a84635df614bda36a9a65506b5cced886"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template_factory.html#a84635df614bda36a9a65506b5cced886">~StoryTemplateFactory</a> ()=default</td></tr>
+<tr class="separator:a84635df614bda36a9a65506b5cced886"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1086a32b5a1097db29a7595292f3637"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template_factory.html#af1086a32b5a1097db29a7595292f3637">GetNuggetFolder</a> () const  =0</td></tr>
 <tr class="separator:af1086a32b5a1097db29a7595292f3637"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00f70f06195fadf19f37485a1ac7e814"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_story_template.html">StoryTemplate</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template_factory.html#a00f70f06195fadf19f37485a1ac7e814">GetTemplates</a> ()</td></tr>
+<tr class="separator:a00f70f06195fadf19f37485a1ac7e814"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a89796bce5e2a8477a43996304ba146d1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a89796bce5e2a8477a43996304ba146d1"></a>
-virtual std::shared_ptr&lt; <a class="el" href="classweave_1_1_story_template.html">StoryTemplate</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>createFromJsonValues</b> (const Json::Value &amp;root) const  =0</td></tr>
+<tr class="memitem:a89796bce5e2a8477a43996304ba146d1"><td class="memItemLeft" align="right" valign="top">virtual std::shared_ptr&lt; <a class="el" href="classweave_1_1_story_template.html">StoryTemplate</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template_factory.html#a89796bce5e2a8477a43996304ba146d1">createFromJsonValues</a> (const Json::Value &amp;root) const  =0</td></tr>
 <tr class="separator:a89796bce5e2a8477a43996304ba146d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad65b44cd80d113ba0c8229f1d0834716"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad65b44cd80d113ba0c8229f1d0834716"></a>
-virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><b>getTemplateFile</b> () const  =0</td></tr>
+<tr class="memitem:ad65b44cd80d113ba0c8229f1d0834716"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template_factory.html#ad65b44cd80d113ba0c8229f1d0834716">getTemplateFile</a> () const  =0</td></tr>
 <tr class="separator:ad65b44cd80d113ba0c8229f1d0834716"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:a05a4a62432249ecc876d7f40d831de6e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05a4a62432249ecc876d7f40d831de6e"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>StoryWriter</b></td></tr>
-<tr class="separator:a05a4a62432249ecc876d7f40d831de6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p>Definition at line <a class="el" href="_story_template_factory_8h_source.html#l00011">11</a> of file <a class="el" href="_story_template_factory_8h_source.html">StoryTemplateFactory.h</a>.</p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a84635df614bda36a9a65506b5cced886"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual weave::StoryTemplateFactory::~StoryTemplateFactory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a89796bce5e2a8477a43996304ba146d1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::shared_ptr&lt;<a class="el" href="classweave_1_1_story_template.html">StoryTemplate</a>&gt; weave::StoryTemplateFactory::createFromJsonValues </td>
+          <td>(</td>
+          <td class="paramtype">const Json::Value &amp;&#160;</td>
+          <td class="paramname"><em>root</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af1086a32b5a1097db29a7595292f3637"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string weave::StoryTemplateFactory::GetNuggetFolder </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad65b44cd80d113ba0c8229f1d0834716"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const char* weave::StoryTemplateFactory::getTemplateFile </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a00f70f06195fadf19f37485a1ac7e814"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classweave_1_1_story_template.html">StoryTemplate</a>&gt; &gt; weave::StoryTemplateFactory::GetTemplates </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/Story/<a class="el" href="_story_template_factory_8h_source.html">StoryTemplateFactory.h</a></li>
 </ul>
 </div><!-- contents -->
@@ -151,8 +254,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>StoryWriter</b></td>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>weave</b></li><li class="navelem"><a class="el" href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a></li>
-    <li class="footer">Generated on Thu Feb 11 2016 20:27:08 for QuestWeaver by
+    <li class="navelem"><a class="el" href="namespaceweave.html">weave</a></li><li class="navelem"><a class="el" href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a></li>
+    <li class="footer">Generated on Sat Feb 13 2016 09:30:18 for QuestWeaver by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>

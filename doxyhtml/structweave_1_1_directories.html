@@ -47,7 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -108,7 +108,6 @@ $(document).ready(function(){initNavTree('structweave_1_1_directories.html','');
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="structweave_1_1_directories-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">weave::Directories Struct Reference</div>  </div>
@@ -131,26 +130,51 @@ Collaboration diagram for weave::Directories:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a8739552b0dfa526640925ca45bb4de73"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8739552b0dfa526640925ca45bb4de73"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structweave_1_1_directories.html#a8739552b0dfa526640925ca45bb4de73">templateDirectory</a> = &quot;Resources/&quot;</td></tr>
-<tr class="memdesc:a8739552b0dfa526640925ca45bb4de73"><td class="mdescLeft">&#160;</td><td class="mdescRight">The base directory which all template factories use to search for template files. <br /></td></tr>
-<tr class="separator:a8739552b0dfa526640925ca45bb4de73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6e68681270f0ec23d74ea70767bd02e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa6e68681270f0ec23d74ea70767bd02e"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structweave_1_1_directories.html#aa6e68681270f0ec23d74ea70767bd02e">modDirectory</a> = &quot;../Resources/&quot;</td></tr>
-<tr class="memdesc:aa6e68681270f0ec23d74ea70767bd02e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template factories prefer template files found in this directory, so mods can override the templates in the default directory. <br /></td></tr>
+<tr class="memitem:aa6e68681270f0ec23d74ea70767bd02e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structweave_1_1_directories.html#aa6e68681270f0ec23d74ea70767bd02e">modDirectory</a> = &quot;../Resources/&quot;</td></tr>
+<tr class="memdesc:aa6e68681270f0ec23d74ea70767bd02e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template factories prefer template files found in this directory, so mods can override the templates in the default directory.  <a href="#aa6e68681270f0ec23d74ea70767bd02e">More...</a><br /></td></tr>
 <tr class="separator:aa6e68681270f0ec23d74ea70767bd02e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:ab2f44cbb59a08132f4c843e5225bba0e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab2f44cbb59a08132f4c843e5225bba0e"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></td></tr>
-<tr class="separator:ab2f44cbb59a08132f4c843e5225bba0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8739552b0dfa526640925ca45bb4de73"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structweave_1_1_directories.html#a8739552b0dfa526640925ca45bb4de73">templateDirectory</a> = &quot;Resources/&quot;</td></tr>
+<tr class="memdesc:a8739552b0dfa526640925ca45bb4de73"><td class="mdescLeft">&#160;</td><td class="mdescRight">The base directory which all template factories use to search for template files.  <a href="#a8739552b0dfa526640925ca45bb4de73">More...</a><br /></td></tr>
+<tr class="separator:a8739552b0dfa526640925ca45bb4de73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This struct hold information about the programs file search paths. </p>
 
 <p>Definition at line <a class="el" href="_weaver_types_8h_source.html#l00046">46</a> of file <a class="el" href="_weaver_types_8h_source.html">WeaverTypes.h</a>.</p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="aa6e68681270f0ec23d74ea70767bd02e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string weave::Directories::modDirectory = &quot;../Resources/&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Template factories prefer template files found in this directory, so mods can override the templates in the default directory. </p>
+
+<p>Definition at line <a class="el" href="_weaver_types_8h_source.html#l00056">56</a> of file <a class="el" href="_weaver_types_8h_source.html">WeaverTypes.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8739552b0dfa526640925ca45bb4de73"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string weave::Directories::templateDirectory = &quot;Resources/&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The base directory which all template factories use to search for template files. </p>
+
+<p>Definition at line <a class="el" href="_weaver_types_8h_source.html#l00050">50</a> of file <a class="el" href="_weaver_types_8h_source.html">WeaverTypes.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/Core/<a class="el" href="_weaver_types_8h_source.html">WeaverTypes.h</a></li>
 </ul>
 </div><!-- contents -->
@@ -158,8 +182,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>weave</b></li><li class="navelem"><a class="el" href="structweave_1_1_directories.html">Directories</a></li>
-    <li class="footer">Generated on Thu Feb 11 2016 20:27:08 for QuestWeaver by
+    <li class="navelem"><a class="el" href="namespaceweave.html">weave</a></li><li class="navelem"><a class="el" href="structweave_1_1_directories.html">Directories</a></li>
+    <li class="footer">Generated on Sat Feb 13 2016 09:30:18 for QuestWeaver by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>

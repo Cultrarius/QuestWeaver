@@ -1,0 +1,10 @@
+<map id="include/World/WorldEntity.h" name="include/World/WorldEntity.h">
+<area shape="rect" id="node2" href="$_world_model_action_8h.html" title="include/World/WorldModel\lAction.h" alt="" coords="194,80,369,121"/>
+<area shape="rect" id="node5" href="$_world_model_8h.html" title="include/World/WorldModel.h" alt="" coords="182,251,367,278"/>
+<area shape="rect" id="node3" href="$_world_listener_8h.html" title="include/World/WorldListener.h" alt="" coords="307,169,503,196"/>
+<area shape="rect" id="node9" href="$_quest_8h.html" title="include/QuestModel\l/Quest.h" alt="" coords="21,244,158,285"/>
+<area shape="rect" id="node4" href="$_quest_weaver_8h.html" title="include/QuestWeaver.h" alt="" coords="201,572,359,599"/>
+<area shape="rect" id="node6" href="$_weaver_config_8h.html" title="include/WeaverConfig.h" alt="" coords="141,497,302,524"/>
+<area shape="rect" id="node7" href="$_quest_template_8h.html" title="include/Template/QuestTemplate.h" alt="" coords="27,333,253,360"/>
+<area shape="rect" id="node8" href="$_quest_template_factory_8h.html" title="include/Template/QuestTemplate\lFactory.h" alt="" coords="35,408,250,449"/>
+</map>

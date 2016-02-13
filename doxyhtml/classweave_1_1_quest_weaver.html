@@ -47,7 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -109,7 +109,6 @@ $(document).ready(function(){initNavTree('classweave_1_1_quest_weaver.html','');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="classweave_1_1_quest_weaver-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">weave::QuestWeaver Class Reference</div>  </div>
@@ -123,61 +122,51 @@ $(document).ready(function(){initNavTree('classweave_1_1_quest_weaver.html','');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2ecd33ee303dbd551908caea85fad23f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a2ecd33ee303dbd551908caea85fad23f">QuestWeaver</a> (<a class="el" href="structweave_1_1_weaver_config.html">WeaverConfig</a> config)</td></tr>
-<tr class="memdesc:a2ecd33ee303dbd551908caea85fad23f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new weaver instance with the given config.  <a href="#a2ecd33ee303dbd551908caea85fad23f">More...</a><br /></td></tr>
-<tr class="separator:a2ecd33ee303dbd551908caea85fad23f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2435782d500fa31ac91d008fd558954e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a2435782d500fa31ac91d008fd558954e">QuestWeaver</a> (<a class="el" href="structweave_1_1_weaver_config.html">WeaverConfig</a> &amp;config)</td></tr>
+<tr class="memdesc:a2435782d500fa31ac91d008fd558954e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new weaver instance with the given config.  <a href="#a2435782d500fa31ac91d008fd558954e">More...</a><br /></td></tr>
+<tr class="separator:a2435782d500fa31ac91d008fd558954e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a006001f54518fd3c266d1502b17db040"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a006001f54518fd3c266d1502b17db040">ChangeQuestState</a> (<a class="el" href="classweave_1_1_quest_model_action.html">QuestModelAction</a> questAction)</td></tr>
+<tr class="memdesc:a006001f54518fd3c266d1502b17db040"><td class="mdescLeft">&#160;</td><td class="mdescRight">Directly changes the state of a quest.  <a href="#a006001f54518fd3c266d1502b17db040">More...</a><br /></td></tr>
+<tr class="separator:a006001f54518fd3c266d1502b17db040"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01debc9fab30def40cf00fc41a303fe5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a01debc9fab30def40cf00fc41a303fe5">ChangeWorkingDirectories</a> (<a class="el" href="structweave_1_1_directories.html">Directories</a> directories)</td></tr>
+<tr class="memdesc:a01debc9fab30def40cf00fc41a303fe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the directories used by the quest system to load files such as templates.  <a href="#a01debc9fab30def40cf00fc41a303fe5">More...</a><br /></td></tr>
+<tr class="separator:a01debc9fab30def40cf00fc41a303fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4cc3f1ed3b13738547b298ad4f6856a"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest.html">Quest</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#ab4cc3f1ed3b13738547b298ad4f6856a">CreateNewQuest</a> ()</td></tr>
+<tr class="memdesc:ab4cc3f1ed3b13738547b298ad4f6856a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new quest.  <a href="#ab4cc3f1ed3b13738547b298ad4f6856a">More...</a><br /></td></tr>
+<tr class="separator:ab4cc3f1ed3b13738547b298ad4f6856a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae039124d0b281e8d5722282271e516c1"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest.html">Quest</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#ae039124d0b281e8d5722282271e516c1">GetAllQuests</a> () const </td></tr>
+<tr class="memdesc:ae039124d0b281e8d5722282271e516c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of all quests.  <a href="#ae039124d0b281e8d5722282271e516c1">More...</a><br /></td></tr>
+<tr class="separator:ae039124d0b281e8d5722282271e516c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac03a367e700dd770d3c6f6cde28f3b4a"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest.html">Quest</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#ac03a367e700dd770d3c6f6cde28f3b4a">GetQuest</a> (<a class="el" href="namespaceweave.html#ad16585a767748e749a3389c77b0e5c76">ID</a> questId) const </td></tr>
+<tr class="memdesc:ac03a367e700dd770d3c6f6cde28f3b4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the quest with the given ID.  <a href="#ac03a367e700dd770d3c6f6cde28f3b4a">More...</a><br /></td></tr>
+<tr class="separator:ac03a367e700dd770d3c6f6cde28f3b4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1260b729344e6e3bfe0a7911665ff8af"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest.html">Quest</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a1260b729344e6e3bfe0a7911665ff8af">GetQuestsWithState</a> (<a class="el" href="namespaceweave.html#afa0e9cd4efa7f2671317618cf3d9b479">QuestState</a> state) const </td></tr>
+<tr class="memdesc:a1260b729344e6e3bfe0a7911665ff8af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of all quests with the given state.  <a href="#a1260b729344e6e3bfe0a7911665ff8af">More...</a><br /></td></tr>
+<tr class="separator:a1260b729344e6e3bfe0a7911665ff8af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab66bd94d2b1c3851d3fd52db1945f9cd"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classweave_1_1_world_model.html">WorldModel</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#ab66bd94d2b1c3851d3fd52db1945f9cd">GetWorldModel</a> () const </td></tr>
+<tr class="memdesc:ab66bd94d2b1c3851d3fd52db1945f9cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an immutable reference to the world model.  <a href="#ab66bd94d2b1c3851d3fd52db1945f9cd">More...</a><br /></td></tr>
+<tr class="separator:ab66bd94d2b1c3851d3fd52db1945f9cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9d87f0b4aa25a8c084b7089e76f5aca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#ab9d87f0b4aa25a8c084b7089e76f5aca">RegisterQuestTemplateFactory</a> (std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest_template_factory.html">QuestTemplateFactory</a> &gt; factory)</td></tr>
 <tr class="memdesc:ab9d87f0b4aa25a8c084b7089e76f5aca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a new quest template factory with the quest system.  <a href="#ab9d87f0b4aa25a8c084b7089e76f5aca">More...</a><br /></td></tr>
 <tr class="separator:ab9d87f0b4aa25a8c084b7089e76f5aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a407384e8ea452e36447742893f96392f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a407384e8ea452e36447742893f96392f">RegisterStoryTemplateFactory</a> (std::shared_ptr&lt; <a class="el" href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a> &gt; factory)</td></tr>
 <tr class="memdesc:a407384e8ea452e36447742893f96392f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a new story template factory with the quest system.  <a href="#a407384e8ea452e36447742893f96392f">More...</a><br /></td></tr>
 <tr class="separator:a407384e8ea452e36447742893f96392f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01debc9fab30def40cf00fc41a303fe5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a01debc9fab30def40cf00fc41a303fe5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a01debc9fab30def40cf00fc41a303fe5">ChangeWorkingDirectories</a> (<a class="el" href="structweave_1_1_directories.html">Directories</a> directories)</td></tr>
-<tr class="memdesc:a01debc9fab30def40cf00fc41a303fe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the directories used by the quest system to load files such as templates. <br /></td></tr>
-<tr class="separator:a01debc9fab30def40cf00fc41a303fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4cc3f1ed3b13738547b298ad4f6856a"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest.html">Quest</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#ab4cc3f1ed3b13738547b298ad4f6856a">CreateNewQuest</a> ()</td></tr>
-<tr class="memdesc:ab4cc3f1ed3b13738547b298ad4f6856a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new quest.  <a href="#ab4cc3f1ed3b13738547b298ad4f6856a">More...</a><br /></td></tr>
-<tr class="separator:ab4cc3f1ed3b13738547b298ad4f6856a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4faa60c735a47c941bf42d0948e026f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#af4faa60c735a47c941bf42d0948e026f">Serialize</a> (std::ostream &amp;outputStream, <a class="el" href="namespaceweave.html#a43b695846582193689b15af33499cab3">StreamType</a> type)</td></tr>
+<tr class="memdesc:af4faa60c735a47c941bf42d0948e026f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serializes the whole quest system including the quest model and world model.  <a href="#af4faa60c735a47c941bf42d0948e026f">More...</a><br /></td></tr>
+<tr class="separator:af4faa60c735a47c941bf42d0948e026f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa775638812718cc59edd6debbc32d70e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#aa775638812718cc59edd6debbc32d70e">Tick</a> (float delta)</td></tr>
 <tr class="memdesc:aa775638812718cc59edd6debbc32d70e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances the quest system state by ticking all quests and executing their desired world and quest changes.  <a href="#aa775638812718cc59edd6debbc32d70e">More...</a><br /></td></tr>
 <tr class="separator:aa775638812718cc59edd6debbc32d70e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1260b729344e6e3bfe0a7911665ff8af"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1260b729344e6e3bfe0a7911665ff8af"></a>
-std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest.html">Quest</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a1260b729344e6e3bfe0a7911665ff8af">GetQuestsWithState</a> (QuestState state) const </td></tr>
-<tr class="memdesc:a1260b729344e6e3bfe0a7911665ff8af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of all quests with the given state. <br /></td></tr>
-<tr class="separator:a1260b729344e6e3bfe0a7911665ff8af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae039124d0b281e8d5722282271e516c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae039124d0b281e8d5722282271e516c1"></a>
-std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest.html">Quest</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#ae039124d0b281e8d5722282271e516c1">GetAllQuests</a> () const </td></tr>
-<tr class="memdesc:ae039124d0b281e8d5722282271e516c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of all quests. <br /></td></tr>
-<tr class="separator:ae039124d0b281e8d5722282271e516c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac03a367e700dd770d3c6f6cde28f3b4a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac03a367e700dd770d3c6f6cde28f3b4a"></a>
-std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest.html">Quest</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#ac03a367e700dd770d3c6f6cde28f3b4a">GetQuest</a> (ID questId) const </td></tr>
-<tr class="memdesc:ac03a367e700dd770d3c6f6cde28f3b4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the quest with the given ID. <br /></td></tr>
-<tr class="separator:ac03a367e700dd770d3c6f6cde28f3b4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ffcc98dce651a568f8b946640936a57"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest.html">Quest</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a6ffcc98dce651a568f8b946640936a57">ChangeQuestState</a> (<a class="el" href="classweave_1_1_quest_model_action.html">QuestModelAction</a> questAction)</td></tr>
-<tr class="memdesc:a6ffcc98dce651a568f8b946640936a57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Directly changes the state of a quest.  <a href="#a6ffcc98dce651a568f8b946640936a57">More...</a><br /></td></tr>
-<tr class="separator:a6ffcc98dce651a568f8b946640936a57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab66bd94d2b1c3851d3fd52db1945f9cd"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classweave_1_1_world_model.html">WorldModel</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#ab66bd94d2b1c3851d3fd52db1945f9cd">GetWorldModel</a> () const </td></tr>
-<tr class="memdesc:ab66bd94d2b1c3851d3fd52db1945f9cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a immutable reference to the world model.  <a href="#ab66bd94d2b1c3851d3fd52db1945f9cd">More...</a><br /></td></tr>
-<tr class="separator:ab66bd94d2b1c3851d3fd52db1945f9cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4faa60c735a47c941bf42d0948e026f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#af4faa60c735a47c941bf42d0948e026f">Serialize</a> (std::ostream &amp;outputStream, StreamType type)</td></tr>
-<tr class="memdesc:af4faa60c735a47c941bf42d0948e026f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serializes the whole quest system including the quest model and world model.  <a href="#af4faa60c735a47c941bf42d0948e026f">More...</a><br /></td></tr>
-<tr class="separator:af4faa60c735a47c941bf42d0948e026f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:adc3136568dcad0bd9bb616d60b53f482"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classweave_1_1_quest_weaver.html">QuestWeaver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#adc3136568dcad0bd9bb616d60b53f482">Deserialize</a> (std::istream &amp;inputStream, StreamType type)</td></tr>
+<tr class="memitem:adc3136568dcad0bd9bb616d60b53f482"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classweave_1_1_quest_weaver.html">QuestWeaver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#adc3136568dcad0bd9bb616d60b53f482">Deserialize</a> (std::istream &amp;inputStream, <a class="el" href="namespaceweave.html#a43b695846582193689b15af33499cab3">StreamType</a> type)</td></tr>
 <tr class="memdesc:adc3136568dcad0bd9bb616d60b53f482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserializes the quest system including the quest model and world model.  <a href="#adc3136568dcad0bd9bb616d60b53f482">More...</a><br /></td></tr>
 <tr class="separator:adc3136568dcad0bd9bb616d60b53f482"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ad46368163fad6141f8a74537e39d1c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classweave_1_1_quest_weaver.html">QuestWeaver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a1ad46368163fad6141f8a74537e39d1c">Deserialize</a> (std::istream &amp;inputStream, StreamType type, <a class="el" href="structweave_1_1_directories.html">Directories</a> currentDirectories)</td></tr>
+<tr class="memitem:a1ad46368163fad6141f8a74537e39d1c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classweave_1_1_quest_weaver.html">QuestWeaver</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a1ad46368163fad6141f8a74537e39d1c">Deserialize</a> (std::istream &amp;inputStream, <a class="el" href="namespaceweave.html#a43b695846582193689b15af33499cab3">StreamType</a> type, <a class="el" href="structweave_1_1_directories.html">Directories</a> currentDirectories)</td></tr>
 <tr class="memdesc:a1ad46368163fad6141f8a74537e39d1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserializes the quest system including the quest model and world model.  <a href="#a1ad46368163fad6141f8a74537e39d1c">More...</a><br /></td></tr>
 <tr class="separator:a1ad46368163fad6141f8a74537e39d1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:ab2f44cbb59a08132f4c843e5225bba0e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab2f44cbb59a08132f4c843e5225bba0e"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></td></tr>
-<tr class="separator:ab2f44cbb59a08132f4c843e5225bba0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><b>Main entry point</b> for applications using the quest system. </p>
@@ -186,7 +175,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></
 
 <p>Definition at line <a class="el" href="_quest_weaver_8h_source.html#l00029">29</a> of file <a class="el" href="_quest_weaver_8h_source.html">QuestWeaver.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a2ecd33ee303dbd551908caea85fad23f"></a>
+<a class="anchor" id="a2435782d500fa31ac91d008fd558954e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -196,7 +185,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></
         <tr>
           <td class="memname">weave::QuestWeaver::QuestWeaver </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structweave_1_1_weaver_config.html">WeaverConfig</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structweave_1_1_weaver_config.html">WeaverConfig</a> &amp;&#160;</td>
           <td class="paramname"><em>config</em></td><td>)</td>
           <td></td>
         </tr>
@@ -209,7 +198,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></
 </div><div class="memdoc">
 
 <p>Creates a new weaver instance with the given config. </p>
-<p>The config needs to contain a valid world model pointer. The quest weaver instance will take ownership of the world model and delete it when being destroyed. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The config needs to contain a valid world model or else an exception is thrown. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">config</td><td>the config to use - must contain a valid world model </td></tr>
   </table>
@@ -219,12 +208,12 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a6ffcc98dce651a568f8b946640936a57"></a>
+<a class="anchor" id="a006001f54518fd3c266d1502b17db040"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classweave_1_1_quest.html">Quest</a>&gt; weave::QuestWeaver::ChangeQuestState </td>
+          <td class="memname">bool weave::QuestWeaver::ChangeQuestState </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classweave_1_1_quest_model_action.html">QuestModelAction</a>&#160;</td>
           <td class="paramname"><em>questAction</em></td><td>)</td>
@@ -234,7 +223,25 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></
 </div><div class="memdoc">
 
 <p>Directly changes the state of a quest. </p>
-<p>A quest can usually change its state once it is ticked, this method should only be used if that is not possible. </p>
+<p>A quest itself can change its state once it is ticked, which should be the preferred method. </p><dl class="section return"><dt>Returns</dt><dd>true if the action was completed, false if the state change was not permitted. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a01debc9fab30def40cf00fc41a303fe5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void weave::QuestWeaver::ChangeWorkingDirectories </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structweave_1_1_directories.html">Directories</a>&#160;</td>
+          <td class="paramname"><em>directories</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes the directories used by the quest system to load files such as templates. </p>
 
 </div>
 </div>
@@ -273,7 +280,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">StreamType&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceweave.html#a43b695846582193689b15af33499cab3">StreamType</a>&#160;</td>
           <td class="paramname"><em>type</em>&#160;</td>
         </tr>
         <tr>
@@ -311,7 +318,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">StreamType&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceweave.html#a43b695846582193689b15af33499cab3">StreamType</a>&#160;</td>
           <td class="paramname"><em>type</em>, </td>
         </tr>
         <tr>
@@ -339,6 +346,59 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></
 
 </div>
 </div>
+<a class="anchor" id="ae039124d0b281e8d5722282271e516c1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classweave_1_1_quest.html">Quest</a>&gt; &gt; weave::QuestWeaver::GetAllQuests </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a list of all quests. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac03a367e700dd770d3c6f6cde28f3b4a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classweave_1_1_quest.html">Quest</a>&gt; weave::QuestWeaver::GetQuest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceweave.html#ad16585a767748e749a3389c77b0e5c76">ID</a>&#160;</td>
+          <td class="paramname"><em>questId</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the quest with the given ID. </p>
+
+</div>
+</div>
+<a class="anchor" id="a1260b729344e6e3bfe0a7911665ff8af"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classweave_1_1_quest.html">Quest</a>&gt; &gt; weave::QuestWeaver::GetQuestsWithState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceweave.html#afa0e9cd4efa7f2671317618cf3d9b479">QuestState</a>&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a list of all quests with the given state. </p>
+
+</div>
+</div>
 <a class="anchor" id="ab66bd94d2b1c3851d3fd52db1945f9cd"></a>
 <div class="memitem">
 <div class="memproto">
@@ -352,7 +412,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></
       </table>
 </div><div class="memdoc">
 
-<p>Returns a immutable reference to the world model. </p>
+<p>Returns an immutable reference to the world model. </p>
 <p>To change the world model, use the <a class="el" href="classweave_1_1_quest_weaver.html#aa775638812718cc59edd6debbc32d70e" title="Advances the quest system state by ticking all quests and executing their desired world and quest cha...">Tick()</a> method which gathers changes from the quests.</p>
 <p>After the quest system was deserialized, the world model listener has to be registered again. </p>
 
@@ -409,7 +469,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">StreamType&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceweave.html#a43b695846582193689b15af33499cab3">StreamType</a>&#160;</td>
           <td class="paramname"><em>type</em>&#160;</td>
         </tr>
         <tr>
@@ -440,8 +500,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></
 </div><div class="memdoc">
 
 <p>Advances the quest system state by ticking all quests and executing their desired world and quest changes. </p>
-<p>Until this method is called, quests are unable to change the world model or their state.</p>
-<p><b>WARNING</b> After ticking, all objects received via this API might be invalid! They can still be used, but might contain outdated data. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Until this method is called, quests are unable to directly change the world model or their quest state.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">delta</td><td>The time elapsed since the last tick. </td></tr>
   </table>
@@ -458,8 +518,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>cereal::access</b></
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>weave</b></li><li class="navelem"><a class="el" href="classweave_1_1_quest_weaver.html">QuestWeaver</a></li>
-    <li class="footer">Generated on Thu Feb 11 2016 20:27:08 for QuestWeaver by
+    <li class="navelem"><a class="el" href="namespaceweave.html">weave</a></li><li class="navelem"><a class="el" href="classweave_1_1_quest_weaver.html">QuestWeaver</a></li>
+    <li class="footer">Generated on Sat Feb 13 2016 09:30:18 for QuestWeaver by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>

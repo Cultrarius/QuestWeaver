@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['formattertype',['formatterType',['../structweave_1_1_weaver_config.html#af6f58da6f948e6460a3e6d5050e84ef9',1,'weave::WeaverConfig']]]
+  ['dirs',['dirs',['../structweave_1_1_weaver_config.html#a481677af3de8090b8fc89e58154b6c74',1,'weave::WeaverConfig']]]
 ];

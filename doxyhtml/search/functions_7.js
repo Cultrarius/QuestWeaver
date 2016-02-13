@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['serialize',['Serialize',['../classweave_1_1_quest_weaver.html#af4faa60c735a47c941bf42d0948e026f',1,'weave::QuestWeaver']]],
-  ['setvalue',['SetValue',['../classweave_1_1_meta_data.html#af24eb20bba3f5e45bdd4483a8d15ae77',1,'weave::MetaData']]]
+  ['newid',['NewId',['../classweave_1_1_world_model.html#a56f909bbef9f828a0c12e92238979482',1,'weave::WorldModel']]],
+  ['nugget',['Nugget',['../classweave_1_1_nugget.html#a816bc33f20ae434a1612ef3957060b96',1,'weave::Nugget::Nugget()=default'],['../classweave_1_1_nugget.html#ad449e09cd4f74121c5d3b3b5298d37fb',1,'weave::Nugget::Nugget(std::string key, std::vector&lt; std::string &gt; requiredTypes, std::vector&lt; std::string &gt; texts)']]]
 ];
