@@ -24,11 +24,11 @@ namespace weave {
         }
 
     protected:
-        std::shared_ptr<StoryTemplate> createFromJsonValues(const Json::Value &root) const {
+        std::shared_ptr<StoryTemplate> createFromJsonValues(const Json::Value &root) const override {
             return std::make_shared<TestStoryTemplate>(requiredTypes);
         }
 
-        const char *getTemplateFile() const {
+        const char *getTemplateFile() const override {
             return "empty.st";
         }
 
