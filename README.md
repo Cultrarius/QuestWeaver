@@ -1,6 +1,7 @@
 # QuestWeaver
 
-<a href="https://travis-ci.org/Cultrarius/QuestWeaver"><img src="https://travis-ci.org/Cultrarius/QuestWeaver.svg"></a>
+<a href="https://drone.io/github.com/Cultrarius/QuestWeaver/admin/badges"><img src="https://drone.io/github.com/Cultrarius/QuestWeaver/status.png"></a>
+<a href='https://coveralls.io/github/Cultrarius/QuestWeaver?branch=master'><img src='https://coveralls.io/repos/github/Cultrarius/QuestWeaver/badge.svg?branch=master' alt='Coverage Status' /></a>
 <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.de"><img src="https://img.shields.io/badge/license-CC0-green.svg"></a>
 
 Procedurally generated quests and stories for computer games.
