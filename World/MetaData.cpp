@@ -8,7 +8,7 @@ using namespace weave;
 using namespace std;
 
 bool MetaData::HasValue(const std::string &name) const {
-    return data.find(name) != data.end();
+    return data.count(name) > 0;
 }
 
 int MetaData::GetValue(const std::string &name) const {

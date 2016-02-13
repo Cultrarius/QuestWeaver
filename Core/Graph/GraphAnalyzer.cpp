@@ -79,7 +79,7 @@ float GraphAnalyzer::getGraphScore(const WeaverGraph &graph, const AnalyzerParam
         activeNodeIds.insert(node.GetId());
 
         // penalty for optional nodes
-        if (mandatory.find(node.GetGroup()) == mandatory.end()) {
+        if (mandatory.count(node.GetGroup()) == 0) {
             score += param.optionalNodePenalty;
         }
 
@@ -101,8 +101,7 @@ float GraphAnalyzer::getGraphScore(const WeaverGraph &graph, const AnalyzerParam
 
     // weigh the edges
     for (auto edge : graph.GetEdges()) {
-        if ((activeNodeIds.find(edge.GetNode1()) != activeNodeIds.end()) &&
-            (activeNodeIds.find(edge.GetNode2()) != activeNodeIds.end())) {
+        if ((activeNodeIds.count(edge.GetNode1()) > 0) && (activeNodeIds.count(edge.GetNode2()) > 0)) {
             score += edge.Count(EdgeType::DIRECT) * param.previousQuestBonus;
             score += edge.Count(EdgeType::TRANSITIVE) * param.transitiveQuestBonus;
         }
@@ -134,7 +133,7 @@ void GraphAnalyzer::getSingleNodeActions(const WeaverGraph &graph, std::map<Grap
     float startScore = getGraphScore(graph, param);
     auto mandatoryGroups = graph.GetMandatoryGroups();
     for (string group : graph.GetGroups()) {
-        bool isMandatory = mandatoryGroups.find(group) != mandatoryGroups.end();
+        bool isMandatory = mandatoryGroups.count(group) > 0;
         for (auto &node : graph.GetNodes(group)) {
             // this copy of the complete graph is not the best solution for performance,
             // but has better readability than mutating the graph all the time

@@ -63,7 +63,7 @@ void StoryWriter::readNuggets() const {
             for (Value text : nuggetJson["texts"]) {
                 texts.push_back(text.asString());
             }
-            if (nuggets.find(key) != nuggets.end()) {
+            if (nuggets.count(key) > 0) {
                 throw ContractFailedException("Duplicate nugget key <" + key + ">!");
             }
             nuggets[key] = Nugget(key, requiredTypes, texts);

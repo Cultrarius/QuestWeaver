@@ -67,7 +67,7 @@ shared_ptr<WorldEntity> WorldModel::GetEntityById(ID id) const {
 }
 
 bool WorldModel::hasEntityWithId(ID id) const {
-    return id != 0 && entities.find(id) != entities.end();
+    return id != 0 && entities.count(id) > 0;
 }
 
 vector<shared_ptr<WorldEntity>> WorldModel::GetEntities() const {

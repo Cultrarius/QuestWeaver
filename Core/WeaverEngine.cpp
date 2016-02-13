@@ -55,7 +55,7 @@ WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldM
     unordered_set<ID> candidateIds;
     for (auto pair : candidates) {
         auto groupName = pair.first;
-        bool isMandatory = mandatory.find(groupName) != mandatory.end();
+        bool isMandatory = mandatory.count(groupName) > 0;
         graph.CreateNodeGroup(groupName, isMandatory);
         for (auto candidate : pair.second) {
             ID id = candidate.GetEntity()->GetId();
@@ -88,8 +88,8 @@ void WeaverEngine::addGraphEdges(const QuestModel &questModel, WeaverGraph &grap
             ID id = entity->GetId();
             // add unknown entities as shadow node, the graph will use them
             // to create the transitive edges between the nodes
-            if (candidateIds.find(id) == candidateIds.end()) {
-                if (shadowIds.find(id) == shadowIds.end()) {
+            if (candidateIds.count(id) == 0) {
+                if (shadowIds.count(id) == 0) {
                     graph.AddShadowNode(id);
                     shadowIds.insert(id);
                 }
@@ -103,7 +103,7 @@ void WeaverEngine::addGraphEdges(const QuestModel &questModel, WeaverGraph &grap
         for (ID id1 : entityIds) {
             seenIds.insert(id1);
             for (ID id2 : entityIds) {
-                if (seenIds.find(id2) != seenIds.end()) {
+                if (seenIds.count(id2) > 0) {
                     continue;
                 }
                 Edge edge(id1, id2, EdgeType::DIRECT, questId);

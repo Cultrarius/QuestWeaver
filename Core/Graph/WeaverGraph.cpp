@@ -28,7 +28,7 @@ WeaverGraph &WeaverGraph::AddNode(const Node &node) {
 
 WeaverGraph &WeaverGraph::CreateNodeGroup(const string &groupName, bool isMandatory) {
     checkUnfinalized();
-    if (groups.find(groupName) != groups.end()) {
+    if (groups.count(groupName) != 0) {
         throw ContractFailedException("Group " + groupName + " already exists in graph");
     }
     groups[groupName] = vector<Node>();
@@ -62,7 +62,7 @@ WeaverGraph &WeaverGraph::AddEdge(Edge edge) {
         nodeGroups.insert(node.GetGroup());
     }
     for (Node node : nodeIt2->second) {
-        if (nodeGroups.find(node.GetGroup()) != nodeGroups.end()) {
+        if (nodeGroups.count(node.GetGroup()) != 0) {
             return *this;
         }
     }
@@ -109,7 +109,7 @@ const vector<Node> &WeaverGraph::GetNodes(const string &groupName) const {
 }
 
 void WeaverGraph::ActivateNode(const Node &node) {
-    if (nodes.find(node.GetId()) == nodes.end()) {
+    if (nodes.count(node.GetId()) == 0) {
         throw ContractFailedException("Unable to activate unknown node!");
     }
     auto iter = groups.find(node.GetGroup());
@@ -123,14 +123,13 @@ void WeaverGraph::ActivateNode(const Node &node) {
 }
 
 bool WeaverGraph::DeactivateNode(const Node &node) {
-    if (nodes.find(node.GetId()) == nodes.end()) {
+    if (nodes.count(node.GetId()) == 0) {
         throw ContractFailedException("Unable to deactivate unknown node!");
     }
-    auto iter = groups.find(node.GetGroup());
-    if (iter == groups.end()) {
+    if (groups.count(node.GetGroup()) == 0) {
         throw ContractFailedException("Unable to deactivate node from unknown group!");
     }
-    if (mandatoryGroups.find(node.GetGroup()) != mandatoryGroups.end()) {
+    if (mandatoryGroups.count(node.GetGroup()) > 0) {
         return false;
     }
     activeNodes.erase(node);
@@ -142,7 +141,7 @@ const set<Node> &WeaverGraph::GetActiveNodes() const {
 }
 
 bool WeaverGraph::IsNodeActive(const Node &node) const {
-    return activeNodes.find(node) != activeNodes.end();
+    return activeNodes.count(node) > 0;
 }
 
 const vector<Node> &WeaverGraph::GetNodesWithId(ID id) const {
@@ -156,7 +155,7 @@ const vector<Node> &WeaverGraph::GetNodesWithId(ID id) const {
 
 WeaverGraph &WeaverGraph::AddShadowNode(ID shadowNodeId) {
     checkUnfinalized();
-    if (nodes.find(shadowNodeId) != nodes.end()) {
+    if (nodes.count(shadowNodeId) > 0) {
         throw ContractFailedException("Cannot add shadow node with id " + to_string(shadowNodeId) +
                                       ", because a regular node with the same id already exists!");
     }
@@ -168,7 +167,7 @@ WeaverGraph &WeaverGraph::AddShadowNode(ID shadowNodeId) {
 }
 
 bool WeaverGraph::isShadowNode(ID shadowNodeId) const {
-    return shadowNodes.find(shadowNodeId) != shadowNodes.end();
+    return shadowNodes.count(shadowNodeId) > 0;
 }
 
 void WeaverGraph::Finalize() {
