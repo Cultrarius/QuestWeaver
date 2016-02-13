@@ -1,17 +1,22 @@
 cmake_minimum_required(VERSION 3.2)
 project(QuestWeaver)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -g -O0 -fprofile-arcs -ftest-coverage -Wall -Wextra")
+if (CMAKE_BUILD_TYPE MATCHES DEBUG)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -g -O0 -fprofile-arcs -ftest-coverage -Wall -Wextra")
+
+    file(COPY Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+    file(COPY Test/Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Test)
+else ()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -O3")
+endif ()
+
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
+INCLUDE(CodeCoverage)
+SETUP_TARGET_FOR_COVERAGE(Weaver_coverage QuestWeaverTest "${CMAKE_CURRENT_SOURCE_DIR}/coverage")
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib")
-set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
-set(CMAKE_BUILD_TYPE "Debug")
-
-INCLUDE(CodeCoverage)
-SETUP_TARGET_FOR_COVERAGE(Weaver_coverage QuestWeaverTest "${CMAKE_CURRENT_SOURCE_DIR}/coverage")
-file(COPY Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-file(COPY Test/Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Test)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
@@ -23,6 +28,7 @@ set(SOURCE_FILES QuestWeaver.cpp Core/WeaverEngine.cpp Template/TemplateEngine.c
         Core/Graph/Node.cpp Core/Graph/Edge.cpp Core/Graph/GraphAnalyzer.cpp QuestModel/QuestModelAction.cpp
         World/WorldListener.cpp Story/StoryWriter.cpp Story/StoryTemplateFactory.cpp Story/StoryTemplate.cpp
         Story/Space/CommonSpaceStoryFactory.cpp Story/Space/AgentIntroStoryTemplate.h)
+
 add_executable(QuestWeaverTest ${SOURCE_FILES} Test/catch.hpp Test/TestRunner.cpp Test/WeaverGraphTest.cpp
         Test/WeaverUtilsTest.cpp Test/Space/TemplateTest.cpp Test/Space/SerializationTest.cpp Test/Space/ModelTest.cpp
         Test/GraphAnalyzerTest.cpp Test/QuestModelTest.cpp Test/Mock/TestQuest.cpp Test/Mock/TestQuest.h
@@ -30,4 +36,5 @@ add_executable(QuestWeaverTest ${SOURCE_FILES} Test/catch.hpp Test/TestRunner.cp
         Test/WeaverApiTest.cpp Test/StoryWriterTest.cpp Test/Mock/TestStoryTemplateFactory.h Test/Mock/TestStoryTemplate.h
         Test/Mock/TestHelper.h Test/Mock/TestHelper.cpp Test/Mock/TestQuestTemplate.cpp Test/Mock/TestQuestTemplate.h
         Test/Mock/TestQuestTemplateFactory.cpp Test/Mock/TestQuestTemplateFactory.h)
+
 add_library(QuestWeaver ${SOURCE_FILES})
