@@ -22,14 +22,13 @@
       <h1>
 <a id="questweaver" class="anchor" href="#questweaver" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>QuestWeaver</h1>
 
-<p><a href="https://travis-ci.org/Cultrarius/QuestWeaver"><img src="https://travis-ci.org/Cultrarius/QuestWeaver.svg"></a>
+<p><a href="https://drone.io/github.com/Cultrarius/QuestWeaver"><img src="https://drone.io/github.com/Cultrarius/QuestWeaver/status.png"></a>
+<a href="https://coveralls.io/github/Cultrarius/QuestWeaver?branch=master"><img src="https://coveralls.io/repos/github/Cultrarius/QuestWeaver/badge.svg?branch=master" alt="Coverage Status"></a>
 <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.de"><img src="https://img.shields.io/badge/license-CC0-green.svg"></a></p>
 
 <p>Procedurally generated quests and stories for computer games.</p>
 
-<p>This project is still in its early stages and under heavy development!</p>
-
-<p>This project includes the following JSON parser: <a href="https://github.com/open-source-parsers/jsoncpp">https://github.com/open-source-parsers/jsoncpp</a></p>
+<p><strong>This project is still in its early stages and under heavy development!</strong></p>
 
 <h2>
 <a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
@@ -69,14 +68,11 @@ fulfill change requests made by the quest system (otherwise the state will be in
     shared_ptr&lt;QuestTemplateFactory&gt; questFactory = make_shared&lt;MyQuestTemplateFactory&gt;();
     shared_ptr&lt;StoryTemplateFactory&gt; storyFactory = make_shared&lt;MyStoryTemplateFactory&gt;();
 
-    <span class="pl-c">// Create your world model</span>
-    <span class="pl-k">auto</span> worldModel = <span class="pl-k">new</span> <span class="pl-c1">MyWorldModel</span>();
-    shared_ptr&lt;WorldListener&gt; myWorldListener = make_shared&lt;MyWorldListener&gt;();
-
     <span class="pl-c">// Create Configuration</span>
     WeaverConfig config;
-    config.<span class="pl-smi">worldModel</span> = worldModel;
+    config.<span class="pl-smi">worldModel</span> = make_unique&lt;MyWorldModel&gt;();
     config.<span class="pl-smi">dirs</span>.<span class="pl-smi">modDirectory</span> = <span class="pl-s"><span class="pl-pds">"</span>./Template/<span class="pl-pds">"</span></span>;
+    shared_ptr&lt;WorldListener&gt; myWorldListener = make_shared&lt;MyWorldListener&gt;();
 
     <span class="pl-c">// Create the quest system</span>
     QuestWeaver <span class="pl-smi">weaver</span>(config);
@@ -117,6 +113,20 @@ The <code>WorldListener</code> allows you to change the game state whenever the 
     weaver.<span class="pl-c1">RegisterStoryTemplateFactory</span>(storyFactory);
     weaver.<span class="pl-c1">GetWorldModel</span>().<span class="pl-c1">AddListener</span>(myWorldListener);
 }</pre></div>
+
+<h2>
+<a id="included-projects" class="anchor" href="#included-projects" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Included projects</h2>
+
+<p>This project uses the help of some very fine frameworks:</p>
+
+<ul>
+<li>JSON parser: <a href="https://github.com/open-source-parsers/jsoncpp">https://github.com/open-source-parsers/jsoncpp</a>
+</li>
+<li>Serialization framework: <a href="http://uscilab.github.io/cereal/">http://uscilab.github.io/cereal/</a>
+</li>
+<li>Testing framework: <a href="https://github.com/philsquared/Catch">https://github.com/philsquared/Catch</a>
+</li>
+</ul>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/Cultrarius/QuestWeaver">QuestWeaver</a> is maintained by <a href="https://github.com/Cultrarius">Cultrarius</a>.</span>
