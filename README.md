@@ -95,7 +95,8 @@ void SerialTest() {
 
 ## Included projects
 
-This project includes the following JSON parser: https://github.com/open-source-parsers/jsoncpp
-As well as the following serialization framework: http://uscilab.github.io/cereal/
+This project uses the help of some very fine frameworks:
 
-To run the tests, the *catch* framework is integrated: https://github.com/philsquared/Catch
+* JSON parser: https://github.com/open-source-parsers/jsoncpp
+* Serialization framework: http://uscilab.github.io/cereal/
+* Testing framework: https://github.com/philsquared/Catch
