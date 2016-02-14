@@ -102,10 +102,11 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="title">QuestWeaver </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a href="https://travis-ci.org/Cultrarius/QuestWeaver"></a> <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.de"></a></p>
+    <div class="textblock"><p><a href="https://drone.io/github.com/Cultrarius/QuestWeaver"></a> <a
+            href="https://coveralls.io/github/Cultrarius/QuestWeaver?branch=master"></a> <a
+            href="https://creativecommons.org/publicdomain/zero/1.0/deed.de"></a></p>
 <p>Procedurally generated quests and stories for computer games.</p>
-<p>This project is still in its early stages and under heavy development!</p>
-<p>This project includes the following JSON parser: <a href="https://github.com/open-source-parsers/jsoncpp">https://github.com/open-source-parsers/jsoncpp</a></p>
+        <p><b>This project is still in its early stages and under heavy development!</b></p>
 <h2>Features</h2>
 <ul>
 <li>Fully <b>portable</b>, <b>serializable</b> quest system, perfect for use in savegames. Supports JSON and a compact binary format.</li>
@@ -125,14 +126,71 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li>Implement a custom <code>WorldModel</code> class</li>
 <li>Register your wold model and template factories with the <code>QuestWeaver</code> instance</li>
 </ul>
-<div class="fragment"><div class="line">QuestWeaver Init() {</div><div class="line">    <span class="comment">// Create your template factories</span></div><div class="line">    shared_ptr&lt;QuestTemplateFactory&gt; questFactory = make_shared&lt;MyQuestTemplateFactory&gt;();</div><div class="line">    shared_ptr&lt;StoryTemplateFactory&gt; storyFactory = make_shared&lt;MyStoryTemplateFactory&gt;();</div><div class="line"></div><div class="line">    <span class="comment">// Create your world model</span></div><div class="line">    <span class="keyword">auto</span> worldModel = <span class="keyword">new</span> MyWorldModel();</div><div class="line">    shared_ptr&lt;WorldListener&gt; myWorldListener = make_shared&lt;MyWorldListener&gt;();</div><div class="line"></div><div class="line">    <span class="comment">// Create Configuration</span></div><div class="line">    WeaverConfig config;</div><div class="line">    config.worldModel = worldModel;</div><div class="line">    config.dirs.modDirectory = <span class="stringliteral">&quot;./Template/&quot;</span>;</div><div class="line"></div><div class="line">    <span class="comment">// Create the quest system</span></div><div class="line">    QuestWeaver weaver(config);</div><div class="line">    weaver.RegisterQuestTemplateFactory(questFactory);</div><div class="line">    weaver.RegisterStoryTemplateFactory(storyFactory);</div><div class="line">    weaver.GetWorldModel().AddListener(myWorldListener);</div><div class="line"></div><div class="line">    <span class="keywordflow">return</span> weaver;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// Create new quests</span></div><div class="line">shared_ptr&lt;Quest&gt; newQuest = weaver.CreateNewQuest();</div></div><!-- fragment --><p>Quests usually want to change the world state as well as their own state (e.g. when a quest succeeds). To do that, you can tick the quest system in your game loop and it will take care of the rest by ticking each quest separately. The <code>WorldListener</code> allows you to change the game state whenever the world model was changed by the quest system.</p>
+        <div class="fragment">
+            <div class="line">QuestWeaver Init() {</div>
+            <div class="line"><span class="comment">// Create your template factories</span></div>
+            <div class="line"> shared_ptr&lt;QuestTemplateFactory&gt; questFactory = make_shared&lt;MyQuestTemplateFactory&gt;();</div>
+            <div class="line"> shared_ptr&lt;StoryTemplateFactory&gt; storyFactory = make_shared&lt;MyStoryTemplateFactory&gt;();</div>
+            <div class="line"></div>
+            <div class="line"><span class="comment">// Create Configuration</span></div>
+            <div class="line"> WeaverConfig config;</div>
+            <div class="line"> config.worldModel = make_unique&lt;MyWorldModel&gt;();</div>
+            <div class="line"> config.dirs.modDirectory = <span class="stringliteral">&quot;./Template/&quot;</span>;
+            </div>
+            <div class="line"> shared_ptr&lt;WorldListener&gt; myWorldListener = make_shared&lt;MyWorldListener&gt;();
+            </div>
+            <div class="line"></div>
+            <div class="line"><span class="comment">// Create the quest system</span></div>
+            <div class="line"> QuestWeaver weaver(config);</div>
+            <div class="line"> weaver.RegisterQuestTemplateFactory(questFactory);</div>
+            <div class="line"> weaver.RegisterStoryTemplateFactory(storyFactory);</div>
+            <div class="line"> weaver.GetWorldModel().AddListener(myWorldListener);</div>
+            <div class="line"></div>
+            <div class="line"><span class="keywordflow">return</span> weaver;</div>
+            <div class="line">}</div>
+            <div class="line"></div>
+            <div class="line"><span class="comment">// Create new quests</span></div>
+            <div class="line">shared_ptr&lt;Quest&gt; newQuest = weaver.CreateNewQuest();</div>
+        </div><!-- fragment --><p>Quests usually want to change the world state as well as their own state (e.g. when a
+            quest succeeds). To do that, you can tick the quest system in your game loop and it will take care of the
+            rest by ticking each quest separately. The <code>WorldListener</code> allows you to change the game state
+            whenever the world model was changed by the quest system.</p>
 <div class="fragment"><div class="line"><span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div><div class="line">   <span class="comment">// game loop ...</span></div><div class="line"></div><div class="line">   weaver.Tick(delta); <span class="comment">// updates the world state </span></div><div class="line">}</div></div><!-- fragment --><p>You can also fully serialize the quest system, e.g. to create a save game or to debug it:</p>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> SerialTest() {</div><div class="line">    QuestWeaver weaver = Init();</div><div class="line"></div><div class="line">    <span class="comment">// serialize</span></div><div class="line">    stringstream ss; <span class="comment">// can also be a file stream</span></div><div class="line">    weaver.Serialize(ss, StreamType::JSON);</div><div class="line">    cout &lt;&lt; ss.str() &lt;&lt; endl; <span class="comment">// or save it to disk</span></div><div class="line"></div><div class="line">    <span class="comment">// deserialize - it is important to re-register the template factories and the world model listener!</span></div><div class="line">    QuestWeaver deserialized = QuestWeaver::Deserialize(ss, StreamType::JSON, config.dirs);</div><div class="line">    weaver.RegisterQuestTemplateFactory(questFactory);</div><div class="line">    weaver.RegisterStoryTemplateFactory(storyFactory);</div><div class="line">    weaver.GetWorldModel().AddListener(myWorldListener);</div><div class="line">}</div></div><!-- fragment --> </div></div><!-- contents -->
+        <div class="fragment">
+            <div class="line"><span class="keywordtype">void</span> SerialTest() {</div>
+            <div class="line"> QuestWeaver weaver = Init();</div>
+            <div class="line"></div>
+            <div class="line"><span class="comment">// serialize</span></div>
+            <div class="line"> stringstream ss; <span class="comment">// can also be a file stream</span></div>
+            <div class="line"> weaver.Serialize(ss, StreamType::JSON);</div>
+            <div class="line"> cout &lt;&lt; ss.str() &lt;&lt; endl; <span class="comment">// or save it to disk</span>
+            </div>
+            <div class="line"></div>
+            <div class="line"><span class="comment">// deserialize - it is important to re-register the template factories and the world model listener!</span>
+            </div>
+            <div class="line"> QuestWeaver deserialized = QuestWeaver::Deserialize(ss, StreamType::JSON, config.dirs);
+            </div>
+            <div class="line"> weaver.RegisterQuestTemplateFactory(questFactory);</div>
+            <div class="line"> weaver.RegisterStoryTemplateFactory(storyFactory);</div>
+            <div class="line"> weaver.GetWorldModel().AddListener(myWorldListener);</div>
+            <div class="line">}</div>
+        </div><!-- fragment --><h2>Included projects</h2>
+        <p>This project uses the help of some very fine frameworks:</p>
+        <ul>
+            <li>JSON parser: <a href="https://github.com/open-source-parsers/jsoncpp">https://github.com/open-source-parsers/jsoncpp</a>
+            </li>
+            <li>Serialization framework: <a href="http://uscilab.github.io/cereal/">http://uscilab.github.io/cereal/</a>
+            </li>
+            <li>Testing framework: <a
+                    href="https://github.com/philsquared/Catch">https://github.com/philsquared/Catch</a></li>
+        </ul>
+    </div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Feb 13 2016 09:30:18 for QuestWeaver by
+      <li class="footer">Generated on Sun Feb 14 2016 01:07:17 for QuestWeaver by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>
