@@ -3,7 +3,7 @@
 //
 
 #include <Story/Space/CommonSpaceStoryFactory.h>
-#include "AgentIntroStoryTemplate.h"
+#include "Story/Space/AgentIntroStoryTemplate.h"
 
 using namespace std;
 using namespace weave;

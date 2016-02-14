@@ -17,6 +17,12 @@ namespace weave {
             return requiredTypes;
         }
 
+        RawStory CreateStory(std::map<std::string, std::shared_ptr<WorldEntity>>,
+                             const WeaverGraph &graph) const override {
+            return RawStory();
+        }
+
+
     private:
         std::vector<std::string> requiredTypes;
     };

@@ -9,25 +9,10 @@
 #include <QuestModel/QuestModel.h>
 #include <Template/TemplateEngine.h>
 #include <Story/StoryTemplateFactory.h>
+#include <Story/Nugget.h>
+#include <Story/RawStory.h>
 
 namespace weave {
-    class Nugget {
-    public:
-        Nugget() = default;
-
-        Nugget(std::string key, std::vector<std::string> requiredTypes, std::vector<std::string> texts);
-
-        std::string GetKey();
-
-        std::vector<std::string> GetRequiredTypes();
-
-        std::vector<std::string> GetTexts();
-
-    private:
-        std::string key;
-        std::vector<std::string> requiredTypes;
-        std::vector<std::string> texts;
-    };
 
     class StoryWriter {
     public:

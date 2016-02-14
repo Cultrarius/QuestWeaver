@@ -8,22 +8,6 @@ using namespace std;
 using namespace weave;
 using namespace Json;
 
-Nugget::Nugget(std::string key, std::vector<std::string> requiredTypes, std::vector<std::string> texts) :
-        key(key), requiredTypes(requiredTypes), texts(texts) {
-}
-
-std::string Nugget::GetKey() {
-    return key;
-}
-
-std::vector<std::string> Nugget::GetRequiredTypes() {
-    return requiredTypes;
-}
-
-std::vector<std::string> Nugget::GetTexts() {
-    return texts;
-}
-
 StoryWriter::StoryWriter(shared_ptr<RandomStream> randomStream, const QuestModel &questModel,
                          const TemplateEngine &templateEngine, const weave::WorldModel &worldModel,
                          const Directories &dirs) :
@@ -97,7 +81,7 @@ string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestProp
 
     initialize();
 
-    if (graph.GetActiveNodes().empty()) {
+    if (graph.GetActiveNodes().empty() || propertyValues.empty()) {
         return "";
     }
 
@@ -108,6 +92,18 @@ string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestProp
                 fittingTemplates.push_back(storyTemplate);
             }
         }
+    }
+
+    for (auto storyTemplate : fittingTemplates) {
+        map<string, shared_ptr<WorldEntity>> requiredEntities;
+        for (string required : storyTemplate->GetRequiredEntities()) {
+            for (auto value : propertyValues) {
+                if (value.GetValue()->GetType() == required) {
+                    requiredEntities[required] = value.GetValue();
+                }
+            }
+        }
+        RawStory rawResult = storyTemplate->CreateStory(requiredEntities, graph);
     }
 
     if (fittingTemplates.empty()) {
