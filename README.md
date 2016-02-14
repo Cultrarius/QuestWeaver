@@ -6,9 +6,7 @@
 
 Procedurally generated quests and stories for computer games.
 
-This project is still in its early stages and under heavy development!
-
-This project includes the following JSON parser: https://github.com/open-source-parsers/jsoncpp
+**This project is still in its early stages and under heavy development!**
 
 ## Features
 
@@ -42,14 +40,11 @@ QuestWeaver Init() {
     shared_ptr<QuestTemplateFactory> questFactory = make_shared<MyQuestTemplateFactory>();
     shared_ptr<StoryTemplateFactory> storyFactory = make_shared<MyStoryTemplateFactory>();
     
-    // Create your world model
-    auto worldModel = new MyWorldModel();
-    shared_ptr<WorldListener> myWorldListener = make_shared<MyWorldListener>();
-    
     // Create Configuration
     WeaverConfig config;
-    config.worldModel = worldModel;
+    config.worldModel = make_unique<MyWorldModel>();
     config.dirs.modDirectory = "./Template/";
+    shared_ptr<WorldListener> myWorldListener = make_shared<MyWorldListener>();
     
     // Create the quest system
     QuestWeaver weaver(config);
@@ -97,3 +92,10 @@ void SerialTest() {
     weaver.GetWorldModel().AddListener(myWorldListener);
 }
 ```
+
+## Included projects
+
+This project includes the following JSON parser: https://github.com/open-source-parsers/jsoncpp
+As well as the following serialization framework: http://uscilab.github.io/cereal/
+
+To run the tests, the *catch* framework is integrated: https://github.com/philsquared/Catch
