@@ -94,6 +94,15 @@ string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestProp
         }
     }
 
+    if (fittingTemplates.empty()) {
+        return "";
+    }
+
+    unordered_map<ID, QuestPropertyValue *> questValues;
+    for (auto value : propertyValues) {
+        questValues[value.GetValue()->GetId()] = &value;
+    }
+
     for (auto storyTemplate : fittingTemplates) {
         map<string, shared_ptr<WorldEntity>> requiredEntities;
         for (string required : storyTemplate->GetRequiredEntities()) {
@@ -103,13 +112,52 @@ string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestProp
                 }
             }
         }
+
+
+        stringstream story;
         for (StoryLine line : storyTemplate->CreateStory(requiredEntities, graph)) {
+            story << line.GetPrePart();
 
+            auto nuggetOptions = line.GetNuggetOptions();
+            if (nuggetOptions.empty()) {
+                story << line.GetPostPart();
+                continue;
+            }
+
+            vector<NuggetOption> supportedNuggets;
+            for (NuggetOption option : nuggetOptions) {
+                for (ID entityId : option.GetEntityIDs()) {
+                    if (questValues.count(entityId) == 0) {
+                        // the template knows which IDs are allowed, so this should never happen
+                        throw ContractFailedException("Invalid nugget option (ID " + to_string(entityId) + ")");
+                    }
+                }
+                if (nuggets.count(option.GetNuggetKey()) == 0) {
+                    // the template does not know which nuggets are actually registered, so this can happen
+                    continue;
+                }
+                supportedNuggets.push_back(option);
+            }
+            NuggetOption chosenOption = supportedNuggets[rs->GetRandomIndex(supportedNuggets.size())];
+            Nugget chosenNugget = nuggets[chosenOption.GetNuggetKey()];
+            auto texts = chosenNugget.GetTexts();
+            string nuggetText = texts[rs->GetRandomIndex(texts.size())];
+            auto entityTypes = chosenNugget.GetRequiredTypes();
+            auto entityIDs = chosenOption.GetEntityIDs();
+            if (entityTypes.size() != entityIDs.size()) {
+                throw ContractFailedException("Nugget parameter mismatch for key <" + chosenNugget.GetKey() + ">");
+            }
+            for (uint64_t i = 0; i < entityIDs.size(); i++) {
+                string from = "%" + entityTypes[i];
+                string to = questValues[entityIDs[i]]->GetValueString(templateEngine.GetFormat());
+                if (!replace(&nuggetText, from, to)) {
+                    string error("Unable to replace nugget text (i=" + to_string(i) + ", key=" + entityTypes[i] + ")");
+                    throw ContractFailedException(error);
+                }
+            }
+
+            story << line.GetPostPart();
         }
-    }
-
-    if (fittingTemplates.empty()) {
-        return "";
     }
 
     return "In a far away galaxy a long time ago...\nThere were three little piglets!";
