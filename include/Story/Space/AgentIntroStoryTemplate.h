@@ -13,8 +13,8 @@ namespace weave {
             return requiredTypes;
         }
 
-        RawStory CreateStory(std::map<std::string, std::shared_ptr<WorldEntity>>,
-                             const WeaverGraph &graph) const override;
+        std::vector<StoryLine> CreateStory(std::map<std::string, std::shared_ptr<WorldEntity>>,
+                                           const WeaverGraph &graph) const override;
 
     private:
         std::vector<std::string> requiredTypes = {"agent"};

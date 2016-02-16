@@ -103,7 +103,9 @@ string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestProp
                 }
             }
         }
-        RawStory rawResult = storyTemplate->CreateStory(requiredEntities, graph);
+        for (StoryLine line : storyTemplate->CreateStory(requiredEntities, graph)) {
+
+        }
     }
 
     if (fittingTemplates.empty()) {

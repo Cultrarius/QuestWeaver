@@ -10,7 +10,7 @@
 #include <Template/TemplateEngine.h>
 #include <Story/StoryTemplateFactory.h>
 #include <Story/Nugget.h>
-#include <Story/RawStory.h>
+#include <Story/StoryLine.h>
 
 namespace weave {
 

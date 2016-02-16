@@ -17,9 +17,9 @@ namespace weave {
             return requiredTypes;
         }
 
-        RawStory CreateStory(std::map<std::string, std::shared_ptr<WorldEntity>>,
-                             const WeaverGraph &graph) const override {
-            return RawStory(std::vector<StoryLine>());
+        std::vector<StoryLine> CreateStory(std::map<std::string, std::shared_ptr<WorldEntity>>,
+                                           const WeaverGraph &graph) const override {
+            return std::vector<StoryLine>();
         }
 
 

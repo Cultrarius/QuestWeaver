@@ -5,7 +5,7 @@
 #pragma once
 
 #include <Core/WeaverTypes.h>
-#include <Story/RawStory.h>
+#include <Story/StoryLine.h>
 #include <Core/Graph/WeaverGraph.h>
 #include <World/WorldEntity.h>
 
@@ -18,7 +18,7 @@ namespace weave {
 
         virtual std::vector<std::string> GetRequiredEntities() const = 0;
 
-        virtual RawStory CreateStory(std::map<std::string, std::shared_ptr<WorldEntity>>,
-                                     const WeaverGraph &graph) const = 0;
+        virtual std::vector<StoryLine> CreateStory(std::map<std::string, std::shared_ptr<WorldEntity>>,
+                                                   const WeaverGraph &graph) const = 0;
     };
 }
