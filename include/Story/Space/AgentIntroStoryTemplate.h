@@ -20,8 +20,4 @@ namespace weave {
         std::vector<std::string> requiredTypes = {"agent"};
     };
 
-    RawStory AgentIntroStoryTemplate::CreateStory(std::map<std::string, std::shared_ptr<WorldEntity>> map,
-                                                  const WeaverGraph &graph) const {
-        return RawStory();
-    }
 }
