@@ -8,31 +8,31 @@
 using namespace std;
 using namespace weave;
 
-bool TemplateQuestProperty::IsMandatory() const {
+bool TemplateQuestProperty::IsMandatory() const noexcept {
     return isMandatory;
 }
 
-string TemplateQuestProperty::GetName() const {
+string TemplateQuestProperty::GetName() const noexcept {
     return name;
 }
 
-TemplateQuestProperty::TemplateQuestProperty(bool isMandatory, const string &name) {
+TemplateQuestProperty::TemplateQuestProperty(bool isMandatory, const string &name) noexcept {
     this->isMandatory = isMandatory;
     this->name = name;
 }
 
-vector<TemplateQuestProperty> QuestTemplate::GetProperties() const {
+vector<TemplateQuestProperty> QuestTemplate::GetProperties() const noexcept {
     return properties;
 }
 
-string TemplateQuestDescription::GetText(FormatterType format) const {
+string TemplateQuestDescription::GetText(FormatterType format) const noexcept {
     if (format == FormatterType::HTML) {
         return htmlEncloseWithTag(text, "span", "description");
     }
     return text;
 }
 
-TemplateQuestDescription::TemplateQuestDescription(const vector<string> &conditions, const string &text) {
+TemplateQuestDescription::TemplateQuestDescription(const vector<string> &conditions, const string &text) noexcept {
     this->descriptionConditions = conditions;
     sort(this->descriptionConditions.begin(), this->descriptionConditions.end());
     this->text = text;
@@ -47,19 +47,19 @@ QuestTemplate::QuestTemplate(string title, vector<TemplateQuestProperty> propert
 }
 
 QuestPropertyValue::QuestPropertyValue(const TemplateQuestProperty &property,
-                                       shared_ptr<WorldEntity> value) :
+                                       shared_ptr<WorldEntity> value) noexcept :
         property(property), value(value) {
 }
 
-TemplateQuestProperty QuestPropertyValue::GetProperty() const {
+TemplateQuestProperty QuestPropertyValue::GetProperty() const noexcept {
     return property;
 }
 
-shared_ptr<WorldEntity> QuestPropertyValue::GetValue() const {
+shared_ptr<WorldEntity> QuestPropertyValue::GetValue() const noexcept {
     return value;
 }
 
-string QuestPropertyValue::GetValueString(FormatterType format) const {
+string QuestPropertyValue::GetValueString(FormatterType format) const noexcept {
     if (format == FormatterType::HTML) {
         vector<string> classes;
         classes.push_back("entity");
@@ -92,12 +92,12 @@ string QuestTemplate::getBestFittingDescription(const vector<QuestPropertyValue>
     throw ContractFailedException(message);
 }
 
-bool TemplateQuestDescription::SupportsConditions(const vector<string> &conditions) const {
+bool TemplateQuestDescription::SupportsConditions(const vector<string> &conditions) const noexcept {
     return includes(conditions.begin(), conditions.end(),
                     descriptionConditions.begin(), descriptionConditions.end());
 }
 
-string QuestTemplate::getTitle(const vector<QuestPropertyValue> &questPropertyValues) const {
+string QuestTemplate::getTitle(const vector<QuestPropertyValue> &questPropertyValues) const noexcept {
     string titleText = this->title;
     for (const auto &questProperty : questPropertyValues) {
         const string &conditionLabel = "%" + questProperty.GetProperty().GetName();
@@ -111,7 +111,7 @@ string QuestTemplate::getTitle(const vector<QuestPropertyValue> &questPropertyVa
 }
 
 ID QuestTemplate::getEntityIdFromProperty(string propertyName,
-                                          const vector<QuestPropertyValue> &questPropertyValues) {
+                                          const vector<QuestPropertyValue> &questPropertyValues) noexcept {
     for (auto propertyValue : questPropertyValues) {
         if (propertyValue.GetProperty().GetName() == propertyName) {
             return propertyValue.GetValue()->GetId();

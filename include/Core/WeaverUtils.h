@@ -10,16 +10,17 @@
 
 namespace weave {
 
-    bool replace(std::string *str, const std::string &from, const std::string &to);
+    bool replace(std::string *str, const std::string &from, const std::string &to) noexcept;
 
-    void replaceAll(std::string *str, const std::string &from, const std::string &to);
+    void replaceAll(std::string *str, const std::string &from, const std::string &to) noexcept;
 
     std::string htmlEncloseWithTag(const std::string &str, const std::string &tag,
-                                   const std::vector<std::string> &classes);
+                                   const std::vector<std::string> &classes) noexcept;
 
-    std::string htmlEncloseWithTag(const std::string &str, const std::string &tag);
+    std::string htmlEncloseWithTag(const std::string &str, const std::string &tag) noexcept;
 
-    std::string htmlEncloseWithTag(const std::string &str, const std::string &tag, const std::string &cssClass);
+    std::string htmlEncloseWithTag(const std::string &str, const std::string &tag,
+                                   const std::string &cssClass) noexcept;
 
     Json::Value readJsonFromFile(const char *fileName, const Directories &dirs);
 }

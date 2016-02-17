@@ -11,54 +11,142 @@
 
 namespace weave {
 
+    /*!
+     * Marks parts of a quest template that represent a WorldEntity.
+     *
+     * The quest system usually has to choose between multiple possible entities for each quest property.
+     * Instances of this class allow the quest system to tell the template which entity should be used for which part
+     * of a quest.
+     */
     class TemplateQuestProperty {
     public:
-        TemplateQuestProperty(bool isMandatory, const std::string &name);
+        /*!
+         * Creates a new quest property with the given name.
+         *
+         * @param isMandatory If true, then the quest template is unable to create a quest without this property.
+         * Otherwise, this property is optional.
+         * @param name The name of this quest property.
+         */
+        TemplateQuestProperty(bool isMandatory, const std::string &name) noexcept;
 
-        bool IsMandatory() const;
+        /*!
+         * Returns true if the quest template is unable to create a quest without this property.
+         */
+        bool IsMandatory() const noexcept;
 
-        std::string GetName() const;
+        /*!
+         * Returns the name of this quest property.
+         */
+        std::string GetName() const noexcept;
 
     private:
         bool isMandatory;
         std::string name;
     };
 
+
+    /*!
+     * Data container linking quest templates and world entities.
+     *
+     * Each quest template requires a number of world entities, which it describes with TemplateQuestProperty values.
+     * Once the quest system has found a suitable WorldEntity for such a value, it creates a QuestPropertyValue object.
+     */
     class QuestPropertyValue {
     public:
-        QuestPropertyValue(const TemplateQuestProperty &property, std::shared_ptr<WorldEntity> value);
+        /*!
+         * Creates a new instance linking the given quest property and world entity.
+         *
+         * @param property the quest property this object describes
+         * @param value the world entity to use for the quest property
+         */
+        QuestPropertyValue(const TemplateQuestProperty &property, std::shared_ptr<WorldEntity> value) noexcept;
 
-        TemplateQuestProperty GetProperty() const;
+        /*!
+         * Returns the quest property value described by this object.
+         */
+        TemplateQuestProperty GetProperty() const noexcept;
 
-        std::shared_ptr<WorldEntity> GetValue() const;
+        /*!
+         * Returns the world entity to use for this object's quest property.
+         */
+        std::shared_ptr<WorldEntity> GetValue() const noexcept;
 
-        std::string GetValueString(FormatterType format) const;
+        /*!
+         * Returns a formatted string version of the WorldEntity contained in this object.
+         */
+        std::string GetValueString(FormatterType format) const noexcept;
+
     private:
         TemplateQuestProperty property;
         std::shared_ptr<WorldEntity> value;
     };
 
+
+    /*!
+     * Wraps the quest description texts for the QuestTemplate.
+     * Contains a text from the template files and the required conditions for the text to appear.
+     */
     class TemplateQuestDescription {
     public:
-        TemplateQuestDescription(const std::vector<std::string> &conditions, const std::string &text);
+        /*!
+         * Creates a new description that is valid for the given conditions.
+         *
+         * @param conditions The names of the TemplateQuestProperty values required for the description to be used.
+         * @param text the description text containing placeholders for the conditions.
+         * A placeholder is a string with a leading %-sign.
+         * When the quest is created, each placeholder will be substituted with the corresponding QuestPropertyValue.
+         */
+        TemplateQuestDescription(const std::vector<std::string> &conditions, const std::string &text) noexcept;
 
-        bool SupportsConditions(const std::vector<std::string> &conditions) const;
+        /*!
+         * Returns true if this description text can be constructed under the given conditions.
+         * @param conditions the **sorted** list of conditions.
+         */
+        bool SupportsConditions(const std::vector<std::string> &conditions) const noexcept;
 
-        std::string GetText(FormatterType format) const;
+        /*!
+         * Returns the description text containing placeholders for the corresponding QuestPropertyValue.
+         */
+        std::string GetText(FormatterType format) const noexcept;
 
     private:
         std::vector<std::string> descriptionConditions;
         std::string text;
     };
 
+
+    /*!
+     * Defines a blueprint from which a specific type of quest can be generated.
+     * Each template contains the information necessary to create variations of a specific quest.
+     *
+     * The template data itself is kept in JSON format in a file and loaded via the QuestTemplateFactory.
+     *
+     * ### Example
+     * A template might define the variables and entities necessary to create a "fetch" quest.
+     * Some of these entities might be optional, e.g. who gave the player the quest.
+     * Some of them are mandatory, e.g. what the player has to fetch.
+     *
+     * A quest generated from such a template might be "Get the king's crown from the dragon" or
+     * "fetch 10 eggs to make breakfast", depending on the entities the world model creates.
+     */
     class QuestTemplate {
     public:
+        /*!
+         * Creates a new quest template.
+         * @param title The quest title (can contain placeholders for *mandatory* properties).
+         * @param properties The properties used by the quest system to select world entities for the quest.
+         * The names of these properties will also be used when substituting the placeholders in the title and
+         * description texts.
+         * @param descriptions The possible description texts. One of these descriptions will be used to create the
+         * quest description, depending on the optional properties used by the quest system.
+         * @param formatterType The format used when creating the texts for a new quest.
+         */
         QuestTemplate(std::string title,
                       std::vector<TemplateQuestProperty> properties,
                       std::vector<TemplateQuestDescription> descriptions,
                       FormatterType formatterType);
 
-        virtual ~QuestTemplate() { }
+        virtual ~QuestTemplate() = default;
 
         virtual std::shared_ptr<Quest> ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues,
                                                const std::string &questStory) const = 0;
@@ -68,22 +156,20 @@ namespace weave {
         virtual std::vector<WorldModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
                                                                     const WorldModel &worldModel) const = 0;
 
-        std::vector<TemplateQuestProperty> GetProperties() const;
+        std::vector<TemplateQuestProperty> GetProperties() const noexcept;
 
     protected:
         std::string getBestFittingDescription(const std::vector<QuestPropertyValue> &questPropertyValues) const;
 
-        std::string getTitle(const std::vector<QuestPropertyValue> &questPropertyValues) const;
+        std::string getTitle(const std::vector<QuestPropertyValue> &questPropertyValues) const noexcept;
 
         static ID getEntityIdFromProperty(std::string propertyName,
-                                          const std::vector<QuestPropertyValue> &questPropertyValues);
+                                          const std::vector<QuestPropertyValue> &questPropertyValues) noexcept;
 
     private:
         std::string title;
         std::vector<TemplateQuestProperty> properties;
         std::vector<TemplateQuestDescription> descriptions;
         FormatterType formatterType;
-
-        std::vector<std::string> getHtmlClasses(const QuestPropertyValue &value) const;
     };
 }

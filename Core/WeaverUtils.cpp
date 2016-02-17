@@ -9,7 +9,7 @@ using namespace std;
 using namespace weave;
 using namespace Json;
 
-void weave::replaceAll(string *str, const string &from, const string &to) {
+void weave::replaceAll(string *str, const string &from, const string &to) noexcept {
     if (from.empty()) {
         return;
     }
@@ -20,7 +20,7 @@ void weave::replaceAll(string *str, const string &from, const string &to) {
     }
 }
 
-bool weave::replace(string *str, const string &from, const string &to) {
+bool weave::replace(string *str, const string &from, const string &to) noexcept {
     size_t start_pos = str->find(from);
     if (start_pos == string::npos) {
         return false;
@@ -29,11 +29,11 @@ bool weave::replace(string *str, const string &from, const string &to) {
     return true;
 }
 
-string weave::htmlEncloseWithTag(const string &str, const string &tag) {
+string weave::htmlEncloseWithTag(const string &str, const string &tag) noexcept {
     return htmlEncloseWithTag(str, tag, vector<string>());
 }
 
-string weave::htmlEncloseWithTag(const string &str, const string &tag, const vector<string> &classes) {
+string weave::htmlEncloseWithTag(const string &str, const string &tag, const vector<string> &classes) noexcept {
     if (tag == "") {
         return str;
     }
@@ -54,7 +54,8 @@ string weave::htmlEncloseWithTag(const string &str, const string &tag, const vec
     return html.str();
 }
 
-std::string weave::htmlEncloseWithTag(const std::string &str, const std::string &tag, const std::string &cssClass) {
+std::string weave::htmlEncloseWithTag(const std::string &str, const std::string &tag,
+                                      const std::string &cssClass) noexcept {
     vector<string> classes;
     classes.push_back(cssClass);
     return htmlEncloseWithTag(str, tag, classes);
