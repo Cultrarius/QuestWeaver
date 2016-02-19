@@ -10,6 +10,10 @@
 #include "QuestTemplate.h"
 
 namespace weave {
+
+    /*!
+     * @ingroup questApi
+     */
     class QuestTemplateFactory {
     public:
         virtual ~QuestTemplateFactory() = default;

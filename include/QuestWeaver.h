@@ -16,6 +16,14 @@
 #include <World/WorldListener.h>
 #include <WeaverConfig.h>
 
+/*!
+ * @defgroup mainApi Main API
+ * @defgroup questApi Quest API
+ * @defgroup storyApi Story API
+ * @defgroup worldApi World API
+ * @defgroup internal Internal
+ */
+
 namespace weave {
 
     /*!
@@ -25,6 +33,8 @@ namespace weave {
      * the quest weaver will generate new and interesting quest.
      *
      * Instances of this class are not thread safe.
+     *
+     * @ingroup mainApi
      */
     class QuestWeaver {
     public:

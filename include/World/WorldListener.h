@@ -8,6 +8,10 @@
 #include "WorldModelAction.h"
 
 namespace weave {
+
+    /*!
+     * @ingroup worldApi
+     */
     class WorldListener {
     public:
 		virtual ~WorldListener() {}

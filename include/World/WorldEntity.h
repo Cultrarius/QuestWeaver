@@ -9,6 +9,9 @@
 
 namespace weave {
 
+    /*!
+     * @ingroup worldApi
+     */
     class WorldEntity {
     public:
         static const ID NoID = 0;

@@ -10,6 +10,10 @@
 #include "QuestTemplate.h"
 
 namespace weave {
+
+    /*!
+     * @ingroup internal
+     */
     class TemplateEngine {
     public:
         TemplateEngine(std::shared_ptr<RandomStream> randomStream, Directories dirs, FormatterType format);

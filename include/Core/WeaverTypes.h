@@ -11,6 +11,8 @@ namespace weave {
 
     /*!
      * Used to identify unique objects in the quest system, i.e. quests or world entities.
+     *
+     * @ingroup mainApi
      */
     typedef uint64_t ID;
 
@@ -19,6 +21,8 @@ namespace weave {
      *
      * All wrong API calls or expected problems (e.g. not being able to parse a quest template) will throw this
      * exception.
+     *
+     * @ingroup mainApi
      */
     struct ContractFailedException : public std::exception {
         std::string s;
@@ -32,6 +36,8 @@ namespace weave {
 
     /*!
      * Operator to enable the use of enums as keys in maps.
+     *
+     * @ingroup internal
      */
     struct EnumClassHash {
         template<typename T>
@@ -42,6 +48,8 @@ namespace weave {
 
     /*!
      * This struct hold information about the programs file search paths.
+     *
+     * @ingroup mainApi
      */
     struct Directories {
         /*!
@@ -64,6 +72,11 @@ namespace weave {
         }
     };
 
+    /*!
+     * Defines the possible serialization types of the quest system.
+     *
+     * @ingroup mainApi
+     */
     enum class StreamType {
         /*!
          * A verbose text format, good for debugging or manual changes.
@@ -77,6 +90,11 @@ namespace weave {
                 BINARY
     };
 
+    /*!
+     * Defines the possible output formats of the texts produced by the quest system.
+     *
+     * @ingroup mainApi
+     */
     enum class FormatterType {
         /*!
          * All texts will be created as vanilla texts without any additional formatting markers
@@ -95,6 +113,8 @@ namespace weave {
      *
      * Defines a serializable, seeded pseudo-random number generator that is used to generate random numbers for the
      * quest system.
+     *
+     * @ingroup mainApi
      */
     class RandomStream {
     public:

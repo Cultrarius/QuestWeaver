@@ -39,14 +39,16 @@ QuestTickResult Quest::Tick(float delta) {
 }
 
 QuestTickResult::QuestTickResult(vector<WorldModelAction> worldChanges, QuestModelAction questChanges) :
-        worldChanges(worldChanges), questChanges(questChanges) {
+        worldChanges(worldChanges), questChanges(questChanges)
+
+noexcept {
 }
 
-vector<WorldModelAction> QuestTickResult::GetWorldChanges() const {
+vector<WorldModelAction> QuestTickResult::GetWorldChanges() const noexcept {
     return worldChanges;
 }
 
-QuestModelAction QuestTickResult::GetQuestChange() const {
+QuestModelAction QuestTickResult::GetQuestChange() const noexcept {
     return questChanges;
 }
 

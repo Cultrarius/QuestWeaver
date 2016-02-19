@@ -17,6 +17,8 @@ namespace weave {
      * The quest system usually has to choose between multiple possible entities for each quest property.
      * Instances of this class allow the quest system to tell the template which entity should be used for which part
      * of a quest.
+     *
+     * @ingroup questApi
      */
     class TemplateQuestProperty {
     public:

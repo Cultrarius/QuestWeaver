@@ -14,6 +14,8 @@ namespace weave {
      * Holds information about a world entity.
      * World entities are considered stateless by the quest system, so any information about their involvement in
      * quests is saved as MetaData.
+     *
+     * @ingroup worldApi
      */
     class MetaData {
     public:

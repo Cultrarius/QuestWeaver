@@ -14,6 +14,9 @@
 
 namespace weave {
 
+    /*!
+     * @ingroup worldApi
+     */
     class WorldModel {
     public:
         WorldModel();

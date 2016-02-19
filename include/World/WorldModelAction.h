@@ -12,10 +12,16 @@
 
 namespace weave {
 
+    /*!
+     * @ingroup worldApi
+     */
     enum class WorldActionType {
         KEEP, CREATE, DELETE, UPDATE
     };
 
+    /*!
+     * @ingroup worldApi
+     */
     class WorldModelAction {
     public:
         WorldModelAction() :
