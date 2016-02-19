@@ -15,6 +15,11 @@
 
 */
 
+.highlight-source-c++ {
+	color: #AFA376;
+	background-color: #232323;
+}
+
 .pl-c /* comment */ {
   color: #969896;
 }
