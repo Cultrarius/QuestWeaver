@@ -148,21 +148,59 @@ namespace weave {
 
         virtual ~QuestTemplate() = default;
 
+        /*!
+         * Creates a new quest based on this template and the given parameters.
+         *
+         * @param questPropertyValues the values for the template's mandatory and optional properties.
+         * @param questStory the quest's background story.
+         */
         virtual std::shared_ptr<Quest> ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues,
                                                const std::string &questStory) const = 0;
 
+        /*!
+         * Creates a new quest based on this template and the given parameters.
+         * The resulting quest has no background story.
+         *
+         * @param questPropertyValues the values for the template's mandatory and optional properties.
+         */
         std::shared_ptr<Quest> ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues) const;
 
+        /*!
+         * This method creates a list of possible candidates for a given template property.
+         * Subclasses implementing this method may search the world model for fitting entities or they may use
+         * the world model to create new entities.
+         *
+         * For every candidate, the template may add some metadata (e.g. relationship changes caused by the quest
+         * or markers to not choose the entity for another quest). If a candidate is chosen from the list,
+         * the corresponding WorldModelAction is executed in the world model.
+         */
         virtual std::vector<WorldModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
                                                                     const WorldModel &worldModel) const = 0;
 
+        /*!
+         * Returns a list of all the template parts that (mandatory) must be filled and (optional) can be filled with
+         * world entities.
+         * Which entities can be used to fill a cartain TemplateQuestProperty is determined by the template itself, by
+         * the GetPropertyCandidates() method.
+         */
         std::vector<TemplateQuestProperty> GetProperties() const noexcept;
 
     protected:
+
+        /*!
+         * Returns the first description that supports all of the given property values.
+         */
         std::string getBestFittingDescription(const std::vector<QuestPropertyValue> &questPropertyValues) const;
 
+        /*!
+         * Returns the quest title and uses the given property values to replace any placeholders.
+         */
         std::string getTitle(const std::vector<QuestPropertyValue> &questPropertyValues) const noexcept;
 
+        /*!
+         * Returns the ID of the entitiy referenced by the property with the given name or returns 0 if no property
+         * with such a name can be found.
+         */
         static ID getEntityIdFromProperty(std::string propertyName,
                                           const std::vector<QuestPropertyValue> &questPropertyValues) noexcept;
 
