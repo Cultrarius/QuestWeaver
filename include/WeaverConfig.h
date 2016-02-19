@@ -10,6 +10,9 @@
 
 namespace weave {
 
+    /*!
+     * Holds the configuration data to create new QuestWeaver instances.
+     */
     struct WeaverConfig {
         /*!
          * The random seed used to create new quests.
@@ -59,8 +62,16 @@ namespace weave {
          */
         std::shared_ptr<RandomStream> randomStream;
 
+        /*!
+         * Creates a new config using default values.
+         * Please note that the config is **not valid** as long as no world model is assigned to it.
+         */
         WeaverConfig() = default;
 
+        /*!
+         * Creates a new config using default values and the given seed.
+         * Please note that the config is **not valid** as long as no world model is assigned to it.
+         */
         explicit WeaverConfig(uint64_t seed) : seed(seed) { }
     };
 }
