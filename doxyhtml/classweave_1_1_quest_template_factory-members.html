@@ -47,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -115,22 +116,66 @@ $(document).ready(function(){initNavTree('classweave_1_1_quest_template_factory.
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#a353ad8e6049d73bf73d5a202e32c3e36">createFromJsonValues</a>(const Json::Value &amp;root) const  =0</td><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#a7202fb6b0aa6cd62d650b29b2a07db64">CreateTemplate</a>(const std::string &amp;templateKey)</td><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#a63bc781d0d51d0c22a67cf7baa02d888">extractDescriptions</a>(const Json::Value &amp;root) const </td><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#a4cc3652a0d2ddffae69c8c41477777ce">extractProperties</a>(const Json::Value &amp;root) const </td><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#af4ff07cdffff3b2fa3a41cde048baf8d">extractProperties</a>(std::vector&lt; TemplateQuestProperty &gt; *properties, const Json::Value &amp;jsonMandatory, bool isMandatory) const </td><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#ac53ee32b3853c58c366a6f64dd6902a7">extractTitle</a>(const Json::Value &amp;root) const </td><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#a55824bdb9c3f9c65910c13463d7f3b36">formatterType</a></td><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#a8a25760aa1e0ba1594e9a9341badf2df">getTemplateFile</a>() const  =0</td><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#aa74ae5523c9c10ac72d8520261b33ef3">GetTemplateKeys</a>()</td><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#ad249b253529f63a955ebf6843fab62d3">randomStream</a></td><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#aa2c5408181a31ce1d5150972b68a26f9">templateMap</a></td><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even">
+    <td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#a6e30f454df1678054bd1242f5502cec2">extractDescriptions</a>(const
+      Json::Value &amp;root)
+    </td>
+    <td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a>
+    </td>
+    <td class="entry"><span class="mlabel">protected</span><span class="mlabel">static</span></td>
+  </tr>
+  <tr>
+    <td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#ad26b505992bcff27dc78d47f6657f54c">extractProperties</a>(const
+      Json::Value &amp;root)
+    </td>
+    <td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a>
+    </td>
+    <td class="entry"><span class="mlabel">protected</span><span class="mlabel">static</span></td>
+  </tr>
+  <tr class="even">
+    <td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#a02649415f3f77233828e258d27632f9f">extractTitle</a>(const
+      Json::Value &amp;root, std::shared_ptr&lt; RandomStream &gt; randomStream)
+    </td>
+    <td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a>
+    </td>
+    <td class="entry"><span class="mlabel">protected</span><span class="mlabel">static</span></td>
+  </tr>
+  <tr>
+    <td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#a55824bdb9c3f9c65910c13463d7f3b36">formatterType</a>
+    </td>
+    <td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a>
+    </td>
+    <td class="entry"><span class="mlabel">protected</span></td>
+  </tr>
+  <tr class="even">
+    <td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#a8a25760aa1e0ba1594e9a9341badf2df">getTemplateFile</a>()
+      const =0
+    </td>
+    <td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a>
+    </td>
+    <td class="entry"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></td>
+  </tr>
+  <tr>
+    <td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#aa74ae5523c9c10ac72d8520261b33ef3">GetTemplateKeys</a>()
+    </td>
+    <td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a>
+    </td>
+    <td class="entry"></td>
+  </tr>
+  <tr class="even">
+    <td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#ad249b253529f63a955ebf6843fab62d3">randomStream</a>
+    </td>
+    <td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a>
+    </td>
+    <td class="entry"><span class="mlabel">protected</span></td>
+  </tr>
   <tr><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html#a6515d3e3c6f80bbde7bf9db08835ce67">~QuestTemplateFactory</a>()=default</td><td class="entry"><a class="el" href="classweave_1_1_quest_template_factory.html">weave::QuestTemplateFactory</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Feb 14 2016 01:07:17 for QuestWeaver by
+    <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>

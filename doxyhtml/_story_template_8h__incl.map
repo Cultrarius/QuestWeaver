@@ -1,3 +1,6 @@
 <map id="include/Story/StoryTemplate.h" name="include/Story/StoryTemplate.h">
-<area shape="rect" id="node2" href="$_weaver_types_8h.html" title="Core/WeaverTypes.h" alt="" coords="31,80,178,107"/>
+<area shape="rect" id="node2" href="$_weaver_types_8h.html" title="Core/WeaverTypes.h" alt="" coords="29,229,176,256"/>
+<area shape="rect" id="node5" href="$_story_line_8h.html" title="Story/StoryLine.h" alt="" coords="28,80,150,107"/>
+<area shape="rect" id="node8" href="$_world_entity_8h.html" title="World/WorldEntity.h" alt="" coords="382,80,521,107"/>
+<area shape="rect" id="node6" href="$_nugget_8h.html" title="Nugget.h" alt="" coords="102,155,177,181"/>
 </map>

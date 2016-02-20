@@ -1,5 +1,7 @@
 <map id="include/Story/StoryWriter.h" name="include/Story/StoryWriter.h">
-<area shape="rect" id="node2" href="$_weaver_utils_8h.html" title="Core/WeaverUtils.h" alt="" coords="3182,155,3319,181"/>
-<area shape="rect" id="node50" href="$_story_template_factory_8h.html" title="Story/StoryTemplateFactory.h" alt="" coords="3531,80,3728,107"/>
-<area shape="rect" id="node4" href="$_weaver_types_8h.html" title="WeaverTypes.h" alt="" coords="115,244,229,271"/>
+<area shape="rect" id="node2" href="$_weaver_utils_8h.html" title="Core/WeaverUtils.h" alt="" coords="3169,155,3306,181"/>
+<area shape="rect" id="node48" href="$_story_template_factory_8h.html" title="Story/StoryTemplateFactory.h" alt="" coords="4840,80,5037,107"/>
+<area shape="rect" id="node49" href="$_nugget_8h.html" title="Nugget.h" alt="" coords="5372,155,5447,181"/>
+<area shape="rect" id="node50" href="$_story_line_8h.html" title="Story/StoryLine.h" alt="" coords="5348,80,5471,107"/>
+<area shape="rect" id="node4" href="$_weaver_types_8h.html" title="WeaverTypes.h" alt="" coords="6727,244,6841,271"/>
 </map>

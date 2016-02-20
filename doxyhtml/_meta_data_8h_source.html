@@ -47,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -107,9 +108,86 @@ $(document).ready(function(){initNavTree('_meta_data_8h_source.html','');});
 <div class="title">MetaData.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_meta_data_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by michael on 26.10.15.</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;cereal.h&gt;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;../Core/WeaverTypes.h&quot;</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;../Core/WeaverUtils.h&quot;</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceweave.html">weave</a> {</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classweave_1_1_meta_data.html">   18</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classweave_1_1_meta_data.html">MetaData</a> {</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classweave_1_1_meta_data.html#a9c7a7c554143c9e4038e26453739a5b5">HasValue</a>(<span class="keyword">const</span> std::string &amp;name) <span class="keyword">const</span>;</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classweave_1_1_meta_data.html#a56dd6e6ce1a2184e4fc0c0972103e0e1">GetValue</a>(<span class="keyword">const</span> std::string &amp;name) <span class="keyword">const</span>;</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="classweave_1_1_meta_data.html">MetaData</a> &amp;<a class="code" href="classweave_1_1_meta_data.html#af24eb20bba3f5e45bdd4483a8d15ae77">SetValue</a>(<span class="keyword">const</span> std::string &amp;name, <span class="keywordtype">int</span> value);</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        std::vector&lt;std::string&gt; <a class="code" href="classweave_1_1_meta_data.html#a61ef992067446ad651573e852e0186ae">GetValueNames</a>() <span class="keyword">const</span>;</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">private</span>:</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        std::unordered_map&lt;std::string, int&gt; data;</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="comment">// serialization</span></div><div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classweave_1_1_meta_data.html#ab2f44cbb59a08132f4c843e5225bba0e">   45</a></span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span>cereal::access;</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> Archive&gt;</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordtype">void</span> serialize(Archive &amp;archive) {</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            archive(CEREAL_NVP(data));</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        }</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    };</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div><div class="ttc" id="namespaceweave_html"><div class="ttname"><a href="namespaceweave.html">weave</a></div><div class="ttdef"><b>Definition:</b> <a href="_quest_weaver_8h_source.html#l00019">QuestWeaver.h:19</a></div></div>
+  <a href="_meta_data_8h.html">Go to the documentation of this file.</a>
+  <div class="fragment">
+    <div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
+    <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by michael on 26.10.15.</span>
+    </div>
+    <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
+    <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
+    <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span>
+    </div>
+    <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+    <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;cereal.h&gt;</span>
+    </div>
+    <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;../Core/WeaverTypes.h&quot;</span>
+    </div>
+    <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;../Core/WeaverUtils.h&quot;</span>
+    </div>
+    <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+    <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span
+            class="keyword">namespace </span><a class="code" href="namespaceweave.html">weave</a> {
+    </div>
+    <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+    <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classweave_1_1_meta_data.html">
+      20</a></span>&#160; <span class="keyword">class </span><a class="code" href="classweave_1_1_meta_data.html">MetaData</a>
+      {
+    </div>
+    <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; <span class="keyword">public</span>:
+    </div>
+    <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; <span class="keywordtype">bool</span>
+      <a class="code" href="classweave_1_1_meta_data.html#a9c7a7c554143c9e4038e26453739a5b5">HasValue</a>(<span
+              class="keyword">const</span> std::string &amp;name) <span class="keyword">const</span>;
+    </div>
+    <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+    <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; <span class="keywordtype">int</span>
+      <a class="code" href="classweave_1_1_meta_data.html#a56dd6e6ce1a2184e4fc0c0972103e0e1">GetValue</a>(<span
+              class="keyword">const</span> std::string &amp;name) <span class="keyword">const</span>;
+    </div>
+    <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+    <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; <a class="code"
+                                                                                      href="classweave_1_1_meta_data.html">MetaData</a>
+      &amp;<a class="code" href="classweave_1_1_meta_data.html#af24eb20bba3f5e45bdd4483a8d15ae77">SetValue</a>(<span
+              class="keyword">const</span> std::string &amp;name, <span class="keywordtype">int</span> value);
+    </div>
+    <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+    <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; std::vector&lt;std::string&gt; <a
+            class="code" href="classweave_1_1_meta_data.html#a61ef992067446ad651573e852e0186ae">GetValueNames</a>()
+      <span class="keyword">const</span>;
+    </div>
+    <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+    <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; <span class="keyword">private</span>:
+    </div>
+    <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; std::unordered_map&lt;std::string,
+      int&gt; data;
+    </div>
+    <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+    <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; <span class="comment">// serialization</span>
+    </div>
+    <div class="line"><a name="l00047"></a><span class="lineno"><a class="line"
+                                                                   href="classweave_1_1_meta_data.html#ab2f44cbb59a08132f4c843e5225bba0e">
+      47</a></span>&#160; <span class="keyword">friend</span> <span class="keyword">class </span>cereal::access;
+    </div>
+    <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+    <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; <span class="keyword">template</span>&lt;<span
+            class="keyword">class</span> Archive&gt;</div>
+    <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; <span class="keywordtype">void</span>
+      serialize(Archive &amp;archive) {
+    </div>
+    <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; archive(CEREAL_NVP(data));</div>
+    <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; }</div>
+    <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; };</div>
+    <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+    <div class="ttc" id="namespaceweave_html">
+      <div class="ttname"><a href="namespaceweave.html">weave</a></div>
+      <div class="ttdef"><b>Definition:</b> <a href="_quest_weaver_8h_source.html#l00027">QuestWeaver.h:27</a></div>
+    </div>
 <div class="ttc" id="classweave_1_1_meta_data_html_a56dd6e6ce1a2184e4fc0c0972103e0e1"><div class="ttname"><a href="classweave_1_1_meta_data.html#a56dd6e6ce1a2184e4fc0c0972103e0e1">weave::MetaData::GetValue</a></div><div class="ttdeci">int GetValue(const std::string &amp;name) const </div><div class="ttdoc">Returns the value associated with the given key. </div></div>
-<div class="ttc" id="classweave_1_1_meta_data_html"><div class="ttname"><a href="classweave_1_1_meta_data.html">weave::MetaData</a></div><div class="ttdoc">Holds information about a world entity. </div><div class="ttdef"><b>Definition:</b> <a href="_meta_data_8h_source.html#l00018">MetaData.h:18</a></div></div>
+    <div class="ttc" id="classweave_1_1_meta_data_html">
+      <div class="ttname"><a href="classweave_1_1_meta_data.html">weave::MetaData</a></div>
+      <div class="ttdoc">Holds information about a world entity.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_meta_data_8h_source.html#l00020">MetaData.h:20</a></div>
+    </div>
 <div class="ttc" id="classweave_1_1_meta_data_html_a9c7a7c554143c9e4038e26453739a5b5"><div class="ttname"><a href="classweave_1_1_meta_data.html#a9c7a7c554143c9e4038e26453739a5b5">weave::MetaData::HasValue</a></div><div class="ttdeci">bool HasValue(const std::string &amp;name) const </div><div class="ttdoc">Returns true if this container holds a value for the given key. </div></div>
 <div class="ttc" id="classweave_1_1_meta_data_html_a61ef992067446ad651573e852e0186ae"><div class="ttname"><a href="classweave_1_1_meta_data.html#a61ef992067446ad651573e852e0186ae">weave::MetaData::GetValueNames</a></div><div class="ttdeci">std::vector&lt; std::string &gt; GetValueNames() const </div><div class="ttdoc">Returns the names of all keys this container has values for. </div></div>
 <div class="ttc" id="classweave_1_1_meta_data_html_af24eb20bba3f5e45bdd4483a8d15ae77"><div class="ttname"><a href="classweave_1_1_meta_data.html#af24eb20bba3f5e45bdd4483a8d15ae77">weave::MetaData::SetValue</a></div><div class="ttdeci">MetaData &amp; SetValue(const std::string &amp;name, int value)</div><div class="ttdoc">Saves a value for the given key in this container. </div></div>
@@ -119,7 +197,7 @@ $(document).ready(function(){initNavTree('_meta_data_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_0d1b67172504b89b2d9553816bcaba92.html">World</a></li><li class="navelem"><a class="el" href="_meta_data_8h.html">MetaData.h</a></li>
-    <li class="footer">Generated on Sun Feb 14 2016 01:07:17 for QuestWeaver by
+    <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>

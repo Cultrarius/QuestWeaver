@@ -47,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -110,28 +111,84 @@ $(document).ready(function(){initNavTree('classweave_1_1_template_quest_property
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classweave_1_1_template_quest_property-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">weave::TemplateQuestProperty Class Reference</div>  </div>
+    <div class="title">weave::TemplateQuestProperty Class Reference
+      <div class="ingroups"><a class="el" href="group__quest_api.html">Quest API</a></div>
+    </div>
+  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="_quest_template_8h_source.html">QuestTemplate.h</a>&gt;</code></p>
+  <p>Marks parts of a quest template that represent a <a class="el"
+                                                         href="classweave_1_1_world_entity.html">WorldEntity</a>.
+    <a href="classweave_1_1_template_quest_property.html#details">More...</a></p>
+
+  <p><code>#include &lt;<a class="el" href="_quest_template_8h_source.html">QuestTemplate.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afc05e28e4e9f4ae0bc6942c6e0c79420"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_template_quest_property.html#afc05e28e4e9f4ae0bc6942c6e0c79420">TemplateQuestProperty</a> (bool isMandatory, const std::string &amp;name)</td></tr>
-<tr class="separator:afc05e28e4e9f4ae0bc6942c6e0c79420"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23d76f8ca14978a730346a487c969ea2"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_template_quest_property.html#a23d76f8ca14978a730346a487c969ea2">GetName</a> () const </td></tr>
-<tr class="separator:a23d76f8ca14978a730346a487c969ea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b0a6c7488fcaedfcd68e93a5d396170"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_template_quest_property.html#a2b0a6c7488fcaedfcd68e93a5d396170">IsMandatory</a> () const </td></tr>
-<tr class="separator:a2b0a6c7488fcaedfcd68e93a5d396170"><td class="memSeparator" colspan="2">&#160;</td></tr>
+  <tr class="memitem:a1e19644f63241bde2e8d149dedf2c744">
+    <td class="memItemLeft" align="right" valign="top">&#160;</td>
+    <td class="memItemRight" valign="bottom"><a class="el"
+                                                href="classweave_1_1_template_quest_property.html#a1e19644f63241bde2e8d149dedf2c744">TemplateQuestProperty</a>
+      (bool isMandatory, const std::string &amp;name) noexcept
+    </td>
+  </tr>
+  <tr class="memdesc:a1e19644f63241bde2e8d149dedf2c744">
+    <td class="mdescLeft">&#160;</td>
+    <td class="mdescRight">Creates a new quest property with the given name. <a
+            href="#a1e19644f63241bde2e8d149dedf2c744">More...</a><br/></td>
+  </tr>
+  <tr class="separator:a1e19644f63241bde2e8d149dedf2c744">
+    <td class="memSeparator" colspan="2">&#160;</td>
+  </tr>
+  <tr class="memitem:a38c37f53cabdaa9b29b647fcda8ec04b">
+    <td class="memItemLeft" align="right" valign="top">std::string&#160;</td>
+    <td class="memItemRight" valign="bottom"><a class="el"
+                                                href="classweave_1_1_template_quest_property.html#a38c37f53cabdaa9b29b647fcda8ec04b">GetName</a>
+      () const noexcept
+    </td>
+  </tr>
+  <tr class="memdesc:a38c37f53cabdaa9b29b647fcda8ec04b">
+    <td class="mdescLeft">&#160;</td>
+    <td class="mdescRight">Returns the name of this quest property. <a
+            href="#a38c37f53cabdaa9b29b647fcda8ec04b">More...</a><br/></td>
+  </tr>
+  <tr class="separator:a38c37f53cabdaa9b29b647fcda8ec04b">
+    <td class="memSeparator" colspan="2">&#160;</td>
+  </tr>
+  <tr class="memitem:aed71a8f3a5f270ffb53e762fb9b7a09d">
+    <td class="memItemLeft" align="right" valign="top">bool&#160;</td>
+    <td class="memItemRight" valign="bottom"><a class="el"
+                                                href="classweave_1_1_template_quest_property.html#aed71a8f3a5f270ffb53e762fb9b7a09d">IsMandatory</a>
+      () const noexcept
+    </td>
+  </tr>
+  <tr class="memdesc:aed71a8f3a5f270ffb53e762fb9b7a09d">
+    <td class="mdescLeft">&#160;</td>
+    <td class="mdescRight">Returns true if the quest template is unable to create a quest without this property. <a
+            href="#aed71a8f3a5f270ffb53e762fb9b7a09d">More...</a><br/></td>
+  </tr>
+  <tr class="separator:aed71a8f3a5f270ffb53e762fb9b7a09d">
+    <td class="memSeparator" colspan="2">&#160;</td>
+  </tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="_quest_template_8h_source.html#l00014">14</a> of file <a class="el" href="_quest_template_8h_source.html">QuestTemplate.h</a>.</p>
+  <div class="textblock"><p>Marks parts of a quest template that represent a <a class="el"
+                                                                                href="classweave_1_1_world_entity.html">WorldEntity</a>.
+  </p>
+    <p>The quest system usually has to choose between multiple possible entities for each quest property. Instances of
+      this class allow the quest system to tell the template which entity should be used for which part of a quest. </p>
+
+    <p>Definition at line <a class="el" href="_quest_template_8h_source.html#l00023">23</a> of file <a class="el"
+                                                                                                       href="_quest_template_8h_source.html">QuestTemplate.h</a>.
+    </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="afc05e28e4e9f4ae0bc6942c6e0c79420"></a>
+  <a class="anchor" id="a1e19644f63241bde2e8d149dedf2c744"></a>
 <div class="memitem">
 <div class="memproto">
+  <table class="mlabels">
+    <tr>
+      <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">weave::TemplateQuestProperty::TemplateQuestProperty </td>
@@ -151,14 +208,41 @@ Public Member Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+      </td>
+      <td class="mlabels-right">
+        <span class="mlabels"><span class="mlabel">noexcept</span></span></td>
+    </tr>
+  </table>
 </div><div class="memdoc">
+
+  <p>Creates a new quest property with the given name. </p>
+  <dl class="params">
+    <dt>Parameters</dt>
+    <dd>
+      <table class="params">
+        <tr>
+          <td class="paramname">isMandatory</td>
+          <td>If true, then the quest template is unable to create a quest without this property. Otherwise, this
+            property is optional.
+          </td>
+        </tr>
+        <tr>
+          <td class="paramname">name</td>
+          <td>The name of this quest property.</td>
+        </tr>
+      </table>
+    </dd>
+  </dl>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a23d76f8ca14978a730346a487c969ea2"></a>
+  <a class="anchor" id="a38c37f53cabdaa9b29b647fcda8ec04b"></a>
 <div class="memitem">
 <div class="memproto">
+  <table class="mlabels">
+    <tr>
+      <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">std::string weave::TemplateQuestProperty::GetName </td>
@@ -167,13 +251,23 @@ Public Member Functions</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+      </td>
+      <td class="mlabels-right">
+        <span class="mlabels"><span class="mlabel">noexcept</span></span></td>
+    </tr>
+  </table>
 </div><div class="memdoc">
+
+  <p>Returns the name of this quest property. </p>
 
 </div>
 </div>
-<a class="anchor" id="a2b0a6c7488fcaedfcd68e93a5d396170"></a>
+  <a class="anchor" id="aed71a8f3a5f270ffb53e762fb9b7a09d"></a>
 <div class="memitem">
 <div class="memproto">
+  <table class="mlabels">
+    <tr>
+      <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool weave::TemplateQuestProperty::IsMandatory </td>
@@ -182,7 +276,14 @@ Public Member Functions</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+      </td>
+      <td class="mlabels-right">
+        <span class="mlabels"><span class="mlabel">noexcept</span></span></td>
+    </tr>
+  </table>
 </div><div class="memdoc">
+
+  <p>Returns true if the quest template is unable to create a quest without this property. </p>
 
 </div>
 </div>
@@ -195,7 +296,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceweave.html">weave</a></li><li class="navelem"><a class="el" href="classweave_1_1_template_quest_property.html">TemplateQuestProperty</a></li>
-    <li class="footer">Generated on Sun Feb 14 2016 01:07:17 for QuestWeaver by
+    <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>

@@ -47,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -107,19 +108,264 @@ $(document).ready(function(){initNavTree('_quest_weaver_8h_source.html','');});
 <div class="title">QuestWeaver.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_quest_weaver_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by michael on 10.08.15.</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_weaver_types_8h.html">Core/WeaverTypes.h</a>&gt;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;cereal.h&gt;</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;json/json.h&gt;</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;Core/WeaverEngine.h&gt;</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;QuestModel/QuestModel.h&gt;</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;Template/TemplateEngine.h&gt;</span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_world_model_8h.html">World/WorldModel.h</a>&gt;</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_quest_8h.html">QuestModel/Quest.h</a>&gt;</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_weaver_utils_8h.html">Core/WeaverUtils.h</a>&gt;</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_world_listener_8h.html">World/WorldListener.h</a>&gt;</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_weaver_config_8h.html">WeaverConfig.h</a>&gt;</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div><div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="namespaceweave.html">   19</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceweave.html">weave</a> {</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div><div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classweave_1_1_quest_weaver.html">   29</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classweave_1_1_quest_weaver.html">QuestWeaver</a> {</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classweave_1_1_quest_weaver.html">QuestWeaver</a>(<a class="code" href="structweave_1_1_weaver_config.html">WeaverConfig</a> &amp;config);</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classweave_1_1_quest_weaver.html#ab9d87f0b4aa25a8c084b7089e76f5aca">RegisterQuestTemplateFactory</a>(std::shared_ptr&lt;QuestTemplateFactory&gt; factory);</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classweave_1_1_quest_weaver.html#a407384e8ea452e36447742893f96392f">RegisterStoryTemplateFactory</a>(std::shared_ptr&lt;StoryTemplateFactory&gt; factory);</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classweave_1_1_quest_weaver.html#a01debc9fab30def40cf00fc41a303fe5">ChangeWorkingDirectories</a>(<a class="code" href="structweave_1_1_directories.html">Directories</a> directories);</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        std::shared_ptr&lt;Quest&gt; <a class="code" href="classweave_1_1_quest_weaver.html#ab4cc3f1ed3b13738547b298ad4f6856a">CreateNewQuest</a>();</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classweave_1_1_quest_weaver.html#aa775638812718cc59edd6debbc32d70e">Tick</a>(<span class="keywordtype">float</span> delta);</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        std::vector&lt;std::shared_ptr&lt;Quest&gt;&gt; <a class="code" href="classweave_1_1_quest_weaver.html#a1260b729344e6e3bfe0a7911665ff8af">GetQuestsWithState</a>(<a class="code" href="namespaceweave.html#afa0e9cd4efa7f2671317618cf3d9b479">QuestState</a> state) <span class="keyword">const</span>;</div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        std::vector&lt;std::shared_ptr&lt;Quest&gt;&gt; <a class="code" href="classweave_1_1_quest_weaver.html#ae039124d0b281e8d5722282271e516c1">GetAllQuests</a>() <span class="keyword">const</span>;</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        std::shared_ptr&lt;Quest&gt; <a class="code" href="classweave_1_1_quest_weaver.html#ac03a367e700dd770d3c6f6cde28f3b4a">GetQuest</a>(<a class="code" href="namespaceweave.html#ad16585a767748e749a3389c77b0e5c76">ID</a> questId) <span class="keyword">const</span>;</div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classweave_1_1_quest_weaver.html#a006001f54518fd3c266d1502b17db040">ChangeQuestState</a>(<a class="code" href="classweave_1_1_quest_model_action.html">QuestModelAction</a> questAction);</div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keyword">const</span> <a class="code" href="classweave_1_1_world_model.html">WorldModel</a> &amp;<a class="code" href="classweave_1_1_quest_weaver.html#ab66bd94d2b1c3851d3fd52db1945f9cd">GetWorldModel</a>() <span class="keyword">const</span>;</div><div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div><div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classweave_1_1_quest_weaver.html#af4faa60c735a47c941bf42d0948e026f">Serialize</a>(std::ostream &amp;outputStream, <a class="code" href="namespaceweave.html#a43b695846582193689b15af33499cab3">StreamType</a> type);</div><div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div><div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keyword">static</span> <a class="code" href="classweave_1_1_quest_weaver.html">QuestWeaver</a> <a class="code" href="classweave_1_1_quest_weaver.html#adc3136568dcad0bd9bb616d60b53f482">Deserialize</a>(std::istream &amp;inputStream, <a class="code" href="namespaceweave.html#a43b695846582193689b15af33499cab3">StreamType</a> type);</div><div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div><div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keyword">static</span> <a class="code" href="classweave_1_1_quest_weaver.html">QuestWeaver</a> <a class="code" href="classweave_1_1_quest_weaver.html#adc3136568dcad0bd9bb616d60b53f482">Deserialize</a>(std::istream &amp;inputStream, <a class="code" href="namespaceweave.html#a43b695846582193689b15af33499cab3">StreamType</a> type, <a class="code" href="structweave_1_1_directories.html">Directories</a> currentDirectories);</div><div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div><div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keyword">private</span>:</div><div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        std::unique_ptr&lt;WeaverEngine&gt; engine;</div><div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        std::unique_ptr&lt;QuestModel&gt; quests;</div><div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        std::unique_ptr&lt;TemplateEngine&gt; templates;</div><div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        std::unique_ptr&lt;WorldModel&gt; world;</div><div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        std::unique_ptr&lt;StoryWriter&gt; stories;</div><div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        std::shared_ptr&lt;RandomStream&gt; randomStream;</div><div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div><div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="comment">// serialization</span></div><div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="classweave_1_1_quest_weaver.html#ab2f44cbb59a08132f4c843e5225bba0e">  146</a></span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span>cereal::access;</div><div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div><div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <a class="code" href="classweave_1_1_quest_weaver.html">QuestWeaver</a>();</div><div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;</div><div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> Archive&gt;</div><div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="keywordtype">void</span> load(Archive &amp;archive) {</div><div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            <a class="code" href="namespaceweave.html#ac4254b88961d333d4dd8189d11168576">FormatterType</a> format;</div><div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world),</div><div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                    cereal::make_nvp(<span class="stringliteral">&quot;format&quot;</span>, format));</div><div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            engine.reset(<span class="keyword">new</span> WeaverEngine(randomStream));</div><div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            stories.reset(<span class="keyword">new</span> <a class="code" href="classweave_1_1_story_writer.html">StoryWriter</a>(randomStream, *quests, *templates, *world, <a class="code" href="structweave_1_1_directories.html">Directories</a>()));</div><div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            templates.reset(<span class="keyword">new</span> TemplateEngine(randomStream, <a class="code" href="structweave_1_1_directories.html">Directories</a>(), format));</div><div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        }</div><div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;</div><div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> Archive&gt;</div><div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keywordtype">void</span> save(Archive &amp;archive)<span class="keyword"> const </span>{</div><div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world),</div><div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                    cereal::make_nvp(<span class="stringliteral">&quot;format&quot;</span>, templates-&gt;GetFormat()));</div><div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        }</div><div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    };</div><div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}</div><div class="ttc" id="classweave_1_1_quest_weaver_html_a407384e8ea452e36447742893f96392f"><div class="ttname"><a href="classweave_1_1_quest_weaver.html#a407384e8ea452e36447742893f96392f">weave::QuestWeaver::RegisterStoryTemplateFactory</a></div><div class="ttdeci">void RegisterStoryTemplateFactory(std::shared_ptr&lt; StoryTemplateFactory &gt; factory)</div><div class="ttdoc">Registers a new story template factory with the quest system. </div></div>
+  <a href="_quest_weaver_8h.html">Go to the documentation of this file.</a>
+  <div class="fragment">
+    <div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
+    <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by michael on 10.08.15.</span>
+    </div>
+    <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
+    <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
+    <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span>
+    </div>
+    <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+    <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a
+            class="code" href="_weaver_types_8h.html">Core/WeaverTypes.h</a>&gt;</span></div>
+    <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;cereal.h&gt;</span>
+    </div>
+    <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;json/json.h&gt;</span>
+    </div>
+    <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;Core/WeaverEngine.h&gt;</span>
+    </div>
+    <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;QuestModel/QuestModel.h&gt;</span>
+    </div>
+    <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;Template/TemplateEngine.h&gt;</span>
+    </div>
+    <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a
+            class="code" href="_world_model_8h.html">World/WorldModel.h</a>&gt;</span></div>
+    <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a
+            class="code" href="_quest_8h.html">QuestModel/Quest.h</a>&gt;</span></div>
+    <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a
+            class="code" href="_weaver_utils_8h.html">Core/WeaverUtils.h</a>&gt;</span></div>
+    <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a
+            class="code" href="_world_listener_8h.html">World/WorldListener.h</a>&gt;</span></div>
+    <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a
+            class="code" href="_weaver_config_8h.html">WeaverConfig.h</a>&gt;</span></div>
+    <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+    <div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="namespaceweave.html">
+      27</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceweave.html">weave</a> {
+    </div>
+    <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+    <div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classweave_1_1_quest_weaver.html">
+      39</a></span>&#160; <span class="keyword">class </span><a class="code" href="classweave_1_1_quest_weaver.html">QuestWeaver</a>
+      {
+    </div>
+    <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; <span class="keyword">public</span>:
+    </div>
+    <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; <span class="keyword">explicit</span>
+      <a class="code" href="classweave_1_1_quest_weaver.html">QuestWeaver</a>(<a class="code"
+                                                                                 href="structweave_1_1_weaver_config.html">WeaverConfig</a>
+      &amp;config);
+    </div>
+    <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+    <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; <span class="keywordtype">void</span>
+      <a class="code" href="classweave_1_1_quest_weaver.html#ab9d87f0b4aa25a8c084b7089e76f5aca">RegisterQuestTemplateFactory</a>(std::shared_ptr&lt;QuestTemplateFactory&gt;
+      factory);
+    </div>
+    <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+    <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; <span class="keywordtype">void</span>
+      <a class="code" href="classweave_1_1_quest_weaver.html#a407384e8ea452e36447742893f96392f">RegisterStoryTemplateFactory</a>(std::shared_ptr&lt;StoryTemplateFactory&gt;
+      factory);
+    </div>
+    <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+    <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; <span class="keywordtype">void</span>
+      <a class="code"
+         href="classweave_1_1_quest_weaver.html#a01debc9fab30def40cf00fc41a303fe5">ChangeWorkingDirectories</a>(<a
+              class="code" href="structweave_1_1_directories.html">Directories</a> directories);
+    </div>
+    <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+    <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; std::shared_ptr&lt;Quest&gt; <a
+            class="code" href="classweave_1_1_quest_weaver.html#ab4cc3f1ed3b13738547b298ad4f6856a">CreateNewQuest</a>();
+    </div>
+    <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+    <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; <span class="keywordtype">void</span>
+      <a class="code" href="classweave_1_1_quest_weaver.html#aa775638812718cc59edd6debbc32d70e">Tick</a>(<span
+              class="keywordtype">float</span> delta);
+    </div>
+    <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+    <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; std::vector&lt;std::shared_ptr&lt;Quest&gt;&gt;
+      <a class="code"
+         href="classweave_1_1_quest_weaver.html#a1260b729344e6e3bfe0a7911665ff8af">GetQuestsWithState</a>(<a
+              class="code" href="group__quest_api.html#gafa0e9cd4efa7f2671317618cf3d9b479">QuestState</a> state) <span
+              class="keyword">const</span>;
+    </div>
+    <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+    <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; std::vector&lt;std::shared_ptr&lt;Quest&gt;&gt;
+      <a class="code" href="classweave_1_1_quest_weaver.html#ae039124d0b281e8d5722282271e516c1">GetAllQuests</a>() <span
+              class="keyword">const</span>;
+    </div>
+    <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+    <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; std::shared_ptr&lt;Quest&gt; <a
+            class="code" href="classweave_1_1_quest_weaver.html#ac03a367e700dd770d3c6f6cde28f3b4a">GetQuest</a>(<a
+            class="code" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a> questId) <span
+            class="keyword">const</span>;
+    </div>
+    <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+    <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; <span class="keywordtype">bool</span>
+      <a class="code" href="classweave_1_1_quest_weaver.html#a006001f54518fd3c266d1502b17db040">ChangeQuestState</a>(<a
+              class="code" href="classweave_1_1_quest_model_action.html">QuestModelAction</a> questAction);
+    </div>
+    <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
+    <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; <span class="keyword">const</span> <a
+            class="code" href="classweave_1_1_world_model.html">WorldModel</a> &amp;<a class="code"
+                                                                                       href="classweave_1_1_quest_weaver.html#ab66bd94d2b1c3851d3fd52db1945f9cd">GetWorldModel</a>()
+      <span class="keyword">const</span>;
+    </div>
+    <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
+    <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; <span class="keywordtype">void</span>
+      <a class="code" href="classweave_1_1_quest_weaver.html#af4faa60c735a47c941bf42d0948e026f">Serialize</a>(std::ostream
+      &amp;outputStream, <a class="code" href="group__main_api.html#ga43b695846582193689b15af33499cab3">StreamType</a>
+      type);
+    </div>
+    <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
+    <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; <span class="keyword">static</span>
+      <a class="code" href="classweave_1_1_quest_weaver.html">QuestWeaver</a> <a class="code"
+                                                                                 href="classweave_1_1_quest_weaver.html#adc3136568dcad0bd9bb616d60b53f482">Deserialize</a>(std::istream
+      &amp;inputStream, <a class="code" href="group__main_api.html#ga43b695846582193689b15af33499cab3">StreamType</a>
+      type);
+    </div>
+    <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
+    <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; <span class="keyword">static</span>
+      <a class="code" href="classweave_1_1_quest_weaver.html">QuestWeaver</a> <a class="code"
+                                                                                 href="classweave_1_1_quest_weaver.html#adc3136568dcad0bd9bb616d60b53f482">Deserialize</a>(std::istream
+      &amp;inputStream, <a class="code" href="group__main_api.html#ga43b695846582193689b15af33499cab3">StreamType</a>
+      type, <a class="code" href="structweave_1_1_directories.html">Directories</a> currentDirectories);
+    </div>
+    <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
+    <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; <span class="keyword">private</span>:
+    </div>
+    <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; std::unique_ptr&lt;WeaverEngine&gt;
+      engine;
+    </div>
+    <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; std::unique_ptr&lt;QuestModel&gt;
+      quests;
+    </div>
+    <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; std::unique_ptr&lt;TemplateEngine&gt;
+      templates;
+    </div>
+    <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; std::unique_ptr&lt;WorldModel&gt;
+      world;
+    </div>
+    <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; std::unique_ptr&lt;StoryWriter&gt;
+      stories;
+    </div>
+    <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; std::shared_ptr&lt;RandomStream&gt;
+      randomStream;
+    </div>
+    <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div>
+    <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; <span class="comment">// serialization</span>
+    </div>
+    <div class="line"><a name="l00156"></a><span class="lineno"><a class="line"
+                                                                   href="classweave_1_1_quest_weaver.html#ab2f44cbb59a08132f4c843e5225bba0e">
+      156</a></span>&#160; <span class="keyword">friend</span> <span class="keyword">class </span>cereal::access;
+    </div>
+    <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;</div>
+    <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; <a class="code"
+                                                                                      href="classweave_1_1_quest_weaver.html">QuestWeaver</a>();
+    </div>
+    <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;</div>
+    <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; <span class="keyword">template</span>&lt;<span
+            class="keyword">class</span> Archive&gt;</div>
+    <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; <span class="keywordtype">void</span>
+      load(Archive &amp;archive) {
+    </div>
+    <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; <a class="code"
+                                                                                      href="group__main_api.html#gac4254b88961d333d4dd8189d11168576">FormatterType</a>
+      format;
+    </div>
+    <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; archive(CEREAL_NVP(randomStream),
+      CEREAL_NVP(quests), CEREAL_NVP(world),
+    </div>
+    <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; cereal::make_nvp(<span
+            class="stringliteral">&quot;format&quot;</span>, format));
+    </div>
+    <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; engine.reset(<span class="keyword">new</span>
+      WeaverEngine(randomStream));
+    </div>
+    <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; stories.reset(<span class="keyword">new</span>
+      <a class="code" href="classweave_1_1_story_writer.html">StoryWriter</a>(randomStream, *quests, *templates, *world,
+      <a class="code" href="structweave_1_1_directories.html">Directories</a>()));
+    </div>
+    <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; templates.reset(<span
+            class="keyword">new</span> TemplateEngine(randomStream, <a class="code"
+                                                                       href="structweave_1_1_directories.html">Directories</a>(),
+      format));
+    </div>
+    <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; }</div>
+    <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
+    <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; <span class="keyword">template</span>&lt;<span
+            class="keyword">class</span> Archive&gt;</div>
+    <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; <span class="keywordtype">void</span>
+      save(Archive &amp;archive)<span class="keyword"> const </span>{
+    </div>
+    <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; archive(CEREAL_NVP(randomStream),
+      CEREAL_NVP(quests), CEREAL_NVP(world),
+    </div>
+    <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; cereal::make_nvp(<span
+            class="stringliteral">&quot;format&quot;</span>, templates-&gt;GetFormat()));
+    </div>
+    <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; }</div>
+    <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; };</div>
+    <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;}</div>
+    <div class="ttc" id="classweave_1_1_quest_weaver_html_a407384e8ea452e36447742893f96392f">
+      <div class="ttname"><a href="classweave_1_1_quest_weaver.html#a407384e8ea452e36447742893f96392f">weave::QuestWeaver::RegisterStoryTemplateFactory</a>
+      </div>
+      <div class="ttdeci">void RegisterStoryTemplateFactory(std::shared_ptr&lt; StoryTemplateFactory &gt; factory)</div>
+      <div class="ttdoc">Registers a new story template factory with the quest system.</div>
+    </div>
+    <div class="ttc" id="group__main_api_html_ga43b695846582193689b15af33499cab3">
+      <div class="ttname"><a href="group__main_api.html#ga43b695846582193689b15af33499cab3">weave::StreamType</a></div>
+      <div class="ttdeci">StreamType</div>
+      <div class="ttdoc">Defines the possible serialization types of the quest system.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_weaver_types_8h_source.html#l00080">WeaverTypes.h:80</a></div>
+    </div>
+    <div class="ttc" id="group__quest_api_html_gafa0e9cd4efa7f2671317618cf3d9b479">
+      <div class="ttname"><a href="group__quest_api.html#gafa0e9cd4efa7f2671317618cf3d9b479">weave::QuestState</a></div>
+      <div class="ttdeci">QuestState</div>
+      <div class="ttdoc">Defines the different states a quest can have.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_quest_8h_source.html#l00019">Quest.h:19</a></div>
+    </div>
 <div class="ttc" id="classweave_1_1_quest_weaver_html_adc3136568dcad0bd9bb616d60b53f482"><div class="ttname"><a href="classweave_1_1_quest_weaver.html#adc3136568dcad0bd9bb616d60b53f482">weave::QuestWeaver::Deserialize</a></div><div class="ttdeci">static QuestWeaver Deserialize(std::istream &amp;inputStream, StreamType type)</div><div class="ttdoc">Deserializes the quest system including the quest model and world model. </div></div>
 <div class="ttc" id="_world_listener_8h_html"><div class="ttname"><a href="_world_listener_8h.html">WorldListener.h</a></div></div>
-<div class="ttc" id="classweave_1_1_world_model_html"><div class="ttname"><a href="classweave_1_1_world_model.html">weave::WorldModel</a></div><div class="ttdef"><b>Definition:</b> <a href="_world_model_8h_source.html#l00017">WorldModel.h:17</a></div></div>
-<div class="ttc" id="namespaceweave_html"><div class="ttname"><a href="namespaceweave.html">weave</a></div><div class="ttdef"><b>Definition:</b> <a href="_quest_weaver_8h_source.html#l00019">QuestWeaver.h:19</a></div></div>
+    <div class="ttc" id="classweave_1_1_world_model_html">
+      <div class="ttname"><a href="classweave_1_1_world_model.html">weave::WorldModel</a></div>
+      <div class="ttdef"><b>Definition:</b> <a href="_world_model_8h_source.html#l00020">WorldModel.h:20</a></div>
+    </div>
+    <div class="ttc" id="namespaceweave_html">
+      <div class="ttname"><a href="namespaceweave.html">weave</a></div>
+      <div class="ttdef"><b>Definition:</b> <a href="_quest_weaver_8h_source.html#l00027">QuestWeaver.h:27</a></div>
+    </div>
+    <div class="ttc" id="group__main_api_html_gad16585a767748e749a3389c77b0e5c76">
+      <div class="ttname"><a href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">weave::ID</a></div>
+      <div class="ttdeci">uint64_t ID</div>
+      <div class="ttdoc">Used to identify unique objects in the quest system, i.e.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_weaver_types_8h_source.html#l00017">WeaverTypes.h:17</a></div>
+    </div>
 <div class="ttc" id="classweave_1_1_quest_weaver_html_ab9d87f0b4aa25a8c084b7089e76f5aca"><div class="ttname"><a href="classweave_1_1_quest_weaver.html#ab9d87f0b4aa25a8c084b7089e76f5aca">weave::QuestWeaver::RegisterQuestTemplateFactory</a></div><div class="ttdeci">void RegisterQuestTemplateFactory(std::shared_ptr&lt; QuestTemplateFactory &gt; factory)</div><div class="ttdoc">Registers a new quest template factory with the quest system. </div></div>
-<div class="ttc" id="structweave_1_1_weaver_config_html"><div class="ttname"><a href="structweave_1_1_weaver_config.html">weave::WeaverConfig</a></div><div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00013">WeaverConfig.h:13</a></div></div>
-<div class="ttc" id="structweave_1_1_directories_html"><div class="ttname"><a href="structweave_1_1_directories.html">weave::Directories</a></div><div class="ttdoc">This struct hold information about the programs file search paths. </div><div class="ttdef"><b>Definition:</b> <a href="_weaver_types_8h_source.html#l00046">WeaverTypes.h:46</a></div></div>
+    <div class="ttc" id="group__main_api_html_gac4254b88961d333d4dd8189d11168576">
+      <div class="ttname"><a href="group__main_api.html#gac4254b88961d333d4dd8189d11168576">weave::FormatterType</a>
+      </div>
+      <div class="ttdeci">FormatterType</div>
+      <div class="ttdoc">Defines the possible output formats of the texts produced by the quest system.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_weaver_types_8h_source.html#l00098">WeaverTypes.h:98</a></div>
+    </div>
+    <div class="ttc" id="structweave_1_1_weaver_config_html">
+      <div class="ttname"><a href="structweave_1_1_weaver_config.html">weave::WeaverConfig</a></div>
+      <div class="ttdoc">Holds the configuration data to create new QuestWeaver instances.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00018">WeaverConfig.h:18</a></div>
+    </div>
+    <div class="ttc" id="structweave_1_1_directories_html">
+      <div class="ttname"><a href="structweave_1_1_directories.html">weave::Directories</a></div>
+      <div class="ttdoc">This struct hold information about the programs file search paths.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_weaver_types_8h_source.html#l00054">WeaverTypes.h:54</a></div>
+    </div>
 <div class="ttc" id="classweave_1_1_quest_weaver_html_a1260b729344e6e3bfe0a7911665ff8af"><div class="ttname"><a href="classweave_1_1_quest_weaver.html#a1260b729344e6e3bfe0a7911665ff8af">weave::QuestWeaver::GetQuestsWithState</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; Quest &gt; &gt; GetQuestsWithState(QuestState state) const </div><div class="ttdoc">Returns a list of all quests with the given state. </div></div>
 <div class="ttc" id="classweave_1_1_quest_weaver_html_af4faa60c735a47c941bf42d0948e026f"><div class="ttname"><a href="classweave_1_1_quest_weaver.html#af4faa60c735a47c941bf42d0948e026f">weave::QuestWeaver::Serialize</a></div><div class="ttdeci">void Serialize(std::ostream &amp;outputStream, StreamType type)</div><div class="ttdoc">Serializes the whole quest system including the quest model and world model. </div></div>
-<div class="ttc" id="namespaceweave_html_a43b695846582193689b15af33499cab3"><div class="ttname"><a href="namespaceweave.html#a43b695846582193689b15af33499cab3">weave::StreamType</a></div><div class="ttdeci">StreamType</div><div class="ttdef"><b>Definition:</b> <a href="_weaver_types_8h_source.html#l00067">WeaverTypes.h:67</a></div></div>
 <div class="ttc" id="classweave_1_1_quest_weaver_html_a006001f54518fd3c266d1502b17db040"><div class="ttname"><a href="classweave_1_1_quest_weaver.html#a006001f54518fd3c266d1502b17db040">weave::QuestWeaver::ChangeQuestState</a></div><div class="ttdeci">bool ChangeQuestState(QuestModelAction questAction)</div><div class="ttdoc">Directly changes the state of a quest. </div></div>
-<div class="ttc" id="classweave_1_1_quest_weaver_html"><div class="ttname"><a href="classweave_1_1_quest_weaver.html">weave::QuestWeaver</a></div><div class="ttdoc">Main entry point for applications using the quest system. </div><div class="ttdef"><b>Definition:</b> <a href="_quest_weaver_8h_source.html#l00029">QuestWeaver.h:29</a></div></div>
+    <div class="ttc" id="classweave_1_1_quest_weaver_html">
+      <div class="ttname"><a href="classweave_1_1_quest_weaver.html">weave::QuestWeaver</a></div>
+      <div class="ttdoc">Main entry point for applications using the quest system.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_quest_weaver_8h_source.html#l00039">QuestWeaver.h:39</a></div>
+    </div>
 <div class="ttc" id="classweave_1_1_quest_weaver_html_a01debc9fab30def40cf00fc41a303fe5"><div class="ttname"><a href="classweave_1_1_quest_weaver.html#a01debc9fab30def40cf00fc41a303fe5">weave::QuestWeaver::ChangeWorkingDirectories</a></div><div class="ttdeci">void ChangeWorkingDirectories(Directories directories)</div><div class="ttdoc">Changes the directories used by the quest system to load files such as templates. ...</div></div>
 <div class="ttc" id="classweave_1_1_quest_weaver_html_ae039124d0b281e8d5722282271e516c1"><div class="ttname"><a href="classweave_1_1_quest_weaver.html#ae039124d0b281e8d5722282271e516c1">weave::QuestWeaver::GetAllQuests</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; Quest &gt; &gt; GetAllQuests() const </div><div class="ttdoc">Returns a list of all quests. </div></div>
 <div class="ttc" id="_weaver_utils_8h_html"><div class="ttname"><a href="_weaver_utils_8h.html">WeaverUtils.h</a></div></div>
@@ -130,19 +376,19 @@ $(document).ready(function(){initNavTree('_quest_weaver_8h_source.html','');});
 <div class="ttc" id="classweave_1_1_quest_model_action_html"><div class="ttname"><a href="classweave_1_1_quest_model_action.html">weave::QuestModelAction</a></div><div class="ttdoc">These actions are used by the quest system to change the state of quests. </div><div class="ttdef"><b>Definition:</b> <a href="_quest_model_action_8h_source.html#l00026">QuestModelAction.h:26</a></div></div>
 <div class="ttc" id="classweave_1_1_quest_weaver_html_aa775638812718cc59edd6debbc32d70e"><div class="ttname"><a href="classweave_1_1_quest_weaver.html#aa775638812718cc59edd6debbc32d70e">weave::QuestWeaver::Tick</a></div><div class="ttdeci">void Tick(float delta)</div><div class="ttdoc">Advances the quest system state by ticking all quests and executing their desired world and quest cha...</div></div>
 <div class="ttc" id="_world_model_8h_html"><div class="ttname"><a href="_world_model_8h.html">WorldModel.h</a></div></div>
-<div class="ttc" id="namespaceweave_html_ad16585a767748e749a3389c77b0e5c76"><div class="ttname"><a href="namespaceweave.html#ad16585a767748e749a3389c77b0e5c76">weave::ID</a></div><div class="ttdeci">uint64_t ID</div><div class="ttdoc">Used to identify unique objects in the quest system, i.e. </div><div class="ttdef"><b>Definition:</b> <a href="_weaver_types_8h_source.html#l00015">WeaverTypes.h:15</a></div></div>
 <div class="ttc" id="classweave_1_1_quest_weaver_html_ab66bd94d2b1c3851d3fd52db1945f9cd"><div class="ttname"><a href="classweave_1_1_quest_weaver.html#ab66bd94d2b1c3851d3fd52db1945f9cd">weave::QuestWeaver::GetWorldModel</a></div><div class="ttdeci">const WorldModel &amp; GetWorldModel() const </div><div class="ttdoc">Returns an immutable reference to the world model. </div></div>
-<div class="ttc" id="namespaceweave_html_afa0e9cd4efa7f2671317618cf3d9b479"><div class="ttname"><a href="namespaceweave.html#afa0e9cd4efa7f2671317618cf3d9b479">weave::QuestState</a></div><div class="ttdeci">QuestState</div><div class="ttdoc">Defines the different states a quest can have. </div><div class="ttdef"><b>Definition:</b> <a href="_quest_8h_source.html#l00017">Quest.h:17</a></div></div>
-<div class="ttc" id="classweave_1_1_story_writer_html"><div class="ttname"><a href="classweave_1_1_story_writer.html">weave::StoryWriter</a></div><div class="ttdef"><b>Definition:</b> <a href="_story_writer_8h_source.html#l00032">StoryWriter.h:32</a></div></div>
+    <div class="ttc" id="classweave_1_1_story_writer_html">
+      <div class="ttname"><a href="classweave_1_1_story_writer.html">weave::StoryWriter</a></div>
+      <div class="ttdef"><b>Definition:</b> <a href="_story_writer_8h_source.html#l00017">StoryWriter.h:17</a></div>
+    </div>
 <div class="ttc" id="_weaver_types_8h_html"><div class="ttname"><a href="_weaver_types_8h.html">WeaverTypes.h</a></div></div>
-<div class="ttc" id="namespaceweave_html_ac4254b88961d333d4dd8189d11168576"><div class="ttname"><a href="namespaceweave.html#ac4254b88961d333d4dd8189d11168576">weave::FormatterType</a></div><div class="ttdeci">FormatterType</div><div class="ttdef"><b>Definition:</b> <a href="_weaver_types_8h_source.html#l00080">WeaverTypes.h:80</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="_quest_weaver_8h.html">QuestWeaver.h</a></li>
-    <li class="footer">Generated on Sun Feb 14 2016 01:07:17 for QuestWeaver by
+    <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>

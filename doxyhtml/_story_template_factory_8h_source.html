@@ -47,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -107,16 +108,108 @@ $(document).ready(function(){initNavTree('_story_template_factory_8h_source.html
 <div class="title">StoryTemplateFactory.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_story_template_factory_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by michael on 21.12.15.</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_weaver_utils_8h.html">Core/WeaverUtils.h</a>&gt;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_story_template_8h.html">Story/StoryTemplate.h</a>&gt;</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceweave.html">weave</a> {</div><div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classweave_1_1_story_template_factory.html">   11</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a> {</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classweave_1_1_story_template_factory.html#a84635df614bda36a9a65506b5cced886">~StoryTemplateFactory</a>() = <span class="keywordflow">default</span>;</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        std::vector&lt;std::shared_ptr&lt;StoryTemplate&gt;&gt; <a class="code" href="classweave_1_1_story_template_factory.html#a00f70f06195fadf19f37485a1ac7e814">GetTemplates</a>();</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keyword">virtual</span> std::string <a class="code" href="classweave_1_1_story_template_factory.html#af1086a32b5a1097db29a7595292f3637">GetNuggetFolder</a>() <span class="keyword">const</span> = 0;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">protected</span>:</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">virtual</span> std::shared_ptr&lt;StoryTemplate&gt; <a class="code" href="classweave_1_1_story_template_factory.html#a89796bce5e2a8477a43996304ba146d1">createFromJsonValues</a>(<span class="keyword">const</span> Json::Value &amp;root) <span class="keyword">const</span> = 0;</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classweave_1_1_story_template_factory.html#ad65b44cd80d113ba0c8229f1d0834716">getTemplateFile</a>() <span class="keyword">const</span> = 0;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">private</span>:</div><div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classweave_1_1_story_template_factory.html#a05a4a62432249ecc876d7f40d831de6e">   25</a></span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classweave_1_1_story_writer.html">StoryWriter</a>;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordtype">bool</span> isInitialized = <span class="keyword">false</span>;</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="structweave_1_1_directories.html">Directories</a> dirs;</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        std::vector&lt;std::shared_ptr&lt;StoryTemplate&gt;&gt; templates;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">void</span> initialize();</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    };</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div><div class="ttc" id="namespaceweave_html"><div class="ttname"><a href="namespaceweave.html">weave</a></div><div class="ttdef"><b>Definition:</b> <a href="_quest_weaver_8h_source.html#l00019">QuestWeaver.h:19</a></div></div>
+  <a href="_story_template_factory_8h.html">Go to the documentation of this file.</a>
+  <div class="fragment">
+    <div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
+    <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by michael on 21.12.15.</span>
+    </div>
+    <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
+    <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
+    <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span>
+    </div>
+    <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+    <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a
+            class="code" href="_weaver_utils_8h.html">Core/WeaverUtils.h</a>&gt;</span></div>
+    <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;<a
+            class="code" href="_story_template_8h.html">Story/StoryTemplate.h</a>&gt;</span></div>
+    <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+    <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span
+            class="keyword">namespace </span><a class="code" href="namespaceweave.html">weave</a> {
+    </div>
+    <div class="line"><a name="l00011"></a><span class="lineno"><a class="line"
+                                                                   href="classweave_1_1_story_template_factory.html">
+      11</a></span>&#160; <span class="keyword">class </span><a class="code"
+                                                                href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a>
+      {
+    </div>
+    <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; <span class="keyword">public</span>:
+    </div>
+    <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; <span class="keyword">virtual</span>
+      <a class="code" href="classweave_1_1_story_template_factory.html#a84635df614bda36a9a65506b5cced886">~StoryTemplateFactory</a>()
+      = <span class="keywordflow">default</span>;
+    </div>
+    <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+    <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; std::vector&lt;std::shared_ptr&lt;StoryTemplate&gt;&gt;
+      <a class="code"
+         href="classweave_1_1_story_template_factory.html#a00f70f06195fadf19f37485a1ac7e814">GetTemplates</a>();
+    </div>
+    <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+    <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; <span class="keyword">virtual</span>
+      std::string <a class="code" href="classweave_1_1_story_template_factory.html#af1086a32b5a1097db29a7595292f3637">GetNuggetFolder</a>()
+      <span class="keyword">const</span> = 0;
+    </div>
+    <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+    <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; <span
+            class="keyword">protected</span>:
+    </div>
+    <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; <span class="keyword">virtual</span>
+      std::shared_ptr&lt;StoryTemplate&gt; <a class="code"
+                                              href="classweave_1_1_story_template_factory.html#a89796bce5e2a8477a43996304ba146d1">createFromJsonValues</a>(<span
+              class="keyword">const</span> Json::Value &amp;root) <span class="keyword">const</span> = 0;
+    </div>
+    <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+    <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; <span class="keyword">virtual</span>
+      <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code"
+                                                                                   href="classweave_1_1_story_template_factory.html#ad65b44cd80d113ba0c8229f1d0834716">getTemplateFile</a>()
+      <span class="keyword">const</span> = 0;
+    </div>
+    <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+    <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; <span class="keyword">private</span>:
+    </div>
+    <div class="line"><a name="l00025"></a><span class="lineno"><a class="line"
+                                                                   href="classweave_1_1_story_template_factory.html#a05a4a62432249ecc876d7f40d831de6e">
+      25</a></span>&#160; <span class="keyword">friend</span> <span class="keyword">class </span><a class="code"
+                                                                                                    href="classweave_1_1_story_writer.html">StoryWriter</a>;
+    </div>
+    <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+    <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; <span class="keywordtype">bool</span>
+      isInitialized = <span class="keyword">false</span>;
+    </div>
+    <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+    <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; <a class="code"
+                                                                                      href="structweave_1_1_directories.html">Directories</a>
+      dirs;
+    </div>
+    <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+    <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; std::vector&lt;std::shared_ptr&lt;StoryTemplate&gt;&gt;
+      templates;
+    </div>
+    <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+    <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; <span class="keywordtype">void</span>
+      initialize();
+    </div>
+    <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; };</div>
+    <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+    <div class="ttc" id="namespaceweave_html">
+      <div class="ttname"><a href="namespaceweave.html">weave</a></div>
+      <div class="ttdef"><b>Definition:</b> <a href="_quest_weaver_8h_source.html#l00027">QuestWeaver.h:27</a></div>
+    </div>
 <div class="ttc" id="classweave_1_1_story_template_factory_html_a84635df614bda36a9a65506b5cced886"><div class="ttname"><a href="classweave_1_1_story_template_factory.html#a84635df614bda36a9a65506b5cced886">weave::StoryTemplateFactory::~StoryTemplateFactory</a></div><div class="ttdeci">virtual ~StoryTemplateFactory()=default</div></div>
 <div class="ttc" id="classweave_1_1_story_template_factory_html_ad65b44cd80d113ba0c8229f1d0834716"><div class="ttname"><a href="classweave_1_1_story_template_factory.html#ad65b44cd80d113ba0c8229f1d0834716">weave::StoryTemplateFactory::getTemplateFile</a></div><div class="ttdeci">virtual const char * getTemplateFile() const  =0</div></div>
-<div class="ttc" id="structweave_1_1_directories_html"><div class="ttname"><a href="structweave_1_1_directories.html">weave::Directories</a></div><div class="ttdoc">This struct hold information about the programs file search paths. </div><div class="ttdef"><b>Definition:</b> <a href="_weaver_types_8h_source.html#l00046">WeaverTypes.h:46</a></div></div>
+    <div class="ttc" id="structweave_1_1_directories_html">
+      <div class="ttname"><a href="structweave_1_1_directories.html">weave::Directories</a></div>
+      <div class="ttdoc">This struct hold information about the programs file search paths.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_weaver_types_8h_source.html#l00054">WeaverTypes.h:54</a></div>
+    </div>
 <div class="ttc" id="classweave_1_1_story_template_factory_html_a00f70f06195fadf19f37485a1ac7e814"><div class="ttname"><a href="classweave_1_1_story_template_factory.html#a00f70f06195fadf19f37485a1ac7e814">weave::StoryTemplateFactory::GetTemplates</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; StoryTemplate &gt; &gt; GetTemplates()</div></div>
 <div class="ttc" id="_story_template_8h_html"><div class="ttname"><a href="_story_template_8h.html">StoryTemplate.h</a></div></div>
 <div class="ttc" id="_weaver_utils_8h_html"><div class="ttname"><a href="_weaver_utils_8h.html">WeaverUtils.h</a></div></div>
 <div class="ttc" id="classweave_1_1_story_template_factory_html"><div class="ttname"><a href="classweave_1_1_story_template_factory.html">weave::StoryTemplateFactory</a></div><div class="ttdef"><b>Definition:</b> <a href="_story_template_factory_8h_source.html#l00011">StoryTemplateFactory.h:11</a></div></div>
 <div class="ttc" id="classweave_1_1_story_template_factory_html_af1086a32b5a1097db29a7595292f3637"><div class="ttname"><a href="classweave_1_1_story_template_factory.html#af1086a32b5a1097db29a7595292f3637">weave::StoryTemplateFactory::GetNuggetFolder</a></div><div class="ttdeci">virtual std::string GetNuggetFolder() const  =0</div></div>
-<div class="ttc" id="classweave_1_1_story_writer_html"><div class="ttname"><a href="classweave_1_1_story_writer.html">weave::StoryWriter</a></div><div class="ttdef"><b>Definition:</b> <a href="_story_writer_8h_source.html#l00032">StoryWriter.h:32</a></div></div>
+    <div class="ttc" id="classweave_1_1_story_writer_html">
+      <div class="ttname"><a href="classweave_1_1_story_writer.html">weave::StoryWriter</a></div>
+      <div class="ttdef"><b>Definition:</b> <a href="_story_writer_8h_source.html#l00017">StoryWriter.h:17</a></div>
+    </div>
 <div class="ttc" id="classweave_1_1_story_template_factory_html_a89796bce5e2a8477a43996304ba146d1"><div class="ttname"><a href="classweave_1_1_story_template_factory.html#a89796bce5e2a8477a43996304ba146d1">weave::StoryTemplateFactory::createFromJsonValues</a></div><div class="ttdeci">virtual std::shared_ptr&lt; StoryTemplate &gt; createFromJsonValues(const Json::Value &amp;root) const  =0</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -124,7 +217,7 @@ $(document).ready(function(){initNavTree('_story_template_factory_8h_source.html
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_da9217a34ad0ff98ec55ada131b98e07.html">Story</a></li><li class="navelem"><a class="el" href="_story_template_factory_8h.html">StoryTemplateFactory.h</a></li>
-    <li class="footer">Generated on Sun Feb 14 2016 01:07:17 for QuestWeaver by
+    <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>

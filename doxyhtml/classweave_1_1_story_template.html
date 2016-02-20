@@ -47,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -122,12 +123,28 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8145b6478fc9852fc966aacedb404dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a458caebee482b44e8064e16f5d898310"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template.html#a458caebee482b44e8064e16f5d898310">~StoryTemplate</a> ()=default</td></tr>
 <tr class="separator:a458caebee482b44e8064e16f5d898310"><td class="memSeparator" colspan="2">&#160;</td></tr>
+  <tr class="memitem:a9a3fd0164b7e7f48e3c2f29784cb32a6">
+    <td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el"
+                                                                                  href="classweave_1_1_story_line.html">StoryLine</a>
+      &gt;&#160;</td>
+    <td class="memItemRight" valign="bottom"><a class="el"
+                                                href="classweave_1_1_story_template.html#a9a3fd0164b7e7f48e3c2f29784cb32a6">CreateStory</a>
+      (std::map&lt; std::string, std::shared_ptr&lt; <a class="el"
+                                                        href="classweave_1_1_world_entity.html">WorldEntity</a> &gt;&gt;,
+      const WeaverGraph &amp;graph) const =0
+    </td>
+  </tr>
+  <tr class="separator:a9a3fd0164b7e7f48e3c2f29784cb32a6">
+    <td class="memSeparator" colspan="2">&#160;</td>
+  </tr>
 <tr class="memitem:a76f1be8a2a1db57b549aafab6da51bb0"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template.html#a76f1be8a2a1db57b549aafab6da51bb0">GetRequiredEntities</a> () const  =0</td></tr>
 <tr class="separator:a76f1be8a2a1db57b549aafab6da51bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_story_template_8h_source.html#l00010">10</a> of file <a class="el" href="_story_template_8h_source.html">StoryTemplate.h</a>.</p>
+  <p>Definition at line <a class="el" href="_story_template_8h_source.html#l00013">13</a> of file <a class="el"
+                                                                                                     href="_story_template_8h_source.html">StoryTemplate.h</a>.
+  </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a8145b6478fc9852fc966aacedb404dcb"></a>
 <div class="memitem">
@@ -168,6 +185,47 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+  <a class="anchor" id="a9a3fd0164b7e7f48e3c2f29784cb32a6"></a>
+  <div class="memitem">
+    <div class="memproto">
+      <table class="mlabels">
+        <tr>
+          <td class="mlabels-left">
+            <table class="memname">
+              <tr>
+                <td class="memname">virtual std::vector&lt;<a class="el"
+                                                              href="classweave_1_1_story_line.html">StoryLine</a>&gt;
+                  weave::StoryTemplate::CreateStory
+                </td>
+                <td>(</td>
+                <td class="paramtype">std::map&lt; std::string, std::shared_ptr&lt; <a class="el"
+                                                                                       href="classweave_1_1_world_entity.html">WorldEntity</a>
+                  &gt;&gt;&#160;</td>
+                <td class="paramname">,</td>
+              </tr>
+              <tr>
+                <td class="paramkey"></td>
+                <td></td>
+                <td class="paramtype">const WeaverGraph &amp;&#160;</td>
+                <td class="paramname"><em>graph</em>&#160;</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>)</td>
+                <td></td>
+                <td> const</td>
+              </tr>
+            </table>
+          </td>
+          <td class="mlabels-right">
+            <span class="mlabels"><span class="mlabel">pure virtual</span></span></td>
+        </tr>
+      </table>
+    </div>
+    <div class="memdoc">
+
+    </div>
+  </div>
 <a class="anchor" id="a76f1be8a2a1db57b549aafab6da51bb0"></a>
 <div class="memitem">
 <div class="memproto">
@@ -200,7 +258,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceweave.html">weave</a></li><li class="navelem"><a class="el" href="classweave_1_1_story_template.html">StoryTemplate</a></li>
-    <li class="footer">Generated on Sun Feb 14 2016 01:07:17 for QuestWeaver by
+    <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>

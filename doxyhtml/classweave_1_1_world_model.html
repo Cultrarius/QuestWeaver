@@ -47,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -112,7 +113,11 @@ $(document).ready(function(){initNavTree('classweave_1_1_world_model.html','');}
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classweave_1_1_world_model-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">weave::WorldModel Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+    <div class="title">weave::WorldModel Class Reference<span class="mlabels"><span
+            class="mlabel">abstract</span></span>
+      <div class="ingroups"><a class="el" href="group__world_api.html">World API</a></div>
+    </div>
+  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -139,34 +144,74 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac6d0b765c31b71a2b15094a82d07611e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d3b805a62f54f6042b87ffa34be487f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_world_entity.html">WorldEntity</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#a2d3b805a62f54f6042b87ffa34be487f">GetEntities</a> () const </td></tr>
 <tr class="separator:a2d3b805a62f54f6042b87ffa34be487f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad3ed580a9ec9a5b37c347517d22860c"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classweave_1_1_world_entity.html">WorldEntity</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#aad3ed580a9ec9a5b37c347517d22860c">GetEntityById</a> (<a class="el" href="namespaceweave.html#ad16585a767748e749a3389c77b0e5c76">ID</a> id) const </td></tr>
+  <tr class="memitem:aad3ed580a9ec9a5b37c347517d22860c">
+    <td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el"
+                                                                              href="classweave_1_1_world_entity.html">WorldEntity</a>
+      &gt;&#160;</td>
+    <td class="memItemRight" valign="bottom"><a class="el"
+                                                href="classweave_1_1_world_model.html#aad3ed580a9ec9a5b37c347517d22860c">GetEntityById</a>
+      (<a class="el" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a> id) const
+    </td>
+  </tr>
 <tr class="separator:aad3ed580a9ec9a5b37c347517d22860c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85cb1e826da95d130c2b4c1614b677fc"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classweave_1_1_world_model_action.html">WorldModelAction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#a85cb1e826da95d130c2b4c1614b677fc">GetHistory</a> () const </td></tr>
 <tr class="separator:a85cb1e826da95d130c2b4c1614b677fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7acee86a1465009addb111eb569f8c8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classweave_1_1_meta_data.html">MetaData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#a7acee86a1465009addb111eb569f8c8a">GetMetaData</a> (<a class="el" href="namespaceweave.html#ad16585a767748e749a3389c77b0e5c76">ID</a> entityId) const </td></tr>
+  <tr class="memitem:a7acee86a1465009addb111eb569f8c8a">
+    <td class="memItemLeft" align="right" valign="top"><a class="el" href="classweave_1_1_meta_data.html">MetaData</a>&#160;
+    </td>
+    <td class="memItemRight" valign="bottom"><a class="el"
+                                                href="classweave_1_1_world_model.html#a7acee86a1465009addb111eb569f8c8a">GetMetaData</a>
+      (<a class="el" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a> entityId) const
+    </td>
+  </tr>
 <tr class="separator:a7acee86a1465009addb111eb569f8c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0526574c2e0ee62c76594b20d33a327b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classweave_1_1_world_model_action.html">WorldModelAction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#a0526574c2e0ee62c76594b20d33a327b">GetMetaDataHistoryForId</a> (<a class="el" href="namespaceweave.html#ad16585a767748e749a3389c77b0e5c76">ID</a> id) const </td></tr>
+  <tr class="memitem:a0526574c2e0ee62c76594b20d33a327b">
+    <td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el"
+                                                                          href="classweave_1_1_world_model_action.html">WorldModelAction</a>
+      &gt;&#160;</td>
+    <td class="memItemRight" valign="bottom"><a class="el"
+                                                href="classweave_1_1_world_model.html#a0526574c2e0ee62c76594b20d33a327b">GetMetaDataHistoryForId</a>
+      (<a class="el" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a> id) const
+    </td>
+  </tr>
 <tr class="separator:a0526574c2e0ee62c76594b20d33a327b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ae253815949de9f4245981abe85cacf60"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#ae253815949de9f4245981abe85cacf60">empty</a> ()=0</td></tr>
 <tr class="separator:ae253815949de9f4245981abe85cacf60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56f909bbef9f828a0c12e92238979482"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceweave.html#ad16585a767748e749a3389c77b0e5c76">ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#a56f909bbef9f828a0c12e92238979482">NewId</a> ()</td></tr>
+  <tr class="memitem:a56f909bbef9f828a0c12e92238979482">
+    <td class="memItemLeft" align="right" valign="top"><a class="el"
+                                                          href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a>&#160;
+    </td>
+    <td class="memItemRight" valign="bottom"><a class="el"
+                                                href="classweave_1_1_world_model.html#a56f909bbef9f828a0c12e92238979482">NewId</a>
+      ()
+    </td>
+  </tr>
 <tr class="separator:a56f909bbef9f828a0c12e92238979482"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a6b17b0df88bb6656523256854d818d5b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classweave_1_1_world_model_action.html">WorldModelAction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#a6b17b0df88bb6656523256854d818d5b">actionHistory</a></td></tr>
 <tr class="separator:a6b17b0df88bb6656523256854d818d5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada595b91b9558dddb2e6d28ebdf93511"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="namespaceweave.html#ad16585a767748e749a3389c77b0e5c76">ID</a>, <a class="el" href="classweave_1_1_meta_data.html">MetaData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#ada595b91b9558dddb2e6d28ebdf93511">metaData</a></td></tr>
+  <tr class="memitem:ada595b91b9558dddb2e6d28ebdf93511">
+    <td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el"
+                                                                                 href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a>,
+      <a class="el" href="classweave_1_1_meta_data.html">MetaData</a> &gt;&#160;</td>
+    <td class="memItemRight" valign="bottom"><a class="el"
+                                                href="classweave_1_1_world_model.html#ada595b91b9558dddb2e6d28ebdf93511">metaData</a>
+    </td>
+  </tr>
 <tr class="separator:ada595b91b9558dddb2e6d28ebdf93511"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a955eb5571b0e84f6b775a5be355e1de0"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classweave_1_1_random_stream.html">RandomStream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#a955eb5571b0e84f6b775a5be355e1de0">rs</a></td></tr>
 <tr class="separator:a955eb5571b0e84f6b775a5be355e1de0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_world_model_8h_source.html#l00017">17</a> of file <a class="el" href="_world_model_8h_source.html">WorldModel.h</a>.</p>
+  <p>Definition at line <a class="el" href="_world_model_8h_source.html#l00020">20</a> of file <a class="el"
+                                                                                                  href="_world_model_8h_source.html">WorldModel.h</a>.
+  </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a20181bae97c7163dabf16369a84bd431"></a>
 <div class="memitem">
@@ -204,7 +249,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_world_model_8h_source.html#l00021">21</a> of file <a class="el" href="_world_model_8h_source.html">WorldModel.h</a>.</p>
+  <p>Definition at line <a class="el" href="_world_model_8h_source.html#l00024">24</a> of file <a class="el"
+                                                                                                  href="_world_model_8h_source.html">WorldModel.h</a>.
+  </p>
 
 </div>
 </div>
@@ -286,7 +333,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">std::shared_ptr&lt;<a class="el" href="classweave_1_1_world_entity.html">WorldEntity</a>&gt; weave::WorldModel::GetEntityById </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceweave.html#ad16585a767748e749a3389c77b0e5c76">ID</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a>&#160;
+          </td>
           <td class="paramname"><em>id</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -317,7 +365,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classweave_1_1_meta_data.html">MetaData</a> weave::WorldModel::GetMetaData </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceweave.html#ad16585a767748e749a3389c77b0e5c76">ID</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a>&#160;
+          </td>
           <td class="paramname"><em>entityId</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -333,7 +382,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">std::vector&lt;<a class="el" href="classweave_1_1_world_model_action.html">WorldModelAction</a>&gt; weave::WorldModel::GetMetaDataHistoryForId </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceweave.html#ad16585a767748e749a3389c77b0e5c76">ID</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a>&#160;
+          </td>
           <td class="paramname"><em>id</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -350,7 +400,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceweave.html#ad16585a767748e749a3389c77b0e5c76">ID</a> weave::WorldModel::NewId </td>
+          <td class="memname"><a class="el" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a>
+            weave::WorldModel::NewId
+          </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -384,7 +436,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_world_model_8h_source.html#l00041">41</a> of file <a class="el" href="_world_model_8h_source.html">WorldModel.h</a>.</p>
+  <p>Definition at line <a class="el" href="_world_model_8h_source.html#l00044">44</a> of file <a class="el"
+                                                                                                  href="_world_model_8h_source.html">WorldModel.h</a>.
+  </p>
 
 </div>
 </div>
@@ -396,7 +450,10 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt;<a class="el" href="namespaceweave.html#ad16585a767748e749a3389c77b0e5c76">ID</a>, <a class="el" href="classweave_1_1_meta_data.html">MetaData</a>&gt; weave::WorldModel::metaData</td>
+          <td class="memname">std::unordered_map&lt;<a class="el"
+                                                       href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a>,
+            <a class="el" href="classweave_1_1_meta_data.html">MetaData</a>&gt; weave::WorldModel::metaData
+          </td>
         </tr>
       </table>
   </td>
@@ -406,7 +463,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_world_model_8h_source.html#l00040">40</a> of file <a class="el" href="_world_model_8h_source.html">WorldModel.h</a>.</p>
+  <p>Definition at line <a class="el" href="_world_model_8h_source.html#l00043">43</a> of file <a class="el"
+                                                                                                  href="_world_model_8h_source.html">WorldModel.h</a>.
+  </p>
 
 </div>
 </div>
@@ -428,7 +487,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_world_model_8h_source.html#l00039">39</a> of file <a class="el" href="_world_model_8h_source.html">WorldModel.h</a>.</p>
+  <p>Definition at line <a class="el" href="_world_model_8h_source.html#l00042">42</a> of file <a class="el"
+                                                                                                  href="_world_model_8h_source.html">WorldModel.h</a>.
+  </p>
 
 </div>
 </div>
@@ -441,7 +502,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceweave.html">weave</a></li><li class="navelem"><a class="el" href="classweave_1_1_world_model.html">WorldModel</a></li>
-    <li class="footer">Generated on Sun Feb 14 2016 01:07:17 for QuestWeaver by
+    <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>

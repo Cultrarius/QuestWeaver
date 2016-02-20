@@ -47,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -107,10 +108,83 @@ $(document).ready(function(){initNavTree('_story_template_8h_source.html','');})
 <div class="title">StoryTemplate.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_story_template_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by michael on 29.01.16.</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_weaver_types_8h.html">Core/WeaverTypes.h</a>&gt;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceweave.html">weave</a> {</div><div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classweave_1_1_story_template.html">   10</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classweave_1_1_story_template.html">StoryTemplate</a> {</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <a class="code" href="classweave_1_1_story_template.html#a8145b6478fc9852fc966aacedb404dcb">StoryTemplate</a>();</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classweave_1_1_story_template.html#a458caebee482b44e8064e16f5d898310">~StoryTemplate</a>() = <span class="keywordflow">default</span>;</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keyword">virtual</span> std::vector&lt;std::string&gt; <a class="code" href="classweave_1_1_story_template.html#a76f1be8a2a1db57b549aafab6da51bb0">GetRequiredEntities</a>() <span class="keyword">const</span> = 0;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    };</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div><div class="ttc" id="namespaceweave_html"><div class="ttname"><a href="namespaceweave.html">weave</a></div><div class="ttdef"><b>Definition:</b> <a href="_quest_weaver_8h_source.html#l00019">QuestWeaver.h:19</a></div></div>
-<div class="ttc" id="classweave_1_1_story_template_html"><div class="ttname"><a href="classweave_1_1_story_template.html">weave::StoryTemplate</a></div><div class="ttdef"><b>Definition:</b> <a href="_story_template_8h_source.html#l00010">StoryTemplate.h:10</a></div></div>
+  <a href="_story_template_8h.html">Go to the documentation of this file.</a>
+  <div class="fragment">
+    <div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
+    <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by michael on 29.01.16.</span>
+    </div>
+    <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
+    <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
+    <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span>
+    </div>
+    <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+    <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a
+            class="code" href="_weaver_types_8h.html">Core/WeaverTypes.h</a>&gt;</span></div>
+    <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;<a
+            class="code" href="_story_line_8h.html">Story/StoryLine.h</a>&gt;</span></div>
+    <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;Core/Graph/WeaverGraph.h&gt;</span>
+    </div>
+    <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;<a
+            class="code" href="_world_entity_8h.html">World/WorldEntity.h</a>&gt;</span></div>
+    <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+    <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span
+            class="keyword">namespace </span><a class="code" href="namespaceweave.html">weave</a> {
+    </div>
+    <div class="line"><a name="l00013"></a><span class="lineno"><a class="line"
+                                                                   href="classweave_1_1_story_template.html">
+      13</a></span>&#160; <span class="keyword">class </span><a class="code" href="classweave_1_1_story_template.html">StoryTemplate</a>
+      {
+    </div>
+    <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; <span class="keyword">public</span>:
+    </div>
+    <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; <a class="code"
+                                                                                      href="classweave_1_1_story_template.html#a8145b6478fc9852fc966aacedb404dcb">StoryTemplate</a>();
+    </div>
+    <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+    <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; <span class="keyword">virtual</span>
+      <a class="code" href="classweave_1_1_story_template.html#a458caebee482b44e8064e16f5d898310">~StoryTemplate</a>() =
+      <span class="keywordflow">default</span>;
+    </div>
+    <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+    <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; <span class="keyword">virtual</span>
+      std::vector&lt;std::string&gt; <a class="code"
+                                        href="classweave_1_1_story_template.html#a76f1be8a2a1db57b549aafab6da51bb0">GetRequiredEntities</a>()
+      <span class="keyword">const</span> = 0;
+    </div>
+    <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+    <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; <span class="keyword">virtual</span>
+      std::vector&lt;StoryLine&gt; <a class="code"
+                                      href="classweave_1_1_story_template.html#a9a3fd0164b7e7f48e3c2f29784cb32a6">CreateStory</a>(std::map&lt;std::string,
+      std::shared_ptr&lt;WorldEntity&gt;&gt;,
+    </div>
+    <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; <span class="keyword">const</span>
+      WeaverGraph &amp;graph) <span class="keyword">const</span> = 0;
+    </div>
+    <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; };</div>
+    <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
+    <div class="ttc" id="_world_entity_8h_html">
+      <div class="ttname"><a href="_world_entity_8h.html">WorldEntity.h</a></div>
+    </div>
+    <div class="ttc" id="classweave_1_1_story_template_html_a9a3fd0164b7e7f48e3c2f29784cb32a6">
+      <div class="ttname"><a href="classweave_1_1_story_template.html#a9a3fd0164b7e7f48e3c2f29784cb32a6">weave::StoryTemplate::CreateStory</a>
+      </div>
+      <div class="ttdeci">virtual std::vector&lt; StoryLine &gt; CreateStory(std::map&lt; std::string, std::shared_ptr&lt;
+        WorldEntity &gt;&gt;, const WeaverGraph &amp;graph) const =0
+      </div>
+    </div>
+    <div class="ttc" id="namespaceweave_html">
+      <div class="ttname"><a href="namespaceweave.html">weave</a></div>
+      <div class="ttdef"><b>Definition:</b> <a href="_quest_weaver_8h_source.html#l00027">QuestWeaver.h:27</a></div>
+    </div>
+    <div class="ttc" id="classweave_1_1_story_template_html">
+      <div class="ttname"><a href="classweave_1_1_story_template.html">weave::StoryTemplate</a></div>
+      <div class="ttdef"><b>Definition:</b> <a href="_story_template_8h_source.html#l00013">StoryTemplate.h:13</a></div>
+    </div>
 <div class="ttc" id="classweave_1_1_story_template_html_a8145b6478fc9852fc966aacedb404dcb"><div class="ttname"><a href="classweave_1_1_story_template.html#a8145b6478fc9852fc966aacedb404dcb">weave::StoryTemplate::StoryTemplate</a></div><div class="ttdeci">StoryTemplate()</div></div>
 <div class="ttc" id="classweave_1_1_story_template_html_a458caebee482b44e8064e16f5d898310"><div class="ttname"><a href="classweave_1_1_story_template.html#a458caebee482b44e8064e16f5d898310">weave::StoryTemplate::~StoryTemplate</a></div><div class="ttdeci">virtual ~StoryTemplate()=default</div></div>
+    <div class="ttc" id="_story_line_8h_html">
+      <div class="ttname"><a href="_story_line_8h.html">StoryLine.h</a></div>
+    </div>
 <div class="ttc" id="_weaver_types_8h_html"><div class="ttname"><a href="_weaver_types_8h.html">WeaverTypes.h</a></div></div>
 <div class="ttc" id="classweave_1_1_story_template_html_a76f1be8a2a1db57b549aafab6da51bb0"><div class="ttname"><a href="classweave_1_1_story_template.html#a76f1be8a2a1db57b549aafab6da51bb0">weave::StoryTemplate::GetRequiredEntities</a></div><div class="ttdeci">virtual std::vector&lt; std::string &gt; GetRequiredEntities() const  =0</div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -119,7 +193,7 @@ $(document).ready(function(){initNavTree('_story_template_8h_source.html','');})
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_da9217a34ad0ff98ec55ada131b98e07.html">Story</a></li><li class="navelem"><a class="el" href="_story_template_8h.html">StoryTemplate.h</a></li>
-    <li class="footer">Generated on Sun Feb 14 2016 01:07:17 for QuestWeaver by
+    <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>

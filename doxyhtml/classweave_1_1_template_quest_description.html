@@ -47,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -114,24 +115,80 @@ $(document).ready(function(){initNavTree('classweave_1_1_template_quest_descript
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="_quest_template_8h_source.html">QuestTemplate.h</a>&gt;</code></p>
+  <p>Wraps the quest description texts for the <a class="el" href="classweave_1_1_quest_template.html"
+                                                  title="Defines a blueprint from which a specific type of quest can be generated. ">QuestTemplate</a>.
+    <a href="classweave_1_1_template_quest_description.html#details">More...</a></p>
+
+  <p><code>#include &lt;<a class="el" href="_quest_template_8h_source.html">QuestTemplate.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a93ed7fc6a2938fd621643a9e5b925313"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_template_quest_description.html#a93ed7fc6a2938fd621643a9e5b925313">TemplateQuestDescription</a> (const std::vector&lt; std::string &gt; &amp;conditions, const std::string &amp;text)</td></tr>
-<tr class="separator:a93ed7fc6a2938fd621643a9e5b925313"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99f851c4e5e63ff4cfb3572c72d7cdee"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_template_quest_description.html#a99f851c4e5e63ff4cfb3572c72d7cdee">GetText</a> (<a class="el" href="namespaceweave.html#ac4254b88961d333d4dd8189d11168576">FormatterType</a> format) const </td></tr>
-<tr class="separator:a99f851c4e5e63ff4cfb3572c72d7cdee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac03639de8b8e3270fa5d4df178d84aab"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_template_quest_description.html#ac03639de8b8e3270fa5d4df178d84aab">SupportsConditions</a> (const std::vector&lt; std::string &gt; &amp;conditions) const </td></tr>
-<tr class="separator:ac03639de8b8e3270fa5d4df178d84aab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+  <tr class="memitem:ab33b126b6edaa4cabb0faa28d47039f3">
+    <td class="memItemLeft" align="right" valign="top">&#160;</td>
+    <td class="memItemRight" valign="bottom"><a class="el"
+                                                href="classweave_1_1_template_quest_description.html#ab33b126b6edaa4cabb0faa28d47039f3">TemplateQuestDescription</a>
+      (const std::vector&lt; std::string &gt; &amp;conditions, const std::string &amp;text) noexcept
+    </td>
+  </tr>
+  <tr class="memdesc:ab33b126b6edaa4cabb0faa28d47039f3">
+    <td class="mdescLeft">&#160;</td>
+    <td class="mdescRight">Creates a new description that is valid for the given conditions. <a
+            href="#ab33b126b6edaa4cabb0faa28d47039f3">More...</a><br/></td>
+  </tr>
+  <tr class="separator:ab33b126b6edaa4cabb0faa28d47039f3">
+    <td class="memSeparator" colspan="2">&#160;</td>
+  </tr>
+  <tr class="memitem:ae09432b0b5889472ff386706bdcb28bf">
+    <td class="memItemLeft" align="right" valign="top">std::string&#160;</td>
+    <td class="memItemRight" valign="bottom"><a class="el"
+                                                href="classweave_1_1_template_quest_description.html#ae09432b0b5889472ff386706bdcb28bf">GetText</a>
+      (<a class="el" href="group__main_api.html#gac4254b88961d333d4dd8189d11168576">FormatterType</a> format) const
+      noexcept
+    </td>
+  </tr>
+  <tr class="memdesc:ae09432b0b5889472ff386706bdcb28bf">
+    <td class="mdescLeft">&#160;</td>
+    <td class="mdescRight">Returns the description text containing placeholders for the corresponding <a class="el"
+                                                                                                         href="classweave_1_1_quest_property_value.html"
+                                                                                                         title="Data container linking quest templates and world entities. ">QuestPropertyValue</a>.
+      <a href="#ae09432b0b5889472ff386706bdcb28bf">More...</a><br/></td>
+  </tr>
+  <tr class="separator:ae09432b0b5889472ff386706bdcb28bf">
+    <td class="memSeparator" colspan="2">&#160;</td>
+  </tr>
+  <tr class="memitem:a9ea8737570094ff036be0611ca51f105">
+    <td class="memItemLeft" align="right" valign="top">bool&#160;</td>
+    <td class="memItemRight" valign="bottom"><a class="el"
+                                                href="classweave_1_1_template_quest_description.html#a9ea8737570094ff036be0611ca51f105">SupportsConditions</a>
+      (const std::vector&lt; std::string &gt; &amp;conditions) const noexcept
+    </td>
+  </tr>
+  <tr class="memdesc:a9ea8737570094ff036be0611ca51f105">
+    <td class="mdescLeft">&#160;</td>
+    <td class="mdescRight">Returns true if this description text can be constructed under the given conditions. <a
+            href="#a9ea8737570094ff036be0611ca51f105">More...</a><br/></td>
+  </tr>
+  <tr class="separator:a9ea8737570094ff036be0611ca51f105">
+    <td class="memSeparator" colspan="2">&#160;</td>
+  </tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="_quest_template_8h_source.html#l00041">41</a> of file <a class="el" href="_quest_template_8h_source.html">QuestTemplate.h</a>.</p>
+  <div class="textblock"><p>Wraps the quest description texts for the <a class="el"
+                                                                         href="classweave_1_1_quest_template.html"
+                                                                         title="Defines a blueprint from which a specific type of quest can be generated. ">QuestTemplate</a>.
+  </p>
+    <p>Contains a text from the template files and the required conditions for the text to appear. </p>
+
+    <p>Definition at line <a class="el" href="_quest_template_8h_source.html#l00091">91</a> of file <a class="el"
+                                                                                                       href="_quest_template_8h_source.html">QuestTemplate.h</a>.
+    </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a93ed7fc6a2938fd621643a9e5b925313"></a>
+  <a class="anchor" id="ab33b126b6edaa4cabb0faa28d47039f3"></a>
 <div class="memitem">
 <div class="memproto">
+  <table class="mlabels">
+    <tr>
+      <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">weave::TemplateQuestDescription::TemplateQuestDescription </td>
@@ -151,30 +208,76 @@ Public Member Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+      </td>
+      <td class="mlabels-right">
+        <span class="mlabels"><span class="mlabel">noexcept</span></span></td>
+    </tr>
+  </table>
 </div><div class="memdoc">
+
+  <p>Creates a new description that is valid for the given conditions. </p>
+  <dl class="params">
+    <dt>Parameters</dt>
+    <dd>
+      <table class="params">
+        <tr>
+          <td class="paramname">conditions</td>
+          <td>The names of the <a class="el" href="classweave_1_1_template_quest_property.html"
+                                  title="Marks parts of a quest template that represent a WorldEntity. ">TemplateQuestProperty</a>
+            values required for the description to be used.
+          </td>
+        </tr>
+        <tr>
+          <td class="paramname">text</td>
+          <td>the description text containing placeholders for the conditions. A placeholder is a string with a leading
+            %-sign. When the quest is created, each placeholder will be substituted with the corresponding <a class="el"
+                                                                                                              href="classweave_1_1_quest_property_value.html"
+                                                                                                              title="Data container linking quest templates and world entities. ">QuestPropertyValue</a>.
+          </td>
+        </tr>
+      </table>
+    </dd>
+  </dl>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a99f851c4e5e63ff4cfb3572c72d7cdee"></a>
+  <a class="anchor" id="ae09432b0b5889472ff386706bdcb28bf"></a>
 <div class="memitem">
 <div class="memproto">
+  <table class="mlabels">
+    <tr>
+      <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">std::string weave::TemplateQuestDescription::GetText </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceweave.html#ac4254b88961d333d4dd8189d11168576">FormatterType</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__main_api.html#gac4254b88961d333d4dd8189d11168576">FormatterType</a>&#160;
+          </td>
           <td class="paramname"><em>format</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
+      </td>
+      <td class="mlabels-right">
+        <span class="mlabels"><span class="mlabel">noexcept</span></span></td>
+    </tr>
+  </table>
 </div><div class="memdoc">
+
+  <p>Returns the description text containing placeholders for the corresponding <a class="el"
+                                                                                   href="classweave_1_1_quest_property_value.html"
+                                                                                   title="Data container linking quest templates and world entities. ">QuestPropertyValue</a>.
+  </p>
 
 </div>
 </div>
-<a class="anchor" id="ac03639de8b8e3270fa5d4df178d84aab"></a>
+  <a class="anchor" id="a9ea8737570094ff036be0611ca51f105"></a>
 <div class="memitem">
 <div class="memproto">
+  <table class="mlabels">
+    <tr>
+      <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool weave::TemplateQuestDescription::SupportsConditions </td>
@@ -184,7 +287,25 @@ Public Member Functions</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+      </td>
+      <td class="mlabels-right">
+        <span class="mlabels"><span class="mlabel">noexcept</span></span></td>
+    </tr>
+  </table>
 </div><div class="memdoc">
+
+  <p>Returns true if this description text can be constructed under the given conditions. </p>
+  <dl class="params">
+    <dt>Parameters</dt>
+    <dd>
+      <table class="params">
+        <tr>
+          <td class="paramname">conditions</td>
+          <td>the <b>sorted</b> list of conditions.</td>
+        </tr>
+      </table>
+    </dd>
+  </dl>
 
 </div>
 </div>
@@ -197,7 +318,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceweave.html">weave</a></li><li class="navelem"><a class="el" href="classweave_1_1_template_quest_description.html">TemplateQuestDescription</a></li>
-    <li class="footer">Generated on Sun Feb 14 2016 01:07:17 for QuestWeaver by
+    <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
   </ul>

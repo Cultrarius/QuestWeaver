@@ -1,6 +1,7 @@
 var NAVTREE =
 [
   [ "QuestWeaver", "index.html", [
+    ["Modules", "modules.html", "modules"],
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -29,7 +30,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_meta_data_8h.html",
-"structweave_1_1_enum_class_hash.html#ab88e06a7759ad83389f71cc37a20daae"
+  "group__main_api.html#ga43b695846582193689b15af33499cab3"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
