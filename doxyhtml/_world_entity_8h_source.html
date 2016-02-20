@@ -108,155 +108,17 @@ $(document).ready(function(){initNavTree('_world_entity_8h_source.html','');});
 <div class="title">WorldEntity.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-  <a href="_world_entity_8h.html">Go to the documentation of this file.</a>
-  <div class="fragment">
-    <div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
-    <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by michael on 06.10.15.</span>
-    </div>
-    <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
-    <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
-    <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span>
-    </div>
-    <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-    <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;../Core/WeaverTypes.h&quot;</span>
-    </div>
-    <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;cereal.h&quot;</span>
-    </div>
-    <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-    <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span
-            class="keyword">namespace </span><a class="code" href="namespaceweave.html">weave</a> {
-    </div>
-    <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-    <div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classweave_1_1_world_entity.html">
-      15</a></span>&#160; <span class="keyword">class </span><a class="code" href="classweave_1_1_world_entity.html">WorldEntity</a>
-      {
-    </div>
-    <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; <span class="keyword">public</span>:
-    </div>
-    <div class="line"><a name="l00017"></a><span class="lineno"><a class="line"
-                                                                   href="classweave_1_1_world_entity.html#aec244462bebe02b0f19fbee190f9cf8a">
-      17</a></span>&#160; <span class="keyword">static</span> <span class="keyword">const</span> <a class="code"
-                                                                                                    href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a>
-      <a class="code" href="classweave_1_1_world_entity.html#aec244462bebe02b0f19fbee190f9cf8a">NoID</a> = 0;
-    </div>
-    <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-    <div class="line"><a name="l00019"></a><span class="lineno"><a class="line"
-                                                                   href="classweave_1_1_world_entity.html#aa83c37cddda4705162f500438333a892">
-      19</a></span>&#160; <a class="code" href="classweave_1_1_world_entity.html#aa83c37cddda4705162f500438333a892">WorldEntity</a>()
-      : <a class="code" href="classweave_1_1_world_entity.html">WorldEntity</a>(NoID) { }
-    </div>
-    <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-    <div class="line"><a name="l00021"></a><span class="lineno"><a class="line"
-                                                                   href="classweave_1_1_world_entity.html#a70d17e69a2f21f9ae2f12be9a7542da9">
-      21</a></span>&#160; <span class="keyword">virtual</span> <a class="code"
-                                                                  href="classweave_1_1_world_entity.html#a70d17e69a2f21f9ae2f12be9a7542da9">~WorldEntity</a>()
-      {}
-    </div>
-    <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-    <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; <a class="code"
-                                                                                      href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a>
-      <a class="code" href="classweave_1_1_world_entity.html#ab4d41f18969c2e23136be94ade9262fa">GetId</a>();
-    </div>
-    <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-    <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; <span class="keyword">virtual</span>
-      std::string <a class="code" href="classweave_1_1_world_entity.html#ad3de8ba54854069a255a75eab9f7976f">GetType</a>()
-      <span class="keyword">const</span> = 0;
-    </div>
-    <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-    <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; <span class="keyword">virtual</span>
-      std::string <a class="code" href="classweave_1_1_world_entity.html#a3bb626fcd882f4327ba39c924efd0608">ToString</a>()
-      <span class="keyword">const</span> = 0;
-    </div>
-    <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-    <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; <span
-            class="keyword">protected</span>:
-    </div>
-    <div class="line"><a name="l00030"></a><span class="lineno"><a class="line"
-                                                                   href="classweave_1_1_world_entity.html#a3d8a4247cc2d1adb5205f7b1a64c71f2">
-      30</a></span>&#160; <span class="keyword">explicit</span> <a class="code"
-                                                                   href="classweave_1_1_world_entity.html#a3d8a4247cc2d1adb5205f7b1a64c71f2">WorldEntity</a>(<a
-            class="code" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a> <span
-            class="keywordtype">id</span>) : id(id) { }
-    </div>
-    <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-    <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; <span class="keyword">private</span>:
-    </div>
-    <div class="line"><a name="l00033"></a><span class="lineno"><a class="line"
-                                                                   href="classweave_1_1_world_entity.html#a1702e650030c9e8cd10f4e18989b809c">
-      33</a></span>&#160; <span class="keyword">friend</span> <span class="keyword">class </span><a class="code"
-                                                                                                    href="classweave_1_1_world_model.html">WorldModel</a>;
-    </div>
-    <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-    <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; <a class="code"
-                                                                                      href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a>
-      id;
-    </div>
-    <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-    <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; <span class="comment">// serialization</span>
-    </div>
-    <div class="line"><a name="l00038"></a><span class="lineno"><a class="line"
-                                                                   href="classweave_1_1_world_entity.html#ab2f44cbb59a08132f4c843e5225bba0e">
-      38</a></span>&#160; <span class="keyword">friend</span> <span class="keyword">class </span>cereal::access;
-    </div>
-    <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-    <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; <span class="keyword">template</span>&lt;<span
-            class="keyword">class</span> Archive&gt;</div>
-    <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; <span class="keywordtype">void</span>
-      serialize(Archive &amp;archive) {
-    </div>
-    <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; archive(CEREAL_NVP(<span
-            class="keywordtype">id</span>));
-    </div>
-    <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; }</div>
-    <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; };</div>
-    <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
-    <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-    <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-    <div class="ttc" id="classweave_1_1_world_entity_html_aa83c37cddda4705162f500438333a892">
-      <div class="ttname"><a href="classweave_1_1_world_entity.html#aa83c37cddda4705162f500438333a892">weave::WorldEntity::WorldEntity</a>
-      </div>
-      <div class="ttdeci">WorldEntity()</div>
-      <div class="ttdef"><b>Definition:</b> <a href="_world_entity_8h_source.html#l00019">WorldEntity.h:19</a></div>
-    </div>
-    <div class="ttc" id="classweave_1_1_world_model_html">
-      <div class="ttname"><a href="classweave_1_1_world_model.html">weave::WorldModel</a></div>
-      <div class="ttdef"><b>Definition:</b> <a href="_world_model_8h_source.html#l00020">WorldModel.h:20</a></div>
-    </div>
-    <div class="ttc" id="namespaceweave_html">
-      <div class="ttname"><a href="namespaceweave.html">weave</a></div>
-      <div class="ttdef"><b>Definition:</b> <a href="_quest_weaver_8h_source.html#l00027">QuestWeaver.h:27</a></div>
-    </div>
-    <div class="ttc" id="classweave_1_1_world_entity_html_aec244462bebe02b0f19fbee190f9cf8a">
-      <div class="ttname"><a href="classweave_1_1_world_entity.html#aec244462bebe02b0f19fbee190f9cf8a">weave::WorldEntity::NoID</a>
-      </div>
-      <div class="ttdeci">static const ID NoID</div>
-      <div class="ttdef"><b>Definition:</b> <a href="_world_entity_8h_source.html#l00017">WorldEntity.h:17</a></div>
-    </div>
+<a href="_world_entity_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by michael on 06.10.15.</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;../Core/WeaverTypes.h&quot;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;cereal.h&quot;</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceweave.html">weave</a> {</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div><div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classweave_1_1_world_entity.html">   15</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classweave_1_1_world_entity.html">WorldEntity</a> {</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classweave_1_1_world_entity.html#aec244462bebe02b0f19fbee190f9cf8a">   17</a></span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a> <a class="code" href="classweave_1_1_world_entity.html#aec244462bebe02b0f19fbee190f9cf8a">NoID</a> = 0;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div><div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classweave_1_1_world_entity.html#aa83c37cddda4705162f500438333a892">   19</a></span>&#160;        <a class="code" href="classweave_1_1_world_entity.html#aa83c37cddda4705162f500438333a892">WorldEntity</a>() : <a class="code" href="classweave_1_1_world_entity.html">WorldEntity</a>(NoID) { }</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div><div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classweave_1_1_world_entity.html#a70d17e69a2f21f9ae2f12be9a7542da9">   21</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classweave_1_1_world_entity.html#a70d17e69a2f21f9ae2f12be9a7542da9">~WorldEntity</a>() {}</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a> <a class="code" href="classweave_1_1_world_entity.html#ab4d41f18969c2e23136be94ade9262fa">GetId</a>();</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">virtual</span> std::string <a class="code" href="classweave_1_1_world_entity.html#ad3de8ba54854069a255a75eab9f7976f">GetType</a>() <span class="keyword">const</span> = 0;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">virtual</span> std::string <a class="code" href="classweave_1_1_world_entity.html#a3bb626fcd882f4327ba39c924efd0608">ToString</a>() <span class="keyword">const</span> = 0;</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">protected</span>:</div><div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classweave_1_1_world_entity.html#a3d8a4247cc2d1adb5205f7b1a64c71f2">   30</a></span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classweave_1_1_world_entity.html#a3d8a4247cc2d1adb5205f7b1a64c71f2">WorldEntity</a>(<a class="code" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a> <span class="keywordtype">id</span>) : id(id) { }</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">private</span>:</div><div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classweave_1_1_world_entity.html#a1702e650030c9e8cd10f4e18989b809c">   33</a></span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classweave_1_1_world_model.html">WorldModel</a>;</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="code" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a> id;</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="comment">// serialization</span></div><div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classweave_1_1_world_entity.html#ab2f44cbb59a08132f4c843e5225bba0e">   38</a></span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span>cereal::access;</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> Archive&gt;</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">void</span> serialize(Archive &amp;archive) {</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            archive(CEREAL_NVP(<span class="keywordtype">id</span>));</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        }</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    };</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div><div class="ttc" id="classweave_1_1_world_entity_html_aa83c37cddda4705162f500438333a892"><div class="ttname"><a href="classweave_1_1_world_entity.html#aa83c37cddda4705162f500438333a892">weave::WorldEntity::WorldEntity</a></div><div class="ttdeci">WorldEntity()</div><div class="ttdef"><b>Definition:</b> <a href="_world_entity_8h_source.html#l00019">WorldEntity.h:19</a></div></div>
+<div class="ttc" id="classweave_1_1_world_model_html"><div class="ttname"><a href="classweave_1_1_world_model.html">weave::WorldModel</a></div><div class="ttdef"><b>Definition:</b> <a href="_world_model_8h_source.html#l00020">WorldModel.h:20</a></div></div>
+<div class="ttc" id="namespaceweave_html"><div class="ttname"><a href="namespaceweave.html">weave</a></div><div class="ttdef"><b>Definition:</b> <a href="_quest_weaver_8h_source.html#l00027">QuestWeaver.h:27</a></div></div>
+<div class="ttc" id="classweave_1_1_world_entity_html_aec244462bebe02b0f19fbee190f9cf8a"><div class="ttname"><a href="classweave_1_1_world_entity.html#aec244462bebe02b0f19fbee190f9cf8a">weave::WorldEntity::NoID</a></div><div class="ttdeci">static const ID NoID</div><div class="ttdef"><b>Definition:</b> <a href="_world_entity_8h_source.html#l00017">WorldEntity.h:17</a></div></div>
 <div class="ttc" id="classweave_1_1_world_entity_html_ab4d41f18969c2e23136be94ade9262fa"><div class="ttname"><a href="classweave_1_1_world_entity.html#ab4d41f18969c2e23136be94ade9262fa">weave::WorldEntity::GetId</a></div><div class="ttdeci">ID GetId()</div></div>
-    <div class="ttc" id="group__main_api_html_gad16585a767748e749a3389c77b0e5c76">
-      <div class="ttname"><a href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">weave::ID</a></div>
-      <div class="ttdeci">uint64_t ID</div>
-      <div class="ttdoc">Used to identify unique objects in the quest system, i.e.</div>
-      <div class="ttdef"><b>Definition:</b> <a href="_weaver_types_8h_source.html#l00017">WeaverTypes.h:17</a></div>
-    </div>
-    <div class="ttc" id="classweave_1_1_world_entity_html">
-      <div class="ttname"><a href="classweave_1_1_world_entity.html">weave::WorldEntity</a></div>
-      <div class="ttdef"><b>Definition:</b> <a href="_world_entity_8h_source.html#l00015">WorldEntity.h:15</a></div>
-    </div>
+<div class="ttc" id="group__main_api_html_gad16585a767748e749a3389c77b0e5c76"><div class="ttname"><a href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">weave::ID</a></div><div class="ttdeci">uint64_t ID</div><div class="ttdoc">Used to identify unique objects in the quest system, i.e. </div><div class="ttdef"><b>Definition:</b> <a href="_weaver_types_8h_source.html#l00017">WeaverTypes.h:17</a></div></div>
+<div class="ttc" id="classweave_1_1_world_entity_html"><div class="ttname"><a href="classweave_1_1_world_entity.html">weave::WorldEntity</a></div><div class="ttdef"><b>Definition:</b> <a href="_world_entity_8h_source.html#l00015">WorldEntity.h:15</a></div></div>
 <div class="ttc" id="classweave_1_1_world_entity_html_ad3de8ba54854069a255a75eab9f7976f"><div class="ttname"><a href="classweave_1_1_world_entity.html#ad3de8ba54854069a255a75eab9f7976f">weave::WorldEntity::GetType</a></div><div class="ttdeci">virtual std::string GetType() const  =0</div></div>
 <div class="ttc" id="classweave_1_1_world_entity_html_a3bb626fcd882f4327ba39c924efd0608"><div class="ttname"><a href="classweave_1_1_world_entity.html#a3bb626fcd882f4327ba39c924efd0608">weave::WorldEntity::ToString</a></div><div class="ttdeci">virtual std::string ToString() const  =0</div></div>
-    <div class="ttc" id="classweave_1_1_world_entity_html_a3d8a4247cc2d1adb5205f7b1a64c71f2">
-      <div class="ttname"><a href="classweave_1_1_world_entity.html#a3d8a4247cc2d1adb5205f7b1a64c71f2">weave::WorldEntity::WorldEntity</a>
-      </div>
-      <div class="ttdeci">WorldEntity(ID id)</div>
-      <div class="ttdef"><b>Definition:</b> <a href="_world_entity_8h_source.html#l00030">WorldEntity.h:30</a></div>
-    </div>
-    <div class="ttc" id="classweave_1_1_world_entity_html_a70d17e69a2f21f9ae2f12be9a7542da9">
-      <div class="ttname"><a href="classweave_1_1_world_entity.html#a70d17e69a2f21f9ae2f12be9a7542da9">weave::WorldEntity::~WorldEntity</a>
-      </div>
-      <div class="ttdeci">virtual ~WorldEntity()</div>
-      <div class="ttdef"><b>Definition:</b> <a href="_world_entity_8h_source.html#l00021">WorldEntity.h:21</a></div>
-    </div>
+<div class="ttc" id="classweave_1_1_world_entity_html_a3d8a4247cc2d1adb5205f7b1a64c71f2"><div class="ttname"><a href="classweave_1_1_world_entity.html#a3d8a4247cc2d1adb5205f7b1a64c71f2">weave::WorldEntity::WorldEntity</a></div><div class="ttdeci">WorldEntity(ID id)</div><div class="ttdef"><b>Definition:</b> <a href="_world_entity_8h_source.html#l00030">WorldEntity.h:30</a></div></div>
+<div class="ttc" id="classweave_1_1_world_entity_html_a70d17e69a2f21f9ae2f12be9a7542da9"><div class="ttname"><a href="classweave_1_1_world_entity.html#a70d17e69a2f21f9ae2f12be9a7542da9">weave::WorldEntity::~WorldEntity</a></div><div class="ttdeci">virtual ~WorldEntity()</div><div class="ttdef"><b>Definition:</b> <a href="_world_entity_8h_source.html#l00021">WorldEntity.h:21</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
