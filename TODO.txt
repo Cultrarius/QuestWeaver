@@ -1,3 +1,5 @@
+* template factories as unique_ptr
+* Template factory should return more than one fileName
 * Implement story writer based on graph nodes
   * Story writer could use templates or modules similar to the quest templates
   * Use metadata / quest template data

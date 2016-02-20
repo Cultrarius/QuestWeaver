@@ -24,7 +24,7 @@ Quest::Quest(ID newId, const string &title, const string &description, const std
 }
 
 
-Quest::Quest(const std::string &title, const std::string &description, const std::string &story):
+Quest::Quest(const std::string &title, const std::string &description, const std::string &story) :
         Quest(NoID, title, description, story) {
 }
 
@@ -38,10 +38,8 @@ QuestTickResult Quest::Tick(float delta) {
     return QuestTickResult(emptyChanges, emptyAction);
 }
 
-QuestTickResult::QuestTickResult(vector<WorldModelAction> worldChanges, QuestModelAction questChanges) :
-        worldChanges(worldChanges), questChanges(questChanges)
-
-noexcept {
+QuestTickResult::QuestTickResult(vector<WorldModelAction> worldChanges, QuestModelAction questChanges) noexcept :
+        worldChanges(worldChanges), questChanges(questChanges) {
 }
 
 vector<WorldModelAction> QuestTickResult::GetWorldChanges() const noexcept {

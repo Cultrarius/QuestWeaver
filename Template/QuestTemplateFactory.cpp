@@ -19,7 +19,7 @@ vector<string> QuestTemplateFactory::GetTemplateKeys() {
     return keys;
 }
 
-string QuestTemplateFactory::extractTitle(const Json::Value &root) const {
+string QuestTemplateFactory::extractTitle(const Json::Value &root, std::shared_ptr<RandomStream> randomStream) {
     vector<string> titles;
     const Value jsonTitles = root["titles"];
     for (unsigned int i = 0; i < jsonTitles.size(); ++i) {
@@ -29,7 +29,7 @@ string QuestTemplateFactory::extractTitle(const Json::Value &root) const {
     return titles.at(index);
 }
 
-vector<TemplateQuestDescription> QuestTemplateFactory::extractDescriptions(const Json::Value &root) const {
+vector<TemplateQuestDescription> QuestTemplateFactory::extractDescriptions(const Json::Value &root) {
     vector<TemplateQuestDescription> descriptions;
     const Value jsonDescriptions = root["descriptions"];
     for (unsigned int i = 0; i < jsonDescriptions.size(); ++i) {
@@ -45,7 +45,7 @@ vector<TemplateQuestDescription> QuestTemplateFactory::extractDescriptions(const
     return descriptions;
 }
 
-vector<TemplateQuestProperty> QuestTemplateFactory::extractProperties(const Value &root) const {
+vector<TemplateQuestProperty> QuestTemplateFactory::extractProperties(const Value &root) {
     vector<TemplateQuestProperty> properties;
     const Value jsonMandatory = root["mandatory"];
     extractProperties(&properties, jsonMandatory, true);
@@ -55,7 +55,7 @@ vector<TemplateQuestProperty> QuestTemplateFactory::extractProperties(const Valu
 }
 
 void QuestTemplateFactory::extractProperties(vector<TemplateQuestProperty> *properties, const Value &jsonMandatory,
-                                             bool isMandatory) const {
+                                             bool isMandatory) {
     for (unsigned int i = 0; i < jsonMandatory.size(); ++i) {
         string name = jsonMandatory[i].asString();
         TemplateQuestProperty property(isMandatory, name);

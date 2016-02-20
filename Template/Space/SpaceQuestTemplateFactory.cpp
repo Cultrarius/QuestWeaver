@@ -16,7 +16,7 @@ std::shared_ptr<QuestTemplate> SpaceQuestTemplateFactory::createFromJsonValues(c
         throw ContractFailedException(errorMessage);
     }
 
-    string title = extractTitle(root);
+    string title = extractTitle(root, randomStream);
     vector<TemplateQuestProperty> properties = extractProperties(root);
     vector<TemplateQuestDescription> descriptions = extractDescriptions(root);
 
