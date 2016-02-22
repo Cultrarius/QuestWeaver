@@ -14,6 +14,7 @@ namespace weave {
      * Holds the configuration data to create new QuestWeaver instances.
      *
      * @ingroup mainApi
+     * @see QuestWeaver
      */
     struct WeaverConfig {
         /*!

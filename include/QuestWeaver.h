@@ -35,6 +35,7 @@ namespace weave {
      * Instances of this class are not thread safe.
      *
      * @ingroup mainApi
+     * @see WeaverConfig
      */
     class QuestWeaver {
     public:
