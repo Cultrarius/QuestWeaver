@@ -21,6 +21,8 @@ namespace weave {
 
         virtual const char *getTemplateFile() const = 0;
 
+        std::vector<std::string> readRequired(const Json::Value &templateJson) const;
+
     private:
         friend class StoryWriter;
 

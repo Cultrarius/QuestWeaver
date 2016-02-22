@@ -92,3 +92,21 @@ TEST_CASE("Nuggets", "[story]") {
         REQUIRE(!story.empty());
     }
 }
+
+TEST_CASE("StoryTemplates", "[story]") {
+    Directories dirs;
+    dirs.templateDirectory = "Test/Resources/";
+    dirs.modDirectory = "../Test/Resources/";
+    shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
+    TemplateEngine engine(rs, dirs, FormatterType::HTML);
+    QuestModel questModel;
+    SpaceWorldModel worldModel(rs);
+    WeaverGraph graph;
+    vector<QuestPropertyValue> values;
+    StoryWriter writer(rs, questModel, engine, worldModel, dirs);
+
+    SECTION("Simple line test") {
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
+        string story = writer.CreateStory(graph, values);
+    }
+}
