@@ -1,8 +1,10 @@
 <map id="weave::WeaverConfig" name="weave::WeaverConfig">
-<area shape="rect" id="node4" href="$classweave_1_1_world_model.html" title="weave::WorldModel" alt="" coords="585,78,723,105"/>
-<area shape="rect" id="node6" href="$classweave_1_1_world_model_action.html" title="weave::WorldModelAction" alt="" coords="5,13,180,39"/>
-<area shape="rect" id="node8" href="$classweave_1_1_meta_data.html" title="Holds information about a world entity. " alt="" coords="30,78,155,105"/>
-<area shape="rect" id="node9" href="$structweave_1_1_directories.html" title="This struct hold information about the programs file search paths. " alt="" coords="943,139,1073,166"/>
-<area shape="rect" id="node10" title="STL class. " alt="" coords="614,143,694,170"/>
-<area shape="rect" id="node11" title="STL class. " alt="" coords="307,136,434,177"/>
+<area shape="rect" id="node4" href="$classweave_1_1_story_template_factory.html" title="weave::StoryTemplateFactory" alt="" coords="287,13,485,39"/>
+<area shape="rect" id="node7" href="$classweave_1_1_quest_template_factory.html" title="A factory that is able to create different &quot;types&quot; of quests (quest templates) on demand..." alt="" coords="285,70,487,97"/>
+<area shape="rect" id="node9" href="$classweave_1_1_world_model.html" title="weave::WorldModel" alt="" coords="635,143,772,170"/>
+<area shape="rect" id="node11" href="$classweave_1_1_world_model_action.html" title="weave::WorldModelAction" alt="" coords="5,129,180,155"/>
+<area shape="rect" id="node13" href="$classweave_1_1_meta_data.html" title="Holds information about a world entity. " alt="" coords="30,194,155,221"/>
+<area shape="rect" id="node14" href="$structweave_1_1_directories.html" title="This struct hold information about the programs file search paths. " alt="" coords="1011,209,1141,235"/>
+<area shape="rect" id="node15" title="STL class. " alt="" coords="663,245,743,271"/>
+<area shape="rect" id="node16" title="STL class. " alt="" coords="323,252,449,293"/>
 </map>

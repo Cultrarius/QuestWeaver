@@ -125,8 +125,17 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0c8344b29115e3bd5796f697e1bf3fa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b918ddfea41a936ca30d3b1f4953e2b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_writer.html#a3b918ddfea41a936ca30d3b1f4953e2b">CreateStory</a> (const weave::WeaverGraph &amp;graph, const std::vector&lt; <a class="el" href="classweave_1_1_quest_property_value.html">QuestPropertyValue</a> &gt; &amp;propertyValues) const </td></tr>
 <tr class="separator:a3b918ddfea41a936ca30d3b1f4953e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e14046e23a6cf9448867dd42399d726"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_writer.html#a1e14046e23a6cf9448867dd42399d726">RegisterTemplateFactory</a> (std::shared_ptr&lt; <a class="el" href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a> &gt; factory)</td></tr>
-<tr class="separator:a1e14046e23a6cf9448867dd42399d726"><td class="memSeparator" colspan="2">&#160;</td></tr>
+  <tr class="memitem:a61603fcb06730acf9fa57ace53d5cbf7">
+    <td class="memItemLeft" align="right" valign="top">void&#160;</td>
+    <td class="memItemRight" valign="bottom"><a class="el"
+                                                href="classweave_1_1_story_writer.html#a61603fcb06730acf9fa57ace53d5cbf7">RegisterTemplateFactory</a>
+      (std::unique_ptr&lt; <a class="el" href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a> &gt;
+      factory)
+    </td>
+  </tr>
+  <tr class="separator:a61603fcb06730acf9fa57ace53d5cbf7">
+    <td class="memSeparator" colspan="2">&#160;</td>
+  </tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -227,14 +236,15 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1e14046e23a6cf9448867dd42399d726"></a>
+  <a class="anchor" id="a61603fcb06730acf9fa57ace53d5cbf7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void weave::StoryWriter::RegisterTemplateFactory </td>
           <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a> &gt;&#160;</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a>
+            &gt;&#160;</td>
           <td class="paramname"><em>factory</em></td><td>)</td>
           <td></td>
         </tr>

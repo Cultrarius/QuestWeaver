@@ -125,12 +125,22 @@ Collaboration diagram for weave::WeaverConfig:</div>
 <div class="dyncontent">
 <div class="center"><img src="structweave_1_1_weaver_config__coll__graph.png" border="0" usemap="#weave_1_1_weaver_config_coll__map" alt="Collaboration graph"/></div>
 <map name="weave_1_1_weaver_config_coll__map" id="weave_1_1_weaver_config_coll__map">
-<area shape="rect" id="node4" href="classweave_1_1_world_model.html" title="weave::WorldModel" alt="" coords="585,78,723,105"/>
-<area shape="rect" id="node6" href="classweave_1_1_world_model_action.html" title="weave::WorldModelAction" alt="" coords="5,13,180,39"/>
-<area shape="rect" id="node8" href="classweave_1_1_meta_data.html" title="Holds information about a world entity. " alt="" coords="30,78,155,105"/>
-<area shape="rect" id="node9" href="structweave_1_1_directories.html" title="This struct hold information about the programs file search paths. " alt="" coords="943,139,1073,166"/>
-<area shape="rect" id="node10" title="STL class. " alt="" coords="614,143,694,170"/>
-<area shape="rect" id="node11" title="STL class. " alt="" coords="307,136,434,177"/>
+    <area shape="rect" id="node4" href="classweave_1_1_story_template_factory.html" title="weave::StoryTemplateFactory"
+          alt="" coords="287,13,485,39"/>
+    <area shape="rect" id="node7" href="classweave_1_1_quest_template_factory.html"
+          title="A factory that is able to create different &quot;types&quot; of quests (quest templates) on demand..."
+          alt="" coords="285,70,487,97"/>
+    <area shape="rect" id="node9" href="classweave_1_1_world_model.html" title="weave::WorldModel" alt=""
+          coords="635,143,772,170"/>
+    <area shape="rect" id="node11" href="classweave_1_1_world_model_action.html" title="weave::WorldModelAction" alt=""
+          coords="5,129,180,155"/>
+    <area shape="rect" id="node13" href="classweave_1_1_meta_data.html" title="Holds information about a world entity. "
+          alt="" coords="30,194,155,221"/>
+    <area shape="rect" id="node14" href="structweave_1_1_directories.html"
+          title="This struct hold information about the programs file search paths. " alt=""
+          coords="1011,209,1141,235"/>
+    <area shape="rect" id="node15" title="STL class. " alt="" coords="663,245,743,271"/>
+    <area shape="rect" id="node16" title="STL class. " alt="" coords="323,252,449,293"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -151,26 +161,59 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:af6f58da6f948e6460a3e6d5050e84ef9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__main_api.html#gac4254b88961d333d4dd8189d11168576">FormatterType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structweave_1_1_weaver_config.html#af6f58da6f948e6460a3e6d5050e84ef9">formatterType</a> = <a class="el" href="group__main_api.html#ggac4254b88961d333d4dd8189d11168576a61a96ffcb251bb9bf0abf8fec19d0ea8">FormatterType::TEXT</a></td></tr>
 <tr class="memdesc:af6f58da6f948e6460a3e6d5050e84ef9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines how the quest texts such as objectives or description will be formatted.  <a href="#af6f58da6f948e6460a3e6d5050e84ef9">More...</a><br /></td></tr>
 <tr class="separator:af6f58da6f948e6460a3e6d5050e84ef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5ebc0520562557d2063999ee6889b53"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest_template_factory.html">QuestTemplateFactory</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structweave_1_1_weaver_config.html#af5ebc0520562557d2063999ee6889b53">questTemplateFactories</a></td></tr>
-<tr class="memdesc:af5ebc0520562557d2063999ee6889b53"><td class="mdescLeft">&#160;</td><td class="mdescRight">The template factories used to create new quest templates.  <a href="#af5ebc0520562557d2063999ee6889b53">More...</a><br /></td></tr>
-<tr class="separator:af5ebc0520562557d2063999ee6889b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+    <tr class="memitem:aadcd1180a186cb4c85cdb5cf8215e759">
+        <td class="memItemLeft" align="right" valign="top">std::vector&lt; std::unique_ptr&lt; <a class="el"
+                                                                                                  href="classweave_1_1_quest_template_factory.html">QuestTemplateFactory</a>
+            &gt; &gt;&#160;</td>
+        <td class="memItemRight" valign="bottom"><a class="el"
+                                                    href="structweave_1_1_weaver_config.html#aadcd1180a186cb4c85cdb5cf8215e759">questTemplateFactories</a>
+        </td>
+    </tr>
+    <tr class="memdesc:aadcd1180a186cb4c85cdb5cf8215e759">
+        <td class="mdescLeft">&#160;</td>
+        <td class="mdescRight">The template factories used to create new quest templates. <a
+                href="#aadcd1180a186cb4c85cdb5cf8215e759">More...</a><br/></td>
+    </tr>
+    <tr class="separator:aadcd1180a186cb4c85cdb5cf8215e759">
+        <td class="memSeparator" colspan="2">&#160;</td>
+    </tr>
 <tr class="memitem:ab442869898a2b6336fae3d86682f337a"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classweave_1_1_random_stream.html">RandomStream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structweave_1_1_weaver_config.html#ab442869898a2b6336fae3d86682f337a">randomStream</a></td></tr>
 <tr class="memdesc:ab442869898a2b6336fae3d86682f337a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><b>OPTIONAL</b> Can be used to supply the quest system with a custom random number generator.  <a href="#ab442869898a2b6336fae3d86682f337a">More...</a><br /></td></tr>
 <tr class="separator:ab442869898a2b6336fae3d86682f337a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4ae6353cfe9972dcd8caa5a7f62e5d2"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structweave_1_1_weaver_config.html#aa4ae6353cfe9972dcd8caa5a7f62e5d2">seed</a> = 0</td></tr>
 <tr class="memdesc:aa4ae6353cfe9972dcd8caa5a7f62e5d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The random seed used to create new quests.  <a href="#aa4ae6353cfe9972dcd8caa5a7f62e5d2">More...</a><br /></td></tr>
 <tr class="separator:aa4ae6353cfe9972dcd8caa5a7f62e5d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a015da471f57734b5e8d8237b1f2939"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structweave_1_1_weaver_config.html#a4a015da471f57734b5e8d8237b1f2939">storyTemplateFactories</a></td></tr>
-<tr class="memdesc:a4a015da471f57734b5e8d8237b1f2939"><td class="mdescLeft">&#160;</td><td class="mdescRight">The template factories used to create the quest stories.  <a href="#a4a015da471f57734b5e8d8237b1f2939">More...</a><br /></td></tr>
-<tr class="separator:a4a015da471f57734b5e8d8237b1f2939"><td class="memSeparator" colspan="2">&#160;</td></tr>
+    <tr class="memitem:ae3a8fb33d2ad7e50ab81879461eb67e5">
+        <td class="memItemLeft" align="right" valign="top">std::vector&lt; std::unique_ptr&lt; <a class="el"
+                                                                                                  href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a>
+            &gt; &gt;&#160;</td>
+        <td class="memItemRight" valign="bottom"><a class="el"
+                                                    href="structweave_1_1_weaver_config.html#ae3a8fb33d2ad7e50ab81879461eb67e5">storyTemplateFactories</a>
+        </td>
+    </tr>
+    <tr class="memdesc:ae3a8fb33d2ad7e50ab81879461eb67e5">
+        <td class="mdescLeft">&#160;</td>
+        <td class="mdescRight">The template factories used to create the quest stories. <a
+                href="#ae3a8fb33d2ad7e50ab81879461eb67e5">More...</a><br/></td>
+    </tr>
+    <tr class="separator:ae3a8fb33d2ad7e50ab81879461eb67e5">
+        <td class="memSeparator" colspan="2">&#160;</td>
+    </tr>
 <tr class="memitem:a700032767d2ba43bd30dbd33e4e62431"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classweave_1_1_world_model.html">WorldModel</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structweave_1_1_weaver_config.html#a700032767d2ba43bd30dbd33e4e62431">worldModel</a></td></tr>
 <tr class="memdesc:a700032767d2ba43bd30dbd33e4e62431"><td class="mdescLeft">&#160;</td><td class="mdescRight">The world model is responsible for creating all quest entities and informs about world changes.  <a href="#a700032767d2ba43bd30dbd33e4e62431">More...</a><br /></td></tr>
 <tr class="separator:a700032767d2ba43bd30dbd33e4e62431"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Holds the configuration data to create new <a class="el" href="classweave_1_1_quest_weaver.html" title="Main entry point for applications using the quest system. ">QuestWeaver</a> instances. </p>
+    <dl class="section see">
+        <dt>See also</dt>
+        <dd><a class="el" href="classweave_1_1_quest_weaver.html"
+               title="Main entry point for applications using the quest system. ">QuestWeaver</a></dd>
+    </dl>
 
-<p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00018">18</a> of file <a class="el" href="_weaver_config_8h_source.html">WeaverConfig.h</a>.</p>
+    <p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00019">19</a> of file <a class="el"
+                                                                                                      href="_weaver_config_8h_source.html">WeaverConfig.h</a>.
+    </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a9b2a4eb518a6d47a9aa215c5dd021338"></a>
 <div class="memitem">
@@ -223,7 +266,9 @@ Public Attributes</h2></td></tr>
 <p>Creates a new config using default values and the given seed. </p>
 <p>Please note that the config is <b>not valid</b> as long as no world model is assigned to it. </p>
 
-<p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00077">77</a> of file <a class="el" href="_weaver_config_8h_source.html">WeaverConfig.h</a>.</p>
+    <p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00078">78</a> of file <a class="el"
+                                                                                                      href="_weaver_config_8h_source.html">WeaverConfig.h</a>.
+    </p>
 
 </div>
 </div>
@@ -241,7 +286,9 @@ Public Attributes</h2></td></tr>
 <p>The directories in which the templates and other files can be found in. </p>
 <p>Also allows to define a mod directory which can overwrite the default directory for selected files. </p>
 
-<p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00032">32</a> of file <a class="el" href="_weaver_config_8h_source.html">WeaverConfig.h</a>.</p>
+    <p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00033">33</a> of file <a class="el"
+                                                                                                      href="_weaver_config_8h_source.html">WeaverConfig.h</a>.
+    </p>
 
 </div>
 </div>
@@ -258,16 +305,21 @@ Public Attributes</h2></td></tr>
 <p>Defines how the quest texts such as objectives or description will be formatted. </p>
 <p>This value cannot be changed later, so choose wisely. </p>
 
-<p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00056">56</a> of file <a class="el" href="_weaver_config_8h_source.html">WeaverConfig.h</a>.</p>
+    <p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00057">57</a> of file <a class="el"
+                                                                                                      href="_weaver_config_8h_source.html">WeaverConfig.h</a>.
+    </p>
 
 </div>
 </div>
-<a class="anchor" id="af5ebc0520562557d2063999ee6889b53"></a>
+    <a class="anchor" id="aadcd1180a186cb4c85cdb5cf8215e759"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classweave_1_1_quest_template_factory.html">QuestTemplateFactory</a>&gt; &gt; weave::WeaverConfig::questTemplateFactories</td>
+            <td class="memname">std::vector&lt;std::unique_ptr&lt;<a class="el"
+                                                                     href="classweave_1_1_quest_template_factory.html">QuestTemplateFactory</a>&gt;
+                &gt; weave::WeaverConfig::questTemplateFactories
+            </td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -275,7 +327,9 @@ Public Attributes</h2></td></tr>
 <p>The template factories used to create new quest templates. </p>
 <p>At least one factory has to be registered before trying to create new quests. </p>
 
-<p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00044">44</a> of file <a class="el" href="_weaver_config_8h_source.html">WeaverConfig.h</a>.</p>
+    <p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00045">45</a> of file <a class="el"
+                                                                                                      href="_weaver_config_8h_source.html">WeaverConfig.h</a>.
+    </p>
 
 </div>
 </div>
@@ -292,7 +346,9 @@ Public Attributes</h2></td></tr>
 <p><b>OPTIONAL</b> Can be used to supply the quest system with a custom random number generator. </p>
 <p>If a nullptr is provided, the default RNG implementation with the provided seed will be used. If a custom RNG is provided, the caller is responsible for the initial seeding of the stream. </p>
 
-<p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00065">65</a> of file <a class="el" href="_weaver_config_8h_source.html">WeaverConfig.h</a>.</p>
+    <p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00066">66</a> of file <a class="el"
+                                                                                                      href="_weaver_config_8h_source.html">WeaverConfig.h</a>.
+    </p>
 
 </div>
 </div>
@@ -309,16 +365,21 @@ Public Attributes</h2></td></tr>
 <p>The random seed used to create new quests. </p>
 <p><a class="el" href="classweave_1_1_quest.html" title="Represents a game quest. ">Quest</a> Systems initialized with the same seed create the same stream of quests (given the quests are initialized and completed the same way). If a random stream is provided instead, the seed is ignored. </p>
 
-<p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00026">26</a> of file <a class="el" href="_weaver_config_8h_source.html">WeaverConfig.h</a>.</p>
+    <p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00027">27</a> of file <a class="el"
+                                                                                                      href="_weaver_config_8h_source.html">WeaverConfig.h</a>.
+    </p>
 
 </div>
 </div>
-<a class="anchor" id="a4a015da471f57734b5e8d8237b1f2939"></a>
+    <a class="anchor" id="ae3a8fb33d2ad7e50ab81879461eb67e5"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a>&gt; &gt; weave::WeaverConfig::storyTemplateFactories</td>
+            <td class="memname">std::vector&lt;std::unique_ptr&lt;<a class="el"
+                                                                     href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a>&gt;
+                &gt; weave::WeaverConfig::storyTemplateFactories
+            </td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -326,7 +387,9 @@ Public Attributes</h2></td></tr>
 <p>The template factories used to create the quest stories. </p>
 <p>These are optional, but without them, the quests will be created without a backstory. </p>
 
-<p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00050">50</a> of file <a class="el" href="_weaver_config_8h_source.html">WeaverConfig.h</a>.</p>
+    <p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00051">51</a> of file <a class="el"
+                                                                                                      href="_weaver_config_8h_source.html">WeaverConfig.h</a>.
+    </p>
 
 </div>
 </div>
@@ -343,7 +406,9 @@ Public Attributes</h2></td></tr>
 <p>The world model is responsible for creating all quest entities and informs about world changes. </p>
 <p><b>MUST</b> be initialized by the caller before creating a new <a class="el" href="classweave_1_1_quest_weaver.html" title="Main entry point for applications using the quest system. ">QuestWeaver</a> instance. </p>
 
-<p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00038">38</a> of file <a class="el" href="_weaver_config_8h_source.html">WeaverConfig.h</a>.</p>
+    <p>Definition at line <a class="el" href="_weaver_config_8h_source.html#l00039">39</a> of file <a class="el"
+                                                                                                      href="_weaver_config_8h_source.html">WeaverConfig.h</a>.
+    </p>
 
 </div>
 </div>

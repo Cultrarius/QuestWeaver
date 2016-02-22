@@ -108,7 +108,200 @@ $(document).ready(function(){initNavTree('_r_e_a_d_m_e_8md.html','');});
 <div class="title">README.md</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_r_e_a_d_m_e_8md.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;# QuestWeaver</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;&lt;a href=&quot;https://drone.io/github.com/Cultrarius/QuestWeaver&quot;&gt;&lt;img src=&quot;https://drone.io/github.com/Cultrarius/QuestWeaver/status.png&quot;&gt;&lt;/a&gt;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;&lt;a href=&#39;https://coveralls.io/github/Cultrarius/QuestWeaver?branch=master&#39;&gt;&lt;img src=&#39;https://coveralls.io/repos/github/Cultrarius/QuestWeaver/badge.svg?branch=master&#39; alt=&#39;Coverage Status&#39; /&gt;&lt;/a&gt;</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;&lt;a href=&quot;https://creativecommons.org/publicdomain/zero/1.0/deed.de&quot;&gt;&lt;img src=&quot;https://img.shields.io/badge/license-CC0-green.svg&quot;&gt;&lt;/a&gt;</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;Procedurally generated quests and stories for computer games.</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;**This project is still in its early stages and under heavy development!**</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;## Features</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;* Fully **portable**, **serializable** quest system, perfect for use in savegames. Supports JSON and a compact binary format. </div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;* Separates quest logic from quest data (such as titles/descriptions) by using **template files**.</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;* Can output the quest properties as simple **text or HTML form** to support rich formatting in the game.</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;* Uses a complex **weighted graph search** to create new quests.</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;This results in more interesting and coherent quest stories as world actors and entities can be reused when fitting.</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;* Supports **mod directories** to overwrite quest templates after deployment.</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;* The game world entities to be used in quests are supplied directly from a game&#39;s custom world model.</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;## Documentation</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;Have a look at the [API documentation](http://cultrarius.github.io/QuestWeaver/doxyhtml/)!</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;## Usage</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;The quest system of a game is not an isolated part of the system as it is heavily involved in the current world state and events.</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;Therefore, the game has to provide the quest system with the necessary information about the game&#39;s state and has to</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;fulfill change requests made by the quest system (otherwise the state will be inconsistent).</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;To use the QuestWeaver system, you have to follow these steps:</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;* Implement and register custom `TemplateFactory` classes that read your custom template files</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;* Implement a custom `WorldModel` class</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;* Register your wold model and template factories with the `QuestWeaver` instance</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;```cpp</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;QuestWeaver Init() {</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    // Create your template factories</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    shared_ptr&lt;QuestTemplateFactory&gt; questFactory = make_shared&lt;MyQuestTemplateFactory&gt;();</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    shared_ptr&lt;StoryTemplateFactory&gt; storyFactory = make_shared&lt;MyStoryTemplateFactory&gt;();</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    </div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    // Create Configuration</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    WeaverConfig config;</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    config.worldModel = make_unique&lt;MyWorldModel&gt;();</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    config.dirs.modDirectory = &quot;./Template/&quot;;</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    shared_ptr&lt;WorldListener&gt; myWorldListener = make_shared&lt;MyWorldListener&gt;();</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    </div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    // Create the quest system</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    QuestWeaver weaver(config);</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    weaver.RegisterQuestTemplateFactory(questFactory);</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    weaver.RegisterStoryTemplateFactory(storyFactory);</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    weaver.GetWorldModel().AddListener(myWorldListener);</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    </div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    return weaver;</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;// Create new quests</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;shared_ptr&lt;Quest&gt; newQuest = weaver.CreateNewQuest();</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;```</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;Quests usually want to change the world state as well as their own state (e.g. when a quest succeeds).</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;To do that, you can tick the quest system in your game loop and it will take care of the rest by ticking each quest</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;separately.</div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;The `WorldListener` allows you to change the game state whenever the world model was changed by the quest system.</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;```cpp</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;while (true) {</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;   // game loop ...</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;   </div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;   weaver.Tick(delta); // updates the world state </div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;```</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;You can also fully serialize the quest system, e.g. to create a save game or to debug it:</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;```cpp</div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;void SerialTest() {</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    QuestWeaver weaver = Init();</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    </div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    // serialize</div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    stringstream ss; // can also be a file stream</div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    weaver.Serialize(ss, StreamType::JSON);</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    cout &lt;&lt; ss.str() &lt;&lt; endl; // or save it to disk</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    </div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    // deserialize - it is important to re-register the template factories and the world model listener!</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    QuestWeaver deserialized = QuestWeaver::Deserialize(ss, StreamType::JSON, config.dirs);</div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    weaver.RegisterQuestTemplateFactory(questFactory);</div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    weaver.RegisterStoryTemplateFactory(storyFactory);</div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    weaver.GetWorldModel().AddListener(myWorldListener);</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;```</div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;## Included projects</div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;This project uses the help of some very fine frameworks:</div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;* JSON parser: https://github.com/open-source-parsers/jsoncpp</div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;* Serialization framework: http://uscilab.github.io/cereal/</div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;* Testing framework: https://github.com/philsquared/Catch</div></div><!-- fragment --></div><!-- contents -->
+  <a href="_r_e_a_d_m_e_8md.html">Go to the documentation of this file.</a>
+  <div class="fragment">
+    <div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;# QuestWeaver</div>
+    <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
+    <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;&lt;a href=&quot;https://drone.io/github.com/Cultrarius/QuestWeaver&quot;&gt;&lt;img
+      src=&quot;https://drone.io/github.com/Cultrarius/QuestWeaver/status.png&quot;&gt;&lt;/a&gt;</div>
+    <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;&lt;a href=&#39;https://coveralls.io/github/Cultrarius/QuestWeaver?branch=master&#39;&gt;&lt;img
+      src=&#39;https://coveralls.io/repos/github/Cultrarius/QuestWeaver/badge.svg?branch=master&#39; alt=&#39;Coverage
+      Status&#39; /&gt;&lt;/a&gt;</div>
+    <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;&lt;a href=&quot;https://creativecommons.org/publicdomain/zero/1.0/deed.de&quot;&gt;&lt;img
+      src=&quot;https://img.shields.io/badge/license-CC0-green.svg&quot;&gt;&lt;/a&gt;</div>
+    <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+    <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;Procedurally generated quests and
+      stories for computer games.
+    </div>
+    <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+    <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;**This project is still in its early
+      stages and under heavy development!**
+    </div>
+    <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+    <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;## Features</div>
+    <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+    <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;* Fully **portable**, **serializable**
+      quest system, perfect for use in savegames. Supports JSON and a compact binary format.
+    </div>
+    <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;* Separates quest logic from quest
+      data (such as titles/descriptions) by using **template files**.
+    </div>
+    <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;* Can output the quest properties as
+      simple **text or HTML form** to support rich formatting in the game.
+    </div>
+    <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;* Uses a complex **weighted graph
+      search** to create new quests.
+    </div>
+    <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;This results in more interesting and
+      coherent quest stories as world actors and entities can be reused when fitting.
+    </div>
+    <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;* Supports **mod directories** to
+      overwrite quest templates after deployment.
+    </div>
+    <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;* The game world entities to be used
+      in quests are supplied directly from a game&#39;s custom world model.
+    </div>
+    <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+    <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;## Documentation</div>
+    <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+    <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;Have a look at the [API
+      documentation](http://cultrarius.github.io/QuestWeaver/doxyhtml/)!
+    </div>
+    <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+    <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;## Usage</div>
+    <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+    <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;The quest system of a game is not an
+      isolated part of the system as it is heavily involved in the current world state and events.
+    </div>
+    <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;Therefore, the game has to provide the
+      quest system with the necessary information about the game&#39;s state and has to
+    </div>
+    <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;fulfill change requests made by the
+      quest system (otherwise the state will be inconsistent).
+    </div>
+    <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+    <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;To use the QuestWeaver system, you
+      have to follow these steps:
+    </div>
+    <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+    <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;* Implement and register custom
+      `TemplateFactory` classes that read your custom template files
+    </div>
+    <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;* Implement a custom `WorldModel`
+      class
+    </div>
+    <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;* Register your wold model and
+      template factories with the `QuestWeaver` instance
+    </div>
+    <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+    <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;```cpp</div>
+    <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;QuestWeaver Init() {</div>
+    <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; // Create your template factories
+    </div>
+    <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; unique_ptr&lt;QuestTemplateFactory&gt;
+      questFactory = make_unique&lt;MyQuestTemplateFactory&gt;();
+    </div>
+    <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; unique_ptr&lt;StoryTemplateFactory&gt;
+      storyFactory = make_unique&lt;MyStoryTemplateFactory&gt;();
+    </div>
+    <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    </div>
+    <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; // Create Configuration</div>
+    <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; WeaverConfig config;</div>
+    <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; config.worldModel = make_unique&lt;MyWorldModel&gt;();
+    </div>
+    <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; config.dirs.modDirectory = &quot;./Template/&quot;;
+    </div>
+    <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; shared_ptr&lt;WorldListener&gt;
+      myWorldListener = make_shared&lt;MyWorldListener&gt;();
+    </div>
+    <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    </div>
+    <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; // Create the quest system</div>
+    <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; QuestWeaver weaver(config);</div>
+    <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;
+      weaver.RegisterQuestTemplateFactory(move(questFactory));
+    </div>
+    <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;
+      weaver.RegisterStoryTemplateFactory(move(storyFactory));
+    </div>
+    <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;
+      weaver.GetWorldModel().AddListener(myWorldListener);
+    </div>
+    <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    </div>
+    <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; return weaver;</div>
+    <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
+    <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+    <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;// Create new quests</div>
+    <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;shared_ptr&lt;Quest&gt; newQuest =
+      weaver.CreateNewQuest();
+    </div>
+    <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;```</div>
+    <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+    <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+    <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;Quests usually want to change the
+      world state as well as their own state (e.g. when a quest succeeds).
+    </div>
+    <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;To do that, you can tick the quest
+      system in your game loop and it will take care of the rest by ticking each quest
+    </div>
+    <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;separately.</div>
+    <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;The `WorldListener` allows you to
+      change the game state whenever the world model was changed by the quest system.
+    </div>
+    <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+    <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;```cpp</div>
+    <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;while (true) {</div>
+    <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; // game loop ...</div>
+    <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;   </div>
+    <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; weaver.Tick(delta); // updates the
+      world state
+    </div>
+    <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
+    <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;```</div>
+    <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+    <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+    <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;You can also fully serialize the quest
+      system, e.g. to create a save game or to debug it:
+    </div>
+    <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+    <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;```cpp</div>
+    <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;void SerialTest() {</div>
+    <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; QuestWeaver weaver = Init();</div>
+    <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    </div>
+    <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; // serialize</div>
+    <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; stringstream ss; // can also be a
+      file stream
+    </div>
+    <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; weaver.Serialize(ss,
+      StreamType::JSON);
+    </div>
+    <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; cout &lt;&lt; ss.str() &lt;&lt; endl;
+      // or save it to disk
+    </div>
+    <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    </div>
+    <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; // deserialize - it is important to
+      re-register the template factories and the world model listener!
+    </div>
+    <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; QuestWeaver deserialized =
+      QuestWeaver::Deserialize(ss, StreamType::JSON, config.dirs);
+    </div>
+    <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;
+      weaver.RegisterQuestTemplateFactory(move(questFactory));
+    </div>
+    <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;
+      weaver.RegisterStoryTemplateFactory(move(storyFactory));
+    </div>
+    <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;
+      weaver.GetWorldModel().AddListener(myWorldListener);
+    </div>
+    <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
+    <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;```</div>
+    <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
+    <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;## Included projects</div>
+    <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+    <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;This project uses the help of some
+      very fine frameworks:
+    </div>
+    <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+    <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;* JSON parser:
+      https://github.com/open-source-parsers/jsoncpp
+    </div>
+    <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;* Serialization framework:
+      http://uscilab.github.io/cereal/
+    </div>
+    <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;* Testing framework:
+      https://github.com/philsquared/Catch
+    </div>
+  </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

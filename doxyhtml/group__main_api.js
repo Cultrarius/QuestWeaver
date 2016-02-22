@@ -22,8 +22,8 @@ var group__main_api =
       [ "GetQuest", "classweave_1_1_quest_weaver.html#ac03a367e700dd770d3c6f6cde28f3b4a", null ],
       [ "GetQuestsWithState", "classweave_1_1_quest_weaver.html#a1260b729344e6e3bfe0a7911665ff8af", null ],
       [ "GetWorldModel", "classweave_1_1_quest_weaver.html#ab66bd94d2b1c3851d3fd52db1945f9cd", null ],
-      [ "RegisterQuestTemplateFactory", "classweave_1_1_quest_weaver.html#ab9d87f0b4aa25a8c084b7089e76f5aca", null ],
-      [ "RegisterStoryTemplateFactory", "classweave_1_1_quest_weaver.html#a407384e8ea452e36447742893f96392f", null ],
+        ["RegisterQuestTemplateFactory", "classweave_1_1_quest_weaver.html#a48d5c0dc8db3bfeef43dbefb0944b08b", null],
+        ["RegisterStoryTemplateFactory", "classweave_1_1_quest_weaver.html#af63b45453ba81e4df7d69df0f4481897", null],
       [ "Serialize", "classweave_1_1_quest_weaver.html#af4faa60c735a47c941bf42d0948e026f", null ],
       [ "Tick", "classweave_1_1_quest_weaver.html#aa775638812718cc59edd6debbc32d70e", null ],
       [ "cereal::access", "classweave_1_1_quest_weaver.html#ab2f44cbb59a08132f4c843e5225bba0e", null ]
@@ -44,10 +44,10 @@ var group__main_api =
       [ "WeaverConfig", "structweave_1_1_weaver_config.html#a3f01141ec6887947a7deb6bbb693bf48", null ],
       [ "dirs", "structweave_1_1_weaver_config.html#a481677af3de8090b8fc89e58154b6c74", null ],
       [ "formatterType", "structweave_1_1_weaver_config.html#af6f58da6f948e6460a3e6d5050e84ef9", null ],
-      [ "questTemplateFactories", "structweave_1_1_weaver_config.html#af5ebc0520562557d2063999ee6889b53", null ],
+        ["questTemplateFactories", "structweave_1_1_weaver_config.html#aadcd1180a186cb4c85cdb5cf8215e759", null],
       [ "randomStream", "structweave_1_1_weaver_config.html#ab442869898a2b6336fae3d86682f337a", null ],
       [ "seed", "structweave_1_1_weaver_config.html#aa4ae6353cfe9972dcd8caa5a7f62e5d2", null ],
-      [ "storyTemplateFactories", "structweave_1_1_weaver_config.html#a4a015da471f57734b5e8d8237b1f2939", null ],
+        ["storyTemplateFactories", "structweave_1_1_weaver_config.html#ae3a8fb33d2ad7e50ab81879461eb67e5", null],
       [ "worldModel", "structweave_1_1_weaver_config.html#a700032767d2ba43bd30dbd33e4e62431", null ]
     ] ],
     [ "ID", "group__main_api.html#gad16585a767748e749a3389c77b0e5c76", null ],

@@ -108,23 +108,166 @@ $(document).ready(function(){initNavTree('_weaver_config_8h_source.html','');});
 <div class="title">WeaverConfig.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_weaver_config_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by michael on 18.01.16.</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_world_model_8h.html">World/WorldModel.h</a>&gt;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_quest_template_factory_8h.html">Template/QuestTemplateFactory.h</a>&gt;</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_story_template_factory_8h.html">Story/StoryTemplateFactory.h</a>&gt;</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceweave.html">weave</a> {</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="structweave_1_1_weaver_config.html">   18</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structweave_1_1_weaver_config.html">WeaverConfig</a> {</div><div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="structweave_1_1_weaver_config.html#aa4ae6353cfe9972dcd8caa5a7f62e5d2">   26</a></span>&#160;        uint64_t <a class="code" href="structweave_1_1_weaver_config.html#aa4ae6353cfe9972dcd8caa5a7f62e5d2">seed</a> = 0;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div><div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="structweave_1_1_weaver_config.html#a481677af3de8090b8fc89e58154b6c74">   32</a></span>&#160;        <a class="code" href="structweave_1_1_directories.html">Directories</a> <a class="code" href="structweave_1_1_weaver_config.html#a481677af3de8090b8fc89e58154b6c74">dirs</a>;</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div><div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="structweave_1_1_weaver_config.html#a700032767d2ba43bd30dbd33e4e62431">   38</a></span>&#160;        std::unique_ptr&lt;WorldModel&gt; <a class="code" href="structweave_1_1_weaver_config.html#a700032767d2ba43bd30dbd33e4e62431">worldModel</a>;</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div><div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="structweave_1_1_weaver_config.html#af5ebc0520562557d2063999ee6889b53">   44</a></span>&#160;        std::vector&lt;std::shared_ptr&lt;QuestTemplateFactory&gt;&gt; <a class="code" href="structweave_1_1_weaver_config.html#af5ebc0520562557d2063999ee6889b53">questTemplateFactories</a>;</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div><div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="structweave_1_1_weaver_config.html#a4a015da471f57734b5e8d8237b1f2939">   50</a></span>&#160;        std::vector&lt;std::shared_ptr&lt;StoryTemplateFactory&gt;&gt; <a class="code" href="structweave_1_1_weaver_config.html#a4a015da471f57734b5e8d8237b1f2939">storyTemplateFactories</a>;</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div><div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="structweave_1_1_weaver_config.html#af6f58da6f948e6460a3e6d5050e84ef9">   56</a></span>&#160;        <a class="code" href="group__main_api.html#gac4254b88961d333d4dd8189d11168576">FormatterType</a> <a class="code" href="structweave_1_1_weaver_config.html#af6f58da6f948e6460a3e6d5050e84ef9">formatterType</a> = <a class="code" href="group__main_api.html#ggac4254b88961d333d4dd8189d11168576a61a96ffcb251bb9bf0abf8fec19d0ea8">FormatterType::TEXT</a>;</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div><div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="structweave_1_1_weaver_config.html#ab442869898a2b6336fae3d86682f337a">   65</a></span>&#160;        std::shared_ptr&lt;RandomStream&gt; <a class="code" href="structweave_1_1_weaver_config.html#ab442869898a2b6336fae3d86682f337a">randomStream</a>;</div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="structweave_1_1_weaver_config.html#a9b2a4eb518a6d47a9aa215c5dd021338">WeaverConfig</a>() = <span class="keywordflow">default</span>;</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div><div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="structweave_1_1_weaver_config.html#a3f01141ec6887947a7deb6bbb693bf48">   77</a></span>&#160;        <span class="keyword">explicit</span> <a class="code" href="structweave_1_1_weaver_config.html#a3f01141ec6887947a7deb6bbb693bf48">WeaverConfig</a>(uint64_t seed) : seed(seed) { }</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    };</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div><div class="ttc" id="namespaceweave_html"><div class="ttname"><a href="namespaceweave.html">weave</a></div><div class="ttdef"><b>Definition:</b> <a href="_quest_weaver_8h_source.html#l00027">QuestWeaver.h:27</a></div></div>
+  <a href="_weaver_config_8h.html">Go to the documentation of this file.</a>
+  <div class="fragment">
+    <div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
+    <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by michael on 18.01.16.</span>
+    </div>
+    <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
+    <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
+    <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span>
+    </div>
+    <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+    <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a
+            class="code" href="_world_model_8h.html">World/WorldModel.h</a>&gt;</span></div>
+    <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;<a
+            class="code" href="_quest_template_factory_8h.html">Template/QuestTemplateFactory.h</a>&gt;</span></div>
+    <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;<a
+            class="code" href="_story_template_factory_8h.html">Story/StoryTemplateFactory.h</a>&gt;</span></div>
+    <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+    <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span
+            class="keyword">namespace </span><a class="code" href="namespaceweave.html">weave</a> {
+    </div>
+    <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+    <div class="line"><a name="l00019"></a><span class="lineno"><a class="line"
+                                                                   href="structweave_1_1_weaver_config.html">
+      19</a></span>&#160; <span class="keyword">struct </span><a class="code" href="structweave_1_1_weaver_config.html">WeaverConfig</a>
+      {
+    </div>
+    <div class="line"><a name="l00027"></a><span class="lineno"><a class="line"
+                                                                   href="structweave_1_1_weaver_config.html#aa4ae6353cfe9972dcd8caa5a7f62e5d2">
+      27</a></span>&#160; uint64_t <a class="code"
+                                      href="structweave_1_1_weaver_config.html#aa4ae6353cfe9972dcd8caa5a7f62e5d2">seed</a>
+      = 0;
+    </div>
+    <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+    <div class="line"><a name="l00033"></a><span class="lineno"><a class="line"
+                                                                   href="structweave_1_1_weaver_config.html#a481677af3de8090b8fc89e58154b6c74">
+      33</a></span>&#160; <a class="code" href="structweave_1_1_directories.html">Directories</a> <a class="code"
+                                                                                                     href="structweave_1_1_weaver_config.html#a481677af3de8090b8fc89e58154b6c74">dirs</a>;
+    </div>
+    <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+    <div class="line"><a name="l00039"></a><span class="lineno"><a class="line"
+                                                                   href="structweave_1_1_weaver_config.html#a700032767d2ba43bd30dbd33e4e62431">
+      39</a></span>&#160; std::unique_ptr&lt;WorldModel&gt; <a class="code"
+                                                               href="structweave_1_1_weaver_config.html#a700032767d2ba43bd30dbd33e4e62431">worldModel</a>;
+    </div>
+    <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+    <div class="line"><a name="l00045"></a><span class="lineno"><a class="line"
+                                                                   href="structweave_1_1_weaver_config.html#aadcd1180a186cb4c85cdb5cf8215e759">
+      45</a></span>&#160; std::vector&lt;std::unique_ptr&lt;QuestTemplateFactory&gt;&gt; <a class="code"
+                                                                                            href="structweave_1_1_weaver_config.html#aadcd1180a186cb4c85cdb5cf8215e759">questTemplateFactories</a>;
+    </div>
+    <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+    <div class="line"><a name="l00051"></a><span class="lineno"><a class="line"
+                                                                   href="structweave_1_1_weaver_config.html#ae3a8fb33d2ad7e50ab81879461eb67e5">
+      51</a></span>&#160; std::vector&lt;std::unique_ptr&lt;StoryTemplateFactory&gt;&gt; <a class="code"
+                                                                                            href="structweave_1_1_weaver_config.html#ae3a8fb33d2ad7e50ab81879461eb67e5">storyTemplateFactories</a>;
+    </div>
+    <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+    <div class="line"><a name="l00057"></a><span class="lineno"><a class="line"
+                                                                   href="structweave_1_1_weaver_config.html#af6f58da6f948e6460a3e6d5050e84ef9">
+      57</a></span>&#160; <a class="code"
+                             href="group__main_api.html#gac4254b88961d333d4dd8189d11168576">FormatterType</a> <a
+            class="code" href="structweave_1_1_weaver_config.html#af6f58da6f948e6460a3e6d5050e84ef9">formatterType</a> =
+      <a class="code" href="group__main_api.html#ggac4254b88961d333d4dd8189d11168576a61a96ffcb251bb9bf0abf8fec19d0ea8">FormatterType::TEXT</a>;
+    </div>
+    <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+    <div class="line"><a name="l00066"></a><span class="lineno"><a class="line"
+                                                                   href="structweave_1_1_weaver_config.html#ab442869898a2b6336fae3d86682f337a">
+      66</a></span>&#160; std::shared_ptr&lt;RandomStream&gt; <a class="code"
+                                                                 href="structweave_1_1_weaver_config.html#ab442869898a2b6336fae3d86682f337a">randomStream</a>;
+    </div>
+    <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+    <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; <a class="code"
+                                                                                      href="structweave_1_1_weaver_config.html#a9b2a4eb518a6d47a9aa215c5dd021338">WeaverConfig</a>()
+      = <span class="keywordflow">default</span>;
+    </div>
+    <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+    <div class="line"><a name="l00078"></a><span class="lineno"><a class="line"
+                                                                   href="structweave_1_1_weaver_config.html#a3f01141ec6887947a7deb6bbb693bf48">
+      78</a></span>&#160; <span class="keyword">explicit</span> <a class="code"
+                                                                   href="structweave_1_1_weaver_config.html#a3f01141ec6887947a7deb6bbb693bf48">WeaverConfig</a>(uint64_t
+      seed) : seed(seed) { }
+    </div>
+    <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; };</div>
+    <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
+    <div class="ttc" id="namespaceweave_html">
+      <div class="ttname"><a href="namespaceweave.html">weave</a></div>
+      <div class="ttdef"><b>Definition:</b> <a href="_quest_weaver_8h_source.html#l00027">QuestWeaver.h:27</a></div>
+    </div>
 <div class="ttc" id="group__main_api_html_gac4254b88961d333d4dd8189d11168576"><div class="ttname"><a href="group__main_api.html#gac4254b88961d333d4dd8189d11168576">weave::FormatterType</a></div><div class="ttdeci">FormatterType</div><div class="ttdoc">Defines the possible output formats of the texts produced by the quest system. </div><div class="ttdef"><b>Definition:</b> <a href="_weaver_types_8h_source.html#l00098">WeaverTypes.h:98</a></div></div>
 <div class="ttc" id="_story_template_factory_8h_html"><div class="ttname"><a href="_story_template_factory_8h.html">StoryTemplateFactory.h</a></div></div>
 <div class="ttc" id="_quest_template_factory_8h_html"><div class="ttname"><a href="_quest_template_factory_8h.html">QuestTemplateFactory.h</a></div></div>
-<div class="ttc" id="structweave_1_1_weaver_config_html"><div class="ttname"><a href="structweave_1_1_weaver_config.html">weave::WeaverConfig</a></div><div class="ttdoc">Holds the configuration data to create new QuestWeaver instances. </div><div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00018">WeaverConfig.h:18</a></div></div>
+    <div class="ttc" id="structweave_1_1_weaver_config_html">
+      <div class="ttname"><a href="structweave_1_1_weaver_config.html">weave::WeaverConfig</a></div>
+      <div class="ttdoc">Holds the configuration data to create new QuestWeaver instances.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00019">WeaverConfig.h:19</a></div>
+    </div>
 <div class="ttc" id="structweave_1_1_weaver_config_html_a9b2a4eb518a6d47a9aa215c5dd021338"><div class="ttname"><a href="structweave_1_1_weaver_config.html#a9b2a4eb518a6d47a9aa215c5dd021338">weave::WeaverConfig::WeaverConfig</a></div><div class="ttdeci">WeaverConfig()=default</div><div class="ttdoc">Creates a new config using default values. </div></div>
 <div class="ttc" id="structweave_1_1_directories_html"><div class="ttname"><a href="structweave_1_1_directories.html">weave::Directories</a></div><div class="ttdoc">This struct hold information about the programs file search paths. </div><div class="ttdef"><b>Definition:</b> <a href="_weaver_types_8h_source.html#l00054">WeaverTypes.h:54</a></div></div>
-<div class="ttc" id="structweave_1_1_weaver_config_html_a481677af3de8090b8fc89e58154b6c74"><div class="ttname"><a href="structweave_1_1_weaver_config.html#a481677af3de8090b8fc89e58154b6c74">weave::WeaverConfig::dirs</a></div><div class="ttdeci">Directories dirs</div><div class="ttdoc">The directories in which the templates and other files can be found in. </div><div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00032">WeaverConfig.h:32</a></div></div>
-<div class="ttc" id="structweave_1_1_weaver_config_html_ab442869898a2b6336fae3d86682f337a"><div class="ttname"><a href="structweave_1_1_weaver_config.html#ab442869898a2b6336fae3d86682f337a">weave::WeaverConfig::randomStream</a></div><div class="ttdeci">std::shared_ptr&lt; RandomStream &gt; randomStream</div><div class="ttdoc">OPTIONAL Can be used to supply the quest system with a custom random number generator. </div><div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00065">WeaverConfig.h:65</a></div></div>
-<div class="ttc" id="structweave_1_1_weaver_config_html_a4a015da471f57734b5e8d8237b1f2939"><div class="ttname"><a href="structweave_1_1_weaver_config.html#a4a015da471f57734b5e8d8237b1f2939">weave::WeaverConfig::storyTemplateFactories</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; StoryTemplateFactory &gt; &gt; storyTemplateFactories</div><div class="ttdoc">The template factories used to create the quest stories. </div><div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00050">WeaverConfig.h:50</a></div></div>
-<div class="ttc" id="structweave_1_1_weaver_config_html_a3f01141ec6887947a7deb6bbb693bf48"><div class="ttname"><a href="structweave_1_1_weaver_config.html#a3f01141ec6887947a7deb6bbb693bf48">weave::WeaverConfig::WeaverConfig</a></div><div class="ttdeci">WeaverConfig(uint64_t seed)</div><div class="ttdoc">Creates a new config using default values and the given seed. </div><div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00077">WeaverConfig.h:77</a></div></div>
-<div class="ttc" id="structweave_1_1_weaver_config_html_a700032767d2ba43bd30dbd33e4e62431"><div class="ttname"><a href="structweave_1_1_weaver_config.html#a700032767d2ba43bd30dbd33e4e62431">weave::WeaverConfig::worldModel</a></div><div class="ttdeci">std::unique_ptr&lt; WorldModel &gt; worldModel</div><div class="ttdoc">The world model is responsible for creating all quest entities and informs about world changes...</div><div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00038">WeaverConfig.h:38</a></div></div>
+    <div class="ttc" id="structweave_1_1_weaver_config_html_a481677af3de8090b8fc89e58154b6c74">
+      <div class="ttname"><a href="structweave_1_1_weaver_config.html#a481677af3de8090b8fc89e58154b6c74">weave::WeaverConfig::dirs</a>
+      </div>
+      <div class="ttdeci">Directories dirs</div>
+      <div class="ttdoc">The directories in which the templates and other files can be found in.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00033">WeaverConfig.h:33</a></div>
+    </div>
+    <div class="ttc" id="structweave_1_1_weaver_config_html_ab442869898a2b6336fae3d86682f337a">
+      <div class="ttname"><a href="structweave_1_1_weaver_config.html#ab442869898a2b6336fae3d86682f337a">weave::WeaverConfig::randomStream</a>
+      </div>
+      <div class="ttdeci">std::shared_ptr&lt; RandomStream &gt; randomStream</div>
+      <div class="ttdoc">OPTIONAL Can be used to supply the quest system with a custom random number generator.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00066">WeaverConfig.h:66</a></div>
+    </div>
+    <div class="ttc" id="structweave_1_1_weaver_config_html_a3f01141ec6887947a7deb6bbb693bf48">
+      <div class="ttname"><a href="structweave_1_1_weaver_config.html#a3f01141ec6887947a7deb6bbb693bf48">weave::WeaverConfig::WeaverConfig</a>
+      </div>
+      <div class="ttdeci">WeaverConfig(uint64_t seed)</div>
+      <div class="ttdoc">Creates a new config using default values and the given seed.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00078">WeaverConfig.h:78</a></div>
+    </div>
+    <div class="ttc" id="structweave_1_1_weaver_config_html_a700032767d2ba43bd30dbd33e4e62431">
+      <div class="ttname"><a href="structweave_1_1_weaver_config.html#a700032767d2ba43bd30dbd33e4e62431">weave::WeaverConfig::worldModel</a>
+      </div>
+      <div class="ttdeci">std::unique_ptr&lt; WorldModel &gt; worldModel</div>
+      <div class="ttdoc">The world model is responsible for creating all quest entities and informs about world
+        changes...
+      </div>
+      <div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00039">WeaverConfig.h:39</a></div>
+    </div>
 <div class="ttc" id="group__main_api_html_ggac4254b88961d333d4dd8189d11168576a61a96ffcb251bb9bf0abf8fec19d0ea8"><div class="ttname"><a href="group__main_api.html#ggac4254b88961d333d4dd8189d11168576a61a96ffcb251bb9bf0abf8fec19d0ea8">weave::FormatterType::TEXT</a></div><div class="ttdoc">All texts will be created as vanilla texts without any additional formatting markers. </div></div>
-<div class="ttc" id="structweave_1_1_weaver_config_html_aa4ae6353cfe9972dcd8caa5a7f62e5d2"><div class="ttname"><a href="structweave_1_1_weaver_config.html#aa4ae6353cfe9972dcd8caa5a7f62e5d2">weave::WeaverConfig::seed</a></div><div class="ttdeci">uint64_t seed</div><div class="ttdoc">The random seed used to create new quests. </div><div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00026">WeaverConfig.h:26</a></div></div>
-<div class="ttc" id="structweave_1_1_weaver_config_html_af5ebc0520562557d2063999ee6889b53"><div class="ttname"><a href="structweave_1_1_weaver_config.html#af5ebc0520562557d2063999ee6889b53">weave::WeaverConfig::questTemplateFactories</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; QuestTemplateFactory &gt; &gt; questTemplateFactories</div><div class="ttdoc">The template factories used to create new quest templates. </div><div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00044">WeaverConfig.h:44</a></div></div>
+    <div class="ttc" id="structweave_1_1_weaver_config_html_aa4ae6353cfe9972dcd8caa5a7f62e5d2">
+      <div class="ttname"><a href="structweave_1_1_weaver_config.html#aa4ae6353cfe9972dcd8caa5a7f62e5d2">weave::WeaverConfig::seed</a>
+      </div>
+      <div class="ttdeci">uint64_t seed</div>
+      <div class="ttdoc">The random seed used to create new quests.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00027">WeaverConfig.h:27</a></div>
+    </div>
+    <div class="ttc" id="structweave_1_1_weaver_config_html_aadcd1180a186cb4c85cdb5cf8215e759">
+      <div class="ttname"><a href="structweave_1_1_weaver_config.html#aadcd1180a186cb4c85cdb5cf8215e759">weave::WeaverConfig::questTemplateFactories</a>
+      </div>
+      <div class="ttdeci">std::vector&lt; std::unique_ptr&lt; QuestTemplateFactory &gt; &gt; questTemplateFactories
+      </div>
+      <div class="ttdoc">The template factories used to create new quest templates.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00045">WeaverConfig.h:45</a></div>
+    </div>
 <div class="ttc" id="_world_model_8h_html"><div class="ttname"><a href="_world_model_8h.html">WorldModel.h</a></div></div>
-<div class="ttc" id="structweave_1_1_weaver_config_html_af6f58da6f948e6460a3e6d5050e84ef9"><div class="ttname"><a href="structweave_1_1_weaver_config.html#af6f58da6f948e6460a3e6d5050e84ef9">weave::WeaverConfig::formatterType</a></div><div class="ttdeci">FormatterType formatterType</div><div class="ttdoc">Defines how the quest texts such as objectives or description will be formatted. </div><div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00056">WeaverConfig.h:56</a></div></div>
+    <div class="ttc" id="structweave_1_1_weaver_config_html_ae3a8fb33d2ad7e50ab81879461eb67e5">
+      <div class="ttname"><a href="structweave_1_1_weaver_config.html#ae3a8fb33d2ad7e50ab81879461eb67e5">weave::WeaverConfig::storyTemplateFactories</a>
+      </div>
+      <div class="ttdeci">std::vector&lt; std::unique_ptr&lt; StoryTemplateFactory &gt; &gt; storyTemplateFactories
+      </div>
+      <div class="ttdoc">The template factories used to create the quest stories.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00051">WeaverConfig.h:51</a></div>
+    </div>
+    <div class="ttc" id="structweave_1_1_weaver_config_html_af6f58da6f948e6460a3e6d5050e84ef9">
+      <div class="ttname"><a href="structweave_1_1_weaver_config.html#af6f58da6f948e6460a3e6d5050e84ef9">weave::WeaverConfig::formatterType</a>
+      </div>
+      <div class="ttdeci">FormatterType formatterType</div>
+      <div class="ttdoc">Defines how the quest texts such as objectives or description will be formatted.</div>
+      <div class="ttdef"><b>Definition:</b> <a href="_weaver_config_8h_source.html#l00057">WeaverConfig.h:57</a></div>
+    </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
