@@ -61,7 +61,7 @@ namespace weave {
          * This method *MUST* be used on newly deserialized objects, otherwise new quests will be created without
          * backstories.
          */
-        void RegisterStoryTemplateFactory(std::shared_ptr<StoryTemplateFactory> factory);
+        void RegisterStoryTemplateFactory(std::unique_ptr<StoryTemplateFactory> factory);
 
         /*!
          * Changes the directories used by the quest system to load files such as templates.

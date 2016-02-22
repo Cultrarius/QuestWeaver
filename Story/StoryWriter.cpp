@@ -19,7 +19,7 @@ void StoryWriter::initialize() const {
         return;
     }
     isInitialized = true;
-    for (auto factory : factories) {
+    for (const auto &factory : factories) {
         factory->initialize();
     }
     readNuggets();
@@ -28,7 +28,7 @@ void StoryWriter::initialize() const {
 void StoryWriter::readNuggets() const {
     nuggets.clear();
     set<string> nuggetFolders;
-    for (auto factory : factories) {
+    for (const auto &factory : factories) {
         nuggetFolders.insert(factory->GetNuggetFolder());
     }
 
@@ -86,7 +86,7 @@ string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestProp
     }
 
     vector<shared_ptr<StoryTemplate>> fittingTemplates;
-    for (auto factory : factories) {
+    for (const auto &factory : factories) {
         for (auto storyTemplate : factory->GetTemplates()) {
             if (hasAll(storyTemplate->GetRequiredEntities(), propertyValues)) {
                 fittingTemplates.push_back(storyTemplate);
@@ -182,13 +182,13 @@ bool StoryWriter::hasAll(vector<string> requiredEntities, const std::vector<Ques
 void StoryWriter::ChangeDirectories(const Directories &newDirs) {
     dirs = newDirs;
     isInitialized = false;
-    for (auto factory : factories) {
+    for (const auto &factory : factories) {
         factory->dirs = dirs;
         factory->isInitialized = false;
     }
 }
 
-void StoryWriter::RegisterTemplateFactory(shared_ptr<StoryTemplateFactory> factory) {
+void StoryWriter::RegisterTemplateFactory(unique_ptr<StoryTemplateFactory> factory) {
     factory->dirs = dirs;
-    factories.push_back(factory);
+    factories.push_back(move(factory));
 }

@@ -26,8 +26,8 @@ QuestWeaver::QuestWeaver(WeaverConfig &config) {
     for (uint64_t i = 0; i < config.questTemplateFactories.size(); i++) {
         RegisterQuestTemplateFactory(move(config.questTemplateFactories.at(i)));
     }
-    for (auto factory : config.storyTemplateFactories) {
-        RegisterStoryTemplateFactory(factory);
+    for (uint64_t i = 0; i < config.storyTemplateFactories.size(); i++) {
+        RegisterStoryTemplateFactory(move(config.storyTemplateFactories.at(i)));
     }
 }
 
@@ -65,11 +65,11 @@ bool QuestWeaver::ChangeQuestState(QuestModelAction questAction) {
 }
 
 void QuestWeaver::RegisterQuestTemplateFactory(std::unique_ptr<QuestTemplateFactory> factory) {
-    templates->RegisterTemplateFactory(std::move(factory));
+    templates->RegisterTemplateFactory(move(factory));
 }
 
-void QuestWeaver::RegisterStoryTemplateFactory(std::shared_ptr<StoryTemplateFactory> factory) {
-    stories->RegisterTemplateFactory(factory);
+void QuestWeaver::RegisterStoryTemplateFactory(std::unique_ptr<StoryTemplateFactory> factory) {
+    stories->RegisterTemplateFactory(move(factory));
 }
 
 void QuestWeaver::Serialize(std::ostream &outputStream, StreamType type) {

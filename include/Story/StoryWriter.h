@@ -25,7 +25,7 @@ namespace weave {
 
         void ChangeDirectories(const Directories &newDirs);
 
-        void RegisterTemplateFactory(std::shared_ptr<StoryTemplateFactory> factory);
+        void RegisterTemplateFactory(std::unique_ptr<StoryTemplateFactory> factory);
 
     private:
         std::shared_ptr<RandomStream> rs;
@@ -33,7 +33,7 @@ namespace weave {
         const weave::TemplateEngine &templateEngine;
         const weave::WorldModel &worldModel;
         Directories dirs;
-        std::vector<std::shared_ptr<StoryTemplateFactory>> factories;
+        std::vector<std::unique_ptr<StoryTemplateFactory>> factories;
 
         mutable bool isInitialized = false;
         mutable std::unordered_map<std::string, Nugget> nuggets;

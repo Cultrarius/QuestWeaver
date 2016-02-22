@@ -28,55 +28,45 @@ TEST_CASE("Nuggets", "[story]") {
     }
 
     SECTION("Valid nuggets") {
-        shared_ptr<StoryTemplateFactory> templateFactory = make_shared<TestStoryTemplateFactory>("1");
-        writer.RegisterTemplateFactory(templateFactory);
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("1"));
         string story = writer.CreateStory(graph, values);
         REQUIRE("" == story);
     }
 
     SECTION("Invalid nuggets - no key") {
-        shared_ptr<StoryTemplateFactory> templateFactory = make_shared<TestStoryTemplateFactory>("2");
-        writer.RegisterTemplateFactory(templateFactory);
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("2"));
         REQUIRE_THROWS_AS(writer.CreateStory(graph, values), ContractFailedException);
     }
 
     SECTION("Invalid nuggets - no required types") {
-        shared_ptr<StoryTemplateFactory> templateFactory = make_shared<TestStoryTemplateFactory>("3");
-        writer.RegisterTemplateFactory(templateFactory);
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("3"));
         REQUIRE_THROWS_AS(writer.CreateStory(graph, values), ContractFailedException);
     }
 
     SECTION("Invalid nuggets - no texts") {
-        shared_ptr<StoryTemplateFactory> templateFactory = make_shared<TestStoryTemplateFactory>("3");
-        writer.RegisterTemplateFactory(templateFactory);
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("3"));
         REQUIRE_THROWS_AS(writer.CreateStory(graph, values), ContractFailedException);
     }
 
     SECTION("Invalid nuggets - no outer json array") {
-        shared_ptr<StoryTemplateFactory> templateFactory = make_shared<TestStoryTemplateFactory>("6");
-        writer.RegisterTemplateFactory(templateFactory);
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("6"));
         REQUIRE_THROWS_AS(writer.CreateStory(graph, values), ContractFailedException);
     }
 
     SECTION("Invalid nuggets - no inner json object") {
-        shared_ptr<StoryTemplateFactory> templateFactory = make_shared<TestStoryTemplateFactory>("7");
-        writer.RegisterTemplateFactory(templateFactory);
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("7"));
         REQUIRE_THROWS_AS(writer.CreateStory(graph, values), ContractFailedException);
     }
 
     SECTION("Duplicate key") {
-        shared_ptr<StoryTemplateFactory> templateFactory = make_shared<TestStoryTemplateFactory>("1");
-        shared_ptr<StoryTemplateFactory> templateFactory2 = make_shared<TestStoryTemplateFactory>("5");
-        writer.RegisterTemplateFactory(templateFactory);
-        writer.RegisterTemplateFactory(templateFactory2);
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("1"));
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("5"));
         REQUIRE_THROWS_AS(writer.CreateStory(graph, values), ContractFailedException);
     }
 
     SECTION("Duplicate key, but same folder") {
-        shared_ptr<StoryTemplateFactory> templateFactory = make_shared<TestStoryTemplateFactory>("1");
-        shared_ptr<StoryTemplateFactory> templateFactory2 = make_shared<TestStoryTemplateFactory>("1");
-        writer.RegisterTemplateFactory(templateFactory);
-        writer.RegisterTemplateFactory(templateFactory2);
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("1"));
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("1"));
         string story = writer.CreateStory(graph, values);
         REQUIRE("" == story);
     }
@@ -90,8 +80,7 @@ TEST_CASE("Nuggets", "[story]") {
         vector<string> requiredTypes = {"agent"};
 
         // create a fitting story template factory
-        shared_ptr<StoryTemplateFactory> templateFactory = make_shared<TestStoryTemplateFactory>("1", requiredTypes);
-        writer.RegisterTemplateFactory(templateFactory);
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("1", requiredTypes));
 
         // create a fitting graph node
         graph.CreateNodeGroup("test", true);

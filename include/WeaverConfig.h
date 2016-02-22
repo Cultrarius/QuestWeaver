@@ -48,7 +48,7 @@ namespace weave {
          * The template factories used to create the quest stories.
          * These are optional, but without them, the quests will be created without a backstory.
          */
-        std::vector<std::shared_ptr<StoryTemplateFactory>> storyTemplateFactories;
+        std::vector<std::unique_ptr<StoryTemplateFactory>> storyTemplateFactories;
 
         /*!
          * Defines how the quest texts such as objectives or description will be formatted.
