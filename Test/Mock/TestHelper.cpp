@@ -12,13 +12,13 @@ using namespace weave;
 using namespace std;
 
 WeaverConfig TestHelper::CreateDebugConfig() {
-    auto spaceFactory = std::make_shared<SpaceQuestTemplateFactory>();
-    auto spaceStoryFactory = std::make_shared<CommonSpaceStoryFactory>();
+    auto spaceFactory = make_unique<SpaceQuestTemplateFactory>();
+    auto spaceStoryFactory = make_shared<CommonSpaceStoryFactory>();
 
     WeaverConfig config;
     config.randomStream = std::make_shared<RandomStream>(42);
     config.worldModel = std::make_unique<SpaceWorldModel>();
-    config.questTemplateFactories.push_back(spaceFactory);
+    config.questTemplateFactories.push_back(std::move(spaceFactory));
     config.storyTemplateFactories.push_back(spaceStoryFactory);
 
     return config;

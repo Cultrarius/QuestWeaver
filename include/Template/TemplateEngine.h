@@ -20,14 +20,14 @@ namespace weave {
 
         std::shared_ptr<QuestTemplate> GetTemplateForNewQuest();
 
-        void RegisterTemplateFactory(std::shared_ptr<QuestTemplateFactory> factory);
+        void RegisterTemplateFactory(std::unique_ptr<QuestTemplateFactory> factory);
 
 		void ChangeDirectories(Directories newDirs);
 
         FormatterType GetFormat() const;
 
     private:
-        std::vector<std::shared_ptr<QuestTemplateFactory>> factories;
+        std::vector<std::unique_ptr<QuestTemplateFactory>> factories;
 
         std::shared_ptr<RandomStream> randomStream;
 

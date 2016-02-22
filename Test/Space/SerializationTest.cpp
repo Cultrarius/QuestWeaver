@@ -21,8 +21,8 @@ TEST_CASE("Serialize Quests", "[serialize]") {
     uint64_t testSize = 100;
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
-    shared_ptr<SpaceQuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
-    engine.RegisterTemplateFactory(factory);
+    SpaceQuestTemplateFactory *factory = new SpaceQuestTemplateFactory();
+    engine.RegisterTemplateFactory(unique_ptr<SpaceQuestTemplateFactory>(factory));
 
     SECTION("Serialize and deserialize JSON in-memory") {
         WorldModel *worldModel = new SpaceWorldModel(rs);
@@ -312,8 +312,7 @@ TEST_CASE("Serialization QuestWeaver", "[serialize]") {
     ss2.flush();
 
     QuestWeaver deserialized = QuestWeaver::Deserialize(ss2, format, config.dirs);
-    shared_ptr<QuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
-    deserialized.RegisterQuestTemplateFactory(factory);
+    deserialized.RegisterQuestTemplateFactory(make_unique<SpaceQuestTemplateFactory>());
     shared_ptr<Quest> desQuest = deserialized.GetQuest(newQuest->GetId());
     REQUIRE(title == desQuest->GetTitle());
     REQUIRE(weaver.GetWorldModel().GetEntities().size() == deserialized.GetWorldModel().GetEntities().size());

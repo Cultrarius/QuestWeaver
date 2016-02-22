@@ -13,15 +13,15 @@ shared_ptr<QuestTemplate> TemplateEngine::GetTemplateForNewQuest() {
         throw ContractFailedException("No factory defined to create template.\n");
     }
     auto factoryIndex = randomStream->GetRandomIndex(factories.size());
-    shared_ptr<QuestTemplateFactory> factory = factories.at(factoryIndex);
+    const unique_ptr<QuestTemplateFactory> &factory = factories.at(factoryIndex);
     auto factoryKeys = factory->GetTemplateKeys();
     auto templateIndex = randomStream->GetRandomIndex(factoryKeys.size());
     auto key = factoryKeys.at(templateIndex);
     return factory->CreateTemplate(key);
 }
 
-void TemplateEngine::RegisterTemplateFactory(std::shared_ptr<QuestTemplateFactory> factory) {
-    for (auto f : factories) {
+void TemplateEngine::RegisterTemplateFactory(std::unique_ptr<QuestTemplateFactory> factory) {
+    for (const auto &f : factories) {
         if (f.get() == factory.get()) {
             return;
         }
@@ -29,7 +29,7 @@ void TemplateEngine::RegisterTemplateFactory(std::shared_ptr<QuestTemplateFactor
     factory->randomStream = randomStream;
     factory->dirs = dirs;
     factory->formatterType = format;
-    factories.push_back(factory);
+    factories.push_back(std::move(factory));
 }
 
 TemplateEngine::TemplateEngine(std::shared_ptr<RandomStream> randomStream, Directories dirs, FormatterType format) :
@@ -39,7 +39,7 @@ TemplateEngine::TemplateEngine(std::shared_ptr<RandomStream> randomStream, Direc
 void weave::TemplateEngine::ChangeDirectories(Directories newDirs)
 {
 	dirs = newDirs;
-	for (auto factory : factories) {
+    for (const auto &factory : factories) {
 		factory->dirs = dirs;
 	}
 }

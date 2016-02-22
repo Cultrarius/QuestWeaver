@@ -23,8 +23,8 @@ QuestWeaver::QuestWeaver(WeaverConfig &config) {
     world = std::move(config.worldModel);
 
     stories.reset(new StoryWriter(randomStream, *quests, *templates, *world, config.dirs));
-    for (auto factory : config.questTemplateFactories) {
-        RegisterQuestTemplateFactory(factory);
+    for (uint64_t i = 0; i < config.questTemplateFactories.size(); i++) {
+        RegisterQuestTemplateFactory(move(config.questTemplateFactories.at(i)));
     }
     for (auto factory : config.storyTemplateFactories) {
         RegisterStoryTemplateFactory(factory);
@@ -64,8 +64,8 @@ bool QuestWeaver::ChangeQuestState(QuestModelAction questAction) {
     return quests->Execute(questAction);
 }
 
-void QuestWeaver::RegisterQuestTemplateFactory(std::shared_ptr<QuestTemplateFactory> factory) {
-    templates->RegisterTemplateFactory(factory);
+void QuestWeaver::RegisterQuestTemplateFactory(std::unique_ptr<QuestTemplateFactory> factory) {
+    templates->RegisterTemplateFactory(std::move(factory));
 }
 
 void QuestWeaver::RegisterStoryTemplateFactory(std::shared_ptr<StoryTemplateFactory> factory) {

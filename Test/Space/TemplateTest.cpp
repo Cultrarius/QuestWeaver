@@ -27,8 +27,8 @@ TEST_CASE("Template factory", "[template]") {
     TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
     REQUIRE_THROWS_AS(engine.GetTemplateForNewQuest(), ContractFailedException);
 
-    shared_ptr<SpaceQuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
-    engine.RegisterTemplateFactory(factory);
+    SpaceQuestTemplateFactory *factory = new SpaceQuestTemplateFactory();
+    engine.RegisterTemplateFactory(unique_ptr<SpaceQuestTemplateFactory>(factory));
     REQUIRE(factory->GetTemplateKeys().size() >= 1);
 
     SECTION("Checking the keys") {
@@ -61,8 +61,8 @@ TEST_CASE("Templates", "[template]") {
     uint64_t testSize = 100;
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
-    shared_ptr<SpaceQuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
-    engine.RegisterTemplateFactory(factory);
+    SpaceQuestTemplateFactory *factory = new SpaceQuestTemplateFactory();
+    engine.RegisterTemplateFactory(unique_ptr<SpaceQuestTemplateFactory>(factory));
 
     SECTION("Checking properties size") {
         for (uint64_t i = 0; i < testSize; i++) {
@@ -248,9 +248,9 @@ TEST_CASE("Templates", "[template]") {
         dirs.templateDirectory = "Test/Resources/";
         dirs.modDirectory = "../Test/Resources/";
         TemplateEngine tempEngine(rs, dirs, FormatterType::TEXT);
+        tempEngine.RegisterTemplateFactory(make_unique<TestQuestTemplateFactory>("missingAttribute.qt"));
+        tempEngine.RegisterTemplateFactory(make_unique<TestQuestTemplateFactory>("missingAttribute.qt"));
         auto templateFactory = make_shared<TestQuestTemplateFactory>("missingAttribute.qt");
-        tempEngine.RegisterTemplateFactory(templateFactory);
-        tempEngine.RegisterTemplateFactory(templateFactory);
         REQUIRE_THROWS_AS(templateFactory->GetTemplateKeys(), ContractFailedException);
     }
 }
@@ -258,19 +258,19 @@ TEST_CASE("Templates", "[template]") {
 TEST_CASE("Directory Change", "[template]") {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
-    shared_ptr<SpaceQuestTemplateFactory> factory = make_shared<SpaceQuestTemplateFactory>();
+    auto factory = make_unique<SpaceQuestTemplateFactory>();
 
     SECTION("Unknown dir pre reg") {
         Directories unknown;
         unknown.templateDirectory = "Test/Unknown/";
         unknown.modDirectory = "../Test/Unknown/";
         engine.ChangeDirectories(unknown);
-        engine.RegisterTemplateFactory(factory);
+        engine.RegisterTemplateFactory(move(factory));
         REQUIRE_THROWS_AS(engine.GetTemplateForNewQuest(), ContractFailedException);
     }
 
     SECTION("Unknown dir post reg") {
-        engine.RegisterTemplateFactory(factory);
+        engine.RegisterTemplateFactory(move(factory));
         Directories unknown;
         unknown.templateDirectory = "Test/Unknown/";
         unknown.modDirectory = "../Test/Unknown/";
@@ -283,7 +283,7 @@ TEST_CASE("Directory Change", "[template]") {
         unknown.templateDirectory = "Test/Resources/";
         unknown.modDirectory = "../Test/Resources/";
         engine.ChangeDirectories(unknown);
-        engine.RegisterTemplateFactory(factory);
+        engine.RegisterTemplateFactory(move(factory));
         REQUIRE(engine.GetTemplateForNewQuest() != nullptr);
     }
 }

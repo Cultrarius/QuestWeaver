@@ -52,7 +52,7 @@ namespace weave {
          * However, this is not true when creating a new instance by deserialization.
          * This method *MUST* be used on newly deserialized objects, otherwise it is impossible to create new quests
          */
-        void RegisterQuestTemplateFactory(std::shared_ptr<QuestTemplateFactory> factory);
+        void RegisterQuestTemplateFactory(std::unique_ptr<QuestTemplateFactory> factory);
 
         /*!
          * Registers a new story template factory with the quest system.
