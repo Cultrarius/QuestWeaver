@@ -23,19 +23,27 @@ void StoryTemplateFactory::initialize() {
     const char *fileName = getTemplateFile();
     Value root = readJsonFromFile(fileName, dirs);
 
-    /*
-    // quick sanity check
-    string requiredMembers[] = {"key", "parent", "mandatory", "optional", "titles", "descriptions", "objectives"};
-    for (string member : requiredMembers) {
-        if (!root.isMember(member)) {
-            string errorMessage = "Missing member in template file! MEMBER: <";
-            errorMessage += member;
-            errorMessage += "> / FILE: ";
-            errorMessage += fileName;
-            throw ContractFailedException(errorMessage);
-        }
-    }
-     */
 
-    templates.push_back(createFromJsonValues(root));
+    // quick sanity check
+    if (!root.isArray()) {
+        string errorMessage = "Invalid Story template file, expected Array as root! FILE: ";
+        errorMessage += fileName;
+        throw ContractFailedException(errorMessage);
+    }
+
+    for (int i = 0; i < root.size(); i++) {
+        Value templateJson = root[i];
+        string requiredMembers[] = {"key", "required", "lines"};
+        for (string member : requiredMembers) {
+            if (!templateJson.isMember(member)) {
+                string errorMessage = "Missing member in template file! MEMBER: <";
+                errorMessage += member;
+                errorMessage += "> / FILE: ";
+                errorMessage += fileName;
+                throw ContractFailedException(errorMessage);
+            }
+        }
+
+        templates.push_back(createFromJsonValues(templateJson));
+    }
 }

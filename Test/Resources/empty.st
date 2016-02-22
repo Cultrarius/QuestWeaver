@@ -1,1 +1,7 @@
-{}
+[
+  {
+    "key": "key",
+    "required": [],
+    "lines": []
+  }
+]

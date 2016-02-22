@@ -1,8 +1,16 @@
 [
   {
-    "key": "agentIntro"
+    "key": "agentIntro",
+    "required": [
+      "agent"
+    ],
+    "lines": []
   },
   {
-    "key": "revenge"
+    "key": "revenge",
+    "required": [
+      "agent"
+    ],
+    "lines": []
   }
 ]

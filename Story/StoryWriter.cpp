@@ -113,7 +113,6 @@ string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestProp
             }
         }
 
-
         stringstream story;
         for (StoryLine line : storyTemplate->CreateStory(requiredEntities, graph)) {
             story << line.GetPrePart();

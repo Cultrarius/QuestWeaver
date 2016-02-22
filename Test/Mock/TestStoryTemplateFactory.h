@@ -19,6 +19,11 @@ namespace weave {
             this->requiredTypes = requiredTypes;
         }
 
+        TestStoryTemplateFactory(const std::string &testFolder, const std::string &templateFile) {
+            this->testFolder = testFolder;
+            this->templateFile = templateFile;
+        }
+
         std::string GetNuggetFolder() const override {
             return testFolder;
         }
@@ -29,11 +34,12 @@ namespace weave {
         }
 
         const char *getTemplateFile() const override {
-            return "empty.st";
+            return templateFile.empty() ? "empty.st" : templateFile.c_str();
         }
 
     private:
         std::string testFolder;
+        std::string templateFile;
         std::vector<std::string> requiredTypes;
     };
 }
