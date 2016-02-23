@@ -10,9 +10,15 @@
 #include <World/WorldEntity.h>
 
 namespace weave {
+    struct RawStoryLine {
+        std::string prePart;
+        std::string postPart;
+        std::set<std::string> nuggets;
+    };
+
     class StoryTemplate {
     public:
-        StoryTemplate();
+        explicit StoryTemplate(std::vector<RawStoryLine> rawStoryLines);
 
         virtual ~StoryTemplate() = default;
 
@@ -20,5 +26,8 @@ namespace weave {
 
         virtual std::vector<StoryLine> CreateStory(std::map<std::string, std::shared_ptr<WorldEntity>>,
                                                    const WeaverGraph &graph) const = 0;
+
+    protected:
+        std::vector<RawStoryLine> rawLines;
     };
 }

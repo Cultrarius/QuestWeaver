@@ -5,14 +5,19 @@
     "lines": [
       {
         "pre": "A.",
-        "line": "B.",
+        "nuggets": [
+          "nuggetB"
+        ],
         "post": "C"
       }
     ]
   },
   {
-    "key": "komplexLines",
-    "required": [],
+    "key": "complexLines",
+    "required": [
+      "agent",
+      "location"
+    ],
     "lines": []
   }
 ]

@@ -1,11 +1,9 @@
 [
   {
-    "key": "actorIntro",
-    "requiredTypes": [
-      "agent"
-    ],
+    "key": "nuggetB",
+    "requiredTypes": [],
     "texts": [
-      "%agent is a mysterious being roaming the galaxy in search of a lost soul."
+      "B."
     ]
   }
 ]

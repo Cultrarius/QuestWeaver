@@ -105,8 +105,20 @@ TEST_CASE("StoryTemplates", "[story]") {
     vector<QuestPropertyValue> values;
     StoryWriter writer(rs, questModel, engine, worldModel, dirs);
 
+    // create an agent in the world model
+    auto agent = worldModel.CreateAgent();
+    TemplateQuestProperty templateProperty(true, "player");
+    values.push_back(QuestPropertyValue(templateProperty, agent));
+    vector<string> requiredTypes = {"agent"};
+
+    // create a fitting graph node
+    graph.CreateNodeGroup("player", true);
+    graph.AddNode(Node("player", agent->GetId()));
+    graph.Finalize();
+
     SECTION("Simple line test") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
         string story = writer.CreateStory(graph, values);
+        REQUIRE(story == "A.B.C");
     }
 }

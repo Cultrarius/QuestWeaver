@@ -9,6 +9,8 @@
 namespace weave {
     class AgentIntroStoryTemplate : public StoryTemplate {
     public:
+        AgentIntroStoryTemplate(std::vector<RawStoryLine> rawLines) : StoryTemplate(rawLines) { }
+
         std::vector<std::string> GetRequiredEntities() const override {
             return requiredTypes;
         }

@@ -9,7 +9,8 @@
 namespace weave {
     class TestStoryTemplate : public StoryTemplate {
     public:
-        explicit TestStoryTemplate(std::vector<std::string> requiredTypes) {
+        TestStoryTemplate(std::vector<std::string> requiredTypes, std::vector<RawStoryLine> rawLines)
+                : StoryTemplate(rawLines) {
             this->requiredTypes = requiredTypes;
         }
 
@@ -19,7 +20,17 @@ namespace weave {
 
         std::vector<StoryLine> CreateStory(std::map<std::string, std::shared_ptr<WorldEntity>>,
                                            const WeaverGraph &graph) const override {
-            return std::vector<StoryLine>();
+            std::vector<StoryLine> lines;
+
+            for (auto rawLine : rawLines) {
+                std::vector<NuggetOption> options;
+                for (auto nuggetKey : rawLine.nuggets) {
+                    options.push_back(NuggetOption(nuggetKey, std::vector<ID>()));
+                }
+                lines.push_back(StoryLine(rawLine.prePart, options, rawLine.postPart));
+            }
+
+            return lines;
         }
 
 

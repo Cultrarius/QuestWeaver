@@ -7,6 +7,5 @@
 using namespace weave;
 using namespace std;
 
-StoryTemplate::StoryTemplate() {
-
+StoryTemplate::StoryTemplate(std::vector<RawStoryLine> rawStoryLines) : rawLines(rawStoryLines) {
 }

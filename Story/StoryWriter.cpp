@@ -109,6 +109,7 @@ string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestProp
             for (auto value : propertyValues) {
                 if (value.GetValue()->GetType() == required) {
                     requiredEntities[required] = value.GetValue();
+                    break;
                 }
             }
         }
@@ -154,8 +155,10 @@ string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestProp
                     throw ContractFailedException(error);
                 }
             }
+            story << nuggetText << line.GetPostPart();
 
-            story << line.GetPostPart();
+            //TODO gather stories choose between them
+            return story.str();
         }
     }
 

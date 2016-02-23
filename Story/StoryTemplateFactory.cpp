@@ -31,8 +31,7 @@ void StoryTemplateFactory::initialize() {
         throw ContractFailedException(errorMessage);
     }
 
-    for (int i = 0; i < root.size(); i++) {
-        Value templateJson = root[i];
+    for (Value templateJson : root) {
         string requiredMembers[] = {"key", "required", "lines"};
         for (string member : requiredMembers) {
             if (!templateJson.isMember(member)) {
@@ -52,6 +51,38 @@ vector<string> StoryTemplateFactory::readRequired(const Value &templateJson) con
     vector<string> result;
     for (auto value : templateJson["required"]) {
         result.push_back(value.asString());
+    }
+    return result;
+}
+
+vector<RawStoryLine> StoryTemplateFactory::readRawLines(const Json::Value &templateJson) const {
+    vector<RawStoryLine> result;
+    for (auto value : templateJson["lines"]) {
+        RawStoryLine line;
+
+        if (value.isString()) {
+            // allow simple strings as story lines
+            line.prePart = value.asString();
+            result.push_back(move(line));
+            continue;
+        }
+
+        if (value.isMember("pre")) {
+            line.prePart = value["pre"].asString();
+            cout << "V: " << line.prePart << "/";
+        }
+        if (value.isMember("post")) {
+            line.postPart = value["post"].asString();
+            cout << "N: " << line.prePart << "/";
+        }
+        if (value.isMember("nuggets")) {
+            for (Value nugget : value["nuggets"]) {
+                cout << "N: " << nugget << "/";
+                line.nuggets.insert(nugget.asString());
+            }
+        }
+        cout << endl;
+        result.push_back(move(line));
     }
     return result;
 }

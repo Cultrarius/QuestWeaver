@@ -31,9 +31,9 @@ namespace weave {
     protected:
         std::shared_ptr<StoryTemplate> createFromJsonValues(const Json::Value &root) const override {
             if (templateFile.empty()) {
-                return std::make_shared<TestStoryTemplate>(requiredTypes);
+                return std::make_shared<TestStoryTemplate>(requiredTypes, std::vector<RawStoryLine>());
             } else {
-                return std::make_shared<TestStoryTemplate>(readRequired(root));
+                return std::make_shared<TestStoryTemplate>(readRequired(root), readRawLines(root));
             }
         }
 
