@@ -22,8 +22,7 @@ namespace weave {
 
         virtual ~StoryTemplate() = default;
 
-        //TODO return a set
-        virtual std::vector<std::string> GetRequiredEntities() const = 0;
+        virtual std::set<std::string> GetRequiredEntities() const = 0;
 
         virtual std::vector<StoryLine> CreateStory(
                 std::map<std::string, std::vector<std::shared_ptr<WorldEntity>>> requiredEntities,

@@ -47,10 +47,10 @@ void StoryTemplateFactory::initialize() {
     }
 }
 
-vector<string> StoryTemplateFactory::readRequired(const Value &templateJson) const {
-    vector<string> result;
+set<string> StoryTemplateFactory::readRequired(const Value &templateJson) const {
+    set<string> result;
     for (auto value : templateJson["required"]) {
-        result.push_back(value.asString());
+        result.insert(value.asString());
     }
     return result;
 }

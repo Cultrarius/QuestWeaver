@@ -48,7 +48,7 @@ namespace weave {
 
         void checkValidNuggetJson(Json::Value root, std::string filePath) const;
 
-        bool hasAll(std::vector<std::string> requiredEntities,
+        bool hasAll(std::set<std::string> requiredEntities,
                     const std::vector<QuestPropertyValue> &propertyValues) const;
 
         std::string CreateStory(const weave::WeaverGraph &graph,

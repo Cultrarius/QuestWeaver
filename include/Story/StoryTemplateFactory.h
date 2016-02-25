@@ -21,7 +21,7 @@ namespace weave {
 
         virtual const char *getTemplateFile() const = 0;
 
-        std::vector<std::string> readRequired(const Json::Value &templateJson) const;
+        std::set<std::string> readRequired(const Json::Value &templateJson) const;
 
         std::vector<RawStoryLine> readRawLines(const Json::Value &templateJson) const;
 

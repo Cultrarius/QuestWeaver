@@ -9,12 +9,12 @@
 namespace weave {
     class TestStoryTemplate : public StoryTemplate {
     public:
-        TestStoryTemplate(std::vector<std::string> requiredTypes, std::vector<RawStoryLine> rawLines)
+        TestStoryTemplate(std::set<std::string> requiredTypes, std::vector<RawStoryLine> rawLines)
                 : StoryTemplate(rawLines) {
             this->requiredTypes = requiredTypes;
         }
 
-        std::vector<std::string> GetRequiredEntities() const override {
+        std::set<std::string> GetRequiredEntities() const override {
             return requiredTypes;
         }
 
@@ -27,7 +27,8 @@ namespace weave {
                 for (auto nuggetKey : rawLine.nuggets) {
                     std::vector<ID> ids;
                     if (!entities.empty() && !requiredTypes.empty()) {
-                        ids.push_back(entities[requiredTypes[0]][0]->GetId());
+                        std::string someType = *requiredTypes.begin();
+                        ids.push_back(entities[someType][0]->GetId());
                     }
                     options.push_back(NuggetOption(nuggetKey, ids));
                 }
@@ -37,8 +38,7 @@ namespace weave {
             return lines;
         }
 
-
     private:
-        std::vector<std::string> requiredTypes;
+        std::set<std::string> requiredTypes;
     };
 }

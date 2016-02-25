@@ -14,7 +14,7 @@ namespace weave {
             this->testFolder = testFolder;
         }
 
-        TestStoryTemplateFactory(const std::string &testFolder, std::vector<std::string> requiredTypes) {
+        TestStoryTemplateFactory(const std::string &testFolder, std::set<std::string> requiredTypes) {
             this->testFolder = testFolder;
             this->requiredTypes = requiredTypes;
         }
@@ -44,6 +44,6 @@ namespace weave {
     private:
         std::string testFolder;
         std::string templateFile;
-        std::vector<std::string> requiredTypes;
+        std::set<std::string> requiredTypes;
     };
 }

@@ -11,7 +11,7 @@ namespace weave {
     public:
         AgentIntroStoryTemplate(std::vector<RawStoryLine> rawLines) : StoryTemplate(rawLines) { }
 
-        std::vector<std::string> GetRequiredEntities() const override {
+        std::set<std::string> GetRequiredEntities() const override {
             return requiredTypes;
         }
 
@@ -20,7 +20,7 @@ namespace weave {
                 const WeaverGraph &graph) const override;
 
     private:
-        std::vector<std::string> requiredTypes = {"agent"};
+        std::set<std::string> requiredTypes = {"agent"};
     };
 
 }

@@ -188,16 +188,13 @@ std::string StoryWriter::CreateStory(const weave::WeaverGraph &graph,
     return "";
 }
 
-bool StoryWriter::hasAll(vector<string> requiredEntities, const std::vector<QuestPropertyValue> &propertyValues) const {
-    for (string required : requiredEntities) {
-        bool hasRequired = false;
-        for (auto questProperty : propertyValues) {
-            if (required == questProperty.GetValue()->GetType()) {
-                hasRequired = true;
-                break;
-            }
-        }
-        if (!hasRequired) {
+bool StoryWriter::hasAll(set<string> requiredEntities, const std::vector<QuestPropertyValue> &propertyValues) const {
+    set<string> availableTypes;
+    for (auto questProperty : propertyValues) {
+        availableTypes.insert(questProperty.GetValue()->GetType());
+    }
+    for (string requiredType : requiredEntities) {
+        if (availableTypes.count(requiredType) == 0) {
             return false;
         }
     }

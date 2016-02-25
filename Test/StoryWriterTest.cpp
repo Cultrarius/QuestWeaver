@@ -78,7 +78,7 @@ TEST_CASE("Nuggets", "[story]") {
         auto agent = worldModel.CreateAgent();
         TemplateQuestProperty templateProperty(true, "superhero");
         values.push_back(QuestPropertyValue(templateProperty, agent));
-        vector<string> requiredTypes = {"agent"};
+        set<string> requiredTypes = {"agent"};
 
         // create a fitting story template factory
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("1", requiredTypes));
@@ -110,7 +110,7 @@ TEST_CASE("StoryTemplates", "[story]") {
     auto testEntity = make_shared<TestEntity>();
     TemplateQuestProperty templateProperty(true, "player");
     values.push_back(QuestPropertyValue(templateProperty, testEntity));
-    vector<string> requiredTypes = {"TestEntityType"};
+    set<string> requiredTypes = {"TestEntityType"};
     WorldModelAction addAction(WorldActionType::CREATE, testEntity);
     worldModel.Execute({addAction});
 
