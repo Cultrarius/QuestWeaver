@@ -81,15 +81,40 @@ string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestProp
 
     initialize();
 
+    unordered_set<string> availableKeys;
+    for (const auto &factory : factories) {
+        auto templates = factory->GetTemplates();
+        for (auto storyTemplate : templates) {
+            availableKeys.insert(storyTemplate.first);
+        }
+    }
+
+    return CreateStory(graph, propertyValues, availableKeys);
+}
+
+std::string StoryWriter::CreateStory(const weave::WeaverGraph &graph,
+                                     const std::vector<QuestPropertyValue> &propertyValues,
+                                     std::string storyTemplateKey) const {
+    unordered_set<string> keyArray = {storyTemplateKey};
+    return CreateStory(graph, propertyValues, keyArray);
+}
+
+std::string StoryWriter::CreateStory(const weave::WeaverGraph &graph,
+                                     const std::vector<QuestPropertyValue> &propertyValues,
+                                     std::unordered_set<std::string> storyTemplateKeys) const {
+    initialize();
+
     if (graph.GetActiveNodes().empty() || propertyValues.empty()) {
         return "";
     }
 
-    vector<shared_ptr<StoryTemplate>> fittingTemplates;
+    map<string, shared_ptr<StoryTemplate>> fittingTemplates;
     for (const auto &factory : factories) {
-        for (auto storyTemplate : factory->GetTemplates()) {
-            if (hasAll(storyTemplate->GetRequiredEntities(), propertyValues)) {
-                fittingTemplates.push_back(storyTemplate);
+        auto templates = factory->GetTemplates();
+        for (auto storyTemplate : templates) {
+            if (storyTemplateKeys.count(storyTemplate.first) > 0 &&
+                hasAll(storyTemplate.second->GetRequiredEntities(), propertyValues)) {
+                fittingTemplates.insert(storyTemplate);
             }
         }
     }
@@ -98,24 +123,23 @@ string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestProp
         return "";
     }
 
-    unordered_map<ID, QuestPropertyValue *> questValues;
-    for (auto value : propertyValues) {
+    unordered_map<ID, const QuestPropertyValue *> questValues;
+    for (auto &value : propertyValues) {
         questValues[value.GetValue()->GetId()] = &value;
     }
 
     for (auto storyTemplate : fittingTemplates) {
-        map<string, shared_ptr<WorldEntity>> requiredEntities;
-        for (string required : storyTemplate->GetRequiredEntities()) {
+        map<string, vector<shared_ptr<WorldEntity>>> requiredEntities;
+        for (string required : storyTemplate.second->GetRequiredEntities()) {
             for (auto value : propertyValues) {
                 if (value.GetValue()->GetType() == required) {
-                    requiredEntities[required] = value.GetValue();
-                    break;
+                    requiredEntities[required].push_back(value.GetValue());
                 }
             }
         }
 
         stringstream story;
-        for (StoryLine line : storyTemplate->CreateStory(requiredEntities, graph)) {
+        for (StoryLine line : storyTemplate.second->CreateStory(requiredEntities, graph)) {
             story << line.GetPrePart();
 
             auto nuggetOptions = line.GetNuggetOptions();

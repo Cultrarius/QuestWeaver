@@ -18,14 +18,18 @@ namespace weave {
             return requiredTypes;
         }
 
-        std::vector<StoryLine> CreateStory(std::map<std::string, std::shared_ptr<WorldEntity>>,
+        std::vector<StoryLine> CreateStory(std::map<std::string, std::vector<std::shared_ptr<WorldEntity>>> entities,
                                            const WeaverGraph &graph) const override {
             std::vector<StoryLine> lines;
 
             for (auto rawLine : rawLines) {
                 std::vector<NuggetOption> options;
                 for (auto nuggetKey : rawLine.nuggets) {
-                    options.push_back(NuggetOption(nuggetKey, std::vector<ID>()));
+                    std::vector<ID> ids;
+                    if (!entities.empty() && !requiredTypes.empty()) {
+                        ids.push_back(entities[requiredTypes[0]][0]->GetId());
+                    }
+                    options.push_back(NuggetOption(nuggetKey, ids));
                 }
                 lines.push_back(StoryLine(rawLine.prePart, options, rawLine.postPart));
             }

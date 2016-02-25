@@ -13,11 +13,18 @@
     ]
   },
   {
-    "key": "complexLines",
+    "key": "entityLine",
     "required": [
-      "agent",
-      "location"
+      "TestEntityType"
     ],
-    "lines": []
+    "lines": [
+      {
+        "pre": "I wish me ",
+        "nuggets": [
+          "nuggetTestEntity"
+        ],
+        "post": " to play with."
+      }
+    ]
   }
 ]

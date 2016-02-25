@@ -7,7 +7,8 @@
 using namespace weave;
 using namespace std;
 
-vector<StoryLine> AgentIntroStoryTemplate::CreateStory(map<string, shared_ptr<WorldEntity>> map,
-                                                       const WeaverGraph &graph) const {
+vector<StoryLine> AgentIntroStoryTemplate::CreateStory(
+        std::map<std::string, std::vector<std::shared_ptr<WorldEntity>>> requiredEntities,
+        const WeaverGraph &graph) const {
     return vector<StoryLine>();
 }

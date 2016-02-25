@@ -4,6 +4,7 @@
 
 #include "catch.hpp"
 #include "Mock/TestStoryTemplateFactory.h"
+#include "Mock/TestEntity.h"
 #include <Story/StoryWriter.h>
 #include <World/Space/SpaceWorldModel.h>
 
@@ -98,27 +99,35 @@ TEST_CASE("StoryTemplates", "[story]") {
     dirs.templateDirectory = "Test/Resources/";
     dirs.modDirectory = "../Test/Resources/";
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
-    TemplateEngine engine(rs, dirs, FormatterType::HTML);
+    TemplateEngine engine(rs, dirs, FormatterType::TEXT);
     QuestModel questModel;
     SpaceWorldModel worldModel(rs);
     WeaverGraph graph;
     vector<QuestPropertyValue> values;
     StoryWriter writer(rs, questModel, engine, worldModel, dirs);
 
-    // create an agent in the world model
-    auto agent = worldModel.CreateAgent();
+    // create a test entity
+    auto testEntity = make_shared<TestEntity>();
     TemplateQuestProperty templateProperty(true, "player");
-    values.push_back(QuestPropertyValue(templateProperty, agent));
-    vector<string> requiredTypes = {"agent"};
+    values.push_back(QuestPropertyValue(templateProperty, testEntity));
+    vector<string> requiredTypes = {"TestEntityType"};
+    WorldModelAction addAction(WorldActionType::CREATE, testEntity);
+    worldModel.Execute({addAction});
 
     // create a fitting graph node
     graph.CreateNodeGroup("player", true);
-    graph.AddNode(Node("player", agent->GetId()));
+    graph.AddNode(Node("player", testEntity->GetId()));
     graph.Finalize();
 
     SECTION("Simple line test") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
-        string story = writer.CreateStory(graph, values);
+        string story = writer.CreateStory(graph, values, "simpleLine");
         REQUIRE(story == "A.B.C");
+    }
+
+    SECTION("Entity line test") {
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
+        string story = writer.CreateStory(graph, values, "entityLine");
+        REQUIRE(story == "I wish me a TestEntity to play with.");
     }
 }

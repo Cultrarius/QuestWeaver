@@ -8,7 +8,7 @@ using namespace weave;
 using namespace std;
 using namespace Json;
 
-vector<shared_ptr<StoryTemplate>> StoryTemplateFactory::GetTemplates() {
+map<string, shared_ptr<StoryTemplate>> StoryTemplateFactory::GetTemplates() {
     initialize();
     return templates;
 }
@@ -43,7 +43,7 @@ void StoryTemplateFactory::initialize() {
             }
         }
 
-        templates.push_back(createFromJsonValues(templateJson));
+        templates[templateJson["key"].asString()] = createFromJsonValues(templateJson);
     }
 }
 
@@ -69,19 +69,15 @@ vector<RawStoryLine> StoryTemplateFactory::readRawLines(const Json::Value &templ
 
         if (value.isMember("pre")) {
             line.prePart = value["pre"].asString();
-            cout << "V: " << line.prePart << "/";
         }
         if (value.isMember("post")) {
             line.postPart = value["post"].asString();
-            cout << "N: " << line.prePart << "/";
         }
         if (value.isMember("nuggets")) {
             for (Value nugget : value["nuggets"]) {
-                cout << "N: " << nugget << "/";
                 line.nuggets.insert(nugget.asString());
             }
         }
-        cout << endl;
         result.push_back(move(line));
     }
     return result;

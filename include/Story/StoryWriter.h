@@ -23,6 +23,10 @@ namespace weave {
         std::string CreateStory(const weave::WeaverGraph &graph,
                                 const std::vector<QuestPropertyValue> &propertyValues) const;
 
+        std::string CreateStory(const weave::WeaverGraph &graph,
+                                const std::vector<QuestPropertyValue> &propertyValues,
+                                std::string storyTemplateKey) const;
+
         void ChangeDirectories(const Directories &newDirs);
 
         void RegisterTemplateFactory(std::unique_ptr<StoryTemplateFactory> factory);
@@ -46,5 +50,9 @@ namespace weave {
 
         bool hasAll(std::vector<std::string> requiredEntities,
                     const std::vector<QuestPropertyValue> &propertyValues) const;
+
+        std::string CreateStory(const weave::WeaverGraph &graph,
+                                const std::vector<QuestPropertyValue> &propertyValues,
+                                std::unordered_set<std::string> storyTemplateKeys) const;
     };
 }

@@ -12,7 +12,7 @@ namespace weave {
     public:
         virtual ~StoryTemplateFactory() = default;
 
-        std::vector<std::shared_ptr<StoryTemplate>> GetTemplates();
+        std::map<std::string, std::shared_ptr<StoryTemplate>> GetTemplates();
 
         virtual std::string GetNuggetFolder() const = 0;
 
@@ -32,7 +32,7 @@ namespace weave {
 
         Directories dirs;
 
-        std::vector<std::shared_ptr<StoryTemplate>> templates;
+        std::map<std::string, std::shared_ptr<StoryTemplate>> templates;
 
         void initialize();
     };
