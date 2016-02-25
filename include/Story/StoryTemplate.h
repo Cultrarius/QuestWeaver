@@ -22,6 +22,7 @@ namespace weave {
 
         virtual ~StoryTemplate() = default;
 
+        //TODO return a set
         virtual std::vector<std::string> GetRequiredEntities() const = 0;
 
         virtual std::vector<StoryLine> CreateStory(

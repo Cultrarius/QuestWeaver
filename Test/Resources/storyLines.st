@@ -26,5 +26,13 @@
         "post": " to play with."
       }
     ]
+  },
+  {
+    "key": "stringOnlyLines",
+    "required": [],
+    "lines": [
+      "This is great! ",
+      "I really love this."
+    ]
   }
 ]

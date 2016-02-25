@@ -180,13 +180,12 @@ std::string StoryWriter::CreateStory(const weave::WeaverGraph &graph,
                 }
             }
             story << nuggetText << line.GetPostPart();
-
-            //TODO gather stories choose between them
-            return story.str();
         }
+        //TODO gather stories choose between them
+        return story.str();
     }
 
-    return "In a far away galaxy a long time ago...\nThere were three little piglets!";
+    return "";
 }
 
 bool StoryWriter::hasAll(vector<string> requiredEntities, const std::vector<QuestPropertyValue> &propertyValues) const {
