@@ -34,5 +34,34 @@
       "This is great!",
       "I really love this."
     ]
+  },
+  {
+    "key": "partialLines",
+    "required": [],
+    "lines": [
+      {
+        "pre": "This is"
+      },
+      {
+        "post": "the result of"
+      },
+      {
+        "pre": "some",
+        "post": "partial lines."
+      }
+    ]
+  },
+  {
+    "key": "unknownNugget",
+    "required": [],
+    "lines": [
+      {
+        "pre": "X",
+        "post": "Z",
+        "nuggets": [
+          "thisIsSomeNugget"
+        ]
+      }
+    ]
   }
 ]

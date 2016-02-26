@@ -136,4 +136,16 @@ TEST_CASE("StoryTemplates", "[story]") {
         string story = writer.CreateStory(graph, values, "stringOnlyLines");
         REQUIRE(story == "This is great! I really love this.");
     }
+
+    SECTION("Partial lines test") {
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
+        string story = writer.CreateStory(graph, values, "partialLines");
+        REQUIRE(story == "This is the result of some partial lines.");
+    }
+
+    SECTION("Unknown nugget") {
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
+        string story = writer.CreateStory(graph, values, "unknownNugget");
+        REQUIRE(story == "");
+    }
 }

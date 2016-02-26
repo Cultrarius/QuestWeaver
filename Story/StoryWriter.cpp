@@ -167,6 +167,11 @@ std::string StoryWriter::CreateStory(const weave::WeaverGraph &graph,
                 }
                 supportedNuggets.push_back(option);
             }
+            if (supportedNuggets.empty()) {
+                // TODO the story is broken at this point, because the nugget is unknown! Should result in an empty story
+                continue;
+            }
+
             NuggetOption chosenOption = supportedNuggets[rs->GetRandomIndex(supportedNuggets.size())];
             Nugget chosenNugget = nuggets[chosenOption.GetNuggetKey()];
             auto texts = chosenNugget.GetTexts();
