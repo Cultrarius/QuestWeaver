@@ -140,11 +140,16 @@ std::string StoryWriter::CreateStory(const weave::WeaverGraph &graph,
 
         stringstream story;
         for (StoryLine line : storyTemplate.second->CreateStory(requiredEntities, graph)) {
-            story << line.GetPrePart();
+            string prePart = line.GetPrePart();
+            string postPart = line.GetPostPart();
+            story << prePart;
 
             auto nuggetOptions = line.GetNuggetOptions();
             if (nuggetOptions.empty()) {
-                story << line.GetPostPart();
+                if (!prePart.empty() && !postPart.empty()) {
+                    story << " ";
+                }
+                story << postPart << " ";
                 continue;
             }
 
@@ -179,10 +184,21 @@ std::string StoryWriter::CreateStory(const weave::WeaverGraph &graph,
                     throw ContractFailedException(error);
                 }
             }
-            story << nuggetText << line.GetPostPart();
+            if (!prePart.empty() && !nuggetText.empty()) {
+                story << " ";
+            }
+            story << nuggetText;
+            if (!nuggetText.empty() && !postPart.empty()) {
+                story << " ";
+            }
+            story << postPart << " ";
         }
         //TODO gather stories choose between them
-        return story.str();
+        string storyString = story.str();
+        if (!storyString.empty()) {
+            storyString.pop_back();
+        }
+        return storyString;
     }
 
     return "";

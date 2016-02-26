@@ -90,7 +90,7 @@ TEST_CASE("Nuggets", "[story]") {
 
         // run it through the story writer
         string story = writer.CreateStory(graph, values);
-        REQUIRE(story.empty());
+        REQUIRE(story == "");
     }
 }
 
@@ -122,7 +122,7 @@ TEST_CASE("StoryTemplates", "[story]") {
     SECTION("Simple line test") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
         string story = writer.CreateStory(graph, values, "simpleLine");
-        REQUIRE(story == "A.B.C");
+        REQUIRE(story == "A. B. C");
     }
 
     SECTION("Entity line test") {

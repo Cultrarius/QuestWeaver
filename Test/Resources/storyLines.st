@@ -19,11 +19,11 @@
     ],
     "lines": [
       {
-        "pre": "I wish me ",
+        "pre": "I wish me",
         "nuggets": [
           "nuggetTestEntity"
         ],
-        "post": " to play with."
+        "post": "to play with."
       }
     ]
   },
@@ -31,7 +31,7 @@
     "key": "stringOnlyLines",
     "required": [],
     "lines": [
-      "This is great! ",
+      "This is great!",
       "I really love this."
     ]
   }
