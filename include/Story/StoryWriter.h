@@ -54,5 +54,28 @@ namespace weave {
         std::string CreateStory(const weave::WeaverGraph &graph,
                                 const std::vector<QuestPropertyValue> &propertyValues,
                                 std::unordered_set<std::string> storyTemplateKeys) const;
+
+        std::vector<std::shared_ptr<StoryTemplate>> getFittingTemplates(
+                const std::vector<QuestPropertyValue> &propertyValues,
+                const std::unordered_set<std::string> &storyTemplateKeys) const;
+
+        std::map<std::string, std::vector<std::shared_ptr<WorldEntity>>> getPossibleEntitiesForTemplate(
+                const std::shared_ptr<StoryTemplate> &storyTemplate,
+                const std::unordered_map<std::string, std::vector<std::shared_ptr<WorldEntity>>> &entitiesByType) const;
+
+        std::map<int, std::string> createWeightedStories(
+                const weave::WeaverGraph &graph,
+                const std::vector<std::shared_ptr<StoryTemplate>> &templates,
+                const std::unordered_map<std::string, std::vector<std::shared_ptr<WorldEntity>>> &entitiesByType,
+                const std::unordered_map<ID, const QuestPropertyValue *> &questValues) const;
+
+        std::vector<NuggetOption> getSupportedNuggets(
+                const std::vector<NuggetOption> &nuggetOptions,
+                const std::unordered_map<ID, const QuestPropertyValue *> &questValues) const;
+
+        std::string getRandomNuggetText(const std::unordered_map<ID, const QuestPropertyValue *> &questValues,
+                                        const std::vector<NuggetOption> &supportedNuggets) const;
+
+        void append(std::stringstream &stream, const std::string &previous, const std::string &toAppend) const;
     };
 }

@@ -9,7 +9,7 @@ using namespace weave;
 using namespace Json;
 
 StoryWriter::StoryWriter(shared_ptr<RandomStream> randomStream, const QuestModel &questModel,
-                         const TemplateEngine &templateEngine, const weave::WorldModel &worldModel,
+                         const TemplateEngine &templateEngine, const WorldModel &worldModel,
                          const Directories &dirs) :
         rs(randomStream), questModel(questModel), templateEngine(templateEngine), worldModel(worldModel), dirs(dirs) {
 }
@@ -55,7 +55,7 @@ void StoryWriter::readNuggets() const {
     }
 }
 
-void StoryWriter::checkValidNuggetJson(Json::Value root, std::string filePath) const {
+void StoryWriter::checkValidNuggetJson(Value root, string filePath) const {
     if (!root.isArray()) {
         throw ContractFailedException("Invalid JSON in nugget file " + filePath + " (no root array)");
     }
@@ -92,125 +92,75 @@ string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestProp
     return CreateStory(graph, propertyValues, availableKeys);
 }
 
-std::string StoryWriter::CreateStory(const weave::WeaverGraph &graph,
-                                     const std::vector<QuestPropertyValue> &propertyValues,
-                                     std::string storyTemplateKey) const {
+string StoryWriter::CreateStory(const WeaverGraph &graph,
+                                const vector<QuestPropertyValue> &propertyValues,
+                                string storyTemplateKey) const {
     unordered_set<string> keyArray = {storyTemplateKey};
     return CreateStory(graph, propertyValues, keyArray);
 }
 
-std::string StoryWriter::CreateStory(const weave::WeaverGraph &graph,
-                                     const std::vector<QuestPropertyValue> &propertyValues,
-                                     std::unordered_set<std::string> storyTemplateKeys) const {
-    initialize();
-
+string StoryWriter::CreateStory(const WeaverGraph &graph,
+                                const vector<QuestPropertyValue> &propertyValues,
+                                unordered_set<string> storyTemplateKeys) const {
     if (graph.GetActiveNodes().empty() || propertyValues.empty()) {
         return "";
     }
+    initialize();
 
-    map<string, shared_ptr<StoryTemplate>> fittingTemplates;
-    for (const auto &factory : factories) {
-        auto templates = factory->GetTemplates();
-        for (auto storyTemplate : templates) {
-            if (storyTemplateKeys.count(storyTemplate.first) > 0 &&
-                hasAll(storyTemplate.second->GetRequiredEntities(), propertyValues)) {
-                fittingTemplates.insert(storyTemplate);
-            }
-        }
-    }
-
+    // find out which templates can be used with the given entities
+    auto fittingTemplates = getFittingTemplates(propertyValues, storyTemplateKeys);
     if (fittingTemplates.empty()) {
         return "";
     }
 
+    // create a property map by ID for faster access
     unordered_map<ID, const QuestPropertyValue *> questValues;
     for (auto &value : propertyValues) {
         questValues[value.GetValue()->GetId()] = &value;
     }
 
-    map<int, string> stories;
-    for (auto storyTemplate : fittingTemplates) {
-        map<string, vector<shared_ptr<WorldEntity>>> requiredEntities;
-        for (string required : storyTemplate.second->GetRequiredEntities()) {
-            for (auto value : propertyValues) {
-                if (value.GetValue()->GetType() == required) {
-                    requiredEntities[required].push_back(value.GetValue());
-                }
-            }
-        }
-
-        stringstream story;
-        int storyValue = 0;
-        for (StoryLine line : storyTemplate.second->CreateStory(requiredEntities, graph)) {
-            string prePart = line.GetPrePart();
-            string postPart = line.GetPostPart();
-            story << prePart;
-
-            auto nuggetOptions = line.GetNuggetOptions();
-            if (nuggetOptions.empty()) {
-                if (!prePart.empty() && !postPart.empty()) {
-                    story << " ";
-                }
-                story << postPart << " ";
-                continue;
-            }
-
-            vector<NuggetOption> supportedNuggets;
-            for (NuggetOption option : nuggetOptions) {
-                for (ID entityId : option.GetEntityIDs()) {
-                    if (questValues.count(entityId) == 0) {
-                        // the template knows which IDs are allowed, so this should never happen
-                        throw ContractFailedException("Invalid nugget option (ID " + to_string(entityId) + ")");
-                    }
-                }
-                if (nuggets.count(option.GetNuggetKey()) == 0) {
-                    // the template does not know which nuggets are actually registered, so this can happen
-                    continue;
-                }
-                supportedNuggets.push_back(option);
-            }
-            if (supportedNuggets.empty()) {
-                // TODO the story is broken at this point, because the nugget is unknown! Should result in an empty story
-                continue;
-            }
-
-            NuggetOption chosenOption = supportedNuggets[rs->GetRandomIndex(supportedNuggets.size())];
-            Nugget chosenNugget = nuggets[chosenOption.GetNuggetKey()];
-            auto texts = chosenNugget.GetTexts();
-            string nuggetText = texts[rs->GetRandomIndex(texts.size())];
-            auto entityTypes = chosenNugget.GetRequiredTypes();
-            auto entityIDs = chosenOption.GetEntityIDs();
-            if (entityTypes.size() != entityIDs.size()) {
-                throw ContractFailedException("Nugget parameter mismatch for key <" + chosenNugget.GetKey() + ">");
-            }
-            for (uint64_t i = 0; i < entityIDs.size(); i++) {
-                string from = "%" + entityTypes[i];
-                string to = questValues[entityIDs[i]]->GetValueString(templateEngine.GetFormat());
-                if (!replace(&nuggetText, from, to)) {
-                    string error("Unable to replace nugget text (i=" + to_string(i) + ", key=" + entityTypes[i] + ")");
-                    throw ContractFailedException(error);
-                }
-            }
-            if (!prePart.empty() && !nuggetText.empty()) {
-                story << " ";
-            }
-            story << nuggetText;
-            if (!nuggetText.empty() && !postPart.empty()) {
-                story << " ";
-            }
-            story << postPart << " ";
-        }
-        string storyString = story.str();
-        if (!storyString.empty()) {
-            storyString.pop_back();
-        }
-        stories[storyValue] = storyString;
+    // create an entity map by type for faster access
+    unordered_map<string, vector<shared_ptr<WorldEntity>>> entitiesByType;
+    for (auto value : propertyValues) {
+        entitiesByType[value.GetValue()->GetType()].push_back(value.GetValue());
     }
 
+    map<int, string> stories = createWeightedStories(graph, fittingTemplates, entitiesByType, questValues);
     return stories.rbegin()->second;
 }
 
-bool StoryWriter::hasAll(set<string> requiredEntities, const std::vector<QuestPropertyValue> &propertyValues) const {
+vector<shared_ptr<StoryTemplate>> StoryWriter::getFittingTemplates(
+        const vector<QuestPropertyValue> &propertyValues, const unordered_set<string> &storyTemplateKeys) const {
+    vector<shared_ptr<StoryTemplate>> fittingTemplates;
+    for (const auto &factory : this->factories) {
+        auto templates = factory->GetTemplates();
+        for (auto storyTemplate : templates) {
+            if (storyTemplateKeys.count(storyTemplate.first) > 0 &&
+                hasAll(storyTemplate.second->GetRequiredEntities(), propertyValues)) {
+                fittingTemplates.push_back(storyTemplate.second);
+            }
+        }
+    }
+    return fittingTemplates;
+}
+
+map<string, vector<shared_ptr<WorldEntity>>> StoryWriter::getPossibleEntitiesForTemplate(
+        const shared_ptr<StoryTemplate> &storyTemplate,
+        const unordered_map<string, vector<shared_ptr<WorldEntity>>> &entitiesByType) const {
+
+    map<string, vector<shared_ptr<WorldEntity>>> requiredEntities;
+    for (string required : storyTemplate->GetRequiredEntities()) {
+        auto iter = entitiesByType.find(required);
+        if (iter != entitiesByType.end()) {
+            for (auto entity : (*iter).second) {
+                requiredEntities[required].push_back(entity);
+            }
+        }
+    }
+    return requiredEntities;
+}
+
+bool StoryWriter::hasAll(set<string> requiredEntities, const vector<QuestPropertyValue> &propertyValues) const {
     set<string> availableTypes;
     for (auto questProperty : propertyValues) {
         availableTypes.insert(questProperty.GetValue()->GetType());
@@ -235,4 +185,101 @@ void StoryWriter::ChangeDirectories(const Directories &newDirs) {
 void StoryWriter::RegisterTemplateFactory(unique_ptr<StoryTemplateFactory> factory) {
     factory->dirs = dirs;
     factories.push_back(move(factory));
+}
+
+map<int, string> StoryWriter::createWeightedStories(
+        const WeaverGraph &graph,
+        const vector<shared_ptr<StoryTemplate>> &templates,
+        const unordered_map<string, vector<shared_ptr<WorldEntity>>> &entitiesByType,
+        const unordered_map<ID, const QuestPropertyValue *> &questValues) const {
+
+    map<int, string> weightedStories;
+    for (auto storyTemplate : templates) {
+        auto requiredEntities = getPossibleEntitiesForTemplate(storyTemplate, entitiesByType);
+
+        stringstream story;
+        int storyValue = 0;
+        for (StoryLine line : storyTemplate->CreateStory(requiredEntities, graph)) {
+            string prePart = line.GetPrePart();
+            string postPart = line.GetPostPart();
+            story << prePart;
+
+            auto nuggetOptions = line.GetNuggetOptions();
+            if (nuggetOptions.empty()) {
+                append(story, prePart, postPart);
+                story << " ";
+                continue;
+            }
+
+            vector<NuggetOption> supportedNuggets = getSupportedNuggets(nuggetOptions, questValues);
+            if (supportedNuggets.empty()) {
+                // the story is broken at this point, because none of the stories required nuggets are known!
+                storyValue = -1;
+                break;
+            }
+
+            string nuggetText = getRandomNuggetText(questValues, supportedNuggets);
+            append(story, prePart, nuggetText);
+            append(story, nuggetText, postPart);
+            story << " ";
+        }
+        string storyString = story.str();
+        if (!storyString.empty()) {
+            // remove trailing whitespace
+            storyString.pop_back();
+        }
+        weightedStories[storyValue] = storyString;
+    }
+    return weightedStories;
+}
+
+string StoryWriter::getRandomNuggetText(const unordered_map<ID, const QuestPropertyValue *> &questValues,
+                                        const vector<NuggetOption> &supportedNuggets) const {
+    NuggetOption chosenOption = supportedNuggets[rs->GetRandomIndex(supportedNuggets.size())];
+    Nugget chosenNugget = nuggets[chosenOption.GetNuggetKey()];
+    auto texts = chosenNugget.GetTexts();
+    string nuggetText = texts[this->rs->GetRandomIndex(texts.size())];
+    auto entityTypes = chosenNugget.GetRequiredTypes();
+    auto entityIDs = chosenOption.GetEntityIDs();
+    if (entityTypes.size() != entityIDs.size()) {
+        throw ContractFailedException("Nugget parameter mismatch for key <" + chosenNugget.GetKey() + ">");
+    }
+    for (uint64_t i = 0; i < entityIDs.size(); i++) {
+        ID id = entityIDs[i];
+        string from = "%" + entityTypes[i];
+        string to = questValues.find(id)->second->GetValueString(this->templateEngine.GetFormat());
+        if (!replace(&nuggetText, from, to)) {
+            string error("Unable to replace nugget text (i=" + to_string(i) + ", key=" + entityTypes[i] + ")");
+            throw ContractFailedException(error);
+        }
+    }
+    return nuggetText;
+}
+
+std::vector<NuggetOption> StoryWriter::getSupportedNuggets(
+        const vector<NuggetOption> &nuggetOptions,
+        const unordered_map<ID, const QuestPropertyValue *> &questValues) const {
+
+    vector<NuggetOption> supportedNuggets;
+    for (NuggetOption option : nuggetOptions) {
+        for (ID entityId : option.GetEntityIDs()) {
+            if (questValues.count(entityId) == 0) {
+                // the template knows which IDs are allowed, so this should never happen
+                throw ContractFailedException("Invalid nugget option (ID " + to_string(entityId) + ")");
+            }
+        }
+        if (nuggets.count(option.GetNuggetKey()) == 0) {
+            // the template does not know which nuggets are actually registered, so this can happen
+            continue;
+        }
+        supportedNuggets.push_back(option);
+    }
+    return supportedNuggets;
+}
+
+void StoryWriter::append(std::stringstream &stream, const string &previous, const string &toAppend) const {
+    if (!previous.empty() && !toAppend.empty()) {
+        stream << " ";
+    }
+    stream << toAppend;
 }
