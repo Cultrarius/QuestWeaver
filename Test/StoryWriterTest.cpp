@@ -148,4 +148,14 @@ TEST_CASE("StoryTemplates", "[story]") {
         string story = writer.CreateStory(graph, values, "unknownNugget");
         REQUIRE(story == "");
     }
+
+    SECTION("Nugget IDs mismatch") {
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
+        REQUIRE_THROWS_AS(writer.CreateStory(graph, values, "wrongNuggetIds"), ContractFailedException);
+    }
+
+    SECTION("Nugget content mismatch") {
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
+        REQUIRE_THROWS_AS(writer.CreateStory(graph, values, "wrongNuggetContent"), ContractFailedException);
+    }
 }

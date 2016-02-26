@@ -63,5 +63,33 @@
         ]
       }
     ]
+  },
+  {
+    "key": "wrongNuggetIds",
+    "required": [],
+    "lines": [
+      {
+        "pre": "X",
+        "post": "Z",
+        "nuggets": [
+          "complexNugget"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "wrongNuggetContent",
+    "required": [
+      "TestEntityType"
+    ],
+    "lines": [
+      {
+        "pre": "X",
+        "post": "Z",
+        "nuggets": [
+          "nuggetTestWrongType"
+        ]
+      }
+    ]
   }
 ]
