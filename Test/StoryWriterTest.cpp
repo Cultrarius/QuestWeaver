@@ -180,4 +180,16 @@ TEST_CASE("StoryTemplates", "[story]") {
         writer.RegisterTemplateFactory(move(factory));
         REQUIRE_THROWS_AS(writer.CreateStory(graph, values, "entityLine"), ContractFailedException);
     }
+
+    SECTION("Broken template") {
+        SECTION("No array as outer struct") {
+            writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "brokenNoArray.st"));
+            REQUIRE_THROWS_AS(writer.CreateStory(graph, values, "simpleLine"), ContractFailedException);
+        }
+
+        SECTION("No Key for story") {
+            writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "brokenNoKey.st"));
+            REQUIRE_THROWS_AS(writer.CreateStory(graph, values, "simpleLine"), ContractFailedException);
+        }
+    }
 }
