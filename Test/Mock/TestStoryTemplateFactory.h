@@ -28,13 +28,18 @@ namespace weave {
             return testFolder;
         }
 
+        bool TemplatesReturnInvalidIDs = false;
+
     protected:
         std::shared_ptr<StoryTemplate> createFromJsonValues(const Json::Value &root) const override {
+            std::shared_ptr<TestStoryTemplate> storyTemplate;
             if (templateFile.empty()) {
-                return std::make_shared<TestStoryTemplate>(requiredTypes, std::vector<RawStoryLine>());
+                storyTemplate = std::make_shared<TestStoryTemplate>(requiredTypes, std::vector<RawStoryLine>());
             } else {
-                return std::make_shared<TestStoryTemplate>(readRequired(root), readRawLines(root));
+                storyTemplate = std::make_shared<TestStoryTemplate>(readRequired(root), readRawLines(root));
             }
+            storyTemplate->ReturnInvalidIDs = TemplatesReturnInvalidIDs;
+            return storyTemplate;
         }
 
         const char *getTemplateFile() const override {

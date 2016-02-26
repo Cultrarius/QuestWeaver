@@ -95,16 +95,20 @@ TEST_CASE("Nuggets", "[story]") {
 }
 
 TEST_CASE("StoryTemplates", "[story]") {
-    Directories dirs;
-    dirs.templateDirectory = "Test/Resources/";
-    dirs.modDirectory = "../Test/Resources/";
+
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
-    TemplateEngine engine(rs, dirs, FormatterType::TEXT);
+    TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
     QuestModel questModel;
     SpaceWorldModel worldModel(rs);
     WeaverGraph graph;
     vector<QuestPropertyValue> values;
-    StoryWriter writer(rs, questModel, engine, worldModel, dirs);
+    StoryWriter writer(rs, questModel, engine, worldModel, Directories());
+
+    Directories dirs;
+    dirs.templateDirectory = "Test/Resources/";
+    dirs.modDirectory = "../Test/Resources/";
+    writer.ChangeDirectories(dirs);
+    engine.ChangeDirectories(dirs);
 
     // create a test entity
     auto testEntity = make_shared<TestEntity>();
@@ -157,5 +161,23 @@ TEST_CASE("StoryTemplates", "[story]") {
     SECTION("Nugget content mismatch") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
         REQUIRE_THROWS_AS(writer.CreateStory(graph, values, "wrongNuggetContent"), ContractFailedException);
+    }
+
+    SECTION("Directory change") {
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
+        string story = writer.CreateStory(graph, values, "entityLine");
+        REQUIRE(story == "I wish me a TestEntity to play with.");
+        writer.ChangeDirectories(dirs);
+        engine.ChangeDirectories(dirs);
+        story = writer.CreateStory(graph, values, "entityLine");
+        REQUIRE(story == "I wish me a TestEntity to play with.");
+
+    }
+
+    SECTION("Invalid entity IDs") {
+        auto factory = make_unique<TestStoryTemplateFactory>("8", "storyLines.st");
+        factory->TemplatesReturnInvalidIDs = true;
+        writer.RegisterTemplateFactory(move(factory));
+        REQUIRE_THROWS_AS(writer.CreateStory(graph, values, "entityLine"), ContractFailedException);
     }
 }

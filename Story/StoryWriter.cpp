@@ -128,6 +128,7 @@ std::string StoryWriter::CreateStory(const weave::WeaverGraph &graph,
         questValues[value.GetValue()->GetId()] = &value;
     }
 
+    map<int, string> stories;
     for (auto storyTemplate : fittingTemplates) {
         map<string, vector<shared_ptr<WorldEntity>>> requiredEntities;
         for (string required : storyTemplate.second->GetRequiredEntities()) {
@@ -139,6 +140,7 @@ std::string StoryWriter::CreateStory(const weave::WeaverGraph &graph,
         }
 
         stringstream story;
+        int storyValue = 0;
         for (StoryLine line : storyTemplate.second->CreateStory(requiredEntities, graph)) {
             string prePart = line.GetPrePart();
             string postPart = line.GetPostPart();
@@ -198,15 +200,14 @@ std::string StoryWriter::CreateStory(const weave::WeaverGraph &graph,
             }
             story << postPart << " ";
         }
-        //TODO gather stories choose between them
         string storyString = story.str();
         if (!storyString.empty()) {
             storyString.pop_back();
         }
-        return storyString;
+        stories[storyValue] = storyString;
     }
 
-    return "";
+    return stories.rbegin()->second;
 }
 
 bool StoryWriter::hasAll(set<string> requiredEntities, const std::vector<QuestPropertyValue> &propertyValues) const {

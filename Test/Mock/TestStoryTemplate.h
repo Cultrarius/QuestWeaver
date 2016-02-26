@@ -9,6 +9,8 @@
 namespace weave {
     class TestStoryTemplate : public StoryTemplate {
     public:
+        bool ReturnInvalidIDs = false;
+
         TestStoryTemplate(std::set<std::string> requiredTypes, std::vector<RawStoryLine> rawLines)
                 : StoryTemplate(rawLines) {
             this->requiredTypes = requiredTypes;
@@ -28,7 +30,11 @@ namespace weave {
                     std::vector<ID> ids;
                     if (!entities.empty() && !requiredTypes.empty()) {
                         std::string someType = *requiredTypes.begin();
-                        ids.push_back(entities[someType][0]->GetId());
+                        if (ReturnInvalidIDs) {
+                            ids.push_back(133337);
+                        } else {
+                            ids.push_back(entities[someType][0]->GetId());
+                        }
                     }
                     options.push_back(NuggetOption(nuggetKey, ids));
                 }
