@@ -109,40 +109,65 @@ $(document).ready(function(){initNavTree('classweave_1_1_story_template.html',''
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classweave_1_1_story_template-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">weave::StoryTemplate Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">weave::StoryTemplate Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="group__story_api.html">Story API</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="_story_template_8h_source.html">StoryTemplate.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for weave::StoryTemplate:</div>
+<div class="dyncontent">
+<div class="center"><img src="classweave_1_1_story_template__coll__graph.png" border="0" usemap="#weave_1_1_story_template_coll__map" alt="Collaboration graph"/></div>
+<map name="weave_1_1_story_template_coll__map" id="weave_1_1_story_template_coll__map">
+<area shape="rect" id="node3" href="structweave_1_1_raw_story_line.html" title="weave::RawStoryLine" alt="" coords="20,277,171,304"/>
+<area shape="rect" id="node5" title="STL class. " alt="" coords="29,96,109,123"/>
+<area shape="rect" id="node6" title="STL class. " alt="" coords="5,5,132,47"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8145b6478fc9852fc966aacedb404dcb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template.html#a8145b6478fc9852fc966aacedb404dcb">StoryTemplate</a> ()</td></tr>
-<tr class="separator:a8145b6478fc9852fc966aacedb404dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af95f029ea2dcac5289cdf28cb5224acd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template.html#af95f029ea2dcac5289cdf28cb5224acd">StoryTemplate</a> (std::vector&lt; <a class="el" href="structweave_1_1_raw_story_line.html">RawStoryLine</a> &gt; rawStoryLines)</td></tr>
+<tr class="separator:af95f029ea2dcac5289cdf28cb5224acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a458caebee482b44e8064e16f5d898310"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template.html#a458caebee482b44e8064e16f5d898310">~StoryTemplate</a> ()=default</td></tr>
 <tr class="separator:a458caebee482b44e8064e16f5d898310"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a3fd0164b7e7f48e3c2f29784cb32a6"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classweave_1_1_story_line.html">StoryLine</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template.html#a9a3fd0164b7e7f48e3c2f29784cb32a6">CreateStory</a> (std::map&lt; std::string, std::shared_ptr&lt; <a class="el" href="classweave_1_1_world_entity.html">WorldEntity</a> &gt;&gt;, const WeaverGraph &amp;graph) const  =0</td></tr>
-<tr class="separator:a9a3fd0164b7e7f48e3c2f29784cb32a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76f1be8a2a1db57b549aafab6da51bb0"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template.html#a76f1be8a2a1db57b549aafab6da51bb0">GetRequiredEntities</a> () const  =0</td></tr>
-<tr class="separator:a76f1be8a2a1db57b549aafab6da51bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94d0632bccbaeeede2b6d29c778a165d"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classweave_1_1_story_line.html">StoryLine</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template.html#a94d0632bccbaeeede2b6d29c778a165d">CreateStory</a> (std::map&lt; std::string, std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_world_entity.html">WorldEntity</a> &gt;&gt;&gt; requiredEntities, const WeaverGraph &amp;graph) const  =0</td></tr>
+<tr class="separator:a94d0632bccbaeeede2b6d29c778a165d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a750c4dc06058c4527ab4920a32152721"><td class="memItemLeft" align="right" valign="top">virtual std::set&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template.html#a750c4dc06058c4527ab4920a32152721">GetRequiredEntities</a> () const  =0</td></tr>
+<tr class="separator:a750c4dc06058c4527ab4920a32152721"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:acaa85ff0fc18f1a62eb7f06aab1e7749"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structweave_1_1_raw_story_line.html">RawStoryLine</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template.html#acaa85ff0fc18f1a62eb7f06aab1e7749">rawLines</a></td></tr>
+<tr class="separator:acaa85ff0fc18f1a62eb7f06aab1e7749"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_story_template_8h_source.html#l00013">13</a> of file <a class="el" href="_story_template_8h_source.html">StoryTemplate.h</a>.</p>
+<p>Definition at line <a class="el" href="_story_template_8h_source.html#l00025">25</a> of file <a class="el" href="_story_template_8h_source.html">StoryTemplate.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a8145b6478fc9852fc966aacedb404dcb"></a>
+<a class="anchor" id="af95f029ea2dcac5289cdf28cb5224acd"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">weave::StoryTemplate::StoryTemplate </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structweave_1_1_raw_story_line.html">RawStoryLine</a> &gt;&#160;</td>
+          <td class="paramname"><em>rawStoryLines</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -171,7 +196,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a9a3fd0164b7e7f48e3c2f29784cb32a6"></a>
+<a class="anchor" id="a94d0632bccbaeeede2b6d29c778a165d"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -181,8 +206,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual std::vector&lt;<a class="el" href="classweave_1_1_story_line.html">StoryLine</a>&gt; weave::StoryTemplate::CreateStory </td>
           <td>(</td>
-          <td class="paramtype">std::map&lt; std::string, std::shared_ptr&lt; <a class="el" href="classweave_1_1_world_entity.html">WorldEntity</a> &gt;&gt;&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">std::map&lt; std::string, std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_world_entity.html">WorldEntity</a> &gt;&gt;&gt;&#160;</td>
+          <td class="paramname"><em>requiredEntities</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -205,7 +230,7 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a76f1be8a2a1db57b549aafab6da51bb0"></a>
+<a class="anchor" id="a750c4dc06058c4527ab4920a32152721"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -213,7 +238,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::vector&lt;std::string&gt; weave::StoryTemplate::GetRequiredEntities </td>
+          <td class="memname">virtual std::set&lt;std::string&gt; weave::StoryTemplate::GetRequiredEntities </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -225,6 +250,29 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="acaa85ff0fc18f1a62eb7f06aab1e7749"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="structweave_1_1_raw_story_line.html">RawStoryLine</a>&gt; weave::StoryTemplate::rawLines</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_story_template_8h_source.html#l00038">38</a> of file <a class="el" href="_story_template_8h_source.html">StoryTemplate.h</a>.</p>
 
 </div>
 </div>

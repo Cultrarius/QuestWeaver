@@ -113,12 +113,16 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds information about a world entity.  <a href="classweave_1_1_meta_data.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_entity.html">weave::WorldEntity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents an object in the game that is relevant for the quest system.  <a href="classweave_1_1_world_entity.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_listener.html">weave::WorldListener</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can be attached to a <a class="el" href="classweave_1_1_world_model.html" title="Holds information about all entities relevant for quests and quest generation. ">WorldModel</a> to receive change updates.  <a href="classweave_1_1_world_listener.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds information about all entities relevant for quests and quest generation.  <a href="classweave_1_1_world_model.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model_action.html">weave::WorldModelAction</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains change information for a <a class="el" href="classweave_1_1_world_model.html" title="Holds information about all entities relevant for quests and quest generation. ">WorldModel</a> entity.  <a href="classweave_1_1_world_model_action.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
@@ -127,7 +131,8 @@ Enumerations</h2></td></tr>
 <a class="el" href="group__world_api.html#ggaa54e8aba2e1a65dc3ebd5a7304b6aeefa294ce20cdefa29be3be0735cb62e715d">weave::WorldActionType::CREATE</a>, 
 <a class="el" href="group__world_api.html#ggaa54e8aba2e1a65dc3ebd5a7304b6aeefa32f68a60cef40faedbc6af20298c1a1e">weave::WorldActionType::DELETE</a>, 
 <a class="el" href="group__world_api.html#ggaa54e8aba2e1a65dc3ebd5a7304b6aeefa15a8022d0ed9cd9c2a2e756822703eb4">weave::WorldActionType::UPDATE</a>
- }</td></tr>
+ }<tr class="memdesc:gaa54e8aba2e1a65dc3ebd5a7304b6aeef"><td class="mdescLeft">&#160;</td><td class="mdescRight">The different types of possible world model changes.  <a href="group__world_api.html#gaa54e8aba2e1a65dc3ebd5a7304b6aeef">More...</a><br /></td></tr>
+</td></tr>
 <tr class="separator:gaa54e8aba2e1a65dc3ebd5a7304b6aeef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -149,18 +154,24 @@ Enumerations</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>The different types of possible world model changes. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="ggaa54e8aba2e1a65dc3ebd5a7304b6aeefa60cba2874369bd3790e14ea5f8a7bc58"></a>KEEP&#160;</td><td class="fielddoc">
+<p>Keep the entity in the model without changing it. </p>
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="ggaa54e8aba2e1a65dc3ebd5a7304b6aeefa294ce20cdefa29be3be0735cb62e715d"></a>CREATE&#160;</td><td class="fielddoc">
+<p>Register the entity with the model (requirement for any other action types) </p>
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="ggaa54e8aba2e1a65dc3ebd5a7304b6aeefa32f68a60cef40faedbc6af20298c1a1e"></a>DELETE&#160;</td><td class="fielddoc">
+<p>Remove the entity from the model. </p>
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="ggaa54e8aba2e1a65dc3ebd5a7304b6aeefa15a8022d0ed9cd9c2a2e756822703eb4"></a>UPDATE&#160;</td><td class="fielddoc">
+<p>Change the entity in the model. </p>
 </td></tr>
 </table>
 
-<p>Definition at line <a class="el" href="_world_model_action_8h_source.html#l00018">18</a> of file <a class="el" href="_world_model_action_8h_source.html">WorldModelAction.h</a>.</p>
+<p>Definition at line <a class="el" href="_world_model_action_8h_source.html#l00020">20</a> of file <a class="el" href="_world_model_action_8h_source.html">WorldModelAction.h</a>.</p>
 
 </div>
 </div>

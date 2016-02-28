@@ -111,7 +111,7 @@ $(document).ready(function(){initNavTree('classweave_1_1_story_writer.html','');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classweave_1_1_story_writer-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">weave::StoryWriter Class Reference</div>  </div>
+<div class="title">weave::StoryWriter Class Reference<div class="ingroups"><a class="el" href="group__story_api.html">Story API</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -125,21 +125,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0c8344b29115e3bd5796f697e1bf3fa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b918ddfea41a936ca30d3b1f4953e2b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_writer.html#a3b918ddfea41a936ca30d3b1f4953e2b">CreateStory</a> (const weave::WeaverGraph &amp;graph, const std::vector&lt; <a class="el" href="classweave_1_1_quest_property_value.html">QuestPropertyValue</a> &gt; &amp;propertyValues) const </td></tr>
 <tr class="separator:a3b918ddfea41a936ca30d3b1f4953e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-  <tr class="memitem:a61603fcb06730acf9fa57ace53d5cbf7">
-    <td class="memItemLeft" align="right" valign="top">void&#160;</td>
-    <td class="memItemRight" valign="bottom"><a class="el"
-                                                href="classweave_1_1_story_writer.html#a61603fcb06730acf9fa57ace53d5cbf7">RegisterTemplateFactory</a>
-      (std::unique_ptr&lt; <a class="el" href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a> &gt;
-      factory)
-    </td>
-  </tr>
-  <tr class="separator:a61603fcb06730acf9fa57ace53d5cbf7">
-    <td class="memSeparator" colspan="2">&#160;</td>
-  </tr>
+<tr class="memitem:ab1d9cf6568ebbdd1182cb4f373be5a14"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_writer.html#ab1d9cf6568ebbdd1182cb4f373be5a14">CreateStory</a> (const weave::WeaverGraph &amp;graph, const std::vector&lt; <a class="el" href="classweave_1_1_quest_property_value.html">QuestPropertyValue</a> &gt; &amp;propertyValues, std::string storyTemplateKey) const </td></tr>
+<tr class="separator:ab1d9cf6568ebbdd1182cb4f373be5a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61603fcb06730acf9fa57ace53d5cbf7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_writer.html#a61603fcb06730acf9fa57ace53d5cbf7">RegisterTemplateFactory</a> (std::unique_ptr&lt; <a class="el" href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a> &gt; factory)</td></tr>
+<tr class="separator:a61603fcb06730acf9fa57ace53d5cbf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_story_writer_8h_source.html#l00017">17</a> of file <a class="el" href="_story_writer_8h_source.html">StoryWriter.h</a>.</p>
+<p>Definition at line <a class="el" href="_story_writer_8h_source.html#l00020">20</a> of file <a class="el" href="_story_writer_8h_source.html">StoryWriter.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a576db909456e13434158a73dd8984525"></a>
 <div class="memitem">
@@ -236,15 +229,46 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-  <a class="anchor" id="a61603fcb06730acf9fa57ace53d5cbf7"></a>
+<a class="anchor" id="ab1d9cf6568ebbdd1182cb4f373be5a14"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string weave::StoryWriter::CreateStory </td>
+          <td>(</td>
+          <td class="paramtype">const weave::WeaverGraph &amp;&#160;</td>
+          <td class="paramname"><em>graph</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="classweave_1_1_quest_property_value.html">QuestPropertyValue</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>propertyValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>storyTemplateKey</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a61603fcb06730acf9fa57ace53d5cbf7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void weave::StoryWriter::RegisterTemplateFactory </td>
           <td>(</td>
-          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a>
-            &gt;&#160;</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classweave_1_1_story_template_factory.html">StoryTemplateFactory</a> &gt;&#160;</td>
           <td class="paramname"><em>factory</em></td><td>)</td>
           <td></td>
         </tr>

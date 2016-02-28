@@ -1,10 +1,8 @@
 <map id="weave::WeaverConfig" name="weave::WeaverConfig">
-<area shape="rect" id="node4" href="$classweave_1_1_story_template_factory.html" title="weave::StoryTemplateFactory" alt="" coords="287,13,485,39"/>
-<area shape="rect" id="node7" href="$classweave_1_1_quest_template_factory.html" title="A factory that is able to create different &quot;types&quot; of quests (quest templates) on demand..." alt="" coords="285,70,487,97"/>
-<area shape="rect" id="node9" href="$classweave_1_1_world_model.html" title="weave::WorldModel" alt="" coords="635,143,772,170"/>
-<area shape="rect" id="node11" href="$classweave_1_1_world_model_action.html" title="weave::WorldModelAction" alt="" coords="5,129,180,155"/>
-<area shape="rect" id="node13" href="$classweave_1_1_meta_data.html" title="Holds information about a world entity. " alt="" coords="30,194,155,221"/>
-<area shape="rect" id="node14" href="$structweave_1_1_directories.html" title="This struct hold information about the programs file search paths. " alt="" coords="1011,209,1141,235"/>
-<area shape="rect" id="node15" title="STL class. " alt="" coords="663,245,743,271"/>
-<area shape="rect" id="node16" title="STL class. " alt="" coords="323,252,449,293"/>
+<area shape="rect" id="node4" href="$classweave_1_1_story_template_factory.html" title="weave::StoryTemplateFactory" alt="" coords="7,13,205,39"/>
+<area shape="rect" id="node7" href="$classweave_1_1_quest_template_factory.html" title="A factory that is able to create different &quot;types&quot; of quests (quest templates) on demand..." alt="" coords="5,78,207,105"/>
+<area shape="rect" id="node9" href="$classweave_1_1_world_model.html" title="Holds information about all entities relevant for quests and quest generation. " alt="" coords="293,142,431,169"/>
+<area shape="rect" id="node10" href="$structweave_1_1_directories.html" title="This struct hold information about the programs file search paths. " alt="" coords="669,202,800,229"/>
+<area shape="rect" id="node11" title="STL class. " alt="" coords="322,202,402,229"/>
+<area shape="rect" id="node12" title="STL class. " alt="" coords="43,195,169,236"/>
 </map>

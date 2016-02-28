@@ -10,8 +10,8 @@ var classweave_1_1_quest_weaver =
     [ "GetQuest", "classweave_1_1_quest_weaver.html#ac03a367e700dd770d3c6f6cde28f3b4a", null ],
     [ "GetQuestsWithState", "classweave_1_1_quest_weaver.html#a1260b729344e6e3bfe0a7911665ff8af", null ],
     [ "GetWorldModel", "classweave_1_1_quest_weaver.html#ab66bd94d2b1c3851d3fd52db1945f9cd", null ],
-    ["RegisterQuestTemplateFactory", "classweave_1_1_quest_weaver.html#a48d5c0dc8db3bfeef43dbefb0944b08b", null],
-    ["RegisterStoryTemplateFactory", "classweave_1_1_quest_weaver.html#af63b45453ba81e4df7d69df0f4481897", null],
+    [ "RegisterQuestTemplateFactory", "classweave_1_1_quest_weaver.html#a48d5c0dc8db3bfeef43dbefb0944b08b", null ],
+    [ "RegisterStoryTemplateFactory", "classweave_1_1_quest_weaver.html#af63b45453ba81e4df7d69df0f4481897", null ],
     [ "Serialize", "classweave_1_1_quest_weaver.html#af4faa60c735a47c941bf42d0948e026f", null ],
     [ "Tick", "classweave_1_1_quest_weaver.html#aa775638812718cc59edd6debbc32d70e", null ],
     [ "cereal::access", "classweave_1_1_quest_weaver.html#ab2f44cbb59a08132f4c843e5225bba0e", null ]

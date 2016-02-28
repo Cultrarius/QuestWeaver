@@ -115,26 +115,34 @@ $(document).ready(function(){initNavTree('classweave_1_1_world_model_action.html
 </div><!--header-->
 <div class="contents">
 
+<p>Contains change information for a <a class="el" href="classweave_1_1_world_model.html" title="Holds information about all entities relevant for quests and quest generation. ">WorldModel</a> entity.  
+ <a href="classweave_1_1_world_model_action.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_world_model_action_8h_source.html">WorldModelAction.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a87a1be80067e27a7f94276fd883de5a1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model_action.html#a87a1be80067e27a7f94276fd883de5a1">WorldModelAction</a> ()</td></tr>
+<tr class="memdesc:a87a1be80067e27a7f94276fd883de5a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an <b>invalid</b> default action.  <a href="#a87a1be80067e27a7f94276fd883de5a1">More...</a><br /></td></tr>
 <tr class="separator:a87a1be80067e27a7f94276fd883de5a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac576b5e01b258a3aa009b839f0f5781c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model_action.html#ac576b5e01b258a3aa009b839f0f5781c">WorldModelAction</a> (const <a class="el" href="group__world_api.html#gaa54e8aba2e1a65dc3ebd5a7304b6aeef">WorldActionType</a> &amp;actionType, const std::shared_ptr&lt; <a class="el" href="classweave_1_1_world_entity.html">WorldEntity</a> &gt; entity)</td></tr>
 <tr class="separator:ac576b5e01b258a3aa009b839f0f5781c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0ca747c7e6ee36d6a5ac3560aa6dd87"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model_action.html#ae0ca747c7e6ee36d6a5ac3560aa6dd87">WorldModelAction</a> (const <a class="el" href="group__world_api.html#gaa54e8aba2e1a65dc3ebd5a7304b6aeef">WorldActionType</a> &amp;actionType, const std::shared_ptr&lt; <a class="el" href="classweave_1_1_world_entity.html">WorldEntity</a> &gt; entity, const <a class="el" href="classweave_1_1_meta_data.html">MetaData</a> metaData)</td></tr>
 <tr class="separator:ae0ca747c7e6ee36d6a5ac3560aa6dd87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb86e00f32ee135dc353b5f38a4f6809"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__world_api.html#gaa54e8aba2e1a65dc3ebd5a7304b6aeef">WorldActionType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model_action.html#acb86e00f32ee135dc353b5f38a4f6809">GetActionType</a> () const </td></tr>
+<tr class="memdesc:acb86e00f32ee135dc353b5f38a4f6809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the type of change produced by this action.  <a href="#acb86e00f32ee135dc353b5f38a4f6809">More...</a><br /></td></tr>
 <tr class="separator:acb86e00f32ee135dc353b5f38a4f6809"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a72a2cc35fbc5e1be5c5ec813fef750"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classweave_1_1_world_entity.html">WorldEntity</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model_action.html#a9a72a2cc35fbc5e1be5c5ec813fef750">GetEntity</a> () const </td></tr>
+<tr class="memdesc:a9a72a2cc35fbc5e1be5c5ec813fef750"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the entity being changed in the world model.  <a href="#a9a72a2cc35fbc5e1be5c5ec813fef750">More...</a><br /></td></tr>
 <tr class="separator:a9a72a2cc35fbc5e1be5c5ec813fef750"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a800b70a8923c8f7e788863b9c19e28df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classweave_1_1_meta_data.html">MetaData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model_action.html#a800b70a8923c8f7e788863b9c19e28df">GetMetaData</a> () const </td></tr>
+<tr class="memdesc:a800b70a8923c8f7e788863b9c19e28df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the new metadata for the given entity.  <a href="#a800b70a8923c8f7e788863b9c19e28df">More...</a><br /></td></tr>
 <tr class="separator:a800b70a8923c8f7e788863b9c19e28df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="_world_model_action_8h_source.html#l00025">25</a> of file <a class="el" href="_world_model_action_8h_source.html">WorldModelAction.h</a>.</p>
+<div class="textblock"><p>Contains change information for a <a class="el" href="classweave_1_1_world_model.html" title="Holds information about all entities relevant for quests and quest generation. ">WorldModel</a> entity. </p>
+
+<p>Definition at line <a class="el" href="_world_model_action_8h_source.html#l00033">33</a> of file <a class="el" href="_world_model_action_8h_source.html">WorldModelAction.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a87a1be80067e27a7f94276fd883de5a1"></a>
 <div class="memitem">
@@ -157,7 +165,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_world_model_action_8h_source.html#l00027">27</a> of file <a class="el" href="_world_model_action_8h_source.html">WorldModelAction.h</a>.</p>
+<p>Creates an <b>invalid</b> default action. </p>
+
+<p>Definition at line <a class="el" href="_world_model_action_8h_source.html#l00039">39</a> of file <a class="el" href="_world_model_action_8h_source.html">WorldModelAction.h</a>.</p>
 
 </div>
 </div>
@@ -192,8 +202,15 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">actionType</td><td>The type of change produced by this action </td></tr>
+    <tr><td class="paramname">entity</td><td>The entity being changed in the world model </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_world_model_action_8h_source.html#l00030">30</a> of file <a class="el" href="_world_model_action_8h_source.html">WorldModelAction.h</a>.</p>
+<p>Definition at line <a class="el" href="_world_model_action_8h_source.html#l00046">46</a> of file <a class="el" href="_world_model_action_8h_source.html">WorldModelAction.h</a>.</p>
 
 </div>
 </div>
@@ -234,8 +251,16 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">actionType</td><td>The type of change produced by this action </td></tr>
+    <tr><td class="paramname">entity</td><td>The entity being changed in the world model </td></tr>
+    <tr><td class="paramname">metaData</td><td>The new metadata for the given entity. If the actionType is KEEP or DELETE, then this data is not used by the world model. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_world_model_action_8h_source.html#l00034">34</a> of file <a class="el" href="_world_model_action_8h_source.html">WorldModelAction.h</a>.</p>
+<p>Definition at line <a class="el" href="_world_model_action_8h_source.html#l00056">56</a> of file <a class="el" href="_world_model_action_8h_source.html">WorldModelAction.h</a>.</p>
 
 </div>
 </div>
@@ -253,6 +278,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Returns the type of change produced by this action. </p>
+
 </div>
 </div>
 <a class="anchor" id="a9a72a2cc35fbc5e1be5c5ec813fef750"></a>
@@ -268,6 +295,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Returns the entity being changed in the world model. </p>
+
 </div>
 </div>
 <a class="anchor" id="a800b70a8923c8f7e788863b9c19e28df"></a>
@@ -282,6 +311,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Returns the new metadata for the given entity. </p>
+<p>If the actionType is KEEP or DELETE, then this data is not used by the world model. </p>
 
 </div>
 </div>

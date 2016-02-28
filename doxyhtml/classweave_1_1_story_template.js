@@ -1,7 +1,8 @@
 var classweave_1_1_story_template =
 [
-    [ "StoryTemplate", "classweave_1_1_story_template.html#a8145b6478fc9852fc966aacedb404dcb", null ],
+    [ "StoryTemplate", "classweave_1_1_story_template.html#af95f029ea2dcac5289cdf28cb5224acd", null ],
     [ "~StoryTemplate", "classweave_1_1_story_template.html#a458caebee482b44e8064e16f5d898310", null ],
-    [ "CreateStory", "classweave_1_1_story_template.html#a9a3fd0164b7e7f48e3c2f29784cb32a6", null ],
-    [ "GetRequiredEntities", "classweave_1_1_story_template.html#a76f1be8a2a1db57b549aafab6da51bb0", null ]
+    [ "CreateStory", "classweave_1_1_story_template.html#a94d0632bccbaeeede2b6d29c778a165d", null ],
+    [ "GetRequiredEntities", "classweave_1_1_story_template.html#a750c4dc06058c4527ab4920a32152721", null ],
+    [ "rawLines", "classweave_1_1_story_template.html#acaa85ff0fc18f1a62eb7f06aab1e7749", null ]
 ];

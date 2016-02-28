@@ -14,6 +14,7 @@ var namespaceweave =
     [ "QuestTickResult", "classweave_1_1_quest_tick_result.html", "classweave_1_1_quest_tick_result" ],
     [ "QuestWeaver", "classweave_1_1_quest_weaver.html", "classweave_1_1_quest_weaver" ],
     [ "RandomStream", "classweave_1_1_random_stream.html", "classweave_1_1_random_stream" ],
+    [ "RawStoryLine", "structweave_1_1_raw_story_line.html", "structweave_1_1_raw_story_line" ],
     [ "StoryLine", "classweave_1_1_story_line.html", "classweave_1_1_story_line" ],
     [ "StoryTemplate", "classweave_1_1_story_template.html", "classweave_1_1_story_template" ],
     [ "StoryTemplateFactory", "classweave_1_1_story_template_factory.html", "classweave_1_1_story_template_factory" ],

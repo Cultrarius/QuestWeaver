@@ -16,6 +16,7 @@ var hierarchy =
     [ "weave::QuestTickResult", "classweave_1_1_quest_tick_result.html", null ],
     [ "weave::QuestWeaver", "classweave_1_1_quest_weaver.html", null ],
     [ "weave::RandomStream", "classweave_1_1_random_stream.html", null ],
+    [ "weave::RawStoryLine", "structweave_1_1_raw_story_line.html", null ],
     [ "weave::StoryLine", "classweave_1_1_story_line.html", null ],
     [ "weave::StoryTemplate", "classweave_1_1_story_template.html", null ],
     [ "weave::StoryTemplateFactory", "classweave_1_1_story_template_factory.html", null ],

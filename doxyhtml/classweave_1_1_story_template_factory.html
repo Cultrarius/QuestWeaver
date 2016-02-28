@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('classweave_1_1_story_template_factory.
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classweave_1_1_story_template_factory-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">weave::StoryTemplateFactory Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">weave::StoryTemplateFactory Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="group__story_api.html">Story API</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -124,8 +124,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a84635df614bda36a9a65506b5cced886"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1086a32b5a1097db29a7595292f3637"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template_factory.html#af1086a32b5a1097db29a7595292f3637">GetNuggetFolder</a> () const  =0</td></tr>
 <tr class="separator:af1086a32b5a1097db29a7595292f3637"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00f70f06195fadf19f37485a1ac7e814"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_story_template.html">StoryTemplate</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template_factory.html#a00f70f06195fadf19f37485a1ac7e814">GetTemplates</a> ()</td></tr>
-<tr class="separator:a00f70f06195fadf19f37485a1ac7e814"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1c96e7184a79ec32202833358545707"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::shared_ptr&lt; <a class="el" href="classweave_1_1_story_template.html">StoryTemplate</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template_factory.html#aa1c96e7184a79ec32202833358545707">GetTemplates</a> ()</td></tr>
+<tr class="separator:aa1c96e7184a79ec32202833358545707"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -133,10 +133,14 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a89796bce5e2a8477a43996304ba146d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad65b44cd80d113ba0c8229f1d0834716"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template_factory.html#ad65b44cd80d113ba0c8229f1d0834716">getTemplateFile</a> () const  =0</td></tr>
 <tr class="separator:ad65b44cd80d113ba0c8229f1d0834716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61e6767a994d56113a4fbf57534a7318"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structweave_1_1_raw_story_line.html">RawStoryLine</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template_factory.html#a61e6767a994d56113a4fbf57534a7318">readRawLines</a> (const Json::Value &amp;templateJson) const </td></tr>
+<tr class="separator:a61e6767a994d56113a4fbf57534a7318"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8849563ff5d33d26f197ab4d1159ca4d"><td class="memItemLeft" align="right" valign="top">std::set&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template_factory.html#a8849563ff5d33d26f197ab4d1159ca4d">readRequired</a> (const Json::Value &amp;templateJson) const </td></tr>
+<tr class="separator:a8849563ff5d33d26f197ab4d1159ca4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_story_template_factory_8h_source.html#l00011">11</a> of file <a class="el" href="_story_template_factory_8h_source.html">StoryTemplateFactory.h</a>.</p>
+<p>Definition at line <a class="el" href="_story_template_factory_8h_source.html#l00014">14</a> of file <a class="el" href="_story_template_factory_8h_source.html">StoryTemplateFactory.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a84635df614bda36a9a65506b5cced886"></a>
 <div class="memitem">
@@ -232,17 +236,65 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a00f70f06195fadf19f37485a1ac7e814"></a>
+<a class="anchor" id="aa1c96e7184a79ec32202833358545707"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classweave_1_1_story_template.html">StoryTemplate</a>&gt; &gt; weave::StoryTemplateFactory::GetTemplates </td>
+          <td class="memname">std::map&lt;std::string, std::shared_ptr&lt;<a class="el" href="classweave_1_1_story_template.html">StoryTemplate</a>&gt; &gt; weave::StoryTemplateFactory::GetTemplates </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a61e6767a994d56113a4fbf57534a7318"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="structweave_1_1_raw_story_line.html">RawStoryLine</a>&gt; weave::StoryTemplateFactory::readRawLines </td>
+          <td>(</td>
+          <td class="paramtype">const Json::Value &amp;&#160;</td>
+          <td class="paramname"><em>templateJson</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8849563ff5d33d26f197ab4d1159ca4d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::set&lt;std::string&gt; weave::StoryTemplateFactory::readRequired </td>
+          <td>(</td>
+          <td class="paramtype">const Json::Value &amp;&#160;</td>
+          <td class="paramname"><em>templateJson</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
