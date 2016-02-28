@@ -12,7 +12,7 @@ ID WorldModel::NewId() {
     return idGenerator;
 }
 
-WorldModel::WorldModel() {
+WorldModel::WorldModel() noexcept {
     rs = make_shared<RandomStream>(0);
     actionHistory.reserve(10000);
 }
@@ -62,7 +62,7 @@ void WorldModel::updateMetaDataForId(ID newId, const MetaData &newData) {
     }
 }
 
-shared_ptr<WorldEntity> WorldModel::GetEntityById(ID id) const {
+shared_ptr<WorldEntity> WorldModel::GetEntityById(ID id) const noexcept {
     return hasEntityWithId(id) ? entities.find(id)->second : shared_ptr<WorldEntity>();
 }
 
@@ -70,7 +70,7 @@ bool WorldModel::hasEntityWithId(ID id) const {
     return id != 0 && entities.count(id) > 0;
 }
 
-vector<shared_ptr<WorldEntity>> WorldModel::GetEntities() const {
+vector<shared_ptr<WorldEntity>> WorldModel::GetEntities() const noexcept {
     vector<shared_ptr<WorldEntity>> result;
     for (auto pair : entities) {
         result.push_back(pair.second);
@@ -78,12 +78,12 @@ vector<shared_ptr<WorldEntity>> WorldModel::GetEntities() const {
     return result;
 }
 
-MetaData WorldModel::GetMetaData(ID entityId) const {
+MetaData WorldModel::GetMetaData(ID entityId) const noexcept {
     auto mapEntry = metaData.find(entityId);
     return mapEntry == metaData.end() ? MetaData() : mapEntry->second;
 }
 
-std::vector<WorldModelAction> WorldModel::GetMetaDataHistoryForId(ID id) const {
+std::vector<WorldModelAction> WorldModel::GetMetaDataHistoryForId(ID id) const noexcept {
     vector<WorldModelAction> result;
     for (auto action : actionHistory) {
         if (action.GetEntity()->GetId() == id && action.GetMetaData().GetValueNames().size() > 0) {
@@ -93,12 +93,14 @@ std::vector<WorldModelAction> WorldModel::GetMetaDataHistoryForId(ID id) const {
     return result;
 }
 
-std::vector<WorldModelAction> WorldModel::GetHistory() const {
+std::vector<WorldModelAction> WorldModel::GetHistory() const noexcept {
     return actionHistory;
 }
 
-void WorldModel::AddListener(std::shared_ptr<WorldListener> listener) const {
-    listeners.push_back(listener);
+void WorldModel::AddListener(std::shared_ptr<WorldListener> listener) const noexcept {
+    if (listener) {
+        listeners.push_back(listener);
+    }
 }
 
 void WorldModel::informListeners(const std::vector<WorldModelAction> &actions) {
