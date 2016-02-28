@@ -53,7 +53,9 @@ void WorldModel::Execute(vector<WorldModelAction> modelActions) {
             actionHistory.push_back(action);
         }
     }
-    informListeners(modelActions);
+    if (!modelActions.empty()) {
+        informListeners(modelActions);
+    }
 }
 
 void WorldModel::updateMetaDataForId(ID newId, const MetaData &newData) {
@@ -86,7 +88,9 @@ MetaData WorldModel::GetMetaData(ID entityId) const noexcept {
 std::vector<WorldModelAction> WorldModel::GetMetaDataHistoryForId(ID id) const noexcept {
     vector<WorldModelAction> result;
     for (auto action : actionHistory) {
-        if (action.GetEntity()->GetId() == id && action.GetMetaData().GetValueNames().size() > 0) {
+        if (action.GetEntity()->GetId() == id &&
+            (action.GetActionType() == WorldActionType::CREATE || action.GetActionType() == WorldActionType::UPDATE) &&
+            action.GetMetaData().GetValueNames().size() > 0) {
             result.push_back(action);
         }
     }

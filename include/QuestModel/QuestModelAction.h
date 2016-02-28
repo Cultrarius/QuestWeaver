@@ -14,7 +14,8 @@ namespace weave {
      * Describes the action the quest model should execute for a quest.
      */
     enum class QuestActionType {
-        KEEP, /*!< Keep a quest in the model */
+        //
+                KEEP, /*!< Keep a quest in the model */
                 ACTIVATE, /*!< Activate an inactive quest */
                 FAIL, /*!< Set an active quest to the failed state */
                 SUCCEED /*!< Set an active quest to the succeeded state */
