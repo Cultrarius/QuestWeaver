@@ -14,6 +14,9 @@
 
 namespace weave {
 
+    /*!
+     * @ingroup storyApi
+     */
     class StoryWriter {
     public:
         explicit StoryWriter(std::shared_ptr<RandomStream> randomStream, const weave::QuestModel &questModel,

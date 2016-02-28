@@ -10,12 +10,18 @@
 #include <World/WorldEntity.h>
 
 namespace weave {
+    /*!
+     * @ingroup storyApi
+     */
     struct RawStoryLine {
         std::string prePart;
         std::string postPart;
         std::set<std::string> nuggets;
     };
 
+    /*!
+     * @ingroup storyApi
+     */
     class StoryTemplate {
     public:
         explicit StoryTemplate(std::vector<RawStoryLine> rawStoryLines);

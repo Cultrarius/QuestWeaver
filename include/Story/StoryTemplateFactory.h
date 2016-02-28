@@ -8,6 +8,9 @@
 #include <Story/StoryTemplate.h>
 
 namespace weave {
+    /*!
+     * @ingroup storyApi
+     */
     class StoryTemplateFactory {
     public:
         virtual ~StoryTemplateFactory() = default;

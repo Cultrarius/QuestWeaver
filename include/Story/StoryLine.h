@@ -9,6 +9,9 @@
 
 namespace weave {
 
+    /*!
+     * @ingroup storyApi
+     */
     class NuggetOption {
     public:
         NuggetOption(std::string nuggetKey, std::vector<ID> entityIDs) noexcept :
@@ -28,6 +31,9 @@ namespace weave {
         std::vector<ID> entityIDs;
     };
 
+    /*!
+     * @ingroup storyApi
+     */
     class StoryLine {
     public:
         StoryLine(std::string prePart, std::vector<NuggetOption> nuggetOptions, std::string postPart) noexcept :

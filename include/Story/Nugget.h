@@ -7,6 +7,10 @@
 #include <Core/WeaverTypes.h>
 
 namespace weave {
+
+    /*!
+     * @ingroup storyApi
+     */
     class Nugget {
     public:
         Nugget() = default;
