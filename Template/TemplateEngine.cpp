@@ -21,11 +21,6 @@ shared_ptr<QuestTemplate> TemplateEngine::GetTemplateForNewQuest() {
 }
 
 void TemplateEngine::RegisterTemplateFactory(std::unique_ptr<QuestTemplateFactory> factory) {
-    for (const auto &f : factories) {
-        if (f.get() == factory.get()) {
-            return;
-        }
-    }
     factory->randomStream = randomStream;
     factory->dirs = dirs;
     factory->formatterType = format;

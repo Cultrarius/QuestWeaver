@@ -248,10 +248,9 @@ TEST_CASE("Templates", "[template]") {
         dirs.templateDirectory = "Test/Resources/";
         dirs.modDirectory = "../Test/Resources/";
         TemplateEngine tempEngine(rs, dirs, FormatterType::TEXT);
-        tempEngine.RegisterTemplateFactory(make_unique<TestQuestTemplateFactory>("missingAttribute.qt"));
-        tempEngine.RegisterTemplateFactory(make_unique<TestQuestTemplateFactory>("missingAttribute.qt"));
-        auto templateFactory = make_shared<TestQuestTemplateFactory>("missingAttribute.qt");
-        REQUIRE_THROWS_AS(templateFactory->GetTemplateKeys(), ContractFailedException);
+        TestQuestTemplateFactory *factory = new TestQuestTemplateFactory("missingAttribute.qt");
+        tempEngine.RegisterTemplateFactory(unique_ptr<TestQuestTemplateFactory>(factory));
+        REQUIRE_THROWS_AS(factory->GetTemplateKeys(), ContractFailedException);
     }
 }
 

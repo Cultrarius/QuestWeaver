@@ -13,7 +13,7 @@ namespace weave {
 
         TestStoryTemplate(std::set<std::string> requiredTypes, std::vector<RawStoryLine> rawLines,
                           std::vector<WorldModelAction> actions)
-                : StoryTemplate(rawLines), actions(actions), requiredTypes(requiredTypes) {
+                : StoryTemplate(rawLines), requiredTypes(requiredTypes), actions(actions) {
         }
 
         std::set<std::string> GetRequiredEntities() const override {
