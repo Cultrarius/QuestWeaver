@@ -8,6 +8,7 @@
 #include <Story/StoryLine.h>
 #include <Core/Graph/WeaverGraph.h>
 #include <World/WorldEntity.h>
+#include <World/WorldModelAction.h>
 
 namespace weave {
     /*!
@@ -17,6 +18,11 @@ namespace weave {
         std::string prePart;
         std::string postPart;
         std::set<std::string> nuggets;
+    };
+
+    struct StoryTemplateResult {
+        std::vector<StoryLine> lines;
+        std::vector<WorldModelAction> worldActions;
     };
 
     /*!
@@ -30,7 +36,7 @@ namespace weave {
 
         virtual std::set<std::string> GetRequiredEntities() const = 0;
 
-        virtual std::vector<StoryLine> CreateStory(
+        virtual StoryTemplateResult CreateStory(
                 std::map<std::string, std::vector<std::shared_ptr<WorldEntity>>> requiredEntities,
                 const WeaverGraph &graph) const = 0;
 

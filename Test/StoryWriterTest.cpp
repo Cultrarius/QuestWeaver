@@ -25,13 +25,13 @@ TEST_CASE("Nuggets", "[story]") {
 
     SECTION("Empty story test") {
         auto result = writer.CreateStory(graph, values);
-        REQUIRE("" == result.story);
+        REQUIRE("" == result.text);
     }
 
     SECTION("Valid nuggets") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("1"));
         auto result = writer.CreateStory(graph, values);
-        REQUIRE("" == result.story);
+        REQUIRE("" == result.text);
     }
 
     SECTION("Invalid nuggets - no key") {
@@ -69,7 +69,7 @@ TEST_CASE("Nuggets", "[story]") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("1"));
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("1"));
         auto result = writer.CreateStory(graph, values);
-        REQUIRE("" == result.story);
+        REQUIRE("" == result.text);
     }
 
     SECTION("Adding agent entity") {
@@ -90,7 +90,7 @@ TEST_CASE("Nuggets", "[story]") {
 
         // run it through the story writer
         auto result = writer.CreateStory(graph, values);
-        REQUIRE(result.story == "");
+        REQUIRE(result.text == "");
     }
 }
 
@@ -126,31 +126,31 @@ TEST_CASE("StoryTemplates", "[story]") {
     SECTION("Simple line test") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
         auto result = writer.CreateStory(graph, values, "simpleLine");
-        REQUIRE(result.story == "A. B. C");
+        REQUIRE(result.text == "A. B. C");
     }
 
     SECTION("Entity line test") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
         auto result = writer.CreateStory(graph, values, "entityLine");
-        REQUIRE(result.story == "I wish me a TestEntity to play with.");
+        REQUIRE(result.text == "I wish me a TestEntity to play with.");
     }
 
     SECTION("String only line test") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
         auto result = writer.CreateStory(graph, values, "stringOnlyLines");
-        REQUIRE(result.story == "This is great! I really love this.");
+        REQUIRE(result.text == "This is great! I really love this.");
     }
 
     SECTION("Partial lines test") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
         auto result = writer.CreateStory(graph, values, "partialLines");
-        REQUIRE(result.story == "This is the result of some partial lines.");
+        REQUIRE(result.text == "This is the result of some partial lines.");
     }
 
     SECTION("Unknown nugget") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
         auto result = writer.CreateStory(graph, values, "unknownNugget");
-        REQUIRE(result.story == "");
+        REQUIRE(result.text == "");
     }
 
     SECTION("Nugget IDs mismatch") {
@@ -166,11 +166,11 @@ TEST_CASE("StoryTemplates", "[story]") {
     SECTION("Directory change") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
         auto result = writer.CreateStory(graph, values, "entityLine");
-        REQUIRE(result.story == "I wish me a TestEntity to play with.");
+        REQUIRE(result.text == "I wish me a TestEntity to play with.");
         writer.ChangeDirectories(dirs);
         engine.ChangeDirectories(dirs);
         result = writer.CreateStory(graph, values, "entityLine");
-        REQUIRE(result.story == "I wish me a TestEntity to play with.");
+        REQUIRE(result.text == "I wish me a TestEntity to play with.");
 
     }
 

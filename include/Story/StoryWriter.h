@@ -14,8 +14,8 @@
 
 namespace weave {
 
-    struct StoryResult {
-        std::string story = "";
+    struct Story {
+        std::string text = "";
         std::vector<WorldModelAction> worldActions;
     };
 
@@ -28,12 +28,12 @@ namespace weave {
                              const weave::TemplateEngine &templateEngine, const weave::WorldModel &worldModel,
                              const Directories &dirs);
 
-        StoryResult CreateStory(const weave::WeaverGraph &graph,
-                                const std::vector<QuestPropertyValue> &propertyValues) const;
+        Story CreateStory(const weave::WeaverGraph &graph,
+                          const std::vector<QuestPropertyValue> &propertyValues) const;
 
-        StoryResult CreateStory(const weave::WeaverGraph &graph,
-                                const std::vector<QuestPropertyValue> &propertyValues,
-                                std::string storyTemplateKey) const;
+        Story CreateStory(const weave::WeaverGraph &graph,
+                          const std::vector<QuestPropertyValue> &propertyValues,
+                          std::string storyTemplateKey) const;
 
         void ChangeDirectories(const Directories &newDirs);
 
@@ -59,9 +59,9 @@ namespace weave {
         bool hasAll(std::set<std::string> requiredEntities,
                     const std::vector<QuestPropertyValue> &propertyValues) const;
 
-        StoryResult CreateStory(const weave::WeaverGraph &graph,
-                                const std::vector<QuestPropertyValue> &propertyValues,
-                                std::unordered_set<std::string> storyTemplateKeys) const;
+        Story CreateStory(const weave::WeaverGraph &graph,
+                          const std::vector<QuestPropertyValue> &propertyValues,
+                          std::unordered_set<std::string> storyTemplateKeys) const;
 
         std::vector<std::shared_ptr<StoryTemplate>> getFittingTemplates(
                 const std::vector<QuestPropertyValue> &propertyValues,
@@ -71,7 +71,7 @@ namespace weave {
                 const std::shared_ptr<StoryTemplate> &storyTemplate,
                 const std::unordered_map<std::string, std::vector<std::shared_ptr<WorldEntity>>> &entitiesByType) const;
 
-        std::map<int, std::string> createWeightedStories(
+        std::map<int, Story> createWeightedStories(
                 const weave::WeaverGraph &graph,
                 const std::vector<std::shared_ptr<StoryTemplate>> &templates,
                 const std::unordered_map<std::string, std::vector<std::shared_ptr<WorldEntity>>> &entitiesByType,

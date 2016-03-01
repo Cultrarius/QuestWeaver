@@ -76,7 +76,7 @@ void StoryWriter::checkValidNuggetJson(Value root, string filePath) const {
     }
 }
 
-StoryResult StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestPropertyValue> &propertyValues) const {
+Story StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestPropertyValue> &propertyValues) const {
     // TODO: the current template might also prove useful at this point to pick a more useful story
 
     initialize();
@@ -92,26 +92,26 @@ StoryResult StoryWriter::CreateStory(const WeaverGraph &graph, const vector<Ques
     return CreateStory(graph, propertyValues, availableKeys);
 }
 
-StoryResult StoryWriter::CreateStory(const WeaverGraph &graph,
-                                     const vector<QuestPropertyValue> &propertyValues,
-                                     string storyTemplateKey) const {
+Story StoryWriter::CreateStory(const WeaverGraph &graph,
+                               const vector<QuestPropertyValue> &propertyValues,
+                               string storyTemplateKey) const {
     unordered_set<string> keyArray = {storyTemplateKey};
     return CreateStory(graph, propertyValues, keyArray);
 }
 
-StoryResult StoryWriter::CreateStory(const WeaverGraph &graph,
-                                     const vector<QuestPropertyValue> &propertyValues,
-                                     unordered_set<string> storyTemplateKeys) const {
-    StoryResult result;
+Story StoryWriter::CreateStory(const WeaverGraph &graph,
+                               const vector<QuestPropertyValue> &propertyValues,
+                               unordered_set<string> storyTemplateKeys) const {
+    Story emptyResult;
     if (graph.GetActiveNodes().empty() || propertyValues.empty()) {
-        return result;
+        return emptyResult;
     }
     initialize();
 
     // find out which templates can be used with the given entities
     auto fittingTemplates = getFittingTemplates(propertyValues, storyTemplateKeys);
     if (fittingTemplates.empty()) {
-        return result;
+        return emptyResult;
     }
 
     // create a property map by ID for faster access
@@ -126,9 +126,8 @@ StoryResult StoryWriter::CreateStory(const WeaverGraph &graph,
         entitiesByType[value.GetValue()->GetType()].push_back(value.GetValue());
     }
 
-    map<int, string> stories = createWeightedStories(graph, fittingTemplates, entitiesByType, questValues);
-    result.story = stories.rbegin()->second;
-    return result;
+    map<int, Story> stories = createWeightedStories(graph, fittingTemplates, entitiesByType, questValues);
+    return stories.rbegin()->second;
 }
 
 vector<shared_ptr<StoryTemplate>> StoryWriter::getFittingTemplates(
@@ -189,19 +188,22 @@ void StoryWriter::RegisterTemplateFactory(unique_ptr<StoryTemplateFactory> facto
     factories.push_back(move(factory));
 }
 
-map<int, string> StoryWriter::createWeightedStories(
+map<int, Story> StoryWriter::createWeightedStories(
         const WeaverGraph &graph,
         const vector<shared_ptr<StoryTemplate>> &templates,
         const unordered_map<string, vector<shared_ptr<WorldEntity>>> &entitiesByType,
         const unordered_map<ID, const QuestPropertyValue *> &questValues) const {
 
-    map<int, string> weightedStories;
+    map<int, Story> weightedStories;
     for (auto storyTemplate : templates) {
         auto requiredEntities = getPossibleEntitiesForTemplate(storyTemplate, entitiesByType);
 
+        Story currentResult;
         stringstream story;
         int storyValue = 0;
-        for (StoryLine line : storyTemplate->CreateStory(requiredEntities, graph)) {
+        auto templateResult = storyTemplate->CreateStory(requiredEntities, graph);
+        currentResult.worldActions = move(templateResult.worldActions);
+        for (StoryLine line : templateResult.lines) {
             string prePart = line.GetPrePart();
             string postPart = line.GetPostPart();
             story << prePart;
@@ -230,7 +232,8 @@ map<int, string> StoryWriter::createWeightedStories(
             // remove trailing whitespace
             storyString.pop_back();
         }
-        weightedStories[storyValue] = storyString;
+        currentResult.text = storyString;
+        weightedStories[storyValue] = currentResult;
     }
     return weightedStories;
 }

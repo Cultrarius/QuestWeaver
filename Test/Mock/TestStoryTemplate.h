@@ -20,8 +20,8 @@ namespace weave {
             return requiredTypes;
         }
 
-        std::vector<StoryLine> CreateStory(std::map<std::string, std::vector<std::shared_ptr<WorldEntity>>> entities,
-                                           const WeaverGraph &graph) const override {
+        StoryTemplateResult CreateStory(std::map<std::string, std::vector<std::shared_ptr<WorldEntity>>> entities,
+                                        const WeaverGraph &graph) const override {
             std::vector<StoryLine> lines;
 
             for (auto rawLine : rawLines) {
@@ -41,7 +41,9 @@ namespace weave {
                 lines.push_back(StoryLine(rawLine.prePart, options, rawLine.postPart));
             }
 
-            return lines;
+            StoryTemplateResult result;
+            result.lines = move(lines);
+            return result;
         }
 
     private:
