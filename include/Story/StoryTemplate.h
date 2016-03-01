@@ -20,6 +20,9 @@ namespace weave {
         std::set<std::string> nuggets;
     };
 
+    /*!
+     * @ingroup storyApi
+     */
     struct StoryTemplateResult {
         std::vector<StoryLine> lines;
         std::vector<WorldModelAction> worldActions;

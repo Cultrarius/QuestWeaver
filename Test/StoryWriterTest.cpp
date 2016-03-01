@@ -192,4 +192,14 @@ TEST_CASE("StoryTemplates", "[story]") {
             REQUIRE_THROWS_AS(writer.CreateStory(graph, values, "simpleLine"), ContractFailedException);
         }
     }
+
+    SECTION("World Model action result") {
+        vector<WorldModelAction> actions;
+        actions.push_back(addAction);
+        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st", actions));
+        auto result = writer.CreateStory(graph, values, "entityLine");
+        REQUIRE(result.text == "I wish me a TestEntity to play with.");
+        REQUIRE(result.worldActions.size() == 1);
+        REQUIRE(result.worldActions[0].GetEntity()->GetId() == addAction.GetEntity()->GetId());
+    }
 }

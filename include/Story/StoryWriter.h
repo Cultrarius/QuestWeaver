@@ -14,6 +14,9 @@
 
 namespace weave {
 
+    /*!
+     * @ingroup storyApi
+     */
     struct Story {
         std::string text = "";
         std::vector<WorldModelAction> worldActions;

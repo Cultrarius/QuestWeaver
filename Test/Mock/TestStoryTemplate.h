@@ -11,9 +11,9 @@ namespace weave {
     public:
         bool ReturnInvalidIDs = false;
 
-        TestStoryTemplate(std::set<std::string> requiredTypes, std::vector<RawStoryLine> rawLines)
-                : StoryTemplate(rawLines) {
-            this->requiredTypes = requiredTypes;
+        TestStoryTemplate(std::set<std::string> requiredTypes, std::vector<RawStoryLine> rawLines,
+                          std::vector<WorldModelAction> actions)
+                : StoryTemplate(rawLines), actions(actions), requiredTypes(requiredTypes) {
         }
 
         std::set<std::string> GetRequiredEntities() const override {
@@ -43,10 +43,12 @@ namespace weave {
 
             StoryTemplateResult result;
             result.lines = move(lines);
+            result.worldActions = actions;
             return result;
         }
 
     private:
         std::set<std::string> requiredTypes;
+        std::vector<WorldModelAction> actions;
     };
 }

@@ -24,6 +24,13 @@ namespace weave {
             this->templateFile = templateFile;
         }
 
+        TestStoryTemplateFactory(const std::string &testFolder, const std::string &templateFile,
+                                 std::vector<WorldModelAction> actions) {
+            this->testFolder = testFolder;
+            this->templateFile = templateFile;
+            this->actions = actions;
+        }
+
         std::string GetNuggetFolder() const override {
             return testFolder;
         }
@@ -34,9 +41,10 @@ namespace weave {
         std::shared_ptr<StoryTemplate> createFromJsonValues(const Json::Value &root) const override {
             std::shared_ptr<TestStoryTemplate> storyTemplate;
             if (templateFile.empty()) {
-                storyTemplate = std::make_shared<TestStoryTemplate>(requiredTypes, std::vector<RawStoryLine>());
+                storyTemplate = std::make_shared<TestStoryTemplate>(requiredTypes, std::vector<RawStoryLine>(),
+                                                                    actions);
             } else {
-                storyTemplate = std::make_shared<TestStoryTemplate>(readRequired(root), readRawLines(root));
+                storyTemplate = std::make_shared<TestStoryTemplate>(readRequired(root), readRawLines(root), actions);
             }
             storyTemplate->ReturnInvalidIDs = TemplatesReturnInvalidIDs;
             return storyTemplate;
@@ -50,5 +58,6 @@ namespace weave {
         std::string testFolder;
         std::string templateFile;
         std::set<std::string> requiredTypes;
+        std::vector<WorldModelAction> actions;
     };
 }
