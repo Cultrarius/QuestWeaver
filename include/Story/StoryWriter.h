@@ -14,6 +14,11 @@
 
 namespace weave {
 
+    struct StoryResult {
+        std::string story = "";
+        std::vector<WorldModelAction> worldActions;
+    };
+
     /*!
      * @ingroup storyApi
      */
@@ -23,10 +28,10 @@ namespace weave {
                              const weave::TemplateEngine &templateEngine, const weave::WorldModel &worldModel,
                              const Directories &dirs);
 
-        std::string CreateStory(const weave::WeaverGraph &graph,
+        StoryResult CreateStory(const weave::WeaverGraph &graph,
                                 const std::vector<QuestPropertyValue> &propertyValues) const;
 
-        std::string CreateStory(const weave::WeaverGraph &graph,
+        StoryResult CreateStory(const weave::WeaverGraph &graph,
                                 const std::vector<QuestPropertyValue> &propertyValues,
                                 std::string storyTemplateKey) const;
 
@@ -54,7 +59,7 @@ namespace weave {
         bool hasAll(std::set<std::string> requiredEntities,
                     const std::vector<QuestPropertyValue> &propertyValues) const;
 
-        std::string CreateStory(const weave::WeaverGraph &graph,
+        StoryResult CreateStory(const weave::WeaverGraph &graph,
                                 const std::vector<QuestPropertyValue> &propertyValues,
                                 std::unordered_set<std::string> storyTemplateKeys) const;
 

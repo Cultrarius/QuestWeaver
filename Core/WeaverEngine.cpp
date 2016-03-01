@@ -44,8 +44,9 @@ EngineResult WeaverEngine::fillTemplate(shared_ptr<QuestTemplate> questTemplate,
             }
         }
     }
-    string story = storyWriter.CreateStory(graph, propertyValues);
-    return EngineResult(modelActions, propertyValues, story);
+    StoryResult storyResult = storyWriter.CreateStory(graph, propertyValues);
+    std::move(storyResult.worldActions.begin(), storyResult.worldActions.end(), std::back_inserter(modelActions));
+    return EngineResult(modelActions, propertyValues, storyResult.story);
 }
 
 WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldModel &worldModel,

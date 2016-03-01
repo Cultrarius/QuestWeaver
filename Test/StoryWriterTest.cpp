@@ -24,14 +24,14 @@ TEST_CASE("Nuggets", "[story]") {
     StoryWriter writer(rs, questModel, engine, worldModel, dirs);
 
     SECTION("Empty story test") {
-        string story = writer.CreateStory(graph, values);
-        REQUIRE("" == story);
+        auto result = writer.CreateStory(graph, values);
+        REQUIRE("" == result.story);
     }
 
     SECTION("Valid nuggets") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("1"));
-        string story = writer.CreateStory(graph, values);
-        REQUIRE("" == story);
+        auto result = writer.CreateStory(graph, values);
+        REQUIRE("" == result.story);
     }
 
     SECTION("Invalid nuggets - no key") {
@@ -68,8 +68,8 @@ TEST_CASE("Nuggets", "[story]") {
     SECTION("Duplicate key, but same folder") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("1"));
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("1"));
-        string story = writer.CreateStory(graph, values);
-        REQUIRE("" == story);
+        auto result = writer.CreateStory(graph, values);
+        REQUIRE("" == result.story);
     }
 
     SECTION("Adding agent entity") {
@@ -89,8 +89,8 @@ TEST_CASE("Nuggets", "[story]") {
         graph.Finalize();
 
         // run it through the story writer
-        string story = writer.CreateStory(graph, values);
-        REQUIRE(story == "");
+        auto result = writer.CreateStory(graph, values);
+        REQUIRE(result.story == "");
     }
 }
 
@@ -125,32 +125,32 @@ TEST_CASE("StoryTemplates", "[story]") {
 
     SECTION("Simple line test") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
-        string story = writer.CreateStory(graph, values, "simpleLine");
-        REQUIRE(story == "A. B. C");
+        auto result = writer.CreateStory(graph, values, "simpleLine");
+        REQUIRE(result.story == "A. B. C");
     }
 
     SECTION("Entity line test") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
-        string story = writer.CreateStory(graph, values, "entityLine");
-        REQUIRE(story == "I wish me a TestEntity to play with.");
+        auto result = writer.CreateStory(graph, values, "entityLine");
+        REQUIRE(result.story == "I wish me a TestEntity to play with.");
     }
 
     SECTION("String only line test") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
-        string story = writer.CreateStory(graph, values, "stringOnlyLines");
-        REQUIRE(story == "This is great! I really love this.");
+        auto result = writer.CreateStory(graph, values, "stringOnlyLines");
+        REQUIRE(result.story == "This is great! I really love this.");
     }
 
     SECTION("Partial lines test") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
-        string story = writer.CreateStory(graph, values, "partialLines");
-        REQUIRE(story == "This is the result of some partial lines.");
+        auto result = writer.CreateStory(graph, values, "partialLines");
+        REQUIRE(result.story == "This is the result of some partial lines.");
     }
 
     SECTION("Unknown nugget") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
-        string story = writer.CreateStory(graph, values, "unknownNugget");
-        REQUIRE(story == "");
+        auto result = writer.CreateStory(graph, values, "unknownNugget");
+        REQUIRE(result.story == "");
     }
 
     SECTION("Nugget IDs mismatch") {
@@ -165,12 +165,12 @@ TEST_CASE("StoryTemplates", "[story]") {
 
     SECTION("Directory change") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
-        string story = writer.CreateStory(graph, values, "entityLine");
-        REQUIRE(story == "I wish me a TestEntity to play with.");
+        auto result = writer.CreateStory(graph, values, "entityLine");
+        REQUIRE(result.story == "I wish me a TestEntity to play with.");
         writer.ChangeDirectories(dirs);
         engine.ChangeDirectories(dirs);
-        story = writer.CreateStory(graph, values, "entityLine");
-        REQUIRE(story == "I wish me a TestEntity to play with.");
+        result = writer.CreateStory(graph, values, "entityLine");
+        REQUIRE(result.story == "I wish me a TestEntity to play with.");
 
     }
 

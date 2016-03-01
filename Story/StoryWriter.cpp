@@ -76,7 +76,7 @@ void StoryWriter::checkValidNuggetJson(Value root, string filePath) const {
     }
 }
 
-string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestPropertyValue> &propertyValues) const {
+StoryResult StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestPropertyValue> &propertyValues) const {
     // TODO: the current template might also prove useful at this point to pick a more useful story
 
     initialize();
@@ -92,25 +92,26 @@ string StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestProp
     return CreateStory(graph, propertyValues, availableKeys);
 }
 
-string StoryWriter::CreateStory(const WeaverGraph &graph,
-                                const vector<QuestPropertyValue> &propertyValues,
-                                string storyTemplateKey) const {
+StoryResult StoryWriter::CreateStory(const WeaverGraph &graph,
+                                     const vector<QuestPropertyValue> &propertyValues,
+                                     string storyTemplateKey) const {
     unordered_set<string> keyArray = {storyTemplateKey};
     return CreateStory(graph, propertyValues, keyArray);
 }
 
-string StoryWriter::CreateStory(const WeaverGraph &graph,
-                                const vector<QuestPropertyValue> &propertyValues,
-                                unordered_set<string> storyTemplateKeys) const {
+StoryResult StoryWriter::CreateStory(const WeaverGraph &graph,
+                                     const vector<QuestPropertyValue> &propertyValues,
+                                     unordered_set<string> storyTemplateKeys) const {
+    StoryResult result;
     if (graph.GetActiveNodes().empty() || propertyValues.empty()) {
-        return "";
+        return result;
     }
     initialize();
 
     // find out which templates can be used with the given entities
     auto fittingTemplates = getFittingTemplates(propertyValues, storyTemplateKeys);
     if (fittingTemplates.empty()) {
-        return "";
+        return result;
     }
 
     // create a property map by ID for faster access
@@ -126,7 +127,8 @@ string StoryWriter::CreateStory(const WeaverGraph &graph,
     }
 
     map<int, string> stories = createWeightedStories(graph, fittingTemplates, entitiesByType, questValues);
-    return stories.rbegin()->second;
+    result.story = stories.rbegin()->second;
+    return result;
 }
 
 vector<shared_ptr<StoryTemplate>> StoryWriter::getFittingTemplates(
