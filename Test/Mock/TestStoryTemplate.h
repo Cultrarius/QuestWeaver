@@ -20,8 +20,7 @@ namespace weave {
             return requiredTypes;
         }
 
-        StoryTemplateResult CreateStory(std::map<std::string, std::vector<std::shared_ptr<WorldEntity>>> entities,
-                                        const WeaverGraph &graph) const override {
+        StoryTemplateResult CreateStory(EntityMap entities, const WeaverGraph &graph) const override {
             std::vector<StoryLine> lines;
 
             for (auto rawLine : rawLines) {

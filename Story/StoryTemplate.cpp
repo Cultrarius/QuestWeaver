@@ -9,3 +9,5 @@ using namespace std;
 
 StoryTemplate::StoryTemplate(std::vector<RawStoryLine> rawStoryLines) : rawLines(rawStoryLines) {
 }
+
+bool StoryTemplate::IsValid(EntityMap requiredEntities, const WeaverGraph &graph) const { return true; }

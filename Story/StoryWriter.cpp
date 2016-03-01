@@ -121,12 +121,15 @@ Story StoryWriter::CreateStory(const WeaverGraph &graph,
     }
 
     // create an entity map by type for faster access
-    unordered_map<string, vector<shared_ptr<WorldEntity>>> entitiesByType;
+    EntityMap entitiesByType;
     for (auto value : propertyValues) {
         entitiesByType[value.GetValue()->GetType()].push_back(value.GetValue());
     }
 
     map<int, Story> stories = createWeightedStories(graph, fittingTemplates, entitiesByType, questValues);
+    if (stories.empty()) {
+        return emptyResult;
+    }
     return stories.rbegin()->second;
 }
 
@@ -145,11 +148,11 @@ vector<shared_ptr<StoryTemplate>> StoryWriter::getFittingTemplates(
     return fittingTemplates;
 }
 
-map<string, vector<shared_ptr<WorldEntity>>> StoryWriter::getPossibleEntitiesForTemplate(
+EntityMap StoryWriter::getPossibleEntitiesForTemplate(
         const shared_ptr<StoryTemplate> &storyTemplate,
-        const unordered_map<string, vector<shared_ptr<WorldEntity>>> &entitiesByType) const {
+        const EntityMap &entitiesByType) const {
 
-    map<string, vector<shared_ptr<WorldEntity>>> requiredEntities;
+    EntityMap requiredEntities;
     for (string required : storyTemplate->GetRequiredEntities()) {
         auto iter = entitiesByType.find(required);
         if (iter != entitiesByType.end()) {
@@ -191,7 +194,7 @@ void StoryWriter::RegisterTemplateFactory(unique_ptr<StoryTemplateFactory> facto
 map<int, Story> StoryWriter::createWeightedStories(
         const WeaverGraph &graph,
         const vector<shared_ptr<StoryTemplate>> &templates,
-        const unordered_map<string, vector<shared_ptr<WorldEntity>>> &entitiesByType,
+        const EntityMap &entitiesByType,
         const unordered_map<ID, const QuestPropertyValue *> &questValues) const {
 
     map<int, Story> weightedStories;
@@ -234,6 +237,11 @@ map<int, Story> StoryWriter::createWeightedStories(
         }
         currentResult.text = storyString;
         weightedStories[storyValue] = currentResult;
+    }
+    //weightedStories.erase(-1);  // remove broken stories
+    auto iter = weightedStories.find(-1);
+    if (iter != weightedStories.end()) {
+        weightedStories.erase(iter);
     }
     return weightedStories;
 }

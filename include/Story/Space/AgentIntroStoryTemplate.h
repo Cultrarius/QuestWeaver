@@ -15,9 +15,7 @@ namespace weave {
             return requiredTypes;
         }
 
-        StoryTemplateResult CreateStory(
-                std::map<std::string, std::vector<std::shared_ptr<WorldEntity>>> requiredEntities,
-                const WeaverGraph &graph) const override;
+        StoryTemplateResult CreateStory(EntityMap requiredEntities, const WeaverGraph &graph) const override;
 
     private:
         std::set<std::string> requiredTypes = {"agent"};

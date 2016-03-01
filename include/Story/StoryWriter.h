@@ -70,14 +70,13 @@ namespace weave {
                 const std::vector<QuestPropertyValue> &propertyValues,
                 const std::unordered_set<std::string> &storyTemplateKeys) const;
 
-        std::map<std::string, std::vector<std::shared_ptr<WorldEntity>>> getPossibleEntitiesForTemplate(
-                const std::shared_ptr<StoryTemplate> &storyTemplate,
-                const std::unordered_map<std::string, std::vector<std::shared_ptr<WorldEntity>>> &entitiesByType) const;
+        EntityMap getPossibleEntitiesForTemplate(const std::shared_ptr<StoryTemplate> &storyTemplate,
+                                                 const EntityMap &entitiesByType) const;
 
         std::map<int, Story> createWeightedStories(
                 const weave::WeaverGraph &graph,
                 const std::vector<std::shared_ptr<StoryTemplate>> &templates,
-                const std::unordered_map<std::string, std::vector<std::shared_ptr<WorldEntity>>> &entitiesByType,
+                const EntityMap &entitiesByType,
                 const std::unordered_map<ID, const QuestPropertyValue *> &questValues) const;
 
         std::vector<NuggetOption> getSupportedNuggets(

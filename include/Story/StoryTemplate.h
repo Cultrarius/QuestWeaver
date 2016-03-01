@@ -11,6 +11,9 @@
 #include <World/WorldModelAction.h>
 
 namespace weave {
+
+    typedef std::unordered_map<std::string, std::vector<std::shared_ptr<WorldEntity>>> EntityMap;
+
     /*!
      * @ingroup storyApi
      */
@@ -39,9 +42,9 @@ namespace weave {
 
         virtual std::set<std::string> GetRequiredEntities() const = 0;
 
-        virtual StoryTemplateResult CreateStory(
-                std::map<std::string, std::vector<std::shared_ptr<WorldEntity>>> requiredEntities,
-                const WeaverGraph &graph) const = 0;
+        virtual bool IsValid(EntityMap requiredEntities, const WeaverGraph &graph) const;
+
+        virtual StoryTemplateResult CreateStory(EntityMap requiredEntities, const WeaverGraph &graph) const = 0;
 
     protected:
         std::vector<RawStoryLine> rawLines;
