@@ -20,6 +20,9 @@ vector<StoryLine> StoryTemplate::createLinesSimple(const vector<ID> &idsForAllNu
     for (auto rawLine : rawLines) {
         vector<NuggetOption> options;
         for (auto nuggetKey : rawLine.nuggets) {
+            if (nuggetKey == "empty") {
+                continue;
+            }
             options.push_back(NuggetOption(nuggetKey, idsForAllNuggets));
         }
         lines.push_back(StoryLine(rawLine.prePart, options, rawLine.postPart));

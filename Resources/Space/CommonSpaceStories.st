@@ -4,13 +4,18 @@
     "required": [
       "agent"
     ],
-    "lines": []
-  },
-  {
-    "key": "revenge",
-    "required": [
-      "agent"
-    ],
-    "lines": []
+    "lines": [
+      {
+        "nuggets": [
+          "actorIntroMisterious"
+        ]
+      },
+      {
+        "nuggets": [
+          "empty",
+          "actorUnknownOrigin"
+        ]
+      }
+    ]
   }
 ]
