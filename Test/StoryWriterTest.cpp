@@ -5,8 +5,11 @@
 #include "catch.hpp"
 #include "Mock/TestStoryTemplateFactory.h"
 #include "Mock/TestEntity.h"
+#include "Mock/TestHelper.h"
 #include <Story/StoryWriter.h>
+#include <Story/Space/CommonSpaceStoryFactory.h>
 #include <World/Space/SpaceWorldModel.h>
+#include <WeaverConfig.h>
 
 using namespace weave;
 using namespace std;
@@ -201,5 +204,35 @@ TEST_CASE("StoryTemplates", "[story]") {
         REQUIRE(result.text == "I wish me a TestEntity to play with.");
         REQUIRE(result.worldActions.size() == 1);
         REQUIRE(result.worldActions[0].GetEntity()->GetId() == addAction.GetEntity()->GetId());
+    }
+}
+
+TEST_CASE("SpaceTemplates", "[story]") {
+    WeaverConfig config = TestHelper::CreateDebugConfig();
+    shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
+    TemplateEngine engine(rs, config.dirs, FormatterType::TEXT);
+    QuestModel questModel;
+    SpaceWorldModel worldModel(rs);
+    WeaverGraph graph;
+    vector<QuestPropertyValue> values;
+    StoryWriter writer(rs, questModel, engine, worldModel, config.dirs);
+
+    // create a test entity
+    auto testAgent = worldModel.CreateAgent();
+    TemplateQuestProperty templateProperty(true, "player");
+    values.push_back(QuestPropertyValue(templateProperty, testAgent));
+    set<string> requiredTypes = {"agent"};
+    WorldModelAction addAction(WorldActionType::CREATE, testAgent);
+    worldModel.Execute({addAction});
+
+    // create a fitting graph node
+    graph.CreateNodeGroup("player", true);
+    graph.AddNode(Node("player", testAgent->GetId()));
+    graph.Finalize();
+
+    SECTION("Intro Story Test") {
+        writer.RegisterTemplateFactory(make_unique<CommonSpaceStoryFactory>());
+        auto result = writer.CreateStory(graph, values, "agentIntro");
+        REQUIRE(result.text.length() > 100);
     }
 }
