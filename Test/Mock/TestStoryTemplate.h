@@ -20,7 +20,8 @@ namespace weave {
             return requiredTypes;
         }
 
-        StoryTemplateResult CreateStory(EntityMap entities, const WeaverGraph &graph) const override {
+        StoryTemplateResult CreateStory(const EntityMap &entities, const WeaverGraph &graph,
+                                        const WorldModel &worldModel) const override {
             std::vector<StoryLine> lines;
 
             for (auto rawLine : rawLines) {
@@ -32,7 +33,7 @@ namespace weave {
                         if (ReturnInvalidIDs) {
                             ids.push_back(133337);
                         } else {
-                            ids.push_back(entities[someType][0]->GetId());
+                            ids.push_back(entities.find(someType)->second.at(0)->GetId());
                         }
                     }
                     options.push_back(NuggetOption(nuggetKey, ids));

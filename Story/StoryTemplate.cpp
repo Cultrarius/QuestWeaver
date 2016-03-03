@@ -10,4 +10,7 @@ using namespace std;
 StoryTemplate::StoryTemplate(std::vector<RawStoryLine> rawStoryLines) : rawLines(rawStoryLines) {
 }
 
-bool StoryTemplate::IsValid(EntityMap requiredEntities, const WeaverGraph &graph) const { return true; }
+bool StoryTemplate::IsValid(const EntityMap &requiredEntities, const WeaverGraph &graph,
+                            const WorldModel &worldModel) const {
+    return true;
+}

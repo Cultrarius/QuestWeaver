@@ -9,6 +9,7 @@
 #include <Core/Graph/WeaverGraph.h>
 #include <World/WorldEntity.h>
 #include <World/WorldModelAction.h>
+#include <World/WorldModel.h>
 
 namespace weave {
 
@@ -42,9 +43,11 @@ namespace weave {
 
         virtual std::set<std::string> GetRequiredEntities() const = 0;
 
-        virtual bool IsValid(EntityMap requiredEntities, const WeaverGraph &graph) const;
+        virtual bool IsValid(const EntityMap &requiredEntities, const WeaverGraph &graph,
+                             const WorldModel &worldModel) const;
 
-        virtual StoryTemplateResult CreateStory(EntityMap requiredEntities, const WeaverGraph &graph) const = 0;
+        virtual StoryTemplateResult CreateStory(const EntityMap &requiredEntities, const WeaverGraph &graph,
+                                                const WorldModel &worldModel) const = 0;
 
     protected:
         std::vector<RawStoryLine> rawLines;

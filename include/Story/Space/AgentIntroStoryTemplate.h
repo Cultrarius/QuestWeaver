@@ -15,10 +15,18 @@ namespace weave {
             return requiredTypes;
         }
 
-        StoryTemplateResult CreateStory(EntityMap requiredEntities, const WeaverGraph &graph) const override;
+        StoryTemplateResult CreateStory(const EntityMap &requiredEntities, const WeaverGraph &graph,
+                                        const WorldModel &worldModel) const override;
+
+        bool IsValid(const EntityMap &requiredEntities, const WeaverGraph &graph,
+                     const WorldModel &worldModel) const override;
 
     private:
         std::set<std::string> requiredTypes = {"agent"};
+        std::string metaDataMarker = "introStoryDone";
+
+        std::vector<std::shared_ptr<WorldEntity>> getValidEntities(const EntityMap &entityMap,
+                                                                   const WorldModel &worldModel) const;
     };
 
 }

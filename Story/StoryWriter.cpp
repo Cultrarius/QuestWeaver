@@ -204,7 +204,7 @@ map<int, Story> StoryWriter::createWeightedStories(
         Story currentResult;
         stringstream story;
         int storyValue = 0;
-        auto templateResult = storyTemplate->CreateStory(requiredEntities, graph);
+        auto templateResult = storyTemplate->CreateStory(requiredEntities, graph, worldModel);
         currentResult.worldActions = move(templateResult.worldActions);
         for (StoryLine line : templateResult.lines) {
             string prePart = line.GetPrePart();
