@@ -16,9 +16,13 @@ StoryTemplateResult AgentIntroStoryTemplate::CreateStory(const EntityMap &requir
     StoryTemplateResult result;
     auto entity = entities[0];
 
+    vector<ID> entityIDs = {entity->GetId()};
+    result.lines = createLinesSimple(entityIDs);
+
     MetaData markedData;
     markedData.SetValue(metaDataMarker, 1);
     result.worldActions.push_back(WorldModelAction(WorldActionType::UPDATE, entity, markedData));
+
     return result;
 }
 

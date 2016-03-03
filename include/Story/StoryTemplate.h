@@ -51,5 +51,10 @@ namespace weave {
 
     protected:
         std::vector<RawStoryLine> rawLines;
+
+        std::vector<StoryLine> createLinesSimple(const std::vector<ID> &idsForAllNuggets) const;
+
+        std::vector<StoryLine> createLinesSimple(
+                const std::unordered_map<std::string, std::vector<ID>> &idsPerNugget) const;
     };
 }
