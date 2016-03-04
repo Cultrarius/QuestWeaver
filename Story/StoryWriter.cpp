@@ -77,8 +77,6 @@ void StoryWriter::checkValidNuggetJson(Value root, string filePath) const {
 }
 
 Story StoryWriter::CreateStory(const StoryWriterParameters &params) const {
-    // TODO: the current template might also prove useful at this point to pick a more useful story
-
     initialize();
 
     unordered_set<string> availableKeys;
@@ -114,13 +112,11 @@ Story StoryWriter::CreateStory(const StoryWriterParameters &params,
         return emptyResult;
     }
 
-    // create a property map by ID for faster access
     QuestValueMap questValues;
     for (auto &value : propertyValues) {
         questValues[value.GetValue()->GetId()] = &value;
     }
 
-    // create an entity map by type for faster access
     EntityMap entitiesByType;
     for (auto value : propertyValues) {
         entitiesByType[value.GetValue()->GetType()].push_back(value.GetValue());
@@ -132,7 +128,7 @@ Story StoryWriter::CreateStory(const StoryWriterParameters &params,
     if (stories.empty()) {
         return emptyResult;
     }
-    return stories.rbegin()->second;
+    return stories.rbegin()->second;  // map is sorted
 }
 
 /*
@@ -179,10 +175,8 @@ vector<shared_ptr<StoryTemplate>> StoryWriter::getFittingTemplates(
     return fittingTemplates;
 }
 
-EntityMap StoryWriter::getPossibleEntitiesForTemplate(
-        const shared_ptr<StoryTemplate> &storyTemplate,
-        const EntityMap &entitiesByType) const {
-
+EntityMap StoryWriter::getPossibleEntitiesForTemplate(const shared_ptr<StoryTemplate> &storyTemplate,
+                                                      const EntityMap &entitiesByType) const {
     EntityMap requiredEntities;
     for (string required : storyTemplate->GetRequiredEntities()) {
         auto iter = entitiesByType.find(required);
@@ -275,7 +269,7 @@ map<float, Story> StoryWriter::createWeightedStories(
         if (storyValue >= 0) {
             storyValue += storyCharWeight * storyString.length();
             // turn the weight into a probability
-            storyValue = storyValue * rs->GetIntInRange(0, 100) / 100.0f;
+            storyValue = storyValue * (rs->GetIntInRange(0, 90) / 90.0f + 0.1f);
         }
         weightedStories[storyValue] = currentResult;
     }
@@ -312,7 +306,6 @@ string StoryWriter::getRandomNuggetText(const QuestValueMap &questValues,
 
 std::vector<NuggetOption> StoryWriter::getSupportedNuggets(const vector<NuggetOption> &nuggetOptions,
                                                            const QuestValueMap &questValues) const {
-
     vector<NuggetOption> supportedNuggets;
     for (NuggetOption option : nuggetOptions) {
         for (ID entityId : option.GetEntityIDs()) {
