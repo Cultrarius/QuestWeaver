@@ -24,6 +24,15 @@ namespace weave {
         std::vector<WorldModelAction> worldActions;
     };
 
+    class StoryWriterParameters {
+    public:
+        StoryWriterParameters(const weave::WeaverGraph &graph, const std::vector<QuestPropertyValue> &propertyValues) :
+                graph(graph), propertyValues(propertyValues) { }
+
+        const weave::WeaverGraph &graph;
+        const std::vector<QuestPropertyValue> &propertyValues;
+    };
+
     /*!
      * @ingroup storyApi
      */
@@ -33,11 +42,9 @@ namespace weave {
                              const weave::TemplateEngine &templateEngine, const weave::WorldModel &worldModel,
                              const Directories &dirs);
 
-        Story CreateStory(const weave::WeaverGraph &graph,
-                          const std::vector<QuestPropertyValue> &propertyValues) const;
+        Story CreateStory(const StoryWriterParameters &params) const;
 
-        Story CreateStory(const weave::WeaverGraph &graph,
-                          const std::vector<QuestPropertyValue> &propertyValues,
+        Story CreateStory(const StoryWriterParameters &params,
                           std::string storyTemplateKey) const;
 
         void ChangeDirectories(const Directories &newDirs);
@@ -69,8 +76,7 @@ namespace weave {
         bool hasAll(std::set<std::string> requiredEntities,
                     const std::vector<QuestPropertyValue> &propertyValues) const;
 
-        Story CreateStory(const weave::WeaverGraph &graph,
-                          const std::vector<QuestPropertyValue> &propertyValues,
+        Story CreateStory(const StoryWriterParameters &params,
                           std::unordered_set<std::string> storyTemplateKeys) const;
 
         std::vector<std::shared_ptr<StoryTemplate>> getFittingTemplates(

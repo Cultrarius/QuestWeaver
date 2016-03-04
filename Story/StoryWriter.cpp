@@ -76,7 +76,7 @@ void StoryWriter::checkValidNuggetJson(Value root, string filePath) const {
     }
 }
 
-Story StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestPropertyValue> &propertyValues) const {
+Story StoryWriter::CreateStory(const StoryWriterParameters &params) const {
     // TODO: the current template might also prove useful at this point to pick a more useful story
 
     initialize();
@@ -89,20 +89,20 @@ Story StoryWriter::CreateStory(const WeaverGraph &graph, const vector<QuestPrope
         }
     }
 
-    return CreateStory(graph, propertyValues, availableKeys);
+    return CreateStory(params, availableKeys);
 }
 
-Story StoryWriter::CreateStory(const WeaverGraph &graph,
-                               const vector<QuestPropertyValue> &propertyValues,
+Story StoryWriter::CreateStory(const StoryWriterParameters &params,
                                string storyTemplateKey) const {
     unordered_set<string> keyArray = {storyTemplateKey};
-    return CreateStory(graph, propertyValues, keyArray);
+    return CreateStory(params, keyArray);
 }
 
-Story StoryWriter::CreateStory(const WeaverGraph &graph,
-                               const vector<QuestPropertyValue> &propertyValues,
+Story StoryWriter::CreateStory(const StoryWriterParameters &params,
                                unordered_set<string> storyTemplateKeys) const {
     Story emptyResult;
+    auto graph = params.graph;
+    auto propertyValues = params.propertyValues;
     if (graph.GetActiveNodes().empty() || propertyValues.empty()) {
         return emptyResult;
     }
