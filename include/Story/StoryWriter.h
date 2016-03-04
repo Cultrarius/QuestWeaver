@@ -14,6 +14,8 @@
 
 namespace weave {
 
+    typedef std::unordered_map<ID, const QuestPropertyValue *> QuestValueMap;
+
     /*!
      * @ingroup storyApi
      */
@@ -82,13 +84,12 @@ namespace weave {
                 const weave::WeaverGraph &graph,
                 const std::vector<std::shared_ptr<StoryTemplate>> &templates,
                 const EntityMap &entitiesByType,
-                const std::unordered_map<ID, const QuestPropertyValue *> &questValues) const;
+                const QuestValueMap &questValues) const;
 
-        std::vector<NuggetOption> getSupportedNuggets(
-                const std::vector<NuggetOption> &nuggetOptions,
-                const std::unordered_map<ID, const QuestPropertyValue *> &questValues) const;
+        std::vector<NuggetOption> getSupportedNuggets(const std::vector<NuggetOption> &nuggetOptions,
+                                                      const QuestValueMap &questValues) const;
 
-        std::string getRandomNuggetText(const std::unordered_map<ID, const QuestPropertyValue *> &questValues,
+        std::string getRandomNuggetText(const QuestValueMap &questValues,
                                         const std::vector<NuggetOption> &supportedNuggets) const;
 
         void append(std::stringstream &stream, const std::string &previous, const std::string &toAppend) const;

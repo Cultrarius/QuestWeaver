@@ -115,7 +115,7 @@ Story StoryWriter::CreateStory(const WeaverGraph &graph,
     }
 
     // create a property map by ID for faster access
-    unordered_map<ID, const QuestPropertyValue *> questValues;
+    QuestValueMap questValues;
     for (auto &value : propertyValues) {
         questValues[value.GetValue()->GetId()] = &value;
     }
@@ -195,7 +195,7 @@ map<float, Story> StoryWriter::createWeightedStories(
         const WeaverGraph &graph,
         const vector<shared_ptr<StoryTemplate>> &templates,
         const EntityMap &entitiesByType,
-        const unordered_map<ID, const QuestPropertyValue *> &questValues) const {
+        const QuestValueMap &questValues) const {
 
     map<float, Story> weightedStories;
     for (auto storyTemplate : templates) {
@@ -256,7 +256,7 @@ map<float, Story> StoryWriter::createWeightedStories(
     return weightedStories;
 }
 
-string StoryWriter::getRandomNuggetText(const unordered_map<ID, const QuestPropertyValue *> &questValues,
+string StoryWriter::getRandomNuggetText(const QuestValueMap &questValues,
                                         const vector<NuggetOption> &supportedNuggets) const {
     NuggetOption chosenOption = supportedNuggets[rs->GetRandomIndex(supportedNuggets.size())];
     Nugget chosenNugget = nuggets[chosenOption.GetNuggetKey()];
@@ -279,9 +279,8 @@ string StoryWriter::getRandomNuggetText(const unordered_map<ID, const QuestPrope
     return nuggetText;
 }
 
-std::vector<NuggetOption> StoryWriter::getSupportedNuggets(
-        const vector<NuggetOption> &nuggetOptions,
-        const unordered_map<ID, const QuestPropertyValue *> &questValues) const {
+std::vector<NuggetOption> StoryWriter::getSupportedNuggets(const vector<NuggetOption> &nuggetOptions,
+                                                           const QuestValueMap &questValues) const {
 
     vector<NuggetOption> supportedNuggets;
     for (NuggetOption option : nuggetOptions) {
