@@ -29,8 +29,13 @@ namespace weave {
         StoryWriterParameters(const weave::WeaverGraph &graph, const std::vector<QuestPropertyValue> &propertyValues) :
                 graph(graph), propertyValues(propertyValues) { }
 
+        StoryWriterParameters(const weave::WeaverGraph &graph, const std::vector<QuestPropertyValue> &propertyValues,
+                              const std::vector<WorldModelAction> &modelActions) :
+                graph(graph), propertyValues(propertyValues), modelActions(modelActions) { }
+
         const weave::WeaverGraph &graph;
-        const std::vector<QuestPropertyValue> &propertyValues;
+        const std::vector<QuestPropertyValue> propertyValues;
+        const std::vector<WorldModelAction> modelActions;
     };
 
     /*!
@@ -99,5 +104,8 @@ namespace weave {
                                         const std::vector<NuggetOption> &supportedNuggets) const;
 
         void append(std::stringstream &stream, const std::string &previous, const std::string &toAppend) const;
+
+        void removeStoriesWithInvalidActions(const StoryWriterParameters &params,
+                                             std::map<float, Story> *storyMap) const;
     };
 }

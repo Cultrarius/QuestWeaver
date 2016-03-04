@@ -127,10 +127,41 @@ Story StoryWriter::CreateStory(const StoryWriterParameters &params,
     }
 
     map<float, Story> stories = createWeightedStories(graph, fittingTemplates, entitiesByType, questValues);
+    removeStoriesWithInvalidActions(params, &stories);
+
     if (stories.empty()) {
         return emptyResult;
     }
     return stories.rbegin()->second;
+}
+
+/*
+ * It is possible that a story wants to change the world model in an invalid way. This happens when a quest wants to
+ * delete an entity from the world model while the story wants to update or keep it. Since the stories are not vital
+ * and to avoid inconsistencies, they are just deleted when that happens.
+ */
+void StoryWriter::removeStoriesWithInvalidActions(const StoryWriterParameters &params,
+                                                  std::map<float, Story> *storyMap) const {
+    unordered_set<ID> deletedEntities;
+    for (auto action : params.modelActions) {
+        if (action.GetActionType() == WorldActionType::DELETE) {
+            deletedEntities.insert(action.GetEntity()->GetId());
+        }
+    }
+    vector<float> storiesWithInvalidActions;
+    for (auto pair : *storyMap) {
+        for (auto action : pair.second.worldActions) {
+            if (deletedEntities.count(action.GetEntity()->GetId()) > 0) {
+                storiesWithInvalidActions.push_back(pair.first);
+            }
+        }
+    }
+    for (float key : storiesWithInvalidActions) {
+        auto iter = storyMap->find(key);
+        if (iter != storyMap->end()) {
+            storyMap->erase(iter);
+        }
+    }
 }
 
 vector<shared_ptr<StoryTemplate>> StoryWriter::getFittingTemplates(
