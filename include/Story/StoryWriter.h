@@ -43,6 +43,11 @@ namespace weave {
         void RegisterTemplateFactory(std::unique_ptr<StoryTemplateFactory> factory);
 
     private:
+        const float storyCharWeight = 1;
+        const float storyEntityWeight = 40;
+        const float worldActionWeight = -20;
+        const float nuggetWeight = 5;
+
         std::shared_ptr<RandomStream> rs;
         const weave::QuestModel &questModel;
         const weave::TemplateEngine &templateEngine;
@@ -73,7 +78,7 @@ namespace weave {
         EntityMap getPossibleEntitiesForTemplate(const std::shared_ptr<StoryTemplate> &storyTemplate,
                                                  const EntityMap &entitiesByType) const;
 
-        std::map<int, Story> createWeightedStories(
+        std::map<float, Story> createWeightedStories(
                 const weave::WeaverGraph &graph,
                 const std::vector<std::shared_ptr<StoryTemplate>> &templates,
                 const EntityMap &entitiesByType,

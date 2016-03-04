@@ -126,7 +126,7 @@ Story StoryWriter::CreateStory(const WeaverGraph &graph,
         entitiesByType[value.GetValue()->GetType()].push_back(value.GetValue());
     }
 
-    map<int, Story> stories = createWeightedStories(graph, fittingTemplates, entitiesByType, questValues);
+    map<float, Story> stories = createWeightedStories(graph, fittingTemplates, entitiesByType, questValues);
     if (stories.empty()) {
         return emptyResult;
     }
@@ -191,13 +191,13 @@ void StoryWriter::RegisterTemplateFactory(unique_ptr<StoryTemplateFactory> facto
     factories.push_back(move(factory));
 }
 
-map<int, Story> StoryWriter::createWeightedStories(
+map<float, Story> StoryWriter::createWeightedStories(
         const WeaverGraph &graph,
         const vector<shared_ptr<StoryTemplate>> &templates,
         const EntityMap &entitiesByType,
         const unordered_map<ID, const QuestPropertyValue *> &questValues) const {
 
-    map<int, Story> weightedStories;
+    map<float, Story> weightedStories;
     for (auto storyTemplate : templates) {
         auto requiredEntities = getPossibleEntitiesForTemplate(storyTemplate, entitiesByType);
         if (!storyTemplate->IsValid(requiredEntities, graph, worldModel)) {
@@ -206,9 +206,10 @@ map<int, Story> StoryWriter::createWeightedStories(
 
         Story currentResult;
         stringstream story;
-        int storyValue = 0;
+        float storyValue = storyEntityWeight * storyTemplate->GetRequiredEntities().size();
         auto templateResult = storyTemplate->CreateStory(requiredEntities, graph, worldModel);
         currentResult.worldActions = move(templateResult.worldActions);
+        storyValue += worldActionWeight * currentResult.worldActions.size();
         for (StoryLine line : templateResult.lines) {
             string prePart = line.GetPrePart();
             string postPart = line.GetPostPart();
@@ -222,6 +223,7 @@ map<int, Story> StoryWriter::createWeightedStories(
             }
 
             vector<NuggetOption> supportedNuggets = getSupportedNuggets(nuggetOptions, questValues);
+            storyValue += nuggetWeight * supportedNuggets.size();
             if (supportedNuggets.empty()) {
                 // the story is broken at this point, because none of the stories required nuggets are known!
                 storyValue = -1;
@@ -239,6 +241,11 @@ map<int, Story> StoryWriter::createWeightedStories(
             storyString.pop_back();
         }
         currentResult.text = storyString;
+        if (storyValue >= 0) {
+            storyValue += storyCharWeight * storyString.length();
+            // turn the weight into a probability
+            storyValue = storyValue * rs->GetIntInRange(0, 100) / 100.0f;
+        }
         weightedStories[storyValue] = currentResult;
     }
     // remove broken stories
