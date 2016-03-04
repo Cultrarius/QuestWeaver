@@ -200,6 +200,9 @@ map<int, Story> StoryWriter::createWeightedStories(
     map<int, Story> weightedStories;
     for (auto storyTemplate : templates) {
         auto requiredEntities = getPossibleEntitiesForTemplate(storyTemplate, entitiesByType);
+        if (!storyTemplate->IsValid(requiredEntities, graph, worldModel)) {
+            continue;
+        }
 
         Story currentResult;
         stringstream story;
@@ -238,7 +241,7 @@ map<int, Story> StoryWriter::createWeightedStories(
         currentResult.text = storyString;
         weightedStories[storyValue] = currentResult;
     }
-    //weightedStories.erase(-1);  // remove broken stories
+    // remove broken stories
     auto iter = weightedStories.find(-1);
     if (iter != weightedStories.end()) {
         weightedStories.erase(iter);

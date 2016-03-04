@@ -230,9 +230,20 @@ TEST_CASE("SpaceTemplates", "[story]") {
     graph.AddNode(Node("player", testAgent->GetId()));
     graph.Finalize();
 
-    SECTION("Intro Story Test") {
+    SECTION("Intro Story") {
         writer.RegisterTemplateFactory(make_unique<CommonSpaceStoryFactory>());
         auto result = writer.CreateStory(graph, values, "agentIntro");
         REQUIRE(result.text.length() > 100);
+        REQUIRE(result.worldActions[0].GetMetaData().HasValue("introStoryDone"));
+    }
+
+    SECTION("No double intro") {
+        writer.RegisterTemplateFactory(make_unique<CommonSpaceStoryFactory>());
+        auto result = writer.CreateStory(graph, values, "agentIntro");
+        REQUIRE(result.text.length() > 100);
+        worldModel.Execute(result.worldActions);
+        result = writer.CreateStory(graph, values, "agentIntro");
+        REQUIRE(result.text == "");
+        REQUIRE(result.worldActions.size() == 0);
     }
 }
