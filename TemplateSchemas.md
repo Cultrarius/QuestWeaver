@@ -10,8 +10,12 @@ This document shows how the template files for the quests and stories are struct
 {
   "parent": <String>,
   "key": <String>,
-  "mandatory": <StringArray>,
-  "optional": <StringArray>,
+  "mandatory": [
+    <String>
+  ],
+  "optional": [
+    <String>
+  ],
   "titles": [
     <String>
   ],
