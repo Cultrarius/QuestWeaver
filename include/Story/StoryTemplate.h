@@ -27,6 +27,18 @@ namespace weave {
     /*!
      * @ingroup storyApi
      */
+    struct RawStoryToken {
+        bool isMandatory;
+        std::string text;
+        std::vector<std::string> nuggetOptions;
+        std::string id;
+    };
+
+    std::vector<RawStoryToken> getStoryTokens(std::string rawStoryText) noexcept;
+
+    /*!
+     * @ingroup storyApi
+     */
     struct StoryTemplateResult {
         std::vector<StoryLine> lines;
         std::vector<WorldModelAction> worldActions;

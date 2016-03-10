@@ -1,3 +1,17 @@
+Ideas from thesis:
+* story templates should be easier to write.
+* {optional} and [mandatory] parts can be integrated directly into the text.
+* nuggets should be integrated in-line
+Idea:
+{
+    rawText: "This is a {positive} part, while THIS is just [negative] bla bla. And this is the [best|worst] part of all! Look, a [entity:id1]."
+}
+=> Parsed nuggets: [positive, negative, best, worst]
+=> Possible results:
+This is a great part, while THIS is just stupid bla bla. And this is the greatest part of all! Look, a duck.
+This is a part, while THIS is just inferior bla bla. And this is the worst part of all! Look, a dog.
+
+
 * Template factory should return more than one fileName
 * Implement story writer based on graph nodes
   * Story writer could use templates or modules similar to the quest templates

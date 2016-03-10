@@ -252,3 +252,106 @@ TEST_CASE("SpaceTemplates", "[story]") {
         REQUIRE(result.worldActions.size() == 0);
     }
 }
+
+TEST_CASE("Tokenizer", "[story]") {
+    vector<RawStoryToken> tokens;
+
+    SECTION("Empty string") {
+        tokens = getStoryTokens("");
+        REQUIRE(tokens.size() == 0);
+    }
+
+    SECTION("Mandatory token") {
+        SECTION("Without ID") {
+            tokens = getStoryTokens("[sure]");
+            REQUIRE(tokens[0].id == "");
+            REQUIRE(tokens[0].text == "[sure]");
+        }
+        SECTION("With ID") {
+            tokens = getStoryTokens("[sure:xyz]");
+            REQUIRE(tokens[0].id == "xyz");
+            REQUIRE(tokens[0].text == "[sure:xyz]");
+        }
+        SECTION("With text") {
+            tokens = getStoryTokens("Before [sure:xyz] and after");
+            REQUIRE(tokens[0].id == "xyz");
+            REQUIRE(tokens[0].text == "[sure:xyz]");
+        }
+        SECTION("With line break") {
+            tokens = getStoryTokens("Be\tfore\n\r [sure:xyz] and after");
+            REQUIRE(tokens[0].id == "xyz");
+            REQUIRE(tokens[0].text == "[sure:xyz]");
+        }
+        REQUIRE(tokens.size() == 1);
+        REQUIRE(tokens[0].isMandatory);
+        REQUIRE(tokens[0].nuggetOptions.size() == 1);
+        REQUIRE(tokens[0].nuggetOptions[0] == "sure");
+    }
+
+    SECTION("Optional token") {
+        SECTION("Without ID") {
+            tokens = getStoryTokens("{maybe}");
+            REQUIRE(tokens[0].id == "");
+            REQUIRE(tokens[0].text == "{maybe}");
+        }
+        SECTION("With ID") {
+            tokens = getStoryTokens("{maybe:xyz}");
+            REQUIRE(tokens[0].id == "xyz");
+            REQUIRE(tokens[0].text == "{maybe:xyz}");
+        }
+        SECTION("With text") {
+            tokens = getStoryTokens("May {maybe:xyz} I say?");
+            REQUIRE(tokens[0].id == "xyz");
+            REQUIRE(tokens[0].text == "{maybe:xyz}");
+        }
+        REQUIRE(tokens.size() == 1);
+        REQUIRE(!tokens[0].isMandatory);
+        REQUIRE(tokens[0].nuggetOptions.size() == 1);
+        REQUIRE(tokens[0].nuggetOptions[0] == "maybe");
+    }
+
+    SECTION("Complex string") {
+        tokens = getStoryTokens(
+                string("This is a {positive|subba:id2} part, (while) {THIS:is|was} just [negative] bla {bla}.") +
+                " And this is {the absolute} [best|worst] [part} {of] [all[]]! Look, a [entity:id1x].");
+        REQUIRE(tokens.size() == 5);
+
+        int i = 0;
+        REQUIRE(tokens[i].text == "{positive|subba:id2}");
+        REQUIRE(tokens[i].id == "id2");
+        REQUIRE(!tokens[i].isMandatory);
+        REQUIRE(tokens[i].nuggetOptions.size() == 2);
+        REQUIRE(tokens[i].nuggetOptions[0] == "positive");
+        REQUIRE(tokens[i].nuggetOptions[1] == "subba");
+
+        i++;
+        REQUIRE(tokens[i].text == "[negative]");
+        REQUIRE(tokens[i].id == "");
+        REQUIRE(tokens[i].isMandatory);
+        REQUIRE(tokens[i].nuggetOptions.size() == 1);
+        REQUIRE(tokens[i].nuggetOptions[0] == "negative");
+
+        i++;
+        REQUIRE(tokens[i].text == "{bla}");
+        REQUIRE(tokens[i].id == "");
+        REQUIRE(!tokens[i].isMandatory);
+        REQUIRE(tokens[i].nuggetOptions.size() == 1);
+        REQUIRE(tokens[i].nuggetOptions[0] == "bla");
+
+        i++;
+        REQUIRE(tokens[i].text == "[best|worst]");
+        REQUIRE(tokens[i].id == "");
+        REQUIRE(tokens[i].isMandatory);
+        REQUIRE(tokens[i].nuggetOptions.size() == 2);
+        REQUIRE(tokens[i].nuggetOptions[0] == "best");
+        REQUIRE(tokens[i].nuggetOptions[1] == "worst");
+
+        i++;
+        REQUIRE(tokens[i].text == "[entity:id1x]");
+        REQUIRE(tokens[i].id == "id1x");
+        REQUIRE(tokens[i].isMandatory);
+        REQUIRE(tokens[i].nuggetOptions.size() == 1);
+        REQUIRE(tokens[i].nuggetOptions[0] == "entity");
+    }
+
+}
