@@ -32,7 +32,7 @@ void StoryTemplateFactory::initialize() {
     }
 
     for (Value templateJson : root) {
-        string requiredMembers[] = {"key", "required", "lines"};
+        string requiredMembers[] = {"key", "required", "text"};
         for (string member : requiredMembers) {
             if (!templateJson.isMember(member)) {
                 string errorMessage = "Missing member in template file! MEMBER: <";
@@ -51,34 +51,6 @@ set<string> StoryTemplateFactory::readRequired(const Value &templateJson) const 
     set<string> result;
     for (auto value : templateJson["required"]) {
         result.insert(value.asString());
-    }
-    return result;
-}
-
-vector<RawStoryLine> StoryTemplateFactory::readRawLines(const Json::Value &templateJson) const {
-    vector<RawStoryLine> result;
-    for (auto value : templateJson["lines"]) {
-        RawStoryLine line;
-
-        if (value.isString()) {
-            // allow simple strings as story lines
-            line.prePart = value.asString();
-            result.push_back(move(line));
-            continue;
-        }
-
-        if (value.isMember("pre")) {
-            line.prePart = value["pre"].asString();
-        }
-        if (value.isMember("post")) {
-            line.postPart = value["post"].asString();
-        }
-        if (value.isMember("nuggets")) {
-            for (Value nugget : value["nuggets"]) {
-                line.nuggets.insert(nugget.asString());
-            }
-        }
-        result.push_back(move(line));
     }
     return result;
 }

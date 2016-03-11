@@ -5,7 +5,6 @@
 #pragma once
 
 #include <Core/WeaverTypes.h>
-#include <Story/StoryLine.h>
 #include <Core/Graph/WeaverGraph.h>
 #include <World/WorldEntity.h>
 #include <World/WorldModelAction.h>
@@ -18,15 +17,6 @@ namespace weave {
     /*!
      * @ingroup storyApi
      */
-    struct RawStoryLine {
-        std::string prePart;
-        std::string postPart;
-        std::set<std::string> nuggets;
-    };
-
-    /*!
-     * @ingroup storyApi
-     */
     struct RawStoryToken {
         bool isMandatory;
         std::string text;
@@ -34,13 +24,39 @@ namespace weave {
         std::string id;
     };
 
+    typedef std::vector<std::pair<RawStoryToken, std::vector<ID>>> TokenMapping;
+    typedef std::unordered_map<std::string, std::vector<ID>> TokenToEntityMap;
+
     std::vector<RawStoryToken> getStoryTokens(std::string rawStoryText) noexcept;
 
     /*!
      * @ingroup storyApi
      */
+    class NuggetOption {
+    public:
+        NuggetOption(std::string nuggetKey, std::vector<ID> entityIDs) noexcept :
+                nuggetKey(nuggetKey), entityIDs(entityIDs) { }
+
+        std::string GetNuggetKey() const noexcept {
+            return nuggetKey;
+        }
+
+        std::vector<ID> GetEntityIDs() const noexcept {
+            return entityIDs;
+        }
+
+
+    private:
+        std::string nuggetKey;
+        std::vector<ID> entityIDs;
+    };
+
+    /*!
+     * @ingroup storyApi
+     */
     struct StoryTemplateResult {
-        std::vector<StoryLine> lines;
+        std::string rawText;
+        TokenMapping tokenMap;
         std::vector<WorldModelAction> worldActions;
     };
 
@@ -49,7 +65,8 @@ namespace weave {
      */
     class StoryTemplate {
     public:
-        explicit StoryTemplate(std::vector<RawStoryLine> rawStoryLines);
+        //TODO: move required entities here too
+        explicit StoryTemplate(std::string rawText);
 
         virtual ~StoryTemplate() = default;
 
@@ -62,11 +79,8 @@ namespace weave {
                                                 const WorldModel &worldModel) const = 0;
 
     protected:
-        std::vector<RawStoryLine> rawLines;
+        std::string rawText;
 
-        std::vector<StoryLine> createLinesSimple(const std::vector<ID> &idsForAllNuggets) const;
-
-        std::vector<StoryLine> createLinesSimple(
-                const std::unordered_map<std::string, std::vector<ID>> &idsPerNugget) const;
+        TokenMapping createTokenMapping(const TokenToEntityMap &idsPerToken) const;
     };
 }

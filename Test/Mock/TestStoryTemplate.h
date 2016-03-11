@@ -11,9 +11,9 @@ namespace weave {
     public:
         bool ReturnInvalidIDs = false;
 
-        TestStoryTemplate(std::set<std::string> requiredTypes, std::vector<RawStoryLine> rawLines,
+        TestStoryTemplate(std::set<std::string> requiredTypes, std::string rawText,
                           std::vector<WorldModelAction> actions)
-                : StoryTemplate(rawLines), requiredTypes(requiredTypes), actions(actions) {
+                : StoryTemplate(rawText), requiredTypes(requiredTypes), actions(actions) {
         }
 
         std::set<std::string> GetRequiredEntities() const override {
@@ -22,28 +22,26 @@ namespace weave {
 
         StoryTemplateResult CreateStory(const EntityMap &entities, const WeaverGraph &graph,
                                         const WorldModel &worldModel) const override {
-            std::vector<StoryLine> lines;
-
-            for (auto rawLine : rawLines) {
-                std::vector<NuggetOption> options;
-                for (auto nuggetKey : rawLine.nuggets) {
-                    std::vector<ID> ids;
-                    if (!entities.empty() && !requiredTypes.empty()) {
-                        std::string someType = *requiredTypes.begin();
-                        if (ReturnInvalidIDs) {
-                            ids.push_back(133337);
-                        } else {
-                            ids.push_back(entities.find(someType)->second.at(0)->GetId());
-                        }
-                    }
-                    options.push_back(NuggetOption(nuggetKey, ids));
+            TokenToEntityMap tokenEntityMap;
+            for (auto token : getStoryTokens(rawText)) {
+                if (token.id.empty()) {
+                    continue;
                 }
-                lines.push_back(StoryLine(rawLine.prePart, options, rawLine.postPart));
+                if (!entities.empty() && !requiredTypes.empty()) {
+                    std::string someType = *requiredTypes.begin();
+                    if (ReturnInvalidIDs) {
+                        tokenEntityMap[token.id].push_back(133337);
+                    } else {
+                        ID id = entities.find(someType)->second.at(0)->GetId();
+                        tokenEntityMap[token.id].push_back(id);
+                    }
+                }
             }
 
             StoryTemplateResult result;
-            result.lines = move(lines);
+            result.rawText = rawText;
             result.worldActions = actions;
+            result.tokenMap = createTokenMapping(tokenEntityMap);
             return result;
         }
 

@@ -230,44 +230,36 @@ map<float, Story> StoryWriter::createWeightedStories(
         }
 
         Story currentResult;
-        stringstream story;
+
         float storyValue = storyEntityWeight * storyTemplate->GetRequiredEntities().size();
         auto templateResult = storyTemplate->CreateStory(requiredEntities, graph, worldModel);
         currentResult.worldActions = move(templateResult.worldActions);
         storyValue += worldActionWeight * currentResult.worldActions.size();
-        for (StoryLine line : templateResult.lines) {
-            string prePart = line.GetPrePart();
-            string postPart = line.GetPostPart();
-            story << prePart;
 
-            auto nuggetOptions = line.GetNuggetOptions();
-            if (nuggetOptions.empty()) {
-                append(story, prePart, postPart);
-                story << " ";
-                continue;
+        string story = templateResult.rawText;
+        for (auto pair : templateResult.tokenMap) {
+            RawStoryToken token = pair.first;
+            auto ids = pair.second;
+
+            vector<NuggetOption> nuggetOptions;
+            for (string option : token.nuggetOptions) {
+                nuggetOptions.push_back(NuggetOption(option, ids));
             }
 
             vector<NuggetOption> supportedNuggets = getSupportedNuggets(nuggetOptions, questValues);
             storyValue += nuggetWeight * supportedNuggets.size();
-            if (supportedNuggets.empty()) {
-                // the story is broken at this point, because none of the stories required nuggets are known!
+            if (supportedNuggets.empty() && token.isMandatory) {
+                // the story is broken at this point, because none of the required nuggets are known!
                 storyValue = -1;
                 break;
             }
 
             string nuggetText = getRandomNuggetText(questValues, supportedNuggets);
-            append(story, prePart, nuggetText);
-            append(story, nuggetText, postPart);
-            story << " ";
+            replace(&story, token.text, nuggetText);
         }
-        string storyString = story.str();
-        if (!storyString.empty()) {
-            // remove trailing whitespace
-            storyString.pop_back();
-        }
-        currentResult.text = storyString;
+        currentResult.text = story;
         if (storyValue >= 0) {
-            storyValue += storyCharWeight * storyString.length();
+            storyValue += storyCharWeight * story.length();
             // turn the weight into a probability
             storyValue = storyValue * (rs->GetIntInRange(0, 90) / 90.0f + 0.1f);
         }

@@ -41,10 +41,10 @@ namespace weave {
         std::shared_ptr<StoryTemplate> createFromJsonValues(const Json::Value &root) const override {
             std::shared_ptr<TestStoryTemplate> storyTemplate;
             if (templateFile.empty()) {
-                storyTemplate = std::make_shared<TestStoryTemplate>(requiredTypes, std::vector<RawStoryLine>(),
-                                                                    actions);
+                storyTemplate = std::make_shared<TestStoryTemplate>(requiredTypes, "", actions);
             } else {
-                storyTemplate = std::make_shared<TestStoryTemplate>(readRequired(root), readRawLines(root), actions);
+                storyTemplate = std::make_shared<TestStoryTemplate>(readRequired(root), root["text"].asString(),
+                                                                    actions);
             }
             storyTemplate->ReturnInvalidIDs = TemplatesReturnInvalidIDs;
             return storyTemplate;

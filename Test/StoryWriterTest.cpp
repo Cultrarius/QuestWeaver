@@ -144,12 +144,6 @@ TEST_CASE("StoryTemplates", "[story]") {
         REQUIRE(result.text == "This is great! I really love this.");
     }
 
-    SECTION("Partial lines test") {
-        writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
-        auto result = writer.CreateStory(StoryWriterParameters(graph, values), "partialLines");
-        REQUIRE(result.text == "This is the result of some partial lines.");
-    }
-
     SECTION("Unknown nugget") {
         writer.RegisterTemplateFactory(make_unique<TestStoryTemplateFactory>("8", "storyLines.st"));
         auto result = writer.CreateStory(StoryWriterParameters(graph, values), "unknownNugget");

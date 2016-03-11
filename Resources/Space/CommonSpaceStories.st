@@ -4,18 +4,6 @@
     "required": [
       "agent"
     ],
-    "lines": [
-      {
-        "nuggets": [
-          "actorIntroMisterious"
-        ]
-      },
-      {
-        "nuggets": [
-          "empty",
-          "actorUnknownOrigin"
-        ]
-      }
-    ]
+    "text": "[actorIntroMisterious:1]{actorUnknownOrigin:1}"
   }
 ]

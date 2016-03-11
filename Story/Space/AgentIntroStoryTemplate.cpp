@@ -16,8 +16,11 @@ StoryTemplateResult AgentIntroStoryTemplate::CreateStory(const EntityMap &requir
     StoryTemplateResult result;
     auto entity = entities[0];
 
-    vector<ID> entityIDs = {entity->GetId()};
-    result.lines = createLinesSimple(entityIDs);
+    // vector<ID> entityIDs = {entity->GetId()};
+    TokenToEntityMap tokenEntityMap;
+    tokenEntityMap["1"] = {entity->GetId()};
+    result.tokenMap = createTokenMapping(tokenEntityMap);
+    result.rawText = rawText;
 
     MetaData markedData;
     markedData.SetValue(metaDataMarker, 1);

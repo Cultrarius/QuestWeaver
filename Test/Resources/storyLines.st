@@ -2,94 +2,35 @@
   {
     "key": "simpleLine",
     "required": [],
-    "lines": [
-      {
-        "pre": "A.",
-        "nuggets": [
-          "nuggetB"
-        ],
-        "post": "C"
-      }
-    ]
+    "text": "A. [nuggetB] C"
   },
   {
     "key": "entityLine",
     "required": [
       "TestEntityType"
     ],
-    "lines": [
-      {
-        "pre": "I wish me",
-        "nuggets": [
-          "nuggetTestEntity"
-        ],
-        "post": "to play with."
-      }
-    ]
+    "text": "I wish me [nuggetTestEntity:1] to play with."
   },
   {
     "key": "stringOnlyLines",
     "required": [],
-    "lines": [
-      "This is great!",
-      "I really love this."
-    ]
-  },
-  {
-    "key": "partialLines",
-    "required": [],
-    "lines": [
-      {
-        "pre": "This is"
-      },
-      {
-        "post": "the result of"
-      },
-      {
-        "pre": "some",
-        "post": "partial lines."
-      }
-    ]
+    "text": "This is great! I really love this."
   },
   {
     "key": "unknownNugget",
     "required": [],
-    "lines": [
-      {
-        "pre": "X",
-        "post": "Z",
-        "nuggets": [
-          "thisIsSomeNugget"
-        ]
-      }
-    ]
+    "text": "X [thisIsSomeNugget] Z"
   },
   {
     "key": "wrongNuggetIds",
     "required": [],
-    "lines": [
-      {
-        "pre": "X",
-        "post": "Z",
-        "nuggets": [
-          "complexNugget"
-        ]
-      }
-    ]
+    "text": "X [complexNugget] Z"
   },
   {
     "key": "wrongNuggetContent",
     "required": [
       "TestEntityType"
     ],
-    "lines": [
-      {
-        "pre": "X",
-        "post": "Z",
-        "nuggets": [
-          "nuggetTestWrongType"
-        ]
-      }
-    ]
+    "text": "X [nuggetTestWrongType] Z"
   }
 ]

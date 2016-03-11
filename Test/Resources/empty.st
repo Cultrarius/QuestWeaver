@@ -2,6 +2,6 @@
   {
     "key": "key",
     "required": [],
-    "lines": []
+    "text": ""
   }
 ]
