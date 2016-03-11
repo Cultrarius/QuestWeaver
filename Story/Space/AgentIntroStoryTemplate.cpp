@@ -7,7 +7,7 @@
 using namespace weave;
 using namespace std;
 
-StoryTemplateResult AgentIntroStoryTemplate::CreateStory(const EntityMap &requiredEntities, const WeaverGraph &graph,
+StoryTemplateResult AgentIntroStoryTemplate::CreateStory(const EntityMap &requiredEntities, const WeaverGraph &,
                                                          const WorldModel &worldModel) const {
     auto entities = getValidEntities(requiredEntities, worldModel);
     if (entities.empty()) {
@@ -28,7 +28,7 @@ StoryTemplateResult AgentIntroStoryTemplate::CreateStory(const EntityMap &requir
     return result;
 }
 
-bool AgentIntroStoryTemplate::IsValid(const EntityMap &requiredEntities, const WeaverGraph &graph,
+bool AgentIntroStoryTemplate::IsValid(const EntityMap &requiredEntities, const WeaverGraph &,
                                       const WorldModel &worldModel) const {
     return getValidEntities(requiredEntities, worldModel).size() > 0;
 }

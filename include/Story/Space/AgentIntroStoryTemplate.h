@@ -9,11 +9,7 @@
 namespace weave {
     class AgentIntroStoryTemplate : public StoryTemplate {
     public:
-        explicit AgentIntroStoryTemplate(std::string rawText) : StoryTemplate(rawText) { }
-
-        std::set<std::string> GetRequiredEntities() const override {
-            return requiredTypes;
-        }
+        explicit AgentIntroStoryTemplate(std::string rawText) : StoryTemplate(rawText, {"agent"}) { }
 
         StoryTemplateResult CreateStory(const EntityMap &requiredEntities, const WeaverGraph &graph,
                                         const WorldModel &worldModel) const override;
@@ -22,7 +18,6 @@ namespace weave {
                      const WorldModel &worldModel) const override;
 
     private:
-        std::set<std::string> requiredTypes = {"agent"};
         std::string metaDataMarker = "introStoryDone";
 
         std::vector<std::shared_ptr<WorldEntity>> getValidEntities(const EntityMap &entityMap,

@@ -8,12 +8,16 @@
 using namespace weave;
 using namespace std;
 
-StoryTemplate::StoryTemplate(string rawText) : rawText(rawText) {
+StoryTemplate::StoryTemplate(string rawText, set<string> requiredEntities) noexcept :
+        rawText(rawText), requiredEntities(requiredEntities) {
 }
 
-bool StoryTemplate::IsValid(const EntityMap &requiredEntities, const WeaverGraph &graph,
-                            const WorldModel &worldModel) const {
+bool StoryTemplate::IsValid(const EntityMap &, const WeaverGraph &, const WorldModel &) const {
     return true;
+}
+
+std::set<std::string> StoryTemplate::GetRequiredEntities() const noexcept {
+    return requiredEntities;
 }
 
 TokenMapping StoryTemplate::createTokenMapping(const TokenToEntityMap &idsPerToken) const {

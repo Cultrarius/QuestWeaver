@@ -13,22 +13,18 @@ namespace weave {
 
         TestStoryTemplate(std::set<std::string> requiredTypes, std::string rawText,
                           std::vector<WorldModelAction> actions)
-                : StoryTemplate(rawText), requiredTypes(requiredTypes), actions(actions) {
+                : StoryTemplate(rawText, requiredTypes), actions(actions) {
         }
 
-        std::set<std::string> GetRequiredEntities() const override {
-            return requiredTypes;
-        }
-
-        StoryTemplateResult CreateStory(const EntityMap &entities, const WeaverGraph &graph,
-                                        const WorldModel &worldModel) const override {
+        StoryTemplateResult CreateStory(const EntityMap &entities, const WeaverGraph &,
+                                        const WorldModel &) const override {
             TokenToEntityMap tokenEntityMap;
             for (auto token : getStoryTokens(rawText)) {
                 if (token.id.empty()) {
                     continue;
                 }
-                if (!entities.empty() && !requiredTypes.empty()) {
-                    std::string someType = *requiredTypes.begin();
+                if (!entities.empty() && !GetRequiredEntities().empty()) {
+                    std::string someType = *GetRequiredEntities().begin();
                     if (ReturnInvalidIDs) {
                         tokenEntityMap[token.id].push_back(133337);
                     } else {
@@ -46,7 +42,6 @@ namespace weave {
         }
 
     private:
-        std::set<std::string> requiredTypes;
         std::vector<WorldModelAction> actions;
     };
 }

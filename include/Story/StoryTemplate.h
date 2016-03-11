@@ -65,12 +65,11 @@ namespace weave {
      */
     class StoryTemplate {
     public:
-        //TODO: move required entities here too
-        explicit StoryTemplate(std::string rawText);
+        StoryTemplate(std::string rawText, std::set<std::string> requiredEntities) noexcept;
 
         virtual ~StoryTemplate() = default;
 
-        virtual std::set<std::string> GetRequiredEntities() const = 0;
+        std::set<std::string> GetRequiredEntities() const noexcept;
 
         virtual bool IsValid(const EntityMap &requiredEntities, const WeaverGraph &graph,
                              const WorldModel &worldModel) const;
@@ -80,6 +79,7 @@ namespace weave {
 
     protected:
         std::string rawText;
+        std::set<std::string> requiredEntities;
 
         TokenMapping createTokenMapping(const TokenToEntityMap &idsPerToken) const;
     };
