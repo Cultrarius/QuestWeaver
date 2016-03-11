@@ -16,6 +16,16 @@
     ]
   },
   {
+    "key": "actorIntroMachine",
+    "requiredTypes": [
+      "agent"
+    ],
+    "texts": [
+      "%agent appears to be a sentient machine, which outlived its creators.",
+      "%agent appears to be a sentient machine, but the creator is unknown."
+    ]
+  },
+  {
     "key": "actorUnknownOrigin",
     "requiredTypes": [
       "agent"

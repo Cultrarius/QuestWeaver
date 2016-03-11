@@ -4,6 +4,6 @@
     "required": [
       "agent"
     ],
-    "text": "[actorIntroMysterious:1]{actorUnknownOrigin:1}"
+    "text": "[actorIntroMysterious|actorIntroMachine:1]{actorUnknownOrigin:1}"
   }
 ]
