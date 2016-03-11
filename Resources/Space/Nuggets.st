@@ -7,7 +7,7 @@
     ]
   },
   {
-    "key": "actorIntroMisterious",
+    "key": "actorIntroMysterious",
     "requiredTypes": [
       "agent"
     ],

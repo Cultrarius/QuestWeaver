@@ -239,8 +239,13 @@ map<float, Story> StoryWriter::createWeightedStories(
         string story = templateResult.rawText;
         for (auto pair : templateResult.tokenMap) {
             RawStoryToken token = pair.first;
-            auto ids = pair.second;
 
+            if (!token.isMandatory && rs->GetIntInRange(0, 1) == 1) {
+                replace(&story, token.text, "");
+                continue;
+            }
+
+            auto ids = pair.second;
             vector<NuggetOption> nuggetOptions;
             for (string option : token.nuggetOptions) {
                 nuggetOptions.push_back(NuggetOption(option, ids));

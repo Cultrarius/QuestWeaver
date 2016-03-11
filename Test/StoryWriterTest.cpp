@@ -98,7 +98,6 @@ TEST_CASE("Nuggets", "[story]") {
 }
 
 TEST_CASE("StoryTemplates", "[story]") {
-
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
     QuestModel questModel;
@@ -208,7 +207,7 @@ TEST_CASE("StoryTemplates", "[story]") {
 
 TEST_CASE("SpaceTemplates", "[story]") {
     WeaverConfig config = TestHelper::CreateDebugConfig();
-    shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
+    shared_ptr<RandomStream> rs = make_shared<RandomStream>(44);
     TemplateEngine engine(rs, config.dirs, FormatterType::TEXT);
     QuestModel questModel;
     SpaceWorldModel worldModel(rs);
