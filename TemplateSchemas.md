@@ -8,22 +8,22 @@ This document shows how the template files for the quests and stories are struct
 `<Document Content>` =
 ```json
 {
-  "parent": <String>,
-  "key": <String>,
+  "parent": String,
+  "key": String,
   "mandatory": [
-    <String>
+    String
   ],
   "optional": [
-    <String>
+    String
   ],
   "titles": [
-    <String>
+    String
   ],
   "descriptions": [
-    <Description>
+    Description
   ],
   "objectives": [
-    <String>
+    String
   ]
 }
 ```
@@ -34,9 +34,9 @@ This document shows how the template files for the quests and stories are struct
 ```json
 {
   "conditions": [
-    <String>
+    String
   ],
-  "text": <String>
+  "text": String
 }
 ```
 
@@ -45,7 +45,7 @@ This document shows how the template files for the quests and stories are struct
 `<Document Content>` =
 ```json
 [
-  <Story>
+  Story
 ]
 ```
 
@@ -54,33 +54,24 @@ This document shows how the template files for the quests and stories are struct
 `<Story>`=
 ```json
 {
-  "key": <String>,
+  "key": String,
   "required": [
-    <String>
+    String
   ],
-  "lines": [
-    <Line> or <String>
-  ]
+  "text": String
 }
 ```
 
-`<Line>`=
-```json
-{
-  "pre": <String>,
-  "nuggets": [
-    <String>
-  ],
-  "post": <String>
-}
-```
+The "text" String has the following form:
+`Word word [mandatoryNugget] word [Nugget|NuggetOption:id] word {optionalNugget:id}`
+
 
 ## Story Nugget Files
 
 `<Document Content>` =
 ```json
 [
-  <Nugget>
+  Nugget
 ]
 ```
 
@@ -89,12 +80,12 @@ This document shows how the template files for the quests and stories are struct
 `<Nugget>`=
 ```json
 {
-  "key": <String>,
+  "key": String>
   "requiredTypes": [
-    <String>
+    String
   ],
   "texts": [
-    <String>
+    String
   ]
 }
 ```

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.2)
 project(QuestWeaver)
 
-if (CMAKE_BUILD_TYPE MATCHES DEBUG)
+if (CMAKE_BUILD_TYPE MATCHES Debug)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -g -O0 -fprofile-arcs -ftest-coverage -Wall -Wextra")
 
     file(COPY Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
@@ -28,7 +28,7 @@ set(SOURCE_FILES QuestWeaver.cpp Core/WeaverEngine.cpp Template/TemplateEngine.c
         Core/Graph/Node.cpp Core/Graph/Edge.cpp Core/Graph/GraphAnalyzer.cpp QuestModel/QuestModelAction.cpp
         World/WorldListener.cpp Story/StoryWriter.cpp Story/StoryTemplateFactory.cpp Story/StoryTemplate.cpp
         Story/Space/CommonSpaceStoryFactory.cpp include/Story/Space/AgentIntroStoryTemplate.h Story/Nugget.cpp
-        include/Story/Nugget.h include/Story/StoryLine.h Story/Space/AgentIntroStoryTemplate.cpp)
+        include/Story/Nugget.h Story/Space/AgentIntroStoryTemplate.cpp)
 
 add_executable(QuestWeaverTest ${SOURCE_FILES} Test/catch.hpp Test/TestRunner.cpp Test/WeaverGraphTest.cpp
         Test/WeaverUtilsTest.cpp Test/Space/TemplateTest.cpp Test/Space/SerializationTest.cpp Test/Space/ModelTest.cpp

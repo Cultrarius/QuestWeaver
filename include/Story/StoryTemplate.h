@@ -45,7 +45,6 @@ namespace weave {
             return entityIDs;
         }
 
-
     private:
         std::string nuggetKey;
         std::vector<ID> entityIDs;
