@@ -257,7 +257,7 @@ TEST_CASE("Templates", "[template]") {
 TEST_CASE("Directory Change", "[template]") {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
-    auto factory = make_unique<SpaceQuestTemplateFactory>();
+        unique_ptr<SpaceQuestTemplateFactory> factory(new SpaceQuestTemplateFactory());
 
     SECTION("Unknown dir pre reg") {
         Directories unknown;

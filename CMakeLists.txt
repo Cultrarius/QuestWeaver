@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.2)
 project(QuestWeaver)
 
 if (CMAKE_BUILD_TYPE MATCHES Debug)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -g -O0 -fprofile-arcs -ftest-coverage -Wall -Wextra")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -O0 -fprofile-arcs -ftest-coverage -Wall -Wextra")
 
     file(COPY Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
     file(COPY Test/Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Test)

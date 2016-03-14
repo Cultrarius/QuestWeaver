@@ -151,19 +151,19 @@ namespace weave {
 
         // serialization helpers
 
-        auto getCerealId() const {
+        cereal::NameValuePair<const ID &> getCerealId() const {
             return cereal::make_nvp("id", id);
         }
 
-        auto getCerealTitle() const {
+        cereal::NameValuePair<const std::string &> getCerealTitle() const {
             return cereal::make_nvp("title", title);
         }
 
-        auto getCerealDescription() const {
+        cereal::NameValuePair<const std::string &> getCerealDescription() const {
             return cereal::make_nvp("description", description);
         }
 
-        auto getCerealStory() const {
+        cereal::NameValuePair<const std::string &> getCerealStory() const {
             return cereal::make_nvp("story", story);
         }
 

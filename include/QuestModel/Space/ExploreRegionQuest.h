@@ -17,11 +17,11 @@ namespace weave {
         std::string GetType() const override;
 
     protected:
-        auto getCerealLocation() const {
+    cereal::NameValuePair<const ID &> getCerealLocation() const {
             return cereal::make_nvp("location", targetLocation);
         }
 
-        auto getCerealSponsor() const {
+        cereal::NameValuePair<const ID &> getCerealSponsor() const {
             return cereal::make_nvp("sponsor", sponsor);
         }
 

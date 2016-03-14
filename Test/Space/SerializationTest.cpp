@@ -312,7 +312,8 @@ TEST_CASE("Serialization QuestWeaver", "[serialize]") {
     ss2.flush();
 
     QuestWeaver deserialized = QuestWeaver::Deserialize(ss2, format, config.dirs);
-    deserialized.RegisterQuestTemplateFactory(make_unique<SpaceQuestTemplateFactory>());
+        unique_ptr<SpaceQuestTemplateFactory> factory(new SpaceQuestTemplateFactory());
+            deserialized.RegisterQuestTemplateFactory(move(factory));
     shared_ptr<Quest> desQuest = deserialized.GetQuest(newQuest->GetId());
     REQUIRE(title == desQuest->GetTitle());
     REQUIRE(weaver.GetWorldModel().GetEntities().size() == deserialized.GetWorldModel().GetEntities().size());
