@@ -45,8 +45,8 @@ std::vector<std::shared_ptr<Quest>> QuestWeaver::GetQuestsWithState(QuestState s
 }
 
 void QuestWeaver::Tick(float delta) {
-    for (const auto &quest : quests->GetQuests()) {
-        const QuestTickResult &change = quest->Tick(delta);
+    for (const auto &quest : quests->GetQuestsWithState(QuestState::Active)) {
+        const QuestTickResult &change = quest->Tick(delta, *world);
         world->Execute(change.GetWorldChanges());
         quests->Execute(change.GetQuestChange());
     }

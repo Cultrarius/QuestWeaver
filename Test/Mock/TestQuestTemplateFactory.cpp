@@ -11,7 +11,7 @@ using namespace std;
 TestQuestTemplateFactory::TestQuestTemplateFactory(string templateFile) : templateFile(templateFile) {
 }
 
-shared_ptr<QuestTemplate> TestQuestTemplateFactory::createFromJsonValues(const Json::Value &root) const {
+shared_ptr<QuestTemplate> TestQuestTemplateFactory::createFromJsonValues(const Json::Value &) const {
     vector<TemplateQuestProperty> properties;
     vector<TemplateQuestDescription> descriptions;
     return make_shared<TestQuestTemplate>(properties, descriptions);

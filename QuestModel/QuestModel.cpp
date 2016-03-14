@@ -7,7 +7,7 @@
 using namespace std;
 using namespace weave;
 
-vector<shared_ptr<Quest>> QuestModel::GetQuestsWithState(QuestState state) const {
+vector<shared_ptr<Quest>> QuestModel::GetQuestsWithState(QuestState state) const noexcept {
     vector<shared_ptr<Quest>> result;
     if (state == QuestState::Unknown) {
         return result;
@@ -38,7 +38,7 @@ void QuestModel::RegisterNew(shared_ptr<Quest> newQuest,
     }
 }
 
-vector<shared_ptr<Quest>> QuestModel::GetQuests() const {
+vector<shared_ptr<Quest>> QuestModel::GetQuests() const noexcept {
     vector<shared_ptr<Quest>> result;
     for (auto quest : quests) {
         result.push_back(quest.second);
@@ -46,7 +46,7 @@ vector<shared_ptr<Quest>> QuestModel::GetQuests() const {
     return result;
 }
 
-set<shared_ptr<WorldEntity>> QuestModel::GetQuestEntities(ID questId) const {
+set<shared_ptr<WorldEntity>> QuestModel::GetQuestEntities(ID questId) const noexcept {
     auto result = questEntities.find(questId);
     if (result == questEntities.end()) {
         return set<shared_ptr<WorldEntity >>();

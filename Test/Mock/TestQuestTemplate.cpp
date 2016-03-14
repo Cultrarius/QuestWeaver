@@ -14,13 +14,13 @@ TestQuestTemplate::TestQuestTemplate(vector<TemplateQuestProperty> properties,
 }
 
 shared_ptr<Quest> TestQuestTemplate::ToQuest(const vector<QuestPropertyValue> &questPropertyValues,
-                                             const string &questStory) const {
+                                             const string &) const {
     string description = getBestFittingDescription(questPropertyValues);
     string title = getTitle(questPropertyValues);
     return make_shared<TestQuest>(title, description);
 }
 
-vector<WorldModelAction> TestQuestTemplate::GetPropertyCandidates(const TemplateQuestProperty &property,
-                                                                  const WorldModel &worldModel) const {
+vector<WorldModelAction> TestQuestTemplate::GetPropertyCandidates(const TemplateQuestProperty &,
+                                                                  const WorldModel &) const {
     return vector<WorldModelAction>();
 }

@@ -11,16 +11,27 @@
 namespace weave {
     class ExploreRegionQuest : public Quest {
     public:
+        static const std::string metaDataMarker;
+
         ExploreRegionQuest(const std::string &title, const std::string &description, const std::string &story,
                            ID locationId, ID sponsorId);
 
         std::string GetType() const override;
 
+        QuestTickResult Tick(float delta, const WorldModel &worldModel) override;
+
     protected:
-    cereal::NameValuePair<const ID &> getCerealLocation() const {
+
+        /*
+         * Can be used by subclasses for serialization purposes
+         */
+        cereal::NameValuePair<const ID &> getCerealLocation() const {
             return cereal::make_nvp("location", targetLocation);
         }
 
+        /*
+         * Can be used by subclasses for serialization purposes
+         */
         cereal::NameValuePair<const ID &> getCerealSponsor() const {
             return cereal::make_nvp("sponsor", sponsor);
         }

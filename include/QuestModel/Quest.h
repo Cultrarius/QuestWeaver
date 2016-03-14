@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <World/WorldModel.h>
 #include "../Core/WeaverTypes.h"
 #include "../cereal.h"
 #include "../World/WorldModelAction.h"
@@ -58,6 +59,22 @@ namespace weave {
      */
     class QuestTickResult {
     public:
+
+        /*!
+         * Creates a new empty tick result, meaning that nothing has changed.
+         */
+        QuestTickResult(ID questId) noexcept;
+
+
+        /*!
+         * Creates a new tick result containing the given changes to the world model.
+         */
+        explicit QuestTickResult(ID questId, std::vector<WorldModelAction> worldChanges) noexcept;
+
+        /*!
+         * Creates a new tick result containing the given change to the quest model.
+         */
+        explicit QuestTickResult(QuestModelAction questChanges) noexcept;
 
         /*!
          * Creates a new tick result containing the given changes to the world and quest models.
@@ -134,20 +151,23 @@ namespace weave {
          */
         virtual std::string GetType() const = 0;
 
+        /*!
+         * This method is called whenever the main quest system is ticked.
+         * It allows subclasses to react to game events and queue changes via the QuestTickResult.
+         * *Only ACTIVE quests can be ticked!*
+         *
+         * @param delta The time elapsed since the last tick.
+         * @param worldModel The world model, which can be used to search and check world entities.
+         * Changing them is only possible by returning the change in the result.
+         */
+        virtual QuestTickResult Tick(float delta, const WorldModel &worldModel);
+
     protected:
-        friend class QuestWeaver;
 
         Quest(ID id,
               const std::string &title,
               const std::string &description,
               const std::string &story);
-
-        /*!
-         * This method is called whenever the main quest system is ticked.
-         * It allows subclasses to react to game events and queue changes via the QuestTickResult.
-         * @param delta The time elapsed since the last tick.
-         */
-        virtual QuestTickResult Tick(float delta);
 
         // serialization helpers
 

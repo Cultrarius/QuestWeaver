@@ -7,6 +7,7 @@
 #include <Template/TemplateEngine.h>
 #include <Template/Space/SpaceQuestTemplateFactory.h>
 #include <World/Space/SpaceWorldModel.h>
+#include <QuestModel/Space/ExploreRegionQuest.h>
 #include "../catch.hpp"
 #include "../Mock/TestQuestTemplate.h"
 #include "../Mock/TestQuestTemplateFactory.h"
@@ -257,7 +258,7 @@ TEST_CASE("Templates", "[template]") {
 TEST_CASE("Directory Change", "[template]") {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
-        unique_ptr<SpaceQuestTemplateFactory> factory(new SpaceQuestTemplateFactory());
+    unique_ptr<SpaceQuestTemplateFactory> factory(new SpaceQuestTemplateFactory());
 
     SECTION("Unknown dir pre reg") {
         Directories unknown;
@@ -284,5 +285,55 @@ TEST_CASE("Directory Change", "[template]") {
         engine.ChangeDirectories(unknown);
         engine.RegisterTemplateFactory(move(factory));
         REQUIRE(engine.GetTemplateForNewQuest() != nullptr);
+    }
+}
+
+TEST_CASE("Explore quest", "[quest]") {
+    shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
+    TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
+    SpaceQuestTemplateFactory *factory = new SpaceQuestTemplateFactory();
+    engine.RegisterTemplateFactory(unique_ptr<SpaceQuestTemplateFactory>(factory));
+    SpaceWorldModel world(rs);
+
+    // Create a new explore region quest manually
+    auto questTemplate = factory->CreateTemplate("ExploreRegionQuest");
+    vector<QuestPropertyValue> questPropertyValues;
+    TemplateQuestProperty property(true, "location");
+    auto location = make_shared<SpaceLocation>(1, 2, 3);
+    WorldModelAction addAction(WorldActionType::CREATE, location);
+    world.Execute({addAction});
+    questPropertyValues.push_back(QuestPropertyValue(property, location));
+    auto quest = questTemplate->ToQuest(questPropertyValues);
+
+    SECTION("Exploration Ticks nothing") {
+        QuestTickResult tickResult = quest->Tick(1, world);
+        REQUIRE(tickResult.GetQuestChange().GetActionType() == QuestActionType::KEEP);
+        REQUIRE(tickResult.GetWorldChanges().size() == 0);
+
+        tickResult = quest->Tick(2, world);
+        REQUIRE(tickResult.GetQuestChange().GetActionType() == QuestActionType::KEEP);
+        REQUIRE(tickResult.GetWorldChanges().size() == 0);
+    }
+
+    SECTION("Exploration Tick partial") {
+        MetaData metaData;
+        metaData.SetValue(ExploreRegionQuest::metaDataMarker, 50);
+        WorldModelAction metaDataAction(WorldActionType::KEEP, location, metaData);
+        world.Execute({metaDataAction});
+
+        QuestTickResult tickResult = quest->Tick(1, world);
+        REQUIRE(tickResult.GetQuestChange().GetActionType() == QuestActionType::KEEP);
+        REQUIRE(tickResult.GetWorldChanges().size() == 0);
+    }
+
+    SECTION("Exploration Tick success") {
+        MetaData metaData;
+        metaData.SetValue(ExploreRegionQuest::metaDataMarker, 100);
+        WorldModelAction metaDataAction(WorldActionType::UPDATE, location, metaData);
+        world.Execute({metaDataAction});
+
+        QuestTickResult tickResult = quest->Tick(1, world);
+        REQUIRE(tickResult.GetQuestChange().GetActionType() == QuestActionType::SUCCEED);
+        REQUIRE(tickResult.GetWorldChanges().size() == 0);
     }
 }

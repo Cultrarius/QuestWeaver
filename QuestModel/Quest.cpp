@@ -32,15 +32,23 @@ ID Quest::GetId() const {
     return id;
 }
 
-QuestTickResult Quest::Tick(float) {
+QuestTickResult Quest::Tick(float, const WorldModel &) {
     vector<WorldModelAction> emptyChanges;
     QuestModelAction emptyAction(QuestActionType::KEEP, id);
     return QuestTickResult(emptyChanges, emptyAction);
 }
 
+QuestTickResult::QuestTickResult(ID questId) noexcept :
+        questChanges(QuestModelAction(QuestActionType::KEEP, questId)) { }
+
 QuestTickResult::QuestTickResult(vector<WorldModelAction> worldChanges, QuestModelAction questChanges) noexcept :
-        worldChanges(worldChanges), questChanges(questChanges) {
-}
+        worldChanges(worldChanges), questChanges(questChanges) { }
+
+QuestTickResult::QuestTickResult(QuestModelAction questChanges) noexcept :
+        questChanges(questChanges) { }
+
+QuestTickResult::QuestTickResult(ID questId, std::vector<WorldModelAction> worldChanges) noexcept :
+        worldChanges(worldChanges), questChanges(QuestModelAction(QuestActionType::KEEP, questId)) { }
 
 vector<WorldModelAction> QuestTickResult::GetWorldChanges() const noexcept {
     return worldChanges;

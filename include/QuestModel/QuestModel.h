@@ -11,15 +11,15 @@
 namespace weave {
     class QuestModel {
     public:
-        std::vector<std::shared_ptr<Quest>> GetQuestsWithState(QuestState state) const;
+        std::vector<std::shared_ptr<Quest>> GetQuestsWithState(QuestState state) const noexcept;
 
-        std::vector<std::shared_ptr<Quest>> GetQuests() const;
+        std::vector<std::shared_ptr<Quest>> GetQuests() const noexcept;
 
         std::shared_ptr<Quest> GetQuest(ID questId) const;
 
         QuestState GetState(ID questId) const noexcept;
 
-        std::set<std::shared_ptr<WorldEntity>> GetQuestEntities(ID questId) const;
+        std::set<std::shared_ptr<WorldEntity>> GetQuestEntities(ID questId) const noexcept;
 
         bool Execute(const QuestModelAction &modelAction);
 
