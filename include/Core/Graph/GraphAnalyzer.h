@@ -11,7 +11,8 @@
 
 namespace weave {
     struct AnalyzerParameters {
-        float optionalNodePenalty = -100;
+        float optionalNodePenalty = -50;
+        float newNodePenalty = -50;
         float previousQuestBonus = 50;
         float transitiveQuestBonus = 10;
         float MetaDataActivityBonus = 5;

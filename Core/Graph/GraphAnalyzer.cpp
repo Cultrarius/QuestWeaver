@@ -83,6 +83,11 @@ float GraphAnalyzer::getGraphScore(const WeaverGraph &graph, const AnalyzerParam
             score += param.optionalNodePenalty;
         }
 
+        // penalty for new nodes
+        if (node.GetId() == 0) {
+            score += param.newNodePenalty;
+        }
+
         // check for metaData activity on the node
         unordered_map<string, int> metaDataValues;
         for (auto metaData : node.GetHistory()) {
