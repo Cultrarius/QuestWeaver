@@ -63,6 +63,7 @@ This document shows how the template files for the quests and stories are struct
 ```
 
 The "text" String has the following form:
+
 `Word word [mandatoryNugget] word [Nugget|NuggetOption:id] word {optionalNugget:id}`
 
 

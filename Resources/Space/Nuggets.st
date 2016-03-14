@@ -40,6 +40,24 @@
     ]
   },
   {
+    "key": "logEntry",
+    "requiredTypes": [],
+    "texts": [
+      "[Datalog Entry 2846219]",
+      "[End of datalog Entry]"
+    ]
+  },
+  {
+    "key": "locationStrangeGravity",
+    "requiredTypes": [
+      "location"
+    ],
+    "texts": [
+      "The star system known as %location was only discovered very recently. Due to an unknown phenomenon, it has an unusual amount of gravity lenses positioned around it, hiding it from cursory sensor scans.",
+      "The star system %location produced such strange gravitational readings, that the ship first reported malfunctioning sensors. The cause of this is still unknown."
+    ]
+  },
+  {
     "key": "revenge",
     "requiredTypes": [
       "agent"

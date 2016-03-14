@@ -3,6 +3,7 @@
 //
 
 #include <Story/Space/CommonSpaceStoryFactory.h>
+#include <Story/Space/LocationIntroStoryTemplate.h>
 #include "Story/Space/AgentIntroStoryTemplate.h"
 
 using namespace std;
@@ -12,6 +13,8 @@ shared_ptr<StoryTemplate> CommonSpaceStoryFactory::createFromJsonValues(const Js
     string key = root["key"].asString();
     if (key == "agentIntro") {
         return make_shared<AgentIntroStoryTemplate>(root["text"].asString());
+    } else if (key == "locationIntro") {
+        return make_shared<LocationIntroStoryTemplate>(root["text"].asString());
     } else {
         throw ContractFailedException("Unknown story template key [" + key +
                                       "], maybe you forgot to create a corresponding StoryTemplate class?");

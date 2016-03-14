@@ -28,7 +28,8 @@ set(SOURCE_FILES QuestWeaver.cpp Core/WeaverEngine.cpp Template/TemplateEngine.c
         Core/Graph/Node.cpp Core/Graph/Edge.cpp Core/Graph/GraphAnalyzer.cpp QuestModel/QuestModelAction.cpp
         World/WorldListener.cpp Story/StoryWriter.cpp Story/StoryTemplateFactory.cpp Story/StoryTemplate.cpp
         Story/Space/CommonSpaceStoryFactory.cpp include/Story/Space/AgentIntroStoryTemplate.h Story/Nugget.cpp
-        include/Story/Nugget.h Story/Space/AgentIntroStoryTemplate.cpp)
+        include/Story/Nugget.h Story/Space/AgentIntroStoryTemplate.cpp Story/Space/LocationIntroStoryTemplate.cpp
+        include/Story/Space/LocationIntroStoryTemplate.h)
 
 add_executable(QuestWeaverTest ${SOURCE_FILES} Test/catch.hpp Test/TestRunner.cpp Test/WeaverGraphTest.cpp
         Test/WeaverUtilsTest.cpp Test/Space/TemplateTest.cpp Test/Space/SerializationTest.cpp Test/Space/ModelTest.cpp
@@ -38,4 +39,4 @@ add_executable(QuestWeaverTest ${SOURCE_FILES} Test/catch.hpp Test/TestRunner.cp
         Test/Mock/TestHelper.h Test/Mock/TestHelper.cpp Test/Mock/TestQuestTemplate.cpp Test/Mock/TestQuestTemplate.h
         Test/Mock/TestQuestTemplateFactory.cpp Test/Mock/TestQuestTemplateFactory.h)
 
-add_library(QuestWeaver ${SOURCE_FILES})
+add_library(QuestWeaver STATIC ${SOURCE_FILES})

@@ -29,7 +29,7 @@ namespace weave {
         /*!
          * Returns a list of all valid template keys, whereas each key represents a different kind of quest template.
          */
-        std::vector<std::string> GetTemplateKeys();
+        virtual std::vector<std::string> GetTemplateKeys();
 
         /*!
          * Creates a new template with the given template key.

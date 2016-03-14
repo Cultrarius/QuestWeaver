@@ -32,7 +32,7 @@ ID Quest::GetId() const {
     return id;
 }
 
-QuestTickResult Quest::Tick(float delta) {
+QuestTickResult Quest::Tick(float) {
     vector<WorldModelAction> emptyChanges;
     QuestModelAction emptyAction(QuestActionType::KEEP, id);
     return QuestTickResult(emptyChanges, emptyAction);

@@ -262,7 +262,12 @@ map<float, Story> StoryWriter::createWeightedStories(
             string nuggetText = getRandomNuggetText(questValues, supportedNuggets);
             replace(&story, token.text, nuggetText);
         }
-        currentResult.text = story;
+        if (templateEngine.GetFormat() == FormatterType::HTML) {
+            replaceAll(&story, "\n", "<br/>\n");
+            currentResult.text = htmlEncloseWithTag(story, "span", "story");
+        } else {
+            currentResult.text = story;
+        }
         if (storyValue >= 0) {
             storyValue += storyCharWeight * story.length();
             // turn the weight into a probability
