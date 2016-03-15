@@ -197,4 +197,29 @@ namespace weave {
             ss >> generator;
         }
     };
+
+    enum class NameType {
+        DARK_PERSON,
+        DARK_THING,
+        LIGHT_PERSON,
+        LIGHT_THING,
+        FUNNY,
+        ALIEN,
+        PLAYER,
+        VILLAIN,
+        CORPORATION,
+        RANDOM
+    };
+
+    class NameGenerator {
+    public:
+        virtual std::string CreateName(NameType nameType, std::shared_ptr<RandomStream> random) {
+            return CreateName(nameType, random, random->GetULongInRange(2, 5));
+        }
+
+        virtual std::string CreateName(NameType nameType, std::shared_ptr<RandomStream> random, uint64_t maxParts) {
+            return "DefaultName" + std::to_string(static_cast<int>(nameType)) + "-" +
+                   std::to_string(random->GetULongInRange(0, maxParts));
+        }
+    };
 }

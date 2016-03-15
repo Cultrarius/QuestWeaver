@@ -29,7 +29,7 @@ set(SOURCE_FILES QuestWeaver.cpp Core/WeaverEngine.cpp Template/TemplateEngine.c
         World/WorldListener.cpp Story/StoryWriter.cpp Story/StoryTemplateFactory.cpp Story/StoryTemplate.cpp
         Story/Space/CommonSpaceStoryFactory.cpp include/Story/Space/AgentIntroStoryTemplate.h Story/Nugget.cpp
         include/Story/Nugget.h Story/Space/AgentIntroStoryTemplate.cpp Story/Space/LocationIntroStoryTemplate.cpp
-        include/Story/Space/LocationIntroStoryTemplate.h)
+        include/World/Space/SpaceNameGenerator.cpp include/Core/NameGen/Generator.cpp)
 
 add_executable(QuestWeaverTest ${SOURCE_FILES} Test/catch.hpp Test/TestRunner.cpp Test/WeaverGraphTest.cpp
         Test/WeaverUtilsTest.cpp Test/Space/TemplateTest.cpp Test/Space/SerializationTest.cpp Test/Space/ModelTest.cpp

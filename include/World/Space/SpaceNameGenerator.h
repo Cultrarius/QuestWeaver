@@ -1,0 +1,14 @@
+//
+// Created by michael on 15.03.16.
+//
+
+#pragma once
+
+#include <Core/WeaverTypes.h>
+
+namespace weave {
+    class SpaceNameGenerator : public NameGenerator {
+    public:
+        std::string CreateName(NameType nameType, std::shared_ptr<RandomStream> random) override;
+    };
+}
