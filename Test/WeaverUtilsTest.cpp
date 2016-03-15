@@ -59,6 +59,20 @@ TEST_CASE("Name Generator", "[utils]") {
             REQUIRE(name == newName);
         }
     }
+
+    SECTION("random stream") {
+        set<string> seenNames;
+        rs->Seed(7);
+        TokenNameGenerator nameGenerator("!<c(o|u)(b|k|kk|ck|gr|x|z|zz|s|ss)<(a|u|o)C|('|-)!C>v<|x|z|b|r|k>>");
+        for (int i = 0; i < 2000; i++) {
+            string name = nameGenerator.toString(rs);
+            REQUIRE(name != "");
+            REQUIRE(seenNames.count(name) == 0);
+            seenNames.insert(name);
+        }
+    }
+
+
 }
 
 TEST_CASE("Simple string substitution", "[utils]") {
