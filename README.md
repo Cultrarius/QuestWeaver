@@ -100,3 +100,4 @@ This project uses the help of some very fine frameworks:
 * JSON parser: https://github.com/open-source-parsers/jsoncpp
 * Serialization framework: http://uscilab.github.io/cereal/
 * Testing framework: https://github.com/philsquared/Catch
+* Name generation: https://github.com/skeeto/fantasyname
