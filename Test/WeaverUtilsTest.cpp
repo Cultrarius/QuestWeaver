@@ -5,6 +5,8 @@
 #include <string>
 #include <Core/WeaverTypes.h>
 #include <Core/WeaverUtils.h>
+#include <Core/NameGen/TokenNameGenerator.h>
+#include <World/Space/SpaceNameGenerator.h>
 #include "catch.hpp"
 
 using namespace weave;
@@ -40,6 +42,22 @@ TEST_CASE("Random Stream", "[utils]") {
     SECTION("creating indices") {
         REQUIRE(rs.GetRandomIndex(1) == 0);
         REQUIRE(rs.GetRandomIndex(10) == 9);
+    }
+}
+
+TEST_CASE("Name Generator", "[utils]") {
+    auto rs = make_shared<RandomStream>();
+
+    SECTION("reseeding the stream") {
+        rs->Seed(7);
+        TokenNameGenerator nameGenerator("iV");
+        string name = nameGenerator.toString(rs);
+        REQUIRE(name != "");
+        for (int i = 0; i < 20; i++) {
+            rs->Seed(7);
+            string newName = nameGenerator.toString(rs);
+            REQUIRE(name == newName);
+        }
     }
 }
 

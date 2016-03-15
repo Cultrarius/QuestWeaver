@@ -7,7 +7,7 @@
  *
  */
 
-#include "Generator.h"
+#include "TokenNameGenerator.h"
 
 #include <cwctype>  // for std::towupper
 #include <algorithm>  // for std::reverse
@@ -15,7 +15,7 @@
 using namespace weave;
 
 const std::unordered_map<std::string, const std::vector<std::string> >
-        Generator::symbols = {
+        TokenNameGenerator::symbols = {
         {
                 "s", {
                              "ach", "ack", "ad", "age", "ald", "ale", "an", "ang", "ar", "ard",
@@ -119,18 +119,18 @@ std::unique_ptr<T> make_unique(Args&&... args)
 }
 
 
-Generator::Generator()
+TokenNameGenerator::TokenNameGenerator()
 {
 }
 
 
-Generator::Generator(std::vector<std::unique_ptr<Generator>>&& generators_) :
+TokenNameGenerator::TokenNameGenerator(std::vector<std::unique_ptr<TokenNameGenerator>>&& generators_) :
         generators(std::move(generators_))
 {
 }
 
 
-size_t Generator::combinations()
+size_t TokenNameGenerator::combinations()
 {
     size_t total = 1;
     for (auto& g : generators) {
@@ -140,7 +140,7 @@ size_t Generator::combinations()
 }
 
 
-size_t Generator::min()
+size_t TokenNameGenerator::min()
 {
     size_t final = 0;
     for (auto& g : generators) {
@@ -150,7 +150,7 @@ size_t Generator::min()
 }
 
 
-size_t Generator::max()
+size_t TokenNameGenerator::max()
 {
     size_t final = 0;
     for (auto& g : generators) {
@@ -159,7 +159,7 @@ size_t Generator::max()
     return final;
 }
 
-std::string Generator::toString(std::shared_ptr<RandomStream> rs) {
+std::string TokenNameGenerator::toString(std::shared_ptr<RandomStream> rs) {
     std::string str;
     for (auto& g : generators) {
         str.append(g->toString(rs));
@@ -168,7 +168,7 @@ std::string Generator::toString(std::shared_ptr<RandomStream> rs) {
 }
 
 
-void Generator::add(std::unique_ptr<Generator>&& g)
+void TokenNameGenerator::add(std::unique_ptr<TokenNameGenerator>&& g)
 {
     generators.push_back(std::move(g));
 }
@@ -178,8 +178,8 @@ Random::Random()
 {
 }
 
-Random::Random(std::vector<std::unique_ptr<Generator>>&& generators_) :
-        Generator(std::move(generators_))
+Random::Random(std::vector<std::unique_ptr<TokenNameGenerator>>&& generators_) :
+        TokenNameGenerator(std::move(generators_))
 {
 }
 
@@ -230,8 +230,8 @@ Sequence::Sequence()
 {
 }
 
-Sequence::Sequence(std::vector<std::unique_ptr<Generator>>&& generators_) :
-        Generator(std::move(generators_))
+Sequence::Sequence(std::vector<std::unique_ptr<TokenNameGenerator>>&& generators_) :
+        TokenNameGenerator(std::move(generators_))
 {
 }
 
@@ -258,7 +258,7 @@ std::string Literal::toString(std::shared_ptr<RandomStream>)
     return value;
 }
 
-Reverser::Reverser(std::unique_ptr<Generator>&& g)
+Reverser::Reverser(std::unique_ptr<TokenNameGenerator>&& g)
 {
     add(std::move(g));
 }
@@ -266,32 +266,32 @@ Reverser::Reverser(std::unique_ptr<Generator>&& g)
 
 std::string Reverser::toString(std::shared_ptr<RandomStream> rs)
 {
-    std::wstring str = towstring(Generator::toString(rs));
+    std::wstring str = towstring(TokenNameGenerator::toString(rs));
     std::reverse(str.begin(), str.end());
     return tostring(str);
 }
 
-Capitalizer::Capitalizer(std::unique_ptr<Generator>&& g)
+Capitalizer::Capitalizer(std::unique_ptr<TokenNameGenerator>&& g)
 {
     add(std::move(g));
 }
 
 std::string Capitalizer::toString(std::shared_ptr<RandomStream> rs)
 {
-    std::wstring str = towstring(Generator::toString(rs));
+    std::wstring str = towstring(TokenNameGenerator::toString(rs));
     str[0] = std::towupper(str[0]);
     return tostring(str);
 }
 
 
-Collapser::Collapser(std::unique_ptr<Generator>&& g)
+Collapser::Collapser(std::unique_ptr<TokenNameGenerator>&& g)
 {
     add(std::move(g));
 }
 
 std::string Collapser::toString(std::shared_ptr<RandomStream> rs)
 {
-    std::wstring str = towstring(Generator::toString(rs));
+    std::wstring str = towstring(TokenNameGenerator::toString(rs));
     std::wstring out;
     int cnt = 0;
     wchar_t pch = L'\0';
@@ -324,8 +324,8 @@ std::string Collapser::toString(std::shared_ptr<RandomStream> rs)
 }
 
 
-Generator::Generator(const std::string &pattern, bool collapse_triples) {
-    std::unique_ptr<Generator> last;
+TokenNameGenerator::TokenNameGenerator(const std::string &pattern, bool collapse_triples) {
+    std::unique_ptr<TokenNameGenerator> last;
 
     std::stack<std::unique_ptr<Group>> stack;
     std::unique_ptr<Group> top = make_unique<GroupSymbol>();
@@ -381,7 +381,7 @@ Generator::Generator(const std::string &pattern, bool collapse_triples) {
         throw std::invalid_argument("Missing closing bracket");
     }
 
-    std::unique_ptr<Generator> g = top->emit();
+    std::unique_ptr<TokenNameGenerator> g = top->emit();
     if (collapse_triples) {
         g = make_unique<Collapser>(std::move(g));
     }
@@ -389,12 +389,12 @@ Generator::Generator(const std::string &pattern, bool collapse_triples) {
 }
 
 
-Generator::Group::Group(group_types_t type_) :
+TokenNameGenerator::Group::Group(group_types_t type_) :
         type(type_)
 {
 }
 
-void Generator::Group::add(std::unique_ptr<Generator>&& g)
+void TokenNameGenerator::Group::add(std::unique_ptr<TokenNameGenerator>&& g)
 {
     while (!wrappers.empty()) {
         switch (wrappers.top()) {
@@ -413,15 +413,15 @@ void Generator::Group::add(std::unique_ptr<Generator>&& g)
     set.back()->add(std::move(g));
 }
 
-void Generator::Group::add(char c)
+void TokenNameGenerator::Group::add(char c)
 {
     std::string value(&c, 1);
-    std::unique_ptr<Generator> g = make_unique<Random>();
+    std::unique_ptr<TokenNameGenerator> g = make_unique<Random>();
     g->add(make_unique<Literal>(value));
     Group::add(std::move(g));
 }
 
-std::unique_ptr<Generator> Generator::Group::emit()
+std::unique_ptr<TokenNameGenerator> TokenNameGenerator::Group::emit()
 {
     switch (set.size()) {
         case 0:
@@ -433,7 +433,7 @@ std::unique_ptr<Generator> Generator::Group::emit()
     }
 }
 
-void Generator::Group::split()
+void TokenNameGenerator::Group::split()
 {
     if (set.size() == 0) {
         set.push_back(make_unique<Sequence>());
@@ -441,22 +441,22 @@ void Generator::Group::split()
     set.push_back(make_unique<Sequence>());
 }
 
-void Generator::Group::wrap(wrappers_t type)
+void TokenNameGenerator::Group::wrap(wrappers_t type)
 {
     wrappers.push(type);
 }
 
-Generator::GroupSymbol::GroupSymbol() :
+TokenNameGenerator::GroupSymbol::GroupSymbol() :
         Group(group_types::symbol)
 {
 }
 
-void Generator::GroupSymbol::add(char c)
+void TokenNameGenerator::GroupSymbol::add(char c)
 {
     std::string value(&c, 1);
-    std::unique_ptr<Generator> g = make_unique<Random>();
+    std::unique_ptr<TokenNameGenerator> g = make_unique<Random>();
     try {
-        for (auto s : Generator::symbols.at(value)) {
+        for (auto s : TokenNameGenerator::symbols.at(value)) {
             g->add(make_unique<Literal>(s));
         }
     } catch (std::out_of_range) {
@@ -465,7 +465,7 @@ void Generator::GroupSymbol::add(char c)
     Group::add(std::move(g));
 }
 
-Generator::GroupLiteral::GroupLiteral() :
+TokenNameGenerator::GroupLiteral::GroupLiteral() :
         Group(group_types::literal)
 {
 }

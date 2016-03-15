@@ -134,7 +134,7 @@ namespace weave {
 #define FANTASY_S_E "(syth|sith|srr|sen|yth|ssen|then|fen|ssth|kel|syn|est|bess|inth|nen|tin|cor|sv|iss|ith|sen|slar|ssil|sthen|svis|s|ss|s|ss)(|(tys|eus|yn|of|es|en|ath|elth|al|ell|ka|ith|yrrl|is|isl|yr|ast|iy))(us|yn|en|ens|ra|rg|le|en|ith|ast|zon|in|yn|ys)"
 
 
-    class Generator
+    class TokenNameGenerator
     {
         typedef enum wrappers {
             capitalizer,
@@ -149,17 +149,17 @@ namespace weave {
 
         class Group {
             std::stack<wrappers_t> wrappers;
-            std::vector<std::unique_ptr<Generator>> set;
+            std::vector<std::unique_ptr<TokenNameGenerator>> set;
 
         public:
             group_types_t type;
 
             Group(group_types_t type_);
 
-            std::unique_ptr<Generator> emit();
+            std::unique_ptr<TokenNameGenerator> emit();
             void split();
             void wrap(wrappers_t type);
-            void add(std::unique_ptr<Generator>&& g);
+            void add(std::unique_ptr<TokenNameGenerator>&& g);
 
             virtual void add(char c);
         };
@@ -178,29 +178,29 @@ namespace weave {
         };
 
     protected:
-        std::vector<std::unique_ptr<Generator>> generators;
+        std::vector<std::unique_ptr<TokenNameGenerator>> generators;
 
     public:
         static const std::unordered_map<std::string, const std::vector<std::string> > symbols;
 
-        Generator();
-        Generator(const std::string& pattern, bool collapse_triples=true);
-        Generator(std::vector<std::unique_ptr<Generator>>&& generators_);
+        TokenNameGenerator();
+        TokenNameGenerator(const std::string& pattern, bool collapse_triples=true);
+        TokenNameGenerator(std::vector<std::unique_ptr<TokenNameGenerator>>&& generators_);
 
         virtual size_t combinations();
         virtual size_t min();
         virtual size_t max();
         virtual std::string toString(std::shared_ptr<RandomStream> rs);
 
-        void add(std::unique_ptr<Generator>&& g);
+        void add(std::unique_ptr<TokenNameGenerator>&& g);
     };
 
 
-    class Random : public Generator
+    class Random : public TokenNameGenerator
     {
     public:
         Random();
-        Random(std::vector<std::unique_ptr<Generator>>&& generators_);
+        Random(std::vector<std::unique_ptr<TokenNameGenerator>>&& generators_);
 
         size_t combinations();
         size_t min();
@@ -209,15 +209,15 @@ namespace weave {
     };
 
 
-    class Sequence : public Generator
+    class Sequence : public TokenNameGenerator
     {
     public:
         Sequence();
-        Sequence(std::vector<std::unique_ptr<Generator>>&& generators_);
+        Sequence(std::vector<std::unique_ptr<TokenNameGenerator>>&& generators_);
     };
 
 
-    class Literal : public Generator
+    class Literal : public TokenNameGenerator
     {
         std::string value;
 
@@ -231,27 +231,27 @@ namespace weave {
     };
 
 
-    class Reverser : public Generator {
+    class Reverser : public TokenNameGenerator {
     public:
-        Reverser(std::unique_ptr<Generator>&& g);
+        Reverser(std::unique_ptr<TokenNameGenerator>&& g);
 
         std::string toString(std::shared_ptr<RandomStream> rs) override;
     };
 
 
-    class Capitalizer : public Generator
+    class Capitalizer : public TokenNameGenerator
     {
     public:
-        Capitalizer(std::unique_ptr<Generator>&& g);
+        Capitalizer(std::unique_ptr<TokenNameGenerator>&& g);
 
         std::string toString(std::shared_ptr<RandomStream> rs) override;
     };
 
 
-    class Collapser : public Generator
+    class Collapser : public TokenNameGenerator
     {
     public:
-        Collapser(std::unique_ptr<Generator>&& g);
+        Collapser(std::unique_ptr<TokenNameGenerator>&& g);
 
         std::string toString(std::shared_ptr<RandomStream> rs) override;
     };

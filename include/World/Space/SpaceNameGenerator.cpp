@@ -4,7 +4,7 @@
 
 #include "SpaceNameGenerator.h"
 #include <algorithm>
-#include <Core/NameGen/Generator.h>
+#include <Core/NameGen/TokenNameGenerator.h>
 
 using namespace weave;
 using namespace std;
@@ -22,7 +22,7 @@ std::string weave::SpaceNameGenerator::CreateName(NameType nameType, std::shared
 //            throw ContractFailedException("Unknown name type.");
 //        }
 //    }
-    Generator nameGenerator(pattern);
+    TokenNameGenerator nameGenerator(pattern);
     std::cerr << "> combinations = " << nameGenerator.combinations() << "\n";
     return nameGenerator.toString(random);
 }
