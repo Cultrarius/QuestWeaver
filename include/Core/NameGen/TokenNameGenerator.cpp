@@ -113,47 +113,41 @@ const std::unordered_map<std::string, const std::vector<std::string> >
 // make_unique is not available in c++11, so we use this template function
 // to maintain full c++11 compatibility; std::make_unique is part of C++14.
 template<typename T, typename... Args>
-std::unique_ptr<T> make_unique(Args&&... args)
-{
+std::unique_ptr<T> make_unique(Args &&... args) {
     return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
 }
 
 
-TokenNameGenerator::TokenNameGenerator()
-{
+TokenNameGenerator::TokenNameGenerator() {
 }
 
 
-TokenNameGenerator::TokenNameGenerator(std::vector<std::unique_ptr<TokenNameGenerator>>&& generators_) :
-        generators(std::move(generators_))
-{
+TokenNameGenerator::TokenNameGenerator(std::vector<std::unique_ptr<TokenNameGenerator>> &&generators_) :
+        generators(std::move(generators_)) {
 }
 
 
-size_t TokenNameGenerator::combinations()
-{
+size_t TokenNameGenerator::combinations() {
     size_t total = 1;
-    for (auto& g : generators) {
+    for (auto &g : generators) {
         total *= g->combinations();
     }
     return total;
 }
 
 
-size_t TokenNameGenerator::min()
-{
+size_t TokenNameGenerator::min() {
     size_t final = 0;
-    for (auto& g : generators) {
+    for (auto &g : generators) {
         final += g->min();
     }
     return final;
 }
 
 
-size_t TokenNameGenerator::max()
-{
+size_t TokenNameGenerator::max() {
     size_t final = 0;
-    for (auto& g : generators) {
+    for (auto &g : generators) {
         final += g->max();
     }
     return final;
@@ -161,41 +155,36 @@ size_t TokenNameGenerator::max()
 
 std::string TokenNameGenerator::toString(std::shared_ptr<RandomStream> rs) {
     std::string str;
-    for (auto& g : generators) {
+    for (auto &g : generators) {
         str.append(g->toString(rs));
     }
     return str;
 }
 
 
-void TokenNameGenerator::add(std::unique_ptr<TokenNameGenerator>&& g)
-{
+void TokenNameGenerator::add(std::unique_ptr<TokenNameGenerator> &&g) {
     generators.push_back(std::move(g));
 }
 
 
-Random::Random()
-{
+Random::Random() {
 }
 
-Random::Random(std::vector<std::unique_ptr<TokenNameGenerator>>&& generators_) :
-        TokenNameGenerator(std::move(generators_))
-{
+Random::Random(std::vector<std::unique_ptr<TokenNameGenerator>> &&generators_) :
+        TokenNameGenerator(std::move(generators_)) {
 }
 
-size_t Random::combinations()
-{
+size_t Random::combinations() {
     size_t total = 0;
-    for (auto& g : generators) {
+    for (auto &g : generators) {
         total += g->combinations();
     }
     return total ? total : 1;
 }
 
-size_t Random::min()
-{
+size_t Random::min() {
     size_t final = -1;
-    for (auto& g : generators) {
+    for (auto &g : generators) {
         size_t current = g->min();
         if (current < final) {
             final = current;
@@ -204,10 +193,9 @@ size_t Random::min()
     return final;
 }
 
-size_t Random::max()
-{
+size_t Random::max() {
     size_t final = 0;
-    for (auto& g : generators) {
+    for (auto &g : generators) {
         size_t current = g->max();
         if (current > final) {
             final = current;
@@ -217,8 +205,7 @@ size_t Random::max()
 }
 
 
-std::string Random::toString(std::shared_ptr<RandomStream> rs)
-{
+std::string Random::toString(std::shared_ptr<RandomStream> rs) {
     if (generators.empty()) {
         return "";
     }
@@ -226,71 +213,60 @@ std::string Random::toString(std::shared_ptr<RandomStream> rs)
 }
 
 
-Sequence::Sequence()
-{
+Sequence::Sequence() {
 }
 
-Sequence::Sequence(std::vector<std::unique_ptr<TokenNameGenerator>>&& generators_) :
-        TokenNameGenerator(std::move(generators_))
-{
+Sequence::Sequence(std::vector<std::unique_ptr<TokenNameGenerator>> &&generators_) :
+        TokenNameGenerator(std::move(generators_)) {
 }
 
 Literal::Literal(const std::string &value_) :
-        value(value_)
-{
+        value(value_) {
 }
 
-size_t Literal::combinations()
-{
+size_t Literal::combinations() {
     return 1;
 }
-size_t Literal::min()
-{
-    return value.size();
-}
-size_t Literal::max()
-{
+
+size_t Literal::min() {
     return value.size();
 }
 
-std::string Literal::toString(std::shared_ptr<RandomStream>)
-{
+size_t Literal::max() {
+    return value.size();
+}
+
+std::string Literal::toString(std::shared_ptr<RandomStream>) {
     return value;
 }
 
-Reverser::Reverser(std::unique_ptr<TokenNameGenerator>&& g)
-{
+Reverser::Reverser(std::unique_ptr<TokenNameGenerator> &&g) {
     add(std::move(g));
 }
 
 
-std::string Reverser::toString(std::shared_ptr<RandomStream> rs)
-{
+std::string Reverser::toString(std::shared_ptr<RandomStream> rs) {
     std::wstring str = towstring(TokenNameGenerator::toString(rs));
     std::reverse(str.begin(), str.end());
     return tostring(str);
 }
 
-Capitalizer::Capitalizer(std::unique_ptr<TokenNameGenerator>&& g)
-{
+Capitalizer::Capitalizer(std::unique_ptr<TokenNameGenerator> &&g) {
     add(std::move(g));
 }
 
-std::string Capitalizer::toString(std::shared_ptr<RandomStream> rs)
-{
+std::string Capitalizer::toString(std::shared_ptr<RandomStream> rs) {
     std::wstring str = towstring(TokenNameGenerator::toString(rs));
     str[0] = std::towupper(str[0]);
     return tostring(str);
 }
 
 
-Collapser::Collapser(std::unique_ptr<TokenNameGenerator>&& g)
-{
+Collapser::Collapser(std::unique_ptr<TokenNameGenerator> &&g) {
     add(std::move(g));
 }
 
-std::string Collapser::toString(std::shared_ptr<RandomStream> rs)
-{
+std::string Collapser::toString(std::shared_ptr<RandomStream> rs) {
     std::wstring str = towstring(TokenNameGenerator::toString(rs));
     std::wstring out;
     int cnt = 0;
@@ -302,7 +278,7 @@ std::string Collapser::toString(std::shared_ptr<RandomStream> rs)
             cnt = 0;
         }
         int mch = 2;
-        switch(ch) {
+        switch (ch) {
             case 'a':
             case 'h':
             case 'i':
@@ -390,12 +366,10 @@ TokenNameGenerator::TokenNameGenerator(const std::string &pattern, bool collapse
 
 
 TokenNameGenerator::Group::Group(group_types_t type_) :
-        type(type_)
-{
+        type(type_) {
 }
 
-void TokenNameGenerator::Group::add(std::unique_ptr<TokenNameGenerator>&& g)
-{
+void TokenNameGenerator::Group::add(std::unique_ptr<TokenNameGenerator> &&g) {
     while (!wrappers.empty()) {
         switch (wrappers.top()) {
             case reverser:
@@ -413,16 +387,14 @@ void TokenNameGenerator::Group::add(std::unique_ptr<TokenNameGenerator>&& g)
     set.back()->add(std::move(g));
 }
 
-void TokenNameGenerator::Group::add(char c)
-{
+void TokenNameGenerator::Group::add(char c) {
     std::string value(&c, 1);
     std::unique_ptr<TokenNameGenerator> g = make_unique<Random>();
     g->add(make_unique<Literal>(value));
     Group::add(std::move(g));
 }
 
-std::unique_ptr<TokenNameGenerator> TokenNameGenerator::Group::emit()
-{
+std::unique_ptr<TokenNameGenerator> TokenNameGenerator::Group::emit() {
     switch (set.size()) {
         case 0:
             return make_unique<Literal>("");
@@ -433,26 +405,22 @@ std::unique_ptr<TokenNameGenerator> TokenNameGenerator::Group::emit()
     }
 }
 
-void TokenNameGenerator::Group::split()
-{
+void TokenNameGenerator::Group::split() {
     if (set.size() == 0) {
         set.push_back(make_unique<Sequence>());
     }
     set.push_back(make_unique<Sequence>());
 }
 
-void TokenNameGenerator::Group::wrap(wrappers_t type)
-{
+void TokenNameGenerator::Group::wrap(wrappers_t type) {
     wrappers.push(type);
 }
 
 TokenNameGenerator::GroupSymbol::GroupSymbol() :
-        Group(group_types::symbol)
-{
+        Group(group_types::symbol) {
 }
 
-void TokenNameGenerator::GroupSymbol::add(char c)
-{
+void TokenNameGenerator::GroupSymbol::add(char c) {
     std::string value(&c, 1);
     std::unique_ptr<TokenNameGenerator> g = make_unique<Random>();
     try {
@@ -466,12 +434,10 @@ void TokenNameGenerator::GroupSymbol::add(char c)
 }
 
 TokenNameGenerator::GroupLiteral::GroupLiteral() :
-        Group(group_types::literal)
-{
+        Group(group_types::literal) {
 }
 
-std::wstring towstring(const std::string & s)
-{
+std::wstring towstring(const std::string &s) {
     const char *cs = s.c_str();
     const size_t wn = std::mbsrtowcs(NULL, &cs, 0, NULL);
 
@@ -489,8 +455,7 @@ std::wstring towstring(const std::string & s)
     return std::wstring(buf.data(), wn);
 }
 
-std::string tostring(const std::wstring & s)
-{
+std::string tostring(const std::wstring &s) {
     const wchar_t *cs = s.c_str();
     const size_t wn = std::wcsrtombs(NULL, &cs, 0, NULL);
 

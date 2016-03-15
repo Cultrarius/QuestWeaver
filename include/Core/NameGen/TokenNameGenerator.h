@@ -134,8 +134,7 @@ namespace weave {
 #define FANTASY_S_E "(syth|sith|srr|sen|yth|ssen|then|fen|ssth|kel|syn|est|bess|inth|nen|tin|cor|sv|iss|ith|sen|slar|ssil|sthen|svis|s|ss|s|ss)(|(tys|eus|yn|of|es|en|ath|elth|al|ell|ka|ith|yrrl|is|isl|yr|ast|iy))(us|yn|en|ens|ra|rg|le|en|ith|ast|zon|in|yn|ys)"
 
 
-    class TokenNameGenerator
-    {
+    class TokenNameGenerator {
         typedef enum wrappers {
             capitalizer,
             reverser
@@ -157,9 +156,12 @@ namespace weave {
             Group(group_types_t type_);
 
             std::unique_ptr<TokenNameGenerator> emit();
+
             void split();
+
             void wrap(wrappers_t type);
-            void add(std::unique_ptr<TokenNameGenerator>&& g);
+
+            void add(std::unique_ptr<TokenNameGenerator> &&g);
 
             virtual void add(char c);
         };
@@ -168,6 +170,7 @@ namespace weave {
         class GroupSymbol : public Group {
         public:
             GroupSymbol();
+
             void add(char c);
         };
 
@@ -184,79 +187,88 @@ namespace weave {
         static const std::unordered_map<std::string, const std::vector<std::string> > symbols;
 
         TokenNameGenerator();
-        TokenNameGenerator(const std::string& pattern, bool collapse_triples=true);
-        TokenNameGenerator(std::vector<std::unique_ptr<TokenNameGenerator>>&& generators_);
+
+        TokenNameGenerator(const std::string &pattern, bool collapse_triples = true);
+
+        TokenNameGenerator(std::vector<std::unique_ptr<TokenNameGenerator>> &&generators_);
 
         virtual size_t combinations();
+
         virtual size_t min();
+
         virtual size_t max();
+
         virtual std::string toString(std::shared_ptr<RandomStream> rs);
 
-        void add(std::unique_ptr<TokenNameGenerator>&& g);
+        void add(std::unique_ptr<TokenNameGenerator> &&g);
     };
 
 
-    class Random : public TokenNameGenerator
-    {
+    class Random : public TokenNameGenerator {
     public:
         Random();
-        Random(std::vector<std::unique_ptr<TokenNameGenerator>>&& generators_);
+
+        Random(std::vector<std::unique_ptr<TokenNameGenerator>> &&generators_);
 
         size_t combinations();
+
         size_t min();
+
         size_t max();
+
         std::string toString(std::shared_ptr<RandomStream> rs) override;
     };
 
 
-    class Sequence : public TokenNameGenerator
-    {
+    class Sequence : public TokenNameGenerator {
     public:
         Sequence();
-        Sequence(std::vector<std::unique_ptr<TokenNameGenerator>>&& generators_);
+
+        Sequence(std::vector<std::unique_ptr<TokenNameGenerator>> &&generators_);
     };
 
 
-    class Literal : public TokenNameGenerator
-    {
+    class Literal : public TokenNameGenerator {
         std::string value;
 
     public:
-        Literal(const std::string& value_);
+        Literal(const std::string &value_);
 
         size_t combinations();
+
         size_t min();
+
         size_t max();
+
         std::string toString(std::shared_ptr<RandomStream> rs) override;
     };
 
 
     class Reverser : public TokenNameGenerator {
     public:
-        Reverser(std::unique_ptr<TokenNameGenerator>&& g);
+        Reverser(std::unique_ptr<TokenNameGenerator> &&g);
 
         std::string toString(std::shared_ptr<RandomStream> rs) override;
     };
 
 
-    class Capitalizer : public TokenNameGenerator
-    {
+    class Capitalizer : public TokenNameGenerator {
     public:
-        Capitalizer(std::unique_ptr<TokenNameGenerator>&& g);
+        Capitalizer(std::unique_ptr<TokenNameGenerator> &&g);
 
         std::string toString(std::shared_ptr<RandomStream> rs) override;
     };
 
 
-    class Collapser : public TokenNameGenerator
-    {
+    class Collapser : public TokenNameGenerator {
     public:
-        Collapser(std::unique_ptr<TokenNameGenerator>&& g);
+        Collapser(std::unique_ptr<TokenNameGenerator> &&g);
 
         std::string toString(std::shared_ptr<RandomStream> rs) override;
     };
 
 };
 
-std::wstring towstring(const std::string& s);
-std::string tostring(const std::wstring& s);
+std::wstring towstring(const std::string &s);
+
+std::string tostring(const std::wstring &s);
