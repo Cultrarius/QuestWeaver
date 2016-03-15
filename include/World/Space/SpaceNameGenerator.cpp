@@ -11,19 +11,26 @@ using namespace std;
 
 std::string weave::SpaceNameGenerator::CreateName(NameType nameType, std::shared_ptr<RandomStream> random) {
 
-    string pattern = "iV";
+    string pattern = "<V|v>s(a|us|<V>)";
+    if (nameType == NameType::DARK_PERSON) {
+        pattern = "<c(o|u)(b|k|kk|ck|gr|x|z|zz|s|ss)<(a|u|o)C|('|-)!C>v<|x|z|b|r|k>>";
+    } else if (nameType == NameType::DARK_THING) {
+        pattern = "(O|U|((Kr|X|B|G)<v>))csv";
+    } else if (nameType == NameType::ALIEN) {
+        pattern = "<BV-!<s|sv>|BV'!<s|sv|d>>";
+    } else if (nameType == NameType::CORPORATION) {
+        pattern = "<v|<C|c>a>s(<u|a|c>|i|us) (Corp|Inc|Tech).";
+    } else if (nameType == NameType::FUNNY) {
+        pattern = "<m|s|i><M|is>|md !Md";
+    } else if (nameType == NameType::LIGHT_PERSON) {
+        pattern = "(a|i|y|e)(y|l|m|s)('<!s>|e|i|l)s(|-<!(a|i|e)(i|y)s>)";
+    } else if (nameType == NameType::LIGHT_THING) {
+        pattern = "(a|e|i|y|a|e)(y|l|m)(e|i|l|a)<s|v|V>(i|y|u|a)(m|s|)";
+    }
 
-//    for (uint64_t i = 0; i < random->GetULongInRange(min(maxParts, (uint64_t) 2), maxParts); i++) {
-//        if (nameType == NameType::DARK_PERSON) {
-//            name << darkParts[random->GetRandomIndex(darkParts.size())];
-//        } else if (nameType == NameType::DARK_THING) {
-//            name << darkParts[random->GetRandomIndex(darkParts.size())];
-//        } else {
-//            throw ContractFailedException("Unknown name type.");
-//        }
-//    }
     TokenNameGenerator nameGenerator(pattern);
-    std::cerr << "> combinations = " << nameGenerator.combinations() << "\n";
-    return nameGenerator.toString(random);
+    string name = nameGenerator.toString(random);
+    name[0] = (char) toupper(name[0]);
+    return name;
 }
 
