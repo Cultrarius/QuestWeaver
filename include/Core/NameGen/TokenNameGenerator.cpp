@@ -80,7 +80,7 @@ const std::unordered_map<std::string, const std::vector<std::string> >
                              "baby", "booble", "bunker", "cuddle", "cuddly", "cutie", "doodle",
                              "foofie", "gooble", "honey", "kissie", "lover", "lovey", "moofie",
                              "mooglie", "moopie", "moopsie", "nookum", "poochie", "poof",
-                                                                                                                                                                               "poofie", "pookie", "schmoopie", "schnoogle", "schnookie",
+                             "poofie", "pookie", "schmoopie", "schnoogle", "schnookie",
                              "schnookum", "smooch", "smoochie", "smoosh", "snoogle", "snoogy",
                              "snookie", "snookum", "snuggy", "sweetie", "woogle", "woogy",
                              "wookie", "wookum", "wuddle", "wuddly", "wuggy", "wunny"
@@ -108,15 +108,6 @@ const std::unordered_map<std::string, const std::vector<std::string> >
                      }
         }
 };
-
-
-// make_unique is not available in c++11, so we use this template function
-// to maintain full c++11 compatibility; std::make_unique is part of C++14.
-template<typename T, typename... Args>
-std::unique_ptr<T> make_unique(Args &&... args) {
-    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
-}
-
 
 TokenNameGenerator::TokenNameGenerator() {
 }
@@ -304,17 +295,17 @@ TokenNameGenerator::TokenNameGenerator(const std::string &pattern, bool collapse
     std::unique_ptr<TokenNameGenerator> last;
 
     std::stack<std::unique_ptr<Group>> stack;
-    std::unique_ptr<Group> top = make_unique<GroupSymbol>();
+    std::unique_ptr<Group> top = std::unique_ptr<GroupSymbol>(new GroupSymbol());
 
     for (auto c : pattern) {
         switch (c) {
             case '<':
                 stack.push(std::move(top));
-                top = make_unique<GroupSymbol>();
+                top = std::unique_ptr<GroupSymbol>(new GroupSymbol());
                 break;
             case '(':
                 stack.push(std::move(top));
-                top = make_unique<GroupLiteral>();
+                top = std::unique_ptr<GroupLiteral>(new GroupLiteral());
                 break;
             case '>':
             case ')':
@@ -359,7 +350,7 @@ TokenNameGenerator::TokenNameGenerator(const std::string &pattern, bool collapse
 
     std::unique_ptr<TokenNameGenerator> g = top->emit();
     if (collapse_triples) {
-        g = make_unique<Collapser>(std::move(g));
+        g = std::unique_ptr<Collapser>(new Collapser(std::move(g)));
     }
     add(std::move(g));
 }
@@ -373,43 +364,43 @@ void TokenNameGenerator::Group::add(std::unique_ptr<TokenNameGenerator> &&g) {
     while (!wrappers.empty()) {
         switch (wrappers.top()) {
             case reverser:
-                g = make_unique<Reverser>(std::move(g));
+                g = std::unique_ptr<Reverser>(new Reverser(std::move(g)));
                 break;
             case capitalizer:
-                g = make_unique<Capitalizer>(std::move(g));
+                g = std::unique_ptr<Capitalizer>(new Capitalizer(std::move(g)));
                 break;
         }
         wrappers.pop();
     }
     if (set.size() == 0) {
-        set.push_back(make_unique<Sequence>());
+        set.push_back(std::unique_ptr<Sequence>(new Sequence()));
     }
     set.back()->add(std::move(g));
 }
 
 void TokenNameGenerator::Group::add(char c) {
     std::string value(&c, 1);
-    std::unique_ptr<TokenNameGenerator> g = make_unique<Random>();
-    g->add(make_unique<Literal>(value));
+    std::unique_ptr<TokenNameGenerator> g = std::unique_ptr<Random>(new Random());
+    g->add(std::unique_ptr<Literal>(new Literal(value)));
     Group::add(std::move(g));
 }
 
 std::unique_ptr<TokenNameGenerator> TokenNameGenerator::Group::emit() {
     switch (set.size()) {
         case 0:
-            return make_unique<Literal>("");
+            return std::unique_ptr<Literal>(new Literal(""));
         case 1:
             return std::move(*set.begin());
         default:
-            return make_unique<Random>(std::move(set));
+            return std::unique_ptr<Random>(new Random(std::move(set)));
     }
 }
 
 void TokenNameGenerator::Group::split() {
     if (set.size() == 0) {
-        set.push_back(make_unique<Sequence>());
+        set.push_back(std::unique_ptr<Sequence>(new Sequence()));
     }
-    set.push_back(make_unique<Sequence>());
+    set.push_back(std::unique_ptr<Sequence>(new Sequence()));
 }
 
 void TokenNameGenerator::Group::wrap(wrappers_t type) {
@@ -422,13 +413,13 @@ TokenNameGenerator::GroupSymbol::GroupSymbol() :
 
 void TokenNameGenerator::GroupSymbol::add(char c) {
     std::string value(&c, 1);
-    std::unique_ptr<TokenNameGenerator> g = make_unique<Random>();
+    std::unique_ptr<TokenNameGenerator> g = std::unique_ptr<Random>(new Random());
     try {
         for (auto s : TokenNameGenerator::symbols.at(value)) {
-            g->add(make_unique<Literal>(s));
+            g->add(std::unique_ptr<Literal>(new Literal(s)));
         }
     } catch (std::out_of_range) {
-        g->add(make_unique<Literal>(value));
+        g->add(std::unique_ptr<Literal>(new Literal(value)));
     }
     Group::add(std::move(g));
 }
