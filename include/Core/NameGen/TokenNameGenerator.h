@@ -188,9 +188,9 @@ namespace weave {
 
         TokenNameGenerator();
 
-        TokenNameGenerator(const std::string &pattern, bool collapse_triples = true);
+        explicit TokenNameGenerator(const std::string &pattern, bool collapse_triples = true);
 
-        TokenNameGenerator(std::vector<std::unique_ptr<TokenNameGenerator>> &&generators_);
+        explicit TokenNameGenerator(std::vector<std::unique_ptr<TokenNameGenerator>> &&generators_);
 
         virtual size_t combinations();
 
@@ -208,7 +208,7 @@ namespace weave {
     public:
         Random();
 
-        Random(std::vector<std::unique_ptr<TokenNameGenerator>> &&generators_);
+        explicit Random(std::vector<std::unique_ptr<TokenNameGenerator>> &&generators_);
 
         size_t combinations();
 
@@ -224,7 +224,7 @@ namespace weave {
     public:
         Sequence();
 
-        Sequence(std::vector<std::unique_ptr<TokenNameGenerator>> &&generators_);
+        explicit Sequence(std::vector<std::unique_ptr<TokenNameGenerator>> &&generators_);
     };
 
 
@@ -232,7 +232,7 @@ namespace weave {
         std::string value;
 
     public:
-        Literal(const std::string &value_);
+        explicit Literal(const std::string &value_);
 
         size_t combinations();
 
@@ -246,7 +246,7 @@ namespace weave {
 
     class Reverser : public TokenNameGenerator {
     public:
-        Reverser(std::unique_ptr<TokenNameGenerator> &&g);
+        explicit Reverser(std::unique_ptr<TokenNameGenerator> &&g);
 
         std::string toString(std::shared_ptr<RandomStream> rs) override;
     };
@@ -254,7 +254,7 @@ namespace weave {
 
     class Capitalizer : public TokenNameGenerator {
     public:
-        Capitalizer(std::unique_ptr<TokenNameGenerator> &&g);
+        explicit Capitalizer(std::unique_ptr<TokenNameGenerator> &&g);
 
         std::string toString(std::shared_ptr<RandomStream> rs) override;
     };
@@ -262,7 +262,7 @@ namespace weave {
 
     class Collapser : public TokenNameGenerator {
     public:
-        Collapser(std::unique_ptr<TokenNameGenerator> &&g);
+        explicit Collapser(std::unique_ptr<TokenNameGenerator> &&g);
 
         std::string toString(std::shared_ptr<RandomStream> rs) override;
     };
