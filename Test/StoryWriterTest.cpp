@@ -33,45 +33,45 @@ TEST_CASE("Nuggets", "[story]") {
 
     SECTION("Valid nuggets") {
 
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("1")));
+        writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("1")));
         auto result = writer.CreateStory(StoryWriterParameters(graph, values));
         REQUIRE("" == result.text);
     }
 
     SECTION("Invalid nuggets - no key") {
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("2")));
+        writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("2")));
         REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values)), ContractFailedException);
     }
 
     SECTION("Invalid nuggets - no required types") {
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("3")));
+        writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("3")));
         REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values)), ContractFailedException);
     }
 
     SECTION("Invalid nuggets - no texts") {
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("3")));
+        writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("3")));
         REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values)), ContractFailedException);
     }
 
     SECTION("Invalid nuggets - no outer json array") {
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("6")));
+        writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("6")));
         REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values)), ContractFailedException);
     }
 
     SECTION("Invalid nuggets - no inner json object") {
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("7")));
+        writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("7")));
         REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values)), ContractFailedException);
     }
 
     SECTION("Duplicate key") {
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("1")));
+        writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("1")));
         writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("5")));
         REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values)), ContractFailedException);
     }
 
     SECTION("Duplicate key, but same folder") {
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("1")));
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("1")));
+        writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("1")));
+        writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("1")));
         auto result = writer.CreateStory(StoryWriterParameters(graph, values));
         REQUIRE("" == result.text);
     }
@@ -79,13 +79,14 @@ TEST_CASE("Nuggets", "[story]") {
     SECTION("Adding agent entity") {
 
         // create an agent in the world model
-        auto agent = worldModel.CreateAgent();
+        auto agent = worldModel.CreateAgent().GetEntity();
         TemplateQuestProperty templateProperty(true, "superhero");
         values.push_back(QuestPropertyValue(templateProperty, agent));
         set<string> requiredTypes = {"agent"};
 
         // create a fitting story template factory
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("1", requiredTypes)));
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("1", requiredTypes)));
 
         // create a fitting graph node
         graph.CreateNodeGroup("test", true);
@@ -127,43 +128,50 @@ TEST_CASE("StoryTemplates", "[story]") {
     graph.Finalize();
 
     SECTION("Simple line test") {
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
         auto result = writer.CreateStory(StoryWriterParameters(graph, values), "simpleLine");
         REQUIRE(result.text == "A. B. C");
     }
 
     SECTION("Entity line test") {
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
         auto result = writer.CreateStory(StoryWriterParameters(graph, values), "entityLine");
         REQUIRE(result.text == "I wish me a TestEntity to play with.");
     }
 
     SECTION("String only line test") {
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
         auto result = writer.CreateStory(StoryWriterParameters(graph, values), "stringOnlyLines");
         REQUIRE(result.text == "This is great! I really love this.");
     }
 
     SECTION("Unknown nugget") {
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
         auto result = writer.CreateStory(StoryWriterParameters(graph, values), "unknownNugget");
         REQUIRE(result.text == "");
     }
 
     SECTION("Nugget IDs mismatch") {
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
         REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values), "wrongNuggetIds"),
                           ContractFailedException);
     }
 
     SECTION("Nugget content mismatch") {
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
         REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values), "wrongNuggetContent"),
                           ContractFailedException);
     }
 
     SECTION("Directory change") {
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
         auto result = writer.CreateStory(StoryWriterParameters(graph, values), "entityLine");
         REQUIRE(result.text == "I wish me a TestEntity to play with.");
         writer.ChangeDirectories(dirs);
@@ -174,7 +182,7 @@ TEST_CASE("StoryTemplates", "[story]") {
     }
 
     SECTION("Invalid entity IDs") {
-    auto factory = unique_ptr<TestStoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st"));
+        auto factory = unique_ptr<TestStoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st"));
         factory->TemplatesReturnInvalidIDs = true;
         writer.RegisterTemplateFactory(move(factory));
         REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values), "entityLine"),
@@ -183,13 +191,15 @@ TEST_CASE("StoryTemplates", "[story]") {
 
     SECTION("Broken template") {
         SECTION("No array as outer struct") {
-    writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "brokenNoArray.st")));
+            writer.RegisterTemplateFactory(
+                    unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "brokenNoArray.st")));
             REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values), "simpleLine"),
                               ContractFailedException);
         }
 
         SECTION("No Key for story") {
-        writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "brokenNoKey.st")));
+            writer.RegisterTemplateFactory(
+                    unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "brokenNoKey.st")));
             REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values), "simpleLine"),
                               ContractFailedException);
         }
@@ -198,7 +208,8 @@ TEST_CASE("StoryTemplates", "[story]") {
     SECTION("World Model action result") {
         vector<WorldModelAction> actions;
         actions.push_back(addAction);
-        writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st", actions)));
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st", actions)));
         auto result = writer.CreateStory(StoryWriterParameters(graph, values), "entityLine");
         REQUIRE(result.text == "I wish me a TestEntity to play with.");
         REQUIRE(result.worldActions.size() == 1);
@@ -217,12 +228,12 @@ TEST_CASE("SpaceTemplates", "[story]") {
     StoryWriter writer(rs, questModel, engine, worldModel, config.dirs);
 
     // create a test entity
-    auto testAgent = worldModel.CreateAgent();
+    auto newAgentAction = worldModel.CreateAgent();
+    auto testAgent = newAgentAction.GetEntity();
     TemplateQuestProperty templateProperty(true, "player");
     values.push_back(QuestPropertyValue(templateProperty, testAgent));
     set<string> requiredTypes = {"agent"};
-    WorldModelAction addAction(WorldActionType::CREATE, testAgent);
-    worldModel.Execute({addAction});
+    worldModel.Execute({newAgentAction});
 
     // create a fitting graph node
     graph.CreateNodeGroup("player", true);
@@ -230,7 +241,7 @@ TEST_CASE("SpaceTemplates", "[story]") {
     graph.Finalize();
 
     SECTION("Intro Story") {
-    writer.RegisterTemplateFactory(unique_ptr<CommonSpaceStoryFactory>(new CommonSpaceStoryFactory()));
+        writer.RegisterTemplateFactory(unique_ptr<CommonSpaceStoryFactory>(new CommonSpaceStoryFactory()));
         auto result = writer.CreateStory(StoryWriterParameters(graph, values), "agentIntro");
         INFO(result.text);
         REQUIRE(result.text.length() > 90);
@@ -238,7 +249,7 @@ TEST_CASE("SpaceTemplates", "[story]") {
     }
 
     SECTION("No double intro") {
-    writer.RegisterTemplateFactory(unique_ptr<CommonSpaceStoryFactory>(new CommonSpaceStoryFactory()));
+        writer.RegisterTemplateFactory(unique_ptr<CommonSpaceStoryFactory>(new CommonSpaceStoryFactory()));
         auto result = writer.CreateStory(StoryWriterParameters(graph, values), "agentIntro");
         INFO(result.text);
         REQUIRE(result.text.length() > 90);

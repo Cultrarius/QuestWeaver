@@ -14,7 +14,7 @@ TEST_CASE("Model Actions", "[model]") {
     shared_ptr<TestWorldListener> listener = make_shared<TestWorldListener>();
     SpaceWorldModel testModel(rs);
     testModel.AddListener(listener);
-    shared_ptr<WorldEntity> entity = testModel.CreateLocation();
+    shared_ptr<WorldEntity> entity = testModel.CreateLocation().GetEntity();
     REQUIRE(entity->GetId() == 0);
 
     SECTION("Unknown entity") {
@@ -124,7 +124,7 @@ TEST_CASE("Model Actions", "[model]") {
 TEST_CASE("Metadata", "[model]") {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(44);
     SpaceWorldModel testModel(rs);
-    shared_ptr<WorldEntity> entity = testModel.CreateAgent();
+    shared_ptr<WorldEntity> entity = testModel.CreateAgent().GetEntity();
     vector<WorldModelAction> actions;
     WorldModelAction action(WorldActionType::CREATE, entity);
     actions.push_back(action);
@@ -175,7 +175,7 @@ TEST_CASE("Metadata", "[model]") {
 
     SECTION("Create metadata entry") {
         SpaceWorldModel metaDataModel(rs);
-        shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
+        shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation().GetEntity();
         MetaData metaData;
         metaData.SetValue("Test123", 142);
         actions[0] = WorldModelAction(WorldActionType::CREATE, metaEntity, metaData);
@@ -187,7 +187,7 @@ TEST_CASE("Metadata", "[model]") {
 
     SECTION("delete entity with metadata") {
         SpaceWorldModel metaDataModel(rs);
-        shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
+        shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation().GetEntity();
         MetaData metaData;
         metaData.SetValue("Test123", 142);
         actions[0] = WorldModelAction(WorldActionType::CREATE, metaEntity, metaData);
@@ -201,7 +201,7 @@ TEST_CASE("Metadata", "[model]") {
 
     SECTION("update entity with metadata") {
         SpaceWorldModel metaDataModel(rs);
-        shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
+        shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation().GetEntity();
         MetaData metaData;
         metaData.SetValue("Test123", 142);
         actions[0] = WorldModelAction(WorldActionType::CREATE, metaEntity, metaData);
@@ -216,7 +216,7 @@ TEST_CASE("Metadata", "[model]") {
 
     SECTION("update metadata key addition") {
         SpaceWorldModel metaDataModel(rs);
-        shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
+        shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation().GetEntity();
         MetaData metaData;
         metaData.SetValue("Test123", 142);
         actions[0] = WorldModelAction(WorldActionType::CREATE, metaEntity, metaData);
@@ -232,7 +232,7 @@ TEST_CASE("Metadata", "[model]") {
 
     SECTION("empty update must not delete keys") {
         SpaceWorldModel metaDataModel(rs);
-        shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation();
+        shared_ptr<WorldEntity> metaEntity = testModel.CreateLocation().GetEntity();
         MetaData metaData;
         metaData.SetValue("Test123", 142);
         actions[0] = WorldModelAction(WorldActionType::CREATE, metaEntity, metaData);

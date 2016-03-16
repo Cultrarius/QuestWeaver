@@ -206,9 +206,11 @@ TEST_CASE("Serialize Entities", "[serialize]") {
     SECTION("Serialize and deserialize a list of entities") {
         vector<shared_ptr<WorldEntity>> entities;
 
-        entities.push_back(testModel.CreateAgent());
-        entities.push_back(testModel.CreateLocation());
-        entities.push_back(testModel.CreateSolarSystem());
+        entities.push_back(testModel.CreateAgent().GetEntity());
+        entities.push_back(testModel.CreateLocation().GetEntity());
+        for (auto action : testModel.CreateSolarSystem()) {
+            entities.push_back(action.GetEntity());
+        }
 
         stringstream ss;
         {
@@ -236,11 +238,14 @@ TEST_CASE("Serialize Entities", "[serialize]") {
         MetaData metaData1, metaData2;
         metaData1.SetValue("Size", 7).SetValue("Age", 42);
         metaData2.SetValue("Age", 43);
-        auto entity1 = testModel.CreateAgent();
-        auto entity2 = testModel.CreateLocation();
+        auto entity1 = testModel.CreateAgent().GetEntity();
+        auto entity2 = testModel.CreateLocation().GetEntity();
         actions.push_back(WorldModelAction(WorldActionType::CREATE, entity1, metaData1));
         actions.push_back(WorldModelAction(WorldActionType::CREATE, entity2, metaData2));
-        actions.push_back(WorldModelAction(WorldActionType::CREATE, testModel.CreateSolarSystem()));
+
+        for (auto action : testModel.CreateSolarSystem()) {
+            actions.push_back(action);
+        }
 
         testModel.Execute(actions);
         REQUIRE(testModel.GetEntities().size() == actions.size());

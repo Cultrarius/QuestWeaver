@@ -135,7 +135,8 @@ TEST_CASE("Templates", "[template]") {
                     for (auto candidate : candidates) {
                         INFO("Template Key: " + templateKey + ", Property: " + property.GetName() + ", Seed: " +
                              to_string(i));
-                        REQUIRE(candidate.GetActionType() == WorldActionType::CREATE);
+                        REQUIRE((candidate.GetActionType() == WorldActionType::CREATE ||
+                                 candidate.GetActionType() == WorldActionType::UPDATE));
                         REQUIRE(candidate.GetEntity().get() != nullptr);
                     }
                 }
@@ -202,7 +203,7 @@ TEST_CASE("Templates", "[template]") {
 
     SECTION("Quest descriptions") {
         SpaceWorldModel *worldModel = new SpaceWorldModel(rs);
-        auto entity = worldModel->CreateLocation();
+        auto entity = worldModel->CreateLocation().GetEntity();
 
         vector<TemplateQuestProperty> properties;
         TemplateQuestProperty mandy(true, "mandy");

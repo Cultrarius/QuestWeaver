@@ -59,8 +59,13 @@ WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldM
         auto groupName = pair.first;
         bool isMandatory = mandatory.count(groupName) > 0;
         graph.CreateNodeGroup(groupName, isMandatory);
+        unordered_set<ID> seenIds;
         for (auto candidate : pair.second) {
             ID id = candidate.GetEntity()->GetId();
+            if (seenIds.count(id) > 0) {
+                continue;
+            }
+            seenIds.insert(id);
 
             // add metadata for node
             vector<MetaData> metaData;

@@ -36,11 +36,11 @@ namespace weave {
 
         // entity creation methods
 
-        std::shared_ptr<SpaceLocation> CreateLocation() const;
+        WorldModelAction CreateLocation() const;
 
-        std::shared_ptr<SpaceAgent> CreateAgent() const;
+        WorldModelAction CreateAgent(NameType nameType = NameType::LIGHT_PERSON) const;
 
-        std::shared_ptr<SolarSystem> CreateSolarSystem() const;
+        std::vector<WorldModelAction> CreateSolarSystem(NameType nameType = NameType::LIGHT_THING) const;
 
     private:
         ModelParameters param;

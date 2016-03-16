@@ -29,10 +29,12 @@ vector<WorldModelAction> ExploreRegionTemplate::GetPropertyCandidates(const Temp
 
 void ExploreRegionTemplate::gatherSponsorEntities(vector<WorldModelAction> *actions,
                                                   const SpaceWorldModel &spaceModel) const {
-    shared_ptr<SpaceAgent> newEntity = spaceModel.CreateAgent();
+    auto newEntityAction = spaceModel.CreateAgent();
+    actions->push_back(newEntityAction);
+
     MetaData metaData;
     metaData.SetValue("relationToPlayer", 10);
-    WorldModelAction metaDataAction(WorldActionType::CREATE, newEntity, metaData);
+    WorldModelAction metaDataAction(WorldActionType::UPDATE, newEntityAction.GetEntity(), metaData);
     actions->push_back(move(metaDataAction));
 
     for (auto entity : spaceModel.GetEntities()) {
@@ -48,13 +50,16 @@ void ExploreRegionTemplate::gatherSponsorEntities(vector<WorldModelAction> *acti
 
 void ExploreRegionTemplate::gatherLocationEntities(vector<WorldModelAction> *actions,
                                                    const SpaceWorldModel &spaceModel) const {
-    shared_ptr<SpaceLocation> newEntity = spaceModel.CreateLocation();
+    auto newEntityAction = spaceModel.CreateLocation();
+    actions->push_back(newEntityAction);
+
     MetaData metaData;
     metaData.SetValue("explored", 0);
     metaData.SetValue("explorationQuestLock", 1);  // so it does not get picked by another exploration quest
-    WorldModelAction metaDataAction(WorldActionType::CREATE, newEntity, metaData);
+    WorldModelAction metaDataAction(WorldActionType::UPDATE, newEntityAction.GetEntity(), metaData);
     actions->push_back(move(metaDataAction));
 
+    // search for existing locations
     for (auto entity : spaceModel.GetEntities()) {
         if (entity->GetType() == "location") {
             auto entityData = spaceModel.GetMetaData(entity->GetId());

@@ -7,11 +7,11 @@
 using namespace std;
 using namespace weave;
 
-shared_ptr<SpaceLocation> SpaceWorldModel::CreateLocation() const {
+WorldModelAction SpaceWorldModel::CreateLocation() const {
     double x = rs->GetIntInRange(param.minLocation, param.maxLocation);
     double y = rs->GetIntInRange(param.minLocation, param.maxLocation);
     double z = rs->GetIntInRange(param.minLocation, param.maxLocation);
-    return make_shared<SpaceLocation>(x, y, z);
+    return WorldModelAction(WorldActionType::CREATE, make_shared<SpaceLocation>(x, y, z));
 }
 
 SpaceWorldModel::SpaceWorldModel(std::shared_ptr<RandomStream> randomStream) : WorldModel() {
@@ -30,10 +30,18 @@ const NameGenerator &SpaceWorldModel::GetNameGenerator() const {
     return nameGenerator;
 }
 
-std::shared_ptr<SpaceAgent> SpaceWorldModel::CreateAgent() const {
-    return make_shared<SpaceAgent>(nameGenerator.CreateName(NameType::LIGHT_PERSON, rs));
+WorldModelAction SpaceWorldModel::CreateAgent(NameType nameType) const {
+    return WorldModelAction(WorldActionType::CREATE, make_shared<SpaceAgent>(nameGenerator.CreateName(nameType, rs)));
 }
 
-std::shared_ptr<SolarSystem> SpaceWorldModel::CreateSolarSystem() const {
-    return make_shared<SolarSystem>(nameGenerator.CreateName(NameType::LIGHT_THING, rs), CreateLocation());
+vector<WorldModelAction> SpaceWorldModel::CreateSolarSystem(NameType nameType) const {
+    vector<WorldModelAction> actions;
+
+    auto locationAction = CreateLocation();
+    actions.push_back(locationAction);
+    shared_ptr<SpaceLocation> location = dynamic_pointer_cast<SpaceLocation>(locationAction.GetEntity());
+    auto solarSystem = make_shared<SolarSystem>(nameGenerator.CreateName(nameType, rs), location);
+    actions.push_back(WorldModelAction(WorldActionType::CREATE, solarSystem));
+
+    return actions;
 }
