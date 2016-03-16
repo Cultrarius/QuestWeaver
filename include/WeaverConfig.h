@@ -34,6 +34,7 @@ namespace weave {
 
         /*!
          * The world model is responsible for creating all quest entities and informs about world changes.
+         *
          * **MUST** be initialized by the caller before creating a new QuestWeaver instance.
          */
         std::unique_ptr<WorldModel> worldModel;

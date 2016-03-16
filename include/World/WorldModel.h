@@ -81,6 +81,12 @@ namespace weave {
          */
         void AddListener(std::shared_ptr<WorldListener> listener) const noexcept;
 
+        /*!
+         * The name generator used to create the names of world entities and story elements.
+         */
+
+        virtual const NameGenerator &GetNameGenerator() const = 0;
+
     protected:
         friend class QuestWeaver;
 
@@ -88,11 +94,6 @@ namespace weave {
          * The random stream can be used by subclasses to create randomized entities.
          */
         std::shared_ptr<RandomStream> rs;
-
-        /*!
-         * So the class is abstract, needed for serialization
-         */
-        virtual void empty() = 0;
 
     private:
         ID idGenerator = 0;

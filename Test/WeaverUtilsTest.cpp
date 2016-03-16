@@ -71,8 +71,6 @@ TEST_CASE("Name Generator", "[utils]") {
             seenNames.insert(name);
         }
     }
-
-
 }
 
 TEST_CASE("Simple string substitution", "[utils]") {

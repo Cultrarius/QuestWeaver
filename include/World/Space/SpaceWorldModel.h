@@ -9,6 +9,7 @@
 #include "../../Core/WeaverUtils.h"
 #include "SpaceAgent.h"
 #include "SolarSystem.h"
+#include "SpaceNameGenerator.h"
 
 namespace weave {
     struct ModelParameters {
@@ -31,6 +32,8 @@ namespace weave {
 
         void SetParameters(ModelParameters parameters);
 
+        const NameGenerator &GetNameGenerator() const override;
+
         // entity creation methods
 
         std::shared_ptr<SpaceLocation> CreateLocation() const;
@@ -39,11 +42,10 @@ namespace weave {
 
         std::shared_ptr<SolarSystem> CreateSolarSystem() const;
 
-    protected:
-		void empty() override { }
-
     private:
         ModelParameters param;
+
+        SpaceNameGenerator nameGenerator;
 
         // serialization
         friend class cereal::access;

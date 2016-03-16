@@ -210,7 +210,7 @@ namespace weave {
 
     class NameGenerator {
     public:
-        virtual std::string CreateName(NameType nameType, std::shared_ptr<RandomStream> random) {
+        virtual std::string CreateName(NameType nameType, std::shared_ptr<RandomStream> random) const {
             return "DefaultName" + std::to_string(static_cast<int>(nameType)) + std::to_string(random->GetInt());
         }
     };

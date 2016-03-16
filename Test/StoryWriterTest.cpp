@@ -232,14 +232,16 @@ TEST_CASE("SpaceTemplates", "[story]") {
     SECTION("Intro Story") {
     writer.RegisterTemplateFactory(unique_ptr<CommonSpaceStoryFactory>(new CommonSpaceStoryFactory()));
         auto result = writer.CreateStory(StoryWriterParameters(graph, values), "agentIntro");
-        REQUIRE(result.text.length() > 100);
+        INFO(result.text);
+        REQUIRE(result.text.length() > 90);
         REQUIRE(result.worldActions[0].GetMetaData().HasValue("introStoryDone"));
     }
 
     SECTION("No double intro") {
     writer.RegisterTemplateFactory(unique_ptr<CommonSpaceStoryFactory>(new CommonSpaceStoryFactory()));
         auto result = writer.CreateStory(StoryWriterParameters(graph, values), "agentIntro");
-        REQUIRE(result.text.length() > 100);
+        INFO(result.text);
+        REQUIRE(result.text.length() > 90);
         worldModel.Execute(result.worldActions);
         result = writer.CreateStory(StoryWriterParameters(graph, values), "agentIntro");
         REQUIRE(result.text == "");

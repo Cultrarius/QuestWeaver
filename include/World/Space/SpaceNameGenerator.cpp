@@ -9,9 +9,9 @@
 using namespace weave;
 using namespace std;
 
-std::string weave::SpaceNameGenerator::CreateName(NameType nameType, std::shared_ptr<RandomStream> random) {
+std::string weave::SpaceNameGenerator::CreateName(NameType nameType, std::shared_ptr<RandomStream> random) const {
 
-    string pattern = "<V|v>s(a|us|<V>)";
+    string pattern = "<V|v><ss|s>(a|us|<V>)";
     if (nameType == NameType::DARK_PERSON) {
         pattern = "<c(o|u)(b|k|kk|ck|gr|x|z|zz|s|ss)<(a|u|o)C|('|-)!C>v<|x|z|b|r|k>>";
     } else if (nameType == NameType::DARK_THING) {
@@ -30,7 +30,7 @@ std::string weave::SpaceNameGenerator::CreateName(NameType nameType, std::shared
 
     TokenNameGenerator nameGenerator(pattern);
     string name = nameGenerator.toString(random);
-    name[0] = (char) toupper(name[0]);
+    name[0] = static_cast<char>(toupper(name[0]));
     return name;
 }
 

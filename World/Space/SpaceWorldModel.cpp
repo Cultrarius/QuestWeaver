@@ -26,10 +26,14 @@ void SpaceWorldModel::SetParameters(ModelParameters parameters) {
     this->param = parameters;
 }
 
+const NameGenerator &SpaceWorldModel::GetNameGenerator() const {
+    return nameGenerator;
+}
+
 std::shared_ptr<SpaceAgent> SpaceWorldModel::CreateAgent() const {
-    return make_shared<SpaceAgent>("Peter Parker");
+    return make_shared<SpaceAgent>(nameGenerator.CreateName(NameType::LIGHT_PERSON, rs));
 }
 
 std::shared_ptr<SolarSystem> SpaceWorldModel::CreateSolarSystem() const {
-    return make_shared<SolarSystem>("Andromeda", CreateLocation());
+    return make_shared<SolarSystem>(nameGenerator.CreateName(NameType::LIGHT_THING, rs), CreateLocation());
 }
