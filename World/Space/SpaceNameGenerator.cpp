@@ -2,7 +2,7 @@
 // Created by michael on 15.03.16.
 //
 
-#include "SpaceNameGenerator.h"
+#include "World/Space/SpaceNameGenerator.h"
 #include <algorithm>
 #include <Core/NameGen/TokenNameGenerator.h>
 
