@@ -11,16 +11,16 @@ string SolarSystem::ToString() const {
     return Name;
 }
 
-SolarSystem::SolarSystem(ID id, string Name, shared_ptr<SpaceLocation> Location) :
-        WorldEntity(id), Name(Name), Location(Location) {
+SolarSystem::SolarSystem(ID id, string name, shared_ptr<SpaceLocation> location, vector<shared_ptr<Planet>> planets) :
+        WorldEntity(id), Name(name), Location(location), Planets(planets) {
 }
 
-SolarSystem::SolarSystem(string Name, shared_ptr<SpaceLocation> Location) :
-        SolarSystem(NoID, Name, Location) {
+SolarSystem::SolarSystem(string name, shared_ptr<SpaceLocation> location, vector<shared_ptr<Planet>> planets) :
+        SolarSystem(NoID, name, location, planets) {
 }
 
 SolarSystem::SolarSystem() :
-        SolarSystem(NoID, "", make_shared<SpaceLocation>()) {
+        SolarSystem(NoID, "", make_shared<SpaceLocation>(), vector<shared_ptr<Planet>>()) {
 }
 
 std::string SolarSystem::GetType() const {

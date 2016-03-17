@@ -40,7 +40,10 @@ namespace weave {
 
         WorldModelAction CreateAgent(NameType nameType = NameType::LIGHT_PERSON) const;
 
-        std::vector<WorldModelAction> CreateSolarSystem(NameType nameType = NameType::LIGHT_THING) const;
+        WorldModelAction CreatePlanet(NameType nameType = NameType::DARK_THING, int distanceToSun = 0) const;
+
+        std::vector<WorldModelAction> CreateSolarSystem(NameType nameType = NameType::LIGHT_THING,
+                                                        int planetCount = -1) const;
 
     private:
         ModelParameters param;
@@ -52,7 +55,7 @@ namespace weave {
 
         template<class Archive>
         void serialize(Archive &ar) {
-            ar( cereal::base_class<WorldModel>(this), CEREAL_NVP(param));
+            ar(cereal::base_class<WorldModel>(this), CEREAL_NVP(param));
         }
     };
 }

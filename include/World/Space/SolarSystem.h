@@ -6,24 +6,27 @@
 
 #include "../WorldEntity.h"
 #include "SpaceLocation.h"
+#include "Planet.h"
 
 namespace weave {
 
     struct SolarSystem : public WorldEntity {
         std::string Name;
         std::shared_ptr<SpaceLocation> Location;
-        // TODO add planet info?
+        std::vector<std::shared_ptr<Planet>> Planets;
 
         SolarSystem();
 
-        SolarSystem(std::string Name, std::shared_ptr<SpaceLocation> Location);
+        SolarSystem(std::string Name, std::shared_ptr<SpaceLocation> Location,
+                    std::vector<std::shared_ptr<Planet>> planets);
 
         std::string ToString() const override;
 
         std::string GetType() const override;
 
     private:
-        SolarSystem(ID id, std::string Name, std::shared_ptr<SpaceLocation> Location);
+        SolarSystem(ID id, std::string name, std::shared_ptr<SpaceLocation> location,
+                    std::vector<std::shared_ptr<Planet>> planets);
 
         // serialization
         friend class cereal::access;
@@ -32,7 +35,8 @@ namespace weave {
         void serialize(Archive &archive) {
             archive(cereal::make_nvp("id", GetId()),
                     CEREAL_NVP(Name),
-                    CEREAL_NVP(Location));
+                    CEREAL_NVP(Location),
+                    CEREAL_NVP(Planets));
         }
 
         template<class Archive>
@@ -40,11 +44,13 @@ namespace weave {
             ID id;
             std::string Name;
             std::shared_ptr<SpaceLocation> Location;
+            std::vector<std::shared_ptr<Planet>> Planets;
 
             archive(cereal::make_nvp("id", id),
                     CEREAL_NVP(Name),
-                    CEREAL_NVP(Location));
-            construct(id, Name, Location);
+                    CEREAL_NVP(Location),
+                    CEREAL_NVP(Planets));
+            construct(id, Name, Location, Planets);
         }
     };
 }
