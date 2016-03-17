@@ -26,7 +26,7 @@ namespace weave {
          * Can be used by subclasses for serialization purposes
          */
         cereal::NameValuePair<const ID &> getCerealLocation() const {
-            return cereal::make_nvp("location", targetLocation);
+            return cereal::make_nvp("solarSystem", targetLocation);
         }
 
         /*

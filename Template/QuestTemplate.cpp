@@ -87,7 +87,7 @@ string QuestTemplate::getBestFittingDescription(const vector<QuestPropertyValue>
             return descriptionText;
         }
     }
-    string message = "Unable to find description fitting the supplied quest properties. Quest Title: ";
+    string message = "Unable to find description fitting the supplied quest properties.\nQuest Title: ";
     message += title;
     throw ContractFailedException(message);
 }

@@ -2,31 +2,31 @@
   "parent": "Space",
   "key": "ExploreRegionQuest",
   "mandatory": [
-    "location"
+    "solarSystem"
   ],
   "optional": [
     "sponsor"
   ],
   "titles": [
     "Explore region of space",
-    "Travel to the coordinates %location"
+    "Travel to the solar system %solarSystem"
   ],
   "descriptions": [
     {
       "conditions": [
-        "location",
+        "solarSystem",
         "sponsor"
       ],
-      "text": "%sponsor generously asks you to explore the solar system found at the coordinates %location. Make haste and inform them about anything interesting you find."
+      "text": "%sponsor generously asks you to explore the solar system %solarSystem. Make haste and inform them about anything interesting you find."
     },
     {
       "conditions": [
-        "location"
+        "solarSystem"
       ],
-      "text": "An anonymous source asks you to explore the solar system found at the coordinates %location. Transmit your findings to the attached address."
+      "text": "An anonymous source asks you to explore the solar system %solarSystem. Transmit your findings to the attached address."
     }
   ],
   "objectives": [
-    "Travel to the %location region"
+    "Travel to the %solarSystem system and visit all of its planets"
   ]
 }

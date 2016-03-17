@@ -22,7 +22,9 @@ namespace weave {
                               FormatterType formatterType);
 
     private:
-        void gatherLocationEntities(std::vector<WorldModelAction> *actions,
+        std::string metaDataMarker = "explorationQuestLock";
+
+        void gatherSolarSystemEntities(std::vector<WorldModelAction> *actions,
                                     const weave::SpaceWorldModel &spaceModel) const;
 
         void gatherSponsorEntities(std::vector<WorldModelAction> *actions, const SpaceWorldModel &spaceModel) const;

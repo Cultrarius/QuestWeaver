@@ -299,11 +299,11 @@ TEST_CASE("Explore quest", "[quest]") {
     // Create a new explore region quest manually
     auto questTemplate = factory->CreateTemplate("ExploreRegionQuest");
     vector<QuestPropertyValue> questPropertyValues;
-    TemplateQuestProperty property(true, "location");
-    auto location = make_shared<SpaceLocation>(1, 2, 3);
-    WorldModelAction addAction(WorldActionType::CREATE, location);
-    world.Execute({addAction});
-    questPropertyValues.push_back(QuestPropertyValue(property, location));
+    TemplateQuestProperty property(true, "solarSystem");
+    auto addSystemActions = world.CreateSolarSystem();
+    world.Execute(addSystemActions);
+    auto solarSystem = addSystemActions[addSystemActions.size() - 1].GetEntity();
+    questPropertyValues.push_back(QuestPropertyValue(property, solarSystem));
     auto quest = questTemplate->ToQuest(questPropertyValues);
 
     SECTION("Exploration Ticks nothing") {
@@ -319,7 +319,7 @@ TEST_CASE("Explore quest", "[quest]") {
     SECTION("Exploration Tick partial") {
         MetaData metaData;
         metaData.SetValue(ExploreRegionQuest::metaDataMarker, 50);
-        WorldModelAction metaDataAction(WorldActionType::KEEP, location, metaData);
+        WorldModelAction metaDataAction(WorldActionType::KEEP, solarSystem, metaData);
         world.Execute({metaDataAction});
 
         QuestTickResult tickResult = quest->Tick(1, world);
@@ -330,7 +330,7 @@ TEST_CASE("Explore quest", "[quest]") {
     SECTION("Exploration Tick success") {
         MetaData metaData;
         metaData.SetValue(ExploreRegionQuest::metaDataMarker, 100);
-        WorldModelAction metaDataAction(WorldActionType::UPDATE, location, metaData);
+        WorldModelAction metaDataAction(WorldActionType::UPDATE, solarSystem, metaData);
         world.Execute({metaDataAction});
 
         QuestTickResult tickResult = quest->Tick(1, world);
