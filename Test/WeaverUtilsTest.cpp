@@ -43,6 +43,47 @@ TEST_CASE("Random Stream", "[utils]") {
         REQUIRE(rs.GetRandomIndex(1) == 0);
         REQUIRE(rs.GetRandomIndex(10) == 9);
     }
+
+    SECTION("creating normalized ints") {
+        SECTION("Zeros") {
+            for (int i = 0; i < 1000; i++) {
+                int k = rs.GetNormalIntInRange(0, 0);
+                REQUIRE(k == 0);
+            }
+        }
+
+        SECTION("Start=End") {
+            for (int i = 0; i < 1000; i++) {
+                int k = rs.GetNormalIntInRange(-42, -42);
+                REQUIRE(k == -42);
+            }
+        }
+
+        SECTION("In Range") {
+            map<int, int> seenNumbers;
+            for (int k = 0; k < 10000; k++) {
+                int i = rs.GetNormalIntInRange(-3, 17);
+                seenNumbers[i]++;
+            }
+
+            for (int i = -3; i <= 17; i++) {
+                REQUIRE(seenNumbers[i] > 0);
+            }
+        }
+
+        SECTION("Small Range") {
+            map<int, int> seenNumbers;
+            for (int k = 0; k < 1000; k++) {
+                int i = rs.GetNormalIntInRange(1, 5);
+                seenNumbers[i]++;
+            }
+
+            REQUIRE(seenNumbers[2] > seenNumbers[1]);
+            REQUIRE(seenNumbers[3] > seenNumbers[2]);
+            REQUIRE(seenNumbers[3] > seenNumbers[4]);
+            REQUIRE(seenNumbers[4] > seenNumbers[5]);
+        }
+    }
 }
 
 TEST_CASE("Name Generator", "[utils]") {

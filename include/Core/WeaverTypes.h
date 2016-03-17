@@ -158,6 +158,20 @@ namespace weave {
         }
 
         /*
+         * Returns a normal distributed random integer from a given range.
+         */
+        virtual int GetNormalIntInRange(int start, int end) {
+            if (end < start) {
+                throw ContractFailedException("(End < Start) for normal distribution in range.\n");
+            }
+            int mean = (end + start) / 2.0f;
+            float stddev = abs(end - mean) / 2.5f;
+            std::normal_distribution<float> normalDist(mean, stddev);
+            int result = round(normalDist(generator));
+            return result < start ? start : (result > end ? end : result);
+        }
+
+        /*
          * Reseeds the random stream.
          */
         virtual void Seed(uint64_t seed) {
