@@ -38,7 +38,7 @@ WorldModelAction SpaceWorldModel::CreateAgent(NameType nameType) const {
 
 WorldModelAction SpaceWorldModel::CreatePlanet(NameType nameType, int distanceToSun) const {
     float angle = rs->GetULongInRange(0, 3600) / 10.0f;
-    float radians = angle * M_PI / 180.0f;
+    float radians = static_cast<float>(angle * M_PI / 180);
     float x = distanceToSun * cos(radians);
     float y = distanceToSun * sin(radians);
     int seed = rs->GetInt();
