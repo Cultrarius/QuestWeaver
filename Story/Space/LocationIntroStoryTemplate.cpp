@@ -36,7 +36,7 @@ bool LocationIntroStoryTemplate::IsValid(const EntityMap &requiredEntities, cons
 vector<shared_ptr<WorldEntity>> LocationIntroStoryTemplate::getValidEntities(const EntityMap &entityMap,
                                                                              const WorldModel &worldModel) const {
     vector<shared_ptr<WorldEntity>> result;
-    auto mapIter = entityMap.find("location");
+    auto mapIter = entityMap.find("solarSystem");
     if (mapIter == entityMap.end()) {
         return result;
     }

@@ -9,7 +9,7 @@
   {
     "key": "locationIntro",
     "required": [
-      "location"
+      "solarSystem"
     ],
     "text": "[locationStrangeGravity:1]\n{logEntry}"
   }

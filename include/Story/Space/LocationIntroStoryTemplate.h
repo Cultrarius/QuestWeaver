@@ -9,7 +9,7 @@
 namespace weave {
     class LocationIntroStoryTemplate : public StoryTemplate {
     public:
-        explicit LocationIntroStoryTemplate(std::string rawText) : StoryTemplate(rawText, {"location"}) { }
+        explicit LocationIntroStoryTemplate(std::string rawText) : StoryTemplate(rawText, {"solarSystem"}) { }
 
         StoryTemplateResult CreateStory(const EntityMap &requiredEntities, const WeaverGraph &graph,
                                         const WorldModel &worldModel) const override;
