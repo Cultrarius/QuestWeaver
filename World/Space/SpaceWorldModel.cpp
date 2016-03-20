@@ -3,8 +3,6 @@
 //
 
 #include <World/Space/SpaceWorldModel.h>
-#include <World/Space/Planet.h>
-#include <cmath>
 
 using namespace std;
 using namespace weave;
@@ -20,12 +18,13 @@ SpaceWorldModel::SpaceWorldModel(std::shared_ptr<RandomStream> randomStream) : W
     rs = randomStream;
 }
 
-ModelParameters SpaceWorldModel::GetParameters() {
-    return param;
+SpaceWorldModel::SpaceWorldModel(std::shared_ptr<RandomStream> randomStream, ModelParameters modelParameters) :
+        WorldModel(), param(modelParameters) {
+    rs = randomStream;
 }
 
-void SpaceWorldModel::SetParameters(ModelParameters parameters) {
-    this->param = parameters;
+ModelParameters SpaceWorldModel::GetParameters() const {
+    return param;
 }
 
 const NameGenerator &SpaceWorldModel::GetNameGenerator() const {
@@ -48,14 +47,15 @@ WorldModelAction SpaceWorldModel::CreatePlanet(NameType nameType, int distanceTo
 
 vector<WorldModelAction> SpaceWorldModel::CreateSolarSystem(NameType nameType, int planetCount) const {
     if (planetCount < 0) {
-        planetCount = rs->GetNormalIntInRange(1, 8);
+        planetCount = rs->GetNormalIntInRange(param.minPlanets, param.maxPlanets);
     }
 
     vector<WorldModelAction> actions;
     vector<NameType> planetNames = {NameType::DARK_THING, NameType::ALIEN, NameType::LIGHT_THING};
     vector<shared_ptr<Planet>> planets;
     for (int i = 1; i <= planetCount; i++) {
-        int distance = 50 + rs->GetNormalIntInRange(-10, 10);
+        int var = param.planetDistanceVariation;
+        int distance = param.planetDistanceBase + rs->GetNormalIntInRange(-var, var);
         auto nameType = planetNames[rs->GetRandomIndex(planetNames.size())];
         auto planetAction = CreatePlanet(nameType, distance);
         actions.push_back(planetAction);

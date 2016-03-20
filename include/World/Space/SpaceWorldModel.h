@@ -15,6 +15,10 @@ namespace weave {
     struct ModelParameters {
         int minLocation = 0;
         int maxLocation = 1000;
+        int minPlanets = 1;
+        int maxPlanets = 8;
+        int planetDistanceBase = 50;
+        int planetDistanceVariation = 10;
 
         template<class Archive>
         void serialize(Archive &ar) {
@@ -28,9 +32,9 @@ namespace weave {
 
         explicit SpaceWorldModel(std::shared_ptr<RandomStream> randomStream);
 
-        ModelParameters GetParameters();
+        SpaceWorldModel(std::shared_ptr<RandomStream> randomStream, ModelParameters modelParameters);
 
-        void SetParameters(ModelParameters parameters);
+        ModelParameters GetParameters() const;
 
         const NameGenerator &GetNameGenerator() const override;
 
@@ -47,7 +51,6 @@ namespace weave {
 
     private:
         ModelParameters param;
-
         SpaceNameGenerator nameGenerator;
 
         // serialization
