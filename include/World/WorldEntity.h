@@ -37,12 +37,12 @@ namespace weave {
          * Returns the type of the entity (e.g. "location" or "beast"). This type is used in the quest and story
          * templates to define which entities can be used for the quest generation.
          */
-        virtual std::string GetType() const = 0;
+        virtual std::string GetType() const noexcept = 0;
 
         /*!
          * Returns a string representation of the entity to be used in the quest generation.
          */
-        virtual std::string ToString() const = 0;
+        virtual std::string ToString() const noexcept = 0;
 
     protected:
         /*!

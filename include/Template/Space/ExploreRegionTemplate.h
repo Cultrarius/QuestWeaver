@@ -21,11 +21,15 @@ namespace weave {
                               std::vector<TemplateQuestDescription> descriptions,
                               FormatterType formatterType);
 
+    protected:
+        std::map<std::string, std::string> resolveAdditionalPlaceholders(
+                QuestPropertyValue questPropertyValue) const noexcept;
+
     private:
         std::string metaDataMarker = "explorationQuestLock";
 
         void gatherSolarSystemEntities(std::vector<WorldModelAction> *actions,
-                                    const weave::SpaceWorldModel &spaceModel) const;
+                                       const weave::SpaceWorldModel &spaceModel) const;
 
         void gatherSponsorEntities(std::vector<WorldModelAction> *actions, const SpaceWorldModel &spaceModel) const;
     };

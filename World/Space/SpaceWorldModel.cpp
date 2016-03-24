@@ -3,6 +3,10 @@
 //
 
 #include <World/Space/SpaceWorldModel.h>
+#include <World/Space/SpaceLocation.h>
+#include <World/Space/SpaceAgent.h>
+#include <World/Space/SolarSystem.h>
+#include <World/Space/DeadCivilization.h>
 
 using namespace std;
 using namespace weave;
@@ -69,4 +73,9 @@ vector<WorldModelAction> SpaceWorldModel::CreateSolarSystem(NameType nameType, i
     actions.push_back(WorldModelAction(WorldActionType::CREATE, solarSystem));
 
     return actions;
+}
+
+WorldModelAction SpaceWorldModel::CreateDeadCivilization(NameType nameType) const {
+    string name = nameGenerator.CreateName(nameType, rs);
+    return WorldModelAction(WorldActionType::CREATE, make_shared<DeadCivilization>(name));
 }

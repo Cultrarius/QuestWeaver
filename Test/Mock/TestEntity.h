@@ -12,9 +12,9 @@ namespace weave {
     struct TestEntity : public WorldEntity {
         TestEntity();
 
-        std::string ToString() const;
+        std::string ToString() const noexcept;
 
-        std::string GetType() const;
+        std::string GetType() const noexcept;
 
     private:
         explicit TestEntity(ID id);

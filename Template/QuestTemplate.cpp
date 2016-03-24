@@ -60,10 +60,17 @@ shared_ptr<WorldEntity> QuestPropertyValue::GetValue() const noexcept {
 }
 
 string QuestPropertyValue::GetValueString(FormatterType format) const noexcept {
+    return GetValueString(value, property.IsMandatory(), format);
+}
+
+string QuestPropertyValue::GetValueString(shared_ptr<WorldEntity> value, bool isMandatory, FormatterType format) {
+    if (!value) {
+        return "";
+    }
     if (format == FormatterType::HTML) {
         vector<string> classes;
         classes.push_back("entity");
-        classes.push_back(property.IsMandatory() ? "mandatory" : "optional");
+        classes.push_back(isMandatory ? "mandatory" : "optional");
         classes.push_back(value->GetType());
         return htmlEncloseWithTag(value->ToString(), "span", classes);
     }
@@ -83,6 +90,11 @@ string QuestTemplate::getBestFittingDescription(const vector<QuestPropertyValue>
                 string conditionLabel = "%" + questProperty.GetProperty().GetName();
                 string conditionValue = questProperty.GetValueString(formatterType);
                 weave::replaceAll(&descriptionText, conditionLabel, conditionValue);
+
+                for (auto entry : resolveAdditionalPlaceholders(questProperty)) {
+                    conditionValue = questProperty.GetValueString(formatterType);
+                    weave::replaceAll(&descriptionText, "%" + entry.first, entry.second);
+                }
             }
             return descriptionText;
         }
@@ -108,6 +120,10 @@ string QuestTemplate::getTitle(const vector<QuestPropertyValue> &questPropertyVa
         titleText = htmlEncloseWithTag(titleText, "span", "title");
     }
     return titleText;
+}
+
+map<string, string> QuestTemplate::resolveAdditionalPlaceholders(QuestPropertyValue) const noexcept {
+    return map<string, string>();
 }
 
 ID QuestTemplate::getEntityIdFromProperty(string propertyName,

@@ -7,7 +7,7 @@
 using namespace weave;
 using namespace std;
 
-std::string SpaceLocation::ToString() const {
+std::string SpaceLocation::ToString() const noexcept {
     return "(" + to_string(X) + ", " + to_string(Y) + ", " + to_string(Z) + ")";
 }
 
@@ -20,6 +20,6 @@ SpaceLocation::SpaceLocation(int x, int y, int z) : SpaceLocation(NoID, x, y, z)
 SpaceLocation::SpaceLocation() : SpaceLocation(0, 0, 0) {
 }
 
-std::string SpaceLocation::GetType() const {
+std::string SpaceLocation::GetType() const noexcept {
     return "location";
 }

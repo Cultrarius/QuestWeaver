@@ -4,6 +4,7 @@
 
 #include <Template/Space/ExploreRegionTemplate.h>
 #include <QuestModel/Space/ExploreRegionQuest.h>
+#include <World/Space/SolarSystem.h>
 
 using namespace std;
 using namespace weave;
@@ -85,4 +86,15 @@ shared_ptr<Quest> ExploreRegionTemplate::ToQuest(const vector<QuestPropertyValue
     ID solarSystem = getEntityIdFromProperty("solarSystem", questPropertyValues);
     ID sponsor = getEntityIdFromProperty("sponsor", questPropertyValues);
     return make_shared<ExploreRegionQuest>(questTitle, description, questStory, solarSystem, sponsor);
+}
+
+map<string, string> ExploreRegionTemplate::resolveAdditionalPlaceholders(QuestPropertyValue questValue) const noexcept {
+    map<std::string, std::string> result;
+    auto entity = questValue.GetValue();
+    if (entity->GetType() == "solarSystem") {
+        auto system = dynamic_pointer_cast<SolarSystem>(entity);
+        bool isMandatory = questValue.GetProperty().IsMandatory();
+        result["location"] = QuestPropertyValue::GetValueString(system->Location, isMandatory, formatterType);
+    }
+    return result;
 }

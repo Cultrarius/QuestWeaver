@@ -10,10 +10,10 @@ weave::TestEntity::TestEntity(weave::ID id) : WorldEntity(id) {
 weave::TestEntity::TestEntity() : TestEntity(NoID) {
 }
 
-std::string weave::TestEntity::ToString() const {
+std::string weave::TestEntity::ToString() const noexcept {
     return "TestEntity";
 }
 
-std::string weave::TestEntity::GetType() const {
+std::string weave::TestEntity::GetType() const noexcept {
     return "TestEntityType";
 }

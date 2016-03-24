@@ -18,9 +18,9 @@ namespace weave {
 
         Planet(float x, float y, int seed, std::string name);
 
-        std::string ToString() const override;
+        std::string ToString() const noexcept override;
 
-        std::string GetType() const override;
+        std::string GetType() const noexcept override;
 
     private:
         Planet(ID id, float x, float y, int seed, std::string name);

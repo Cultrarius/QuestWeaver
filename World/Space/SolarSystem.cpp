@@ -7,7 +7,7 @@
 using namespace weave;
 using namespace std;
 
-string SolarSystem::ToString() const {
+string SolarSystem::ToString() const noexcept {
     return Name;
 }
 
@@ -23,6 +23,6 @@ SolarSystem::SolarSystem() :
         SolarSystem(NoID, "", make_shared<SpaceLocation>(), vector<shared_ptr<Planet>>()) {
 }
 
-std::string SolarSystem::GetType() const {
+std::string SolarSystem::GetType() const noexcept {
     return "solarSystem";
 }

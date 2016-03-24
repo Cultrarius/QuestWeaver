@@ -17,9 +17,9 @@ namespace weave {
 
         SpaceLocation(int x, int y, int z);
 
-        std::string ToString() const override;
+        std::string ToString() const noexcept override;
 
-        std::string GetType() const override;
+        std::string GetType() const noexcept override;
 
     private:
         SpaceLocation(ID id, int x, int y, int z);

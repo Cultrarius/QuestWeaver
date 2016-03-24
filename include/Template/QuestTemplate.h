@@ -78,6 +78,11 @@ namespace weave {
          */
         std::string GetValueString(FormatterType format) const noexcept;
 
+        /*!
+         * Returns a formatted string version of the given WorldEntity.
+         */
+        static std::string GetValueString(std::shared_ptr<WorldEntity> value, bool isMandatory, FormatterType format);
+
     private:
         TemplateQuestProperty property;
         std::shared_ptr<WorldEntity> value;
@@ -199,6 +204,9 @@ namespace weave {
          */
         std::string getTitle(const std::vector<QuestPropertyValue> &questPropertyValues) const noexcept;
 
+        virtual std::map<std::string, std::string> resolveAdditionalPlaceholders(
+                QuestPropertyValue questPropertyValue) const noexcept;
+
         /*!
          * Returns the ID of the entitiy referenced by the property with the given name or returns 0 if no property
          * with such a name can be found.
@@ -206,10 +214,11 @@ namespace weave {
         static ID getEntityIdFromProperty(std::string propertyName,
                                           const std::vector<QuestPropertyValue> &questPropertyValues) noexcept;
 
+        FormatterType formatterType;
+
     private:
         std::string title;
         std::vector<TemplateQuestProperty> properties;
         std::vector<TemplateQuestDescription> descriptions;
-        FormatterType formatterType;
     };
 }

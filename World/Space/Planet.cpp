@@ -2,12 +2,12 @@
 // Created by michael on 16.03.16.
 //
 
-#include "Planet.h"
+#include "World/Space/Planet.h"
 
 using namespace weave;
 using namespace std;
 
-std::string Planet::ToString() const {
+std::string Planet::ToString() const noexcept {
     return Name;
 }
 
@@ -21,6 +21,6 @@ Planet::Planet(float x, float y, int seed, std::string name) : Planet(NoID, x, y
 Planet::Planet() : Planet(0, 0, 0, 0, "") {
 }
 
-std::string Planet::GetType() const {
+std::string Planet::GetType() const noexcept {
     return "planet";
 }

@@ -5,10 +5,7 @@
 #pragma once
 
 #include "../WorldModel.h"
-#include "SpaceLocation.h"
 #include "../../Core/WeaverUtils.h"
-#include "SpaceAgent.h"
-#include "SolarSystem.h"
 #include "SpaceNameGenerator.h"
 
 namespace weave {
@@ -48,6 +45,8 @@ namespace weave {
 
         std::vector<WorldModelAction> CreateSolarSystem(NameType nameType = NameType::LIGHT_THING,
                                                         int planetCount = -1) const;
+
+        WorldModelAction CreateDeadCivilization(NameType nameType = NameType::ALIEN) const;
 
     private:
         ModelParameters param;
