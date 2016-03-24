@@ -39,14 +39,15 @@ WorldModelAction SpaceWorldModel::CreateAgent(NameType nameType) const {
     return WorldModelAction(WorldActionType::CREATE, make_shared<SpaceAgent>(nameGenerator.CreateName(nameType, rs)));
 }
 
-WorldModelAction SpaceWorldModel::CreatePlanet(NameType nameType, int distanceToSun) const {
+WorldModelAction SpaceWorldModel::CreatePlanet(shared_ptr<SpaceLocation> location, NameType nameType,
+                                               int distanceToSun) const {
     float angle = rs->GetULongInRange(0, 3600) / 10.0f;
     float radians = static_cast<float>(angle * M_PI / 180);
     float x = distanceToSun * cos(radians);
     float y = distanceToSun * sin(radians);
     int seed = rs->GetInt();
     string name = nameGenerator.CreateName(nameType, rs);
-    return WorldModelAction(WorldActionType::CREATE, make_shared<Planet>(x, y, seed, name));
+    return WorldModelAction(WorldActionType::CREATE, make_shared<Planet>(x, y, seed, name, location));
 }
 
 vector<WorldModelAction> SpaceWorldModel::CreateSolarSystem(NameType nameType, int planetCount) const {
@@ -55,20 +56,22 @@ vector<WorldModelAction> SpaceWorldModel::CreateSolarSystem(NameType nameType, i
     }
 
     vector<WorldModelAction> actions;
+
+    auto locationAction = CreateLocation();
+    actions.push_back(locationAction);
+    shared_ptr<SpaceLocation> location = dynamic_pointer_cast<SpaceLocation>(locationAction.GetEntity());
+
     vector<NameType> planetNames = {NameType::DARK_THING, NameType::ALIEN, NameType::LIGHT_THING};
     vector<shared_ptr<Planet>> planets;
     for (int i = 1; i <= planetCount; i++) {
         int var = param.planetDistanceVariation;
         int distance = param.planetDistanceBase + rs->GetNormalIntInRange(-var, var);
         auto nameType = planetNames[rs->GetRandomIndex(planetNames.size())];
-        auto planetAction = CreatePlanet(nameType, distance);
+        auto planetAction = CreatePlanet(location, nameType, distance);
         actions.push_back(planetAction);
         planets.push_back(dynamic_pointer_cast<Planet>(planetAction.GetEntity()));
     }
 
-    auto locationAction = CreateLocation();
-    actions.push_back(locationAction);
-    shared_ptr<SpaceLocation> location = dynamic_pointer_cast<SpaceLocation>(locationAction.GetEntity());
     auto solarSystem = make_shared<SolarSystem>(nameGenerator.CreateName(nameType, rs), location, planets);
     actions.push_back(WorldModelAction(WorldActionType::CREATE, solarSystem));
 

@@ -5,6 +5,7 @@
 #pragma once
 
 #include "../WorldEntity.h"
+#include "SpaceLocation.h"
 
 namespace weave {
 
@@ -13,17 +14,18 @@ namespace weave {
         const float Y;
         const int Seed;
         const std::string Name;
+        const std::shared_ptr<SpaceLocation> Location;
 
         Planet();
 
-        Planet(float x, float y, int seed, std::string name);
+        Planet(float x, float y, int seed, std::string name, std::shared_ptr<SpaceLocation> location);
 
         std::string ToString() const noexcept override;
 
         std::string GetType() const noexcept override;
 
     private:
-        Planet(ID id, float x, float y, int seed, std::string name);
+        Planet(ID id, float x, float y, int seed, std::string name, std::shared_ptr<SpaceLocation> location);
 
         // serialization
         friend class cereal::access;
@@ -34,7 +36,8 @@ namespace weave {
                     CEREAL_NVP(X),
                     CEREAL_NVP(Y),
                     CEREAL_NVP(Seed),
-                    CEREAL_NVP(Name));
+                    CEREAL_NVP(Name),
+                    CEREAL_NVP(Location));
         }
 
         template<class Archive>
@@ -44,13 +47,15 @@ namespace weave {
             float Y;
             int Seed;
             std::string Name;
+            std::shared_ptr<SpaceLocation> Location;
 
             ar(cereal::make_nvp("id", id),
                CEREAL_NVP(X),
                CEREAL_NVP(Y),
                CEREAL_NVP(Seed),
-               CEREAL_NVP(Name));
-            construct(id, X, Y, Seed, Name);
+               CEREAL_NVP(Name),
+               CEREAL_NVP(Location));
+            construct(id, X, Y, Seed, Name, Location);
         }
     };
 }

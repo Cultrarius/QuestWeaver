@@ -11,9 +11,9 @@
 namespace weave {
 
     struct SolarSystem : public WorldEntity {
-        std::string Name;
-        std::shared_ptr<SpaceLocation> Location;
-        std::vector<std::shared_ptr<Planet>> Planets;
+        const std::string Name;
+        const std::shared_ptr<SpaceLocation> Location;
+        const std::vector<std::shared_ptr<Planet>> Planets;
 
         SolarSystem();
 

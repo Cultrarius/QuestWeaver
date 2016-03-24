@@ -7,6 +7,7 @@
 #include "../WorldModel.h"
 #include "../../Core/WeaverUtils.h"
 #include "SpaceNameGenerator.h"
+#include <World/Space/SpaceLocation.h>
 
 namespace weave {
     struct ModelParameters {
@@ -41,7 +42,8 @@ namespace weave {
 
         WorldModelAction CreateAgent(NameType nameType = NameType::LIGHT_PERSON) const;
 
-        WorldModelAction CreatePlanet(NameType nameType = NameType::DARK_THING, int distanceToSun = 0) const;
+        WorldModelAction CreatePlanet(std::shared_ptr<SpaceLocation> location,
+                                      NameType nameType = NameType::DARK_THING, int distanceToSun = 0) const;
 
         std::vector<WorldModelAction> CreateSolarSystem(NameType nameType = NameType::LIGHT_THING,
                                                         int planetCount = -1) const;
