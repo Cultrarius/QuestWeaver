@@ -23,13 +23,17 @@ std::shared_ptr<QuestTemplate> SpaceQuestTemplateFactory::createFromJsonValues(c
     const string &templateKey = root["key"].asString();
     if (templateKey == "ExploreRegionQuest") {
         return make_shared<ExploreRegionTemplate>(title, properties, descriptions, formatterType);
+    } else if (templateKey == "ScanPlanetQuest") {
+        return make_shared<ExploreRegionTemplate>(title, properties, descriptions, formatterType);
     } else {
         throw ContractFailedException("Unknown Space template key " + templateKey + "\n");
     }
 }
 
-const char *SpaceQuestTemplateFactory::getTemplateFile() const {
-    return "Space/ExploreRegionTemplate.qt";
+std::vector<const char *> SpaceQuestTemplateFactory::getTemplateFiles() const {
+    return {"Space/ExploreRegionTemplate.qt", "Space/ScanPlanetTemplate.qt"};
 }
+
+
 
 

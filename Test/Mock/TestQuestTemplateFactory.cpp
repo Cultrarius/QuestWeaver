@@ -17,6 +17,6 @@ shared_ptr<QuestTemplate> TestQuestTemplateFactory::createFromJsonValues(const J
     return make_shared<TestQuestTemplate>(properties, descriptions);
 }
 
-const char *TestQuestTemplateFactory::getTemplateFile() const {
-    return templateFile.c_str();
+std::vector<const char *> TestQuestTemplateFactory::getTemplateFiles() const {
+    return {templateFile.c_str()};
 }

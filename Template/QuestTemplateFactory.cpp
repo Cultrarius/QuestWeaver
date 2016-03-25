@@ -80,20 +80,21 @@ void QuestTemplateFactory::initialize() {
     isInitialized = true;
     templateMap.clear();
 
-    const char *fileName = getTemplateFile();
-    Value root = readJsonFromFile(fileName, dirs);
+    for (const char *fileName : getTemplateFiles()) {
+        Value root = readJsonFromFile(fileName, dirs);
 
-    // quick sanity check
-    string requiredMembers[] = {"key", "parent", "mandatory", "optional", "titles", "descriptions", "objectives"};
-    for (string member : requiredMembers) {
-        if (!root.isMember(member)) {
-            string errorMessage = "Missing member in template file! MEMBER: <";
-            errorMessage += member;
-            errorMessage += "> / FILE: ";
-            errorMessage += fileName;
-            throw ContractFailedException(errorMessage);
+        // quick sanity check
+        string requiredMembers[] = {"key", "parent", "mandatory", "optional", "titles", "descriptions", "objectives"};
+        for (string member : requiredMembers) {
+            if (!root.isMember(member)) {
+                string errorMessage = "Missing member in template file! MEMBER: <";
+                errorMessage += member;
+                errorMessage += "> / FILE: ";
+                errorMessage += fileName;
+                throw ContractFailedException(errorMessage);
+            }
         }
-    }
 
-    templateMap[root["key"].asString()] = root;
+        templateMap[root["key"].asString()] = root;
+    }
 }

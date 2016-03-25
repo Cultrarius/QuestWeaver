@@ -13,7 +13,7 @@ namespace weave {
 
         std::shared_ptr<QuestTemplate> createFromJsonValues(const Json::Value &root) const override;
 
-        const char *getTemplateFile() const override;
+        std::vector<const char *> getTemplateFiles() const override;
 
     private:
         std::string templateFile;

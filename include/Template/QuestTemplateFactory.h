@@ -43,7 +43,7 @@ namespace weave {
          */
         virtual std::shared_ptr<QuestTemplate> createFromJsonValues(const Json::Value &root) const = 0;
 
-        virtual const char *getTemplateFile() const = 0;
+        virtual std::vector<const char *> getTemplateFiles() const = 0;
 
         /*!
          * Helper function to extract quest properties from a JSON object.
