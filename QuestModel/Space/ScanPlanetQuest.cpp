@@ -2,7 +2,7 @@
 // Created by michael on 25.03.16.
 //
 
-#include "ScanPlanetQuest.h"
+#include "QuestModel/Space/ScanPlanetQuest.h"
 
 using namespace weave;
 using namespace std;
