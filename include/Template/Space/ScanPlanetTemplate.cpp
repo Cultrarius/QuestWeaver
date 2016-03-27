@@ -56,10 +56,10 @@ void ScanPlanetTemplate::gatherPlanetEntities(vector<PropertyCandidate> *candida
     string scanPercent = ScanPlanetQuest::metaDataMarker;
     auto newEntityActions = spaceModel.CreateSolarSystem();
     vector<WorldModelAction> actions;
-    shared_ptr<WorldEntity> newSolarSystem;
+    shared_ptr<WorldEntity> newPlanet;
     for (auto action : newEntityActions) {
-        if (action.GetEntity()->GetType() == "solarSystem") {
-            newSolarSystem = action.GetEntity();
+        if (action.GetEntity()->GetType() == "planet") {
+            newPlanet = action.GetEntity();
         }
         actions.push_back(action);
         MetaData metaData;
@@ -68,7 +68,7 @@ void ScanPlanetTemplate::gatherPlanetEntities(vector<PropertyCandidate> *candida
         WorldModelAction metaDataAction(WorldActionType::UPDATE, action.GetEntity(), metaData);
         actions.push_back(move(metaDataAction));
     }
-    candidates->push_back(PropertyCandidate(actions, newSolarSystem));
+    candidates->push_back(PropertyCandidate(actions, newPlanet));
 
     // search for existing unexplored planets
     for (auto entity : spaceModel.GetEntities()) {

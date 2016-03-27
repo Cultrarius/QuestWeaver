@@ -348,3 +348,39 @@ TEST_CASE("Explore quest", "[quest]") {
         REQUIRE(tickResult.GetWorldChanges().size() == 0);
     }
 }
+
+TEST_CASE("Scan planet quest", "[quest]") {
+    shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
+    TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
+    SpaceQuestTemplateFactory *factory = new SpaceQuestTemplateFactory();
+    engine.RegisterTemplateFactory(unique_ptr<SpaceQuestTemplateFactory>(factory));
+    SpaceWorldModel world(rs);
+
+    // Create a new scan planet quest manually
+    auto questTemplate = factory->CreateTemplate("ScanPlanetQuest");
+
+    TemplateQuestProperty property(true, "planet");
+    auto candidates = questTemplate->GetPropertyCandidates(property, world);
+
+    // it has to create a new solar system, since the world is empty
+    REQUIRE(candidates.size() == 1);
+    REQUIRE(candidates[0].GetValue()->GetType() == "planet");
+    REQUIRE(candidates[0].GetActions().size() > 2);
+
+    auto addSystemActions = world.CreateSolarSystem();
+    world.Execute(addSystemActions);
+    int planetCount = 0;
+    for (auto entity : world.GetEntities()) {
+        if (entity->GetType() == "planet") {
+            planetCount++;
+        }
+    }
+    REQUIRE(planetCount > 3);
+
+    candidates = questTemplate->GetPropertyCandidates(property, world);
+    REQUIRE((candidates.size() - 1) == planetCount);
+    for (uint64_t i = 1; i < candidates.size(); i++) {
+        REQUIRE(candidates[i].GetValue()->GetType() == "planet");
+        REQUIRE(candidates[i].GetActions().size() == 1);
+    }
+}
