@@ -23,7 +23,9 @@
         "deadCivilization",
         "sponsor"
       ],
-      "text": "We intercepted an encrypted message from %sponsor and from what we could decipher, planet %planet could hold some very valuable information. It looks like %planet was once a stronghold of the now vanished civilization %deadCivilization. Maybe we can still salvage some of their technology."
+      "text": "We intercepted an encrypted message from %sponsor and from what we could decipher, planet %planet could hold some very valuable information.
+      It looks like %planet was once a stronghold of the now vanished civilization %deadCivilization.
+      Maybe we can still salvage some of their technology."
     },
     {
       "conditions": [
@@ -38,9 +40,5 @@
       ],
       "text": "A data anomaly was found yesterday when processing the databanks for planet %planet. It could just be a memory error, but just to be sure you should go and scan the planet surface."
     }
-  ],
-  "objectives": [
-    "Travel to planet %planet and use your ship's scanner to explore the surface.",
-    "Travel to planet %planet and scan the surface with your ship's sensors."
   ]
 }

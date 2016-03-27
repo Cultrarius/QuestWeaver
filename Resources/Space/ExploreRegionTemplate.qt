@@ -25,8 +25,5 @@
       ],
       "text": "An anonymous source asks you to explore the solar system %solarSystem. Navigate to the coordinates %location on your star map to gather information."
     }
-  ],
-  "objectives": [
-    "Travel to the %solarSystem system and visit all of its planets"
   ]
 }

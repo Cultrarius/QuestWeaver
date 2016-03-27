@@ -28,8 +28,5 @@
       ],
       "text": "An anonymous source asks you to explore %location. Transmit your findings to the attached address."
     }
-  ],
-  "objectives": [
-    "Travel to the %location region"
   ]
 }

@@ -84,7 +84,7 @@ void QuestTemplateFactory::initialize() {
         Value root = readJsonFromFile(fileName, dirs);
 
         // quick sanity check
-        string requiredMembers[] = {"key", "parent", "mandatory", "optional", "titles", "descriptions", "objectives"};
+        string requiredMembers[] = {"key", "parent", "mandatory", "optional", "titles", "descriptions"};
         for (string member : requiredMembers) {
             if (!root.isMember(member)) {
                 string errorMessage = "Missing member in template file! MEMBER: <";
