@@ -20,7 +20,7 @@ shared_ptr<Quest> TestQuestTemplate::ToQuest(const vector<QuestPropertyValue> &q
     return make_shared<TestQuest>(title, description);
 }
 
-vector<WorldModelAction> TestQuestTemplate::GetPropertyCandidates(const TemplateQuestProperty &,
-                                                                  const WorldModel &) const {
-    return vector<WorldModelAction>();
+vector<PropertyCandidate> TestQuestTemplate::GetPropertyCandidates(const TemplateQuestProperty &,
+                                                                   const WorldModel &) const {
+    return vector<PropertyCandidate>();
 }

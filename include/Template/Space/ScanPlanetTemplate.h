@@ -13,8 +13,8 @@ namespace weave {
         std::shared_ptr<Quest> ToQuest(const std::vector<QuestPropertyValue> &questPropertyValues,
                                        const std::string &questStory) const override;
 
-        std::vector<WorldModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
-                                                            const WorldModel &worldModel) const override;
+        std::vector<PropertyCandidate> GetPropertyCandidates(const TemplateQuestProperty &property,
+                                                             const WorldModel &worldModel) const override;
 
         ScanPlanetTemplate(std::string title,
                            std::vector<TemplateQuestProperty> properties,
@@ -28,9 +28,11 @@ namespace weave {
     private:
         std::string metaDataMarker = "scanQuestLock";
 
-        void gatherPlanetEntities(std::vector<WorldModelAction> *actions,
-                                  const weave::SpaceWorldModel &spaceModel) const;
+        void gatherPlanetEntities(std::vector<PropertyCandidate> *candidates, const SpaceWorldModel &spaceModel) const;
 
-        void gatherSponsorEntities(std::vector<WorldModelAction> *actions, const SpaceWorldModel &spaceModel) const;
+        void gatherSponsorEntities(std::vector<PropertyCandidate> *candidates, const SpaceWorldModel &spaceModel) const;
+
+        void gatherCivilizationEntities(std::vector<PropertyCandidate> *candidates,
+                                        const SpaceWorldModel &spaceModel) const;
     };
 }

@@ -60,7 +60,7 @@ namespace weave {
 
         WeaverGraph createGraph(const QuestModel &questModel, const WorldModel &worldModel,
                                 std::unordered_set<std::string> mandatoryProperties,
-                                std::map<std::string, std::vector<WorldModelAction>> candidates) const;
+                                std::map<std::string, std::vector<PropertyCandidate>> candidates) const;
 
         void addGraphEdges(const QuestModel &questModel, WeaverGraph &graph,
                            std::unordered_set<ID> &candidateIds) const;

@@ -4,6 +4,7 @@
 
 #include <Template/Space/SpaceQuestTemplateFactory.h>
 #include <Template/Space/ExploreRegionTemplate.h>
+#include <Template/Space/ScanPlanetTemplate.h>
 
 using namespace std;
 using namespace Json;
@@ -24,7 +25,7 @@ std::shared_ptr<QuestTemplate> SpaceQuestTemplateFactory::createFromJsonValues(c
     if (templateKey == "ExploreRegionQuest") {
         return make_shared<ExploreRegionTemplate>(title, properties, descriptions, formatterType);
     } else if (templateKey == "ScanPlanetQuest") {
-        return make_shared<ExploreRegionTemplate>(title, properties, descriptions, formatterType);
+        return make_shared<ScanPlanetTemplate>(title, properties, descriptions, formatterType);
     } else {
         throw ContractFailedException("Unknown Space template key " + templateKey + "\n");
     }

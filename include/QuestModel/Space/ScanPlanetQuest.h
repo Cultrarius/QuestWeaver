@@ -1,5 +1,5 @@
 //
-// Created by michael on 10.10.15.
+// Created by michael on 25.03.16.
 //
 
 #pragma once
@@ -7,12 +7,12 @@
 #include "../Quest.h"
 
 namespace weave {
-    class ExploreRegionQuest : public Quest {
+    class ScanPlanetQuest : public Quest {
     public:
         static const std::string metaDataMarker;
 
-        ExploreRegionQuest(const std::string &title, const std::string &description, const std::string &story,
-                           ID locationId, ID sponsorId);
+        ScanPlanetQuest(const std::string &title, const std::string &description, const std::string &story,
+                        ID planetId, ID sponsorId);
 
         std::string GetType() const override;
 
@@ -24,7 +24,7 @@ namespace weave {
          * Can be used by subclasses for serialization purposes
          */
         cereal::NameValuePair<const ID &> getCerealLocation() const {
-            return cereal::make_nvp("solarSystem", targetLocation);
+            return cereal::make_nvp("planet", targetPlanet);
         }
 
         /*
@@ -35,11 +35,11 @@ namespace weave {
         }
 
     private:
-        ID targetLocation;
+        ID targetPlanet;
         ID sponsor;
 
-        ExploreRegionQuest(ID id, const std::string &title, const std::string &description,
-                           const std::string &story, ID location, ID sponsor);
+        ScanPlanetQuest(ID id, const std::string &title, const std::string &description,
+                        const std::string &story, ID planetId, ID sponsor);
 
         friend class cereal::access;
 
@@ -50,18 +50,18 @@ namespace weave {
         }
 
         template<class Archive>
-        static void load_and_construct(Archive &ar, cereal::construct<ExploreRegionQuest> &construct) {
+        static void load_and_construct(Archive &ar, cereal::construct<ScanPlanetQuest> &construct) {
             ID id;
             std::string title;
             std::string description;
             std::string story;
-            ID location;
+            ID targetPlanet;
             ID sponsor;
 
-            ar(id, title, description, story, location, sponsor);
-            construct(id, title, description, story, location, sponsor);
+            ar(id, title, description, story, targetPlanet, sponsor);
+            construct(id, title, description, story, targetPlanet, sponsor);
         }
     };
 }
 
-CEREAL_REGISTER_TYPE(weave::ExploreRegionQuest);
+CEREAL_REGISTER_TYPE(weave::ScanPlanetQuest);

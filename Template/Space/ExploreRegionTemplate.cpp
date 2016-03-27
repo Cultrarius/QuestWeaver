@@ -16,54 +16,62 @@ ExploreRegionTemplate::ExploreRegionTemplate(string title,
         : QuestTemplate(title, properties, descriptions, formatterType) {
 }
 
-vector<WorldModelAction> ExploreRegionTemplate::GetPropertyCandidates(const TemplateQuestProperty &property,
-                                                                      const WorldModel &worldModel) const {
-    vector<WorldModelAction> actions;
+vector<PropertyCandidate> ExploreRegionTemplate::GetPropertyCandidates(const TemplateQuestProperty &property,
+                                                                       const WorldModel &worldModel) const {
+    vector<PropertyCandidate> candidates;
     const SpaceWorldModel &spaceModel = (const SpaceWorldModel &) worldModel;
     if (property.GetName() == "solarSystem") {
-        gatherSolarSystemEntities(&actions, spaceModel);
+        gatherSolarSystemEntities(&candidates, spaceModel);
     } else if (property.GetName() == "sponsor") {
-        gatherSponsorEntities(&actions, spaceModel);
+        gatherSponsorEntities(&candidates, spaceModel);
     }
-    return actions;
+    return candidates;
 }
 
-void ExploreRegionTemplate::gatherSponsorEntities(vector<WorldModelAction> *actions,
+void ExploreRegionTemplate::gatherSponsorEntities(vector<PropertyCandidate> *candidates,
                                                   const SpaceWorldModel &spaceModel) const {
+    vector<WorldModelAction> actions;
     auto newEntityAction = spaceModel.CreateAgent();
-    actions->push_back(newEntityAction);
+    actions.push_back(newEntityAction);
 
     MetaData metaData;
     metaData.SetValue("relationToPlayer", 10);
     WorldModelAction metaDataAction(WorldActionType::UPDATE, newEntityAction.GetEntity(), metaData);
-    actions->push_back(move(metaDataAction));
+    actions.push_back(move(metaDataAction));
+
+    candidates->push_back(PropertyCandidate(actions, newEntityAction.GetEntity()));
 
     for (auto entity : spaceModel.GetEntities()) {
         if (entity->GetType() == "agent") {
             auto entityData = spaceModel.GetMetaData(entity->GetId());
             if (entityData.GetValue("relationToPlayer") >= 10) {
                 WorldModelAction modelAction(WorldActionType::KEEP, entity);
-                actions->push_back(move(modelAction));
+                candidates->push_back(PropertyCandidate(modelAction));
             }
         }
     }
 }
 
-void ExploreRegionTemplate::gatherSolarSystemEntities(vector<WorldModelAction> *actions,
+void ExploreRegionTemplate::gatherSolarSystemEntities(vector<PropertyCandidate> *candidates,
                                                       const SpaceWorldModel &spaceModel) const {
-
     string exploredPercent = ExploreRegionQuest::metaDataMarker;
     auto newEntityActions = spaceModel.CreateSolarSystem();
+    vector<WorldModelAction> actions;
+    shared_ptr<WorldEntity> newSolarSystem;
     for (auto action : newEntityActions) {
-        actions->push_back(action);
+        if (action.GetEntity()->GetType() == "solarSystem") {
+            newSolarSystem = action.GetEntity();
+        }
+        actions.push_back(action);
         MetaData metaData;
         metaData.SetValue(exploredPercent, 0);
         metaData.SetValue(metaDataMarker, 1);  // so it does not get picked by another exploration quest
         WorldModelAction metaDataAction(WorldActionType::UPDATE, action.GetEntity(), metaData);
-        actions->push_back(move(metaDataAction));
+        actions.push_back(move(metaDataAction));
     }
+    candidates->push_back(PropertyCandidate(actions, newSolarSystem));
 
-    // search for existing locations
+    // search for existing unexplored solar systems
     for (auto entity : spaceModel.GetEntities()) {
         if (entity->GetType() == "solarSystem") {
             auto entityData = spaceModel.GetMetaData(entity->GetId());
@@ -72,7 +80,7 @@ void ExploreRegionTemplate::gatherSolarSystemEntities(vector<WorldModelAction> *
                 metaData.SetValue(exploredPercent, 0);
                 metaData.SetValue(metaDataMarker, 1);
                 WorldModelAction modelAction(WorldActionType::UPDATE, entity, metaData);
-                actions->push_back(move(modelAction));
+                candidates->push_back(PropertyCandidate(modelAction));
             }
         }
     }

@@ -88,6 +88,24 @@ namespace weave {
         std::shared_ptr<WorldEntity> value;
     };
 
+    class PropertyCandidate {
+    public:
+        PropertyCandidate() noexcept;
+
+        explicit PropertyCandidate(WorldModelAction singleAction) noexcept;
+
+        PropertyCandidate(std::vector<WorldModelAction> actionList,
+                          std::shared_ptr<WorldEntity> candidateValue) noexcept;
+
+        std::shared_ptr<WorldEntity> GetValue() const noexcept;
+
+        std::vector<WorldModelAction> GetActions() const noexcept;
+
+    private:
+        std::vector<WorldModelAction> actions;
+        std::shared_ptr<WorldEntity> candidateValue;
+    };
+
 
     /*!
      * Wraps the quest description texts for the QuestTemplate.
@@ -179,15 +197,15 @@ namespace weave {
          *
          * For every candidate, the template may add some metadata (e.g. relationship changes caused by the quest
          * or markers to not choose the entity for another quest). If a candidate is chosen from the list,
-         * the corresponding WorldModelAction is executed in the world model.
+         * the corresponding WorldModelActions are executed in the world model.
          */
-        virtual std::vector<WorldModelAction> GetPropertyCandidates(const TemplateQuestProperty &property,
-                                                                    const WorldModel &worldModel) const = 0;
+        virtual std::vector<PropertyCandidate> GetPropertyCandidates(const TemplateQuestProperty &property,
+                                                                     const WorldModel &worldModel) const = 0;
 
         /*!
          * Returns a list of all the template parts that (mandatory) must be filled and (optional) can be filled with
          * world entities.
-         * Which entities can be used to fill a cartain TemplateQuestProperty is determined by the template itself, by
+         * Which entities can be used to fill a certain TemplateQuestProperty is determined by the template itself, by
          * the GetPropertyCandidates() method.
          */
         std::vector<TemplateQuestProperty> GetProperties() const noexcept;

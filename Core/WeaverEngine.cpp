@@ -13,7 +13,7 @@ EngineResult WeaverEngine::fillTemplate(shared_ptr<QuestTemplate> questTemplate,
                                         const WorldModel &worldModel,
                                         const StoryWriter &storyWriter) const {
     unordered_set<string> mandatory;
-    map<string, vector<WorldModelAction>> candidates;
+    map<string, vector<PropertyCandidate>> candidates;
     for (const TemplateQuestProperty &questProperty : questTemplate->GetProperties()) {
         candidates[questProperty.GetName()] = questTemplate->GetPropertyCandidates(questProperty, worldModel);
         if (questProperty.IsMandatory()) {
@@ -37,11 +37,13 @@ EngineResult WeaverEngine::fillTemplate(shared_ptr<QuestTemplate> questTemplate,
         }
         ID nodeId = iter->second.GetId();
         for (auto candidate : candidates[propertyName]) {
-            if (candidate.GetEntity()->GetId() == nodeId) {
-                modelActions.push_back(candidate);
-                QuestPropertyValue questValue(questProperty, candidate.GetEntity());
-                propertyValues.push_back(move(questValue));
+            if (candidate.GetValue()->GetId() != nodeId) {
+                continue;
             }
+            for (auto action : candidate.GetActions()) {
+                modelActions.push_back(action);
+            }
+            propertyValues.push_back(QuestPropertyValue(questProperty, candidate.GetValue()));
         }
     }
     StoryWriterParameters storyParams(graph, propertyValues, modelActions);
@@ -52,7 +54,7 @@ EngineResult WeaverEngine::fillTemplate(shared_ptr<QuestTemplate> questTemplate,
 
 WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldModel &worldModel,
                                       unordered_set<string> mandatory,
-                                      map<string, vector<WorldModelAction>> candidates) const {
+                                      map<string, vector<PropertyCandidate>> candidates) const {
     WeaverGraph graph;
     unordered_set<ID> candidateIds;
     for (auto pair : candidates) {
@@ -61,7 +63,7 @@ WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldM
         graph.CreateNodeGroup(groupName, isMandatory);
         unordered_set<ID> seenIds;
         for (auto candidate : pair.second) {
-            ID id = candidate.GetEntity()->GetId();
+            ID id = candidate.GetValue()->GetId();
             if (seenIds.count(id) > 0) {
                 continue;
             }

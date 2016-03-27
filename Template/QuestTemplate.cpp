@@ -46,6 +46,23 @@ QuestTemplate::QuestTemplate(string title, vector<TemplateQuestProperty> propert
     this->formatterType = formatterType;
 }
 
+PropertyCandidate::PropertyCandidate() noexcept { }
+
+PropertyCandidate::PropertyCandidate(WorldModelAction singleAction) noexcept :
+        actions({singleAction}), candidateValue(singleAction.GetEntity()) { }
+
+PropertyCandidate::PropertyCandidate(vector<WorldModelAction> actionList,
+                                     shared_ptr<WorldEntity> candidateValue) noexcept :
+        actions(actionList), candidateValue(candidateValue) { }
+
+std::shared_ptr<WorldEntity> PropertyCandidate::GetValue() const noexcept {
+    return candidateValue;
+}
+
+std::vector<WorldModelAction> PropertyCandidate::GetActions() const noexcept {
+    return actions;
+}
+
 QuestPropertyValue::QuestPropertyValue(const TemplateQuestProperty &property,
                                        shared_ptr<WorldEntity> value) noexcept :
         property(property), value(value) {

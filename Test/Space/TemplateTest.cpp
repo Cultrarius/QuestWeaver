@@ -135,9 +135,11 @@ TEST_CASE("Templates", "[template]") {
                     for (auto candidate : candidates) {
                         INFO("Template Key: " + templateKey + ", Property: " + property.GetName() + ", Seed: " +
                              to_string(i));
-                        REQUIRE((candidate.GetActionType() == WorldActionType::CREATE ||
-                                 candidate.GetActionType() == WorldActionType::UPDATE));
-                        REQUIRE(candidate.GetEntity().get() != nullptr);
+                        for (auto action : candidate.GetActions()) {
+                            REQUIRE((action.GetActionType() == WorldActionType::CREATE ||
+                                     action.GetActionType() == WorldActionType::UPDATE));
+                        }
+                        REQUIRE(candidate.GetValue().get() != nullptr);
                     }
                 }
             }
@@ -153,10 +155,14 @@ TEST_CASE("Templates", "[template]") {
                 vector<QuestPropertyValue> questValues;
                 for (auto property : tp->GetProperties()) {
                     auto candidates = tp->GetPropertyCandidates(property, *worldModel);
+                    vector<WorldModelAction> actions;
                     for (auto candidate : candidates) {
-                        questValues.push_back(QuestPropertyValue(property, candidate.GetEntity()));
+                        questValues.push_back(QuestPropertyValue(property, candidate.GetValue()));
+                        for (auto action : candidate.GetActions()) {
+                            actions.push_back(action);
+                        }
                     }
-                    worldModel->Execute(candidates);
+                    worldModel->Execute(actions);
                 }
 
                 INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));
@@ -183,10 +189,14 @@ TEST_CASE("Templates", "[template]") {
                         continue;
                     }
                     auto candidates = tp->GetPropertyCandidates(property, *worldModel);
+                    vector<WorldModelAction> actions;
                     for (auto candidate : candidates) {
-                        questValues.push_back(QuestPropertyValue(property, candidate.GetEntity()));
+                        questValues.push_back(QuestPropertyValue(property, candidate.GetValue()));
+                        for (auto action : candidate.GetActions()) {
+                            actions.push_back(action);
+                        }
                     }
-                    worldModel->Execute(candidates);
+                    worldModel->Execute(actions);
                 }
 
                 INFO("Template Key: " + templateKey + ", Seed: " + to_string(i));

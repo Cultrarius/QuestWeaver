@@ -29,7 +29,8 @@ set(SOURCE_FILES QuestWeaver.cpp Core/WeaverEngine.cpp Template/TemplateEngine.c
         World/WorldListener.cpp Story/StoryWriter.cpp Story/StoryTemplateFactory.cpp Story/StoryTemplate.cpp
         Story/Space/CommonSpaceStoryFactory.cpp include/Story/Space/AgentIntroStoryTemplate.h Story/Nugget.cpp
         Story/Space/AgentIntroStoryTemplate.cpp Story/Space/LocationIntroStoryTemplate.cpp
-        World/Space/SpaceNameGenerator.cpp include/Core/NameGen/TokenNameGenerator.cpp World/Space/Planet.cpp World/Space/DeadCivilization.cpp include/World/Space/DeadCivilization.h include/Template/Space/ScanPlanetTemplate.cpp include/Template/Space/ScanPlanetTemplate.h)
+        World/Space/SpaceNameGenerator.cpp include/Core/NameGen/TokenNameGenerator.cpp World/Space/Planet.cpp
+        World/Space/DeadCivilization.cpp include/Template/Space/ScanPlanetTemplate.cpp include/QuestModel/Space/ScanPlanetQuest.cpp include/QuestModel/Space/ScanPlanetQuest.h)
 
 add_executable(QuestWeaverTest ${SOURCE_FILES} Test/catch.hpp Test/TestRunner.cpp Test/WeaverGraphTest.cpp
         Test/WeaverUtilsTest.cpp Test/Space/TemplateTest.cpp Test/Space/SerializationTest.cpp Test/Space/ModelTest.cpp

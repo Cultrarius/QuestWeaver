@@ -61,18 +61,18 @@ namespace weave {
         /*!
          * Returns the type of change produced by this action.
          */
-        WorldActionType GetActionType() const;
+        WorldActionType GetActionType() const noexcept;
 
         /*!
          * Returns the entity being changed in the world model.
          */
-        std::shared_ptr<WorldEntity> GetEntity() const;
+        std::shared_ptr<WorldEntity> GetEntity() const noexcept;
 
         /*!
          * Returns the new metadata for the given entity. If the actionType is KEEP or DELETE, then this data
          * is not used by the world model.
          */
-        MetaData GetMetaData() const;
+        MetaData GetMetaData() const noexcept;
 
     private:
         WorldActionType actionType;
