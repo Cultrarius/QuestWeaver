@@ -1,13 +1,8 @@
 {
   "parent": "Space",
   "key": "ScanPlanetQuest",
-  "mandatory": [
-    "planet"
-  ],
-  "optional": [
-    "sponsor",
-    "deadCivilization"
-  ],
+  "mandatory": ["planet"],
+  "optional": ["sponsor", "deadCivilization"],
   "titles": [
     "Explore planet surface",
     "Scan planet surface",
@@ -18,32 +13,14 @@
   ],
   "descriptions": [
     {
-      "conditions": [
-        "planet",
-        "deadCivilization",
-        "sponsor"
-      ],
-      "text": "We intercepted an encrypted message from %sponsor and from what we could decipher, planet %planet could hold some very valuable information.
-      It looks like %planet was once a stronghold of the now vanished civilization %deadCivilization.
-      Maybe we can still salvage some of their technology.
-      The planet can be found at location %location on the star map."
-    },
-    {
-      "conditions": [
-        "planet",
-        "deadCivilization"
-      ],
-      "text": "It looks like %planet was once a stronghold of the now vanished civilization %deadCivilization.
-      If there is any of their technology left, we should try and find it.
-      The planet can be found at location %location on the star map."
-    },
-    {
-      "conditions": [
-        "planet"
-      ],
-      "text": "A data anomaly was found yesterday when processing the databanks for planet %planet.
-      It could just be a memory error, but just to be sure you should go and scan the planet surface.
-      The planet can be found at location %location on the star map."
+      "conditions": ["planet", "deadCivilization", "sponsor"],
+      "text": "We intercepted an encrypted message from %sponsor and from what we could decipher, planet %planet could hold some very valuable information. It looks like %planet was once a stronghold of the now vanished civilization %deadCivilization. Maybe we can still salvage some of their technology. The planet can be found at location %location on the star map."
+    }, {
+      "conditions": ["planet", "deadCivilization"],
+      "text": "It looks like %planet was once a stronghold of the now vanished civilization %deadCivilization. If there is any of their technology left, we should try and find it. The planet can be found at location %location on the star map."
+    }, {
+      "conditions": ["planet"],
+      "text": "A data anomaly was found yesterday when processing the databanks for planet %planet. It could just be a memory error, but just to be sure you should go and scan the planet surface. The planet can be found at location %location on the star map."
     }
   ]
 }

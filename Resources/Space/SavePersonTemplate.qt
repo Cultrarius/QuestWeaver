@@ -1,31 +1,16 @@
 {
   "parent": "Space",
   "key": "SavePersonQuest",
-  "mandatory": [
-    "friend",
-    "location"
-  ],
-  "optional": [
-    "sponsor",
-    "reason",
-    "kidnapper"
-  ],
-  "titles": [
-    "Save your friend!",
-    "Travel to %location to save %friend"
-  ],
+  "mandatory": ["friend", "location"],
+  "optional": ["sponsor", "reason", "kidnapper"],
+  "titles": ["Save your friend!", "Travel to %location to save %friend"],
   "descriptions": [
     {
-      "conditions": [
-        "location",
-        "sponsor"
-      ],
+      "conditions": ["location", "sponsor"],
       "text": "%sponsor generously asks you to explore %location and inform them about anything interesting you find."
     },
     {
-      "conditions": [
-        "location"
-      ],
+      "conditions": ["location"],
       "text": "An anonymous source asks you to explore %location. Transmit your findings to the attached address."
     }
   ]
