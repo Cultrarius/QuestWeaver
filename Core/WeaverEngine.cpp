@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <iterator>
 #include <Core/WeaverEngine.h>
 
 using namespace std;
@@ -48,7 +49,7 @@ EngineResult WeaverEngine::fillTemplate(shared_ptr<QuestTemplate> questTemplate,
     }
     StoryWriterParameters storyParams(graph, propertyValues, modelActions);
     Story storyResult = storyWriter.CreateStory(storyParams);
-    std::move(storyResult.worldActions.begin(), storyResult.worldActions.end(), std::back_inserter(modelActions));
+    std::move(storyResult.worldActions.begin(), storyResult.worldActions.end(), back_inserter(modelActions));
     return EngineResult(modelActions, propertyValues, storyResult.text);
 }
 
