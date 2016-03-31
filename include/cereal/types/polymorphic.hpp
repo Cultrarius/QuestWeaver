@@ -30,6 +30,12 @@
 #ifndef CEREAL_TYPES_POLYMORPHIC_HPP_
 #define CEREAL_TYPES_POLYMORPHIC_HPP_
 
+#ifdef WIN32
+#pragma warning( push )
+#pragma warning( disable: 4530 )
+namespace std{ typedef type_info type_info; }
+#endif
+
 #include <cereal/cereal.hpp>
 #include <cereal/types/memory.hpp>
 
@@ -37,6 +43,8 @@
 #include <cereal/details/helpers.hpp>
 #include <cereal/details/traits.hpp>
 #include <cereal/details/polymorphic_impl.hpp>
+
+
 
 #ifdef _MSC_VER
 #define STATIC_CONSTEXPR static
@@ -450,6 +458,10 @@ namespace cereal {
         binding.unique_ptr(&ar, result);
         ptr.reset(static_cast<T *>(result.release()));
     }
+
+#ifdef WIN32
+#pragma warning( pop )
+#endif
 
 #undef UNREGISTERED_POLYMORPHIC_EXCEPTION
 } // namespace cereal
