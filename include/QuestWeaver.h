@@ -111,12 +111,12 @@ namespace weave {
         bool ChangeQuestState(QuestModelAction questAction);
 
         /*!
-         * Returns an immutable reference to the world model.
-         * To change the world model, use the Tick() method which gathers changes from the quests.
+         * Returns a reference to the world model.
+         * To change the world model, you should consider to use the Tick() method which gathers changes from the quests.
          *
          * After the quest system was deserialized, the world model listener has to be registered again.
          */
-        const WorldModel &GetWorldModel() const;
+        WorldModel &GetWorldModel() const;
 
         /*!
          * Serializes the whole quest system including the quest model and world model.
