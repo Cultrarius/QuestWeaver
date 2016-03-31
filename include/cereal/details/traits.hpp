@@ -1154,9 +1154,9 @@ namespace cereal {
         namespace detail {
             struct shared_from_this_wrapper {
                 template<class U>
-                static auto check(U const &t) -> decltype(::cereal::access::shared_from_this(t), std::true_type());
+                static auto test(U const &t) -> decltype(::cereal::access::shared_from_this(t), std::true_type());
 
-                static auto check(...) -> decltype(std::false_type());
+                static auto test(...) -> decltype(std::false_type());
 
                 template<class U>
                 static auto get(U const &t) -> decltype(t.shared_from_this());
@@ -1165,7 +1165,7 @@ namespace cereal {
 
         //! Determine if T or any base class of T has inherited from std::enable_shared_from_this
         template<class T>
-        struct has_shared_from_this : decltype(detail::shared_from_this_wrapper::check(std::declval<T>())) {
+        struct has_shared_from_this : decltype(detail::shared_from_this_wrapper::test(std::declval<T>())) {
         };
 
         //! Get the type of the base class of T which inherited from std::enable_shared_from_this
@@ -1202,7 +1202,7 @@ namespace cereal {
         template<typename T, typename A>
         struct has_member_load_and_construct : std::integral_constant<bool,
                 std::is_same<decltype(access::load_and_construct<T>(std::declval<A &>(),
-                                                                    std::declval<::cereal::construct<T> &>())), void>::value> {
+                                                                    std::declval< ::cereal::construct<T> &>())), void>::value> {
         };
 
         // ######################################################################
@@ -1210,7 +1210,7 @@ namespace cereal {
         template<typename T, typename A>
         struct has_non_member_load_and_construct : std::integral_constant<bool,
                 std::is_same<decltype(LoadAndConstruct<T>::load_and_construct(std::declval<A &>(),
-                                                                              std::declval<::cereal::construct<T> &>())), void>::value> {
+                                                                              std::declval< ::cereal::construct<T> &>())), void>::value> {
         };
 
         // ######################################################################
