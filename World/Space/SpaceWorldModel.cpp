@@ -2,6 +2,8 @@
 // Created by michael on 06.10.15.
 //
 
+#define _USE_MATH_DEFINES
+#include <cmath> 
 #include <World/Space/SpaceWorldModel.h>
 #include <World/Space/SpaceLocation.h>
 #include <World/Space/SpaceAgent.h>
