@@ -15,8 +15,9 @@ namespace weave {
         int maxLocation = 1000;
         int minPlanets = 1;
         int maxPlanets = 8;
-        int planetDistanceBase = 50;
-        int planetDistanceVariation = 10;
+        int planetDistanceBase = 3000;
+        int planetDistanceAverage = 5000;
+        int planetDistanceVariation = 2000;
 
         template<class Archive>
         void serialize(Archive &ar) {

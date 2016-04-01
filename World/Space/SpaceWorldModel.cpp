@@ -14,9 +14,9 @@ using namespace std;
 using namespace weave;
 
 WorldModelAction SpaceWorldModel::CreateLocation() const {
-    int x = rs->GetIntInRange(param.minLocation, param.maxLocation);
-    int y = rs->GetIntInRange(param.minLocation, param.maxLocation);
-    int z = rs->GetIntInRange(param.minLocation, param.maxLocation);
+    int x = rs->GetNormalIntInRange(-param.maxLocation, param.maxLocation);
+    int y = rs->GetNormalIntInRange(-param.maxLocation, param.maxLocation);
+    int z = rs->GetNormalIntInRange(-param.maxLocation, param.maxLocation);
     return WorldModelAction(WorldActionType::CREATE, make_shared<SpaceLocation>(x, y, z));
 }
 
@@ -63,11 +63,18 @@ vector<WorldModelAction> SpaceWorldModel::CreateSolarSystem(NameType nameType, i
     actions.push_back(locationAction);
     shared_ptr<SpaceLocation> location = dynamic_pointer_cast<SpaceLocation>(locationAction.GetEntity());
 
+    vector<int> availableRings;
+    for (int i = 1; i <= param.maxPlanets; i++) {
+        availableRings.push_back(i);
+    }
     vector<NameType> planetNames = {NameType::DARK_THING, NameType::ALIEN, NameType::LIGHT_THING};
     vector<shared_ptr<Planet>> planets;
     for (int i = 1; i <= planetCount; i++) {
+        uint64_t ringIndex = rs->GetRandomIndex(availableRings.size());
+        int ring = availableRings[ringIndex];
+        availableRings.erase(availableRings.begin() + ringIndex);
         int var = param.planetDistanceVariation;
-        int distance = param.planetDistanceBase + rs->GetNormalIntInRange(-var, var);
+        int distance = param.planetDistanceBase + ring * param.planetDistanceAverage + rs->GetNormalIntInRange(-var, var);
         auto nameType = planetNames[rs->GetRandomIndex(planetNames.size())];
         auto planetAction = CreatePlanet(location, nameType, distance);
         actions.push_back(planetAction);
