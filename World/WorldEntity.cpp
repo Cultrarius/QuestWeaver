@@ -6,6 +6,6 @@
 
 using namespace weave;
 
-ID weave::WorldEntity::GetId() {
+ID weave::WorldEntity::GetId() const {
     return id;
 }

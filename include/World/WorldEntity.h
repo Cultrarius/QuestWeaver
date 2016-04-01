@@ -31,7 +31,7 @@ namespace weave {
         /*!
          * Returns the entity's ID.
          */
-        ID GetId();
+        ID GetId() const;
 
         /*!
          * Returns the type of the entity (e.g. "location" or "beast"). This type is used in the quest and story
