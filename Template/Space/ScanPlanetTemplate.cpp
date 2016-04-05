@@ -5,6 +5,7 @@
 #include "Template/Space/ScanPlanetTemplate.h"
 #include <QuestModel/Space/ScanPlanetQuest.h>
 #include <World/Space/Planet.h>
+#include <World/Space/DeadCivilization.h>
 
 using namespace std;
 using namespace weave;
@@ -43,7 +44,7 @@ map<string, string> ScanPlanetTemplate::resolveAdditionalPlaceholders(
         QuestPropertyValue questPropertyValue) const noexcept {
     map<string, string> result;
     auto entity = questPropertyValue.GetValue();
-    if (entity->GetType() == "planet") {
+    if (entity->GetType() == Planet::Type) {
         auto system = dynamic_pointer_cast<Planet>(entity);
         bool isMandatory = questPropertyValue.GetProperty().IsMandatory();
         result["location"] = QuestPropertyValue::GetValueString(system->Location, isMandatory, formatterType);
@@ -72,7 +73,7 @@ void ScanPlanetTemplate::gatherPlanetEntities(vector<PropertyCandidate> *candida
 
     // search for existing unexplored planets
     for (auto entity : spaceModel.GetEntities()) {
-        if (entity->GetType() == "planet") {
+        if (entity->GetType() == Planet::Type) {
             auto entityData = spaceModel.GetMetaData(entity->GetId());
             if (!entityData.HasValue(metaDataMarker) && entityData.GetValue(scanPercent) == 0) {
                 MetaData metaData;
@@ -115,7 +116,7 @@ void ScanPlanetTemplate::gatherCivilizationEntities(vector<PropertyCandidate> *c
     candidates->push_back(PropertyCandidate(newEntityAction));
 
     for (auto entity : spaceModel.GetEntities()) {
-        if (entity->GetType() == "deadCivilization") {
+        if (entity->GetType() == DeadCivilization::Type) {
             WorldModelAction modelAction(WorldActionType::KEEP, entity);
             candidates->push_back(PropertyCandidate(modelAction));
         }

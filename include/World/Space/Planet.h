@@ -10,6 +10,8 @@
 namespace weave {
 
     struct Planet : public WorldEntity {
+        static const std::string Type;
+
         const float X;
         const float Y;
         const int Seed;

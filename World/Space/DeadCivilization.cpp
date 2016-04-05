@@ -7,6 +7,8 @@
 using namespace weave;
 using namespace std;
 
+const string DeadCivilization::Type = "deadCivilization";
+
 std::string DeadCivilization::ToString() const noexcept {
     return Name;
 }
@@ -21,5 +23,5 @@ DeadCivilization::DeadCivilization() : DeadCivilization(0, "") {
 }
 
 std::string DeadCivilization::GetType() const noexcept {
-    return "deadCivilization";
+    return Type;
 }

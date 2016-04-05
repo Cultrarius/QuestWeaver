@@ -7,6 +7,8 @@
 using namespace weave;
 using namespace std;
 
+const string Planet::Type = "planet";
+
 std::string Planet::ToString() const noexcept {
     return Name;
 }
@@ -23,5 +25,5 @@ Planet::Planet() : Planet(0, 0, 0, 0, "", make_shared<SpaceLocation>()) {
 }
 
 std::string Planet::GetType() const noexcept {
-    return "planet";
+    return Type;
 }
