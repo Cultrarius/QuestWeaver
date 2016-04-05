@@ -31,13 +31,69 @@ QuestWeaver::QuestWeaver(WeaverConfig &config) {
     }
 }
 
-shared_ptr<Quest> QuestWeaver::CreateNewQuest() {
-    auto questTemplate = templates->GetTemplateForNewQuest();
-    EngineResult result = engine->fillTemplate(questTemplate, *quests, *world, *stories);
-    world->Execute(result.GetModelActions());
-    shared_ptr<Quest> newQuest = questTemplate->ToQuest(result.GetQuestPropertyValues(), result.GetStory());
-    quests->RegisterNew(newQuest, result.GetQuestPropertyValues());
-    return newQuest;
+vector<shared_ptr<Quest>> QuestWeaver::CreateNewQuests() {
+    vector<QuestCandidate> newQuestCandidates;
+    bool hasPriorityQuests = false;
+    int maxScore = 0;
+
+    // gather quest candidates
+    for (auto questTemplate : templates->GetTemplatesForNewQuest(*world, *quests)) {
+        EngineResult result = engine->fillTemplate(questTemplate, *quests, *world, *stories);
+        shared_ptr<Quest> newQuest = questTemplate->ToQuest(result.GetQuestPropertyValues(), result.GetStory());
+        int score = 0;
+        if (questTemplate->HasPriority()) {
+            hasPriorityQuests = true;
+        } else {
+            for (auto oldQuest : quests->GetQuests()) {
+                if (newQuest->GetType() == oldQuest->GetType()) {
+                    score++;
+                }
+            }
+            maxScore = max(maxScore, score);
+        }
+        newQuestCandidates.push_back({newQuest, result, score, questTemplate->HasPriority()});
+    }
+
+    // shuffle candidates, then sort by score
+    auto begin = newQuestCandidates.begin();
+    auto end = newQuestCandidates.end();
+    for (auto iter = begin + 1; iter != end; iter++) {
+        auto iter2 = begin + randomStream->GetRandomIndex((iter - begin) + 1);
+        if (iter != iter2) {
+            iter_swap(iter, iter2);
+        }
+    }
+    auto comparator = [](const QuestCandidate &a, const QuestCandidate &b) -> bool {
+        return a.score < b.score;
+    };
+    stable_sort(newQuestCandidates.begin(), newQuestCandidates.end(), comparator);
+
+    // randomly select a minimum required score
+    vector<shared_ptr<Quest>> newQuests;
+    int selectedScore = -1;
+    while (selectedScore < 0) {
+        selectedScore = randomStream->GetNormalIntInRange(-maxScore, maxScore);
+    }
+
+    // select the fitting candidate(s)
+    for (auto candidate : newQuestCandidates) {
+        if (hasPriorityQuests) {
+            if (candidate.isPriorityQuest) {
+                world->Execute(candidate.result.GetModelActions());
+                quests->RegisterNew(candidate.quest, candidate.result.GetQuestPropertyValues());
+                newQuests.push_back(candidate.quest);
+            }
+            continue;
+        }
+        if (candidate.score >= selectedScore) {
+            world->Execute(candidate.result.GetModelActions());
+            quests->RegisterNew(candidate.quest, candidate.result.GetQuestPropertyValues());
+            newQuests.push_back(candidate.quest);
+            break;
+        }
+
+    }
+    return newQuests;
 }
 
 std::vector<std::shared_ptr<Quest>> QuestWeaver::GetQuestsWithState(QuestState state) const {

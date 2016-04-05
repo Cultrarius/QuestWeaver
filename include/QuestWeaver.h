@@ -69,16 +69,16 @@ namespace weave {
         void ChangeWorkingDirectories(Directories directories);
 
         /*!
-         * Creates a new quest.
+         * Creates at least one new quest.
          * This node does not have any input because it is the responsibility of the quest weaver to decide which quest
          * should be next.
          * The previously registered template factories and the world model are used to create the quest.
          *
-         * Once a quest is created, it is active in the world (and most likely already changed it).
+         * Once a quest is created, it is active in the world (and most likely already started to change it).
          * The caller of this API cannot decide to undo that or delete the quest, it can only change the state to
          * a "completed" type.
          */
-        std::shared_ptr<Quest> CreateNewQuest();
+        std::vector<std::shared_ptr<Quest>> CreateNewQuests();
 
         /*!
          * Advances the quest system state by ticking all quests and executing their desired world and quest changes.
@@ -152,6 +152,13 @@ namespace weave {
         std::unique_ptr<WorldModel> world;
         std::unique_ptr<StoryWriter> stories;
         std::shared_ptr<RandomStream> randomStream;
+
+        struct QuestCandidate {
+            std::shared_ptr<Quest> quest;
+            EngineResult result;
+            int score;
+            bool isPriorityQuest;
+        };
 
         // serialization
         friend class cereal::access;

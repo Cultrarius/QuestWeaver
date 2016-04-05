@@ -304,7 +304,7 @@ TEST_CASE("Serialization QuestWeaver", "[serialize]") {
     WeaverConfig config = TestHelper::CreateDebugConfig();
     config.formatterType = FormatterType::HTML;
     QuestWeaver weaver(config);
-    shared_ptr<Quest> newQuest = weaver.CreateNewQuest();
+    shared_ptr<Quest> newQuest = weaver.CreateNewQuests()[0];
     string title = newQuest->GetTitle();
     REQUIRE_FALSE(title.empty());
     weaver.Tick(1);
@@ -336,7 +336,7 @@ TEST_CASE("Serialization QuestWeaver", "[serialize]") {
     REQUIRE(weaver.GetWorldModel().GetEntities().size() == deserialized.GetWorldModel().GetEntities().size());
     REQUIRE(weaver.GetAllQuests().size() == deserialized.GetAllQuests().size());
 
-    newQuest = deserialized.CreateNewQuest();
+    newQuest = deserialized.CreateNewQuests()[0];
     REQUIRE_FALSE(newQuest->GetTitle().empty());
     REQUIRE(weaver.GetAllQuests().size() == deserialized.GetAllQuests().size() - 1);
 }

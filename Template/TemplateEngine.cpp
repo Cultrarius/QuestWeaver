@@ -8,16 +8,22 @@
 using namespace std;
 using namespace weave;
 
-shared_ptr<QuestTemplate> TemplateEngine::GetTemplateForNewQuest() {
+vector<shared_ptr<QuestTemplate>> TemplateEngine::GetTemplatesForNewQuest(const WorldModel &worldModel,
+                                                                          const QuestModel &questModel) {
     if (factories.size() == 0) {
         throw ContractFailedException("No factory defined to create template.\n");
     }
-    auto factoryIndex = randomStream->GetRandomIndex(factories.size());
-    const unique_ptr<QuestTemplateFactory> &factory = factories.at(factoryIndex);
-    auto factoryKeys = factory->GetTemplateKeys();
-    auto templateIndex = randomStream->GetRandomIndex(factoryKeys.size());
-    auto key = factoryKeys.at(templateIndex);
-    return factory->CreateTemplate(key);
+    vector<shared_ptr<QuestTemplate>> templates;
+    for (auto &factory : factories) {
+        auto factoryKeys = factory->GetTemplateKeys();
+        for (auto key : factoryKeys) {
+            auto questTemplate = factory->CreateTemplate(key);
+            if (questTemplate->IsValid(worldModel, questModel)) {
+                templates.push_back(questTemplate);
+            }
+        }
+    }
+    return templates;
 }
 
 void TemplateEngine::RegisterTemplateFactory(std::unique_ptr<QuestTemplateFactory> factory) {
@@ -31,12 +37,11 @@ TemplateEngine::TemplateEngine(std::shared_ptr<RandomStream> randomStream, Direc
         randomStream(randomStream), dirs(dirs), format(format) {
 }
 
-void weave::TemplateEngine::ChangeDirectories(Directories newDirs)
-{
-	dirs = newDirs;
+void weave::TemplateEngine::ChangeDirectories(Directories newDirs) {
+    dirs = newDirs;
     for (const auto &factory : factories) {
-		factory->dirs = dirs;
-	}
+        factory->dirs = dirs;
+    }
 }
 
 FormatterType TemplateEngine::GetFormat() const {

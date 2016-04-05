@@ -5,8 +5,8 @@
 #pragma once
 
 #include <QuestModel/Quest.h>
-#include <Template/QuestTemplate.h>
 #include <QuestModel/QuestModelAction.h>
+#include <Template/QuestPropertyValue.h>
 
 namespace weave {
     class QuestModel {

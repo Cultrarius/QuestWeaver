@@ -43,7 +43,7 @@ TEST_CASE("Weaver Config", "[weaver]") {
     WeaverConfig configRs = TestHelper::CreateDebugConfig();
     configRs.seed = 0;
     QuestWeaver weaver1(configRs);
-    auto quest1 = weaver1.CreateNewQuest();
+    auto quest1 = weaver1.CreateNewQuests()[0];
 
     WeaverConfig configSeed = TestHelper::CreateDebugConfig();
     configSeed.randomStream = nullptr;
@@ -51,7 +51,7 @@ TEST_CASE("Weaver Config", "[weaver]") {
     SECTION("Same seed") {
         configSeed.seed = 42;
         QuestWeaver weaver2(configSeed);
-        auto quest2 = weaver2.CreateNewQuest();
+        auto quest2 = weaver2.CreateNewQuests()[0];
 
         REQUIRE(quest1->GetTitle() == quest2->GetTitle());
         REQUIRE(quest1->GetDescription() == quest2->GetDescription());
@@ -60,7 +60,7 @@ TEST_CASE("Weaver Config", "[weaver]") {
     SECTION("Different seed") {
         configSeed.seed = 1337;
         QuestWeaver weaver2(configSeed);
-        auto quest2 = weaver2.CreateNewQuest();
+        auto quest2 = weaver2.CreateNewQuests()[0];
 
         REQUIRE_FALSE(quest1->GetTitle() == quest2->GetTitle());
         REQUIRE_FALSE(quest1->GetDescription() == quest2->GetDescription());
@@ -75,12 +75,12 @@ TEST_CASE("Weaver Quests", "[weaver]") {
         REQUIRE(weaver.GetAllQuests().size() == 0);
     }
 
-    auto quest = weaver.CreateNewQuest();
+    auto quest = weaver.CreateNewQuests()[0];
     REQUIRE(quest.get() != nullptr);
     REQUIRE(quest->GetId() != 0);
 
     SECTION("Created new quests") {
-        weaver.CreateNewQuest();
+        weaver.CreateNewQuests();
         REQUIRE(weaver.GetAllQuests().size() == 2);
         REQUIRE(weaver.GetQuestsWithState(QuestState::Inactive).size() == 2);
     }

@@ -18,11 +18,12 @@ namespace weave {
     public:
         TemplateEngine(std::shared_ptr<RandomStream> randomStream, Directories dirs, FormatterType format);
 
-        std::shared_ptr<QuestTemplate> GetTemplateForNewQuest();
+        std::vector<std::shared_ptr<QuestTemplate>> GetTemplatesForNewQuest(const WorldModel &worldModel,
+                                                                            const QuestModel &questModel);
 
         void RegisterTemplateFactory(std::unique_ptr<QuestTemplateFactory> factory);
 
-		void ChangeDirectories(Directories newDirs);
+        void ChangeDirectories(Directories newDirs);
 
         FormatterType GetFormat() const;
 

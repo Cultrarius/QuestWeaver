@@ -26,7 +26,11 @@ TEST_CASE("Format check", "[template]") {
 TEST_CASE("Template factory", "[template]") {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
-    REQUIRE_THROWS_AS(engine.GetTemplateForNewQuest(), ContractFailedException);
+    SpaceWorldModel world;
+    QuestModel questModel;
+    SECTION("No factories") {
+        REQUIRE_THROWS_AS(engine.GetTemplatesForNewQuest(world, questModel), ContractFailedException);
+    }
 
     SpaceQuestTemplateFactory *factory = new SpaceQuestTemplateFactory();
     engine.RegisterTemplateFactory(unique_ptr<SpaceQuestTemplateFactory>(factory));
@@ -269,6 +273,8 @@ TEST_CASE("Templates", "[template]") {
 TEST_CASE("Directory Change", "[template]") {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
+    SpaceWorldModel world;
+    QuestModel questModel;
     unique_ptr<SpaceQuestTemplateFactory> factory(new SpaceQuestTemplateFactory());
 
     SECTION("Unknown dir pre reg") {
@@ -277,7 +283,7 @@ TEST_CASE("Directory Change", "[template]") {
         unknown.modDirectory = "../Test/Unknown/";
         engine.ChangeDirectories(unknown);
         engine.RegisterTemplateFactory(move(factory));
-        REQUIRE_THROWS_AS(engine.GetTemplateForNewQuest(), ContractFailedException);
+        REQUIRE_THROWS_AS(engine.GetTemplatesForNewQuest(world, questModel), ContractFailedException);
     }
 
     SECTION("Unknown dir post reg") {
@@ -286,7 +292,7 @@ TEST_CASE("Directory Change", "[template]") {
         unknown.templateDirectory = "Test/Unknown/";
         unknown.modDirectory = "../Test/Unknown/";
         engine.ChangeDirectories(unknown);
-        REQUIRE_THROWS_AS(engine.GetTemplateForNewQuest(), ContractFailedException);
+        REQUIRE_THROWS_AS(engine.GetTemplatesForNewQuest(world, questModel), ContractFailedException);
     }
 
     SECTION("Pre register") {
@@ -295,7 +301,7 @@ TEST_CASE("Directory Change", "[template]") {
         unknown.modDirectory = "../Test/Resources/";
         engine.ChangeDirectories(unknown);
         engine.RegisterTemplateFactory(move(factory));
-        REQUIRE(engine.GetTemplateForNewQuest() != nullptr);
+        REQUIRE(engine.GetTemplatesForNewQuest(world, questModel).size() > 0);
     }
 }
 
