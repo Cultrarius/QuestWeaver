@@ -54,6 +54,7 @@ void WorldModel::Execute(vector<WorldModelAction> modelActions) {
         }
     }
     if (!modelActions.empty()) {
+        entityTypeCache.clear();
         informListeners(modelActions);
     }
 }
@@ -66,6 +67,16 @@ void WorldModel::updateMetaDataForId(ID newId, const MetaData &newData) {
 
 shared_ptr<WorldEntity> WorldModel::GetEntityById(ID id) const noexcept {
     return hasEntityWithId(id) ? entities.find(id)->second : shared_ptr<WorldEntity>();
+}
+
+vector<shared_ptr<WorldEntity>> WorldModel::GetEntitiesWithType(string type) const noexcept {
+    if (entityTypeCache.empty()) {
+        for (auto &mapEntry : entities) {
+            auto entity = mapEntry.second;
+            entityTypeCache[entity->GetType()].push_back(entity);
+        }
+    }
+    return entityTypeCache[type];
 }
 
 bool WorldModel::hasEntityWithId(ID id) const {

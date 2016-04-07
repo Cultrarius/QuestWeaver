@@ -53,6 +53,11 @@ namespace weave {
         std::shared_ptr<WorldEntity> GetEntityById(ID id) const noexcept;
 
         /*!
+         * Returns all entities with a given type.
+         */
+        std::vector<std::shared_ptr<WorldEntity>> GetEntitiesWithType(std::string type) const noexcept;
+
+        /*!
          * Returns a list of all entities known to this world model.
          */
         std::vector<std::shared_ptr<WorldEntity>> GetEntities() const noexcept;
@@ -101,6 +106,7 @@ namespace weave {
         mutable std::vector<std::shared_ptr<WorldListener>> listeners;
         std::unordered_map<ID, MetaData> metaData;
         std::vector<WorldModelAction> actionHistory;
+        mutable std::unordered_map<std::string, std::vector<std::shared_ptr<WorldEntity>>> entityTypeCache;
 
         ID NewId();
 
