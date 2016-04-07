@@ -6,6 +6,7 @@
 #include <QuestModel/Space/ScanPlanetQuest.h>
 #include <World/Space/Planet.h>
 #include <World/Space/DeadCivilization.h>
+#include <World/Space/SpaceAgent.h>
 
 using namespace std;
 using namespace weave;
@@ -100,7 +101,7 @@ void ScanPlanetTemplate::gatherSponsorEntities(vector<PropertyCandidate> *candid
     candidates->push_back(PropertyCandidate(actions, newEntityAction.GetEntity()));
 
     for (auto entity : spaceModel.GetEntities()) {
-        if (entity->GetType() == "agent") {
+        if (entity->GetType() == SpaceAgent::Type) {
             auto entityData = spaceModel.GetMetaData(entity->GetId());
             if (entityData.GetValue("relationToPlayer") >= 10) {
                 WorldModelAction modelAction(WorldActionType::KEEP, entity);

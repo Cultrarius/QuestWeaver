@@ -7,6 +7,8 @@
 using namespace weave;
 using namespace std;
 
+const string SolarSystem::Type = "solarSystem";
+
 string SolarSystem::ToString() const noexcept {
     return Name;
 }
@@ -24,5 +26,5 @@ SolarSystem::SolarSystem() :
 }
 
 std::string SolarSystem::GetType() const noexcept {
-    return "solarSystem";
+    return Type;
 }

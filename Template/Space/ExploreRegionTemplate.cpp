@@ -5,6 +5,7 @@
 #include <Template/Space/ExploreRegionTemplate.h>
 #include <QuestModel/Space/ExploreRegionQuest.h>
 #include <World/Space/SolarSystem.h>
+#include <World/Space/SpaceAgent.h>
 
 using namespace std;
 using namespace weave;
@@ -42,7 +43,7 @@ void ExploreRegionTemplate::gatherSponsorEntities(vector<PropertyCandidate> *can
     candidates->push_back(PropertyCandidate(actions, newEntityAction.GetEntity()));
 
     for (auto entity : spaceModel.GetEntities()) {
-        if (entity->GetType() == "agent") {
+        if (entity->GetType() == SpaceAgent::Type) {
             auto entityData = spaceModel.GetMetaData(entity->GetId());
             if (entityData.GetValue("relationToPlayer") >= 10) {
                 WorldModelAction modelAction(WorldActionType::KEEP, entity);
@@ -59,7 +60,7 @@ void ExploreRegionTemplate::gatherSolarSystemEntities(vector<PropertyCandidate> 
     vector<WorldModelAction> actions;
     shared_ptr<WorldEntity> newSolarSystem;
     for (auto action : newEntityActions) {
-        if (action.GetEntity()->GetType() == "solarSystem") {
+        if (action.GetEntity()->GetType() == SolarSystem::Type) {
             newSolarSystem = action.GetEntity();
         }
         actions.push_back(action);
@@ -73,7 +74,7 @@ void ExploreRegionTemplate::gatherSolarSystemEntities(vector<PropertyCandidate> 
 
     // search for existing unexplored solar systems
     for (auto entity : spaceModel.GetEntities()) {
-        if (entity->GetType() == "solarSystem") {
+        if (entity->GetType() == SolarSystem::Type) {
             auto entityData = spaceModel.GetMetaData(entity->GetId());
             if (!entityData.HasValue(metaDataMarker) && entityData.GetValue(exploredPercent) == 0) {
                 MetaData metaData;
@@ -99,7 +100,7 @@ shared_ptr<Quest> ExploreRegionTemplate::ToQuest(const vector<QuestPropertyValue
 map<string, string> ExploreRegionTemplate::resolveAdditionalPlaceholders(QuestPropertyValue questValue) const noexcept {
     map<std::string, std::string> result;
     auto entity = questValue.GetValue();
-    if (entity->GetType() == "solarSystem") {
+    if (entity->GetType() == SolarSystem::Type) {
         auto system = dynamic_pointer_cast<SolarSystem>(entity);
         bool isMandatory = questValue.GetProperty().IsMandatory();
         result["location"] = QuestPropertyValue::GetValueString(system->Location, isMandatory, formatterType);

@@ -9,6 +9,8 @@
 namespace weave {
 
     struct SpaceAgent : public WorldEntity {
+        static const std::string Type;
+
         std::string Name;
 
         explicit SpaceAgent(std::string name);

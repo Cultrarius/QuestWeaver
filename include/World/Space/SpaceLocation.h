@@ -9,6 +9,8 @@
 namespace weave {
 
     struct SpaceLocation : public WorldEntity {
+        static const std::string Type;
+
         const int X;
         const int Y;
         const int Z;

@@ -4,6 +4,8 @@
 
 #include <World/Space/SpaceAgent.h>
 
+const std::string weave::SpaceAgent::Type = "agent";
+
 weave::SpaceAgent::SpaceAgent(std::string name) : SpaceAgent(NoID, name) {
 }
 
@@ -15,5 +17,5 @@ std::string weave::SpaceAgent::ToString() const noexcept {
 }
 
 std::string weave::SpaceAgent::GetType() const noexcept {
-    return "agent";
+    return Type;
 }
