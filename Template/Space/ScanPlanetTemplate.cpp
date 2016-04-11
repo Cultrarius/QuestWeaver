@@ -73,16 +73,14 @@ void ScanPlanetTemplate::gatherPlanetEntities(vector<PropertyCandidate> *candida
     candidates->push_back(PropertyCandidate(actions, newPlanet));
 
     // search for existing unexplored planets
-    for (auto entity : spaceModel.GetEntities()) {
-        if (entity->GetType() == Planet::Type) {
-            auto entityData = spaceModel.GetMetaData(entity->GetId());
-            if (!entityData.HasValue(metaDataMarker) && entityData.GetValue(scanPercent) == 0) {
-                MetaData metaData;
-                metaData.SetValue(scanPercent, 0);
-                metaData.SetValue(metaDataMarker, 1);
-                WorldModelAction modelAction(WorldActionType::UPDATE, entity, metaData);
-                candidates->push_back(PropertyCandidate(modelAction));
-            }
+    for (auto entity : spaceModel.GetEntitiesWithType(Planet::Type)) {
+        auto entityData = spaceModel.GetMetaData(entity->GetId());
+        if (!entityData.HasValue(metaDataMarker) && entityData.GetValue(scanPercent) == 0) {
+            MetaData metaData;
+            metaData.SetValue(scanPercent, 0);
+            metaData.SetValue(metaDataMarker, 1);
+            WorldModelAction modelAction(WorldActionType::UPDATE, entity, metaData);
+            candidates->push_back(PropertyCandidate(modelAction));
         }
     }
 }
@@ -100,13 +98,11 @@ void ScanPlanetTemplate::gatherSponsorEntities(vector<PropertyCandidate> *candid
 
     candidates->push_back(PropertyCandidate(actions, newEntityAction.GetEntity()));
 
-    for (auto entity : spaceModel.GetEntities()) {
-        if (entity->GetType() == SpaceAgent::Type) {
-            auto entityData = spaceModel.GetMetaData(entity->GetId());
-            if (entityData.GetValue("relationToPlayer") >= 10) {
-                WorldModelAction modelAction(WorldActionType::KEEP, entity);
-                candidates->push_back(PropertyCandidate(modelAction));
-            }
+    for (auto entity : spaceModel.GetEntitiesWithType(SpaceAgent::Type)) {
+        auto entityData = spaceModel.GetMetaData(entity->GetId());
+        if (entityData.GetValue("relationToPlayer") >= 10) {
+            WorldModelAction modelAction(WorldActionType::KEEP, entity);
+            candidates->push_back(PropertyCandidate(modelAction));
         }
     }
 }
@@ -116,11 +112,9 @@ void ScanPlanetTemplate::gatherCivilizationEntities(vector<PropertyCandidate> *c
     auto newEntityAction = spaceModel.CreateDeadCivilization();
     candidates->push_back(PropertyCandidate(newEntityAction));
 
-    for (auto entity : spaceModel.GetEntities()) {
-        if (entity->GetType() == DeadCivilization::Type) {
-            WorldModelAction modelAction(WorldActionType::KEEP, entity);
-            candidates->push_back(PropertyCandidate(modelAction));
-        }
+    for (auto entity : spaceModel.GetEntitiesWithType(DeadCivilization::Type)) {
+        WorldModelAction modelAction(WorldActionType::KEEP, entity);
+        candidates->push_back(PropertyCandidate(modelAction));
     }
 }
 

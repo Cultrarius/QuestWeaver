@@ -42,13 +42,11 @@ void ExploreRegionTemplate::gatherSponsorEntities(vector<PropertyCandidate> *can
 
     candidates->push_back(PropertyCandidate(actions, newEntityAction.GetEntity()));
 
-    for (auto entity : spaceModel.GetEntities()) {
-        if (entity->GetType() == SpaceAgent::Type) {
-            auto entityData = spaceModel.GetMetaData(entity->GetId());
-            if (entityData.GetValue("relationToPlayer") >= 10) {
-                WorldModelAction modelAction(WorldActionType::KEEP, entity);
-                candidates->push_back(PropertyCandidate(modelAction));
-            }
+    for (auto entity : spaceModel.GetEntitiesWithType(SpaceAgent::Type)) {
+        auto entityData = spaceModel.GetMetaData(entity->GetId());
+        if (entityData.GetValue("relationToPlayer") >= 10) {
+            WorldModelAction modelAction(WorldActionType::KEEP, entity);
+            candidates->push_back(PropertyCandidate(modelAction));
         }
     }
 }
@@ -73,16 +71,14 @@ void ExploreRegionTemplate::gatherSolarSystemEntities(vector<PropertyCandidate> 
     candidates->push_back(PropertyCandidate(actions, newSolarSystem));
 
     // search for existing unexplored solar systems
-    for (auto entity : spaceModel.GetEntities()) {
-        if (entity->GetType() == SolarSystem::Type) {
-            auto entityData = spaceModel.GetMetaData(entity->GetId());
-            if (!entityData.HasValue(metaDataMarker) && entityData.GetValue(exploredPercent) == 0) {
-                MetaData metaData;
-                metaData.SetValue(exploredPercent, 0);
-                metaData.SetValue(metaDataMarker, 1);
-                WorldModelAction modelAction(WorldActionType::UPDATE, entity, metaData);
-                candidates->push_back(PropertyCandidate(modelAction));
-            }
+    for (auto entity : spaceModel.GetEntitiesWithType(SolarSystem::Type)) {
+        auto entityData = spaceModel.GetMetaData(entity->GetId());
+        if (!entityData.HasValue(metaDataMarker) && entityData.GetValue(exploredPercent) == 0) {
+            MetaData metaData;
+            metaData.SetValue(exploredPercent, 0);
+            metaData.SetValue(metaDataMarker, 1);
+            WorldModelAction modelAction(WorldActionType::UPDATE, entity, metaData);
+            candidates->push_back(PropertyCandidate(modelAction));
         }
     }
 }
