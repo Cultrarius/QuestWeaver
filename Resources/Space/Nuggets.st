@@ -44,21 +44,23 @@
   },
   {
     "key": "locationStrangeGravity",
-    "requiredTypes": ["location"],
+    "requiredTypes": [
+      "solarSystem"
+    ],
     "texts": [
-      "The star system known as %location was only discovered very recently. Due to an unknown phenomenon, it has an unusual amount of gravity lenses positioned around it, hiding it from cursory sensor scans.",
-      "The star system %location produced such strange gravitational readings, that the ship first reported malfunctioning sensors. The cause of this is still unknown."
+      "The star system known as %solarSystem was only discovered very recently. Due to an unknown phenomenon, it has an unusual amount of gravity lenses positioned around it, hiding it from cursory sensor scans.",
+      "The star system %solarSystem produced such strange gravitational readings, that the ship first reported malfunctioning sensors. The cause of this is still unknown."
     ]
   },
   {
     "key": "locationBattle",
     "requiredTypes": [
-      "location"
+      "solarSystem"
     ],
     "texts": [
-      "Space around the star %location is littered with debris. Is is very likely that this system once saw a battle of enormous magnitude.",
-      "Space around the star %location is littered with debris. It looks like a big battle was fought here not too long ago.",
-      "All throughout the star system %location one can find the wrecks of gigantic ships from a battle that was fought ages ago."
+      "Space around the star %solarSystem is littered with debris. Is is very likely that this system once saw a battle of enormous magnitude.",
+      "Space around the star %solarSystem is littered with debris. It looks like a big battle was fought here not too long ago.",
+      "All throughout the star system %solarSystem one can find the wrecks of gigantic ships from a battle that was fought ages ago."
     ]
   },
   {

@@ -296,10 +296,17 @@ string StoryWriter::getRandomNuggetText(const QuestValueMap &questValues,
     }
     for (uint64_t i = 0; i < entityIDs.size(); i++) {
         ID id = entityIDs[i];
-        string from = "%" + entityTypes[i];
-        string to = questValues.find(id)->second->GetValueString(this->templateEngine.GetFormat());
+        string requiredType = entityTypes[i];
+        auto questProperty = questValues.find(id)->second;
+        string actualType = questProperty->GetValue()->GetType();
+        if (requiredType != actualType) {
+            string error("Invalid types <" + requiredType + "> and <" + actualType + ">");
+            throw ContractFailedException(error);
+        }
+        string from = "%" + requiredType;
+        string to = questProperty->GetValueString(this->templateEngine.GetFormat());
         if (!replace(&nuggetText, from, to)) {
-            string error("Unable to replace nugget text (i=" + to_string(i) + ", key=" + entityTypes[i] + ")");
+            string error("Unable to replace nugget text (i=" + to_string(i) + ", key=" + requiredType + ")");
             throw ContractFailedException(error);
         }
     }
