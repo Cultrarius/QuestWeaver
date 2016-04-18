@@ -22,7 +22,15 @@ std::set<std::string> StoryTemplate::GetRequiredEntities() const noexcept {
 
 TokenMapping StoryTemplate::createTokenMapping(const TokenToEntityMap &idsPerToken) const {
     TokenMapping result;
-    for (auto token : getStoryTokens(rawText)) {
+    vector<RawStoryToken> tokens;
+    auto iter = tokenCache.find(rawText);
+    if (iter == tokenCache.end()) {
+        tokens = getStoryTokens(rawText);
+        tokenCache[rawText] = tokens;
+    } else {
+        tokens = iter->second;
+    }
+    for (auto token : tokens) {
         auto it = idsPerToken.find(token.id);
         if (it != idsPerToken.end()) {
             result.push_back(make_pair(token, it->second));

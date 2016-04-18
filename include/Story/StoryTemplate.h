@@ -79,6 +79,7 @@ namespace weave {
     protected:
         std::string rawText;
         std::set<std::string> requiredEntities;
+        mutable std::unordered_map<std::string, std::vector<RawStoryToken>> tokenCache;
 
         TokenMapping createTokenMapping(const TokenToEntityMap &idsPerToken) const;
     };
