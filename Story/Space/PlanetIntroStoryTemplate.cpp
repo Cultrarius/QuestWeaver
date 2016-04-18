@@ -1,15 +1,16 @@
 //
-// Created by michael on 12.03.16.
+// Created by michael on 18.04.16.
 //
 
-#include <World/Space/SolarSystem.h>
-#include "Story/Space/LocationIntroStoryTemplate.h"
+#include <World/Space/Planet.h>
+#include "Story/Space/PlanetIntroStoryTemplate.h"
+
 
 using namespace weave;
 using namespace std;
 
-StoryTemplateResult LocationIntroStoryTemplate::CreateStory(const EntityMap &requiredEntities, const WeaverGraph &,
-                                                            const WorldModel &worldModel) const {
+StoryTemplateResult PlanetIntroStoryTemplate::CreateStory(const EntityMap &requiredEntities, const WeaverGraph &,
+                                                          const WorldModel &worldModel) const {
     auto entities = getValidEntities(requiredEntities, worldModel);
     if (entities.empty()) {
         throw ContractFailedException("Invalid template call!");
@@ -29,15 +30,15 @@ StoryTemplateResult LocationIntroStoryTemplate::CreateStory(const EntityMap &req
     return result;
 }
 
-bool LocationIntroStoryTemplate::IsValid(const EntityMap &requiredEntities, const WeaverGraph &,
-                                         const WorldModel &worldModel) const {
+bool PlanetIntroStoryTemplate::IsValid(const EntityMap &requiredEntities, const WeaverGraph &,
+                                       const WorldModel &worldModel) const {
     return getValidEntities(requiredEntities, worldModel).size() > 0;
 }
 
-vector<shared_ptr<WorldEntity>> LocationIntroStoryTemplate::getValidEntities(const EntityMap &entityMap,
-                                                                             const WorldModel &worldModel) const {
+vector<shared_ptr<WorldEntity>> PlanetIntroStoryTemplate::getValidEntities(const EntityMap &entityMap,
+                                                                           const WorldModel &worldModel) const {
     vector<shared_ptr<WorldEntity>> result;
-    auto mapIter = entityMap.find(SolarSystem::Type);
+    auto mapIter = entityMap.find(Planet::Type);
     if (mapIter == entityMap.end()) {
         return result;
     }

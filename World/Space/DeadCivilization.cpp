@@ -8,6 +8,7 @@ using namespace weave;
 using namespace std;
 
 const string DeadCivilization::Type = "deadCivilization";
+const string DeadCivilization::PlanetMarker = "deadCivPlanetRuins";
 
 std::string DeadCivilization::ToString() const noexcept {
     return Name;

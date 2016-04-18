@@ -10,6 +10,7 @@ namespace weave {
 
     struct DeadCivilization : public WorldEntity {
         static const std::string Type;
+        static const std::string PlanetMarker;
 
         const std::string Name;
 

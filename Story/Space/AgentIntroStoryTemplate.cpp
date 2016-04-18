@@ -3,6 +3,7 @@
 //
 
 #include <Story/Space/AgentIntroStoryTemplate.h>
+#include <World/Space/SpaceAgent.h>
 
 using namespace weave;
 using namespace std;
@@ -36,7 +37,7 @@ bool AgentIntroStoryTemplate::IsValid(const EntityMap &requiredEntities, const W
 vector<shared_ptr<WorldEntity>> AgentIntroStoryTemplate::getValidEntities(const EntityMap &entityMap,
                                                                           const WorldModel &worldModel) const {
     vector<shared_ptr<WorldEntity>> result;
-    auto mapIter = entityMap.find("agent");
+    auto mapIter = entityMap.find(SpaceAgent::Type);
     if (mapIter == entityMap.end()) {
         return result;
     }

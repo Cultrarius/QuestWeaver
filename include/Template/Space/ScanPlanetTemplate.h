@@ -4,8 +4,10 @@
 
 #pragma once
 
-#include "Template/QuestTemplate.h"
-#include "../../World/Space/SpaceWorldModel.h"
+#include <Template/QuestTemplate.h>
+#include <World/Space/SpaceWorldModel.h>
+#include <World/Space/Planet.h>
+#include <World/Space/DeadCivilization.h>
 
 namespace weave {
     class ScanPlanetTemplate : public QuestTemplate {
@@ -27,6 +29,9 @@ namespace weave {
 
     private:
         std::string metaDataMarker = "scanQuestLock";
+        std::string planetProperty = Planet::Type;
+        std::string sponsorProperty = "sponsor";
+        std::string deadCivProperty = DeadCivilization::Type;
 
         void gatherPlanetEntities(std::vector<PropertyCandidate> *candidates, const SpaceWorldModel &spaceModel) const;
 

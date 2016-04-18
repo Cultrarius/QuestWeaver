@@ -21,11 +21,11 @@ vector<PropertyCandidate> ScanPlanetTemplate::GetPropertyCandidates(const Templa
                                                                     const WorldModel &worldModel) const {
     vector<PropertyCandidate> candidates;
     const SpaceWorldModel &spaceModel = (const SpaceWorldModel &) worldModel;
-    if (property.GetName() == "planet") {
+    if (property.GetName() == planetProperty) {
         gatherPlanetEntities(&candidates, spaceModel);
-    } else if (property.GetName() == "sponsor") {
+    } else if (property.GetName() == sponsorProperty) {
         gatherSponsorEntities(&candidates, spaceModel);
-    } else if (property.GetName() == "deadCivilization") {
+    } else if (property.GetName() == deadCivProperty) {
         gatherCivilizationEntities(&candidates, spaceModel);
     }
     return candidates;
@@ -36,8 +36,8 @@ shared_ptr<Quest> ScanPlanetTemplate::ToQuest(const vector<QuestPropertyValue> &
     const string &description = getBestFittingDescription(questPropertyValues);
     const string &questTitle = getTitle(questPropertyValues);
 
-    ID planetId = getEntityIdFromProperty("planet", questPropertyValues);
-    ID sponsor = getEntityIdFromProperty("sponsor", questPropertyValues);
+    ID planetId = getEntityIdFromProperty(planetProperty, questPropertyValues);
+    ID sponsor = getEntityIdFromProperty(sponsorProperty, questPropertyValues);
     return make_shared<ScanPlanetQuest>(questTitle, description, questStory, planetId, sponsor);
 }
 
@@ -60,7 +60,7 @@ void ScanPlanetTemplate::gatherPlanetEntities(vector<PropertyCandidate> *candida
     vector<WorldModelAction> actions;
     shared_ptr<WorldEntity> newPlanet;
     for (auto action : newEntityActions) {
-        if (action.GetEntity()->GetType() == "planet") {
+        if (action.GetEntity()->GetType() == Planet::Type) {
             newPlanet = action.GetEntity();
         }
         actions.push_back(action);
@@ -117,12 +117,3 @@ void ScanPlanetTemplate::gatherCivilizationEntities(vector<PropertyCandidate> *c
         candidates->push_back(PropertyCandidate(modelAction));
     }
 }
-
-
-
-
-
-
-
-
-

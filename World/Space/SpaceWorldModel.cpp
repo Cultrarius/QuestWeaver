@@ -3,7 +3,8 @@
 //
 
 #define _USE_MATH_DEFINES
-#include <cmath> 
+
+#include <cmath>
 #include <World/Space/SpaceWorldModel.h>
 #include <World/Space/SpaceLocation.h>
 #include <World/Space/SpaceAgent.h>
@@ -49,7 +50,11 @@ WorldModelAction SpaceWorldModel::CreatePlanet(shared_ptr<SpaceLocation> locatio
     float y = distanceToSun * sin(radians);
     int seed = rs->GetInt();
     string name = nameGenerator.CreateName(nameType, rs);
-    return WorldModelAction(WorldActionType::CREATE, make_shared<Planet>(x, y, seed, name, location));
+    MetaData metaData;
+    if (rs->GetIntInRange(0, param.deadCivRarity) == param.deadCivRarity) {
+        metaData.SetValue(DeadCivilization::PlanetMarker, 1);
+    }
+    return WorldModelAction(WorldActionType::CREATE, make_shared<Planet>(x, y, seed, name, location), metaData);
 }
 
 vector<WorldModelAction> SpaceWorldModel::CreateSolarSystem(NameType nameType, int planetCount) const {

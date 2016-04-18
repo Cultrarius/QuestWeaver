@@ -18,6 +18,7 @@ namespace weave {
         int planetDistanceBase = 3000;
         int planetDistanceAverage = 5000;
         int planetDistanceVariation = 2000;
+        int deadCivRarity = 20;
 
         template<class Archive>
         void serialize(Archive &ar) {
