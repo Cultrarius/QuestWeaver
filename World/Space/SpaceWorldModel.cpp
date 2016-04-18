@@ -79,14 +79,16 @@ vector<WorldModelAction> SpaceWorldModel::CreateSolarSystem(NameType nameType, i
         int ring = availableRings[ringIndex];
         availableRings.erase(availableRings.begin() + ringIndex);
         int var = param.planetDistanceVariation;
-        int distance = param.planetDistanceBase + ring * param.planetDistanceAverage + rs->GetNormalIntInRange(-var, var);
+        int planetDistanceVariation = rs->GetNormalIntInRange(-var, var);
+        int distance = param.planetDistanceBase + planetDistanceVariation + ring * param.planetDistanceAverage;
         auto nameType = planetNames[rs->GetRandomIndex(planetNames.size())];
         auto planetAction = CreatePlanet(location, nameType, distance);
         actions.push_back(planetAction);
         planets.push_back(dynamic_pointer_cast<Planet>(planetAction.GetEntity()));
     }
 
-    auto solarSystem = make_shared<SolarSystem>(nameGenerator.CreateName(nameType, rs), location, planets);
+    int seed = rs->GetInt();
+    auto solarSystem = make_shared<SolarSystem>(nameGenerator.CreateName(nameType, rs), seed, location, planets);
     actions.push_back(WorldModelAction(WorldActionType::CREATE, solarSystem));
 
     return actions;
