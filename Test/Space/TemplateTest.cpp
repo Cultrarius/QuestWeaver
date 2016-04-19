@@ -23,6 +23,15 @@ TEST_CASE("Format check", "[template]") {
     REQUIRE(htmlEngine.GetFormat() == FormatterType::HTML);
 }
 
+TEST_CASE("QuestPropertyValue noexcept", "[template]") {
+    TemplateQuestProperty property(false, "asd");
+    QuestPropertyValue value(property, shared_ptr<WorldEntity>());
+    REQUIRE(value.GetValueString(FormatterType::TEXT) == "");
+    REQUIRE(value.GetValueString(FormatterType::HTML) == "");
+    REQUIRE(value.GetValueString(shared_ptr<WorldEntity>(), true, FormatterType::TEXT) == "");
+    REQUIRE(value.GetValueString(shared_ptr<WorldEntity>(), true, FormatterType::HTML) == "");
+}
+
 TEST_CASE("Template factory", "[template]") {
     shared_ptr<RandomStream> rs = make_shared<RandomStream>(42);
     TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
