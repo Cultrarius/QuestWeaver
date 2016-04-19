@@ -35,21 +35,30 @@ vector<shared_ptr<Quest>> QuestWeaver::CreateNewQuests() {
     vector<QuestCandidate> newQuestCandidates;
     bool hasPriorityQuests = false;
     int maxScore = 0;
+    int minScore = -1;
 
     // gather quest candidates
     for (auto questTemplate : templates->GetTemplatesForNewQuest(*world, *quests)) {
         EngineResult result = engine->fillTemplate(questTemplate, *quests, *world, *stories);
         shared_ptr<Quest> newQuest = questTemplate->ToQuest(result.GetQuestPropertyValues(), result.GetStory());
-        int score = 0;
+        int score = 0;  // smaller score is better
         if (questTemplate->HasPriority()) {
             hasPriorityQuests = true;
         } else {
             for (auto oldQuest : quests->GetQuests()) {
+                // penalize quests that occurred often
                 if (newQuest->GetType() == oldQuest->GetType()) {
                     score++;
                 }
             }
+            for (auto action : result.GetModelActions()) {
+                // penalize quests that need to create new entities
+                if (action.GetActionType() == WorldActionType::CREATE) {
+                    score++;
+                }
+            }
             maxScore = max(maxScore, score);
+            minScore = minScore == -1 ? score : min(minScore, score);
         }
         newQuestCandidates.push_back({newQuest, result, score, questTemplate->HasPriority()});
     }
@@ -71,8 +80,9 @@ vector<shared_ptr<Quest>> QuestWeaver::CreateNewQuests() {
     // randomly select a minimum required score
     vector<shared_ptr<Quest>> newQuests;
     int selectedScore = -1;
+    int normalizedScore = maxScore - minScore;  // to prevent the scores getting too big as the game progresses
     while (selectedScore < 0) {
-        selectedScore = randomStream->GetNormalIntInRange(-maxScore, maxScore);
+        selectedScore = randomStream->GetNormalIntInRange(-normalizedScore, normalizedScore);
     }
 
     // select the fitting candidate(s)
@@ -85,7 +95,7 @@ vector<shared_ptr<Quest>> QuestWeaver::CreateNewQuests() {
             }
             continue;
         }
-        if (candidate.score >= selectedScore) {
+        if (candidate.score >= (selectedScore + minScore)) {
             world->Execute(candidate.result.GetModelActions());
             quests->RegisterNew(candidate.quest, candidate.result.GetQuestPropertyValues());
             newQuests.push_back(candidate.quest);
