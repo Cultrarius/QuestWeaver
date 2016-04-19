@@ -141,6 +141,20 @@ TEST_CASE("StoryTemplates", "[story]") {
         REQUIRE(result.text == "I wish me a TestEntity to play with.");
     }
 
+    SECTION("Update deleted entity test") {
+        vector<WorldModelAction> questActions;
+        questActions.push_back(WorldModelAction(WorldActionType::DELETE, testEntity));
+        vector<WorldModelAction> storyActions;
+        storyActions.push_back(WorldModelAction(WorldActionType::UPDATE, testEntity));
+
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st", storyActions)));
+
+        auto result = writer.CreateStory(StoryWriterParameters(graph, values, questActions), "entityLine");
+        REQUIRE(result.text == "");
+        REQUIRE(result.worldActions.size() == 0);
+    }
+
     SECTION("String only line test") {
         writer.RegisterTemplateFactory(
                 unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
@@ -166,6 +180,20 @@ TEST_CASE("StoryTemplates", "[story]") {
         writer.RegisterTemplateFactory(
                 unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
         REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values), "wrongNuggetContent"),
+                          ContractFailedException);
+    }
+
+    SECTION("Nugget required type mismatch") {
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values), "wrongType"),
+                          ContractFailedException);
+    }
+
+    SECTION("Nugget no replacement found") {
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values), "missingReplacement"),
                           ContractFailedException);
     }
 

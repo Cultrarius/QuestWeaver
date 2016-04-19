@@ -16,6 +16,15 @@
     ]
   },
   {
+    "key": "nuggetMissingReplacement",
+    "requiredTypes": [
+      "TestEntityType"
+    ],
+    "texts": [
+      "a %TestXEntityXType"
+    ]
+  },
+  {
     "key": "complexNugget",
     "requiredTypes": [
       "TestEntityType",
@@ -28,7 +37,7 @@
   {
     "key": "nuggetTestWrongType",
     "requiredTypes": [
-      "TestEntityType"
+      "NotMyType"
     ],
     "texts": [
       "This is %NotMyType"

@@ -331,10 +331,3 @@ std::vector<NuggetOption> StoryWriter::getSupportedNuggets(const vector<NuggetOp
     }
     return supportedNuggets;
 }
-
-void StoryWriter::append(std::stringstream &stream, const string &previous, const string &toAppend) const {
-    if (!previous.empty() && !toAppend.empty()) {
-        stream << " ";
-    }
-    stream << toAppend;
-}

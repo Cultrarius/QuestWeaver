@@ -102,8 +102,6 @@ namespace weave {
         std::string getRandomNuggetText(const QuestValueMap &questValues,
                                         const std::vector<NuggetOption> &supportedNuggets) const;
 
-        void append(std::stringstream &stream, const std::string &previous, const std::string &toAppend) const;
-
         void removeStoriesWithInvalidActions(const StoryWriterParameters &params,
                                              std::map<float, Story> *storyMap) const;
     };
