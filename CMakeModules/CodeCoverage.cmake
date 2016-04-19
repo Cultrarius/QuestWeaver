@@ -108,10 +108,6 @@ MARK_AS_ADVANCED(
         CMAKE_EXE_LINKER_FLAGS_COVERAGE
         CMAKE_SHARED_LINKER_FLAGS_COVERAGE)
 
-IF (NOT (CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "Coverage"))
-    MESSAGE(WARNING "Code coverage results with an optimized (non-Debug) build may be misleading")
-ENDIF () # NOT CMAKE_BUILD_TYPE STREQUAL "Debug"
-
 
 # Param _targetname     The name of new the custom make target
 # Param _testrunner     The name of the target which runs the tests.
@@ -142,7 +138,7 @@ FUNCTION(SETUP_TARGET_FOR_COVERAGE _targetname _testrunner _outputname)
 
             # Capturing lcov counters and generating report
             COMMAND ${LCOV_PATH} --directory . --capture --output-file ${_outputname}.info
-            COMMAND ${LCOV_PATH} --remove ${_outputname}.info 'tests/*' '/usr/*' --output-file ${_outputname}.info.cleaned
+            COMMAND ${LCOV_PATH} --remove ${_outputname}.info 'tests/*' '/usr/*' 'include/*' 'Test/*' --output-file ${_outputname}.info.cleaned
             COMMAND ${GENHTML_PATH} -o ${_outputname} ${_outputname}.info.cleaned
             COMMAND ${CMAKE_COMMAND} -E remove ${_outputname}.info ${_outputname}.info.cleaned
 
