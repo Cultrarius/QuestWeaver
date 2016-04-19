@@ -9,7 +9,7 @@
 namespace weave {
     class PlanetIntroStoryTemplate : public StoryTemplate {
     public:
-        explicit PlanetIntroStoryTemplate(std::string rawText) : StoryTemplate(rawText, {"solarSystem"}) { }
+        explicit PlanetIntroStoryTemplate(std::string rawText) : StoryTemplate(rawText, {"planet"}) { }
 
         StoryTemplateResult CreateStory(const EntityMap &requiredEntities, const WeaverGraph &graph,
                                         const WorldModel &worldModel) const override;

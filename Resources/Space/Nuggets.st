@@ -33,13 +33,13 @@
     "key": "logEntry",
     "requiredTypes": [],
     "texts": [
-      "[Datalog Entry 2846219]",
-      "[End of datalog Entry]",
-      "[Datalog Entry 1223219]",
-      "[Datalog Entry corrupted]",
-      "[Datalog Entry 3816219]",
-      "[Datalog Entry 1811219]",
-      "[Datalog Entry 3811389]"
+      "\n\n[Datalog Entry 2846219]",
+      "\n\n[End of datalog Entry]",
+      "\n\n[Datalog Entry 1223212]",
+      "\n\n[Datalog Entry corrupted]",
+      "\n\n[Datalog Entry 3816211]",
+      "\n\n[Datalog Entry 1811214]",
+      "\n\n[Datalog Entry 3811389]"
     ]
   },
   {
@@ -89,30 +89,30 @@
     "key": "planetMetals",
     "requiredTypes": [],
     "texts": [
-      "Metal scan result: no significant amount of valuable metals in the planet's crust.",
-      "Metal scan result: no amount of valuable metals in the planet's crust.",
-      "Metal scan result: no valuable metals in the planet's crust.",
-      "Metal scan result: no metal at all, since the planet is a gas giant.",
-      "Metal scan result: High amount of Hg and Ur salts.",
-      "Metal scan result: High amount of raw, liquid Hg.",
-      "Metal scan result: High amount of Co, Al and Mo.",
-      "Metal scan result: High amount of Ge and Ur."
+      "\nMetal scan result: no significant amount of valuable metals in the planet's crust.",
+      "\nMetal scan result: no amount of valuable metals in the planet's crust.",
+      "\nMetal scan result: no valuable metals in the planet's crust.",
+      "\nMetal scan result: no metal at all, since the planet is a gas giant.",
+      "\nMetal scan result: High amount of Hg and Ur salts.",
+      "\nMetal scan result: High amount of raw, liquid Hg.",
+      "\nMetal scan result: High amount of Co, Al and Mo.",
+      "\nMetal scan result: High amount of Ge and Ur."
     ]
   },
   {
     "key": "planetLife",
     "requiredTypes": [],
     "texts": [
-      "Life scan result: no traces of life could be found.",
-      "Life scan result: no life could be found.",
-      "Life scan result: traces life could be found, but not enough to give a definitive answer.",
-      "Life scan result: single-cellular organisms (no DNA).",
-      "Life scan result: single-cellular organisms (complex DNA).",
-      "Life scan result: multi-cellular organisms (no DNA, not sentient).",
-      "Life scan result: multi-cellular organisms (complex DNA, not sentient).",
-      "Life scan result: simple plant life.",
-      "Life scan result: complex plant life, but no animals or bacteria",
-      "Life scan result: Primitive, sentient life forms detected"
+      "\nLife scan result: no traces of life could be found.",
+      "\nLife scan result: no life could be found.",
+      "\nLife scan result: traces life could be found, but not enough to give a definitive answer.",
+      "\nLife scan result: single-cellular organisms (no DNA).",
+      "\nLife scan result: single-cellular organisms (complex DNA).",
+      "\nLife scan result: multi-cellular organisms (no DNA, not sentient).",
+      "\nLife scan result: multi-cellular organisms (complex DNA, not sentient).",
+      "\nLife scan result: simple plant life.",
+      "\nLife scan result: complex plant life, but no animals or bacteria",
+      "\nLife scan result: Primitive, sentient life forms detected"
     ]
   },
   {

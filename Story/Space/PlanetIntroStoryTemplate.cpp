@@ -26,7 +26,7 @@ StoryTemplateResult PlanetIntroStoryTemplate::CreateStory(const EntityMap &requi
     MetaData markedData;
     markedData.SetValue(metaDataMarker, 1);
     result.worldActions.push_back(WorldModelAction(WorldActionType::UPDATE, entity, markedData));
-
+    
     return result;
 }
 

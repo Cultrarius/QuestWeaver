@@ -262,6 +262,7 @@ map<float, Story> StoryWriter::createWeightedStories(
             string nuggetText = getRandomNuggetText(questValues, supportedNuggets);
             replace(&story, token.text, nuggetText);
         }
+
         if (templateEngine.GetFormat() == FormatterType::HTML) {
             replaceAll(&story, "\n", "<br/>\n");
             currentResult.text = htmlEncloseWithTag(story, "span", "story");
