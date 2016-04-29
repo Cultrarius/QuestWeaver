@@ -307,6 +307,13 @@ string StoryWriter::getRandomNuggetText(const QuestValueMap &questValues,
     Nugget chosenNugget = nuggets[chosenOption.GetNuggetKey()];
     auto texts = chosenNugget.GetTexts();
     string nuggetText = texts[this->rs->GetRandomIndex(texts.size())];
+
+    for (string key : chosenNugget.GetRandimizationKeys()) {
+        string from = "%" + key;
+        string to = to_string(chosenNugget.GetRandomValue(key, rs));
+        replace(&nuggetText, from, to);
+    }
+
     auto entityTypes = chosenNugget.GetRequiredTypes();
     auto entityIDs = chosenOption.GetEntityIDs();
     if (entityTypes.size() != entityIDs.size()) {
@@ -328,6 +335,7 @@ string StoryWriter::getRandomNuggetText(const QuestValueMap &questValues,
             throw ContractFailedException(error);
         }
     }
+
     return nuggetText;
 }
 

@@ -36,7 +36,7 @@ vector<string> Nugget::GetRandimizationKeys() const noexcept {
     return randomKeys;
 }
 
-int Nugget::GetRandomValue(string key, RandomStream stream) const noexcept {
+int Nugget::GetRandomValue(string key, shared_ptr<RandomStream> stream) const noexcept {
     int minValue = 0;
     auto minIter = minValues.find(key);
     if (minIter != minValues.end()) {
@@ -50,7 +50,7 @@ int Nugget::GetRandomValue(string key, RandomStream stream) const noexcept {
     if (minValue > maxValue) {
         minValue = maxValue;
     }
-    return stream.GetIntInRange(minValue, maxValue);
+    return stream->GetIntInRange(minValue, maxValue);
 }
 
 

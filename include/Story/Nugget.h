@@ -26,7 +26,7 @@ namespace weave {
 
         std::vector<std::string> GetRandimizationKeys() const noexcept;
 
-        int GetRandomValue(std::string key, RandomStream stream) const noexcept;
+        int GetRandomValue(std::string key, std::shared_ptr<RandomStream> stream) const noexcept;
 
     private:
         std::string key;

@@ -32,14 +32,18 @@
   {
     "key": "logEntry",
     "requiredTypes": [],
+    "randomized": [
+      {
+        "key": "entryNumber",
+        "min": 1000000,
+        "max": 10000000
+      }
+    ],
     "texts": [
-      "\n\n[Datalog Entry 2846219]",
-      "\n\n[End of datalog Entry]",
-      "\n\n[Datalog Entry 1223212]",
-      "\n\n[Datalog Entry corrupted]",
-      "\n\n[Datalog Entry 3816211]",
-      "\n\n[Datalog Entry 1811214]",
-      "\n\n[Datalog Entry 3811389]"
+      "\n\n[End of datalog entry %entryNumber]",
+      "\n\n[Excerpt from datalog entry %entryNumber]",
+      "\n\n[Datalog entry %entryNumber]",
+      "\n\n[Warning: datalog entry corrupted]"
     ]
   },
   {
@@ -88,15 +92,27 @@
   {
     "key": "planetMetals",
     "requiredTypes": [],
+    "randomized": [
+      {
+        "key": "percent1",
+        "min": 10,
+        "max": 40
+      },
+      {
+        "key": "percent2",
+        "min": 10,
+        "max": 40
+      }
+    ],
     "texts": [
       "\nMetal scan result: no significant amount of valuable metals in the planet's crust.",
       "\nMetal scan result: no amount of valuable metals in the planet's crust.",
       "\nMetal scan result: no valuable metals in the planet's crust.",
       "\nMetal scan result: no metal at all, since the planet is a gas giant.",
-      "\nMetal scan result: High amount of Hg and Ur salts.",
-      "\nMetal scan result: High amount of raw, liquid Hg.",
-      "\nMetal scan result: High amount of Co, Al and Mo.",
-      "\nMetal scan result: High amount of Ge and Ur."
+      "\nMetal scan result: High amount of Hg (%percent1%) and Ur salts (%percent2%).",
+      "\nMetal scan result: High amount of raw, liquid Hg (%percent1%).",
+      "\nMetal scan result: High amount of Al (%percent1%) and Mo (%percent2%).",
+      "\nMetal scan result: High amount of Ge (%percent1%) and Ur (%percent2%)."
     ]
   },
   {
