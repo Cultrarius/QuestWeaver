@@ -39,18 +39,35 @@ void StoryWriter::readNuggets() const {
         checkValidNuggetJson(root, file);
         for (Value nuggetJson : root) {
             string key = nuggetJson["key"].asString();
+            if (nuggets.count(key) > 0) {
+                throw ContractFailedException("Duplicate nugget key <" + key + ">!");
+            }
+
             vector<string> requiredTypes;
             for (Value requiredType : nuggetJson["requiredTypes"]) {
                 requiredTypes.push_back(requiredType.asString());
             }
+
             vector<string> texts;
             for (Value text : nuggetJson["texts"]) {
                 texts.push_back(text.asString());
             }
-            if (nuggets.count(key) > 0) {
-                throw ContractFailedException("Duplicate nugget key <" + key + ">!");
+
+            unordered_map<string, int> minValues;
+            unordered_map<string, int> maxValues;
+            if (nuggetJson.isMember("randomized")) {
+                for (Value randomization : nuggetJson["randomized"]) {
+                    string randomKey = randomization["key"].asString();
+                    if (randomization.isMember("min")) {
+                        minValues[randomKey] = randomization["min"].asInt();
+                    }
+                    if (randomization.isMember("max")) {
+                        maxValues[randomKey] = randomization["max"].asInt();
+                    }
+                }
             }
-            nuggets[key] = Nugget(key, requiredTypes, texts);
+
+            nuggets[key] = Nugget(key, requiredTypes, texts, minValues, maxValues);
         }
     }
 }
