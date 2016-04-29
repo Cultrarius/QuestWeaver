@@ -8,15 +8,17 @@ using namespace std;
 using namespace weave;
 
 Nugget::Nugget(string key, vector<string> requiredTypes, vector<string> texts, unordered_map<string, int> minValues,
-               unordered_map<string, int> maxValues) :
-        key(key), requiredTypes(requiredTypes), texts(texts), minValues(minValues), maxValues(maxValues) {
+               unordered_map<string, int> maxValues, unordered_map<string, NameType> randomNames) :
+        key(key), requiredTypes(requiredTypes), texts(texts), minValues(minValues), maxValues(maxValues),
+        randomNames(randomNames) {
+    for (auto minVal : randomNames) {
+        randomKeys.insert(minVal.first);
+    }
     for (auto minVal : minValues) {
-        randomKeys.push_back(minVal.first);
+        randomKeys.insert(minVal.first);
     }
     for (auto maxVal : maxValues) {
-        if (minValues.count(maxVal.first) == 0) {
-            randomKeys.push_back(maxVal.first);
-        }
+        randomKeys.insert(maxVal.first);
     }
 }
 
@@ -32,11 +34,21 @@ vector<string> Nugget::GetTexts() const noexcept {
     return texts;
 }
 
-vector<string> Nugget::GetRandimizationKeys() const noexcept {
+set<string> Nugget::GetRandomizationKeys() const noexcept {
     return randomKeys;
 }
 
-int Nugget::GetRandomValue(string key, shared_ptr<RandomStream> stream) const noexcept {
+string Nugget::GetRandomValue(string key, shared_ptr<RandomStream> stream,
+                              const NameGenerator &nameGen) const noexcept {
+    if (randomKeys.count(key) == 0) {
+        return "";
+    }
+
+    auto nameIter = randomNames.find(key);
+    if (nameIter != randomNames.end()) {
+        return nameGen.CreateName(nameIter->second, stream);
+    }
+
     int minValue = 0;
     auto minIter = minValues.find(key);
     if (minIter != minValues.end()) {
@@ -50,7 +62,7 @@ int Nugget::GetRandomValue(string key, shared_ptr<RandomStream> stream) const no
     if (minValue > maxValue) {
         minValue = maxValue;
     }
-    return stream->GetIntInRange(minValue, maxValue);
+    return to_string(stream->GetIntInRange(minValue, maxValue));
 }
 
 

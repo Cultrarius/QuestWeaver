@@ -32,7 +32,7 @@
   {
     "key": "logEntry",
     "requiredTypes": [],
-    "randomized": [
+    "randomizedValue": [
       {
         "key": "entryNumber",
         "min": 1000000,
@@ -61,10 +61,18 @@
     "requiredTypes": [
       "solarSystem"
     ],
+    "randomizedName": [
+      {
+        "key": "shipName",
+        "type": "dark_thing"
+      }
+    ],
     "texts": [
       "Space around the star %solarSystem is littered with debris. Is is very likely that this system once saw a battle of enormous magnitude.",
       "Space around the star %solarSystem is littered with debris. It looks like a big battle was fought here not too long ago.",
-      "All throughout the star system %solarSystem one can find the wrecks of gigantic ships from a battle that was fought ages ago."
+      "All throughout the star system %solarSystem one can find the wrecks of gigantic ships from a battle that was fought ages ago.",
+      "All throughout the star system %solarSystem one can find the wrecks of gigantic ships from a battle that was fought ages ago. One of the ships still broadcasts its name into the void: %shipName",
+      "%shipName - one of the many ship names that lie buried in the graveyard that is star system %solarSystem. A massive battle was fought here in the past and the fallout is still visible to your sensors."
     ]
   },
   {
@@ -92,7 +100,7 @@
   {
     "key": "planetMetals",
     "requiredTypes": [],
-    "randomized": [
+    "randomizedValue": [
       {
         "key": "percent1",
         "min": 10,

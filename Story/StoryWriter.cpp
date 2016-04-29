@@ -55,19 +55,59 @@ void StoryWriter::readNuggets() const {
 
             unordered_map<string, int> minValues;
             unordered_map<string, int> maxValues;
-            if (nuggetJson.isMember("randomized")) {
-                for (Value randomization : nuggetJson["randomized"]) {
-                    string randomKey = randomization["key"].asString();
-                    if (randomization.isMember("min")) {
-                        minValues[randomKey] = randomization["min"].asInt();
-                    }
-                    if (randomization.isMember("max")) {
-                        maxValues[randomKey] = randomization["max"].asInt();
-                    }
-                }
-            }
+            readRandomizedValues(nuggetJson, minValues, maxValues);
 
-            nuggets[key] = Nugget(key, requiredTypes, texts, minValues, maxValues);
+            unordered_map<string, NameType> randomNames;
+            readRandomizedNames(nuggetJson, randomNames);
+
+            nuggets[key] = Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        }
+    }
+}
+
+void StoryWriter::readRandomizedNames(const Value &nuggetJson, unordered_map<string, NameType> &randomNames) const {
+    if (!nuggetJson.isMember("randomizedName")) {
+        return;
+    }
+    for (Value randomization : nuggetJson["randomizedName"]) {
+        string randomKey = randomization["key"].asString();
+        NameType type = NameType::DARK_THING;
+        if (randomization.isMember("type")) {
+            string typeString = randomization["type"].asString();
+            if (typeString == "dark_thing") {
+                type = NameType::DARK_THING;
+            } else if (typeString == "dark_person") {
+                type = NameType::DARK_PERSON;
+            } else if (typeString == "alien") {
+                type = NameType::ALIEN;
+            } else if (typeString == "light_thing") {
+                type = NameType::LIGHT_THING;
+            } else if (typeString == "light_person") {
+                type = NameType::LIGHT_PERSON;
+            } else if (typeString == "corporation") {
+                type = NameType::CORPORATION;
+            } else if (typeString == "funny") {
+                type = NameType::FUNNY;
+            } else {
+                //throw ContractFailedException("Unknown name type <" + typeString + ">!");
+            }
+        }
+        randomNames[randomKey] = type;
+    }
+}
+
+void StoryWriter::readRandomizedValues(const Value &nuggetJson, unordered_map<string, int> &minValues,
+                                       unordered_map<string, int> &maxValues) const {
+    if (!nuggetJson.isMember("randomizedValue")) {
+        return;
+    }
+    for (Value randomization : nuggetJson["randomizedValue"]) {
+        string randomKey = randomization["key"].asString();
+        if (randomization.isMember("min")) {
+            minValues[randomKey] = randomization["min"].asInt();
+        }
+        if (randomization.isMember("max")) {
+            maxValues[randomKey] = randomization["max"].asInt();
         }
     }
 }
@@ -308,10 +348,10 @@ string StoryWriter::getRandomNuggetText(const QuestValueMap &questValues,
     auto texts = chosenNugget.GetTexts();
     string nuggetText = texts[this->rs->GetRandomIndex(texts.size())];
 
-    for (string key : chosenNugget.GetRandimizationKeys()) {
+    for (string key : chosenNugget.GetRandomizationKeys()) {
         string from = "%" + key;
-        string to = to_string(chosenNugget.GetRandomValue(key, rs));
-        replace(&nuggetText, from, to);
+        string to = chosenNugget.GetRandomValue(key, rs, worldModel.GetNameGenerator());
+        replaceAll(&nuggetText, from, to);
     }
 
     auto entityTypes = chosenNugget.GetRequiredTypes();

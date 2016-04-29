@@ -104,5 +104,11 @@ namespace weave {
 
         void removeStoriesWithInvalidActions(const StoryWriterParameters &params,
                                              std::map<float, Story> *storyMap) const;
+
+        void readRandomizedValues(const Json::Value &nuggetJson, std::unordered_map<std::string, int> &minValues,
+                                  std::unordered_map<std::string, int> &maxValues) const;
+
+        void readRandomizedNames(const Json::Value &nuggetJson,
+                                 std::unordered_map<std::string, NameType> &randomNames) const;
     };
 }
