@@ -19,13 +19,17 @@ std::string weave::SpaceNameGenerator::CreateName(NameType nameType, std::shared
     } else if (nameType == NameType::ALIEN) {
         pattern = "<BV-!<s|sv>|BV'!<s|sv|d>>";
     } else if (nameType == NameType::CORPORATION) {
-        pattern = "<v|<C|c>a>s(<u|a|c>|i|us) (Corp|Inc|Tech).";
+        pattern = "<v|<C|c>a>s(<u|a|c>|i|us) (Corp|Inc|Tech|Ltd).";
     } else if (nameType == NameType::FUNNY) {
         pattern = "<m|s|i><M|is>|md !Md";
     } else if (nameType == NameType::LIGHT_PERSON) {
         pattern = "(a|i|y|e)(y|l|m|s)('<!s>|e|i|l)s(|-<!(a|i|e)(i|y)s>)";
     } else if (nameType == NameType::LIGHT_THING) {
         pattern = "(a|e|i|y|a|e)(y|l|m)(e|i|l|a)<s|v|V>(i|y|u|a)(m|s|)";
+    } else if (nameType == NameType::SHIP) {
+        pattern = "!(m|v|p|x|l|c)(<v>r|<v>l<v>|a|y|e)(m|n) !sv(p|k|t)";
+    } else if (nameType == NameType::CUDDLY) {
+        pattern = "(m|v|p|a|l|u)(r|li|a|y|)m";
     }
 
     TokenNameGenerator nameGenerator(pattern);

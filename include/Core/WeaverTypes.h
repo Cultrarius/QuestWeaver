@@ -219,7 +219,9 @@ namespace weave {
         LIGHT_THING,
         FUNNY,
         ALIEN,
-        CORPORATION
+        CORPORATION,
+        SHIP,
+        CUDDLY
     };
 
     class NameGenerator {
