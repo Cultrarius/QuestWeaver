@@ -14,6 +14,116 @@
 using namespace weave;
 using namespace std;
 
+TEST_CASE("Nugget Randomizer", "[story]") {
+    string key = "testNugget";
+    vector<string> requiredTypes;
+    vector<string> texts = {"Lorem ipsum"};
+    unordered_map<string, int> minValues;
+    unordered_map<string, int> maxValues;
+    unordered_map<string, NameType> randomNames;
+    shared_ptr<RandomStream> rs = make_shared<RandomStream>(38);
+    SpaceWorldModel worldModel(rs);
+
+    SECTION("Empty nugget test") {
+        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        REQUIRE(key == n->GetKey());
+        REQUIRE(0 == n->GetRandomizationKeys().size());
+        REQUIRE(0 == n->GetRequiredTypes().size());
+        REQUIRE(1 == n->GetTexts().size());
+        REQUIRE("" == n->GetRandomValue("asd", rs, worldModel.GetNameGenerator()));
+    }
+
+    SECTION("Random name test") {
+        randomNames["123test"] = NameType::FUNNY;
+        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        REQUIRE(key == n->GetKey());
+        REQUIRE(1 == n->GetRandomizationKeys().size());
+        REQUIRE("123test" == *n->GetRandomizationKeys().begin());
+        REQUIRE("" != n->GetRandomValue("123test", rs, worldModel.GetNameGenerator()));
+    }
+
+    SECTION("min value") {
+        minValues["123test"] = 50;
+        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        REQUIRE(key == n->GetKey());
+        REQUIRE(1 == n->GetRandomizationKeys().size());
+        REQUIRE("123test" == *n->GetRandomizationKeys().begin());
+        for (int i = 0; i < 1000; i++) {
+            string str = n->GetRandomValue("123test", rs, worldModel.GetNameGenerator());
+            int val = atoi(str.c_str());
+            REQUIRE(val >= 50);
+        }
+    }
+
+    SECTION("big min value") {
+        minValues["123test"] = 5000;
+        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        REQUIRE(key == n->GetKey());
+        REQUIRE(1 == n->GetRandomizationKeys().size());
+        REQUIRE("123test" == *n->GetRandomizationKeys().begin());
+        for (int i = 0; i < 1000; i++) {
+            string str = n->GetRandomValue("123test", rs, worldModel.GetNameGenerator());
+            int val = atoi(str.c_str());
+            REQUIRE(val == 5000);
+        }
+    }
+
+    SECTION("max value") {
+        maxValues["123test"] = 50;
+        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        REQUIRE(key == n->GetKey());
+        REQUIRE(1 == n->GetRandomizationKeys().size());
+        REQUIRE("123test" == *n->GetRandomizationKeys().begin());
+        for (int i = 0; i < 1000; i++) {
+            string str = n->GetRandomValue("123test", rs, worldModel.GetNameGenerator());
+            int val = atoi(str.c_str());
+            REQUIRE(val <= 50);
+        }
+    }
+
+    SECTION("small max value") {
+        maxValues["123test"] = -10;
+        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        REQUIRE(key == n->GetKey());
+        REQUIRE(1 == n->GetRandomizationKeys().size());
+        REQUIRE("123test" == *n->GetRandomizationKeys().begin());
+        for (int i = 0; i < 1000; i++) {
+            string str = n->GetRandomValue("123test", rs, worldModel.GetNameGenerator());
+            int val = atoi(str.c_str());
+            REQUIRE(val == -10);
+        }
+    }
+
+    SECTION("Same min/max value") {
+        minValues["123test"] = 50;
+        maxValues["123test"] = 50;
+        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        REQUIRE(key == n->GetKey());
+        REQUIRE(1 == n->GetRandomizationKeys().size());
+        REQUIRE("123test" == *n->GetRandomizationKeys().begin());
+        for (int i = 0; i < 1000; i++) {
+            string str = n->GetRandomValue("123test", rs, worldModel.GetNameGenerator());
+            int val = atoi(str.c_str());
+            REQUIRE(val == 50);
+        }
+    }
+
+    SECTION("min/max value") {
+        minValues["123test"] = 1000;
+        maxValues["123test"] = 50000;
+        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        REQUIRE(key == n->GetKey());
+        REQUIRE(1 == n->GetRandomizationKeys().size());
+        REQUIRE("123test" == *n->GetRandomizationKeys().begin());
+        for (int i = 0; i < 1000; i++) {
+            string str = n->GetRandomValue("123test", rs, worldModel.GetNameGenerator());
+            int val = atoi(str.c_str());
+            REQUIRE(val >= 1000);
+            REQUIRE(val <= 50000);
+        }
+    }
+}
+
 TEST_CASE("Nuggets", "[story]") {
     Directories dirs;
     dirs.templateDirectory = "Test/Resources/";
@@ -32,7 +142,6 @@ TEST_CASE("Nuggets", "[story]") {
     }
 
     SECTION("Valid nuggets") {
-
         writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("1")));
         auto result = writer.CreateStory(StoryWriterParameters(graph, values));
         REQUIRE("" == result.text);

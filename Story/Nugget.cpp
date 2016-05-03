@@ -51,16 +51,23 @@ string Nugget::GetRandomValue(string key, shared_ptr<RandomStream> stream,
 
     int minValue = 0;
     auto minIter = minValues.find(key);
-    if (minIter != minValues.end()) {
+    bool hasMin = minIter != minValues.end();
+    if (hasMin) {
         minValue = minIter->second;
     }
+
     int maxValue = 100;
     auto maxIter = maxValues.find(key);
-    if (maxIter != maxValues.end()) {
+    bool hasMax = maxIter != maxValues.end();
+    if (hasMax) {
         maxValue = maxIter->second;
     }
     if (minValue > maxValue) {
-        minValue = maxValue;
+        if (hasMin && !hasMax) {
+            maxValue = minValue;
+        } else {
+            minValue = maxValue;
+        }
     }
     return to_string(stream->GetIntInRange(minValue, maxValue));
 }
