@@ -14,6 +14,6 @@
     "required": [
       "planet"
     ],
-    "text": "[planetVeryOld|planetVeryYoung:1]{planetMetals}{planetLife}{logEntry}"
+    "text": "[planetVeryOld|planetVeryYoung|planetCuddlyCreatures:1]{planetMetals}{planetLife}{logEntry}"
   }
 ]

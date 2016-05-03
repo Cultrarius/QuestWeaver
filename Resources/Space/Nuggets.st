@@ -113,30 +113,68 @@
       }
     ],
     "texts": [
-      "\nMetal scan result: no significant amount of valuable metals in the planet's crust.",
-      "\nMetal scan result: no amount of valuable metals in the planet's crust.",
-      "\nMetal scan result: no valuable metals in the planet's crust.",
-      "\nMetal scan result: no metal at all, since the planet is a gas giant.",
-      "\nMetal scan result: High amount of Hg (%percent1%) and Ur salts (%percent2%).",
-      "\nMetal scan result: High amount of raw, liquid Hg (%percent1%).",
-      "\nMetal scan result: High amount of Al (%percent1%) and Mo (%percent2%).",
-      "\nMetal scan result: High amount of Ge (%percent1%) and Ur (%percent2%)."
+      "\n[Metal scan result]: no significant amount of valuable metals in the planet's crust.",
+      "\n[Metal scan result]: no amount of valuable metals in the planet's crust.",
+      "\n[Metal scan result]: no valuable metals in the planet's crust.",
+      "\n[Metal scan result]: no metal at all, since the planet is a gas giant.",
+      "\n[Metal scan result]: High amount of Hg (%percent1%) and Ur salts (%percent2%).",
+      "\n[Metal scan result]: High amount of raw, liquid Hg (%percent1%).",
+      "\n[Metal scan result]: High amount of Al (%percent1%) and Mo (%percent2%).",
+      "\n[Metal scan result]: High amount of Ge (%percent1%) and Ur (%percent2%)."
     ]
   },
   {
     "key": "planetLife",
     "requiredTypes": [],
     "texts": [
-      "\nLife scan result: no traces of life could be found.",
-      "\nLife scan result: no life could be found.",
-      "\nLife scan result: traces life could be found, but not enough to give a definitive answer.",
-      "\nLife scan result: single-cellular organisms (no DNA).",
-      "\nLife scan result: single-cellular organisms (complex DNA).",
-      "\nLife scan result: multi-cellular organisms (no DNA, not sentient).",
-      "\nLife scan result: multi-cellular organisms (complex DNA, not sentient).",
-      "\nLife scan result: simple plant life.",
-      "\nLife scan result: complex plant life, but no animals or bacteria",
-      "\nLife scan result: Primitive, sentient life forms detected"
+      "\n[Life scan result]: no traces of life could be found.",
+      "\n[Life scan result]: no life could be found.",
+      "\n[Life scan result]: traces life could be found, but not enough to give a definitive answer.",
+      "\n[Life scan result]: single-cellular organisms (no DNA).",
+      "\n[Life scan result]: single-cellular organisms (complex DNA).",
+      "\n[Life scan result]: multi-cellular organisms (no DNA, not sentient).",
+      "\n[Life scan result]: multi-cellular organisms (complex DNA, not sentient).",
+      "\n[Life scan result]: simple plant life.",
+      "\n[Life scan result]: complex plant life, but no animals or bacteria",
+      "\n[Life scan result]: Primitive, sentient life forms detected"
+    ]
+  },
+  {
+    "key": "planetCuddlyCreatures",
+    "requiredTypes": [
+      "planet"
+    ],
+    "randomizedValue": [
+      {
+        "key": "deadSince",
+        "min": 10,
+        "max": 100
+      }
+    ],
+    "randomizedName": [
+      {
+        "key": "creatures",
+        "type": "cuddly"
+      },
+      {
+        "key": "enemies",
+        "type": "dark_person"
+      },
+      {
+        "key": "practice1",
+        "type": "cuddly_verb"
+      },
+      {
+        "key": "practice2",
+        "type": "cuddly_verb"
+      },
+      {
+        "key": "practice3",
+        "type": "cuddly_verb"
+      }
+    ],
+    "texts": [
+      "%planet now looks like an uninhabited and barren rock, but this was not always the case. About %deadSince millenia ago, a race of creatures known as %creatures swarmed the planets surface. They were extremely social and peaceful - so much in fact, that they are coined with the invention of %practice1ing and %practice2ing (which sounds absurd, now that everybody does it). But when a large armada of %enemies battleships starts to bombard your planet, you can not just %practice3 your way out of that..."
     ]
   },
   {
