@@ -1,5 +1,5 @@
 //
-// Created by michael on 22.03.16.
+// Created by michael on 03.05.16.
 //
 
 #pragma once
@@ -8,22 +8,21 @@
 
 namespace weave {
 
-    struct DeadCivilization : public WorldEntity {
+    struct Artifact : public WorldEntity {
         static const std::string Type;
-        static const std::string PlanetMarker;
 
         const std::string Name;
 
-        DeadCivilization();
+        Artifact();
 
-        explicit DeadCivilization(std::string name);
+        explicit Artifact(std::string name);
 
         std::string ToString() const noexcept override;
 
         std::string GetType() const noexcept override;
 
     private:
-        DeadCivilization(ID id, std::string name);
+        Artifact(ID id, std::string name);
 
         // serialization
         friend class cereal::access;
@@ -34,7 +33,7 @@ namespace weave {
         }
 
         template<class Archive>
-        static void load_and_construct(Archive &ar, cereal::construct<DeadCivilization> &construct) {
+        static void load_and_construct(Archive &ar, cereal::construct<Artifact> &construct) {
             ID id;
             std::string Name;
 
@@ -45,4 +44,4 @@ namespace weave {
     };
 }
 
-CEREAL_REGISTER_TYPE(weave::DeadCivilization);
+CEREAL_REGISTER_TYPE(weave::Artifact);
