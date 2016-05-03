@@ -10,6 +10,7 @@
 #include <World/Space/SpaceAgent.h>
 #include <World/Space/SolarSystem.h>
 #include <World/Space/DeadCivilization.h>
+#include <World/Space/Artifact.h>
 
 using namespace std;
 using namespace weave;
@@ -98,3 +99,10 @@ WorldModelAction SpaceWorldModel::CreateDeadCivilization(NameType nameType) cons
     string name = nameGenerator.CreateName(nameType, rs);
     return WorldModelAction(WorldActionType::CREATE, make_shared<DeadCivilization>(name));
 }
+
+WorldModelAction SpaceWorldModel::CreateArtifact(NameType nameType) const {
+    string name = nameGenerator.CreateName(nameType, rs);
+    return WorldModelAction(WorldActionType::CREATE, make_shared<Artifact>(name));
+}
+
+

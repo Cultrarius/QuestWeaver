@@ -52,6 +52,8 @@ namespace weave {
 
         WorldModelAction CreateDeadCivilization(NameType nameType = NameType::ALIEN) const;
 
+        WorldModelAction CreateArtifact(NameType nameType = NameType::ALIEN) const;
+
     private:
         ModelParameters param;
         SpaceNameGenerator nameGenerator;
