@@ -92,6 +92,8 @@ void StoryWriter::readRandomizedNames(const Value &nuggetJson, unordered_map<str
                 type = NameType::SHIP;
             } else if (typeString == "cuddly") {
                 type = NameType::CUDDLY;
+            } else if (typeString == "cuddly_verb") {
+                type = NameType::CUDDLY_VERB;
             } else {
                 throw ContractFailedException("Unknown name type <" + typeString + ">!");
             }

@@ -221,7 +221,8 @@ namespace weave {
         ALIEN,
         CORPORATION,
         SHIP,
-        CUDDLY
+        CUDDLY,
+        CUDDLY_VERB
     };
 
     class NameGenerator {
