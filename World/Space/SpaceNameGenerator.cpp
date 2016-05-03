@@ -19,7 +19,7 @@ std::string weave::SpaceNameGenerator::CreateName(NameType nameType, std::shared
     } else if (nameType == NameType::ALIEN) {
         pattern = "<BV-!<s|sv>|BV'!<s|sv|d>>";
     } else if (nameType == NameType::CORPORATION) {
-        pattern = "<v|<C|c>a>s(<u|a|c>|i|us) (Corp|Inc|Tech|Ltd).";
+        pattern = "<v|<C|c>a>s(<u|a|c>|i|us) (Corp|Inc|Tech|Ltd|LLC).";
     } else if (nameType == NameType::FUNNY) {
         pattern = "<m|s|i><M|is>|md !Md";
     } else if (nameType == NameType::LIGHT_PERSON) {

@@ -64,7 +64,7 @@
     "randomizedName": [
       {
         "key": "shipName",
-        "type": "light_thing"
+        "type": "ship"
       }
     ],
     "texts": [
