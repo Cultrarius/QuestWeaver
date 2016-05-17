@@ -142,7 +142,7 @@
   },
   {
     "key": "planetCuddlyCreatures",
-    "rarity": 15,
+    "rarity": 8,
     "requiredTypes": [
       "planet"
     ],
