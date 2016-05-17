@@ -29,6 +29,13 @@ string QuestTemplateFactory::extractTitle(const Json::Value &root, std::shared_p
     return titles.at(index);
 }
 
+int QuestTemplateFactory::extractRarity(const Json::Value &root) {
+    if (root.isMember("rarity")) {
+        return max(0, root["rarity"].asInt());
+    }
+    return 0;
+}
+
 vector<TemplateQuestDescription> QuestTemplateFactory::extractDescriptions(const Json::Value &root) {
     vector<TemplateQuestDescription> descriptions;
     const Value jsonDescriptions = root["descriptions"];

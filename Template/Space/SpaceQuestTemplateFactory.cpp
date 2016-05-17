@@ -20,12 +20,13 @@ std::shared_ptr<QuestTemplate> SpaceQuestTemplateFactory::createFromJsonValues(c
     string title = extractTitle(root, randomStream);
     vector<TemplateQuestProperty> properties = extractProperties(root);
     vector<TemplateQuestDescription> descriptions = extractDescriptions(root);
+    int rarity = extractRarity(root);
 
     const string &templateKey = root["key"].asString();
     if (templateKey == "ExploreRegionQuest") {
-        return make_shared<ExploreRegionTemplate>(title, properties, descriptions, formatterType);
+        return make_shared<ExploreRegionTemplate>(title, properties, descriptions, formatterType, rarity);
     } else if (templateKey == "ScanPlanetQuest") {
-        return make_shared<ScanPlanetTemplate>(title, properties, descriptions, formatterType);
+        return make_shared<ScanPlanetTemplate>(title, properties, descriptions, formatterType, rarity);
     } else {
         throw ContractFailedException("Unknown Space template key " + templateKey + "\n");
     }

@@ -1,6 +1,7 @@
 {
   "parent": "Space",
   "key": "SavePersonQuest",
+  "rarity": 10,
   "mandatory": ["friend", "location"],
   "optional": ["sponsor", "reason", "kidnapper"],
   "titles": ["Save your friend!", "Travel to %location to save %friend"],

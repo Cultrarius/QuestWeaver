@@ -61,6 +61,11 @@ namespace weave {
         static std::string extractTitle(const Json::Value &root, std::shared_ptr<RandomStream> randomStream);
 
         /*!
+         * Helper function to extract quest rarity from a JSON object.
+         */
+        static int extractRarity(const Json::Value &root);
+
+        /*!
          * The random stream instance to use for any random choices regarding the quest template.
          */
         std::shared_ptr<RandomStream> randomStream;

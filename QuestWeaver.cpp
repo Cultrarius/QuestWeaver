@@ -45,6 +45,7 @@ vector<shared_ptr<Quest>> QuestWeaver::CreateNewQuests() {
         if (questTemplate->HasPriority()) {
             hasPriorityQuests = true;
         } else {
+            score += questTemplate->GetRarity();
             for (auto oldQuest : quests->GetQuests()) {
                 // penalize quests that occurred often
                 if (newQuest->GetType() == oldQuest->GetType()) {

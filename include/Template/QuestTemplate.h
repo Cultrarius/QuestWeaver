@@ -94,7 +94,8 @@ namespace weave {
         QuestTemplate(std::string title,
                       std::vector<TemplateQuestProperty> properties,
                       std::vector<TemplateQuestDescription> descriptions,
-                      FormatterType formatterType);
+                      FormatterType formatterType,
+                      int rarity = 0);
 
         virtual ~QuestTemplate() = default;
 
@@ -139,6 +140,8 @@ namespace weave {
 
         virtual bool HasPriority() const noexcept;
 
+        int GetRarity() const noexcept;
+
     protected:
 
         /*!
@@ -167,5 +170,6 @@ namespace weave {
         std::string title;
         std::vector<TemplateQuestProperty> properties;
         std::vector<TemplateQuestDescription> descriptions;
+        int rarity;
     };
 }

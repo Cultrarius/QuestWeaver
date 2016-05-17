@@ -19,7 +19,8 @@ namespace weave {
         ExploreRegionTemplate(std::string title,
                               std::vector<TemplateQuestProperty> properties,
                               std::vector<TemplateQuestDescription> descriptions,
-                              FormatterType formatterType);
+                              FormatterType formatterType,
+                              int rarity);
 
     protected:
         std::map<std::string, std::string> resolveAdditionalPlaceholders(

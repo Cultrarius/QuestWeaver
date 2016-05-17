@@ -13,8 +13,8 @@ using namespace weave;
 
 ScanPlanetTemplate::ScanPlanetTemplate(string title, vector<TemplateQuestProperty> properties,
                                        vector<TemplateQuestDescription> descriptions,
-                                       FormatterType formatterType)
-        : QuestTemplate(title, properties, descriptions, formatterType) {
+                                       FormatterType formatterType, int rarity)
+        : QuestTemplate(title, properties, descriptions, formatterType, rarity) {
 }
 
 vector<PropertyCandidate> ScanPlanetTemplate::GetPropertyCandidates(const TemplateQuestProperty &property,

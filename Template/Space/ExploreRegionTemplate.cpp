@@ -13,8 +13,8 @@ using namespace weave;
 ExploreRegionTemplate::ExploreRegionTemplate(string title,
                                              vector<TemplateQuestProperty> properties,
                                              vector<TemplateQuestDescription> descriptions,
-                                             FormatterType formatterType)
-        : QuestTemplate(title, properties, descriptions, formatterType) {
+                                             FormatterType formatterType, int rarity)
+        : QuestTemplate(title, properties, descriptions, formatterType, rarity) {
 }
 
 vector<PropertyCandidate> ExploreRegionTemplate::GetPropertyCandidates(const TemplateQuestProperty &property,

@@ -37,6 +37,10 @@ bool QuestTemplate::HasPriority() const noexcept {
     return false;
 }
 
+int QuestTemplate::GetRarity() const noexcept {
+    return rarity;
+}
+
 string TemplateQuestDescription::GetText(FormatterType format) const noexcept {
     if (format == FormatterType::HTML) {
         return htmlEncloseWithTag(text, "span", "description");
@@ -51,10 +55,11 @@ TemplateQuestDescription::TemplateQuestDescription(const vector<string> &conditi
 }
 
 QuestTemplate::QuestTemplate(string title, vector<TemplateQuestProperty> properties,
-                             vector<TemplateQuestDescription> descriptions, FormatterType formatterType) {
+                             vector<TemplateQuestDescription> descriptions, FormatterType formatterType, int rarity) {
     this->title = title;
     this->properties = properties;
     this->descriptions = descriptions;
+    this->rarity = rarity;
     this->formatterType = formatterType;
 }
 

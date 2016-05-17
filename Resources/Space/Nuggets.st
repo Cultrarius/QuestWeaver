@@ -48,6 +48,7 @@
   },
   {
     "key": "locationStrangeGravity",
+    "rarity": 5,
     "requiredTypes": [
       "solarSystem"
     ],
@@ -141,7 +142,7 @@
   },
   {
     "key": "planetCuddlyCreatures",
-    "rarity": 5,
+    "rarity": 15,
     "requiredTypes": [
       "planet"
     ],
