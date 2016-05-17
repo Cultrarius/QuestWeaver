@@ -25,7 +25,7 @@ TEST_CASE("Nugget Randomizer", "[story]") {
     SpaceWorldModel worldModel(rs);
 
     SECTION("Empty nugget test") {
-        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        auto n = new Nugget(key, 1, requiredTypes, texts, minValues, maxValues, randomNames);
         REQUIRE(key == n->GetKey());
         REQUIRE(0 == n->GetRandomizationKeys().size());
         REQUIRE(0 == n->GetRequiredTypes().size());
@@ -35,7 +35,7 @@ TEST_CASE("Nugget Randomizer", "[story]") {
 
     SECTION("Random name test") {
         randomNames["123test"] = NameType::FUNNY;
-        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        auto n = new Nugget(key, 1, requiredTypes, texts, minValues, maxValues, randomNames);
         REQUIRE(key == n->GetKey());
         REQUIRE(1 == n->GetRandomizationKeys().size());
         REQUIRE("123test" == *n->GetRandomizationKeys().begin());
@@ -44,7 +44,7 @@ TEST_CASE("Nugget Randomizer", "[story]") {
 
     SECTION("min value") {
         minValues["123test"] = 50;
-        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        auto n = new Nugget(key, 1, requiredTypes, texts, minValues, maxValues, randomNames);
         REQUIRE(key == n->GetKey());
         REQUIRE(1 == n->GetRandomizationKeys().size());
         REQUIRE("123test" == *n->GetRandomizationKeys().begin());
@@ -57,7 +57,7 @@ TEST_CASE("Nugget Randomizer", "[story]") {
 
     SECTION("big min value") {
         minValues["123test"] = 5000;
-        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        auto n = new Nugget(key, 1, requiredTypes, texts, minValues, maxValues, randomNames);
         REQUIRE(key == n->GetKey());
         REQUIRE(1 == n->GetRandomizationKeys().size());
         REQUIRE("123test" == *n->GetRandomizationKeys().begin());
@@ -70,7 +70,7 @@ TEST_CASE("Nugget Randomizer", "[story]") {
 
     SECTION("max value") {
         maxValues["123test"] = 50;
-        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        auto n = new Nugget(key, 1, requiredTypes, texts, minValues, maxValues, randomNames);
         REQUIRE(key == n->GetKey());
         REQUIRE(1 == n->GetRandomizationKeys().size());
         REQUIRE("123test" == *n->GetRandomizationKeys().begin());
@@ -83,7 +83,7 @@ TEST_CASE("Nugget Randomizer", "[story]") {
 
     SECTION("small max value") {
         maxValues["123test"] = -10;
-        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        auto n = new Nugget(key, 1, requiredTypes, texts, minValues, maxValues, randomNames);
         REQUIRE(key == n->GetKey());
         REQUIRE(1 == n->GetRandomizationKeys().size());
         REQUIRE("123test" == *n->GetRandomizationKeys().begin());
@@ -97,7 +97,7 @@ TEST_CASE("Nugget Randomizer", "[story]") {
     SECTION("Same min/max value") {
         minValues["123test"] = 50;
         maxValues["123test"] = 50;
-        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        auto n = new Nugget(key, 1, requiredTypes, texts, minValues, maxValues, randomNames);
         REQUIRE(key == n->GetKey());
         REQUIRE(1 == n->GetRandomizationKeys().size());
         REQUIRE("123test" == *n->GetRandomizationKeys().begin());
@@ -111,7 +111,7 @@ TEST_CASE("Nugget Randomizer", "[story]") {
     SECTION("min/max value") {
         minValues["123test"] = 1000;
         maxValues["123test"] = 50000;
-        auto n = new Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+        auto n = new Nugget(key, 1, requiredTypes, texts, minValues, maxValues, randomNames);
         REQUIRE(key == n->GetKey());
         REQUIRE(1 == n->GetRandomizationKeys().size());
         REQUIRE("123test" == *n->GetRandomizationKeys().begin());

@@ -110,5 +110,7 @@ namespace weave {
 
         void readRandomizedNames(const Json::Value &nuggetJson,
                                  std::unordered_map<std::string, NameType> &randomNames) const;
+
+        uint64_t getNuggetIndexByRarity(const std::vector<NuggetOption> &supportedNuggets) const;
     };
 }

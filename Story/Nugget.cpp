@@ -7,10 +7,11 @@
 using namespace std;
 using namespace weave;
 
-Nugget::Nugget(string key, vector<string> requiredTypes, vector<string> texts, unordered_map<string, int> minValues,
-               unordered_map<string, int> maxValues, unordered_map<string, NameType> randomNames) :
-        key(key), requiredTypes(requiredTypes), texts(texts), minValues(minValues), maxValues(maxValues),
-        randomNames(randomNames) {
+Nugget::Nugget(string key, float rarity, vector<string> requiredTypes, vector<string> texts,
+               unordered_map<string, int> minValues, unordered_map<string, int> maxValues,
+               unordered_map<string, NameType> randomNames) :
+        key(key), rarity(rarity), requiredTypes(requiredTypes), texts(texts), minValues(minValues),
+        maxValues(maxValues), randomNames(randomNames) {
     for (auto minVal : randomNames) {
         randomKeys.insert(minVal.first);
     }
@@ -72,6 +73,6 @@ string Nugget::GetRandomValue(string key, shared_ptr<RandomStream> stream,
     return to_string(stream->GetIntInRange(minValue, maxValue));
 }
 
-
-
-
+float Nugget::GetRarity() const noexcept {
+    return rarity;
+}

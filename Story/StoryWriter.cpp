@@ -60,7 +60,15 @@ void StoryWriter::readNuggets() const {
             unordered_map<string, NameType> randomNames;
             readRandomizedNames(nuggetJson, randomNames);
 
-            nuggets[key] = Nugget(key, requiredTypes, texts, minValues, maxValues, randomNames);
+            float rarity = 1;
+            if (nuggetJson.isMember("rarity")) {
+                rarity = nuggetJson["rarity"].asFloat();
+                if (rarity < 0) {
+                    throw ContractFailedException("Rarity for nugget key <" + key + "> is smaller than 0!");
+                }
+            }
+
+            nuggets[key] = Nugget(key, rarity, requiredTypes, texts, minValues, maxValues, randomNames);
         }
     }
 }
@@ -349,7 +357,8 @@ map<float, Story> StoryWriter::createWeightedStories(
 
 string StoryWriter::getRandomNuggetText(const QuestValueMap &questValues,
                                         const vector<NuggetOption> &supportedNuggets) const {
-    NuggetOption chosenOption = supportedNuggets[rs->GetRandomIndex(supportedNuggets.size())];
+    uint64_t nuggetIndex = getNuggetIndexByRarity(supportedNuggets);
+    NuggetOption chosenOption = supportedNuggets[nuggetIndex];
     Nugget chosenNugget = nuggets[chosenOption.GetNuggetKey()];
     auto texts = chosenNugget.GetTexts();
     string nuggetText = texts[this->rs->GetRandomIndex(texts.size())];
@@ -383,6 +392,16 @@ string StoryWriter::getRandomNuggetText(const QuestValueMap &questValues,
     }
 
     return nuggetText;
+}
+
+uint64_t StoryWriter::getNuggetIndexByRarity(const vector<NuggetOption> &supportedNuggets) const {
+    map<float, uint64_t> nuggetProbability;
+    for (uint64_t i = 0; i < supportedNuggets.size(); i++) {
+        auto nugget = nuggets[supportedNuggets[i].GetNuggetKey()];
+        float probability = 1 - rs->GetIntInRange(0, 100) / (100 * (nugget.GetRarity() + 1));
+        nuggetProbability[probability] = i;
+    }
+    return (*nuggetProbability.begin()).second;
 }
 
 std::vector<NuggetOption> StoryWriter::getSupportedNuggets(const vector<NuggetOption> &nuggetOptions,

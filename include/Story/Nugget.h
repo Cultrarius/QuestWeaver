@@ -15,11 +15,13 @@ namespace weave {
     public:
         Nugget() = default;
 
-        Nugget(std::string key, std::vector<std::string> requiredTypes, std::vector<std::string> texts,
+        Nugget(std::string key, float rarity, std::vector<std::string> requiredTypes, std::vector<std::string> texts,
                std::unordered_map<std::string, int> minValues, std::unordered_map<std::string, int> maxValues,
                std::unordered_map<std::string, NameType> randomNames);
 
         std::string GetKey() const noexcept;
+
+        float GetRarity() const noexcept;
 
         std::vector<std::string> GetRequiredTypes() const noexcept;
 
@@ -32,6 +34,7 @@ namespace weave {
 
     private:
         std::string key;
+        float rarity;
         std::vector<std::string> requiredTypes;
         std::vector<std::string> texts;
         std::set<std::string> randomKeys;
