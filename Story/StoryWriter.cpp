@@ -60,7 +60,7 @@ void StoryWriter::readNuggets() const {
             unordered_map<string, NameType> randomNames;
             readRandomizedNames(nuggetJson, randomNames);
 
-            float rarity = 1;
+            float rarity = 0;
             if (nuggetJson.isMember("rarity")) {
                 rarity = nuggetJson["rarity"].asFloat();
                 if (rarity < 0) {
@@ -311,15 +311,21 @@ map<float, Story> StoryWriter::createWeightedStories(
         for (auto pair : templateResult.tokenMap) {
             RawStoryToken token = pair.first;
 
-            if (!token.isMandatory && rs->GetIntInRange(0, 1) == 1) {
-                replace(&story, token.text, "");
-                continue;
-            }
-
             auto ids = pair.second;
             vector<NuggetOption> nuggetOptions;
+            float minRarity = 0;
             for (string option : token.nuggetOptions) {
                 nuggetOptions.push_back(NuggetOption(option, ids));
+                auto nuggetIter = nuggets.find(option);
+                if (nuggetIter != nuggets.end()) {
+                    minRarity = min(minRarity, nuggetIter->second.GetRarity());
+                }
+            }
+
+            int rarityToReach = static_cast<int>(minRarity + 1);
+            if (!token.isMandatory && rs->GetIntInRange(0, rarityToReach) == rarityToReach) {
+                replace(&story, token.text, "");
+                continue;
             }
 
             vector<NuggetOption> supportedNuggets = getSupportedNuggets(nuggetOptions, questValues);
