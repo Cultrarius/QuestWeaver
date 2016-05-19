@@ -24,7 +24,7 @@ StoryTemplateResult LocationIntroStoryTemplate::CreateStory(const EntityMap &req
 
     MetaData markedData;
     markedData.SetValue(metaDataMarker, 1);
-    result.worldActions.push_back(WorldModelAction(WorldActionType::UPDATE, entity, markedData));
+    result.worldActions.emplace_back(WorldActionType::UPDATE, entity, markedData);
 
     return result;
 }

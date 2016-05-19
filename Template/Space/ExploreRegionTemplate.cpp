@@ -40,13 +40,13 @@ void ExploreRegionTemplate::gatherSponsorEntities(vector<PropertyCandidate> *can
     WorldModelAction metaDataAction(WorldActionType::UPDATE, newEntityAction.GetEntity(), metaData);
     actions.push_back(move(metaDataAction));
 
-    candidates->push_back(PropertyCandidate(actions, newEntityAction.GetEntity()));
+    candidates->emplace_back(actions, newEntityAction.GetEntity());
 
     for (auto entity : spaceModel.GetEntitiesWithType(SpaceAgent::Type)) {
         auto entityData = spaceModel.GetMetaData(entity->GetId());
         if (entityData.GetValue("relationToPlayer") >= 10) {
             WorldModelAction modelAction(WorldActionType::KEEP, entity);
-            candidates->push_back(PropertyCandidate(modelAction));
+            candidates->emplace_back(modelAction);
         }
     }
 }
@@ -68,7 +68,7 @@ void ExploreRegionTemplate::gatherSolarSystemEntities(vector<PropertyCandidate> 
         WorldModelAction metaDataAction(WorldActionType::UPDATE, action.GetEntity(), metaData);
         actions.push_back(move(metaDataAction));
     }
-    candidates->push_back(PropertyCandidate(actions, newSolarSystem));
+    candidates->emplace_back(actions, newSolarSystem);
 
     // search for existing unexplored solar systems
     for (auto entity : spaceModel.GetEntitiesWithType(SolarSystem::Type)) {
@@ -78,7 +78,7 @@ void ExploreRegionTemplate::gatherSolarSystemEntities(vector<PropertyCandidate> 
             metaData.SetValue(exploredPercent, 0);
             metaData.SetValue(metaDataMarker, 1);
             WorldModelAction modelAction(WorldActionType::UPDATE, entity, metaData);
-            candidates->push_back(PropertyCandidate(modelAction));
+            candidates->emplace_back(modelAction);
         }
     }
 }

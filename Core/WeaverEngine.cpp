@@ -44,7 +44,7 @@ EngineResult WeaverEngine::fillTemplate(shared_ptr<QuestTemplate> questTemplate,
             for (auto action : candidate.GetActions()) {
                 modelActions.push_back(action);
             }
-            propertyValues.push_back(QuestPropertyValue(questProperty, candidate.GetValue()));
+            propertyValues.emplace_back(questProperty, candidate.GetValue());
         }
     }
     StoryWriterParameters storyParams(graph, propertyValues, modelActions);

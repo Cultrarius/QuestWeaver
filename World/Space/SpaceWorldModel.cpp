@@ -90,7 +90,7 @@ vector<WorldModelAction> SpaceWorldModel::CreateSolarSystem(NameType nameType, i
 
     int seed = rs->GetInt();
     auto solarSystem = make_shared<SolarSystem>(nameGenerator.CreateName(nameType, rs), seed, location, planets);
-    actions.push_back(WorldModelAction(WorldActionType::CREATE, solarSystem));
+    actions.emplace_back(WorldActionType::CREATE, solarSystem);
 
     return actions;
 }

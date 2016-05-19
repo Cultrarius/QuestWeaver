@@ -190,7 +190,7 @@ TEST_CASE("Nuggets", "[story]") {
         // create an agent in the world model
         auto agent = worldModel.CreateAgent().GetEntity();
         TemplateQuestProperty templateProperty(true, "superhero");
-        values.push_back(QuestPropertyValue(templateProperty, agent));
+        values.emplace_back(templateProperty, agent);
         set<string> requiredTypes = {"agent"};
 
         // create a fitting story template factory
@@ -226,7 +226,7 @@ TEST_CASE("StoryTemplates", "[story]") {
     // create a test entity
     auto testEntity = make_shared<TestEntity>();
     TemplateQuestProperty templateProperty(true, "player");
-    values.push_back(QuestPropertyValue(templateProperty, testEntity));
+    values.emplace_back(templateProperty, testEntity);
     set<string> requiredTypes = {"TestEntityType"};
     WorldModelAction addAction(WorldActionType::CREATE, testEntity);
     worldModel.Execute({addAction});
@@ -252,9 +252,9 @@ TEST_CASE("StoryTemplates", "[story]") {
 
     SECTION("Update deleted entity test") {
         vector<WorldModelAction> questActions;
-        questActions.push_back(WorldModelAction(WorldActionType::DELETE, testEntity));
+        questActions.emplace_back(WorldActionType::DELETE, testEntity);
         vector<WorldModelAction> storyActions;
-        storyActions.push_back(WorldModelAction(WorldActionType::UPDATE, testEntity));
+        storyActions.emplace_back(WorldActionType::UPDATE, testEntity);
 
         writer.RegisterTemplateFactory(
                 unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st", storyActions)));
@@ -368,7 +368,7 @@ TEST_CASE("SpaceTemplates", "[story]") {
     auto newAgentAction = worldModel.CreateAgent();
     auto testAgent = newAgentAction.GetEntity();
     TemplateQuestProperty templateProperty(true, "player");
-    values.push_back(QuestPropertyValue(templateProperty, testAgent));
+    values.emplace_back(templateProperty, testAgent);
     set<string> requiredTypes = {"agent"};
     worldModel.Execute({newAgentAction});
 

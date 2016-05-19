@@ -70,7 +70,7 @@ void ScanPlanetTemplate::gatherPlanetEntities(vector<PropertyCandidate> *candida
         WorldModelAction metaDataAction(WorldActionType::UPDATE, action.GetEntity(), metaData);
         actions.push_back(move(metaDataAction));
     }
-    candidates->push_back(PropertyCandidate(actions, newPlanet));
+    candidates->emplace_back(actions, newPlanet);
 
     // search for existing unexplored planets
     for (auto entity : spaceModel.GetEntitiesWithType(Planet::Type)) {
@@ -80,7 +80,7 @@ void ScanPlanetTemplate::gatherPlanetEntities(vector<PropertyCandidate> *candida
             metaData.SetValue(scanPercent, 0);
             metaData.SetValue(metaDataMarker, 1);
             WorldModelAction modelAction(WorldActionType::UPDATE, entity, metaData);
-            candidates->push_back(PropertyCandidate(modelAction));
+            candidates->emplace_back(modelAction);
         }
     }
 }
@@ -96,13 +96,13 @@ void ScanPlanetTemplate::gatherSponsorEntities(vector<PropertyCandidate> *candid
     WorldModelAction metaDataAction(WorldActionType::UPDATE, newEntityAction.GetEntity(), metaData);
     actions.push_back(move(metaDataAction));
 
-    candidates->push_back(PropertyCandidate(actions, newEntityAction.GetEntity()));
+    candidates->emplace_back(actions, newEntityAction.GetEntity());
 
     for (auto entity : spaceModel.GetEntitiesWithType(SpaceAgent::Type)) {
         auto entityData = spaceModel.GetMetaData(entity->GetId());
         if (entityData.GetValue("relationToPlayer") >= 10) {
             WorldModelAction modelAction(WorldActionType::KEEP, entity);
-            candidates->push_back(PropertyCandidate(modelAction));
+            candidates->emplace_back(modelAction);
         }
     }
 }
@@ -110,10 +110,10 @@ void ScanPlanetTemplate::gatherSponsorEntities(vector<PropertyCandidate> *candid
 void ScanPlanetTemplate::gatherCivilizationEntities(vector<PropertyCandidate> *candidates,
                                                     const SpaceWorldModel &spaceModel) const {
     auto newEntityAction = spaceModel.CreateDeadCivilization();
-    candidates->push_back(PropertyCandidate(newEntityAction));
+    candidates->emplace_back(newEntityAction);
 
     for (auto entity : spaceModel.GetEntitiesWithType(DeadCivilization::Type)) {
         WorldModelAction modelAction(WorldActionType::KEEP, entity);
-        candidates->push_back(PropertyCandidate(modelAction));
+        candidates->emplace_back(modelAction);
     }
 }
