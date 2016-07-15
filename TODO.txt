@@ -10,3 +10,13 @@
 * Actor Classes (Persons in the world/quests)
 * Actor Generation Algorithm
 * Quest Templates
+
+
+~QUEST IDEAS~
+Fight enemies
+Answer distress signal
+Gather precious metals (resources)
+Find information on dead civilization
+Find technical data for new blueprint
+Salvage research station
+Transport cargo
