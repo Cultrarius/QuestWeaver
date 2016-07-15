@@ -31,7 +31,7 @@ set(SOURCE_FILES QuestWeaver.cpp Core/WeaverEngine.cpp Template/TemplateEngine.c
         Story/Space/LocationIntroStoryTemplate.cpp World/Space/SpaceNameGenerator.cpp
         include/Core/NameGen/TokenNameGenerator.cpp World/Space/Planet.cpp World/Space/DeadCivilization.cpp
         Template/Space/ScanPlanetTemplate.cpp QuestModel/Space/ScanPlanetQuest.cpp Template/QuestPropertyValue.cpp
-        Story/Space/PlanetIntroStoryTemplate.cpp World/Space/Artifact.cpp)
+        Story/Space/PlanetIntroStoryTemplate.cpp World/Space/Artifact.cpp World/Space/SpaceStation.cpp)
 
 add_executable(QuestWeaverTest ${SOURCE_FILES} Test/catch.hpp Test/TestRunner.cpp Test/WeaverGraphTest.cpp
         Test/WeaverUtilsTest.cpp Test/Space/TemplateTest.cpp Test/Space/SerializationTest.cpp Test/Space/ModelTest.cpp
