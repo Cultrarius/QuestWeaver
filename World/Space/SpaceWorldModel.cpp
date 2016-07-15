@@ -11,6 +11,7 @@
 #include <World/Space/SolarSystem.h>
 #include <World/Space/DeadCivilization.h>
 #include <World/Space/Artifact.h>
+#include <World/Space/SpaceStation.h>
 
 using namespace std;
 using namespace weave;
@@ -104,5 +105,30 @@ WorldModelAction SpaceWorldModel::CreateArtifact(NameType nameType) const {
     string name = nameGenerator.CreateName(nameType, rs);
     return WorldModelAction(WorldActionType::CREATE, make_shared<Artifact>(name));
 }
+
+WorldModelAction SpaceWorldModel::CreateSpaceStation(shared_ptr<SolarSystem> homeSystem, NameType nameType) const {
+    auto planets = homeSystem->Planets;
+    float angle = rs->GetULongInRange(0, 3600) / 10.0f;
+    float radians = static_cast<float>(angle * M_PI / 180);
+    float x, y;
+    if (planets.empty()) {
+        float distanceToSun = param.planetDistanceBase + rs->GetNormalIntInRange(1, 5) * param.planetDistanceAverage;
+        x = distanceToSun * cos(radians);
+        y = distanceToSun * sin(radians);
+    } else {
+        auto planet = planets.at(rs->GetRandomIndex(planets.size()));
+        int var = param.planetDistanceVariation / 5;
+        int distanceVariation = rs->GetNormalIntInRange(-var, var);
+        float distanceToPlanet = param.planetDistanceAverage / 5 + distanceVariation;
+        x = planet->X + distanceToPlanet * cos(radians);
+        y = planet->Y + distanceToPlanet * sin(radians);
+    }
+
+    int seed = rs->GetInt();
+    string name = nameGenerator.CreateName(nameType, rs);
+    return weave::WorldModelAction(WorldActionType::CREATE, make_shared<SpaceStation>(x, y, seed, name, homeSystem));
+}
+
+
 
 

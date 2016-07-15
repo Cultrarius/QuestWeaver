@@ -7,6 +7,7 @@
 #include "../WorldModel.h"
 #include "../../Core/WeaverUtils.h"
 #include "SpaceNameGenerator.h"
+#include "SolarSystem.h"
 #include <World/Space/SpaceLocation.h>
 
 namespace weave {
@@ -53,6 +54,9 @@ namespace weave {
         WorldModelAction CreateDeadCivilization(NameType nameType = NameType::ALIEN) const;
 
         WorldModelAction CreateArtifact(NameType nameType = NameType::ALIEN) const;
+
+        WorldModelAction CreateSpaceStation(std::shared_ptr<SolarSystem> homeSystem,
+                                            NameType nameType = NameType::LIGHT_THING) const;
 
     private:
         ModelParameters param;
