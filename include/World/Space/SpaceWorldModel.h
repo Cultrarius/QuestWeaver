@@ -8,6 +8,7 @@
 #include "../../Core/WeaverUtils.h"
 #include "SpaceNameGenerator.h"
 #include "SolarSystem.h"
+#include "SpaceAgent.h"
 #include <World/Space/SpaceLocation.h>
 
 namespace weave {
@@ -73,6 +74,9 @@ namespace weave {
 
         WorldModelAction CreateSpaceWreck(std::shared_ptr<SolarSystem> homeSystem,
                                           NameType nameType = NameType::SHIP) const;
+
+        WorldModelAction CreateSpaceShip(std::shared_ptr<SpaceAgent> owner,
+                                         NameType nameType = NameType::SHIP) const;
 
     private:
         ModelParameters param;

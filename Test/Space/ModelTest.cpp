@@ -8,6 +8,7 @@
 #include <World/Space/Artifact.h>
 #include <World/Space/SpaceStation.h>
 #include <World/Space/SpaceWreck.h>
+#include <World/Space/SpaceShip.h>
 #include "../catch.hpp"
 #include "../Mock/TestWorldListener.h"
 
@@ -253,7 +254,7 @@ TEST_CASE("Metadata", "[model]") {
 int getTypeCount(vector<WorldModelAction> actions, string type) {
     int count = 0;
     for (auto action : actions) {
-        if (action.GetEntity()->GetType() == type) {
+        if (action.GetActionType() == WorldActionType::CREATE && action.GetEntity()->GetType() == type) {
             count++;
         }
     }
@@ -275,5 +276,22 @@ TEST_CASE("Init world", "[model]") {
         REQUIRE(getTypeCount(actions, Artifact::Type) > 0);
         REQUIRE(getTypeCount(actions, SpaceStation::Type) > 0);
         REQUIRE(getTypeCount(actions, SpaceWreck::Type) > 0);
+        REQUIRE(getTypeCount(actions, SpaceShip::Type) > 0);
+    }
+
+    SECTION("Each agent has at least one ship") {
+        vector<WorldModelAction> actions = model.InitializeNewWorld();
+        REQUIRE(actions.size() > 0);
+
+        int agents = getTypeCount(actions, SpaceAgent::Type);
+        set<shared_ptr<SpaceAgent>> owners;
+        for (auto action : actions) {
+            if (action.GetEntity()->GetType() == SpaceShip::Type) {
+                auto ship = dynamic_pointer_cast<SpaceShip>(action.GetEntity());
+                owners.insert(ship->Owner);
+            }
+        }
+
+        REQUIRE(agents == owners.size());
     }
 }

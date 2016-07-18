@@ -13,6 +13,8 @@ namespace weave {
 
         std::string Name;
 
+        SpaceAgent();
+
         explicit SpaceAgent(std::string name);
 
         std::string ToString() const noexcept override;

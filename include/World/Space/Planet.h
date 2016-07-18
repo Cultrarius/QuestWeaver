@@ -16,7 +16,7 @@ namespace weave {
         const float Y;
         const int Seed;
         const std::string Name;
-        const std::shared_ptr<SpaceLocation> Location;
+        const std::shared_ptr<SpaceLocation> Location; // location of the parent solar system
 
         Planet();
 

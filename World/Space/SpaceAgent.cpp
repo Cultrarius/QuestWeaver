@@ -6,6 +6,9 @@
 
 const std::string weave::SpaceAgent::Type = "agent";
 
+weave::SpaceAgent::SpaceAgent() : SpaceAgent(NoID, "") {
+}
+
 weave::SpaceAgent::SpaceAgent(std::string name) : SpaceAgent(NoID, name) {
 }
 

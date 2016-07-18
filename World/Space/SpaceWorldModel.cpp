@@ -13,6 +13,7 @@
 #include <World/Space/Artifact.h>
 #include <World/Space/SpaceStation.h>
 #include <World/Space/SpaceWreck.h>
+#include <World/Space/SpaceShip.h>
 
 using namespace std;
 using namespace weave;
@@ -143,6 +144,11 @@ WorldModelAction SpaceWorldModel::CreateSpaceWreck(std::shared_ptr<SolarSystem> 
     return weave::WorldModelAction(WorldActionType::CREATE, make_shared<SpaceWreck>(x, y, seed, name, homeSystem));
 }
 
+WorldModelAction SpaceWorldModel::CreateSpaceShip(std::shared_ptr<SpaceAgent> owner, NameType nameType) const {
+    int seed = rs->GetInt();
+    string name = nameGenerator.CreateName(nameType, rs);
+    return weave::WorldModelAction(WorldActionType::CREATE, make_shared<SpaceShip>(seed, name, owner));
+}
 
 std::vector<WorldModelAction> SpaceWorldModel::InitializeNewWorld() const {
     vector<WorldModelAction> actions;
@@ -177,16 +183,18 @@ std::vector<WorldModelAction> SpaceWorldModel::InitializeNewWorld() const {
     for (int i = 0; i < param.startFriends; i++) {
         auto newAgentAction = CreateAgent(NameType::LIGHT_PERSON);
         actions.push_back(newAgentAction);
+        actions.push_back(CreateSpaceShip(dynamic_pointer_cast<SpaceAgent>(newAgentAction.GetEntity())));
 
         MetaData metaData;
         metaData.SetValue("relationToPlayer", rs->GetNormalIntInRange(65, 100));
         actions.emplace_back(WorldActionType::UPDATE, newAgentAction.GetEntity(), metaData);
     }
 
-    // Zapp Brannigan loves these guys
+    // Zapp Brannigan hates these guys
     for (int i = 0; i < param.startNeutrals; i++) {
         auto newAgentAction = CreateAgent();
         actions.push_back(newAgentAction);
+        actions.push_back(CreateSpaceShip(dynamic_pointer_cast<SpaceAgent>(newAgentAction.GetEntity())));
 
         MetaData metaData;
         metaData.SetValue("relationToPlayer", rs->GetNormalIntInRange(35, 65));
@@ -197,6 +205,7 @@ std::vector<WorldModelAction> SpaceWorldModel::InitializeNewWorld() const {
     for (int i = 0; i < param.startEnemies; i++) {
         auto newAgentAction = CreateAgent(NameType::DARK_PERSON);
         actions.push_back(newAgentAction);
+        actions.push_back(CreateSpaceShip(dynamic_pointer_cast<SpaceAgent>(newAgentAction.GetEntity())));
 
         MetaData metaData;
         metaData.SetValue("relationToPlayer", rs->GetNormalIntInRange(0, 35));
@@ -210,6 +219,8 @@ std::vector<WorldModelAction> SpaceWorldModel::InitializeNewWorld() const {
 
     return actions;
 }
+
+
 
 
 
