@@ -12,6 +12,7 @@
 #include <World/Space/DeadCivilization.h>
 #include <World/Space/Artifact.h>
 #include <World/Space/SpaceStation.h>
+#include <World/Space/SpaceWreck.h>
 
 using namespace std;
 using namespace weave;
@@ -108,9 +109,9 @@ WorldModelAction SpaceWorldModel::CreateArtifact(NameType nameType) const {
 
 WorldModelAction SpaceWorldModel::CreateSpaceStation(shared_ptr<SolarSystem> homeSystem, NameType nameType) const {
     auto planets = homeSystem->Planets;
+    float x, y;
     float angle = rs->GetULongInRange(0, 3600) / 10.0f;
     float radians = static_cast<float>(angle * M_PI / 180);
-    float x, y;
     if (planets.empty()) {
         float distanceToSun = param.planetDistanceBase + rs->GetNormalIntInRange(1, 5) * param.planetDistanceAverage;
         x = distanceToSun * cos(radians);
@@ -128,6 +129,20 @@ WorldModelAction SpaceWorldModel::CreateSpaceStation(shared_ptr<SolarSystem> hom
     string name = nameGenerator.CreateName(nameType, rs);
     return weave::WorldModelAction(WorldActionType::CREATE, make_shared<SpaceStation>(x, y, seed, name, homeSystem));
 }
+
+WorldModelAction SpaceWorldModel::CreateSpaceWreck(std::shared_ptr<SolarSystem> homeSystem, NameType nameType) const {
+    float x, y;
+    float angle = rs->GetULongInRange(0, 3600) / 10.0f;
+    float radians = static_cast<float>(angle * M_PI / 180);
+    float distanceToSun = param.planetDistanceBase + rs->GetNormalIntInRange(1, 8) * param.planetDistanceAverage;
+    x = distanceToSun * cos(radians);
+    y = distanceToSun * sin(radians);
+
+    int seed = rs->GetInt();
+    string name = nameGenerator.CreateName(nameType, rs);
+    return weave::WorldModelAction(WorldActionType::CREATE, make_shared<SpaceWreck>(x, y, seed, name, homeSystem));
+}
+
 
 std::vector<WorldModelAction> SpaceWorldModel::InitializeNewWorld() const {
     vector<WorldModelAction> actions;
@@ -147,6 +162,12 @@ std::vector<WorldModelAction> SpaceWorldModel::InitializeNewWorld() const {
         actions.push_back(CreateSpaceStation(targetSystem));
     }
 
+    // throw some debris around
+    for (int i = 0; i < param.startWrecks; i++) {
+        auto targetSystem = solarSystems.at(rs->GetRandomIndex(solarSystems.size()));
+        actions.push_back(CreateSpaceWreck(targetSystem));
+    }
+
     // bury the rotting remains of dead civilizations
     for (int i = 0; i < param.startDeadCivs; i++) {
         actions.push_back(CreateDeadCivilization());
@@ -154,7 +175,7 @@ std::vector<WorldModelAction> SpaceWorldModel::InitializeNewWorld() const {
 
     // create some good guys
     for (int i = 0; i < param.startFriends; i++) {
-        auto newAgentAction = CreateAgent();
+        auto newAgentAction = CreateAgent(NameType::LIGHT_PERSON);
         actions.push_back(newAgentAction);
 
         MetaData metaData;
@@ -174,7 +195,7 @@ std::vector<WorldModelAction> SpaceWorldModel::InitializeNewWorld() const {
 
     // Some bad guys are needed too
     for (int i = 0; i < param.startEnemies; i++) {
-        auto newAgentAction = CreateAgent();
+        auto newAgentAction = CreateAgent(NameType::DARK_PERSON);
         actions.push_back(newAgentAction);
 
         MetaData metaData;
@@ -182,5 +203,13 @@ std::vector<WorldModelAction> SpaceWorldModel::InitializeNewWorld() const {
         actions.emplace_back(WorldActionType::UPDATE, newAgentAction.GetEntity(), metaData);
     }
 
+    // indiana jones would love these artifacts
+    for (int i = 0; i < param.startDeadCivs; i++) {
+        actions.push_back(CreateArtifact());
+    }
+
     return actions;
 }
+
+
+

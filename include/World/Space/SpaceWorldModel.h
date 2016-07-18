@@ -23,6 +23,7 @@ namespace weave {
 
         int startSystems = 15;
         int startSpaceStations = 5;
+        int startWrecks = 8;
         int startDeadCivs = 2;
         int startFriends = 3;
         int startNeutrals = 25;
@@ -69,6 +70,9 @@ namespace weave {
 
         WorldModelAction CreateSpaceStation(std::shared_ptr<SolarSystem> homeSystem,
                                             NameType nameType = NameType::LIGHT_THING) const;
+
+        WorldModelAction CreateSpaceWreck(std::shared_ptr<SolarSystem> homeSystem,
+                                          NameType nameType = NameType::SHIP) const;
 
     private:
         ModelParameters param;

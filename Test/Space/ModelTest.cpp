@@ -3,6 +3,11 @@
 //
 
 #include <World/Space/SpaceWorldModel.h>
+#include <World/Space/DeadCivilization.h>
+#include <World/Space/SpaceAgent.h>
+#include <World/Space/Artifact.h>
+#include <World/Space/SpaceStation.h>
+#include <World/Space/SpaceWreck.h>
 #include "../catch.hpp"
 #include "../Mock/TestWorldListener.h"
 
@@ -242,5 +247,33 @@ TEST_CASE("Metadata", "[model]") {
         actions[0] = WorldModelAction(WorldActionType::UPDATE, metaEntity, MetaData());
         metaDataModel.Execute(actions);
         REQUIRE(metaDataModel.GetMetaData(id).GetValue("Test123") == 142);
+    }
+}
+
+int getTypeCount(vector<WorldModelAction> actions, string type) {
+    int count = 0;
+    for (auto action : actions) {
+        if (action.GetEntity()->GetType() == type) {
+            count++;
+        }
+    }
+    return count;
+}
+
+TEST_CASE("Init world", "[model]") {
+    shared_ptr<RandomStream> rs = make_shared<RandomStream>(44);
+    SpaceWorldModel model(rs);
+
+    SECTION("Check required entities") {
+        vector<WorldModelAction> actions = model.InitializeNewWorld();
+        REQUIRE(actions.size() > 0);
+
+        REQUIRE(getTypeCount(actions, SolarSystem::Type) > 0);
+        REQUIRE(getTypeCount(actions, Planet::Type) > 0);
+        REQUIRE(getTypeCount(actions, DeadCivilization::Type) > 0);
+        REQUIRE(getTypeCount(actions, SpaceAgent::Type) > 0);
+        REQUIRE(getTypeCount(actions, Artifact::Type) > 0);
+        REQUIRE(getTypeCount(actions, SpaceStation::Type) > 0);
+        REQUIRE(getTypeCount(actions, SpaceWreck::Type) > 0);
     }
 }
