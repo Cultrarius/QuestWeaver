@@ -21,6 +21,13 @@ namespace weave {
         int planetDistanceVariation = 2000;
         int deadCivRarity = 20;
 
+        int startSystems = 15;
+        int startSpaceStations = 5;
+        int startDeadCivs = 2;
+        int startFriends = 3;
+        int startNeutrals = 25;
+        int startEnemies = 5;
+
         template<class Archive>
         void serialize(Archive &ar) {
             ar(CEREAL_NVP(minLocation), CEREAL_NVP(maxLocation));
@@ -38,6 +45,11 @@ namespace weave {
         ModelParameters GetParameters() const;
 
         const NameGenerator &GetNameGenerator() const override;
+
+        /**
+         * Creates a complete new world with a reasonable number of different entities.
+         */
+        std::vector<WorldModelAction> InitializeNewWorld() const;
 
         // entity creation methods
 

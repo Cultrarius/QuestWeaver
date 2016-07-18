@@ -129,6 +129,58 @@ WorldModelAction SpaceWorldModel::CreateSpaceStation(shared_ptr<SolarSystem> hom
     return weave::WorldModelAction(WorldActionType::CREATE, make_shared<SpaceStation>(x, y, seed, name, homeSystem));
 }
 
+std::vector<WorldModelAction> SpaceWorldModel::InitializeNewWorld() const {
+    vector<WorldModelAction> actions;
 
+    // create a few solar systems
+    vector<shared_ptr<SolarSystem>> solarSystems;
+    for (int i = 0; i < param.startSystems; i++) {
+        vector<WorldModelAction> solarSystemActions = CreateSolarSystem();
+        auto lastAction = solarSystemActions.at(solarSystemActions.size() - 1).GetEntity();
+        solarSystems.push_back(dynamic_pointer_cast<SolarSystem>(lastAction));
+        std::move(solarSystemActions.begin(), solarSystemActions.end(), back_inserter(actions));
+    }
 
+    // maybe add a few space stations
+    for (int i = 0; i < param.startSpaceStations; i++) {
+        auto targetSystem = solarSystems.at(rs->GetRandomIndex(solarSystems.size()));
+        actions.push_back(CreateSpaceStation(targetSystem));
+    }
 
+    // bury the rotting remains of dead civilizations
+    for (int i = 0; i < param.startDeadCivs; i++) {
+        actions.push_back(CreateDeadCivilization());
+    }
+
+    // create some good guys
+    for (int i = 0; i < param.startFriends; i++) {
+        auto newAgentAction = CreateAgent();
+        actions.push_back(newAgentAction);
+
+        MetaData metaData;
+        metaData.SetValue("relationToPlayer", rs->GetNormalIntInRange(65, 100));
+        actions.emplace_back(WorldActionType::UPDATE, newAgentAction.GetEntity(), metaData);
+    }
+
+    // Zapp Brannigan loves these guys
+    for (int i = 0; i < param.startNeutrals; i++) {
+        auto newAgentAction = CreateAgent();
+        actions.push_back(newAgentAction);
+
+        MetaData metaData;
+        metaData.SetValue("relationToPlayer", rs->GetNormalIntInRange(35, 65));
+        actions.emplace_back(WorldActionType::UPDATE, newAgentAction.GetEntity(), metaData);
+    }
+
+    // Some bad guys are needed too
+    for (int i = 0; i < param.startEnemies; i++) {
+        auto newAgentAction = CreateAgent();
+        actions.push_back(newAgentAction);
+
+        MetaData metaData;
+        metaData.SetValue("relationToPlayer", rs->GetNormalIntInRange(0, 35));
+        actions.emplace_back(WorldActionType::UPDATE, newAgentAction.GetEntity(), metaData);
+    }
+
+    return actions;
+}
