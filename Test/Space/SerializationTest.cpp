@@ -298,6 +298,51 @@ TEST_CASE("Serialize Entities", "[serialize]") {
         REQUIRE(deserializedModel.GetMetaData(entity1->GetId()).GetValue("Age") == 42);
         REQUIRE(deserializedModel.GetMetaData(entity2->GetId()).GetValue("Age") == 43);
     }
+
+    SECTION("Serialize and deserialize an initialized world model") {
+        vector<WorldModelAction> actions = testModel.InitializeNewWorld();
+        testModel.Execute(actions);
+        int newCount = 0;
+        for (auto action : actions) {
+            if (action.GetActionType() == WorldActionType::CREATE) {
+                newCount++;
+            }
+        }
+        REQUIRE(testModel.GetEntities().size() == newCount);
+        SpaceWorldModel deserializedModel(rx);
+        stringstream ss;
+
+        SECTION("Using JSON format") {
+            {
+                cereal::JSONOutputArchive outputArchive(ss);
+                outputArchive(testModel);
+            }
+            string serialized = ss.str();
+            REQUIRE(!serialized.empty());
+            {
+                cereal::JSONInputArchive inputArchive(ss);
+                inputArchive(deserializedModel);
+            }
+        }
+
+        SECTION("Using binary format") {
+            {
+                cereal::PortableBinaryOutputArchive outputArchive(ss);
+                outputArchive(testModel);
+            }
+            string serialized = ss.str();
+            REQUIRE(!serialized.empty());
+            {
+                cereal::PortableBinaryInputArchive inputArchive(ss);
+                inputArchive(deserializedModel);
+            }
+        }
+        REQUIRE(testModel.GetEntities().size() == deserializedModel.GetEntities().size());
+
+        for (uint64_t i = 0; i < testModel.GetEntities().size(); i++) {
+            REQUIRE(typeid(testModel.GetEntities()[i]) == typeid(deserializedModel.GetEntities()[i]));
+        }
+    }
 }
 
 TEST_CASE("Serialization QuestWeaver", "[serialize]") {
