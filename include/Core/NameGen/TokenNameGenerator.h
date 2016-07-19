@@ -210,11 +210,11 @@ namespace weave {
 
         explicit Random(std::vector<std::unique_ptr<TokenNameGenerator>> &&generators_);
 
-        size_t combinations();
+        size_t combinations() override;
 
-        size_t min();
+        size_t min() override;
 
-        size_t max();
+        size_t max() override;
 
         std::string toString(std::shared_ptr<RandomStream> rs) override;
     };
@@ -234,11 +234,11 @@ namespace weave {
     public:
         explicit Literal(const std::string &value_);
 
-        size_t combinations();
+        size_t combinations() override;
 
-        size_t min();
+        size_t min() override;
 
-        size_t max();
+        size_t max() override;
 
         std::string toString(std::shared_ptr<RandomStream> rs) override;
     };

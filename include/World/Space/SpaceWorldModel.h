@@ -53,7 +53,7 @@ namespace weave {
          */
         std::vector<WorldModelAction> InitializeNewWorld() const;
 
-        // entity creation methods
+        // basic entity creation methods
 
         WorldModelAction CreateLocation() const;
 

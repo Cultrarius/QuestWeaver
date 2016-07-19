@@ -24,7 +24,7 @@ namespace weave {
 
     protected:
         std::map<std::string, std::string> resolveAdditionalPlaceholders(
-                QuestPropertyValue questPropertyValue) const noexcept;
+                QuestPropertyValue questPropertyValue) const noexcept override;
 
     private:
         std::string metaDataMarker = "explorationQuestLock";
