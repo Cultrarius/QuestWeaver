@@ -1,7 +1,7 @@
 {
   "parent": "Space",
   "key": "ExploreRegionQuest",
-  "rarity": 2,
+  "rarity": 10,
   "mandatory": ["solarSystem"],
   "optional": ["sponsor"],
   "titles": ["Explore region of space", "Travel to the solar system %solarSystem"],

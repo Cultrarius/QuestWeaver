@@ -26,6 +26,7 @@ ExploreRegionQuest::ExploreRegionQuest(const string &title, const string &descri
 QuestTickResult ExploreRegionQuest::Tick(float, const WorldModel &worldModel) {
     int explored = worldModel.GetMetaData(targetLocation).GetValue(metaDataMarker);
     if (explored >= 100) {
+        //TODO improve sponsor relationship
         return QuestTickResult(QuestModelAction(QuestActionType::SUCCEED, GetId()));
     }
     return QuestTickResult(GetId());

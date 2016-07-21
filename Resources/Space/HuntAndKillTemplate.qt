@@ -1,0 +1,35 @@
+{
+  "parent": "Space",
+  "key": "HuntAndKillQuest",
+  "rarity": 3,
+  "mandatory": [
+    "solarSystem",
+    "targetShip"
+  ],
+  "optional": [
+    "sponsor"
+  ],
+  "titles": [
+    "Destroy enemy spaceship",
+    "Hunt And Kill",
+    "Destroy spaceship %targetShip"
+  ],
+  "descriptions": [
+    {
+      "conditions": [
+        "solarSystem",
+        "targetShip",
+        "sponsor"
+      ],
+      "text": "%sponsor says go to %solarSystem system and destroy spaceship %targetShip."
+    },
+    {
+      "conditions": [
+        "solarSystem",
+        "targetShip",
+        "sponsor"
+      ],
+      "text": "Go to %solarSystem system and destroy spaceship %targetShip."
+    }
+  ]
+}

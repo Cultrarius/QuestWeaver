@@ -92,7 +92,7 @@ void ScanPlanetTemplate::gatherSponsorEntities(vector<PropertyCandidate> *candid
     actions.push_back(newEntityAction);
 
     MetaData metaData;
-    metaData.SetValue("relationToPlayer", 10);
+    metaData.SetValue(MetaDataMarkers::RelationToPlayer, 50);
     WorldModelAction metaDataAction(WorldActionType::UPDATE, newEntityAction.GetEntity(), metaData);
     actions.push_back(move(metaDataAction));
 
@@ -100,7 +100,7 @@ void ScanPlanetTemplate::gatherSponsorEntities(vector<PropertyCandidate> *candid
 
     for (auto entity : spaceModel.GetEntitiesWithType(SpaceAgent::Type)) {
         auto entityData = spaceModel.GetMetaData(entity->GetId());
-        if (entityData.GetValue("relationToPlayer") >= 10) {
+        if (entityData.GetValue(MetaDataMarkers::RelationToPlayer) >= 50) {
             WorldModelAction modelAction(WorldActionType::KEEP, entity);
             candidates->emplace_back(modelAction);
         }

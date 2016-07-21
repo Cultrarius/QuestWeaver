@@ -71,7 +71,7 @@ namespace weave {
         /*!
          * Creates at least one new quest.
          * This node does not have any input because it is the responsibility of the quest weaver to decide which quest
-         * should be next.
+         * should be created next.
          * The previously registered template factories and the world model are used to create the quest.
          *
          * Once a quest is created, it is active in the world (and most likely already started to change it).

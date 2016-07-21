@@ -1,7 +1,7 @@
 {
   "parent": "Space",
   "key": "ScanPlanetQuest",
-  "rarity": 1,
+  "rarity": 2,
   "mandatory": ["planet"],
   "optional": ["sponsor", "deadCivilization"],
   "titles": [

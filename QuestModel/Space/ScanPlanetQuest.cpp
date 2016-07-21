@@ -26,6 +26,7 @@ ScanPlanetQuest::ScanPlanetQuest(const string &title, const string &description,
 QuestTickResult ScanPlanetQuest::Tick(float, const WorldModel &worldModel) {
     int scanned = worldModel.GetMetaData(targetPlanet).GetValue(metaDataMarker);
     if (scanned >= 100) {
+        //TODO improve sponsor relationship
         return QuestTickResult(QuestModelAction(QuestActionType::SUCCEED, GetId()));
     }
     return QuestTickResult(GetId());
