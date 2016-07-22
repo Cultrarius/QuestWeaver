@@ -322,6 +322,7 @@ map<float, Story> StoryWriter::createWeightedStories(
                 }
             }
 
+            // sort out optional tokens by rarity
             int rarityToReach = static_cast<int>(minRarity + 1);
             if (!token.isMandatory && rs->GetIntInRange(0, rarityToReach) == rarityToReach) {
                 replace(&story, token.text, "");
@@ -336,7 +337,30 @@ map<float, Story> StoryWriter::createWeightedStories(
                 break;
             }
 
-            string nuggetText = getRandomNuggetText(questValues, supportedNuggets);
+            uint64_t nuggetIndex = getNuggetIndexByRarity(supportedNuggets);
+            NuggetOption chosenOption = supportedNuggets[nuggetIndex];
+
+            // check previous quests for nugget entity matches
+            unordered_set<ID> nuggetIDs;
+            for (ID id : chosenOption.GetEntityIDs()) {
+                nuggetIDs.insert(id);
+            }
+            for (auto quest : questModel.GetQuests()) {
+                auto questEntities = questModel.GetQuestEntities(quest->GetId());
+                QuestState state = questModel.GetState(quest->GetId());
+                for (auto entity : questEntities) {
+                    if (nuggetIDs.count(entity->GetId())) {
+                        if (state == QuestState::Success || state == QuestState::Failed) {
+                            storyValue += finishedQuestWeight;
+                        } else {
+                            storyValue += unfinishedQuestWeight;
+                        }
+                    }
+                }
+            }
+
+            // place the nugget in the story
+            string nuggetText = getNuggetText(questValues, chosenOption);
             replace(&story, token.text, nuggetText);
         }
 
@@ -361,10 +385,7 @@ map<float, Story> StoryWriter::createWeightedStories(
     return weightedStories;
 }
 
-string StoryWriter::getRandomNuggetText(const QuestValueMap &questValues,
-                                        const vector<NuggetOption> &supportedNuggets) const {
-    uint64_t nuggetIndex = getNuggetIndexByRarity(supportedNuggets);
-    NuggetOption chosenOption = supportedNuggets[nuggetIndex];
+string StoryWriter::getNuggetText(const QuestValueMap &questValues, const NuggetOption &chosenOption) const {
     Nugget chosenNugget = nuggets[chosenOption.GetNuggetKey()];
     auto texts = chosenNugget.GetTexts();
     string nuggetText = texts[this->rs->GetRandomIndex(texts.size())];

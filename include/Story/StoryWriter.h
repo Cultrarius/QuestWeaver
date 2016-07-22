@@ -26,11 +26,11 @@ namespace weave {
     class StoryWriterParameters {
     public:
         StoryWriterParameters(const weave::WeaverGraph &graph, const std::vector<QuestPropertyValue> &propertyValues) :
-                graph(graph), propertyValues(propertyValues) { }
+                graph(graph), propertyValues(propertyValues) {}
 
         StoryWriterParameters(const weave::WeaverGraph &graph, const std::vector<QuestPropertyValue> &propertyValues,
                               const std::vector<WorldModelAction> &modelActions) :
-                graph(graph), propertyValues(propertyValues), modelActions(modelActions) { }
+                graph(graph), propertyValues(propertyValues), modelActions(modelActions) {}
 
         const weave::WeaverGraph &graph;
         const std::vector<QuestPropertyValue> propertyValues;
@@ -60,6 +60,8 @@ namespace weave {
         const float storyEntityWeight = 40;
         const float worldActionWeight = -20;
         const float nuggetWeight = 5;
+        const float unfinishedQuestWeight = 5;
+        const float finishedQuestWeight = 10;
 
         std::shared_ptr<RandomStream> rs;
         const weave::QuestModel &questModel;
@@ -99,8 +101,7 @@ namespace weave {
         std::vector<NuggetOption> getSupportedNuggets(const std::vector<NuggetOption> &nuggetOptions,
                                                       const QuestValueMap &questValues) const;
 
-        std::string getRandomNuggetText(const QuestValueMap &questValues,
-                                        const std::vector<NuggetOption> &supportedNuggets) const;
+        std::string getNuggetText(const QuestValueMap &questValues, const NuggetOption &chosenOption) const;
 
         void removeStoriesWithInvalidActions(const StoryWriterParameters &params,
                                              std::map<float, Story> *storyMap) const;
