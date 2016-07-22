@@ -202,7 +202,8 @@ TEST_CASE("Metadata", "[model]") {
         REQUIRE(metaDataModel.GetMetaData(id).HasValue("Test123"));
         actions[0] = WorldModelAction(WorldActionType::DELETE, metaEntity);
         metaDataModel.Execute(actions);
-        REQUIRE(!metaDataModel.GetMetaData(id).HasValue("Test123"));
+        REQUIRE(!metaDataModel.GetEntityById(id));
+        REQUIRE(metaDataModel.GetMetaData(id).HasValue("Test123"));
     }
 
     SECTION("update entity with metadata") {

@@ -7,6 +7,7 @@
 #include <World/Space/Planet.h>
 #include <World/Space/DeadCivilization.h>
 #include <World/Space/SpaceAgent.h>
+#include <World/Space/MetaDataMarkers.h>
 
 using namespace std;
 using namespace weave;

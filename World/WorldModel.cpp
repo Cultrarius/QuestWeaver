@@ -41,7 +41,6 @@ void WorldModel::Execute(vector<WorldModelAction> modelActions) {
             ID oldId = action.GetEntity()->GetId();
             action.GetEntity()->id = WorldEntity::NoID;
             entities.erase(oldId);
-            metaData.erase(oldId);
         } else if (action.GetActionType() == WorldActionType::UPDATE) {
             updateMetaDataForId(id, action.GetMetaData());
         } else {

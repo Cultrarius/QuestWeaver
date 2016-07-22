@@ -4,9 +4,13 @@
 
 #pragma once
 
+#include "Core/WeaverTypes.h"
+
 namespace weave {
 
     struct MetaDataMarkers {
-        static std::string RelationToPlayer = "relationToPlayer";
-    }
+        static const std::string RelationToPlayer;
+        static const std::string Destroyed;
+        static const std::string CurrentLocation;
+    };
 }

@@ -31,6 +31,7 @@ namespace weave {
         }
 
     private:
+        static const int relationAdd = 10;
         ID targetShip;
         ID solarSystem;
         ID sponsor;
