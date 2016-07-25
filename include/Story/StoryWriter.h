@@ -98,8 +98,7 @@ namespace weave {
                 const EntityMap &entitiesByType,
                 const QuestValueMap &questValues) const;
 
-        std::vector<NuggetOption> getSupportedNuggets(const std::vector<NuggetOption> &nuggetOptions,
-                                                      const QuestValueMap &questValues) const;
+        std::vector<NuggetOption> getSupportedNuggets(const std::vector<NuggetOption> &nuggetOptions) const;
 
         std::string getNuggetText(const QuestValueMap &questValues, const NuggetOption &chosenOption) const;
 
@@ -113,5 +112,7 @@ namespace weave {
                                  std::unordered_map<std::string, NameType> &randomNames) const;
 
         uint64_t getNuggetIndexByRarity(const std::vector<NuggetOption> &supportedNuggets) const;
+
+        QuestPropertyValue getQuestValueForID(const QuestValueMap &questValues, ID id) const;
     };
 }

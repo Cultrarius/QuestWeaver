@@ -2,16 +2,24 @@
   {
     "key": "empty",
     "requiredTypes": [],
-    "texts": [""]
+    "texts": [
+      ""
+    ]
   },
   {
     "key": "actorIntroMysterious",
-    "requiredTypes": ["agent"],
-    "texts": ["%agent is a mysterious being roaming the galaxy in search of a lost soul."]
+    "requiredTypes": [
+      "agent"
+    ],
+    "texts": [
+      "%agent is a mysterious being roaming the galaxy in search of a lost soul."
+    ]
   },
   {
     "key": "actorIntroMachine",
-    "requiredTypes": ["agent"],
+    "requiredTypes": [
+      "agent"
+    ],
     "texts": [
       "%agent appears to be a sentient machine, which outlived its creators.",
       "%agent appears to be a sentient machine, but the creator is unknown."
@@ -19,7 +27,9 @@
   },
   {
     "key": "actorUnknownOrigin",
-    "requiredTypes": ["agent"],
+    "requiredTypes": [
+      "agent"
+    ],
     "texts": [
       "It is not known where %agent originated from.",
       "It is not known where %agent originated from, but several clues suggest that the location lies beyond our known galaxy.",
@@ -181,10 +191,28 @@
   },
   {
     "key": "revenge",
-    "requiredTypes": ["agent"],
+    "requiredTypes": [
+      "agent"
+    ],
     "texts": [
       "The betrayal felt by %agent drives him to seek revenge against all that wronged him.",
       "%agent felt betrayed. He is acting out of pure hatred and seeks revenge at all costs."
+    ]
+  },
+  {
+    "key": "shipOriginOwner",
+    "requiredTypes": [
+      "spaceShip",
+      "agent"
+    ],
+    "randomizedName": [
+      {
+        "key": "origin",
+        "type": "dark_thing"
+      }
+    ],
+    "texts": [
+      "The %spaceShip first saw the cold starlight in the %origin star system. It was later stolen by %agent, who then mainly used it to ambush trade vessels."
     ]
   }
 ]

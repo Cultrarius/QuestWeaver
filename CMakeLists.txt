@@ -33,7 +33,7 @@ set(SOURCE_FILES QuestWeaver.cpp Core/WeaverEngine.cpp Template/TemplateEngine.c
         Template/Space/ScanPlanetTemplate.cpp QuestModel/Space/ScanPlanetQuest.cpp Template/QuestPropertyValue.cpp
         Story/Space/PlanetIntroStoryTemplate.cpp World/Space/Artifact.cpp World/Space/SpaceStation.cpp World/Space/SpaceWreck.cpp
         World/Space/SpaceShip.cpp QuestModel/Space/HuntAndKillQuest.cpp World/Space/MetaDataMarkers.cpp
-        Template/Space/HuntAndKillTemplate.cpp)
+        Template/Space/HuntAndKillTemplate.cpp Story/Space/ShipIntroStoryTemplate.cpp)
 
 add_executable(QuestWeaverTest ${SOURCE_FILES} Test/catch.hpp Test/TestRunner.cpp Test/WeaverGraphTest.cpp
         Test/WeaverUtilsTest.cpp Test/Space/TemplateTest.cpp Test/Space/SerializationTest.cpp Test/Space/ModelTest.cpp

@@ -8,9 +8,12 @@
 #include <Template/Space/SpaceQuestTemplateFactory.h>
 #include <World/Space/SpaceWorldModel.h>
 #include <QuestModel/Space/ExploreRegionQuest.h>
+#include <QuestWeaver.h>
+#include <Story/Space/CommonSpaceStoryFactory.h>
 #include "../catch.hpp"
 #include "../Mock/TestQuestTemplate.h"
 #include "../Mock/TestQuestTemplateFactory.h"
+#include "../Mock/ProxyQuestFactory.h"
 
 using namespace weave;
 using namespace std;
@@ -398,4 +401,42 @@ TEST_CASE("Scan planet quest", "[quest]") {
         REQUIRE(candidates[i].GetValue()->GetType() == "planet");
         REQUIRE(candidates[i].GetActions().size() == 1);
     }
+}
+
+TEST_CASE("Hunter Killer quest", "[quest]") {
+    shared_ptr<RandomStream> rs = make_shared<RandomStream>(1);
+    TemplateEngine engine(rs, Directories(), FormatterType::TEXT);
+    SpaceQuestTemplateFactory *factory = new SpaceQuestTemplateFactory();
+    engine.RegisterTemplateFactory(unique_ptr<SpaceQuestTemplateFactory>(factory));
+    WeaverConfig config;
+    SpaceWorldModel *world = new SpaceWorldModel(rs);
+    config.worldModel = unique_ptr<SpaceWorldModel>(world);
+
+    // Create a new scan planet quest manually
+    auto questTemplate = factory->CreateTemplate("HuntAndKillQuest");
+
+    TemplateQuestProperty property(true, "solarSystem");
+    auto candidates = questTemplate->GetPropertyCandidates(property, *world);
+
+    // it has to create a new solar system, since the world is empty
+    REQUIRE(candidates.size() == 1);
+    REQUIRE(candidates[0].GetValue()->GetType() == "solarSystem");
+    REQUIRE(candidates[0].GetActions().size() > 2);
+
+    auto ownerAction = world->CreateAgent();
+    world->Execute({ownerAction});
+    auto shipAction = world->CreateSpaceShip(dynamic_pointer_cast<SpaceAgent>(ownerAction.GetEntity()));
+    world->Execute({shipAction});
+
+
+    QuestWeaver weaver(config);
+    unique_ptr<StoryTemplateFactory> storyFactory = unique_ptr<StoryTemplateFactory>(new CommonSpaceStoryFactory());
+    unique_ptr<QuestTemplateFactory> questFactory = unique_ptr<QuestTemplateFactory>(
+            new ProxyQuestFactory("HuntAndKillQuest"));
+    weaver.RegisterQuestTemplateFactory(move(questFactory));
+    weaver.RegisterStoryTemplateFactory(move(storyFactory));
+    shared_ptr<Quest> newQuest = weaver.CreateNewQuests().at(0);
+    REQUIRE(newQuest->GetType() == "Space::HuntAndKill");
+
+    //TODO test some stuff
 }

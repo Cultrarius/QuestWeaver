@@ -326,7 +326,7 @@ map<float, Story> StoryWriter::createWeightedStories(
                 continue;
             }
 
-            vector<NuggetOption> supportedNuggets = getSupportedNuggets(nuggetOptions, questValues);
+            vector<NuggetOption> supportedNuggets = getSupportedNuggets(nuggetOptions);
             storyValue += nuggetWeight * supportedNuggets.size();
             if (supportedNuggets.empty() && token.isMandatory) {
                 // the story is broken at this point, because none of the required nuggets are known!
@@ -401,14 +401,14 @@ string StoryWriter::getNuggetText(const QuestValueMap &questValues, const Nugget
     for (uint64_t i = 0; i < entityIDs.size(); i++) {
         ID id = entityIDs[i];
         string requiredType = entityTypes[i];
-        auto questProperty = questValues.find(id)->second;
-        string actualType = questProperty->GetValue()->GetType();
+        QuestPropertyValue questProperty = getQuestValueForID(questValues, id);
+        string actualType = questProperty.GetValue()->GetType();
         if (requiredType != actualType) {
             string error("Invalid types <" + requiredType + "> and <" + actualType + ">");
             throw ContractFailedException(error);
         }
         string from = "%" + requiredType;
-        string to = questProperty->GetValueString(this->templateEngine.GetFormat());
+        string to = questProperty.GetValueString(this->templateEngine.GetFormat());
         if (!replace(&nuggetText, from, to)) {
             string error("Unable to replace nugget text (i=" + to_string(i) + ", key=" + requiredType + ")");
             throw ContractFailedException(error);
@@ -416,6 +416,16 @@ string StoryWriter::getNuggetText(const QuestValueMap &questValues, const Nugget
     }
 
     return nuggetText;
+}
+
+QuestPropertyValue StoryWriter::getQuestValueForID(const QuestValueMap &questValues, ID id) const {
+    auto iter = questValues.find(id);
+    if (iter != questValues.end()) {
+        return *iter->second;
+    }
+    // the story template used an entity not from the quest values, so we make a temp quest object to help
+    // with the formatting
+    return QuestPropertyValue(TemplateQuestProperty(false, "tmp"), worldModel.GetEntityById(id));
 }
 
 uint64_t StoryWriter::getNuggetIndexByRarity(const vector<NuggetOption> &supportedNuggets) const {
@@ -428,12 +438,11 @@ uint64_t StoryWriter::getNuggetIndexByRarity(const vector<NuggetOption> &support
     return (*nuggetProbability.begin()).second;
 }
 
-std::vector<NuggetOption> StoryWriter::getSupportedNuggets(const vector<NuggetOption> &nuggetOptions,
-                                                           const QuestValueMap &questValues) const {
+std::vector<NuggetOption> StoryWriter::getSupportedNuggets(const vector<NuggetOption> &nuggetOptions) const {
     vector<NuggetOption> supportedNuggets;
     for (NuggetOption option : nuggetOptions) {
         for (ID entityId : option.GetEntityIDs()) {
-            if (questValues.count(entityId) == 0) {
+            if (!worldModel.GetEntityById(entityId)) {
                 // the template knows which IDs are allowed, so this should never happen
                 throw ContractFailedException("Invalid nugget option (ID " + to_string(entityId) + ")");
             }

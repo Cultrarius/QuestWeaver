@@ -15,5 +15,12 @@
       "planet"
     ],
     "text": "[planetVeryOld|planetVeryYoung|planetCuddlyCreatures:1]{planetMetals}{planetLife}{logEntry}"
+  },
+  {
+    "key": "shipIntro",
+    "required": [
+      "spaceShip"
+    ],
+    "text": "[shipOriginOwner:shipAndOwner]{logEntry}"
   }
 ]
