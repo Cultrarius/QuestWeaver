@@ -184,12 +184,9 @@ Story StoryWriter::CreateStory(const StoryWriterParameters &params,
     }
 
     QuestValueMap questValues;
+    EntityMap entitiesByType;
     for (auto &value : propertyValues) {
         questValues[value.GetValue()->GetId()] = &value;
-    }
-
-    EntityMap entitiesByType;
-    for (auto value : propertyValues) {
         entitiesByType[value.GetValue()->GetType()].push_back(value.GetValue());
     }
 

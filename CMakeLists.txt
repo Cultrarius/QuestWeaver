@@ -32,7 +32,8 @@ set(SOURCE_FILES QuestWeaver.cpp Core/WeaverEngine.cpp Template/TemplateEngine.c
         include/Core/NameGen/TokenNameGenerator.cpp World/Space/Planet.cpp World/Space/DeadCivilization.cpp
         Template/Space/ScanPlanetTemplate.cpp QuestModel/Space/ScanPlanetQuest.cpp Template/QuestPropertyValue.cpp
         Story/Space/PlanetIntroStoryTemplate.cpp World/Space/Artifact.cpp World/Space/SpaceStation.cpp World/Space/SpaceWreck.cpp
-        World/Space/SpaceShip.cpp QuestModel/Space/HuntAndKillQuest.cpp World/Space/MetaDataMarkers.cpp)
+        World/Space/SpaceShip.cpp QuestModel/Space/HuntAndKillQuest.cpp World/Space/MetaDataMarkers.cpp
+        Template/Space/HuntAndKillTemplate.cpp)
 
 add_executable(QuestWeaverTest ${SOURCE_FILES} Test/catch.hpp Test/TestRunner.cpp Test/WeaverGraphTest.cpp
         Test/WeaverUtilsTest.cpp Test/Space/TemplateTest.cpp Test/Space/SerializationTest.cpp Test/Space/ModelTest.cpp
@@ -40,6 +41,6 @@ add_executable(QuestWeaverTest ${SOURCE_FILES} Test/catch.hpp Test/TestRunner.cp
         Test/Mock/TestEntity.cpp Test/Mock/TestEntity.h Test/Mock/TestWorldListener.cpp Test/Mock/TestWorldListener.h
         Test/WeaverApiTest.cpp Test/StoryWriterTest.cpp Test/Mock/TestStoryTemplateFactory.h Test/Mock/TestStoryTemplate.h
         Test/Mock/TestHelper.h Test/Mock/TestHelper.cpp Test/Mock/TestQuestTemplate.cpp Test/Mock/TestQuestTemplate.h
-        Test/Mock/TestQuestTemplateFactory.cpp Test/Mock/TestQuestTemplateFactory.h)
+        Test/Mock/TestQuestTemplateFactory.cpp Test/Mock/TestQuestTemplateFactory.h Test/Mock/ProxyQuestFactory.cpp Test/Mock/ProxyQuestFactory.h)
 
 add_library(QuestWeaver STATIC ${SOURCE_FILES})
