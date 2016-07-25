@@ -38,21 +38,22 @@ TEST_CASE("Quest Model", "[model]") {
         REQUIRE(newQuest->GetTitle() == "TestTitle");
         REQUIRE(newQuest->GetDescription() == "Blabla");
 
-        model.RegisterNew(newQuest, properties);
+        model.RegisterNew(newQuest, properties, "Story Text");
 
         questId = newQuest->GetId();
         REQUIRE(newQuest->GetId() != 0);
         REQUIRE(model.GetState(questId) == QuestState::Inactive);
         REQUIRE(newQuest->GetTitle() == "TestTitle");
         REQUIRE(newQuest->GetDescription() == "Blabla");
+        REQUIRE(newQuest->GetStory() == "Story Text");
     }
 
     shared_ptr<Quest> quest = make_shared<TestQuest>("TestTitle", "Blabla");
-    model.RegisterNew(quest, properties);
+    model.RegisterNew(quest, properties, "");
     REQUIRE(quest->GetId() != 0);
 
     SECTION("Register quest twice") {
-        REQUIRE_THROWS_AS(model.RegisterNew(quest, properties), ContractFailedException);
+        REQUIRE_THROWS_AS(model.RegisterNew(quest, properties, ""), ContractFailedException);
     }
 
     SECTION("Keep known quest") {
@@ -115,7 +116,7 @@ TEST_CASE("Quest Model", "[model]") {
     shared_ptr<WorldEntity> entity = make_shared<TestEntity>();
     QuestPropertyValue value(templateValue, entity);
     properties.push_back(value);
-    model.RegisterNew(quest2, properties);
+    model.RegisterNew(quest2, properties, "");
     REQUIRE(quest2->GetId() != 0);
 
     SECTION("Get quest entities") {

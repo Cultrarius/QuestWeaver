@@ -22,7 +22,8 @@ vector<shared_ptr<Quest>> QuestModel::GetQuestsWithState(QuestState state) const
 }
 
 void QuestModel::RegisterNew(shared_ptr<Quest> newQuest,
-                             const vector<QuestPropertyValue> &questProperties) {
+                             const vector<QuestPropertyValue> &questProperties,
+                             const std::string &storyText) {
     // check the quest is not already registered
     ID id = newQuest->GetId();
     if (quests.count(id) + questStates.count(id) > 0) {
@@ -31,6 +32,7 @@ void QuestModel::RegisterNew(shared_ptr<Quest> newQuest,
 
     idGenerator++;
     newQuest->id = idGenerator;
+    newQuest->story = storyText;
     quests[idGenerator] = newQuest;
     questStates[idGenerator] = QuestState::Inactive;
     for (auto property : questProperties) {

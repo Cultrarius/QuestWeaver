@@ -25,16 +25,16 @@ namespace weave {
 
     class StoryWriterParameters {
     public:
-        StoryWriterParameters(const weave::WeaverGraph &graph, const std::vector<QuestPropertyValue> &propertyValues) :
+        StoryWriterParameters(const WeaverGraph &graph, const std::vector<QuestPropertyValue> &propertyValues) :
                 graph(graph), propertyValues(propertyValues) {}
 
-        StoryWriterParameters(const weave::WeaverGraph &graph, const std::vector<QuestPropertyValue> &propertyValues,
+        StoryWriterParameters(const WeaverGraph &graph, const std::vector<QuestPropertyValue> &propertyValues,
                               const std::vector<WorldModelAction> &modelActions) :
                 graph(graph), propertyValues(propertyValues), modelActions(modelActions) {}
 
-        const weave::WeaverGraph &graph;
-        const std::vector<QuestPropertyValue> propertyValues;
-        const std::vector<WorldModelAction> modelActions;
+        WeaverGraph graph;
+        std::vector<QuestPropertyValue> propertyValues;
+        std::vector<WorldModelAction> modelActions;
     };
 
     /*!
@@ -42,8 +42,8 @@ namespace weave {
      */
     class StoryWriter {
     public:
-        explicit StoryWriter(std::shared_ptr<RandomStream> randomStream, const weave::QuestModel &questModel,
-                             const weave::TemplateEngine &templateEngine, const weave::WorldModel &worldModel,
+        explicit StoryWriter(std::shared_ptr<RandomStream> randomStream, const QuestModel &questModel,
+                             const TemplateEngine &templateEngine, const WorldModel &worldModel,
                              const Directories &dirs);
 
         Story CreateStory(const StoryWriterParameters &params) const;
@@ -64,9 +64,9 @@ namespace weave {
         const float finishedQuestWeight = 10;
 
         std::shared_ptr<RandomStream> rs;
-        const weave::QuestModel &questModel;
-        const weave::TemplateEngine &templateEngine;
-        const weave::WorldModel &worldModel;
+        const QuestModel &questModel;
+        const TemplateEngine &templateEngine;
+        const WorldModel &worldModel;
         Directories dirs;
         std::vector<std::unique_ptr<StoryTemplateFactory>> factories;
 
@@ -93,7 +93,7 @@ namespace weave {
                                                  const EntityMap &entitiesByType) const;
 
         std::map<float, Story> createWeightedStories(
-                const weave::WeaverGraph &graph,
+                const WeaverGraph &graph,
                 const std::vector<std::shared_ptr<StoryTemplate>> &templates,
                 const EntityMap &entitiesByType,
                 const QuestValueMap &questValues) const;

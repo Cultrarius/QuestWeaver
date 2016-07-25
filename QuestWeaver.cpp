@@ -39,8 +39,8 @@ vector<shared_ptr<Quest>> QuestWeaver::CreateNewQuests() {
 
     // gather quest candidates
     for (auto questTemplate : templates->GetTemplatesForNewQuest(*world, *quests)) {
-        EngineResult result = engine->fillTemplate(questTemplate, *quests, *world, *stories);
-        shared_ptr<Quest> newQuest = questTemplate->ToQuest(result.GetQuestPropertyValues(), result.GetStory());
+        EngineResult result = engine->fillTemplate(questTemplate, *quests, *world);
+        shared_ptr<Quest> newQuest = questTemplate->ToQuest(result.GetQuestPropertyValues());
         int score = 0;  // smaller score is better
         if (questTemplate->HasPriority()) {
             hasPriorityQuests = true;
@@ -91,14 +91,18 @@ vector<shared_ptr<Quest>> QuestWeaver::CreateNewQuests() {
         if (hasPriorityQuests) {
             if (candidate.isPriorityQuest) {
                 world->Execute(candidate.result.GetModelActions());
-                quests->RegisterNew(candidate.quest, candidate.result.GetQuestPropertyValues());
+                Story storyResult = stories->CreateStory(candidate.result.GetStoryParameters());
+                world->Execute(storyResult.worldActions);
+                quests->RegisterNew(candidate.quest, candidate.result.GetQuestPropertyValues(), storyResult.text);
                 newQuests.push_back(candidate.quest);
             }
             continue;
         }
         if (candidate.score >= (selectedScore + minScore)) {
             world->Execute(candidate.result.GetModelActions());
-            quests->RegisterNew(candidate.quest, candidate.result.GetQuestPropertyValues());
+            Story storyResult = stories->CreateStory(candidate.result.GetStoryParameters());
+            world->Execute(storyResult.worldActions);
+            quests->RegisterNew(candidate.quest, candidate.result.GetQuestPropertyValues(), storyResult.text);
             newQuests.push_back(candidate.quest);
             break;
         }

@@ -11,8 +11,7 @@ using namespace weave;
 
 EngineResult WeaverEngine::fillTemplate(shared_ptr<QuestTemplate> questTemplate,
                                         const QuestModel &questModel,
-                                        const WorldModel &worldModel,
-                                        const StoryWriter &storyWriter) const {
+                                        const WorldModel &worldModel) const {
     unordered_set<string> mandatory;
     map<string, vector<PropertyCandidate>> candidates;
     for (const TemplateQuestProperty &questProperty : questTemplate->GetProperties()) {
@@ -48,9 +47,7 @@ EngineResult WeaverEngine::fillTemplate(shared_ptr<QuestTemplate> questTemplate,
         }
     }
     StoryWriterParameters storyParams(graph, propertyValues, modelActions);
-    Story storyResult = storyWriter.CreateStory(storyParams);
-    std::move(storyResult.worldActions.begin(), storyResult.worldActions.end(), back_inserter(modelActions));
-    return EngineResult(modelActions, propertyValues, storyResult.text);
+    return EngineResult(modelActions, propertyValues, storyParams);
 }
 
 WeaverGraph WeaverEngine::createGraph(const QuestModel &questModel, const WorldModel &worldModel,
@@ -141,7 +138,8 @@ WeaverEngine::WeaverEngine(std::shared_ptr<RandomStream> rs) {
 
 EngineResult::EngineResult(const std::vector<WorldModelAction> &actions,
                            const std::vector<QuestPropertyValue> &propertyValues,
-                           const std::string &story) : actions(actions), propertyValues(propertyValues), story(story) {
+                           const StoryWriterParameters &storyParams) : actions(actions), propertyValues(propertyValues),
+                                                                       storyParams(storyParams) {
 }
 
 const std::vector<WorldModelAction> &EngineResult::GetModelActions() const {
@@ -152,6 +150,6 @@ const std::vector<QuestPropertyValue> &EngineResult::GetQuestPropertyValues() co
     return propertyValues;
 }
 
-const std::string &EngineResult::GetStory() const {
-    return story;
+const StoryWriterParameters &EngineResult::GetStoryParameters() const {
+    return storyParams;
 }

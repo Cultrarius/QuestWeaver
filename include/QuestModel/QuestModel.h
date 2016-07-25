@@ -24,7 +24,8 @@ namespace weave {
         bool Execute(const QuestModelAction &modelAction);
 
         void RegisterNew(std::shared_ptr<Quest> newQuest,
-                         const std::vector<QuestPropertyValue> &questProperties);
+                         const std::vector<QuestPropertyValue> &questProperties,
+                         const std::string &storyText);
 
     private:
         std::map<ID, std::shared_ptr<Quest>> quests;

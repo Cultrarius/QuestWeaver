@@ -27,18 +27,18 @@ namespace weave {
     public:
         EngineResult(const std::vector<WorldModelAction> &actions,
                      const std::vector<QuestPropertyValue> &propertyValues,
-                     const std::string &story);
+                     const StoryWriterParameters &storyParams);
 
         const std::vector<WorldModelAction> &GetModelActions() const;
 
         const std::vector<QuestPropertyValue> &GetQuestPropertyValues() const;
 
-        const std::string &GetStory() const;
+        const StoryWriterParameters &GetStoryParameters() const;
 
     private:
         std::vector<WorldModelAction> actions;
         std::vector<QuestPropertyValue> propertyValues;
-        std::string story;
+        StoryWriterParameters storyParams;
     };
 
     class WeaverEngine {
@@ -47,8 +47,7 @@ namespace weave {
 
         EngineResult fillTemplate(std::shared_ptr<QuestTemplate> questTemplate,
                                   const QuestModel &questModel,
-                                  const WorldModel &worldModel,
-                                  const StoryWriter &storyWriter) const;
+                                  const WorldModel &worldModel) const;
 
         EngineParameters GetParameters();
 

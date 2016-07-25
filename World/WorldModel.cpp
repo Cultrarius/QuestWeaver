@@ -23,7 +23,8 @@ void WorldModel::Execute(vector<WorldModelAction> modelActions) {
         auto entity = GetEntityById(id);
         if (entity.get() == nullptr && action.GetActionType() != WorldActionType::CREATE) {
             throw ContractFailedException(
-                    "Unable to execute model action: entity with id " + to_string(id) + " not found.");
+                    "Unable to execute model action: entity with id " + to_string(id) + " not found (type " +
+                    action.GetEntity()->GetType() + ").");
         }
         if (action.GetActionType() == WorldActionType::KEEP) {
             // doing nothing
