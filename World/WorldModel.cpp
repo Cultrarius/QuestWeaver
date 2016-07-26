@@ -22,16 +22,18 @@ void WorldModel::Execute(vector<WorldModelAction> modelActions) {
         ID id = action.GetEntity()->GetId();
         auto entity = GetEntityById(id);
         if (entity.get() == nullptr && action.GetActionType() != WorldActionType::CREATE) {
-            throw ContractFailedException(
+            Logger::Error(ContractFailedException(
                     "Unable to execute model action: entity with id " + to_string(id) + " not found (type " +
-                    action.GetEntity()->GetType() + ").");
+                    action.GetEntity()->GetType() + ")."));
+            continue;
         }
         if (action.GetActionType() == WorldActionType::KEEP) {
             // doing nothing
         } else if (action.GetActionType() == WorldActionType::CREATE) {
             if (id != WorldEntity::NoID) {
-                throw ContractFailedException(
-                        "Unable to execute model action create: entity already has an ID: " + to_string(id));
+                Logger::Error(ContractFailedException(
+                        "Unable to execute model action create: entity already has an ID: " + to_string(id)));
+                continue;
             }
 
             ID newId = NewId();
@@ -45,7 +47,8 @@ void WorldModel::Execute(vector<WorldModelAction> modelActions) {
         } else if (action.GetActionType() == WorldActionType::UPDATE) {
             updateMetaDataForId(id, action.GetMetaData());
         } else {
-            throw ContractFailedException("Illegal action type.");
+            Logger::Error(ContractFailedException("Illegal action type."));
+            continue;
         }
 
         // update change history

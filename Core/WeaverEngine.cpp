@@ -31,7 +31,8 @@ EngineResult WeaverEngine::fillTemplate(shared_ptr<QuestTemplate> questTemplate,
         auto iter = propertyMap.find(propertyName);
         if (iter == propertyMap.end()) {
             if (questProperty.IsMandatory()) {
-                throw ContractFailedException("Graph result must contain results for mandatory quest properties.");
+                string errorMsg = "Graph result must contain results for mandatory quest properties.";
+                Logger::Fatal(ContractFailedException(errorMsg));
             }
             continue;
         }

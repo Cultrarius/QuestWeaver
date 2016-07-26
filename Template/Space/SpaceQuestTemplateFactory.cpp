@@ -14,8 +14,7 @@ using namespace weave;
 std::shared_ptr<QuestTemplate> SpaceQuestTemplateFactory::createFromJsonValues(const Json::Value &root) const {
     if (root["parent"].asString() != "Space") {
         string errorMessage = string("Template file has incompatible parent: ") + root["parent"].asString() + "\n";
-        cerr << errorMessage;
-        throw ContractFailedException(errorMessage);
+        Logger::Fatal(ContractFailedException(errorMessage));
     }
 
     string title = extractTitle(root, randomStream);
@@ -31,7 +30,9 @@ std::shared_ptr<QuestTemplate> SpaceQuestTemplateFactory::createFromJsonValues(c
     } else if (templateKey == "HuntAndKillQuest") {
         return make_shared<HuntAndKillTemplate>(title, properties, descriptions, formatterType, rarity);
     } else {
-        throw ContractFailedException("Unknown Space template key " + templateKey + "\n");
+        auto ex = ContractFailedException("Unknown Space template key " + templateKey);
+        Logger::Fatal(ex);
+        throw ex;
     }
 }
 

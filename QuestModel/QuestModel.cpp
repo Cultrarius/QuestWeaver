@@ -27,7 +27,8 @@ void QuestModel::RegisterNew(shared_ptr<Quest> newQuest,
     // check the quest is not already registered
     ID id = newQuest->GetId();
     if (quests.count(id) + questStates.count(id) > 0) {
-        throw ContractFailedException("Quest with id " + to_string(newQuest->GetId()) + " already registered!");
+        Logger::Error(ContractFailedException("Quest id " + to_string(newQuest->GetId()) + " already registered!"));
+        return;
     }
 
     idGenerator++;
@@ -81,7 +82,8 @@ bool QuestModel::Execute(const QuestModelAction &modelAction) {
     QuestActionType actionType = modelAction.GetActionType();
     ID questId = modelAction.GetQuestId();
     if (actionType == QuestActionType::KEEP && quests.count(questId) == 0) {
-        throw ContractFailedException("Quest id " + to_string(questId) + " not found in the model!");
+        Logger::Error(ContractFailedException("Quest id " + to_string(questId) + " not found in the model!"));
+        return false;
     }
 
     bool result = true;
@@ -98,7 +100,8 @@ bool QuestModel::Execute(const QuestModelAction &modelAction) {
             result = false;
         }
     } else if (actionType != QuestActionType::KEEP) {
-        throw ContractFailedException("Unknown quest model action type");
+        Logger::Error(ContractFailedException("Unknown quest model action type"));
+        return false;
     }
 
     actionHistory.push_back(modelAction);
@@ -108,7 +111,9 @@ bool QuestModel::Execute(const QuestModelAction &modelAction) {
 shared_ptr<Quest> QuestModel::GetQuest(ID questId) const {
     auto iter = quests.find(questId);
     if (iter == quests.end()) {
-        throw ContractFailedException("Quest with id " + to_string(questId) + " not found in the model!");
+        auto ex = ContractFailedException("Quest with id " + to_string(questId) + " not found in the model!");
+        Logger::Fatal(ex);
+        throw ex;
     }
     return iter->second;
 }

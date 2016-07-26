@@ -10,15 +10,18 @@ using namespace weave;
 WeaverGraph &WeaverGraph::AddNode(const Node &node) {
     checkUnfinalized();
     if (node.GetGroup() == "") {
-        throw ContractFailedException("Can not add node with empty group!");
+        Logger::Error(ContractFailedException("Can not add node with empty group!"));
+        return *this;
     }
     auto iter = groups.find(node.GetGroup());
     if (iter == groups.end()) {
-        throw ContractFailedException("Unknown node group " + node.GetGroup());
+        Logger::Error(ContractFailedException("Unknown node group " + node.GetGroup()));
+        return *this;
     }
     for (auto addedNode : iter->second) {
         if (node == addedNode) {
-            throw ContractFailedException("Can not add the same node twice to a graph!");
+            Logger::Error(ContractFailedException("Can not add the same node twice to a graph!"));
+            return *this;
         }
     }
     nodes[node.GetId()].push_back(node);
@@ -29,7 +32,8 @@ WeaverGraph &WeaverGraph::AddNode(const Node &node) {
 WeaverGraph &WeaverGraph::CreateNodeGroup(const string &groupName, bool isMandatory) {
     checkUnfinalized();
     if (groups.count(groupName) != 0) {
-        throw ContractFailedException("Group " + groupName + " already exists in graph");
+        Logger::Error(ContractFailedException("Group " + groupName + " already exists in graph"));
+        return *this;
     }
     groups[groupName] = vector<Node>();
     if (isMandatory) {
@@ -51,9 +55,9 @@ WeaverGraph &WeaverGraph::AddEdge(Edge edge) {
             return *this;
         }
         if (isShadowNode(edge.id1) && isShadowNode(edge.id2)) {
-            throw ContractFailedException("Can not add edge between two shadow nodes!");
+            Logger::Error(ContractFailedException("Can not add edge between two shadow nodes!"));
         }
-        throw ContractFailedException("Can not create edge to unknown graph node!");
+        Logger::Error(ContractFailedException("Can not create edge to unknown graph node!"));
     }
 
     // check if the edge connects two nodes from the same node group. If so, silently drop it.
@@ -103,18 +107,22 @@ const unordered_set<string> WeaverGraph::GetMandatoryGroups() const {
 const vector<Node> &WeaverGraph::GetNodes(const string &groupName) const {
     auto iter = groups.find(groupName);
     if (iter == groups.end()) {
-        throw ContractFailedException("Unable to get nodes for unknown group name!");
+        auto ex = ContractFailedException("Unable to get nodes for unknown group name!");
+        Logger::Fatal(ex);
+        throw ex;
     }
     return iter->second;
 }
 
 void WeaverGraph::ActivateNode(const Node &node) {
     if (nodes.count(node.GetId()) == 0) {
-        throw ContractFailedException("Unable to activate unknown node!");
+        Logger::Error(ContractFailedException("Unable to activate unknown node!"));
+        return;
     }
     auto iter = groups.find(node.GetGroup());
     if (iter == groups.end()) {
-        throw ContractFailedException("Unable to activate node from unknown group!");
+        Logger::Error(ContractFailedException("Unable to activate node from unknown group!"));
+        return;
     }
     for (Node groupNode : iter->second) {
         activeNodes.erase(groupNode);
@@ -124,10 +132,12 @@ void WeaverGraph::ActivateNode(const Node &node) {
 
 bool WeaverGraph::DeactivateNode(const Node &node) {
     if (nodes.count(node.GetId()) == 0) {
-        throw ContractFailedException("Unable to deactivate unknown node!");
+        Logger::Error(ContractFailedException("Unable to deactivate unknown node!"));
+        return false;
     }
     if (groups.count(node.GetGroup()) == 0) {
-        throw ContractFailedException("Unable to deactivate node from unknown group!");
+        Logger::Error(ContractFailedException("Unable to deactivate node from unknown group!"));
+        return false;
     }
     if (mandatoryGroups.count(node.GetGroup()) > 0) {
         return false;
@@ -156,11 +166,13 @@ const vector<Node> &WeaverGraph::GetNodesWithId(ID id) const {
 WeaverGraph &WeaverGraph::AddShadowNode(ID shadowNodeId) {
     checkUnfinalized();
     if (nodes.count(shadowNodeId) > 0) {
-        throw ContractFailedException("Cannot add shadow node with id " + to_string(shadowNodeId) +
-                                      ", because a regular node with the same id already exists!");
+        Logger::Error(ContractFailedException("Cannot add shadow node with id " + to_string(shadowNodeId) +
+                                              ", because a regular node with the same id already exists!"));
+        return *this;
     }
     if (isShadowNode(shadowNodeId)) {
-        throw ContractFailedException("Shadow node with id " + to_string(shadowNodeId) + " already present in graph!");
+        Logger::Error(ContractFailedException(
+                "Shadow node with id " + to_string(shadowNodeId) + " already present in graph!"));
     }
     shadowNodes.insert(shadowNodeId);
     return *this;
@@ -184,7 +196,8 @@ void WeaverGraph::activateMandatoryGroups() {
     for (auto group : mandatoryGroups) {
         auto nodes = GetNodes(group);
         if (nodes.size() == 0) {
-            throw ContractFailedException("Missing nodes for mandatory group!");
+            Logger::Error(ContractFailedException("Missing nodes for mandatory group!"));
+            return;
         }
         bool hasActive = false;
         for (auto node : nodes) {
@@ -222,6 +235,6 @@ void WeaverGraph::addTransitiveEdges() {
 
 void WeaverGraph::checkUnfinalized() const {
     if (isFinalized) {
-        throw ContractFailedException("Graph was already finalized");
+        Logger::Error(ContractFailedException("Graph was already finalized"));
     }
 }

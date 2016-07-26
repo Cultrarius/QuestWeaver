@@ -27,9 +27,9 @@ namespace weave {
     struct ContractFailedException : public std::exception {
         std::string s;
 
-        explicit ContractFailedException(std::string ss) : s(ss) { }
+        explicit ContractFailedException(std::string ss) : s(ss) {}
 
-        virtual ~ContractFailedException() throw() { }
+        virtual ~ContractFailedException() throw() {}
 
         const char *what() const throw() { return s.c_str(); }
     };
@@ -106,6 +106,69 @@ namespace weave {
          * css classes.
          */
                 HTML
+    };
+
+    /*!
+     * The logger used to print errors and debug messages.
+     *
+     * The logger can also be configured to eat non-breaking exceptions (e.g. release mode) and prevent them
+     * from being thrown.
+     * Be aware that this might cause weird behavior!
+     *
+     * @ingroup mainApi
+     */
+    class Logger {
+    private:
+        static std::shared_ptr<Logger> sharedInstance;
+
+    public:
+        bool EatsNonFatalExceptions = false;
+
+        virtual void error(const std::string &what) {
+            std::cerr << "ERROR: " << what << std::endl;
+        }
+
+        virtual void debug(const std::string &what) {
+            std::cout << what << "\n";
+        }
+
+        static void Error(const std::string &what) {
+            if (sharedInstance) {
+                sharedInstance->error(what);
+            }
+        }
+
+        static void Error(ContractFailedException ex) {
+            if (sharedInstance) {
+                sharedInstance->error(ex.what());
+                if (!sharedInstance->EatsNonFatalExceptions) {
+                    throw ex;
+                }
+            } else {
+                throw ex;
+            }
+        }
+
+        static void Fatal(ContractFailedException ex) {
+            if (sharedInstance) {
+                sharedInstance->error(ex.what());
+            }
+            throw ex;
+        }
+
+        static void Debug(const std::string &what) {
+            if (sharedInstance) {
+                sharedInstance->debug(what);
+            }
+        }
+
+        static std::shared_ptr<Logger> Get() {
+            return sharedInstance;
+        }
+
+        static void Set(std::shared_ptr<Logger> newInstance) {
+            sharedInstance = newInstance;
+        }
     };
 
     /*!

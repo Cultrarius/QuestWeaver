@@ -23,8 +23,10 @@ shared_ptr<StoryTemplate> CommonSpaceStoryFactory::createFromJsonValues(const Js
     } else if (key == "shipIntro") {
         return make_shared<ShipIntroStoryTemplate>(text);
     } else {
-        throw ContractFailedException("Unknown story template key [" + key +
-                                      "], maybe you forgot to create a corresponding StoryTemplate class?");
+        ContractFailedException ex("Unknown story template key [" + key +
+                                   "], maybe you forgot to create a corresponding StoryTemplate class?");
+        Logger::Fatal(ex);
+        throw ex;
     }
 }
 

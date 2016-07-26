@@ -3,14 +3,7 @@
 * Support i18n for quests (might not be possible once they are serialized)
 * Add logger
 
-# Separate Project
-
-* UE4 Bindings
-* World Model Classes
-* Actor Classes (Persons in the world/quests)
-* Actor Generation Algorithm
-* Quest Templates
-
+* support pictures (+variations) in quest descriptions and stories
 
 ~QUEST IDEAS~
 Fight enemies

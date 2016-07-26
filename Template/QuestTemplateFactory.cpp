@@ -74,7 +74,7 @@ std::shared_ptr<QuestTemplate> QuestTemplateFactory::CreateTemplate(const std::s
     initialize();
     auto mapEntry = templateMap.find(templateKey);
     if (mapEntry == templateMap.end()) {
-        throw ContractFailedException("Cannot find template for key " + templateKey + "\n");
+        Logger::Fatal(ContractFailedException("Cannot find template for key " + templateKey + "\n"));
     }
     const Value root = mapEntry->second;
     return createFromJsonValues(root);
@@ -98,7 +98,7 @@ void QuestTemplateFactory::initialize() {
                 errorMessage += member;
                 errorMessage += "> / FILE: ";
                 errorMessage += fileName;
-                throw ContractFailedException(errorMessage);
+                Logger::Fatal(ContractFailedException(errorMessage));
             }
         }
 

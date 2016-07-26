@@ -70,7 +70,7 @@ namespace weave {
 
         /*!
          * Returns the action history of all actions executed by this world model.
-         * If this history is executed on an empty world model, it should be a copy of the current model.
+         * If this history is executed on an empty world model, it should result in a copy of the current model.
          */
         std::vector<WorldModelAction> GetHistory() const noexcept;
 

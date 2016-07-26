@@ -76,6 +76,6 @@ namespace weave {
          * Creates a new config using default values and the given seed.
          * Please note that the config is **not valid** as long as no world model is assigned to it.
          */
-        explicit WeaverConfig(uint64_t seed) : seed(seed) { }
+        explicit WeaverConfig(uint64_t seed) : seed(seed) {}
     };
 }

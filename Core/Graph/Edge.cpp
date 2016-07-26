@@ -13,7 +13,9 @@ Edge::Edge(ID nodeId1, ID nodeId2, EdgeType type) : Edge(nodeId1, nodeId2, type,
 
 Edge::Edge(ID nodeId1, ID nodeId2, EdgeType type, ID questId) {
     if (nodeId1 == nodeId2) {
-        throw ContractFailedException("Can not create an edge between the same nodes!");
+        string errorMsg = "Can not create an edge between the same nodes!";
+        Logger::Error(ContractFailedException(errorMsg));
+        return;
     }
     id1 = min(nodeId1, nodeId2);
     id2 = max(nodeId1, nodeId2);
@@ -33,7 +35,9 @@ bool Edge::operator==(const Edge &other) const {
 
 void Edge::addTypesFrom(const Edge &other) {
     if (!this->operator==(other)) {
-        throw ContractFailedException("unable to combine edges from different nodes!");
+        string errorMsg = "unable to combine edges from different nodes!";
+        Logger::Error(ContractFailedException(errorMsg));
+        return;
     }
     for (auto type : other.types) {
         types[type.first] += type.second;
@@ -66,7 +70,9 @@ std::unordered_set<ID> Edge::GetQuestIds() const {
 
 void Edge::addQuestIdsFrom(const Edge &other) {
     if (!this->operator==(other)) {
-        throw ContractFailedException("unable to combine edges from different nodes!");
+        string errorMsg = "unable to combine edges from different nodes!";
+        Logger::Error(ContractFailedException(errorMsg));
+        return;
     }
     for (ID id : other.questIds) {
         questIds.insert(id);
