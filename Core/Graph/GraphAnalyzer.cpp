@@ -12,6 +12,7 @@ unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph,
                                                       shared_ptr<RandomStream> rs,
                                                       AnalyzerParameters param) {
     map<GraphAction, float> actionMap;
+    int iterations = 1;
     while (fillActionMap(*graph, &actionMap, param, rs)) {
         assert(!actionMap.empty());
 
@@ -36,7 +37,16 @@ unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph,
         }
         action.Apply(graph);
         actionMap.clear();
+        iterations++;
     }
+
+    int nodeCount = 0;
+    for (string group : graph->GetGroups()) {
+        nodeCount += graph->GetNodes(group).size();
+    }
+    Logger::Debug("Solved graph with " + to_string(graph->GetEdges().size()) + " edges / " + to_string(nodeCount) +
+                  " nodes / " + to_string(graph->GetGroups().size()) + " groups in " + to_string(iterations) +
+                  " iterations.");
 
     unordered_map<string, Node> results;
     for (auto node : graph->GetActiveNodes()) {
