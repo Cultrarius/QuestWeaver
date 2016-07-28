@@ -14,12 +14,16 @@ vector<shared_ptr<QuestTemplate>> TemplateEngine::GetTemplatesForNewQuest(const 
         Logger::Fatal(ContractFailedException("No factory defined to create template."));
     }
     vector<shared_ptr<QuestTemplate>> templates;
+    Logger::Debug("Checking quest templates...");
     for (auto &factory : factories) {
         auto factoryKeys = factory->GetTemplateKeys();
         for (auto key : factoryKeys) {
             auto questTemplate = factory->CreateTemplate(key);
             if (questTemplate->IsValid(worldModel, questModel)) {
                 templates.push_back(questTemplate);
+                Logger::Debug("    " + key + ": valid");
+            } else {
+                Logger::Debug("    " + key + ": not valid");
             }
         }
     }

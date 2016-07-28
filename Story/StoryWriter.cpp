@@ -19,13 +19,19 @@ void StoryWriter::initialize() const {
         return;
     }
     isInitialized = true;
+    Logger::Debug("Reading story factories:");
     for (const auto &factory : factories) {
         factory->initialize();
+        Logger::Debug(string("    File: ") + factory->getTemplateFile());
+        for (auto &entry : factory->GetTemplates()) {
+            Logger::Debug("        Template: " + entry.first);
+        }
     }
     readNuggets();
 }
 
 void StoryWriter::readNuggets() const {
+    Logger::Debug("Reading story nuggets:");
     nuggets.clear();
     set<string> nuggetFolders;
     for (const auto &factory : factories) {
@@ -35,10 +41,12 @@ void StoryWriter::readNuggets() const {
     for (string folder : nuggetFolders) {
         string file = folder;
         file += "/Nuggets.st";
+        Logger::Debug("    Input: " + file);
         Value root = readJsonFromFile(file.c_str(), dirs);
         checkValidNuggetJson(root, file);
         for (Value nuggetJson : root) {
             string key = nuggetJson["key"].asString();
+            Logger::Debug("        Key: " + key);
             if (nuggets.count(key) > 0) {
                 Logger::Fatal(ContractFailedException("Duplicate nugget key <" + key + ">!"));
             }
@@ -170,17 +178,21 @@ Story StoryWriter::CreateStory(const StoryWriterParameters &params,
 
 Story StoryWriter::CreateStory(const StoryWriterParameters &params,
                                unordered_set<string> storyTemplateKeys) const {
+    Logger::Debug("Creating new quest story:");
     Story emptyResult;
     auto graph = params.graph;
     auto propertyValues = params.propertyValues;
     if (graph.GetActiveNodes().empty() || propertyValues.empty()) {
+        Logger::Debug("    No input data.");
         return emptyResult;
     }
     initialize();
 
     // find out which templates can be used with the given entities
+    Logger::Debug("    Possible templates:");
     auto fittingTemplates = getFittingTemplates(propertyValues, storyTemplateKeys);
     if (fittingTemplates.empty()) {
+        Logger::Debug("        No fitting template found.");
         return emptyResult;
     }
 
@@ -195,8 +207,10 @@ Story StoryWriter::CreateStory(const StoryWriterParameters &params,
     removeStoriesWithInvalidActions(params, &stories);
 
     if (stories.empty()) {
+        Logger::Debug("    No valid stories possible.");
         return emptyResult;
     }
+    Logger::Debug("    Created possible stories: " + to_string(stories.size()));
     return stories.rbegin()->second;  // map is sorted
 }
 
@@ -238,6 +252,7 @@ vector<shared_ptr<StoryTemplate>> StoryWriter::getFittingTemplates(
             if (storyTemplateKeys.count(storyTemplate.first) > 0 &&
                 hasAll(storyTemplate.second->GetRequiredEntities(), propertyValues)) {
                 fittingTemplates.push_back(storyTemplate.second);
+                Logger::Debug("        " + storyTemplate.first);
             }
         }
     }
