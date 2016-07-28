@@ -146,6 +146,8 @@ shared_ptr<Quest> QuestWeaver::GetQuest(ID questId) const {
 }
 
 bool QuestWeaver::ChangeQuestState(QuestModelAction questAction) {
+    Logger::Debug("Directly changing quest " + to_string(questAction.GetQuestId()) + " state to " +
+                  to_string(static_cast<int>(questAction.GetActionType())));
     return quests->Execute(questAction);
 }
 

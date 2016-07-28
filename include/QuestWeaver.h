@@ -167,6 +167,7 @@ namespace weave {
 
         template<class Archive>
         void load(Archive &archive) {
+            Logger::Debug("Deserializing quest weaver!");
             FormatterType format;
             archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world),
                     cereal::make_nvp("format", format));
@@ -177,6 +178,7 @@ namespace weave {
 
         template<class Archive>
         void save(Archive &archive) const {
+            Logger::Debug("Serializing quest weaver!");
             archive(CEREAL_NVP(randomStream), CEREAL_NVP(quests), CEREAL_NVP(world),
                     cereal::make_nvp("format", templates->GetFormat()));
         }
