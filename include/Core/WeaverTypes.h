@@ -149,6 +149,10 @@ namespace weave {
             }
         }
 
+        static void Fatal(const std::string &what) {
+            Fatal(ContractFailedException(what));
+        }
+
         static void Fatal(ContractFailedException ex) {
             if (sharedInstance) {
                 sharedInstance->error(ex.what());

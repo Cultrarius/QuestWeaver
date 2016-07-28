@@ -14,7 +14,7 @@ using namespace weave;
 std::shared_ptr<QuestTemplate> SpaceQuestTemplateFactory::createFromJsonValues(const Json::Value &root) const {
     if (root["parent"].asString() != "Space") {
         string errorMessage = string("Template file has incompatible parent: ") + root["parent"].asString() + "\n";
-        Logger::Fatal(ContractFailedException(errorMessage));
+        Logger::Fatal(errorMessage);
     }
 
     string title = extractTitle(root, randomStream);

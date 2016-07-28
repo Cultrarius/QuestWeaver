@@ -48,7 +48,7 @@ void StoryWriter::readNuggets() const {
             string key = nuggetJson["key"].asString();
             Logger::Debug("        Key: " + key);
             if (nuggets.count(key) > 0) {
-                Logger::Fatal(ContractFailedException("Duplicate nugget key <" + key + ">!"));
+                Logger::Fatal("Duplicate nugget key <" + key + ">!");
             }
 
             vector<string> requiredTypes;
@@ -137,11 +137,11 @@ void StoryWriter::readRandomizedValues(const Value &nuggetJson, unordered_map<st
 
 void StoryWriter::checkValidNuggetJson(Value root, string filePath) const {
     if (!root.isArray()) {
-        Logger::Fatal(ContractFailedException("Invalid JSON in nugget file " + filePath + " (no root array)"));
+        Logger::Fatal("Invalid JSON in nugget file " + filePath + " (no root array)");
     }
     for (Value nuggetJson : root) {
         if (!nuggetJson.isObject()) {
-            Logger::Fatal(ContractFailedException("Invalid JSON in nugget file " + filePath + " (no nugget object)"));
+            Logger::Fatal("Invalid JSON in nugget file " + filePath + " (no nugget object)");
         }
         string requiredMembers[] = {"key", "requiredTypes", "texts"};
         for (string member : requiredMembers) {
@@ -150,7 +150,7 @@ void StoryWriter::checkValidNuggetJson(Value root, string filePath) const {
                 errorMessage += member;
                 errorMessage += "> / FILE: ";
                 errorMessage += filePath;
-                Logger::Fatal(ContractFailedException(errorMessage));
+                Logger::Fatal(errorMessage);
             }
         }
     }
@@ -412,7 +412,7 @@ string StoryWriter::getNuggetText(const QuestValueMap &questValues, const Nugget
     auto entityTypes = chosenNugget.GetRequiredTypes();
     auto entityIDs = chosenOption.GetEntityIDs();
     if (entityTypes.size() != entityIDs.size()) {
-        Logger::Fatal(ContractFailedException("Nugget parameter mismatch for key <" + chosenNugget.GetKey() + ">"));
+        Logger::Fatal("Nugget parameter mismatch for key <" + chosenNugget.GetKey() + ">");
     }
     for (uint64_t i = 0; i < entityIDs.size(); i++) {
         ID id = entityIDs[i];
@@ -421,7 +421,7 @@ string StoryWriter::getNuggetText(const QuestValueMap &questValues, const Nugget
         string actualType = questProperty.GetValue()->GetType();
         if (requiredType != actualType) {
             string error("Invalid types <" + requiredType + "> and <" + actualType + ">");
-            Logger::Fatal(ContractFailedException(error));
+            Logger::Fatal(error);
         }
         string from = "%" + requiredType;
         string to = questProperty.GetValueString(this->templateEngine.GetFormat());
@@ -460,7 +460,7 @@ std::vector<NuggetOption> StoryWriter::getSupportedNuggets(const vector<NuggetOp
         for (ID entityId : option.GetEntityIDs()) {
             if (!worldModel.GetEntityById(entityId)) {
                 // the template knows which IDs are allowed, so this should never happen
-                Logger::Fatal(ContractFailedException("Invalid nugget option (ID " + to_string(entityId) + ")"));
+                Logger::Fatal("Invalid nugget option (ID " + to_string(entityId) + ")");
             }
         }
         if (nuggets.count(option.GetNuggetKey()) == 0) {

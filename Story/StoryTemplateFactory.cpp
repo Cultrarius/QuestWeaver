@@ -28,7 +28,7 @@ void StoryTemplateFactory::initialize() {
     if (!root.isArray()) {
         string errorMessage = "Invalid Story template file, expected Array as root! FILE: ";
         errorMessage += fileName;
-        Logger::Fatal(ContractFailedException(errorMessage));
+        Logger::Fatal(errorMessage);
     }
 
     for (Value templateJson : root) {
@@ -39,7 +39,7 @@ void StoryTemplateFactory::initialize() {
                 errorMessage += member;
                 errorMessage += "> / FILE: ";
                 errorMessage += fileName;
-                Logger::Fatal(ContractFailedException(errorMessage));
+                Logger::Fatal(errorMessage);
             }
         }
 

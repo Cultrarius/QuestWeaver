@@ -88,7 +88,7 @@ Value weave::readJsonFromFile(const char *fileName, const Directories &dirs) {
                                "] in any of the following directories: [., ") +
                         dirs.templateDirectory +
                         ", " + dirs.modDirectory + "]";
-                Logger::Fatal(ContractFailedException(errorMsg));
+                Logger::Fatal(errorMsg);
             }
         }
     }
@@ -96,8 +96,7 @@ Value weave::readJsonFromFile(const char *fileName, const Directories &dirs) {
     Value root;
     string errorMessage;
     if (!parseFromStream(readBuilder, inStream, &root, &errorMessage)) {
-        errorMessage = "Error parsing template file: " + errorMessage;
-        Logger::Fatal(ContractFailedException(errorMessage));
+        Logger::Fatal("Error parsing template file: " + errorMessage);
     }
 
     return root;

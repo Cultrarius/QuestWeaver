@@ -14,7 +14,7 @@ StoryTemplateResult ShipIntroStoryTemplate::CreateStory(const EntityMap &require
                                                         const WorldModel &worldModel) const {
     auto entities = getValidEntities(requiredEntities, worldModel);
     if (entities.empty()) {
-        Logger::Fatal(ContractFailedException("Invalid template call!"));
+        Logger::Fatal("Invalid template call!");
     }
     StoryTemplateResult result;
     auto entity = entities[0];

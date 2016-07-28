@@ -11,7 +11,7 @@ using namespace weave;
 
 QuestWeaver::QuestWeaver(WeaverConfig &config) {
     if (!config.worldModel) {
-        Logger::Fatal(ContractFailedException("A world model must be provided for the quest system to work."));
+        Logger::Fatal("A world model must be provided for the quest system to work.");
     }
     randomStream = config.randomStream ? config.randomStream : make_shared<RandomStream>(config.seed);
     engine.reset(new WeaverEngine(randomStream));
@@ -167,7 +167,7 @@ void QuestWeaver::Serialize(std::ostream &outputStream, StreamType type) {
         cereal::PortableBinaryOutputArchive outputArchive(outputStream);
         outputArchive(*this);
     } else {
-        Logger::Fatal(ContractFailedException("Unknown serialization type!"));
+        Logger::Fatal("Unknown serialization type!");
     }
 }
 
@@ -180,7 +180,7 @@ QuestWeaver QuestWeaver::Deserialize(std::istream &inputStream, StreamType type)
         cereal::PortableBinaryInputArchive inputArchive(inputStream);
         inputArchive(deserialized);
     } else {
-        Logger::Fatal(ContractFailedException("Unknown serialization type!"));
+        Logger::Fatal("Unknown serialization type!");
     }
     return deserialized;
 }

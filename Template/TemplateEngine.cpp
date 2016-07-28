@@ -11,7 +11,7 @@ using namespace weave;
 vector<shared_ptr<QuestTemplate>> TemplateEngine::GetTemplatesForNewQuest(const WorldModel &worldModel,
                                                                           const QuestModel &questModel) {
     if (factories.size() == 0) {
-        Logger::Fatal(ContractFailedException("No factory defined to create template."));
+        Logger::Fatal("No factory defined to create template.");
     }
     vector<shared_ptr<QuestTemplate>> templates;
     Logger::Debug("Checking quest templates...");
