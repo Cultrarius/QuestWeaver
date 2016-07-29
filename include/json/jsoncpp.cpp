@@ -2406,6 +2406,7 @@ namespace Json {
 
 #include <cstddef> // size_t
 #include <algorithm> // min()
+#include <Core/WeaverTypes.h>
 
 #define JSON_ASSERT_UNREACHABLE assert(false)
 
@@ -2558,11 +2559,11 @@ namespace Json {
             : Exception(msg) { }
 
     void throwRuntimeError(std::string const &msg) {
-        throw RuntimeError(msg);
+        weave::Logger::Fatal("RuntimeError: " + msg);
     }
 
     void throwLogicError(std::string const &msg) {
-        throw LogicError(msg);
+        weave::Logger::Fatal("LogicError: " + msg);
     }
 
 // //////////////////////////////////////////////////////////////////

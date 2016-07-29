@@ -207,7 +207,8 @@ namespace weave {
          */
         virtual int GetIntInRange(int start, int end) {
             if (end < start) {
-                throw ContractFailedException("(End < Start) for random distribution in range.\n");
+                Logger::Error(ContractFailedException("(End < Start) for random distribution in range.\n"));
+                end = start;
             }
             std::uniform_int_distribution<int> limitedDist(start, end);
             return limitedDist(generator);
@@ -218,7 +219,8 @@ namespace weave {
          */
         virtual uint64_t GetULongInRange(uint64_t start, uint64_t end) {
             if (end < start) {
-                throw ContractFailedException("(End < Start) for random distribution in range.\n");
+                Logger::Error(ContractFailedException("(End < Start) for random distribution in range.\n"));
+                end = start;
             }
             std::uniform_int_distribution<uint64_t> limitedDist(start, end);
             return limitedDist(generator);
@@ -229,7 +231,8 @@ namespace weave {
          */
         virtual int GetNormalIntInRange(int start, int end) {
             if (end < start) {
-                throw ContractFailedException("(End < Start) for normal distribution in range.\n");
+                Logger::Error(ContractFailedException("(End < Start) for normal distribution in range.\n"));
+                end = start;
             }
             int mean = (end + start) / 2.0f;
             float stddev = abs(end - mean) / 2.5f;
@@ -250,7 +253,8 @@ namespace weave {
          */
         virtual uint64_t GetRandomIndex(uint64_t collectionSize) {
             if (collectionSize == 0) {
-                throw ContractFailedException("Collection Size = 0 for random index.\n");
+                Logger::Fatal("Collection Size = 0 for random index.\n");
+                return 0;
             }
             return GetULongInRange(0, collectionSize - 1);
         }

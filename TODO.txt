@@ -1,8 +1,5 @@
 * More unit tests
-* Support i18n for template files
-* Support i18n for quests (might not be possible once they are serialized)
-
-* support pictures (+variations) in quest descriptions and stories
+* support pictures (+variations) in quest descriptions and stories??
 
 ~QUEST IDEAS~
 Fight enemies
