@@ -14,6 +14,7 @@
 #include "../Mock/TestQuestTemplate.h"
 #include "../Mock/TestQuestTemplateFactory.h"
 #include "../Mock/ProxyQuestFactory.h"
+#include "../Mock/TestHelper.h"
 
 using namespace weave;
 using namespace std;
@@ -439,4 +440,21 @@ TEST_CASE("Hunter Killer quest", "[quest]") {
     REQUIRE(newQuest->GetType() == "Space::HuntAndKill");
 
     //TODO test some stuff
+}
+
+TEST_CASE("Internationalization", "[weaver]") {
+    WeaverConfig config = TestHelper::CreateDebugConfig();
+    config.questTemplateFactories.clear();
+    config.questTemplateFactories.push_back(
+            unique_ptr<QuestTemplateFactory>(new ProxyQuestFactory("HuntAndKillQuest")));
+    config.dirs.templateDirectory = "Test/Resources/i18n/";
+    config.dirs.modDirectory = "../Test/Resources/i18n/";
+    QuestWeaver weaver(config);
+
+    SECTION("Create new i18n quest") {
+        shared_ptr<Quest> newQuest = weaver.CreateNewQuests().at(0);
+        REQUIRE(newQuest->GetTitle() == "i18n title");
+        REQUIRE(newQuest->GetDescription().find("i18n description ") == 0);
+        REQUIRE(newQuest->GetStory().find("i18n story ") == 0);
+    }
 }

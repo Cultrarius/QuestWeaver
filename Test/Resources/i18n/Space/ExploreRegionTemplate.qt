@@ -1,0 +1,21 @@
+{
+  "parent": "Space",
+  "key": "ExploreRegionQuest",
+  "mandatory": [
+    "location"
+  ],
+  "optional": [
+    "sponsor"
+  ],
+  "titles": [
+    ""
+  ],
+  "descriptions": [
+    {
+      "conditions": [
+        "location"
+      ],
+      "text": "%location"
+    }
+  ]
+}

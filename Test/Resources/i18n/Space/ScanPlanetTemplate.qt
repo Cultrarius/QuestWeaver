@@ -1,0 +1,22 @@
+{
+  "parent": "Space",
+  "key": "ScanPlanetQuest",
+  "mandatory": [
+    "planet"
+  ],
+  "optional": [
+    "sponsor",
+    "deadCivilization"
+  ],
+  "titles": [
+    ""
+  ],
+  "descriptions": [
+    {
+      "conditions": [
+        "planet"
+      ],
+      "text": "%planet"
+    }
+  ]
+}

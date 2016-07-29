@@ -1,0 +1,24 @@
+{
+  "parent": "Space",
+  "key": "HuntAndKillQuest",
+  "rarity": 3,
+  "mandatory": [
+    "solarSystem",
+    "targetShip"
+  ],
+  "optional": [
+    "sponsor"
+  ],
+  "titles": [
+    "i18n title"
+  ],
+  "descriptions": [
+    {
+      "conditions": [
+        "solarSystem",
+        "targetShip"
+      ],
+      "text": "i18n description %solarSystem %targetShip."
+    }
+  ]
+}
