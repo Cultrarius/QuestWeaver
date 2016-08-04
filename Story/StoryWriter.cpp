@@ -111,6 +111,8 @@ void StoryWriter::readRandomizedNames(const Value &nuggetJson, unordered_map<str
                 type = NameType::CUDDLY;
             } else if (typeString == "cuddly_verb") {
                 type = NameType::CUDDLY_VERB;
+            } else if (typeString == "venerable") {
+                type = NameType::VENERABLE;
             } else {
                 Logger::Error(ContractFailedException("Unknown name type <" + typeString + ">!"));
             }
