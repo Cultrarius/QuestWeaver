@@ -1,18 +1,33 @@
 cmake_minimum_required(VERSION 3.2)
 project(QuestWeaver)
 
+### Version 1 - Developer Version with Linux and gcc
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -O0 -fprofile-arcs -ftest-coverage -Wall -Wextra")
 
     file(COPY Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
     file(COPY Test/Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Test)
 else ()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -O3")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O3")
 endif ()
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
 INCLUDE(CodeCoverage)
 SETUP_TARGET_FOR_COVERAGE(Weaver_coverage QuestWeaverTest "${CMAKE_CURRENT_SOURCE_DIR}/coverage")
+###
+
+### Version 2 - Windows version (no gcc, no code coverage)
+#[[
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -O0 -Wall -Wextra")
+
+    file(COPY Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+    file(COPY Test/Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Test)
+else ()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O3")
+endif ()
+]]
+###
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib")
