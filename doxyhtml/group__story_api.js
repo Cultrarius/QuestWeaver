@@ -2,33 +2,39 @@ var group__story_api =
 [
     [ "Nugget", "classweave_1_1_nugget.html", [
       [ "Nugget", "classweave_1_1_nugget.html#a816bc33f20ae434a1612ef3957060b96", null ],
-      [ "Nugget", "classweave_1_1_nugget.html#ad449e09cd4f74121c5d3b3b5298d37fb", null ],
-      [ "GetKey", "classweave_1_1_nugget.html#a31574332414b0cc45882e467aa6d0a35", null ],
-      [ "GetRequiredTypes", "classweave_1_1_nugget.html#a5cca1480ec953d699a35d7611c89b8b8", null ],
-      [ "GetTexts", "classweave_1_1_nugget.html#ab7ab9775e47d528043aba784aec6c60d", null ]
+      [ "Nugget", "classweave_1_1_nugget.html#a2b11b277d8149a4939a7d43820ace629", null ],
+      [ "GetKey", "classweave_1_1_nugget.html#a1bc6d143560a95b4ba6dc93728bd7754", null ],
+      [ "GetRandomizationKeys", "classweave_1_1_nugget.html#aa0e07fe9bf17a461a7d3fe62dc9f0d4c", null ],
+      [ "GetRandomValue", "classweave_1_1_nugget.html#a926724eb6cf2e4b90d7d56da02ac6306", null ],
+      [ "GetRarity", "classweave_1_1_nugget.html#a055a29d3672bfada84a6009967c07f44", null ],
+      [ "GetRequiredTypes", "classweave_1_1_nugget.html#ae2861395ca27547aff7b6ca35a722992", null ],
+      [ "GetTexts", "classweave_1_1_nugget.html#a3bd5e30c103b8c28c3f22e32f29bd32f", null ]
     ] ],
     [ "NuggetOption", "classweave_1_1_nugget_option.html", [
       [ "NuggetOption", "classweave_1_1_nugget_option.html#a8b08debb590f493d464c4bfb4a9870d5", null ],
       [ "GetEntityIDs", "classweave_1_1_nugget_option.html#a30926f9c14783fdbed0903b395e3cdcb", null ],
       [ "GetNuggetKey", "classweave_1_1_nugget_option.html#aef0f692aa3f5b213ff7f3f7f8c3b4532", null ]
     ] ],
-    [ "RawStoryLine", "structweave_1_1_raw_story_line.html", [
-      [ "nuggets", "structweave_1_1_raw_story_line.html#af54671cc45ad09708e9fe28ab43ef2c3", null ],
-      [ "postPart", "structweave_1_1_raw_story_line.html#aa401a6bf6f64b9d7c3909b6099bbb79c", null ],
-      [ "prePart", "structweave_1_1_raw_story_line.html#adf7b0047dd03f6c26fc22fa68cbe54f7", null ]
+    [ "RawStoryToken", "structweave_1_1_raw_story_token.html", [
+      [ "id", "structweave_1_1_raw_story_token.html#ad2667603ab20fe4c6866ad9466d195db", null ],
+      [ "isMandatory", "structweave_1_1_raw_story_token.html#a39ecd4eecc4f0f701b7b2a40c0510332", null ],
+      [ "nuggetOptions", "structweave_1_1_raw_story_token.html#a1192cb87b11cefb9e224e154721a4e3b", null ],
+      [ "text", "structweave_1_1_raw_story_token.html#ad7862880613c5e559049370df6c3a16d", null ]
     ] ],
-    [ "StoryLine", "classweave_1_1_story_line.html", [
-      [ "StoryLine", "classweave_1_1_story_line.html#a8c353809fdf0a738dc198b7993f78895", null ],
-      [ "GetNuggetOptions", "classweave_1_1_story_line.html#ab3f097bc1c9b4651ef5dddfe4f187a68", null ],
-      [ "GetPostPart", "classweave_1_1_story_line.html#ac017b554feca2cccde9ef4cffec28968", null ],
-      [ "GetPrePart", "classweave_1_1_story_line.html#af63049f66d8cba98c7d623fa6221c963", null ]
+    [ "Story", "structweave_1_1_story.html", [
+      [ "text", "structweave_1_1_story.html#ad2f9769a16a1faabd381786460d91945", null ],
+      [ "worldActions", "structweave_1_1_story.html#aab46d8e3d1e0bf6242d7c177b047d6dc", null ]
     ] ],
     [ "StoryTemplate", "classweave_1_1_story_template.html", [
-      [ "StoryTemplate", "classweave_1_1_story_template.html#af95f029ea2dcac5289cdf28cb5224acd", null ],
+      [ "StoryTemplate", "classweave_1_1_story_template.html#aa07e9d97c7dc65f8ff56983761a1ed4b", null ],
       [ "~StoryTemplate", "classweave_1_1_story_template.html#a458caebee482b44e8064e16f5d898310", null ],
-      [ "CreateStory", "classweave_1_1_story_template.html#a94d0632bccbaeeede2b6d29c778a165d", null ],
-      [ "GetRequiredEntities", "classweave_1_1_story_template.html#a750c4dc06058c4527ab4920a32152721", null ],
-      [ "rawLines", "classweave_1_1_story_template.html#acaa85ff0fc18f1a62eb7f06aab1e7749", null ]
+      [ "CreateStory", "classweave_1_1_story_template.html#a24cd4a14afa2872de2a62a08f584a07b", null ],
+      [ "createTokenMapping", "classweave_1_1_story_template.html#a80f0a9599faa983c97cd16059fb75d05", null ],
+      [ "GetRequiredEntities", "classweave_1_1_story_template.html#abc3f39444ea9c2d52a63706fd3c0771e", null ],
+      [ "IsValid", "classweave_1_1_story_template.html#ac180b3a2ca0986d1045d6acd5c63f7fc", null ],
+      [ "rawText", "classweave_1_1_story_template.html#a10bdc0fc33d9a00b43d9a15d031bf57d", null ],
+      [ "requiredEntities", "classweave_1_1_story_template.html#aaa4f258c475e80b3beaa60aab4cb6f4f", null ],
+      [ "tokenCache", "classweave_1_1_story_template.html#a9db441590bc959df3e8fc67dbc501148", null ]
     ] ],
     [ "StoryTemplateFactory", "classweave_1_1_story_template_factory.html", [
       [ "~StoryTemplateFactory", "classweave_1_1_story_template_factory.html#a84635df614bda36a9a65506b5cced886", null ],
@@ -36,15 +42,19 @@ var group__story_api =
       [ "GetNuggetFolder", "classweave_1_1_story_template_factory.html#af1086a32b5a1097db29a7595292f3637", null ],
       [ "getTemplateFile", "classweave_1_1_story_template_factory.html#ad65b44cd80d113ba0c8229f1d0834716", null ],
       [ "GetTemplates", "classweave_1_1_story_template_factory.html#aa1c96e7184a79ec32202833358545707", null ],
-      [ "readRawLines", "classweave_1_1_story_template_factory.html#a61e6767a994d56113a4fbf57534a7318", null ],
       [ "readRequired", "classweave_1_1_story_template_factory.html#a8849563ff5d33d26f197ab4d1159ca4d", null ],
       [ "StoryWriter", "classweave_1_1_story_template_factory.html#a05a4a62432249ecc876d7f40d831de6e", null ]
     ] ],
+    [ "StoryTemplateResult", "structweave_1_1_story_template_result.html", [
+      [ "rawText", "structweave_1_1_story_template_result.html#a7ca9ee671d8d35108421b01daf964b80", null ],
+      [ "tokenMap", "structweave_1_1_story_template_result.html#a414630f19b240e7c26b930d542eaeca3", null ],
+      [ "worldActions", "structweave_1_1_story_template_result.html#aeb15dd307a4f818429a4c05747d1c9e7", null ]
+    ] ],
     [ "StoryWriter", "classweave_1_1_story_writer.html", [
-      [ "StoryWriter", "classweave_1_1_story_writer.html#a576db909456e13434158a73dd8984525", null ],
+      [ "StoryWriter", "classweave_1_1_story_writer.html#a601f51b8dba30ebf735dc075eb48b0c4", null ],
       [ "ChangeDirectories", "classweave_1_1_story_writer.html#a0c8344b29115e3bd5796f697e1bf3fa4", null ],
-      [ "CreateStory", "classweave_1_1_story_writer.html#a3b918ddfea41a936ca30d3b1f4953e2b", null ],
-      [ "CreateStory", "classweave_1_1_story_writer.html#ab1d9cf6568ebbdd1182cb4f373be5a14", null ],
+      [ "CreateStory", "classweave_1_1_story_writer.html#a49b37e29b5bf95eba3cc078927a7c675", null ],
+      [ "CreateStory", "classweave_1_1_story_writer.html#ad912c1e464781d4de5994ed9178c6574", null ],
       [ "RegisterTemplateFactory", "classweave_1_1_story_writer.html#a61603fcb06730acf9fa57ace53d5cbf7", null ]
     ] ]
 ];

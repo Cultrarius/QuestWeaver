@@ -1,5 +1,6 @@
 <map id="include/Template/QuestTemplateFactory.h" name="include/Template/QuestTemplateFactory.h">
-<area shape="rect" id="node2" href="$_weaver_types_8h.html" title="../Core/WeaverTypes.h" alt="" coords="7,259,165,285"/>
-<area shape="rect" id="node5" href="$_weaver_utils_8h.html" title="../Core/WeaverUtils.h" alt="" coords="3487,169,3637,196"/>
-<area shape="rect" id="node50" href="$_quest_template_8h.html" title="QuestTemplate.h" alt="" coords="3290,95,3413,121"/>
+<area shape="rect" id="node2" href="$_weaver_types_8h.html" title="../Core/WeaverTypes.h" alt="" coords="5,259,164,285"/>
+<area shape="rect" id="node5" href="$_weaver_utils_8h.html" title="../Core/WeaverUtils.h" alt="" coords="2953,169,3102,196"/>
+<area shape="rect" id="node49" href="$_quest_template_8h.html" title="QuestTemplate.h" alt="" coords="821,95,943,121"/>
+<area shape="rect" id="node50" href="$_quest_8h.html" title="../QuestModel/Quest.h" alt="" coords="715,169,870,196"/>
 </map>

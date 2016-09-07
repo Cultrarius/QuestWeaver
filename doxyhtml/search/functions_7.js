@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['nugget',['Nugget',['../classweave_1_1_nugget.html#a816bc33f20ae434a1612ef3957060b96',1,'weave::Nugget::Nugget()=default'],['../classweave_1_1_nugget.html#ad449e09cd4f74121c5d3b3b5298d37fb',1,'weave::Nugget::Nugget(std::string key, std::vector&lt; std::string &gt; requiredTypes, std::vector&lt; std::string &gt; texts)']]],
-  ['nuggetoption',['NuggetOption',['../classweave_1_1_nugget_option.html#a8b08debb590f493d464c4bfb4a9870d5',1,'weave::NuggetOption']]]
+  ['isvalid',['IsValid',['../classweave_1_1_quest_template.html#a313b4f7c825bd36b46805d572621f37b',1,'weave::QuestTemplate::IsValid()'],['../classweave_1_1_story_template.html#ac180b3a2ca0986d1045d6acd5c63f7fc',1,'weave::StoryTemplate::IsValid()']]]
 ];

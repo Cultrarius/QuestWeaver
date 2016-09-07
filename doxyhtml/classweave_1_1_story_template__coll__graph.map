@@ -1,5 +1,5 @@
 <map id="weave::StoryTemplate" name="weave::StoryTemplate">
-<area shape="rect" id="node3" href="$structweave_1_1_raw_story_line.html" title="weave::RawStoryLine" alt="" coords="20,277,171,304"/>
-<area shape="rect" id="node5" title="STL class. " alt="" coords="29,96,109,123"/>
-<area shape="rect" id="node6" title="STL class. " alt="" coords="5,5,132,47"/>
+<area shape="rect" id="node3" title="STL class. " alt="" coords="181,120,261,147"/>
+<area shape="rect" id="node7" href="$structweave_1_1_raw_story_token.html" title="weave::RawStoryToken" alt="" coords="729,187,892,213"/>
+<area shape="rect" id="node4" title="STL class. " alt="" coords="5,113,132,154"/>
 </map>

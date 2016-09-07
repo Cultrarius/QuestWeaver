@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['worldactiontype',['WorldActionType',['../group__world_api.html#gaa54e8aba2e1a65dc3ebd5a7304b6aeef',1,'weave']]]
+  ['streamtype',['StreamType',['../group__main_api.html#ga43b695846582193689b15af33499cab3',1,'weave']]]
 ];

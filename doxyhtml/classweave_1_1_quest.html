@@ -30,6 +30,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="favicon.ico"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">QuestWeaver
    </div>
@@ -147,6 +148,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a289fea5b62277e4aba309ff86bca31de"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest.html#a289fea5b62277e4aba309ff86bca31de">GetType</a> () const  =0</td></tr>
 <tr class="memdesc:a289fea5b62277e4aba309ff86bca31de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the type of the quest.  <a href="#a289fea5b62277e4aba309ff86bca31de">More...</a><br /></td></tr>
 <tr class="separator:a289fea5b62277e4aba309ff86bca31de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54d0a1729afdf2ff1852fb4223ffa688"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classweave_1_1_quest_tick_result.html">QuestTickResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest.html#a54d0a1729afdf2ff1852fb4223ffa688">Tick</a> (float delta, const <a class="el" href="classweave_1_1_world_model.html">WorldModel</a> &amp;worldModel)</td></tr>
+<tr class="memdesc:a54d0a1729afdf2ff1852fb4223ffa688"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called whenever the main quest system is ticked.  <a href="#a54d0a1729afdf2ff1852fb4223ffa688">More...</a><br /></td></tr>
+<tr class="separator:a54d0a1729afdf2ff1852fb4223ffa688"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -158,23 +162,20 @@ Static Public Attributes</h2></td></tr>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:aed6cb60aa6f620f1bd8b7d27eb020be7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest.html#aed6cb60aa6f620f1bd8b7d27eb020be7">Quest</a> (<a class="el" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a> id, const std::string &amp;title, const std::string &amp;description, const std::string &amp;story)</td></tr>
 <tr class="separator:aed6cb60aa6f620f1bd8b7d27eb020be7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acebbef8d74e79ccc4a64df0ad6684872"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest.html#acebbef8d74e79ccc4a64df0ad6684872">getCerealDescription</a> () const </td></tr>
-<tr class="separator:acebbef8d74e79ccc4a64df0ad6684872"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d604e3a62dd232d4d19cb8cdedc46db"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest.html#a0d604e3a62dd232d4d19cb8cdedc46db">getCerealId</a> () const </td></tr>
-<tr class="separator:a0d604e3a62dd232d4d19cb8cdedc46db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2264ffd7430c5b8d46706db1bac44122"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest.html#a2264ffd7430c5b8d46706db1bac44122">getCerealStory</a> () const </td></tr>
-<tr class="separator:a2264ffd7430c5b8d46706db1bac44122"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34ba84f6565bacc121a42946b2b090f2"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest.html#a34ba84f6565bacc121a42946b2b090f2">getCerealTitle</a> () const </td></tr>
-<tr class="separator:a34ba84f6565bacc121a42946b2b090f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4bfc74338b54f1040131ce15fa9a5c4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classweave_1_1_quest_tick_result.html">QuestTickResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest.html#ab4bfc74338b54f1040131ce15fa9a5c4">Tick</a> (float delta)</td></tr>
-<tr class="memdesc:ab4bfc74338b54f1040131ce15fa9a5c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called whenever the main quest system is ticked.  <a href="#ab4bfc74338b54f1040131ce15fa9a5c4">More...</a><br /></td></tr>
-<tr class="separator:ab4bfc74338b54f1040131ce15fa9a5c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc32cd23def364e5dc085c4393cd2f76"><td class="memItemLeft" align="right" valign="top">cereal::NameValuePair&lt; const std::string &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest.html#afc32cd23def364e5dc085c4393cd2f76">getCerealDescription</a> () const </td></tr>
+<tr class="separator:afc32cd23def364e5dc085c4393cd2f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade6667905a11c372158a43e8e8461956"><td class="memItemLeft" align="right" valign="top">cereal::NameValuePair&lt; const <a class="el" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest.html#ade6667905a11c372158a43e8e8461956">getCerealId</a> () const </td></tr>
+<tr class="separator:ade6667905a11c372158a43e8e8461956"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39cfcbdb7af04d4b9b2a59fe89fd67ca"><td class="memItemLeft" align="right" valign="top">cereal::NameValuePair&lt; const std::string &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest.html#a39cfcbdb7af04d4b9b2a59fe89fd67ca">getCerealStory</a> () const </td></tr>
+<tr class="separator:a39cfcbdb7af04d4b9b2a59fe89fd67ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadb3de95c9571e359419649bb3b4ddb5"><td class="memItemLeft" align="right" valign="top">cereal::NameValuePair&lt; const std::string &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest.html#aadb3de95c9571e359419649bb3b4ddb5">getCerealTitle</a> () const </td></tr>
+<tr class="separator:aadb3de95c9571e359419649bb3b4ddb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a game quest. </p>
 <p>Instances of this class are immutable. The associated quest state can be changed from within the quest once it is ticked by the quest system. </p>
 
-<p>Definition at line <a class="el" href="_quest_8h_source.html#l00089">89</a> of file <a class="el" href="_quest_8h_source.html">Quest.h</a>.</p>
+<p>Definition at line <a class="el" href="_quest_8h_source.html#l00106">106</a> of file <a class="el" href="_quest_8h_source.html">Quest.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a21cc8d2e1f05f6bf783ec28565898541"></a>
 <div class="memitem">
@@ -259,7 +260,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_quest_8h_source.html#l00109">109</a> of file <a class="el" href="_quest_8h_source.html">Quest.h</a>.</p>
+<p>Definition at line <a class="el" href="_quest_8h_source.html#l00126">126</a> of file <a class="el" href="_quest_8h_source.html">Quest.h</a>.</p>
 
 </div>
 </div>
@@ -310,7 +311,7 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="acebbef8d74e79ccc4a64df0ad6684872"></a>
+<a class="anchor" id="afc32cd23def364e5dc085c4393cd2f76"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -318,7 +319,7 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto weave::Quest::getCerealDescription </td>
+          <td class="memname">cereal::NameValuePair&lt;const std::string &amp;&gt; weave::Quest::getCerealDescription </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -331,11 +332,11 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_quest_8h_source.html#l00162">162</a> of file <a class="el" href="_quest_8h_source.html">Quest.h</a>.</p>
+<p>Definition at line <a class="el" href="_quest_8h_source.html#l00182">182</a> of file <a class="el" href="_quest_8h_source.html">Quest.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a0d604e3a62dd232d4d19cb8cdedc46db"></a>
+<a class="anchor" id="ade6667905a11c372158a43e8e8461956"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -343,7 +344,7 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto weave::Quest::getCerealId </td>
+          <td class="memname">cereal::NameValuePair&lt;const <a class="el" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a> &amp;&gt; weave::Quest::getCerealId </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -356,11 +357,11 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_quest_8h_source.html#l00154">154</a> of file <a class="el" href="_quest_8h_source.html">Quest.h</a>.</p>
+<p>Definition at line <a class="el" href="_quest_8h_source.html#l00174">174</a> of file <a class="el" href="_quest_8h_source.html">Quest.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a2264ffd7430c5b8d46706db1bac44122"></a>
+<a class="anchor" id="a39cfcbdb7af04d4b9b2a59fe89fd67ca"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -368,7 +369,7 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto weave::Quest::getCerealStory </td>
+          <td class="memname">cereal::NameValuePair&lt;const std::string &amp;&gt; weave::Quest::getCerealStory </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -381,11 +382,11 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_quest_8h_source.html#l00166">166</a> of file <a class="el" href="_quest_8h_source.html">Quest.h</a>.</p>
+<p>Definition at line <a class="el" href="_quest_8h_source.html#l00186">186</a> of file <a class="el" href="_quest_8h_source.html">Quest.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a34ba84f6565bacc121a42946b2b090f2"></a>
+<a class="anchor" id="aadb3de95c9571e359419649bb3b4ddb5"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -393,7 +394,7 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto weave::Quest::getCerealTitle </td>
+          <td class="memname">cereal::NameValuePair&lt;const std::string &amp;&gt; weave::Quest::getCerealTitle </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -406,7 +407,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="_quest_8h_source.html#l00158">158</a> of file <a class="el" href="_quest_8h_source.html">Quest.h</a>.</p>
+<p>Definition at line <a class="el" href="_quest_8h_source.html#l00178">178</a> of file <a class="el" href="_quest_8h_source.html">Quest.h</a>.</p>
 
 </div>
 </div>
@@ -504,7 +505,7 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab4bfc74338b54f1040131ce15fa9a5c4"></a>
+<a class="anchor" id="a54d0a1729afdf2ff1852fb4223ffa688"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -515,21 +516,33 @@ Protected Member Functions</h2></td></tr>
           <td class="memname">virtual <a class="el" href="classweave_1_1_quest_tick_result.html">QuestTickResult</a> weave::Quest::Tick </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>delta</em></td><td>)</td>
+          <td class="paramname"><em>delta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="classweave_1_1_world_model.html">WorldModel</a> &amp;&#160;</td>
+          <td class="paramname"><em>worldModel</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>This method is called whenever the main quest system is ticked. </p>
-<p>It allows subclasses to react to game events and queue changes via the <a class="el" href="classweave_1_1_quest_tick_result.html" title="Event generated by a quest when ticked by the game. ">QuestTickResult</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>It allows subclasses to react to game events and queue changes via the <a class="el" href="classweave_1_1_quest_tick_result.html" title="Event generated by a quest when ticked by the game. ">QuestTickResult</a>. <em>Only ACTIVE quests can be ticked!</em></p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">delta</td><td>The time elapsed since the last tick. </td></tr>
+    <tr><td class="paramname">worldModel</td><td>The world model, which can be used to search and check world entities. Changing them is only possible by returning the change in the result. </td></tr>
   </table>
   </dd>
 </dl>
@@ -557,7 +570,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Quests not registered with the quest system have this id. </p>
 
-<p>Definition at line <a class="el" href="_quest_8h_source.html#l00094">94</a> of file <a class="el" href="_quest_8h_source.html">Quest.h</a>.</p>
+<p>Definition at line <a class="el" href="_quest_8h_source.html#l00111">111</a> of file <a class="el" href="_quest_8h_source.html">Quest.h</a>.</p>
 
 </div>
 </div>

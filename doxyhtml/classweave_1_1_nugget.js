@@ -1,8 +1,11 @@
 var classweave_1_1_nugget =
 [
     [ "Nugget", "classweave_1_1_nugget.html#a816bc33f20ae434a1612ef3957060b96", null ],
-    [ "Nugget", "classweave_1_1_nugget.html#ad449e09cd4f74121c5d3b3b5298d37fb", null ],
-    [ "GetKey", "classweave_1_1_nugget.html#a31574332414b0cc45882e467aa6d0a35", null ],
-    [ "GetRequiredTypes", "classweave_1_1_nugget.html#a5cca1480ec953d699a35d7611c89b8b8", null ],
-    [ "GetTexts", "classweave_1_1_nugget.html#ab7ab9775e47d528043aba784aec6c60d", null ]
+    [ "Nugget", "classweave_1_1_nugget.html#a2b11b277d8149a4939a7d43820ace629", null ],
+    [ "GetKey", "classweave_1_1_nugget.html#a1bc6d143560a95b4ba6dc93728bd7754", null ],
+    [ "GetRandomizationKeys", "classweave_1_1_nugget.html#aa0e07fe9bf17a461a7d3fe62dc9f0d4c", null ],
+    [ "GetRandomValue", "classweave_1_1_nugget.html#a926724eb6cf2e4b90d7d56da02ac6306", null ],
+    [ "GetRarity", "classweave_1_1_nugget.html#a055a29d3672bfada84a6009967c07f44", null ],
+    [ "GetRequiredTypes", "classweave_1_1_nugget.html#ae2861395ca27547aff7b6ca35a722992", null ],
+    [ "GetTexts", "classweave_1_1_nugget.html#a3bd5e30c103b8c28c3f22e32f29bd32f", null ]
 ];

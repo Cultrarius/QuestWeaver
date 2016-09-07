@@ -1,26 +1,6 @@
 var searchData=
 [
-  ['questweaver',['QuestWeaver',['../index.html',1,'']]],
-  ['quest',['Quest',['../classweave_1_1_quest.html',1,'weave']]],
-  ['quest',['Quest',['../classweave_1_1_quest.html#a21cc8d2e1f05f6bf783ec28565898541',1,'weave::Quest::Quest(const std::string &amp;title, const std::string &amp;description)'],['../classweave_1_1_quest.html#a5798fe9fbfbcce2a11f7930323e1bc6b',1,'weave::Quest::Quest(const std::string &amp;title, const std::string &amp;description, const std::string &amp;story)'],['../classweave_1_1_quest.html#aed6cb60aa6f620f1bd8b7d27eb020be7',1,'weave::Quest::Quest(ID id, const std::string &amp;title, const std::string &amp;description, const std::string &amp;story)']]],
-  ['quest_2eh',['Quest.h',['../_quest_8h.html',1,'']]],
-  ['questactiontype',['QuestActionType',['../namespaceweave.html#a9236c511e6a59a195f9f2752d1d245b0',1,'weave']]],
-  ['quest_20api',['Quest API',['../group__quest_api.html',1,'']]],
-  ['questmodelaction',['QuestModelAction',['../classweave_1_1_quest_model_action.html',1,'weave']]],
-  ['questmodelaction',['QuestModelAction',['../classweave_1_1_quest_model_action.html#ad993883174ffa26f1ee361ce1906d369',1,'weave::QuestModelAction::QuestModelAction()'],['../classweave_1_1_quest_model_action.html#a759813bb5e5e7c336c8a336de86d664f',1,'weave::QuestModelAction::QuestModelAction(const QuestActionType &amp;actionType, ID questId)']]],
-  ['questmodelaction_2eh',['QuestModelAction.h',['../_quest_model_action_8h.html',1,'']]],
-  ['questpropertyvalue',['QuestPropertyValue',['../classweave_1_1_quest_property_value.html',1,'weave']]],
-  ['questpropertyvalue',['QuestPropertyValue',['../classweave_1_1_quest_property_value.html#a2ae15dbe17e4a4db27b2cc72e9fe8f71',1,'weave::QuestPropertyValue']]],
-  ['queststate',['QuestState',['../group__quest_api.html#gafa0e9cd4efa7f2671317618cf3d9b479',1,'weave']]],
-  ['questtemplate',['QuestTemplate',['../classweave_1_1_quest_template.html',1,'weave']]],
-  ['questtemplate',['QuestTemplate',['../classweave_1_1_quest_template.html#af9167d9dbc2778d21f445c4e5429d3f3',1,'weave::QuestTemplate']]],
-  ['questtemplate_2eh',['QuestTemplate.h',['../_quest_template_8h.html',1,'']]],
-  ['questtemplatefactories',['questTemplateFactories',['../structweave_1_1_weaver_config.html#aadcd1180a186cb4c85cdb5cf8215e759',1,'weave::WeaverConfig']]],
-  ['questtemplatefactory',['QuestTemplateFactory',['../classweave_1_1_quest_template_factory.html',1,'weave']]],
-  ['questtemplatefactory_2eh',['QuestTemplateFactory.h',['../_quest_template_factory_8h.html',1,'']]],
-  ['questtickresult',['QuestTickResult',['../classweave_1_1_quest_tick_result.html',1,'weave']]],
-  ['questtickresult',['QuestTickResult',['../classweave_1_1_quest_tick_result.html#a3068f0f555819749b53602288050cd2c',1,'weave::QuestTickResult']]],
-  ['questweaver',['QuestWeaver',['../classweave_1_1_quest_weaver.html#a2435782d500fa31ac91d008fd558954e',1,'weave::QuestWeaver']]],
-  ['questweaver',['QuestWeaver',['../classweave_1_1_quest_weaver.html',1,'weave']]],
-  ['questweaver_2eh',['QuestWeaver.h',['../_quest_weaver_8h.html',1,'']]]
+  ['propertycandidate',['PropertyCandidate',['../classweave_1_1_property_candidate.html',1,'weave']]],
+  ['propertycandidate',['PropertyCandidate',['../classweave_1_1_property_candidate.html#a099448f6114099940b0e1e0b7ab135a0',1,'weave::PropertyCandidate::PropertyCandidate() noexcept'],['../classweave_1_1_property_candidate.html#adfb6cc74157cd2425d715d254228ff6e',1,'weave::PropertyCandidate::PropertyCandidate(WorldModelAction singleAction) noexcept'],['../classweave_1_1_property_candidate.html#a1c77d0d62d83c7d97167ce95840560aa',1,'weave::PropertyCandidate::PropertyCandidate(std::vector&lt; WorldModelAction &gt; actionList, std::shared_ptr&lt; WorldEntity &gt; candidateValue) noexcept']]],
+  ['propertyvalues',['propertyValues',['../classweave_1_1_story_writer_parameters.html#a7e4ab99326da8f7a8178bcb6235799dd',1,'weave::StoryWriterParameters']]]
 ];

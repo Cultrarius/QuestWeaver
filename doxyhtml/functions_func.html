@@ -30,6 +30,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="favicon.ico"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">QuestWeaver
    </div>
@@ -90,11 +91,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_c"><span>c</span></a></li>
       <li><a href="#index_d"><span>d</span></a></li>
       <li><a href="#index_e"><span>e</span></a></li>
+      <li><a href="#index_f"><span>f</span></a></li>
       <li><a href="#index_g"><span>g</span></a></li>
       <li><a href="#index_h"><span>h</span></a></li>
       <li><a href="#index_i"><span>i</span></a></li>
       <li><a href="#index_n"><span>n</span></a></li>
       <li><a href="#index_o"><span>o</span></a></li>
+      <li><a href="#index_p"><span>p</span></a></li>
       <li><a href="#index_q"><span>q</span></a></li>
       <li><a href="#index_r"><span>r</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
@@ -159,20 +162,32 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 : <a class="el" href="classweave_1_1_quest_template_factory.html#a353ad8e6049d73bf73d5a202e32c3e36">weave::QuestTemplateFactory</a>
 , <a class="el" href="classweave_1_1_story_template_factory.html#a89796bce5e2a8477a43996304ba146d1">weave::StoryTemplateFactory</a>
 </li>
-<li>CreateNewQuest()
-: <a class="el" href="classweave_1_1_quest_weaver.html#ab4cc3f1ed3b13738547b298ad4f6856a">weave::QuestWeaver</a>
+<li>CreateName()
+: <a class="el" href="classweave_1_1_name_generator.html#a9a57c2bc877af368fd46869c0b97da4c">weave::NameGenerator</a>
+</li>
+<li>CreateNewQuests()
+: <a class="el" href="classweave_1_1_quest_weaver.html#a0fcdc0bfa19c6ca8e2a2fec2366c5a11">weave::QuestWeaver</a>
 </li>
 <li>CreateStory()
-: <a class="el" href="classweave_1_1_story_template.html#a94d0632bccbaeeede2b6d29c778a165d">weave::StoryTemplate</a>
-, <a class="el" href="classweave_1_1_story_writer.html#a3b918ddfea41a936ca30d3b1f4953e2b">weave::StoryWriter</a>
+: <a class="el" href="classweave_1_1_story_template.html#a24cd4a14afa2872de2a62a08f584a07b">weave::StoryTemplate</a>
+, <a class="el" href="classweave_1_1_story_writer.html#ad912c1e464781d4de5994ed9178c6574">weave::StoryWriter</a>
 </li>
 <li>CreateTemplate()
 : <a class="el" href="classweave_1_1_quest_template_factory.html#a7202fb6b0aa6cd62d650b29b2a07db64">weave::QuestTemplateFactory</a>
+</li>
+<li>createTokenMapping()
+: <a class="el" href="classweave_1_1_story_template.html#a80f0a9599faa983c97cd16059fb75d05">weave::StoryTemplate</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
+<li>debug()
+: <a class="el" href="classweave_1_1_logger.html#a86de919560fe5da40e67fe73ffbfbe71">weave::Logger</a>
+</li>
+<li>Debug()
+: <a class="el" href="classweave_1_1_logger.html#ab55fee0508a9a00755d8a021cd72c057">weave::Logger</a>
+</li>
 <li>Deserialize()
 : <a class="el" href="classweave_1_1_quest_weaver.html#adc3136568dcad0bd9bb616d60b53f482">weave::QuestWeaver</a>
 </li>
@@ -180,8 +195,11 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 
 
 <h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
-<li>empty()
-: <a class="el" href="classweave_1_1_world_model.html#ae253815949de9f4245981abe85cacf60">weave::WorldModel</a>
+<li>error()
+: <a class="el" href="classweave_1_1_logger.html#aab00a797cbc3bfd193f5dce5da0a5057">weave::Logger</a>
+</li>
+<li>Error()
+: <a class="el" href="classweave_1_1_logger.html#ab4ed877aa4b0e8ac1523ece87872b1ca">weave::Logger</a>
 </li>
 <li>Execute()
 : <a class="el" href="classweave_1_1_world_model.html#ac6d0b765c31b71a2b15094a82d07611e">weave::WorldModel</a>
@@ -192,16 +210,32 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>extractProperties()
 : <a class="el" href="classweave_1_1_quest_template_factory.html#ad26b505992bcff27dc78d47f6657f54c">weave::QuestTemplateFactory</a>
 </li>
+<li>extractRarity()
+: <a class="el" href="classweave_1_1_quest_template_factory.html#ab0bd5cdcb55c44095c45de807f90413b">weave::QuestTemplateFactory</a>
+</li>
 <li>extractTitle()
 : <a class="el" href="classweave_1_1_quest_template_factory.html#a02649415f3f77233828e258d27632f9f">weave::QuestTemplateFactory</a>
 </li>
 </ul>
 
 
+<h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
+<li>Fatal()
+: <a class="el" href="classweave_1_1_logger.html#a8319969e683227aeac3f3abb95db17c4">weave::Logger</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
+<li>Get()
+: <a class="el" href="classweave_1_1_logger.html#a52a44a65c70542487572311b0eb7cb27">weave::Logger</a>
+</li>
+<li>GetActions()
+: <a class="el" href="classweave_1_1_property_candidate.html#ab05550added3d4108ca44a216892afc7">weave::PropertyCandidate</a>
+</li>
 <li>GetActionType()
 : <a class="el" href="classweave_1_1_quest_model_action.html#a4c7a7908c2992581b1a9581b1ede9a9d">weave::QuestModelAction</a>
-, <a class="el" href="classweave_1_1_world_model_action.html#acb86e00f32ee135dc353b5f38a4f6809">weave::WorldModelAction</a>
+, <a class="el" href="classweave_1_1_world_model_action.html#ac4f5ba972309f2b0080824a55662bb2d">weave::WorldModelAction</a>
 </li>
 <li>GetAllQuests()
 : <a class="el" href="classweave_1_1_quest_weaver.html#ae039124d0b281e8d5722282271e516c1">weave::QuestWeaver</a>
@@ -210,16 +244,16 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 : <a class="el" href="classweave_1_1_quest_template.html#a5d804f0068e8096e0a995119f6259fd9">weave::QuestTemplate</a>
 </li>
 <li>getCerealDescription()
-: <a class="el" href="classweave_1_1_quest.html#acebbef8d74e79ccc4a64df0ad6684872">weave::Quest</a>
+: <a class="el" href="classweave_1_1_quest.html#afc32cd23def364e5dc085c4393cd2f76">weave::Quest</a>
 </li>
 <li>getCerealId()
-: <a class="el" href="classweave_1_1_quest.html#a0d604e3a62dd232d4d19cb8cdedc46db">weave::Quest</a>
+: <a class="el" href="classweave_1_1_quest.html#ade6667905a11c372158a43e8e8461956">weave::Quest</a>
 </li>
 <li>getCerealStory()
-: <a class="el" href="classweave_1_1_quest.html#a2264ffd7430c5b8d46706db1bac44122">weave::Quest</a>
+: <a class="el" href="classweave_1_1_quest.html#a39cfcbdb7af04d4b9b2a59fe89fd67ca">weave::Quest</a>
 </li>
 <li>getCerealTitle()
-: <a class="el" href="classweave_1_1_quest.html#a34ba84f6565bacc121a42946b2b090f2">weave::Quest</a>
+: <a class="el" href="classweave_1_1_quest.html#aadb3de95c9571e359419649bb3b4ddb5">weave::Quest</a>
 </li>
 <li>GetDescription()
 : <a class="el" href="classweave_1_1_quest.html#a0ddec7dfa227a721f5f69bf2ba8b604d">weave::Quest</a>
@@ -227,8 +261,11 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>GetEntities()
 : <a class="el" href="classweave_1_1_world_model.html#a8fa0059ec9e140b6dde4bbb89114f7f3">weave::WorldModel</a>
 </li>
+<li>GetEntitiesWithType()
+: <a class="el" href="classweave_1_1_world_model.html#a7bf17825674a37194ab529d1307b519b">weave::WorldModel</a>
+</li>
 <li>GetEntity()
-: <a class="el" href="classweave_1_1_world_model_action.html#a9a72a2cc35fbc5e1be5c5ec813fef750">weave::WorldModelAction</a>
+: <a class="el" href="classweave_1_1_world_model_action.html#adaaa9e5fa1ca6fed5096ec094de218dd">weave::WorldModelAction</a>
 </li>
 <li>GetEntityById()
 : <a class="el" href="classweave_1_1_world_model.html#ade56a1703b0ae6339c4f659a754181a9">weave::WorldModel</a>
@@ -244,7 +281,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 </li>
 <li>GetId()
 : <a class="el" href="classweave_1_1_quest.html#a51f6df07150367680091a73c01692836">weave::Quest</a>
-, <a class="el" href="classweave_1_1_world_entity.html#ab4d41f18969c2e23136be94ade9262fa">weave::WorldEntity</a>
+, <a class="el" href="classweave_1_1_world_entity.html#a1b8a8fb5b697f86684184056594fdf6e">weave::WorldEntity</a>
 </li>
 <li>GetInt()
 : <a class="el" href="classweave_1_1_random_stream.html#a3294be137289646922323ec8be016e78">weave::RandomStream</a>
@@ -253,17 +290,20 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 : <a class="el" href="classweave_1_1_random_stream.html#a5d3f3016f4f0c92d711bb212770f3f36">weave::RandomStream</a>
 </li>
 <li>GetKey()
-: <a class="el" href="classweave_1_1_nugget.html#a31574332414b0cc45882e467aa6d0a35">weave::Nugget</a>
+: <a class="el" href="classweave_1_1_nugget.html#a1bc6d143560a95b4ba6dc93728bd7754">weave::Nugget</a>
 </li>
 <li>GetMetaData()
 : <a class="el" href="classweave_1_1_world_model.html#aaf555d96ffb6e22998eed0bbd742eb8f">weave::WorldModel</a>
-, <a class="el" href="classweave_1_1_world_model_action.html#a800b70a8923c8f7e788863b9c19e28df">weave::WorldModelAction</a>
+, <a class="el" href="classweave_1_1_world_model_action.html#af12fd0b58a1329e0a3bcf6d681e72921">weave::WorldModelAction</a>
 </li>
 <li>GetMetaDataHistoryForId()
 : <a class="el" href="classweave_1_1_world_model.html#a6a46e2a213fd9a4dd78c38aee2739e0d">weave::WorldModel</a>
 </li>
-<li>GetName()
-: <a class="el" href="classweave_1_1_template_quest_property.html#a38c37f53cabdaa9b29b647fcda8ec04b">weave::TemplateQuestProperty</a>
+<li>GetNameGenerator()
+: <a class="el" href="classweave_1_1_world_model.html#ac33f0db5e2a412f52e38e459fd23099f">weave::WorldModel</a>
+</li>
+<li>GetNormalIntInRange()
+: <a class="el" href="classweave_1_1_random_stream.html#ac0e07d496a7fdd42cdd8cbe11aa86c00">weave::RandomStream</a>
 </li>
 <li>GetNuggetFolder()
 : <a class="el" href="classweave_1_1_story_template_factory.html#af1086a32b5a1097db29a7595292f3637">weave::StoryTemplateFactory</a>
@@ -271,23 +311,11 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>GetNuggetKey()
 : <a class="el" href="classweave_1_1_nugget_option.html#aef0f692aa3f5b213ff7f3f7f8c3b4532">weave::NuggetOption</a>
 </li>
-<li>GetNuggetOptions()
-: <a class="el" href="classweave_1_1_story_line.html#ab3f097bc1c9b4651ef5dddfe4f187a68">weave::StoryLine</a>
-</li>
-<li>GetPostPart()
-: <a class="el" href="classweave_1_1_story_line.html#ac017b554feca2cccde9ef4cffec28968">weave::StoryLine</a>
-</li>
-<li>GetPrePart()
-: <a class="el" href="classweave_1_1_story_line.html#af63049f66d8cba98c7d623fa6221c963">weave::StoryLine</a>
-</li>
 <li>GetProperties()
 : <a class="el" href="classweave_1_1_quest_template.html#aa04add3a1d1c94741b4a9baa50b0a08e">weave::QuestTemplate</a>
 </li>
-<li>GetProperty()
-: <a class="el" href="classweave_1_1_quest_property_value.html#a092301003feb352e3c42f5b287458771">weave::QuestPropertyValue</a>
-</li>
 <li>GetPropertyCandidates()
-: <a class="el" href="classweave_1_1_quest_template.html#a67d5438e62420cb288d34b7a469b70b5">weave::QuestTemplate</a>
+: <a class="el" href="classweave_1_1_quest_template.html#a63b6bbfb1af299c099c0d8295fe8a6f1">weave::QuestTemplate</a>
 </li>
 <li>GetQuest()
 : <a class="el" href="classweave_1_1_quest_weaver.html#ac03a367e700dd770d3c6f6cde28f3b4a">weave::QuestWeaver</a>
@@ -304,21 +332,33 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>GetRandomIndex()
 : <a class="el" href="classweave_1_1_random_stream.html#ac13d9b4ff8575636f387ffe189b94d1a">weave::RandomStream</a>
 </li>
+<li>GetRandomizationKeys()
+: <a class="el" href="classweave_1_1_nugget.html#aa0e07fe9bf17a461a7d3fe62dc9f0d4c">weave::Nugget</a>
+</li>
+<li>GetRandomValue()
+: <a class="el" href="classweave_1_1_nugget.html#a926724eb6cf2e4b90d7d56da02ac6306">weave::Nugget</a>
+</li>
+<li>GetRarity()
+: <a class="el" href="classweave_1_1_nugget.html#a055a29d3672bfada84a6009967c07f44">weave::Nugget</a>
+, <a class="el" href="classweave_1_1_quest_template.html#a076133fd6832a7be951d9f5cb2c3a94e">weave::QuestTemplate</a>
+</li>
 <li>GetRequiredEntities()
-: <a class="el" href="classweave_1_1_story_template.html#a750c4dc06058c4527ab4920a32152721">weave::StoryTemplate</a>
+: <a class="el" href="classweave_1_1_story_template.html#abc3f39444ea9c2d52a63706fd3c0771e">weave::StoryTemplate</a>
 </li>
 <li>GetRequiredTypes()
-: <a class="el" href="classweave_1_1_nugget.html#a5cca1480ec953d699a35d7611c89b8b8">weave::Nugget</a>
+: <a class="el" href="classweave_1_1_nugget.html#ae2861395ca27547aff7b6ca35a722992">weave::Nugget</a>
 </li>
 <li>GetStory()
 : <a class="el" href="classweave_1_1_quest.html#a8909442ff1eb3d51002216010acfbad5">weave::Quest</a>
 </li>
 <li>getTemplateFile()
-: <a class="el" href="classweave_1_1_quest_template_factory.html#a8a25760aa1e0ba1594e9a9341badf2df">weave::QuestTemplateFactory</a>
-, <a class="el" href="classweave_1_1_story_template_factory.html#ad65b44cd80d113ba0c8229f1d0834716">weave::StoryTemplateFactory</a>
+: <a class="el" href="classweave_1_1_story_template_factory.html#ad65b44cd80d113ba0c8229f1d0834716">weave::StoryTemplateFactory</a>
+</li>
+<li>getTemplateFiles()
+: <a class="el" href="classweave_1_1_quest_template_factory.html#aa73492473162e9211ef98ef9b944febe">weave::QuestTemplateFactory</a>
 </li>
 <li>GetTemplateKeys()
-: <a class="el" href="classweave_1_1_quest_template_factory.html#aa74ae5523c9c10ac72d8520261b33ef3">weave::QuestTemplateFactory</a>
+: <a class="el" href="classweave_1_1_quest_template_factory.html#a0a5b7037cdf7c5430a18c3d5da2df0a5">weave::QuestTemplateFactory</a>
 </li>
 <li>GetTemplates()
 : <a class="el" href="classweave_1_1_story_template_factory.html#aa1c96e7184a79ec32202833358545707">weave::StoryTemplateFactory</a>
@@ -327,7 +367,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 : <a class="el" href="classweave_1_1_template_quest_description.html#ae09432b0b5889472ff386706bdcb28bf">weave::TemplateQuestDescription</a>
 </li>
 <li>GetTexts()
-: <a class="el" href="classweave_1_1_nugget.html#ab7ab9775e47d528043aba784aec6c60d">weave::Nugget</a>
+: <a class="el" href="classweave_1_1_nugget.html#a3bd5e30c103b8c28c3f22e32f29bd32f">weave::Nugget</a>
 </li>
 <li>GetTitle()
 : <a class="el" href="classweave_1_1_quest.html#a1a5787e5f54f65fc492aa952e6c04cf4">weave::Quest</a>
@@ -337,31 +377,31 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 </li>
 <li>GetType()
 : <a class="el" href="classweave_1_1_quest.html#a289fea5b62277e4aba309ff86bca31de">weave::Quest</a>
-, <a class="el" href="classweave_1_1_world_entity.html#ad3de8ba54854069a255a75eab9f7976f">weave::WorldEntity</a>
+, <a class="el" href="classweave_1_1_world_entity.html#aec7f4d8511eedc982978f1a25bc7fabd">weave::WorldEntity</a>
 </li>
 <li>GetULongInRange()
 : <a class="el" href="classweave_1_1_random_stream.html#a1c3ccda5f8d29f13f63467a87537dabf">weave::RandomStream</a>
 </li>
 <li>GetValue()
 : <a class="el" href="classweave_1_1_meta_data.html#a56dd6e6ce1a2184e4fc0c0972103e0e1">weave::MetaData</a>
-, <a class="el" href="classweave_1_1_quest_property_value.html#ac667c1edc3016077ca0d8eb3ba3a31c6">weave::QuestPropertyValue</a>
+, <a class="el" href="classweave_1_1_property_candidate.html#a3ec325fdb9938a1492ce4045741c0567">weave::PropertyCandidate</a>
 </li>
 <li>GetValueNames()
 : <a class="el" href="classweave_1_1_meta_data.html#a61ef992067446ad651573e852e0186ae">weave::MetaData</a>
-</li>
-<li>GetValueString()
-: <a class="el" href="classweave_1_1_quest_property_value.html#a067e09ab2b71414e4a70f6edbcbc6664">weave::QuestPropertyValue</a>
 </li>
 <li>GetWorldChanges()
 : <a class="el" href="classweave_1_1_quest_tick_result.html#a21d13cb777e4345ef0e63a8a5e8356a3">weave::QuestTickResult</a>
 </li>
 <li>GetWorldModel()
-: <a class="el" href="classweave_1_1_quest_weaver.html#ab66bd94d2b1c3851d3fd52db1945f9cd">weave::QuestWeaver</a>
+: <a class="el" href="classweave_1_1_quest_weaver.html#a38a6eaa8dc12b08b9ec7869976fc619d">weave::QuestWeaver</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_h"></a>- h -</h3><ul>
+<li>HasPriority()
+: <a class="el" href="classweave_1_1_quest_template.html#a0f0307e66ea74d64bdb7bfbe9eb7d4f9">weave::QuestTemplate</a>
+</li>
 <li>HasValue()
 : <a class="el" href="classweave_1_1_meta_data.html#a9c7a7c554143c9e4038e26453739a5b5">weave::MetaData</a>
 </li>
@@ -369,8 +409,9 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 
 
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
-<li>IsMandatory()
-: <a class="el" href="classweave_1_1_template_quest_property.html#aed71a8f3a5f270ffb53e762fb9b7a09d">weave::TemplateQuestProperty</a>
+<li>IsValid()
+: <a class="el" href="classweave_1_1_quest_template.html#a313b4f7c825bd36b46805d572621f37b">weave::QuestTemplate</a>
+, <a class="el" href="classweave_1_1_story_template.html#ac180b3a2ca0986d1045d6acd5c63f7fc">weave::StoryTemplate</a>
 </li>
 </ul>
 
@@ -392,6 +433,13 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 </ul>
 
 
+<h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
+<li>PropertyCandidate()
+: <a class="el" href="classweave_1_1_property_candidate.html#a099448f6114099940b0e1e0b7ab135a0">weave::PropertyCandidate</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_q"></a>- q -</h3><ul>
 <li>Quest()
 : <a class="el" href="classweave_1_1_quest.html#a21cc8d2e1f05f6bf783ec28565898541">weave::Quest</a>
@@ -399,11 +447,8 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>QuestModelAction()
 : <a class="el" href="classweave_1_1_quest_model_action.html#ad993883174ffa26f1ee361ce1906d369">weave::QuestModelAction</a>
 </li>
-<li>QuestPropertyValue()
-: <a class="el" href="classweave_1_1_quest_property_value.html#a2ae15dbe17e4a4db27b2cc72e9fe8f71">weave::QuestPropertyValue</a>
-</li>
 <li>QuestTemplate()
-: <a class="el" href="classweave_1_1_quest_template.html#af9167d9dbc2778d21f445c4e5429d3f3">weave::QuestTemplate</a>
+: <a class="el" href="classweave_1_1_quest_template.html#a306b7c24951a5bd98512fdaab8981df7">weave::QuestTemplate</a>
 </li>
 <li>QuestTickResult()
 : <a class="el" href="classweave_1_1_quest_tick_result.html#a3068f0f555819749b53602288050cd2c">weave::QuestTickResult</a>
@@ -418,9 +463,6 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>RandomStream()
 : <a class="el" href="classweave_1_1_random_stream.html#a283509286cd9a2324cf982dba9ebeab5">weave::RandomStream</a>
 </li>
-<li>readRawLines()
-: <a class="el" href="classweave_1_1_story_template_factory.html#a61e6767a994d56113a4fbf57534a7318">weave::StoryTemplateFactory</a>
-</li>
 <li>readRequired()
 : <a class="el" href="classweave_1_1_story_template_factory.html#a8849563ff5d33d26f197ab4d1159ca4d">weave::StoryTemplateFactory</a>
 </li>
@@ -433,6 +475,9 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>RegisterTemplateFactory()
 : <a class="el" href="classweave_1_1_story_writer.html#a61603fcb06730acf9fa57ace53d5cbf7">weave::StoryWriter</a>
 </li>
+<li>resolveAdditionalPlaceholders()
+: <a class="el" href="classweave_1_1_quest_template.html#a17b960431e9f78e41183942ed06ef9da">weave::QuestTemplate</a>
+</li>
 </ul>
 
 
@@ -443,17 +488,20 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>Serialize()
 : <a class="el" href="classweave_1_1_quest_weaver.html#af4faa60c735a47c941bf42d0948e026f">weave::QuestWeaver</a>
 </li>
+<li>Set()
+: <a class="el" href="classweave_1_1_logger.html#ae1b136e2dab1a3bacb6f73d29311f31f">weave::Logger</a>
+</li>
 <li>SetValue()
 : <a class="el" href="classweave_1_1_meta_data.html#af24eb20bba3f5e45bdd4483a8d15ae77">weave::MetaData</a>
 </li>
-<li>StoryLine()
-: <a class="el" href="classweave_1_1_story_line.html#a8c353809fdf0a738dc198b7993f78895">weave::StoryLine</a>
-</li>
 <li>StoryTemplate()
-: <a class="el" href="classweave_1_1_story_template.html#af95f029ea2dcac5289cdf28cb5224acd">weave::StoryTemplate</a>
+: <a class="el" href="classweave_1_1_story_template.html#aa07e9d97c7dc65f8ff56983761a1ed4b">weave::StoryTemplate</a>
 </li>
 <li>StoryWriter()
-: <a class="el" href="classweave_1_1_story_writer.html#a576db909456e13434158a73dd8984525">weave::StoryWriter</a>
+: <a class="el" href="classweave_1_1_story_writer.html#a601f51b8dba30ebf735dc075eb48b0c4">weave::StoryWriter</a>
+</li>
+<li>StoryWriterParameters()
+: <a class="el" href="classweave_1_1_story_writer_parameters.html#a07a743832af7dda8fa05c41b491993ac">weave::StoryWriterParameters</a>
 </li>
 <li>SupportsConditions()
 : <a class="el" href="classweave_1_1_template_quest_description.html#a9ea8737570094ff036be0611ca51f105">weave::TemplateQuestDescription</a>
@@ -465,18 +513,15 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>TemplateQuestDescription()
 : <a class="el" href="classweave_1_1_template_quest_description.html#ab33b126b6edaa4cabb0faa28d47039f3">weave::TemplateQuestDescription</a>
 </li>
-<li>TemplateQuestProperty()
-: <a class="el" href="classweave_1_1_template_quest_property.html#a1e19644f63241bde2e8d149dedf2c744">weave::TemplateQuestProperty</a>
-</li>
 <li>Tick()
-: <a class="el" href="classweave_1_1_quest.html#ab4bfc74338b54f1040131ce15fa9a5c4">weave::Quest</a>
+: <a class="el" href="classweave_1_1_quest.html#a54d0a1729afdf2ff1852fb4223ffa688">weave::Quest</a>
 , <a class="el" href="classweave_1_1_quest_weaver.html#aa775638812718cc59edd6debbc32d70e">weave::QuestWeaver</a>
 </li>
 <li>ToQuest()
-: <a class="el" href="classweave_1_1_quest_template.html#a556324c0c9e0d63c11892285217adf92">weave::QuestTemplate</a>
+: <a class="el" href="classweave_1_1_quest_template.html#a0ff2d2dffbba8ee4190562b874562980">weave::QuestTemplate</a>
 </li>
 <li>ToString()
-: <a class="el" href="classweave_1_1_world_entity.html#a3bb626fcd882f4327ba39c924efd0608">weave::WorldEntity</a>
+: <a class="el" href="classweave_1_1_world_entity.html#aded54f9f13f5ce7c59d42af53aba4ad0">weave::WorldEntity</a>
 </li>
 </ul>
 

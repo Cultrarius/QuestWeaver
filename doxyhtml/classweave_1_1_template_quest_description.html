@@ -30,6 +30,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="favicon.ico"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">QuestWeaver
    </div>
@@ -126,7 +127,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab33b126b6edaa4cabb0faa28d47039f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new description that is valid for the given conditions.  <a href="#ab33b126b6edaa4cabb0faa28d47039f3">More...</a><br /></td></tr>
 <tr class="separator:ab33b126b6edaa4cabb0faa28d47039f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae09432b0b5889472ff386706bdcb28bf"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_template_quest_description.html#ae09432b0b5889472ff386706bdcb28bf">GetText</a> (<a class="el" href="group__main_api.html#gac4254b88961d333d4dd8189d11168576">FormatterType</a> format) const  noexcept</td></tr>
-<tr class="memdesc:ae09432b0b5889472ff386706bdcb28bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the description text containing placeholders for the corresponding <a class="el" href="classweave_1_1_quest_property_value.html" title="Data container linking quest templates and world entities. ">QuestPropertyValue</a>.  <a href="#ae09432b0b5889472ff386706bdcb28bf">More...</a><br /></td></tr>
+<tr class="memdesc:ae09432b0b5889472ff386706bdcb28bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the description text containing placeholders for the corresponding QuestPropertyValue.  <a href="#ae09432b0b5889472ff386706bdcb28bf">More...</a><br /></td></tr>
 <tr class="separator:ae09432b0b5889472ff386706bdcb28bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ea8737570094ff036be0611ca51f105"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_template_quest_description.html#a9ea8737570094ff036be0611ca51f105">SupportsConditions</a> (const std::vector&lt; std::string &gt; &amp;conditions) const  noexcept</td></tr>
 <tr class="memdesc:a9ea8737570094ff036be0611ca51f105"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if this description text can be constructed under the given conditions.  <a href="#a9ea8737570094ff036be0611ca51f105">More...</a><br /></td></tr>
@@ -136,7 +137,7 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Wraps the quest description texts for the <a class="el" href="classweave_1_1_quest_template.html" title="Defines a blueprint from which a specific type of quest can be generated. ">QuestTemplate</a>. </p>
 <p>Contains a text from the template files and the required conditions for the text to appear. </p>
 
-<p>Definition at line <a class="el" href="_quest_template_8h_source.html#l00091">91</a> of file <a class="el" href="_quest_template_8h_source.html">QuestTemplate.h</a>.</p>
+<p>Definition at line <a class="el" href="_quest_template_8h_source.html#l00039">39</a> of file <a class="el" href="_quest_template_8h_source.html">QuestTemplate.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ab33b126b6edaa4cabb0faa28d47039f3"></a>
 <div class="memitem">
@@ -173,8 +174,8 @@ Public Member Functions</h2></td></tr>
 <p>Creates a new description that is valid for the given conditions. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">conditions</td><td>The names of the <a class="el" href="classweave_1_1_template_quest_property.html" title="Marks parts of a quest template that represent a WorldEntity. ">TemplateQuestProperty</a> values required for the description to be used. </td></tr>
-    <tr><td class="paramname">text</td><td>the description text containing placeholders for the conditions. A placeholder is a string with a leading %-sign. When the quest is created, each placeholder will be substituted with the corresponding <a class="el" href="classweave_1_1_quest_property_value.html" title="Data container linking quest templates and world entities. ">QuestPropertyValue</a>. </td></tr>
+    <tr><td class="paramname">conditions</td><td>The names of the TemplateQuestProperty values required for the description to be used. </td></tr>
+    <tr><td class="paramname">text</td><td>the description text containing placeholders for the conditions. A placeholder is a string with a leading %-sign. When the quest is created, each placeholder will be substituted with the corresponding QuestPropertyValue. </td></tr>
   </table>
   </dd>
 </dl>
@@ -204,7 +205,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the description text containing placeholders for the corresponding <a class="el" href="classweave_1_1_quest_property_value.html" title="Data container linking quest templates and world entities. ">QuestPropertyValue</a>. </p>
+<p>Returns the description text containing placeholders for the corresponding QuestPropertyValue. </p>
 
 </div>
 </div>

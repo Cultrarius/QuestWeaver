@@ -30,6 +30,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="favicon.ico"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">QuestWeaver
    </div>
@@ -115,16 +116,17 @@ $(document).ready(function(){initNavTree('classweave_1_1_world_model.html','');}
 <p>This is the complete list of members for <a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a>, including all inherited members.</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_world_model.html#a016db34fff7afb9b9ee4b92c1c6276a6">AddListener</a>(std::shared_ptr&lt; WorldListener &gt; listener) const  noexcept</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classweave_1_1_world_model.html#ae253815949de9f4245981abe85cacf60">empty</a>()=0</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_world_model.html#ac6d0b765c31b71a2b15094a82d07611e">Execute</a>(std::vector&lt; WorldModelAction &gt; modelActions)</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classweave_1_1_world_model.html#a8fa0059ec9e140b6dde4bbb89114f7f3">GetEntities</a>() const  noexcept</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classweave_1_1_world_model.html#ac6d0b765c31b71a2b15094a82d07611e">Execute</a>(std::vector&lt; WorldModelAction &gt; modelActions)</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_world_model.html#a8fa0059ec9e140b6dde4bbb89114f7f3">GetEntities</a>() const  noexcept</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classweave_1_1_world_model.html#a7bf17825674a37194ab529d1307b519b">GetEntitiesWithType</a>(std::string type) const  noexcept</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_world_model.html#ade56a1703b0ae6339c4f659a754181a9">GetEntityById</a>(ID id) const  noexcept</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classweave_1_1_world_model.html#abd3b2abb2852dfcb49f4d58a1b715056">GetHistory</a>() const  noexcept</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_world_model.html#aaf555d96ffb6e22998eed0bbd742eb8f">GetMetaData</a>(ID entityId) const  noexcept</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classweave_1_1_world_model.html#a6a46e2a213fd9a4dd78c38aee2739e0d">GetMetaDataHistoryForId</a>(ID id) const  noexcept</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_world_model.html#a955eb5571b0e84f6b775a5be355e1de0">rs</a></td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classweave_1_1_world_model.html#ab429d42838c87fd59308df8ede0233a5">WorldModel</a>() noexcept</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_world_model.html#a3fd5534db94e8eb046062fcaa1df091a">~WorldModel</a>()=default</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_world_model.html#ac33f0db5e2a412f52e38e459fd23099f">GetNameGenerator</a>() const  =0</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classweave_1_1_world_model.html#a955eb5571b0e84f6b775a5be355e1de0">rs</a></td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_world_model.html#ab429d42838c87fd59308df8ede0233a5">WorldModel</a>() noexcept</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classweave_1_1_world_model.html#a3fd5534db94e8eb046062fcaa1df091a">~WorldModel</a>()=default</td><td class="entry"><a class="el" href="classweave_1_1_world_model.html">weave::WorldModel</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

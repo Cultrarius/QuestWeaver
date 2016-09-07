@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['formattertype',['formatterType',['../structweave_1_1_weaver_config.html#af6f58da6f948e6460a3e6d5050e84ef9',1,'weave::WeaverConfig::formatterType()'],['../classweave_1_1_quest_template_factory.html#a55824bdb9c3f9c65910c13463d7f3b36',1,'weave::QuestTemplateFactory::formatterType()']]]
+  ['eatsnonfatalexceptions',['EatsNonFatalExceptions',['../classweave_1_1_logger.html#aca5ca0f013f7027869cd90826d891611',1,'weave::Logger']]]
 ];

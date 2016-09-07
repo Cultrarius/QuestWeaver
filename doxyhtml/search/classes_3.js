@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['metadata',['MetaData',['../classweave_1_1_meta_data.html',1,'weave']]]
+  ['logger',['Logger',['../classweave_1_1_logger.html',1,'weave']]]
 ];

@@ -1,7 +1,11 @@
 <map id="include/World/WorldListener.h" name="include/World/WorldListener.h">
-<area shape="rect" id="node2" href="$_quest_weaver_8h.html" title="include/QuestWeaver.h" alt="" coords="24,393,183,420"/>
-<area shape="rect" id="node3" href="$_world_model_8h.html" title="include/World/WorldModel.h" alt="" coords="76,80,261,107"/>
-<area shape="rect" id="node4" href="$_weaver_config_8h.html" title="include/WeaverConfig.h" alt="" coords="141,319,303,345"/>
-<area shape="rect" id="node5" href="$_quest_template_8h.html" title="include/Template/QuestTemplate.h" alt="" coords="197,155,423,181"/>
-<area shape="rect" id="node6" href="$_quest_template_factory_8h.html" title="include/Template/QuestTemplate\lFactory.h" alt="" coords="200,229,415,271"/>
+<area shape="rect" id="node2" href="$_quest_weaver_8h.html" title="include/QuestWeaver.h" alt="" coords="89,497,247,524"/>
+<area shape="rect" id="node3" href="$_world_model_8h.html" title="include/World/WorldModel.h" alt="" coords="237,80,422,107"/>
+<area shape="rect" id="node4" href="$_weaver_config_8h.html" title="include/WeaverConfig.h" alt="" coords="199,423,361,449"/>
+<area shape="rect" id="node5" href="$_quest_8h.html" title="include/QuestModel\l/Quest.h" alt="" coords="129,155,266,196"/>
+<area shape="rect" id="node6" href="$_quest_template_8h.html" title="include/Template/QuestTemplate.h" alt="" coords="93,251,318,278"/>
+<area shape="rect" id="node8" href="$_story_template_8h.html" title="include/Story/StoryTemplate.h" alt="" coords="391,162,590,189"/>
+<area shape="rect" id="node7" href="$_quest_template_factory_8h.html" title="include/Template/QuestTemplate\lFactory.h" alt="" coords="99,333,314,375"/>
+<area shape="rect" id="node9" href="$_story_template_factory_8h.html" title="include/Story/StoryTemplate\lFactory.h" alt="" coords="397,244,584,285"/>
+<area shape="rect" id="node10" href="$_story_writer_8h.html" title="include/Story/StoryWriter.h" alt="" coords="441,341,620,367"/>
 </map>

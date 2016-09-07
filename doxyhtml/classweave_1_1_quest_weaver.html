@@ -30,6 +30,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="favicon.ico"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">QuestWeaver
    </div>
@@ -108,6 +109,7 @@ $(document).ready(function(){initNavTree('classweave_1_1_quest_weaver.html','');
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classweave_1_1_quest_weaver-members.html">List of all members</a>  </div>
@@ -132,9 +134,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a01debc9fab30def40cf00fc41a303fe5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a01debc9fab30def40cf00fc41a303fe5">ChangeWorkingDirectories</a> (<a class="el" href="structweave_1_1_directories.html">Directories</a> directories)</td></tr>
 <tr class="memdesc:a01debc9fab30def40cf00fc41a303fe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the directories used by the quest system to load files such as templates.  <a href="#a01debc9fab30def40cf00fc41a303fe5">More...</a><br /></td></tr>
 <tr class="separator:a01debc9fab30def40cf00fc41a303fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4cc3f1ed3b13738547b298ad4f6856a"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest.html">Quest</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#ab4cc3f1ed3b13738547b298ad4f6856a">CreateNewQuest</a> ()</td></tr>
-<tr class="memdesc:ab4cc3f1ed3b13738547b298ad4f6856a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new quest.  <a href="#ab4cc3f1ed3b13738547b298ad4f6856a">More...</a><br /></td></tr>
-<tr class="separator:ab4cc3f1ed3b13738547b298ad4f6856a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fcdc0bfa19c6ca8e2a2fec2366c5a11"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest.html">Quest</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a0fcdc0bfa19c6ca8e2a2fec2366c5a11">CreateNewQuests</a> ()</td></tr>
+<tr class="memdesc:a0fcdc0bfa19c6ca8e2a2fec2366c5a11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates at least one new quest.  <a href="#a0fcdc0bfa19c6ca8e2a2fec2366c5a11">More...</a><br /></td></tr>
+<tr class="separator:a0fcdc0bfa19c6ca8e2a2fec2366c5a11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae039124d0b281e8d5722282271e516c1"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest.html">Quest</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#ae039124d0b281e8d5722282271e516c1">GetAllQuests</a> () const </td></tr>
 <tr class="memdesc:ae039124d0b281e8d5722282271e516c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of all quests.  <a href="#ae039124d0b281e8d5722282271e516c1">More...</a><br /></td></tr>
 <tr class="separator:ae039124d0b281e8d5722282271e516c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,9 +146,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1260b729344e6e3bfe0a7911665ff8af"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_quest.html">Quest</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a1260b729344e6e3bfe0a7911665ff8af">GetQuestsWithState</a> (<a class="el" href="group__quest_api.html#gafa0e9cd4efa7f2671317618cf3d9b479">QuestState</a> state) const </td></tr>
 <tr class="memdesc:a1260b729344e6e3bfe0a7911665ff8af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of all quests with the given state.  <a href="#a1260b729344e6e3bfe0a7911665ff8af">More...</a><br /></td></tr>
 <tr class="separator:a1260b729344e6e3bfe0a7911665ff8af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab66bd94d2b1c3851d3fd52db1945f9cd"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classweave_1_1_world_model.html">WorldModel</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#ab66bd94d2b1c3851d3fd52db1945f9cd">GetWorldModel</a> () const </td></tr>
-<tr class="memdesc:ab66bd94d2b1c3851d3fd52db1945f9cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an immutable reference to the world model.  <a href="#ab66bd94d2b1c3851d3fd52db1945f9cd">More...</a><br /></td></tr>
-<tr class="separator:ab66bd94d2b1c3851d3fd52db1945f9cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38a6eaa8dc12b08b9ec7869976fc619d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classweave_1_1_world_model.html">WorldModel</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a38a6eaa8dc12b08b9ec7869976fc619d">GetWorldModel</a> () const </td></tr>
+<tr class="memdesc:a38a6eaa8dc12b08b9ec7869976fc619d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a reference to the world model.  <a href="#a38a6eaa8dc12b08b9ec7869976fc619d">More...</a><br /></td></tr>
+<tr class="separator:a38a6eaa8dc12b08b9ec7869976fc619d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48d5c0dc8db3bfeef43dbefb0944b08b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_quest_weaver.html#a48d5c0dc8db3bfeef43dbefb0944b08b">RegisterQuestTemplateFactory</a> (std::unique_ptr&lt; <a class="el" href="classweave_1_1_quest_template_factory.html">QuestTemplateFactory</a> &gt; factory)</td></tr>
 <tr class="memdesc:a48d5c0dc8db3bfeef43dbefb0944b08b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a new quest template factory with the quest system.  <a href="#a48d5c0dc8db3bfeef43dbefb0944b08b">More...</a><br /></td></tr>
 <tr class="separator:a48d5c0dc8db3bfeef43dbefb0944b08b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -247,12 +249,12 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab4cc3f1ed3b13738547b298ad4f6856a"></a>
+<a class="anchor" id="a0fcdc0bfa19c6ca8e2a2fec2366c5a11"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classweave_1_1_quest.html">Quest</a>&gt; weave::QuestWeaver::CreateNewQuest </td>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classweave_1_1_quest.html">Quest</a>&gt; &gt; weave::QuestWeaver::CreateNewQuests </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -260,9 +262,9 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Creates a new quest. </p>
-<p>This node does not have any input because it is the responsibility of the quest weaver to decide which quest should be next. The previously registered template factories and the world model are used to create the quest.</p>
-<p>Once a quest is created, it is active in the world (and most likely already changed it). The caller of this API cannot decide to undo that or delete the quest, it can only change the state to a "completed" type. </p>
+<p>Creates at least one new quest. </p>
+<p>This node does not have any input because it is the responsibility of the quest weaver to decide which quest should be created next. The previously registered template factories and the world model are used to create the quest.</p>
+<p>Once a quest is created, it is active in the world (and most likely already started to change it). The caller of this API cannot decide to undo that or delete the quest, it can only change the state to a "completed" type. </p>
 
 </div>
 </div>
@@ -401,12 +403,12 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab66bd94d2b1c3851d3fd52db1945f9cd"></a>
+<a class="anchor" id="a38a6eaa8dc12b08b9ec7869976fc619d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classweave_1_1_world_model.html">WorldModel</a>&amp; weave::QuestWeaver::GetWorldModel </td>
+          <td class="memname"><a class="el" href="classweave_1_1_world_model.html">WorldModel</a>&amp; weave::QuestWeaver::GetWorldModel </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -414,8 +416,8 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns an immutable reference to the world model. </p>
-<p>To change the world model, use the <a class="el" href="classweave_1_1_quest_weaver.html#aa775638812718cc59edd6debbc32d70e" title="Advances the quest system state by ticking all quests and executing their desired world and quest cha...">Tick()</a> method which gathers changes from the quests.</p>
+<p>Returns a reference to the world model. </p>
+<p>To change the world model, you should consider to use the <a class="el" href="classweave_1_1_quest_weaver.html#aa775638812718cc59edd6debbc32d70e" title="Advances the quest system state by ticking all quests and executing their desired world and quest cha...">Tick()</a> method which gathers changes from the quests.</p>
 <p>After the quest system was deserialized, the world model listener has to be registered again. </p>
 
 </div>

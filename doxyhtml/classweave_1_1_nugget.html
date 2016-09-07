@@ -30,6 +30,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="favicon.ico"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">QuestWeaver
    </div>
@@ -121,14 +122,20 @@ $(document).ready(function(){initNavTree('classweave_1_1_nugget.html','');});
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a816bc33f20ae434a1612ef3957060b96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_nugget.html#a816bc33f20ae434a1612ef3957060b96">Nugget</a> ()=default</td></tr>
 <tr class="separator:a816bc33f20ae434a1612ef3957060b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad449e09cd4f74121c5d3b3b5298d37fb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_nugget.html#ad449e09cd4f74121c5d3b3b5298d37fb">Nugget</a> (std::string key, std::vector&lt; std::string &gt; requiredTypes, std::vector&lt; std::string &gt; texts)</td></tr>
-<tr class="separator:ad449e09cd4f74121c5d3b3b5298d37fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31574332414b0cc45882e467aa6d0a35"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_nugget.html#a31574332414b0cc45882e467aa6d0a35">GetKey</a> ()</td></tr>
-<tr class="separator:a31574332414b0cc45882e467aa6d0a35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5cca1480ec953d699a35d7611c89b8b8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_nugget.html#a5cca1480ec953d699a35d7611c89b8b8">GetRequiredTypes</a> ()</td></tr>
-<tr class="separator:a5cca1480ec953d699a35d7611c89b8b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7ab9775e47d528043aba784aec6c60d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_nugget.html#ab7ab9775e47d528043aba784aec6c60d">GetTexts</a> ()</td></tr>
-<tr class="separator:ab7ab9775e47d528043aba784aec6c60d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b11b277d8149a4939a7d43820ace629"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_nugget.html#a2b11b277d8149a4939a7d43820ace629">Nugget</a> (std::string key, float rarity, std::vector&lt; std::string &gt; requiredTypes, std::vector&lt; std::string &gt; texts, std::unordered_map&lt; std::string, int &gt; minValues, std::unordered_map&lt; std::string, int &gt; maxValues, std::unordered_map&lt; std::string, <a class="el" href="namespaceweave.html#a7bec14a14297b1cce21f4e4310b96371">NameType</a> &gt; randomNames)</td></tr>
+<tr class="separator:a2b11b277d8149a4939a7d43820ace629"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bc6d143560a95b4ba6dc93728bd7754"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_nugget.html#a1bc6d143560a95b4ba6dc93728bd7754">GetKey</a> () const  noexcept</td></tr>
+<tr class="separator:a1bc6d143560a95b4ba6dc93728bd7754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0e07fe9bf17a461a7d3fe62dc9f0d4c"><td class="memItemLeft" align="right" valign="top">std::set&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_nugget.html#aa0e07fe9bf17a461a7d3fe62dc9f0d4c">GetRandomizationKeys</a> () const  noexcept</td></tr>
+<tr class="separator:aa0e07fe9bf17a461a7d3fe62dc9f0d4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a926724eb6cf2e4b90d7d56da02ac6306"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_nugget.html#a926724eb6cf2e4b90d7d56da02ac6306">GetRandomValue</a> (std::string key, std::shared_ptr&lt; <a class="el" href="classweave_1_1_random_stream.html">RandomStream</a> &gt; stream, const <a class="el" href="classweave_1_1_name_generator.html">NameGenerator</a> &amp;nameGen) const  noexcept</td></tr>
+<tr class="separator:a926724eb6cf2e4b90d7d56da02ac6306"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a055a29d3672bfada84a6009967c07f44"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_nugget.html#a055a29d3672bfada84a6009967c07f44">GetRarity</a> () const  noexcept</td></tr>
+<tr class="separator:a055a29d3672bfada84a6009967c07f44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2861395ca27547aff7b6ca35a722992"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_nugget.html#ae2861395ca27547aff7b6ca35a722992">GetRequiredTypes</a> () const  noexcept</td></tr>
+<tr class="separator:ae2861395ca27547aff7b6ca35a722992"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bd5e30c103b8c28c3f22e32f29bd32f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_nugget.html#a3bd5e30c103b8c28c3f22e32f29bd32f">GetTexts</a> () const  noexcept</td></tr>
+<tr class="separator:a3bd5e30c103b8c28c3f22e32f29bd32f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -157,7 +164,7 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad449e09cd4f74121c5d3b3b5298d37fb"></a>
+<a class="anchor" id="a2b11b277d8149a4939a7d43820ace629"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -170,6 +177,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>rarity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
           <td class="paramname"><em>requiredTypes</em>, </td>
         </tr>
@@ -177,7 +190,25 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
-          <td class="paramname"><em>texts</em>&#160;</td>
+          <td class="paramname"><em>texts</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unordered_map&lt; std::string, int &gt;&#160;</td>
+          <td class="paramname"><em>minValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unordered_map&lt; std::string, int &gt;&#160;</td>
+          <td class="paramname"><em>maxValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unordered_map&lt; std::string, <a class="el" href="namespaceweave.html#a7bec14a14297b1cce21f4e4310b96371">NameType</a> &gt;&#160;</td>
+          <td class="paramname"><em>randomNames</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -190,47 +221,157 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a31574332414b0cc45882e467aa6d0a35"></a>
+<a class="anchor" id="a1bc6d143560a95b4ba6dc93728bd7754"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">std::string weave::Nugget::GetKey </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a5cca1480ec953d699a35d7611c89b8b8"></a>
+<a class="anchor" id="aa0e07fe9bf17a461a7d3fe62dc9f0d4c"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::set&lt;std::string&gt; weave::Nugget::GetRandomizationKeys </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a926724eb6cf2e4b90d7d56da02ac6306"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string weave::Nugget::GetRandomValue </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classweave_1_1_random_stream.html">RandomStream</a> &gt;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classweave_1_1_name_generator.html">NameGenerator</a> &amp;&#160;</td>
+          <td class="paramname"><em>nameGen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a055a29d3672bfada84a6009967c07f44"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float weave::Nugget::GetRarity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae2861395ca27547aff7b6ca35a722992"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">std::vector&lt;std::string&gt; weave::Nugget::GetRequiredTypes </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="ab7ab9775e47d528043aba784aec6c60d"></a>
+<a class="anchor" id="a3bd5e30c103b8c28c3f22e32f29bd32f"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">std::vector&lt;std::string&gt; weave::Nugget::GetTexts </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

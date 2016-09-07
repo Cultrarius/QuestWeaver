@@ -30,6 +30,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="favicon.ico"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">QuestWeaver
    </div>
@@ -109,7 +110,6 @@ $(document).ready(function(){initNavTree('classweave_1_1_world_model.html','');}
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classweave_1_1_world_model-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -138,6 +138,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8fa0059ec9e140b6dde4bbb89114f7f3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_world_entity.html">WorldEntity</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#a8fa0059ec9e140b6dde4bbb89114f7f3">GetEntities</a> () const  noexcept</td></tr>
 <tr class="memdesc:a8fa0059ec9e140b6dde4bbb89114f7f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of all entities known to this world model.  <a href="#a8fa0059ec9e140b6dde4bbb89114f7f3">More...</a><br /></td></tr>
 <tr class="separator:a8fa0059ec9e140b6dde4bbb89114f7f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bf17825674a37194ab529d1307b519b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classweave_1_1_world_entity.html">WorldEntity</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#a7bf17825674a37194ab529d1307b519b">GetEntitiesWithType</a> (std::string type) const  noexcept</td></tr>
+<tr class="memdesc:a7bf17825674a37194ab529d1307b519b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns all entities with a given type.  <a href="#a7bf17825674a37194ab529d1307b519b">More...</a><br /></td></tr>
+<tr class="separator:a7bf17825674a37194ab529d1307b519b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade56a1703b0ae6339c4f659a754181a9"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classweave_1_1_world_entity.html">WorldEntity</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#ade56a1703b0ae6339c4f659a754181a9">GetEntityById</a> (<a class="el" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a> id) const  noexcept</td></tr>
 <tr class="memdesc:ade56a1703b0ae6339c4f659a754181a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the entity for a given ID, or a nullptr if no such entity is known.  <a href="#ade56a1703b0ae6339c4f659a754181a9">More...</a><br /></td></tr>
 <tr class="separator:ade56a1703b0ae6339c4f659a754181a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,12 +153,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6a46e2a213fd9a4dd78c38aee2739e0d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classweave_1_1_world_model_action.html">WorldModelAction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#a6a46e2a213fd9a4dd78c38aee2739e0d">GetMetaDataHistoryForId</a> (<a class="el" href="group__main_api.html#gad16585a767748e749a3389c77b0e5c76">ID</a> id) const  noexcept</td></tr>
 <tr class="memdesc:a6a46e2a213fd9a4dd78c38aee2739e0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of all actions that changed the metadata of the entity with the given ID.  <a href="#a6a46e2a213fd9a4dd78c38aee2739e0d">More...</a><br /></td></tr>
 <tr class="separator:a6a46e2a213fd9a4dd78c38aee2739e0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:ae253815949de9f4245981abe85cacf60"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#ae253815949de9f4245981abe85cacf60">empty</a> ()=0</td></tr>
-<tr class="memdesc:ae253815949de9f4245981abe85cacf60"><td class="mdescLeft">&#160;</td><td class="mdescRight">So the class is abstract, needed for serialization.  <a href="#ae253815949de9f4245981abe85cacf60">More...</a><br /></td></tr>
-<tr class="separator:ae253815949de9f4245981abe85cacf60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac33f0db5e2a412f52e38e459fd23099f"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classweave_1_1_name_generator.html">NameGenerator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_world_model.html#ac33f0db5e2a412f52e38e459fd23099f">GetNameGenerator</a> () const  =0</td></tr>
+<tr class="memdesc:ac33f0db5e2a412f52e38e459fd23099f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name generator used to create the names of world entities and story elements.  <a href="#ac33f0db5e2a412f52e38e459fd23099f">More...</a><br /></td></tr>
+<tr class="separator:ac33f0db5e2a412f52e38e459fd23099f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -246,31 +246,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae253815949de9f4245981abe85cacf60"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void weave::WorldModel::empty </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>So the class is abstract, needed for serialization. </p>
-
-</div>
-</div>
 <a class="anchor" id="ac6d0b765c31b71a2b15094a82d07611e"></a>
 <div class="memitem">
 <div class="memproto">
@@ -322,6 +297,32 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a7bf17825674a37194ab529d1307b519b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classweave_1_1_world_entity.html">WorldEntity</a>&gt; &gt; weave::WorldModel::GetEntitiesWithType </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns all entities with a given type. </p>
+
+</div>
+</div>
 <a class="anchor" id="ade56a1703b0ae6339c4f659a754181a9"></a>
 <div class="memitem">
 <div class="memproto">
@@ -370,7 +371,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the action history of all actions executed by this world model. </p>
-<p>If this history is executed on an empty world model, it should be a copy of the current model. </p>
+<p>If this history is executed on an empty world model, it should result in a copy of the current model. </p>
 
 </div>
 </div>
@@ -428,6 +429,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ac33f0db5e2a412f52e38e459fd23099f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const <a class="el" href="classweave_1_1_name_generator.html">NameGenerator</a>&amp; weave::WorldModel::GetNameGenerator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The name generator used to create the names of world entities and story elements. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a class="anchor" id="a955eb5571b0e84f6b775a5be355e1de0"></a>
 <div class="memitem">
@@ -449,7 +475,7 @@ Protected Attributes</h2></td></tr>
 
 <p>The random stream can be used by subclasses to create randomized entities. </p>
 
-<p>Definition at line <a class="el" href="_world_model_8h_source.html#l00090">90</a> of file <a class="el" href="_world_model_8h_source.html">WorldModel.h</a>.</p>
+<p>Definition at line <a class="el" href="_world_model_8h_source.html#l00101">101</a> of file <a class="el" href="_world_model_8h_source.html">WorldModel.h</a>.</p>
 
 </div>
 </div>

@@ -30,6 +30,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="favicon.ico"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">QuestWeaver
    </div>
@@ -106,24 +107,30 @@ $(document).ready(function(){initNavTree('_story_template_8h.html','');});
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">StoryTemplate.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="_weaver_types_8h_source.html">Core/WeaverTypes.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="_story_line_8h_source.html">Story/StoryLine.h</a>&gt;</code><br />
 <code>#include &lt;Core/Graph/WeaverGraph.h&gt;</code><br />
 <code>#include &lt;<a class="el" href="_world_entity_8h_source.html">World/WorldEntity.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="_world_model_action_8h_source.html">World/WorldModelAction.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="_world_model_8h_source.html">World/WorldModel.h</a>&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for StoryTemplate.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="_story_template_8h__incl.png" border="0" usemap="#include_2_story_2_story_template_8h" alt=""/></div>
 <map name="include_2_story_2_story_template_8h" id="include_2_story_2_story_template_8h">
-<area shape="rect" id="node2" href="_weaver_types_8h.html" title="Core/WeaverTypes.h" alt="" coords="29,229,176,256"/>
-<area shape="rect" id="node5" href="_story_line_8h.html" title="Story/StoryLine.h" alt="" coords="28,80,150,107"/>
-<area shape="rect" id="node8" href="_world_entity_8h.html" title="World/WorldEntity.h" alt="" coords="382,80,521,107"/>
-<area shape="rect" id="node6" href="_nugget_8h.html" title="Nugget.h" alt="" coords="102,155,177,181"/>
+<area shape="rect" id="node2" href="_weaver_types_8h.html" title="Core/WeaverTypes.h" alt="" coords="49,468,196,495"/>
+<area shape="rect" id="node6" href="_world_entity_8h.html" title="World/WorldEntity.h" alt="" coords="304,304,442,331"/>
+<area shape="rect" id="node8" href="_world_model_action_8h.html" title="World/WorldModelAction.h" alt="" coords="442,229,619,256"/>
+<area shape="rect" id="node49" href="_world_model_8h.html" title="World/WorldModel.h" alt="" coords="488,80,628,107"/>
+<area shape="rect" id="node10" href="_meta_data_8h.html" title="MetaData.h" alt="" coords="568,304,658,331"/>
+<area shape="rect" id="node11" href="_weaver_utils_8h.html" title="../Core/WeaverUtils.h" alt="" coords="2870,379,3020,405"/>
+<area shape="rect" id="node50" href="_world_listener_8h.html" title="WorldListener.h" alt="" coords="455,155,568,181"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -142,15 +149,33 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structweave_1_1_raw_story_line.html">weave::RawStoryLine</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_nugget_option.html">weave::NuggetOption</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structweave_1_1_raw_story_token.html">weave::RawStoryToken</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweave_1_1_story_template.html">weave::StoryTemplate</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structweave_1_1_story_template_result.html">weave::StoryTemplateResult</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceweave"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceweave.html">weave</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:aa7f65a852d14b238912a3b83389a8d4a"><td class="memItemLeft" align="right" valign="top">typedef std::unordered_map&lt; std::string, std::vector&lt; std::shared_ptr&lt; WorldEntity &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceweave.html#aa7f65a852d14b238912a3b83389a8d4a">weave::EntityMap</a></td></tr>
+<tr class="separator:aa7f65a852d14b238912a3b83389a8d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a22981b1aa5ba3f436419fdddde2215"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; std::pair&lt; RawStoryToken, std::vector&lt; ID &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceweave.html#a2a22981b1aa5ba3f436419fdddde2215">weave::TokenMapping</a></td></tr>
+<tr class="separator:a2a22981b1aa5ba3f436419fdddde2215"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e61e365ab059f38f523aa875118b735"><td class="memItemLeft" align="right" valign="top">typedef std::unordered_map&lt; std::string, std::vector&lt; ID &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceweave.html#a7e61e365ab059f38f523aa875118b735">weave::TokenToEntityMap</a></td></tr>
+<tr class="separator:a7e61e365ab059f38f523aa875118b735"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:af6cc908c384b5475079607dcb2fe6ce0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; RawStoryToken &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceweave.html#af6cc908c384b5475079607dcb2fe6ce0">weave::getStoryTokens</a> (std::string rawStoryText) noexcept</td></tr>
+<tr class="separator:af6cc908c384b5475079607dcb2fe6ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

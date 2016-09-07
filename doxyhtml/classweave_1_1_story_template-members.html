@@ -30,6 +30,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="favicon.ico"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">QuestWeaver
    </div>
@@ -114,10 +115,14 @@ $(document).ready(function(){initNavTree('classweave_1_1_story_template.html',''
 
 <p>This is the complete list of members for <a class="el" href="classweave_1_1_story_template.html">weave::StoryTemplate</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_story_template.html#a94d0632bccbaeeede2b6d29c778a165d">CreateStory</a>(std::map&lt; std::string, std::vector&lt; std::shared_ptr&lt; WorldEntity &gt;&gt;&gt; requiredEntities, const WeaverGraph &amp;graph) const  =0</td><td class="entry"><a class="el" href="classweave_1_1_story_template.html">weave::StoryTemplate</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classweave_1_1_story_template.html#a750c4dc06058c4527ab4920a32152721">GetRequiredEntities</a>() const  =0</td><td class="entry"><a class="el" href="classweave_1_1_story_template.html">weave::StoryTemplate</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_story_template.html#acaa85ff0fc18f1a62eb7f06aab1e7749">rawLines</a></td><td class="entry"><a class="el" href="classweave_1_1_story_template.html">weave::StoryTemplate</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classweave_1_1_story_template.html#af95f029ea2dcac5289cdf28cb5224acd">StoryTemplate</a>(std::vector&lt; RawStoryLine &gt; rawStoryLines)</td><td class="entry"><a class="el" href="classweave_1_1_story_template.html">weave::StoryTemplate</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_story_template.html#a24cd4a14afa2872de2a62a08f584a07b">CreateStory</a>(const EntityMap &amp;requiredEntities, const WeaverGraph &amp;graph, const WorldModel &amp;worldModel) const  =0</td><td class="entry"><a class="el" href="classweave_1_1_story_template.html">weave::StoryTemplate</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classweave_1_1_story_template.html#a80f0a9599faa983c97cd16059fb75d05">createTokenMapping</a>(const TokenToEntityMap &amp;idsPerToken) const </td><td class="entry"><a class="el" href="classweave_1_1_story_template.html">weave::StoryTemplate</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_story_template.html#abc3f39444ea9c2d52a63706fd3c0771e">GetRequiredEntities</a>() const  noexcept</td><td class="entry"><a class="el" href="classweave_1_1_story_template.html">weave::StoryTemplate</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classweave_1_1_story_template.html#ac180b3a2ca0986d1045d6acd5c63f7fc">IsValid</a>(const EntityMap &amp;requiredEntities, const WeaverGraph &amp;graph, const WorldModel &amp;worldModel) const </td><td class="entry"><a class="el" href="classweave_1_1_story_template.html">weave::StoryTemplate</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_story_template.html#a10bdc0fc33d9a00b43d9a15d031bf57d">rawText</a></td><td class="entry"><a class="el" href="classweave_1_1_story_template.html">weave::StoryTemplate</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classweave_1_1_story_template.html#aaa4f258c475e80b3beaa60aab4cb6f4f">requiredEntities</a></td><td class="entry"><a class="el" href="classweave_1_1_story_template.html">weave::StoryTemplate</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_story_template.html#aa07e9d97c7dc65f8ff56983761a1ed4b">StoryTemplate</a>(std::string rawText, std::set&lt; std::string &gt; requiredEntities) noexcept</td><td class="entry"><a class="el" href="classweave_1_1_story_template.html">weave::StoryTemplate</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classweave_1_1_story_template.html#a9db441590bc959df3e8fc67dbc501148">tokenCache</a></td><td class="entry"><a class="el" href="classweave_1_1_story_template.html">weave::StoryTemplate</a></td><td class="entry"><span class="mlabel">mutable</span><span class="mlabel">protected</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classweave_1_1_story_template.html#a458caebee482b44e8064e16f5d898310">~StoryTemplate</a>()=default</td><td class="entry"><a class="el" href="classweave_1_1_story_template.html">weave::StoryTemplate</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
