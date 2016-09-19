@@ -24,6 +24,10 @@ namespace weave {
      */
     class QuestTemplateFactory {
     public:
+        QuestTemplateFactory() = default;
+
+        QuestTemplateFactory(QuestTemplateFactory &&) = default;
+        
         virtual ~QuestTemplateFactory() = default;
 
         /*!
@@ -76,6 +80,8 @@ namespace weave {
         FormatterType formatterType;
 
     private:
+        QuestTemplateFactory(const QuestTemplateFactory&) = delete;
+
         friend class TemplateEngine;
 
         bool isInitialized = false;
