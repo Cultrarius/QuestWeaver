@@ -19,9 +19,9 @@ using namespace std;
 using namespace weave;
 
 WorldModelAction SpaceWorldModel::CreateLocation() const {
-    int x = rs->GetNormalIntInRange(-param.maxLocation, param.maxLocation);
-    int y = rs->GetNormalIntInRange(-param.maxLocation, param.maxLocation);
-    int z = rs->GetNormalIntInRange(-param.maxLocation, param.maxLocation);
+    int x = rs->GetIntInRange(-param.maxLocation, param.maxLocation);
+    int y = rs->GetIntInRange(-param.maxLocation, param.maxLocation);
+    int z = rs->GetIntInRange(-param.maxLocation, param.maxLocation);
     return WorldModelAction(WorldActionType::CREATE, make_shared<SpaceLocation>(x, y, z));
 }
 

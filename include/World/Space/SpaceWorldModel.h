@@ -13,7 +13,6 @@
 
 namespace weave {
     struct ModelParameters {
-        int minLocation = 0;
         int maxLocation = 1000;
         int minPlanets = 1;
         int maxPlanets = 8;
@@ -32,7 +31,8 @@ namespace weave {
 
         template<class Archive>
         void serialize(Archive &ar) {
-            ar(CEREAL_NVP(minLocation), CEREAL_NVP(maxLocation));
+            ar(CEREAL_NVP(maxLocation), CEREAL_NVP(minPlanets), CEREAL_NVP(maxPlanets),
+                CEREAL_NVP(planetDistanceBase), CEREAL_NVP(planetDistanceAverage), CEREAL_NVP(planetDistanceVariation));
         }
     };
 
