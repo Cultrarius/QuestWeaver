@@ -5,12 +5,14 @@
 #pragma once
 
 #include <memory>
-#include "cereal.h"
 #include "WorldEntity.h"
 #include "MetaData.h"
 
 
 namespace weave {
+
+#pragma push_macro("DELETE")
+#undef DELETE
 
     /*!
      * The different types of possible world model changes.
@@ -18,12 +20,13 @@ namespace weave {
      * @ingroup worldApi
      */
     enum class WorldActionType {
-        //
-                KEEP, /*!< Keep the entity in the model without changing it */
-                CREATE, /*!< Register the entity with the model (requirement for any other action types) */
-                DELETE, /*!< Remove the entity from the model */
-                UPDATE /*!< Change the entity in the model */
+        KEEP,
+        CREATE,
+        DELETE,
+        UPDATE,
     };
+
+#pragma pop_macro("DELETE")
 
     /*!
      * Contains change information for a WorldModel entity.
