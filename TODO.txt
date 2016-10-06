@@ -1,6 +1,9 @@
 * More unit tests
 * support pictures (+variations) in quest descriptions and stories??
 
+* Conditions inside the story template file => make it easier to write stories!
+* Simple variations inside the nuggets
+
 ~QUEST IDEAS~
 Fight enemies
 Answer distress signal
@@ -9,3 +12,5 @@ Find information on dead civilization
 Find technical data for new blueprint
 Salvage research station
 Transport cargo
+
+~STORY IDEAS~
