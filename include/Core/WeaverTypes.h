@@ -121,9 +121,7 @@ namespace weave {
     private:
         static std::shared_ptr<Logger> sharedInstance;
 
-    public:
-        bool EatsNonFatalExceptions = false;
-
+    protected:
         virtual void error(const std::string &what) {
             std::cerr << "ERROR: " << what << std::endl;
         }
@@ -131,6 +129,9 @@ namespace weave {
         virtual void debug(const std::string &what) {
             std::cout << what << "\n";
         }
+
+    public:
+        bool EatsNonFatalExceptions = false;
 
         static void Error(const std::string &what) {
             if (sharedInstance) {
