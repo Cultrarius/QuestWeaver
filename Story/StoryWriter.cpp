@@ -2,6 +2,7 @@
 // Created by michael on 21.12.15.
 //
 
+#include <regex>
 #include <Story/StoryWriter.h>
 
 using namespace std;
@@ -323,6 +324,7 @@ map<float, Story> StoryWriter::createWeightedStories(
         storyValue += worldActionWeight * currentResult.worldActions.size();
 
         string story = templateResult.rawText;
+
         for (auto pair : templateResult.tokenMap) {
             RawStoryToken token = pair.first;
 
@@ -330,6 +332,7 @@ map<float, Story> StoryWriter::createWeightedStories(
             vector<NuggetOption> nuggetOptions;
             float minRarity = 0;
             for (string option : token.nuggetOptions) {
+                Logger::Debug("       Nugget option " + option);
                 nuggetOptions.push_back(NuggetOption(option, ids));
                 auto nuggetIter = nuggets.find(option);
                 if (nuggetIter != nuggets.end()) {
@@ -344,16 +347,23 @@ map<float, Story> StoryWriter::createWeightedStories(
                 continue;
             }
 
+            Logger::Debug("        Gathering supported nuggets");
             vector<NuggetOption> supportedNuggets = getSupportedNuggets(nuggetOptions);
             storyValue += nuggetWeight * supportedNuggets.size();
-            if (supportedNuggets.empty() && token.isMandatory) {
-                // the story is broken at this point, because none of the required nuggets are known!
-                storyValue = -1;
-                break;
+            if (supportedNuggets.empty()) {
+                if (token.isMandatory) {
+                    // the story is broken at this point, because none of the required nuggets are known!
+                    storyValue = -1;
+                    break;
+                }
+                Logger::Debug("        Jumping over optional token with no supported nuggets.");
+                continue;
             }
 
+            Logger::Debug("        Choose nugget by rarity");
             uint64_t nuggetIndex = getNuggetIndexByRarity(supportedNuggets);
             NuggetOption chosenOption = supportedNuggets[nuggetIndex];
+            Logger::Debug("        Chosen nugget:");
 
             // check previous quests for nugget entity matches
             unordered_set<ID> nuggetIDs;
@@ -375,9 +385,17 @@ map<float, Story> StoryWriter::createWeightedStories(
             }
 
             // place the nugget in the story
+            Logger::Debug("       Create formatted nugget text and place it in the story");
             string nuggetText = getNuggetText(questValues, chosenOption);
             replace(&story, token.text, nuggetText);
         }
+
+        regex spaces("[ \t\r]+");
+        story = regex_replace(story, spaces, " ");
+        regex trim("^\\s*([\\s\\S]+?)\\s*$");
+        story = regex_replace(story, trim, "$1");
+        regex newlines("\n\\s*\n\\s*\n");
+        story = regex_replace(story, newlines, "\n\n");
 
         if (templateEngine.GetFormat() == FormatterType::HTML) {
             replaceAll(&story, "\n", "<br/>\n");
