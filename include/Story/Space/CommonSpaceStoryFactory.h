@@ -17,7 +17,9 @@ namespace weave {
         }
 
     protected:
-        std::shared_ptr<StoryTemplate> createFromJsonValues(const Json::Value &root) const override;
+        std::shared_ptr<StoryTemplate> createFromJsonValues(const Json::Value &root, std::string key, std::string text,
+                                                            std::set<std::string> requiredTypes,
+                                                            std::set<StoryCondition> conditions) const override;
 
         const char *getTemplateFile() const override;
     };

@@ -195,7 +195,7 @@ TEST_CASE("Nuggets", "[story]") {
 
         // create a fitting story template factory
         writer.RegisterTemplateFactory(
-                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("1", requiredTypes)));
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("1")));
 
         // create a fitting graph node
         graph.CreateNodeGroup("test", true);
@@ -382,7 +382,7 @@ TEST_CASE("SpaceTemplates", "[story]") {
         auto result = writer.CreateStory(StoryWriterParameters(graph, values), "agentIntro");
         INFO(result.text);
         REQUIRE(result.text.length() > 90);
-        REQUIRE(result.worldActions[0].GetMetaData().HasValue("introStoryDone"));
+        REQUIRE(result.worldActions[0].GetMetaData().HasValue("agentIntro"));
     }
 
     SECTION("No double intro") {

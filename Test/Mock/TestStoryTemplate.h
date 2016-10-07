@@ -17,7 +17,8 @@ namespace weave {
         }
 
         StoryTemplateResult CreateStory(const EntityMap &entities, const WeaverGraph &,
-                                        const WorldModel &) const override {
+                                        const WorldModel &,
+                                        std::shared_ptr<RandomStream>) const override {
             TokenToEntityMap tokenEntityMap;
             for (auto token : getStoryTokens(rawText)) {
                 if (token.id.empty()) {

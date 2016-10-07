@@ -7,9 +7,11 @@
 #include <Story/StoryTemplate.h>
 
 namespace weave {
-    class AgentIntroStoryTemplate : public StoryTemplate {
+    class SimpleStoryTemplate : public StoryTemplate {
     public:
-        explicit AgentIntroStoryTemplate(std::string rawText) : StoryTemplate(rawText, {"agent"}) { }
+        SimpleStoryTemplate(std::string key, std::string rawText, std::set<std::string> requiredTypes,
+                            std::set<StoryCondition> conditions) :
+                StoryTemplate(rawText, requiredTypes), key(key), conditions(conditions) {}
 
         StoryTemplateResult CreateStory(const EntityMap &requiredEntities, const WeaverGraph &graph,
                                         const WorldModel &worldModel,
@@ -19,10 +21,12 @@ namespace weave {
                      const WorldModel &worldModel) const override;
 
     private:
-        std::string metaDataMarker = "introStoryDone";
+        std::string key;
+        std::set<StoryCondition> conditions;
 
         std::vector<std::shared_ptr<WorldEntity>> getValidEntities(const EntityMap &entityMap,
-                                                                   const WorldModel &worldModel) const;
+                                                                   const WorldModel &worldModel,
+                                                                   std::shared_ptr<RandomStream> randomStream) const;
     };
 
 }

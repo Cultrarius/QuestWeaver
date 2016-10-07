@@ -1,6 +1,7 @@
 [
   {
     "key": "shipIntro",
+    "type": "complex",
     "required": [
       "spaceShip"
     ],

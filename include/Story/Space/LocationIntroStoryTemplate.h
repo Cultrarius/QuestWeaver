@@ -12,7 +12,8 @@ namespace weave {
         explicit LocationIntroStoryTemplate(std::string rawText) : StoryTemplate(rawText, {"solarSystem"}) { }
 
         StoryTemplateResult CreateStory(const EntityMap &requiredEntities, const WeaverGraph &graph,
-                                        const WorldModel &worldModel) const override;
+                                        const WorldModel &worldModel,
+                                        std::shared_ptr<RandomStream> randomStream) const override;
 
         bool IsValid(const EntityMap &requiredEntities, const WeaverGraph &graph,
                      const WorldModel &worldModel) const override;

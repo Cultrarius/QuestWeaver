@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <regex>
 #include <Core/WeaverUtils.h>
 #include <Story/StoryTemplate.h>
 
@@ -20,11 +21,12 @@ namespace weave {
         virtual std::string GetNuggetFolder() const = 0;
 
     protected:
-        virtual std::shared_ptr<StoryTemplate> createFromJsonValues(const Json::Value &root) const = 0;
+        virtual std::shared_ptr<StoryTemplate>
+        createFromJsonValues(const Json::Value &root, std::string key, std::string text,
+                             std::set<std::string> requiredTypes,
+                             std::set<StoryCondition> conditions) const = 0;
 
         virtual const char *getTemplateFile() const = 0;
-
-        std::set<std::string> readRequired(const Json::Value &templateJson) const;
 
     private:
         friend class StoryWriter;

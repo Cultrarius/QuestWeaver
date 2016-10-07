@@ -14,6 +14,10 @@ namespace weave {
 
     typedef std::unordered_map<std::string, std::vector<std::shared_ptr<WorldEntity>>> EntityMap;
 
+    enum class StoryCondition {
+        OncePerEntity
+    };
+
     /*!
      * @ingroup storyApi
      */
@@ -74,7 +78,8 @@ namespace weave {
                              const WorldModel &worldModel) const;
 
         virtual StoryTemplateResult CreateStory(const EntityMap &requiredEntities, const WeaverGraph &graph,
-                                                const WorldModel &worldModel) const = 0;
+                                                const WorldModel &worldModel,
+                                                std::shared_ptr<RandomStream> randomStream) const = 0;
 
     protected:
         std::string rawText;

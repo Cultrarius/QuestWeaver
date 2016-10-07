@@ -38,13 +38,14 @@ namespace weave {
         bool TemplatesReturnInvalidIDs = false;
 
     protected:
-        std::shared_ptr<StoryTemplate> createFromJsonValues(const Json::Value &root) const override {
+        std::shared_ptr<StoryTemplate> createFromJsonValues(const Json::Value &, std::string, std::string text,
+                                                            std::set<std::string> requiredExtern,
+                                                            std::set<StoryCondition>) const override {
             std::shared_ptr<TestStoryTemplate> storyTemplate;
             if (templateFile.empty()) {
                 storyTemplate = std::make_shared<TestStoryTemplate>(requiredTypes, "", actions);
             } else {
-                storyTemplate = std::make_shared<TestStoryTemplate>(readRequired(root), root["text"].asString(),
-                                                                    actions);
+                storyTemplate = std::make_shared<TestStoryTemplate>(requiredExtern, text, actions);
             }
             storyTemplate->ReturnInvalidIDs = TemplatesReturnInvalidIDs;
             return storyTemplate;

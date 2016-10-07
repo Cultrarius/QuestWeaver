@@ -10,10 +10,11 @@
 
 using namespace std;
 using namespace weave;
+using namespace Json;
 
-shared_ptr<StoryTemplate> CommonSpaceStoryFactory::createFromJsonValues(const Json::Value &root) const {
-    string key = root["key"].asString();
-    string text = root["text"].asString();
+shared_ptr<StoryTemplate>
+CommonSpaceStoryFactory::createFromJsonValues(const Value &, string key, string text,
+                                              set<string>, set<StoryCondition>) const {
     if (key == "agentIntro") {
         return make_shared<AgentIntroStoryTemplate>(text);
     } else if (key == "locationIntro") {

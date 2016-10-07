@@ -9,7 +9,8 @@ using namespace weave;
 using namespace std;
 
 StoryTemplateResult LocationIntroStoryTemplate::CreateStory(const EntityMap &requiredEntities, const WeaverGraph &,
-                                                            const WorldModel &worldModel) const {
+                                                            const WorldModel &worldModel,
+                                                            shared_ptr<RandomStream>) const {
     auto entities = getValidEntities(requiredEntities, worldModel);
     if (entities.empty()) {
         Logger::Fatal("Invalid template call!");

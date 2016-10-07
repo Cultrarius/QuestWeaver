@@ -1,11 +1,13 @@
 [
   {
     "key": "simpleLine",
+    "type": "complex",
     "required": [],
     "text": "A. [nuggetB] C"
   },
   {
     "key": "entityLine",
+    "type": "complex",
     "required": [
       "TestEntityType"
     ],
@@ -13,6 +15,7 @@
   },
   {
     "key": "missingReplacement",
+    "type": "complex",
     "required": [
       "TestEntityType"
     ],
@@ -20,6 +23,7 @@
   },
   {
     "key": "wrongType",
+    "type": "complex",
     "required": [
       "TestEntityType"
     ],
@@ -27,21 +31,25 @@
   },
   {
     "key": "stringOnlyLines",
+    "type": "complex",
     "required": [],
     "text": "This is great! I really love this."
   },
   {
     "key": "unknownNugget",
+    "type": "complex",
     "required": [],
     "text": "X [thisIsSomeNugget] Z"
   },
   {
     "key": "wrongNuggetIds",
+    "type": "complex",
     "required": [],
     "text": "X [complexNugget] Z"
   },
   {
     "key": "wrongNuggetContent",
+    "type": "complex",
     "required": [
       "TestEntityType"
     ],

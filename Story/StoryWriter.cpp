@@ -319,7 +319,7 @@ map<float, Story> StoryWriter::createWeightedStories(
         Story currentResult;
 
         float storyValue = storyEntityWeight * storyTemplate->GetRequiredEntities().size();
-        auto templateResult = storyTemplate->CreateStory(requiredEntities, graph, worldModel);
+        auto templateResult = storyTemplate->CreateStory(requiredEntities, graph, worldModel, rs);
         currentResult.worldActions = move(templateResult.worldActions);
         storyValue += worldActionWeight * currentResult.worldActions.size();
 
