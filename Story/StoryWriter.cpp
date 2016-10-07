@@ -149,9 +149,9 @@ void StoryWriter::checkValidNuggetJson(Value root, string filePath) const {
         string requiredMembers[] = {"key", "requiredTypes", "texts"};
         for (string member : requiredMembers) {
             if (!nuggetJson.isMember(member)) {
-                string errorMessage = "Missing member in nugget file! MEMBER: <";
+                string errorMessage = "Missing member in nugget file! MEMBER: ";
                 errorMessage += member;
-                errorMessage += "> / FILE: ";
+                errorMessage += " / FILE: ";
                 errorMessage += filePath;
                 Logger::Fatal(errorMessage);
             }
@@ -432,7 +432,7 @@ string StoryWriter::getNuggetText(const QuestValueMap &questValues, const Nugget
     auto entityTypes = chosenNugget.GetRequiredTypes();
     auto entityIDs = chosenOption.GetEntityIDs();
     if (entityTypes.size() != entityIDs.size()) {
-        Logger::Fatal("Nugget parameter mismatch for key <" + chosenNugget.GetKey() + ">");
+        Logger::Fatal("Nugget parameter mismatch for key " + chosenNugget.GetKey());
     }
     for (uint64_t i = 0; i < entityIDs.size(); i++) {
         ID id = entityIDs[i];
@@ -440,7 +440,7 @@ string StoryWriter::getNuggetText(const QuestValueMap &questValues, const Nugget
         QuestPropertyValue questProperty = getQuestValueForID(questValues, id);
         string actualType = questProperty.GetValue()->GetType();
         if (requiredType != actualType) {
-            string error("Invalid types <" + requiredType + "> and <" + actualType + ">");
+            string error("Invalid types [" + requiredType + "] and [" + actualType + "]");
             Logger::Fatal(error);
         }
         string from = "%" + requiredType;
