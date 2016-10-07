@@ -2,9 +2,8 @@
   {
     "key": "shipIntro",
     "type": "complex",
-    "required": [
-      "spaceShip"
-    ],
+    "conditions": ["once per entity"],
+    "required": ["spaceShip"],
     "text": "[shipOriginOwner:shipAndOwner]"
   }
 ]
