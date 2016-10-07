@@ -42,11 +42,10 @@ set(SOURCE_FILES QuestWeaver.cpp Core/WeaverEngine.cpp Template/TemplateEngine.c
         Core/WeaverUtils.cpp World/Space/SpaceAgent.cpp World/Space/SolarSystem.cpp World/MetaData.cpp Core/Graph/WeaverGraph.cpp
         Core/Graph/Node.cpp Core/Graph/Edge.cpp Core/Graph/GraphAnalyzer.cpp QuestModel/QuestModelAction.cpp
         World/WorldListener.cpp Story/StoryWriter.cpp Story/StoryTemplateFactory.cpp Story/StoryTemplate.cpp
-        Story/Space/CommonSpaceStoryFactory.cpp Story/Nugget.cpp Story/Space/AgentIntroStoryTemplate.cpp
-        Story/Space/LocationIntroStoryTemplate.cpp World/Space/SpaceNameGenerator.cpp
+        Story/Space/CommonSpaceStoryFactory.cpp Story/Nugget.cpp World/Space/SpaceNameGenerator.cpp
         include/Core/NameGen/TokenNameGenerator.cpp World/Space/Planet.cpp World/Space/DeadCivilization.cpp
         Template/Space/ScanPlanetTemplate.cpp QuestModel/Space/ScanPlanetQuest.cpp Template/QuestPropertyValue.cpp
-        Story/Space/PlanetIntroStoryTemplate.cpp World/Space/Artifact.cpp World/Space/SpaceStation.cpp World/Space/SpaceWreck.cpp
+        World/Space/Artifact.cpp World/Space/SpaceStation.cpp World/Space/SpaceWreck.cpp
         World/Space/SpaceShip.cpp QuestModel/Space/HuntAndKillQuest.cpp World/Space/MetaDataMarkers.cpp
         Template/Space/HuntAndKillTemplate.cpp Story/Space/ShipIntroStoryTemplate.cpp Core/WeaverTypes.cpp
         Story/SimpleStoryTemplate.cpp)
