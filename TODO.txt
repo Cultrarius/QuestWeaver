@@ -13,3 +13,12 @@ Salvage research station
 Transport cargo
 
 ~STORY IDEAS~
+
+
+~OPEN TESTS~
+Priority quests
+QuestModel error
+StoryCondition::WithoutProperty
+Unknown story template type
+Nugget rarity < 0
+Unknown story template key
