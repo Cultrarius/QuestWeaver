@@ -11,7 +11,7 @@ using namespace Json;
 
 shared_ptr<StoryTemplate>
 CommonSpaceStoryFactory::createFromJsonValues(const Value &, string key, string text,
-                                              set<string>, set<StoryCondition>) const {
+                                              set<string>, ConditionMap) const {
     if (key == "shipIntro") {
         return make_shared<ShipIntroStoryTemplate>(text);
     } else {

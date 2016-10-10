@@ -33,7 +33,8 @@ void StoryTemplateFactory::initialize() {
     }
 
     map<StoryCondition, regex> conditionRegexes = {
-            {StoryCondition::OncePerEntity, regex("once per entity", icase | optimize)}
+            {StoryCondition::OncePerEntity, regex("once per entity", icase | optimize)},
+            {StoryCondition::WithoutProperty, regex("does not have (\\w+)", icase | optimize)}
     };
 
     for (Value templateJson : root) {
@@ -52,12 +53,18 @@ void StoryTemplateFactory::initialize() {
         string text = templateJson["text"].asString();
         string type = templateJson.get("type", Value("simple")).asString();
 
-        set<StoryCondition> conditions;
+        ConditionMap conditions;
         for (Value rawCondition : templateJson.get("conditions", Value(arrayValue))) {
             string condition = rawCondition.asString();
             for (auto pair : conditionRegexes) {
-                if (regex_match(condition, pair.second)) {
-                    conditions.insert(pair.first);
+                smatch matchResult;
+                if (regex_match(condition, matchResult, pair.second)) {
+                    vector<string> properties;
+                    for (uint64_t i = 1; i < matchResult.size(); i++) {
+                        std::ssub_match base_sub_match = matchResult[i];
+                        properties.push_back(base_sub_match.str());
+                    }
+                    conditions[pair.first] = properties;
                     break;
                 }
             }

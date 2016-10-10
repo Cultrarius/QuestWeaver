@@ -24,7 +24,7 @@ namespace weave {
         virtual std::shared_ptr<StoryTemplate>
         createFromJsonValues(const Json::Value &root, std::string key, std::string text,
                              std::set<std::string> requiredTypes,
-                             std::set<StoryCondition> conditions) const = 0;
+                             ConditionMap conditions) const = 0;
 
         virtual const char *getTemplateFile() const = 0;
 

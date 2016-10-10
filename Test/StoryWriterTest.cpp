@@ -369,7 +369,6 @@ TEST_CASE("SpaceTemplates", "[story]") {
     auto testAgent = newAgentAction.GetEntity();
     TemplateQuestProperty templateProperty(true, "player");
     values.emplace_back(templateProperty, testAgent);
-    set<string> requiredTypes = {"agent"};
     worldModel.Execute({newAgentAction});
 
     // create a fitting graph node

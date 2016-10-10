@@ -40,7 +40,7 @@ namespace weave {
     protected:
         std::shared_ptr<StoryTemplate> createFromJsonValues(const Json::Value &, std::string, std::string text,
                                                             std::set<std::string> requiredExtern,
-                                                            std::set<StoryCondition>) const override {
+                                                            ConditionMap) const override {
             std::shared_ptr<TestStoryTemplate> storyTemplate;
             if (templateFile.empty()) {
                 storyTemplate = std::make_shared<TestStoryTemplate>(requiredTypes, "", actions);

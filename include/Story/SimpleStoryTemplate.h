@@ -10,7 +10,7 @@ namespace weave {
     class SimpleStoryTemplate : public StoryTemplate {
     public:
         SimpleStoryTemplate(std::string key, std::string rawText, std::set<std::string> requiredTypes,
-                            std::set<StoryCondition> conditions) :
+                            ConditionMap conditions) :
                 StoryTemplate(rawText, requiredTypes), key(key), conditions(conditions) {}
 
         StoryTemplateResult CreateStory(const EntityMap &requiredEntities, const WeaverGraph &graph,
@@ -22,7 +22,7 @@ namespace weave {
 
     private:
         std::string key;
-        std::set<StoryCondition> conditions;
+        ConditionMap conditions;
 
         std::vector<std::shared_ptr<WorldEntity>> getValidEntities(const EntityMap &entityMap,
                                                                    const WorldModel &worldModel,

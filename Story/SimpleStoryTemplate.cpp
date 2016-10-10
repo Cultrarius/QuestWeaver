@@ -50,12 +50,22 @@ vector<shared_ptr<WorldEntity>> SimpleStoryTemplate::getValidEntities(const Enti
         }
 
         for (shared_ptr<WorldEntity> entity : mapIter->second) {
-            if (conditions.count(StoryCondition::OncePerEntity)) {
-                ID id = entity->GetId();
-                MetaData metaData = worldModel.GetMetaData(id);
-                if (metaData.HasValue(key)) {
-                    continue;
-                }
+            ID id = entity->GetId();
+            MetaData metaData = worldModel.GetMetaData(id);
+
+            // check the "once per entity" condition
+            if (conditions.count(StoryCondition::OncePerEntity) && metaData.HasValue(key)) {
+                Logger::Debug("          Entity " + entity->ToString() +
+                              " cannot be used, because the story was already created for it once.");
+                continue;
+            }
+
+            // check the "without property" condition
+            auto iter = conditions.find(StoryCondition::WithoutProperty);
+            if (iter != conditions.end() && !iter->second.empty() && metaData.HasValue(iter->second[0])) {
+                Logger::Debug("          Entity " + entity->ToString() +
+                                      " cannot be used, because it has property " + iter->second[0]);
+                continue;
             }
             validEntities.push_back(entity);
         }

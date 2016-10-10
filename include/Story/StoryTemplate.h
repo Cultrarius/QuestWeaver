@@ -15,8 +15,11 @@ namespace weave {
     typedef std::unordered_map<std::string, std::vector<std::shared_ptr<WorldEntity>>> EntityMap;
 
     enum class StoryCondition {
-        OncePerEntity
+        OncePerEntity,
+        WithoutProperty
     };
+
+    typedef std::map<StoryCondition, std::vector<std::string>> ConditionMap;
 
     /*!
      * @ingroup storyApi

@@ -1,3 +1,11 @@
+// allowed required entities:
+// artifact, deadCivilization, planet, solarSystem, agent, location, spaceShip, spaceStation, spaceWreck
+
+// allowed conditions:
+// once per entity
+// 'property' greater 'value' (e.g. relationToPlayer greater 20)
+// 'property' smaller 'value'
+// does not have 'property'
 [
   {
     "key": "agentIntro",
