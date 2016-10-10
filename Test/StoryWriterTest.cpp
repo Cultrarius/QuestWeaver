@@ -172,6 +172,16 @@ TEST_CASE("Nuggets", "[story]") {
         REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values)), ContractFailedException);
     }
 
+    SECTION("Invalid nuggets - negative rarity") {
+        writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("9")));
+        REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values)), ContractFailedException);
+    }
+
+    SECTION("Invalid nuggets - string rarity") {
+        writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("10")));
+        REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values)), ContractFailedException);
+    }
+
     SECTION("Duplicate key") {
         writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("1")));
         writer.RegisterTemplateFactory(unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("5")));
