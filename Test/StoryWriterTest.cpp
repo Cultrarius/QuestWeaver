@@ -243,11 +243,46 @@ TEST_CASE("StoryTemplates", "[story]") {
         REQUIRE(result.text == "A. B. C");
     }
 
-    SECTION("Entity line test") {
+    SECTION("Entity line test (complex)") {
         writer.RegisterTemplateFactory(
                 unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
         auto result = writer.CreateStory(StoryWriterParameters(graph, values), "entityLine");
         REQUIRE(result.text == "I wish me a TestEntity to play with.");
+    }
+
+    SECTION("Entity line test (simple)") {
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        auto result = writer.CreateStory(StoryWriterParameters(graph, values), "entityLineSimple");
+        REQUIRE(result.text == "I wish me a TestEntity to play with.");
+    }
+
+    SECTION("Wrong type") {
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        REQUIRE_THROWS_AS(writer.CreateStory(StoryWriterParameters(graph, values), "wrongType"),
+                          ContractFailedException);
+    }
+
+    SECTION("Condition - once per entity") {
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        auto result = writer.CreateStory(StoryWriterParameters(graph, values), "entityLineSimple");
+        REQUIRE(result.text == "I wish me a TestEntity to play with.");
+        worldModel.Execute(result.worldActions);
+        result = writer.CreateStory(StoryWriterParameters(graph, values), "entityLineSimple");
+        REQUIRE(result.text == "");
+    }
+
+    SECTION("Condition - does not have ...") {
+        MetaData metaData;
+        metaData.SetValue("someProperty", 1);
+        WorldModelAction changeAction(WorldActionType::UPDATE, testEntity, metaData);
+        worldModel.Execute({changeAction});
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        auto result = writer.CreateStory(StoryWriterParameters(graph, values), "entityLineSimple");
+        REQUIRE(result.text == "");
     }
 
     SECTION("Update deleted entity test") {

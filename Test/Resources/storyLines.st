@@ -14,6 +14,32 @@
     "text": "I wish me [nuggetTestEntity:1] to play with."
   },
   {
+    "key": "entityLineSimple",
+    "type": "simple",
+    "conditions": ["once per entity", "does not have someProperty"],
+    "required": [
+      "TestEntityType"
+    ],
+    "text": "I wish me [nuggetTestEntity:1] to play with."
+  },
+  {
+    "key": "wrongType",
+    "type": "wrongType",
+    "required": [
+      "TestEntityType"
+    ],
+    "text": "I wish me [nuggetTestEntity:1] to play with."
+  },
+  {
+    "key": "Conditions",
+    "type": "simple",
+    "conditions": ["once per entity", "does not have someProperty"],
+    "required": [
+      "TestEntityType"
+    ],
+    "text": "I wish me [nuggetTestEntity:1] to play with."
+  },
+  {
     "key": "missingReplacement",
     "type": "complex",
     "required": [
