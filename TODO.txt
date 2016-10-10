@@ -17,5 +17,3 @@ Transport cargo
 
 ~OPEN TESTS~
 Priority quests
-QuestModel error
-Unknown story template key

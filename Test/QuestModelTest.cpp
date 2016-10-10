@@ -30,6 +30,10 @@ TEST_CASE("Quest Model", "[model]") {
         REQUIRE_THROWS_AS(model.Execute(keepAction), ContractFailedException);
     }
 
+    SECTION("Retrieve unknown quest") {
+        REQUIRE_THROWS_AS(model.GetQuest(42), ContractFailedException);
+    }
+
     SECTION("Register quest") {
         shared_ptr<Quest> newQuest = make_shared<TestQuest>("TestTitle", "Blabla");
         ID questId = newQuest->GetId();
@@ -38,7 +42,9 @@ TEST_CASE("Quest Model", "[model]") {
         REQUIRE(newQuest->GetTitle() == "TestTitle");
         REQUIRE(newQuest->GetDescription() == "Blabla");
 
+        REQUIRE(model.GetQuestsWithState(QuestState::Unknown).size() == 0);
         model.RegisterNew(newQuest, properties, "Story Text");
+        REQUIRE(model.GetQuestsWithState(QuestState::Unknown).size() == 0);
 
         questId = newQuest->GetId();
         REQUIRE(newQuest->GetId() != 0);
