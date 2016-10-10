@@ -73,8 +73,8 @@ void StoryWriter::readNuggets() const {
             if (nuggetJson.isMember("rarity")) {
                 rarity = nuggetJson["rarity"].asFloat();
                 if (rarity < 0) {
-                    Logger::Error(ContractFailedException("Rarity for nugget key <" + key + "> is smaller than 0!"));
                     rarity = 0;
+                    Logger::Error(ContractFailedException("Rarity for nugget key <" + key + "> is smaller than 0!"));
                 }
             }
 

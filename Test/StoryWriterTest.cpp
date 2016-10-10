@@ -295,6 +295,13 @@ TEST_CASE("StoryTemplates", "[story]") {
         REQUIRE(result.text == "");
     }
 
+    SECTION("Unknown template") {
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        auto result = writer.CreateStory(StoryWriterParameters(graph, values), "unknownTemplate");
+        REQUIRE(result.text == "");
+    }
+
     SECTION("Update deleted entity test") {
         vector<WorldModelAction> questActions;
         questActions.emplace_back(WorldActionType::DELETE, testEntity);
