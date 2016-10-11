@@ -16,7 +16,10 @@ namespace weave {
 
     enum class StoryCondition {
         OncePerEntity,
-        WithoutProperty
+        WithoutProperty,
+        WithProperty,
+        GreaterThan,
+        SmallerThan
     };
 
     typedef std::map<StoryCondition, std::vector<std::string>> ConditionMap;

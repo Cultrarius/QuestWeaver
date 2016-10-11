@@ -67,6 +67,40 @@ vector<shared_ptr<WorldEntity>> SimpleStoryTemplate::getValidEntities(const Enti
                                       " cannot be used, because it has property " + iter->second[0]);
                 continue;
             }
+
+            // check the "with property" condition
+            iter = conditions.find(StoryCondition::WithProperty);
+            if (iter != conditions.end() && !iter->second.empty() && !metaData.HasValue(iter->second[0])) {
+                Logger::Debug("          Entity " + entity->ToString() +
+                              " cannot be used, because it is missing property " + iter->second[0]);
+                continue;
+            }
+
+            // check the "greater than" condition
+            iter = conditions.find(StoryCondition::GreaterThan);
+            if (iter != conditions.end() && iter->second.size() == 2) {
+                string property = iter->second[0];
+                int value = atoi(iter->second[1].c_str());
+                if (!metaData.HasValue(property) || metaData.GetValue(property) <= value) {
+                    Logger::Debug("          Entity " + entity->ToString() +
+                                  " cannot be used, because its property " + property + " is not greater "
+                                  + to_string(value));
+                    continue;
+                }
+            }
+
+            // check the "smaller than" condition
+            iter = conditions.find(StoryCondition::SmallerThan);
+            if (iter != conditions.end() && iter->second.size() == 2) {
+                string property = iter->second[0];
+                int value = atoi(iter->second[1].c_str());
+                if (!metaData.HasValue(property) || metaData.GetValue(property) >= value) {
+                    Logger::Debug("          Entity " + entity->ToString() +
+                                  " cannot be used, because its property " + property + " is not smaller "
+                                  + to_string(value));
+                    continue;
+                }
+            }
             validEntities.push_back(entity);
         }
         if (validEntities.empty()) {

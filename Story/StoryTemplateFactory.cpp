@@ -34,7 +34,10 @@ void StoryTemplateFactory::initialize() {
 
     map<StoryCondition, regex> conditionRegexes = {
             {StoryCondition::OncePerEntity, regex("once per entity", icase | optimize)},
-            {StoryCondition::WithoutProperty, regex("does not have (\\w+)", icase | optimize)}
+            {StoryCondition::WithoutProperty, regex("does not have (\\w+)", icase | optimize)},
+            {StoryCondition::WithProperty, regex("does have (\\w+)", icase | optimize)},
+            {StoryCondition::GreaterThan, regex("(\\w+) (?:greater than|>) (\\d+)", icase | optimize)},
+            {StoryCondition::SmallerThan, regex("(\\w+) (?:smaller than|<) (\\d+)", icase | optimize)}
     };
 
     for (Value templateJson : root) {
@@ -56,6 +59,7 @@ void StoryTemplateFactory::initialize() {
         ConditionMap conditions;
         for (Value rawCondition : templateJson.get("conditions", Value(arrayValue))) {
             string condition = rawCondition.asString();
+            bool found = false;
             for (auto pair : conditionRegexes) {
                 smatch matchResult;
                 if (regex_match(condition, matchResult, pair.second)) {
@@ -65,8 +69,12 @@ void StoryTemplateFactory::initialize() {
                         properties.push_back(base_sub_match.str());
                     }
                     conditions[pair.first] = properties;
+                    found = true;
                     break;
                 }
+            }
+            if (!found) {
+                Logger::Error("Unknown condition: " + condition);
             }
         }
 

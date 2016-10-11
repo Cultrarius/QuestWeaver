@@ -3,7 +3,8 @@
 
 // allowed "conditions":
 // * once per entity
-// * does not have 'property'
+// * does not have 'property' (e.g. does not have relationToPlayer)
+// * does have 'property'
 // * 'property' greater 'value' (e.g. relationToPlayer greater 20)
 // * 'property' smaller 'value'
 [
