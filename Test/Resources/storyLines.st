@@ -23,6 +23,15 @@
     "text": "I wish me [nuggetTestEntity:1] to play with."
   },
   {
+    "key": "entityLineSimple2",
+    "type": "simple",
+    "conditions": ["does have someProperty"],
+    "required": [
+      "TestEntityType"
+    ],
+    "text": "I wish me [nuggetTestEntity:1] to play with."
+  },
+  {
     "key": "wrongType",
     "type": "wrongType",
     "required": [
@@ -31,9 +40,18 @@
     "text": "I wish me [nuggetTestEntity:1] to play with."
   },
   {
-    "key": "Conditions",
+    "key": "conditionGreaterAndSmaller",
     "type": "simple",
-    "conditions": ["once per entity", "does not have someProperty"],
+    "conditions": ["someProperty > 15", "someProperty < 40"],
+    "required": [
+      "TestEntityType"
+    ],
+    "text": "I wish me [nuggetTestEntity:1] to play with."
+  },
+  {
+    "key": "unknownCondition",
+    "type": "simple",
+    "conditions": ["unknown stuff"],
     "required": [
       "TestEntityType"
     ],

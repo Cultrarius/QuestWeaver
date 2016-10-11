@@ -295,6 +295,58 @@ TEST_CASE("StoryTemplates", "[story]") {
         REQUIRE(result.text == "");
     }
 
+    SECTION("Condition - does have ...") {
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        auto result = writer.CreateStory(StoryWriterParameters(graph, values), "entityLineSimple2");
+        REQUIRE(result.text == "");
+
+        MetaData metaData;
+        metaData.SetValue("someProperty", 1);
+        WorldModelAction changeAction(WorldActionType::UPDATE, testEntity, metaData);
+        worldModel.Execute({changeAction});
+
+        result = writer.CreateStory(StoryWriterParameters(graph, values), "entityLineSimple2");
+        REQUIRE(result.text == "I wish me a TestEntity to play with.");
+    }
+
+    SECTION("Condition - bigger and smaller") {
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        auto result = writer.CreateStory(StoryWriterParameters(graph, values), "conditionGreaterAndSmaller");
+        REQUIRE(result.text == "");
+
+        MetaData metaData;
+        metaData.SetValue("someProperty", 10);
+        WorldModelAction changeAction(WorldActionType::UPDATE, testEntity, metaData);
+        worldModel.Execute({changeAction});
+
+        result = writer.CreateStory(StoryWriterParameters(graph, values), "conditionGreaterAndSmaller");
+        REQUIRE(result.text == "");
+
+        metaData.SetValue("someProperty", 50);
+        WorldModelAction changeAction2(WorldActionType::UPDATE, testEntity, metaData);
+        worldModel.Execute({changeAction2});
+
+        result = writer.CreateStory(StoryWriterParameters(graph, values), "conditionGreaterAndSmaller");
+        REQUIRE(result.text == "");
+
+        metaData.SetValue("someProperty", 30);
+        WorldModelAction changeAction3(WorldActionType::UPDATE, testEntity, metaData);
+        worldModel.Execute({changeAction3});
+
+        result = writer.CreateStory(StoryWriterParameters(graph, values), "entityLineSimple2");
+        REQUIRE(result.text == "I wish me a TestEntity to play with.");
+    }
+
+    SECTION("Unknown condition") {
+        writer.RegisterTemplateFactory(
+                unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
+        // creates a log error, but is not breaking
+        auto result = writer.CreateStory(StoryWriterParameters(graph, values), "unknownCondition");
+        REQUIRE(result.text == "I wish me a TestEntity to play with.");
+    }
+
     SECTION("Unknown template") {
         writer.RegisterTemplateFactory(
                 unique_ptr<StoryTemplateFactory>(new TestStoryTemplateFactory("8", "storyLines.st")));
