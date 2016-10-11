@@ -63,6 +63,7 @@ std::string weave::htmlEncloseWithTag(const std::string &str, const std::string 
 
 Value weave::readJsonFromFile(const char *fileName, const Directories &dirs) {
     CharReaderBuilder readBuilder;
+    readBuilder["allowComments"] = true;
     readBuilder["collectComments"] = false;
     readBuilder["rejectDupKeys"] = true;
     ifstream inStream;
