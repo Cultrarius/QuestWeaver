@@ -8,14 +8,14 @@
 using namespace std;
 using namespace weave;
 
-PropertyCandidate::PropertyCandidate() noexcept { }
+PropertyCandidate::PropertyCandidate() noexcept {}
 
 PropertyCandidate::PropertyCandidate(WorldModelAction singleAction) noexcept :
-        actions({singleAction}), candidateValue(singleAction.GetEntity()) { }
+        actions({singleAction}), candidateValue(singleAction.GetEntity()) {}
 
 PropertyCandidate::PropertyCandidate(vector<WorldModelAction> actionList,
                                      shared_ptr<WorldEntity> candidateValue) noexcept :
-        actions(actionList), candidateValue(candidateValue) { }
+        actions(actionList), candidateValue(candidateValue) {}
 
 std::shared_ptr<WorldEntity> PropertyCandidate::GetValue() const noexcept {
     return candidateValue;
@@ -55,12 +55,14 @@ TemplateQuestDescription::TemplateQuestDescription(const vector<string> &conditi
 }
 
 QuestTemplate::QuestTemplate(string title, vector<TemplateQuestProperty> properties,
-                             vector<TemplateQuestDescription> descriptions, FormatterType formatterType, int rarity) {
+                             vector<TemplateQuestDescription> descriptions, FormatterType formatterType, int rarity,
+                             string id) {
     this->title = title;
     this->properties = properties;
     this->descriptions = descriptions;
     this->rarity = rarity;
     this->formatterType = formatterType;
+    this->id = id;
 }
 
 string QuestTemplate::getBestFittingDescription(const vector<QuestPropertyValue> &questPropertyValues) const {
@@ -125,4 +127,8 @@ ID QuestTemplate::getEntityIdFromProperty(string propertyName,
 
 shared_ptr<Quest> QuestTemplate::ToQuest(const vector<QuestPropertyValue> &questPropertyValues) const {
     return ToQuest(questPropertyValues, "");
+}
+
+string QuestTemplate::GetIdentifier() const noexcept {
+    return id;
 }

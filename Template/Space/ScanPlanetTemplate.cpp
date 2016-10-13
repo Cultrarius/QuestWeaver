@@ -15,7 +15,7 @@ using namespace weave;
 ScanPlanetTemplate::ScanPlanetTemplate(string title, vector<TemplateQuestProperty> properties,
                                        vector<TemplateQuestDescription> descriptions,
                                        FormatterType formatterType, int rarity)
-        : QuestTemplate(title, properties, descriptions, formatterType, rarity) {
+        : QuestTemplate(title, properties, descriptions, formatterType, rarity, "ScanPlanetTemplate") {
 }
 
 vector<PropertyCandidate> ScanPlanetTemplate::GetPropertyCandidates(const TemplateQuestProperty &property,

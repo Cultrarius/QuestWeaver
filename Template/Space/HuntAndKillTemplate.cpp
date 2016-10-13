@@ -14,7 +14,7 @@ using namespace weave;
 HuntAndKillTemplate::HuntAndKillTemplate(string title, vector<TemplateQuestProperty> properties,
                                          vector<TemplateQuestDescription> descriptions,
                                          FormatterType formatterType, int rarity)
-        : QuestTemplate(title, properties, descriptions, formatterType, rarity) {
+        : QuestTemplate(title, properties, descriptions, formatterType, rarity, "HuntAndKillTemplate") {
 }
 
 vector<PropertyCandidate> HuntAndKillTemplate::GetPropertyCandidates(const TemplateQuestProperty &property,

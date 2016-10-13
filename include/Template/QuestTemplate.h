@@ -95,7 +95,8 @@ namespace weave {
                       std::vector<TemplateQuestProperty> properties,
                       std::vector<TemplateQuestDescription> descriptions,
                       FormatterType formatterType,
-                      int rarity = 0);
+                      int rarity = 0,
+                      std::string id = "");
 
         virtual ~QuestTemplate() = default;
 
@@ -142,6 +143,11 @@ namespace weave {
 
         int GetRarity() const noexcept;
 
+        /*!
+         * Returns the id of this template (for debug purposes only).
+         */
+        std::string GetIdentifier() const noexcept;
+
     protected:
 
         /*!
@@ -171,5 +177,6 @@ namespace weave {
         std::vector<TemplateQuestProperty> properties;
         std::vector<TemplateQuestDescription> descriptions;
         int rarity;
+        std::string id;
     };
 }

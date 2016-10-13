@@ -15,7 +15,7 @@ ExploreRegionTemplate::ExploreRegionTemplate(string title,
                                              vector<TemplateQuestProperty> properties,
                                              vector<TemplateQuestDescription> descriptions,
                                              FormatterType formatterType, int rarity)
-        : QuestTemplate(title, properties, descriptions, formatterType, rarity) {
+        : QuestTemplate(title, properties, descriptions, formatterType, rarity, "ExploreRegionTemplate") {
 }
 
 vector<PropertyCandidate> ExploreRegionTemplate::GetPropertyCandidates(const TemplateQuestProperty &property,

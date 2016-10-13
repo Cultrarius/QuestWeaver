@@ -21,7 +21,7 @@ EngineResult WeaverEngine::fillTemplate(shared_ptr<QuestTemplate> questTemplate,
         }
     }
 
-    Logger::Debug("Creating graph for ???", 1); // TODO
+    Logger::Debug("Creating graph for template " + questTemplate->GetIdentifier(), 1);
     WeaverGraph graph = createGraph(questModel, worldModel, mandatory, candidates);
     auto propertyMap = GraphAnalyzer::SolveGraph(&graph, randomStream);
 
