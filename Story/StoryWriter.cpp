@@ -20,19 +20,19 @@ void StoryWriter::initialize() const {
         return;
     }
     isInitialized = true;
-    Logger::Debug("Reading story factories:");
+    Logger::Debug("Reading story factories:", 2);
     for (const auto &factory : factories) {
         factory->initialize();
-        Logger::Debug(string("    File: ") + factory->getTemplateFile());
+        Logger::Debug(string("File: ") + factory->getTemplateFile(), 3);
         for (auto &entry : factory->GetTemplates()) {
-            Logger::Debug("        Template: " + entry.first);
+            Logger::Debug("Template: " + entry.first, 4);
         }
     }
     readNuggets();
 }
 
 void StoryWriter::readNuggets() const {
-    Logger::Debug("Reading story nuggets:");
+    Logger::Debug("Reading story nuggets:", 2);
     nuggets.clear();
     set<string> nuggetFolders;
     for (const auto &factory : factories) {
@@ -42,12 +42,12 @@ void StoryWriter::readNuggets() const {
     for (string folder : nuggetFolders) {
         string file = folder;
         file += "/Nuggets.st";
-        Logger::Debug("    Input: " + file);
+        Logger::Debug("Input: " + file, 3);
         Value root = readJsonFromFile(file.c_str(), dirs);
         checkValidNuggetJson(root, file);
         for (Value nuggetJson : root) {
             string key = nuggetJson["key"].asString();
-            Logger::Debug("        Key: " + key);
+            Logger::Debug("Key: " + key, 4);
             if (nuggets.count(key) > 0) {
                 Logger::Fatal("Duplicate nugget key <" + key + ">!");
             }
@@ -181,21 +181,21 @@ Story StoryWriter::CreateStory(const StoryWriterParameters &params,
 
 Story StoryWriter::CreateStory(const StoryWriterParameters &params,
                                unordered_set<string> storyTemplateKeys) const {
-    Logger::Debug("Creating new quest story:");
+    Logger::Debug("Creating new quest story:", 2);
     Story emptyResult;
     auto graph = params.graph;
     auto propertyValues = params.propertyValues;
     if (graph.GetActiveNodes().empty() || propertyValues.empty()) {
-        Logger::Debug("    No input data.");
+        Logger::Debug("No input data.", 3);
         return emptyResult;
     }
     initialize();
 
     // find out which templates can be used with the given entities
-    Logger::Debug("    Possible templates:");
+    Logger::Debug("Possible templates:", 3);
     auto fittingTemplates = getFittingTemplates(propertyValues, storyTemplateKeys);
     if (fittingTemplates.empty()) {
-        Logger::Debug("        No fitting template found.");
+        Logger::Debug("No fitting template found.", 3);
         return emptyResult;
     }
 
@@ -210,10 +210,10 @@ Story StoryWriter::CreateStory(const StoryWriterParameters &params,
     removeStoriesWithInvalidActions(params, &stories);
 
     if (stories.empty()) {
-        Logger::Debug("    No valid stories possible.");
+        Logger::Debug("No valid stories possible.", 3);
         return emptyResult;
     }
-    Logger::Debug("    Created possible stories: " + to_string(stories.size()));
+    Logger::Debug("Created possible stories: " + to_string(stories.size()), 3);
     return stories.rbegin()->second;  // map is sorted
 }
 
@@ -255,7 +255,7 @@ vector<shared_ptr<StoryTemplate>> StoryWriter::getFittingTemplates(
             if (storyTemplateKeys.count(storyTemplate.first) > 0 &&
                 hasAll(storyTemplate.second->GetRequiredEntities(), propertyValues)) {
                 fittingTemplates.push_back(storyTemplate.second);
-                Logger::Debug("        " + storyTemplate.first);
+                Logger::Debug(storyTemplate.first, 4);
             }
         }
     }
@@ -327,12 +327,13 @@ map<float, Story> StoryWriter::createWeightedStories(
 
         for (auto pair : templateResult.tokenMap) {
             RawStoryToken token = pair.first;
+            Logger::Debug("Processing token " + token.text, 4);
 
             auto ids = pair.second;
             vector<NuggetOption> nuggetOptions;
             float minRarity = 0;
             for (string option : token.nuggetOptions) {
-                Logger::Debug("       Nugget option " + option);
+                Logger::Debug("Nugget option " + option, 5);
                 nuggetOptions.push_back(NuggetOption(option, ids));
                 auto nuggetIter = nuggets.find(option);
                 if (nuggetIter != nuggets.end()) {
@@ -344,10 +345,11 @@ map<float, Story> StoryWriter::createWeightedStories(
             int rarityToReach = static_cast<int>(minRarity + 1);
             if (!token.isMandatory && rs->GetIntInRange(0, rarityToReach) == rarityToReach) {
                 replace(&story, token.text, "");
+                Logger::Debug("[Ignored] optional token", 5);
                 continue;
             }
 
-            Logger::Debug("        Gathering supported nuggets");
+            Logger::Debug("Gathering supported nuggets", 5);
             vector<NuggetOption> supportedNuggets = getSupportedNuggets(nuggetOptions);
             storyValue += nuggetWeight * supportedNuggets.size();
             if (supportedNuggets.empty()) {
@@ -356,14 +358,14 @@ map<float, Story> StoryWriter::createWeightedStories(
                     storyValue = -1;
                     break;
                 }
-                Logger::Debug("        Jumping over optional token with no supported nuggets.");
+                Logger::Debug("[Ignored] Jumping over optional token with no supported nuggets.", 5);
                 continue;
             }
 
-            Logger::Debug("        Choose nugget by rarity");
+            Logger::Debug("Choose nugget by rarity", 5);
             uint64_t nuggetIndex = getNuggetIndexByRarity(supportedNuggets);
             NuggetOption chosenOption = supportedNuggets[nuggetIndex];
-            Logger::Debug("        Chosen nugget:");
+            Logger::Debug("Chosen nugget: " + chosenOption.GetNuggetKey(), 5);
 
             // check previous quests for nugget entity matches
             unordered_set<ID> nuggetIDs;
@@ -385,8 +387,9 @@ map<float, Story> StoryWriter::createWeightedStories(
             }
 
             // place the nugget in the story
-            Logger::Debug("       Create formatted nugget text and place it in the story");
             string nuggetText = getNuggetText(questValues, chosenOption);
+            Logger::Debug("Created formatted nugget text to place into the story: "
+                          + nuggetText.substr(0, 10) + "...", 4);
             replace(&story, token.text, nuggetText);
         }
 

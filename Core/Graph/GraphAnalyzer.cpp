@@ -46,7 +46,7 @@ unordered_map<string, Node> GraphAnalyzer::SolveGraph(weave::WeaverGraph *graph,
     }
     Logger::Debug("Solved graph with " + to_string(graph->GetEdges().size()) + " edges / " + to_string(nodeCount) +
                   " nodes / " + to_string(graph->GetGroups().size()) + " groups in " + to_string(iterations) +
-                  " iterations.");
+                  " iterations.", 2);
 
     unordered_map<string, Node> results;
     for (auto node : graph->GetActiveNodes()) {

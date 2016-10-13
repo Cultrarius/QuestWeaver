@@ -37,7 +37,7 @@ vector<shared_ptr<Quest>> QuestWeaver::CreateNewQuests() {
     int minScore = -1;
 
     // gather quest candidates
-    Logger::Debug("Starting new quest creation.");
+    Logger::Debug("Starting new quest creation...");
     for (auto questTemplate : templates->GetTemplatesForNewQuest(*world, *quests)) {
         EngineResult result = engine->fillTemplate(questTemplate, *quests, *world);
         shared_ptr<Quest> newQuest = questTemplate->ToQuest(result.GetQuestPropertyValues());
@@ -78,9 +78,9 @@ vector<shared_ptr<Quest>> QuestWeaver::CreateNewQuests() {
     };
     stable_sort(newQuestCandidates.begin(), newQuestCandidates.end(), comparator);
 
-    Logger::Debug("Quest types with score:");
+    Logger::Debug("Quest types by absolute score:", 1);
     for (auto candidate : newQuestCandidates) {
-        Logger::Debug("    " + candidate.quest->GetType() + ": " + to_string(candidate.score));
+        Logger::Debug(to_string(candidate.score) + ": " + candidate.quest->GetType(), 2);
     }
 
     // randomly select a minimum required score
@@ -92,36 +92,36 @@ vector<shared_ptr<Quest>> QuestWeaver::CreateNewQuests() {
     }
 
     // select the fitting candidate(s)
+    Logger::Debug("Selecting one of the candidates with a score bigger " + to_string(selectedScore + minScore), 1);
     for (auto candidate : newQuestCandidates) {
-        Logger::Debug("[X] Processing quest candidate " + candidate.quest->GetType());
+        Logger::Debug("Processing quest candidate " + candidate.quest->GetType(), 1);
         if (hasPriorityQuests) {
             if (candidate.isPriorityQuest) {
-                Logger::Debug("    [Priority] quest!");
+                Logger::Debug("[Priority] quest!", 2);
                 world->Execute(candidate.result.GetModelActions());
                 Story storyResult = stories->CreateStory(candidate.result.GetStoryParameters());
                 world->Execute(storyResult.worldActions);
                 quests->RegisterNew(candidate.quest, candidate.result.GetQuestPropertyValues(), storyResult.text);
                 newQuests.push_back(candidate.quest);
-                Logger::Debug("[X] World changes from quest: " + to_string(candidate.result.GetModelActions().size()));
-                Logger::Debug("[X] World changes from story: " + to_string(storyResult.worldActions.size()));
             } else {
-                Logger::Debug("    [Ignored] because it is not a priority quest.");
+                Logger::Debug("[Ignored] because it is not a priority quest.", 2);
             }
             continue;
         }
         if (candidate.score >= (selectedScore + minScore)) {
+            Logger::Debug("Quest was chosen! Updating world model with quest changes...", 2);
             world->Execute(candidate.result.GetModelActions());
+            Logger::Debug("Creating story for chosen quest...", 2);
             Story storyResult = stories->CreateStory(candidate.result.GetStoryParameters());
+            Logger::Debug("Updating world model with story changes...", 2);
             world->Execute(storyResult.worldActions);
             quests->RegisterNew(candidate.quest, candidate.result.GetQuestPropertyValues(), storyResult.text);
             newQuests.push_back(candidate.quest);
-            Logger::Debug("[X] World changes from quest: " + to_string(candidate.result.GetModelActions().size()));
-            Logger::Debug("[X] World changes from story: " + to_string(storyResult.worldActions.size()));
             break;
         }
-
+        Logger::Debug("[Ignored] because its score was too low.", 2);
     }
-    Logger::Debug("Quest creation finished, chose " + to_string(newQuests.size()) + " quests.");
+    Logger::Debug("Quest creation finished, chose " + to_string(newQuests.size()) + " quest(s).", 1);
     return newQuests;
 }
 

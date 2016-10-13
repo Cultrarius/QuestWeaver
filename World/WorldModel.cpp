@@ -28,7 +28,7 @@ void WorldModel::Execute(vector<WorldModelAction> modelActions) {
             continue;
         }
         if (action.GetActionType() == WorldActionType::KEEP) {
-            Logger::Debug("WM: Keep entity " + to_string(id) + " (" + action.GetEntity()->GetType() + ")");
+            Logger::Debug("WorldModel: Keep entity " + to_string(id) + " (" + action.GetEntity()->GetType() + ")", 2);
         } else if (action.GetActionType() == WorldActionType::CREATE) {
             if (id != WorldEntity::NoID) {
                 Logger::Error(ContractFailedException(
@@ -40,13 +40,14 @@ void WorldModel::Execute(vector<WorldModelAction> modelActions) {
             action.GetEntity()->id = newId;
             entities[newId] = action.GetEntity();
             updateMetaDataForId(newId, action.GetMetaData());
-            Logger::Debug("WM: Create entity " + to_string(newId) + " (" + action.GetEntity()->GetType() + ")");
+            Logger::Debug("WorldModel: Create entity " + to_string(newId) + " (" + action.GetEntity()->GetType() + ")",
+                          2);
         } else if (action.GetActionType() == WorldActionType::DELETE) {
-            Logger::Debug("WM: Delete entity " + to_string(id) + " (" + action.GetEntity()->GetType() + ")");
+            Logger::Debug("WorldModel: Delete entity " + to_string(id) + " (" + action.GetEntity()->GetType() + ")", 2);
             action.GetEntity()->id = WorldEntity::NoID;
             entities.erase(id);
         } else if (action.GetActionType() == WorldActionType::UPDATE) {
-            Logger::Debug("WM: Update entity " + to_string(id) + " (" + action.GetEntity()->GetType() + ")");
+            Logger::Debug("WorldModel: Update entity " + to_string(id) + " (" + action.GetEntity()->GetType() + ")", 2);
             updateMetaDataForId(id, action.GetMetaData());
         } else {
             Logger::Error(ContractFailedException("Illegal action type."));

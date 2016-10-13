@@ -161,9 +161,13 @@ namespace weave {
             throw ex;
         }
 
-        static void Debug(const std::string &what) {
+        static void Debug(const std::string &what, uint8_t nesting = 0) {
             if (sharedInstance) {
-                sharedInstance->debug(what);
+                std::string space;
+                for (uint8_t i = 0; i < nesting; i++) {
+                    space.append("  ");
+                }
+                sharedInstance->debug(space + what);
             }
         }
 
