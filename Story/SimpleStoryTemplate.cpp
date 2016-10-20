@@ -18,7 +18,7 @@ StoryTemplateResult SimpleStoryTemplate::CreateStory(const EntityMap &requiredEn
     TokenToEntityMap tokenEntityMap;
     StoryTemplateResult result;
     for (uint64_t i = 1; i <= GetRequiredEntities().size(); i++) {
-        auto entity = entities[0];
+        auto entity = entities[i - 1];
         tokenEntityMap[to_string(i)] = {entity->GetId()};
 
         if (conditions.count(StoryCondition::OncePerEntity)) {
