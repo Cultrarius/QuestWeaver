@@ -27,11 +27,24 @@ WorldModelAction SpaceWorldModel::CreateLocation() const {
 
 SpaceWorldModel::SpaceWorldModel(std::shared_ptr<RandomStream> randomStream) : WorldModel() {
     rs = randomStream;
+    nameGenerator = unique_ptr<SpaceNameGenerator>(new SpaceNameGenerator());
 }
 
 SpaceWorldModel::SpaceWorldModel(std::shared_ptr<RandomStream> randomStream, ModelParameters modelParameters) :
         WorldModel(), param(modelParameters) {
     rs = randomStream;
+    nameGenerator = unique_ptr<SpaceNameGenerator>(new SpaceNameGenerator());
+}
+
+SpaceWorldModel::SpaceWorldModel(std::shared_ptr<RandomStream> randomStream, unique_ptr<SpaceNameGenerator> ng)
+        : WorldModel() {
+    rs = randomStream;
+    if (ng) {
+        nameGenerator = move(ng);
+    } else {
+        Logger::Error("Invalid name generator provided");
+        nameGenerator = unique_ptr<SpaceNameGenerator>(new SpaceNameGenerator());
+    }
 }
 
 ModelParameters SpaceWorldModel::GetParameters() const {
@@ -39,11 +52,11 @@ ModelParameters SpaceWorldModel::GetParameters() const {
 }
 
 const NameGenerator &SpaceWorldModel::GetNameGenerator() const {
-    return nameGenerator;
+    return *nameGenerator;
 }
 
 WorldModelAction SpaceWorldModel::CreateAgent(NameType nameType) const {
-    return WorldModelAction(WorldActionType::CREATE, make_shared<SpaceAgent>(nameGenerator.CreateName(nameType, rs)));
+    return WorldModelAction(WorldActionType::CREATE, make_shared<SpaceAgent>(nameGenerator->CreateName(nameType, rs)));
 }
 
 WorldModelAction SpaceWorldModel::CreatePlanet(shared_ptr<SpaceLocation> location, NameType nameType,
@@ -53,7 +66,7 @@ WorldModelAction SpaceWorldModel::CreatePlanet(shared_ptr<SpaceLocation> locatio
     float x = distanceToSun * cos(radians);
     float y = distanceToSun * sin(radians);
     int seed = rs->GetInt();
-    string name = nameGenerator.CreateName(nameType, rs);
+    string name = nameGenerator->CreateName(nameType, rs);
     MetaData metaData;
     if (rs->GetIntInRange(0, param.deadCivRarity) == param.deadCivRarity) {
         metaData.SetValue(DeadCivilization::PlanetMarker, 1);
@@ -92,19 +105,19 @@ vector<WorldModelAction> SpaceWorldModel::CreateSolarSystem(NameType nameType, i
     }
 
     int seed = rs->GetInt();
-    auto solarSystem = make_shared<SolarSystem>(nameGenerator.CreateName(nameType, rs), seed, location, planets);
+    auto solarSystem = make_shared<SolarSystem>(nameGenerator->CreateName(nameType, rs), seed, location, planets);
     actions.emplace_back(WorldActionType::CREATE, solarSystem);
 
     return actions;
 }
 
 WorldModelAction SpaceWorldModel::CreateDeadCivilization(NameType nameType) const {
-    string name = nameGenerator.CreateName(nameType, rs);
+    string name = nameGenerator->CreateName(nameType, rs);
     return WorldModelAction(WorldActionType::CREATE, make_shared<DeadCivilization>(name));
 }
 
 WorldModelAction SpaceWorldModel::CreateArtifact(NameType nameType) const {
-    string name = nameGenerator.CreateName(nameType, rs);
+    string name = nameGenerator->CreateName(nameType, rs);
     return WorldModelAction(WorldActionType::CREATE, make_shared<Artifact>(name));
 }
 
@@ -127,7 +140,7 @@ WorldModelAction SpaceWorldModel::CreateSpaceStation(shared_ptr<SolarSystem> hom
     }
 
     int seed = rs->GetInt();
-    string name = nameGenerator.CreateName(nameType, rs);
+    string name = nameGenerator->CreateName(nameType, rs);
     return weave::WorldModelAction(WorldActionType::CREATE, make_shared<SpaceStation>(x, y, seed, name, homeSystem));
 }
 
@@ -140,13 +153,13 @@ WorldModelAction SpaceWorldModel::CreateSpaceWreck(std::shared_ptr<SolarSystem> 
     y = distanceToSun * sin(radians);
 
     int seed = rs->GetInt();
-    string name = nameGenerator.CreateName(nameType, rs);
+    string name = nameGenerator->CreateName(nameType, rs);
     return weave::WorldModelAction(WorldActionType::CREATE, make_shared<SpaceWreck>(x, y, seed, name, homeSystem));
 }
 
 WorldModelAction SpaceWorldModel::CreateSpaceShip(std::shared_ptr<SpaceAgent> owner, NameType nameType) const {
     int seed = rs->GetInt();
-    string name = nameGenerator.CreateName(nameType, rs);
+    string name = nameGenerator->CreateName(nameType, rs);
     return weave::WorldModelAction(WorldActionType::CREATE, make_shared<SpaceShip>(seed, name, owner));
 }
 
@@ -219,8 +232,3 @@ std::vector<WorldModelAction> SpaceWorldModel::InitializeNewWorld() const {
 
     return actions;
 }
-
-
-
-
-

@@ -42,6 +42,8 @@ namespace weave {
 
         explicit SpaceWorldModel(std::shared_ptr<RandomStream> randomStream);
 
+        SpaceWorldModel(std::shared_ptr<RandomStream> randomStream, std::unique_ptr<SpaceNameGenerator> nameGenerator);
+
         SpaceWorldModel(std::shared_ptr<RandomStream> randomStream, ModelParameters modelParameters);
 
         ModelParameters GetParameters() const;
@@ -80,7 +82,7 @@ namespace weave {
 
     private:
         ModelParameters param;
-        SpaceNameGenerator nameGenerator;
+        std::unique_ptr<SpaceNameGenerator> nameGenerator;
 
         // serialization
         friend class cereal::access;
