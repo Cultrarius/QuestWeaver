@@ -323,24 +323,13 @@ map<float, Story> StoryWriter::createWeightedStories(
         storyValue += worldActionWeight * currentStory.worldActions.size();
 
         string story = processTokens(questValues, templateResult, storyValue);
-        regex spaces("[ \t\r]+");
-        story = regex_replace(story, spaces, " ");
-        regex trim("^\\s*([\\s\\S]+?)\\s*$");
-        story = regex_replace(story, trim, "$1");
-        regex newlines("\n\\s*\n\\s*\n");
-        story = regex_replace(story, newlines, "\n\n");
-
-        if (templateEngine.GetFormat() == FormatterType::HTML) {
-            replaceAll(&story, "\n", "<br/>\n");
-            currentStory.text = htmlEncloseWithTag(story, "span", "story");
-        } else {
-            currentStory.text = story;
-        }
         if (storyValue >= 0) {
             storyValue += storyCharWeight * story.length();
             // turn the weight into a probability
             storyValue = storyValue * (rs->GetIntInRange(0, 90) / 90.0f + 0.1f);
         }
+
+        applyFinalFormatting(&currentStory, story);
         weightedStories[storyValue] = currentStory;
     }
     // remove broken stories
@@ -351,8 +340,24 @@ map<float, Story> StoryWriter::createWeightedStories(
     return weightedStories;
 }
 
+void StoryWriter::applyFinalFormatting(Story *currentStory, string story) const {
+    regex spaces("[ \t\r]+");
+    story = regex_replace(story, spaces, " ");
+    regex trim("^\\s*([\\s\\S]+?)\\s*$");
+    story = regex_replace(story, trim, "$1");
+    regex newlines("\n\\s*\n\\s*\n");
+    story = regex_replace(story, newlines, "\n\n");
+
+    if (templateEngine.GetFormat() == FormatterType::HTML) {
+        replaceAll(&story, "\n", "<br/>\n");
+        currentStory->text = htmlEncloseWithTag(story, "span", "story");
+    } else {
+        currentStory->text = story;
+    }
+}
+
 string StoryWriter::processTokens(const QuestValueMap &questValues, const StoryTemplateResult &templateResult,
-                                float &storyValue) const {
+                                  float &storyValue) const {
     string story = templateResult.rawText;
     for (auto pair : templateResult.tokenMap) {
         RawStoryToken token = pair.first;

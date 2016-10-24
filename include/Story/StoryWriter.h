@@ -116,6 +116,8 @@ namespace weave {
         QuestPropertyValue getQuestValueForID(const QuestValueMap &questValues, ID id) const;
 
         std::string processTokens(const QuestValueMap &questValues, const StoryTemplateResult &templateResult,
-                           float &storyValue) const;
+                                  float &storyValue) const;
+
+        void applyFinalFormatting(Story *currentStory, std::string story) const;
     };
 }
