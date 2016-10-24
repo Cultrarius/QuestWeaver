@@ -249,7 +249,7 @@ void StoryWriter::removeStoriesWithInvalidActions(const StoryWriterParameters &p
 vector<shared_ptr<StoryTemplate>> StoryWriter::getFittingTemplates(
         const vector<QuestPropertyValue> &propertyValues, const unordered_set<string> &storyTemplateKeys) const {
     vector<shared_ptr<StoryTemplate>> fittingTemplates;
-    for (const auto &factory : this->factories) {
+    for (const auto &factory : factories) {
         auto templates = factory->GetTemplates();
         for (auto storyTemplate : templates) {
             if (storyTemplateKeys.count(storyTemplate.first) > 0 &&
@@ -316,83 +316,13 @@ map<float, Story> StoryWriter::createWeightedStories(
             continue;
         }
 
-        Story currentResult;
-
+        Story currentStory;
         float storyValue = storyEntityWeight * storyTemplate->GetRequiredEntities().size();
         auto templateResult = storyTemplate->CreateStory(requiredEntities, graph, worldModel, rs);
-        currentResult.worldActions = move(templateResult.worldActions);
-        storyValue += worldActionWeight * currentResult.worldActions.size();
+        currentStory.worldActions = move(templateResult.worldActions);
+        storyValue += worldActionWeight * currentStory.worldActions.size();
 
-        string story = templateResult.rawText;
-
-        for (auto pair : templateResult.tokenMap) {
-            RawStoryToken token = pair.first;
-            Logger::Debug("Processing token " + token.text, 4);
-
-            auto ids = pair.second;
-            vector<NuggetOption> nuggetOptions;
-            float minRarity = 0;
-            for (string option : token.nuggetOptions) {
-                Logger::Debug("Nugget option " + option, 5);
-                nuggetOptions.push_back(NuggetOption(option, ids));
-                auto nuggetIter = nuggets.find(option);
-                if (nuggetIter != nuggets.end()) {
-                    minRarity = min(minRarity, nuggetIter->second.GetRarity());
-                }
-            }
-
-            // sort out optional tokens by rarity
-            int rarityToReach = static_cast<int>(minRarity + 1);
-            if (!token.isMandatory && rs->GetIntInRange(0, rarityToReach) == rarityToReach) {
-                replace(&story, token.text, "");
-                Logger::Debug("[Ignored] optional token", 5);
-                continue;
-            }
-
-            Logger::Debug("Gathering supported nuggets", 5);
-            vector<NuggetOption> supportedNuggets = getSupportedNuggets(nuggetOptions);
-            storyValue += nuggetWeight * supportedNuggets.size();
-            if (supportedNuggets.empty()) {
-                if (token.isMandatory) {
-                    // the story is broken at this point, because none of the required nuggets are known!
-                    storyValue = -1;
-                    break;
-                }
-                Logger::Debug("[Ignored] Jumping over optional token with no supported nuggets.", 5);
-                continue;
-            }
-
-            Logger::Debug("Choose nugget by rarity", 5);
-            uint64_t nuggetIndex = getNuggetIndexByRarity(supportedNuggets);
-            NuggetOption chosenOption = supportedNuggets[nuggetIndex];
-            Logger::Debug("Chosen nugget: " + chosenOption.GetNuggetKey(), 5);
-
-            // check previous quests for nugget entity matches
-            unordered_set<ID> nuggetIDs;
-            for (ID id : chosenOption.GetEntityIDs()) {
-                nuggetIDs.insert(id);
-            }
-            for (auto quest : questModel.GetQuests()) {
-                auto questEntities = questModel.GetQuestEntities(quest->GetId());
-                QuestState state = questModel.GetState(quest->GetId());
-                for (auto entity : questEntities) {
-                    if (nuggetIDs.count(entity->GetId())) {
-                        if (state == QuestState::Success || state == QuestState::Failed) {
-                            storyValue += finishedQuestWeight;
-                        } else {
-                            storyValue += unfinishedQuestWeight;
-                        }
-                    }
-                }
-            }
-
-            // place the nugget in the story
-            string nuggetText = getNuggetText(questValues, chosenOption);
-            Logger::Debug("Created formatted nugget text to place into the story: "
-                          + nuggetText.substr(0, 10) + "...", 4);
-            replace(&story, token.text, nuggetText);
-        }
-
+        string story = processTokens(questValues, templateResult, storyValue);
         regex spaces("[ \t\r]+");
         story = regex_replace(story, spaces, " ");
         regex trim("^\\s*([\\s\\S]+?)\\s*$");
@@ -402,16 +332,16 @@ map<float, Story> StoryWriter::createWeightedStories(
 
         if (templateEngine.GetFormat() == FormatterType::HTML) {
             replaceAll(&story, "\n", "<br/>\n");
-            currentResult.text = htmlEncloseWithTag(story, "span", "story");
+            currentStory.text = htmlEncloseWithTag(story, "span", "story");
         } else {
-            currentResult.text = story;
+            currentStory.text = story;
         }
         if (storyValue >= 0) {
             storyValue += storyCharWeight * story.length();
             // turn the weight into a probability
             storyValue = storyValue * (rs->GetIntInRange(0, 90) / 90.0f + 0.1f);
         }
-        weightedStories[storyValue] = currentResult;
+        weightedStories[storyValue] = currentStory;
     }
     // remove broken stories
     auto iter = weightedStories.find(-1);
@@ -421,10 +351,83 @@ map<float, Story> StoryWriter::createWeightedStories(
     return weightedStories;
 }
 
+string StoryWriter::processTokens(const QuestValueMap &questValues, const StoryTemplateResult &templateResult,
+                                float &storyValue) const {
+    string story = templateResult.rawText;
+    for (auto pair : templateResult.tokenMap) {
+        RawStoryToken token = pair.first;
+        Logger::Debug("Processing token " + token.text, 4);
+
+        auto ids = pair.second;
+        vector<NuggetOption> nuggetOptions;
+        float minRarity = 0;
+        for (string option : token.nuggetOptions) {
+            Logger::Debug("Nugget option " + option, 5);
+            nuggetOptions.push_back(NuggetOption(option, ids));
+            auto nuggetIter = nuggets.find(option);
+            if (nuggetIter != nuggets.end()) {
+                minRarity = min(minRarity, nuggetIter->second.GetRarity());
+            }
+        }
+
+        // sort out optional tokens by rarity
+        int rarityToReach = static_cast<int>(minRarity + 1);
+        if (!token.isMandatory && rs->GetIntInRange(0, rarityToReach) == rarityToReach) {
+            replace(&story, token.text, "");
+            Logger::Debug("[Ignored] optional token", 5);
+            continue;
+        }
+
+        Logger::Debug("Gathering supported nuggets", 5);
+        vector<NuggetOption> supportedNuggets = getSupportedNuggets(nuggetOptions);
+        storyValue += nuggetWeight * supportedNuggets.size();
+        if (supportedNuggets.empty()) {
+            if (token.isMandatory) {
+                // the story is broken at this point, because none of the required nuggets are known!
+                storyValue = -1;
+                break;
+            }
+            Logger::Debug("[Ignored] Jumping over optional token with no supported nuggets.", 5);
+            continue;
+        }
+
+        Logger::Debug("Choose nugget by rarity", 5);
+        uint64_t nuggetIndex = getNuggetIndexByRarity(supportedNuggets);
+        NuggetOption chosenOption = supportedNuggets[nuggetIndex];
+        Logger::Debug("Chosen nugget: " + chosenOption.GetNuggetKey(), 5);
+
+        // check previous quests for nugget entity matches
+        unordered_set<ID> nuggetIDs;
+        for (ID id : chosenOption.GetEntityIDs()) {
+            nuggetIDs.insert(id);
+        }
+        for (auto quest : questModel.GetQuests()) {
+            auto questEntities = questModel.GetQuestEntities(quest->GetId());
+            QuestState state = questModel.GetState(quest->GetId());
+            for (auto entity : questEntities) {
+                if (nuggetIDs.count(entity->GetId())) {
+                    if (state == QuestState::Success || state == QuestState::Failed) {
+                        storyValue += finishedQuestWeight;
+                    } else {
+                        storyValue += unfinishedQuestWeight;
+                    }
+                }
+            }
+        }
+
+        // place the nugget in the story
+        string nuggetText = getNuggetText(questValues, chosenOption);
+        Logger::Debug("Created formatted nugget text to place into the story: "
+                      + nuggetText.substr(0, 10) + "...", 4);
+        replace(&story, token.text, nuggetText);
+    }
+    return story;
+}
+
 string StoryWriter::getNuggetText(const QuestValueMap &questValues, const NuggetOption &chosenOption) const {
     Nugget chosenNugget = nuggets[chosenOption.GetNuggetKey()];
     auto texts = chosenNugget.GetTexts();
-    string nuggetText = texts[this->rs->GetRandomIndex(texts.size())];
+    string nuggetText = texts[rs->GetRandomIndex(texts.size())];
 
     for (string key : chosenNugget.GetRandomizationKeys()) {
         string from = "%" + key;
@@ -447,7 +450,7 @@ string StoryWriter::getNuggetText(const QuestValueMap &questValues, const Nugget
             Logger::Fatal(error);
         }
         string from = "%" + requiredType;
-        string to = questProperty.GetValueString(this->templateEngine.GetFormat());
+        string to = questProperty.GetValueString(templateEngine.GetFormat());
         if (!replace(&nuggetText, from, to)) {
             string error("Unable to replace nugget text (i=" + to_string(i) + ", key=" + requiredType + ")");
             Logger::Error(ContractFailedException(error));

@@ -114,5 +114,8 @@ namespace weave {
         uint64_t getNuggetIndexByRarity(const std::vector<NuggetOption> &supportedNuggets) const;
 
         QuestPropertyValue getQuestValueForID(const QuestValueMap &questValues, ID id) const;
+
+        std::string processTokens(const QuestValueMap &questValues, const StoryTemplateResult &templateResult,
+                           float &storyValue) const;
     };
 }

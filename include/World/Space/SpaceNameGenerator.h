@@ -9,6 +9,6 @@
 namespace weave {
     class SpaceNameGenerator : public NameGenerator {
     public:
-        virtual std::string CreateName(NameType nameType, std::shared_ptr<RandomStream> random) const override;
+        std::string CreateName(NameType nameType, std::shared_ptr<RandomStream> random) const override;
     };
 }

@@ -38,7 +38,7 @@ namespace weave {
 
     class SpaceWorldModel : public WorldModel {
     public:
-        SpaceWorldModel() = default;
+        SpaceWorldModel();
 
         explicit SpaceWorldModel(std::shared_ptr<RandomStream> randomStream);
 

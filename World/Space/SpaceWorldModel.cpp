@@ -25,6 +25,10 @@ WorldModelAction SpaceWorldModel::CreateLocation() const {
     return WorldModelAction(WorldActionType::CREATE, make_shared<SpaceLocation>(x, y, z));
 }
 
+SpaceWorldModel::SpaceWorldModel() : SpaceWorldModel(make_shared<RandomStream>()) {
+
+}
+
 SpaceWorldModel::SpaceWorldModel(std::shared_ptr<RandomStream> randomStream) : WorldModel() {
     rs = randomStream;
     nameGenerator = unique_ptr<SpaceNameGenerator>(new SpaceNameGenerator());
