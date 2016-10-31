@@ -410,22 +410,20 @@ string StoryWriter::processTokens(const QuestValueMap &questValues, const StoryT
             auto questEntities = questModel.GetQuestEntities(quest->GetId());
             QuestState state = questModel.GetState(quest->GetId());
             for (auto entity : questEntities) {
-                if (nuggetIDs.count(entity->GetId())) {
-                    if (state == QuestState::Success || state == QuestState::Failed) {
-                        storyValue += finishedQuestWeight;
-                    } else {
-                        storyValue += unfinishedQuestWeight;
-                    }
+                if (!nuggetIDs.count(entity->GetId())) {
+                    continue;
                 }
+                storyValue += (state == QuestState::Success || state == QuestState::Failed)
+                              ? finishedQuestWeight : unfinishedQuestWeight;
             }
         }
 
         // place the nugget in the story
         string nuggetText = getNuggetText(questValues, chosenOption);
-        Logger::Debug("Created formatted nugget text to place into the story: "
-                      + nuggetText.substr(0, 10) + "...", 4);
+        Logger::Debug("Created formatted nugget text to place into the story: " + nuggetText.substr(0, 10) + "...", 4);
         replace(&story, token.text, nuggetText);
     }
+
     return story;
 }
 
