@@ -31,6 +31,6 @@ before_script:
   - $HOME/cmake/bin/cmake $HOME/build/Cultrarius/QuestWeaver
 
 script:
-  - make
+  - make QuestWeaverTest
   - cd bin
   - ./QuestWeaverTest
