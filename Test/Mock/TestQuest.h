@@ -20,7 +20,7 @@ namespace weave {
 
         template<class Archive>
         static void load_and_construct(Archive &ar, cereal::construct<TestQuest> &construct) {
-            ID id;
+            ID id = 0;
             std::string title;
             std::string description;
 

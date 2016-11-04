@@ -4,7 +4,6 @@
 
 #include <World/Space/SpaceWorldModel.h>
 #include <World/Space/DeadCivilization.h>
-#include <World/Space/SpaceAgent.h>
 #include <World/Space/Artifact.h>
 #include <World/Space/SpaceStation.h>
 #include <World/Space/SpaceWreck.h>
