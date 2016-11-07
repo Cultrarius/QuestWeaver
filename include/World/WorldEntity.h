@@ -11,6 +11,7 @@ namespace weave {
 
     /*!
      * Represents an object in the game that is relevant for the quest system.
+     * Entities are stateless, any stateful information about an entity must be encoded as MetaData in the world model.
      *
      * @ingroup worldApi
      */

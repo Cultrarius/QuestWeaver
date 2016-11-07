@@ -89,9 +89,12 @@ namespace weave {
         /*!
          * The name generator used to create the names of world entities and story elements.
          */
-
         virtual const NameGenerator &GetNameGenerator() const = 0;
 
+        /*!
+         * Creates an action that when executed by the world model changes the metadata of the entitiy with the given ID
+         * to the value provided by the updater function parameter.
+         */
         WorldModelAction ChangeMetaData(ID entityId, std::string key, std::function<int(int)> updater) const;
 
     protected:
@@ -114,9 +117,9 @@ namespace weave {
 
         void updateMetaDataForId(ID newId, const MetaData &newData);
 
-        bool hasEntityWithId(ID id) const;
+        bool hasEntityWithId(ID id) const noexcept;
 
-        void informListeners(const std::vector<WorldModelAction> &actions);
+        void informListeners(const std::vector<WorldModelAction> &actions) const;
 
         // serialization
         friend class cereal::access;

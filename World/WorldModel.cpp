@@ -85,7 +85,7 @@ vector<shared_ptr<WorldEntity>> WorldModel::GetEntitiesWithType(string type) con
     return entityTypeCache[type];
 }
 
-bool WorldModel::hasEntityWithId(ID id) const {
+bool WorldModel::hasEntityWithId(ID id) const noexcept {
     return id != 0 && entities.count(id) > 0;
 }
 
@@ -124,7 +124,7 @@ void WorldModel::AddListener(shared_ptr<WorldListener> listener) const noexcept 
     }
 }
 
-void WorldModel::informListeners(const vector<WorldModelAction> &actions) {
+void WorldModel::informListeners(const vector<WorldModelAction> &actions) const {
     for (auto &listener : listeners) {
         listener->WorldChanged(actions);
     }
