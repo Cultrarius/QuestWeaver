@@ -22,9 +22,7 @@ StoryTemplateResult SimpleStoryTemplate::CreateStory(const EntityMap &requiredEn
         tokenEntityMap[to_string(i)] = {entity->GetId()};
 
         if (conditions.count(StoryCondition::OncePerEntity)) {
-            MetaData markedData;
-            markedData.SetValue(key, 1);
-            result.worldActions.emplace_back(WorldActionType::UPDATE, entity, markedData);
+            result.worldActions.emplace_back(WorldActionType::UPDATE, entity, MetaData(key, 1));
         }
     }
 

@@ -3,6 +3,7 @@
 //
 
 #include <QuestModel/Space/ExploreRegionQuest.h>
+#include <World/Space/MetaDataMarkers.h>
 
 using namespace weave;
 using namespace std;
@@ -26,8 +27,13 @@ ExploreRegionQuest::ExploreRegionQuest(const string &title, const string &descri
 QuestTickResult ExploreRegionQuest::Tick(float, const WorldModel &worldModel) {
     int explored = worldModel.GetMetaData(targetLocation).GetValue(metaDataMarker);
     if (explored >= 100) {
-        //TODO improve sponsor relationship
-        return QuestTickResult(QuestModelAction(QuestActionType::SUCCEED, GetId()));
+        string marker = MetaDataMarkers::RelationToPlayer;
+        auto updater = [](int oldValue) {
+            int newRelation = relationAdd + oldValue;
+            return newRelation > 100 ? 100 : newRelation;
+        };
+        WorldModelAction improveRelation = worldModel.ChangeMetaData(sponsor, marker, updater);
+        return QuestTickResult({improveRelation}, QuestModelAction(QuestActionType::SUCCEED, GetId()));
     }
     return QuestTickResult(GetId());
 }

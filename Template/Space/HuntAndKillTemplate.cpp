@@ -60,10 +60,8 @@ void HuntAndKillTemplate::gatherSponsorEntities(vector<PropertyCandidate> *candi
 
     // create new sponsor
     auto newEntityAction = spaceModel.CreateAgent(NameType::LIGHT_PERSON);
-    MetaData metaData;
-    metaData.SetValue(MetaDataMarkers::RelationToPlayer, 65);
-    WorldModelAction metaDataAction(WorldActionType::CREATE, newEntityAction.GetEntity(), metaData);
-    actions.push_back(move(metaDataAction));
+    MetaData metaData(MetaDataMarkers::RelationToPlayer, 65);
+    actions.emplace_back(WorldActionType::CREATE, newEntityAction.GetEntity(), metaData);
     candidates->emplace_back(actions, newEntityAction.GetEntity());
 
     // gather existing sponsors
@@ -110,10 +108,8 @@ void HuntAndKillTemplate::gatherTargetEntities(std::vector<PropertyCandidate> *c
     }
     if (!newOwner) {
         auto newEntityAction = spaceModel.CreateAgent(NameType::DARK_PERSON);
-        MetaData metaData;
-        metaData.SetValue(MetaDataMarkers::RelationToPlayer, 35);
-        WorldModelAction metaDataAction(WorldActionType::CREATE, newEntityAction.GetEntity(), metaData);
-        newShipActions.push_back(move(metaDataAction));
+        MetaData metaData(MetaDataMarkers::RelationToPlayer, 35);
+        newShipActions.emplace_back(WorldActionType::CREATE, newEntityAction.GetEntity(), metaData);
 
         newOwner = dynamic_pointer_cast<SpaceAgent>(newEntityAction.GetEntity());
     }
@@ -127,9 +123,7 @@ void HuntAndKillTemplate::gatherTargetEntities(std::vector<PropertyCandidate> *c
         auto shipData = spaceModel.GetMetaData(ship->GetId());
         auto ownerData = spaceModel.GetMetaData(ship->Owner->GetId());
         if (!shipData.HasValue(metaDataMarker) && ownerData.GetValue(MetaDataMarkers::RelationToPlayer) <= 50) {
-            MetaData metaData;
-            metaData.SetValue(metaDataMarker, 1);
-            WorldModelAction modelAction(WorldActionType::UPDATE, entity, metaData);
+            WorldModelAction modelAction(WorldActionType::UPDATE, entity, MetaData(metaDataMarker, 1));
             candidates->emplace_back(modelAction);
         }
     }

@@ -92,6 +92,8 @@ namespace weave {
 
         virtual const NameGenerator &GetNameGenerator() const = 0;
 
+        WorldModelAction ChangeMetaData(ID entityId, std::string key, std::function<int(int)> updater) const;
+
     protected:
         friend class QuestWeaver;
 

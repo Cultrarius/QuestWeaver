@@ -357,14 +357,23 @@ TEST_CASE("Explore quest", "[quest]") {
     }
 
     SECTION("Exploration Tick success") {
-        MetaData metaData;
-        metaData.SetValue(ExploreRegionQuest::metaDataMarker, 100);
+        MetaData metaData(ExploreRegionQuest::metaDataMarker, 100);
         WorldModelAction metaDataAction(WorldActionType::UPDATE, solarSystem, metaData);
         world.Execute({metaDataAction});
 
         QuestTickResult tickResult = quest->Tick(1, world);
         REQUIRE(tickResult.GetQuestChange().GetActionType() == QuestActionType::SUCCEED);
-        REQUIRE(tickResult.GetWorldChanges().size() == 0);
+        REQUIRE(tickResult.GetWorldChanges().size() == 1);
+    }
+
+    SECTION("Exploration Tick success with world action") {
+        WorldModelAction metaDataAction = world.ChangeMetaData(solarSystem->GetId(), ExploreRegionQuest::metaDataMarker,
+                                                               [](int) { return 100; });
+        world.Execute({metaDataAction});
+
+        QuestTickResult tickResult = quest->Tick(1, world);
+        REQUIRE(tickResult.GetQuestChange().GetActionType() == QuestActionType::SUCCEED);
+        REQUIRE(tickResult.GetWorldChanges().size() == 1);
     }
 }
 

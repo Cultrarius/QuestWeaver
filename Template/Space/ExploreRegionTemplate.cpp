@@ -36,10 +36,8 @@ void ExploreRegionTemplate::gatherSponsorEntities(vector<PropertyCandidate> *can
     auto newEntityAction = spaceModel.CreateAgent();
     actions.push_back(newEntityAction);
 
-    MetaData metaData;
-    metaData.SetValue(MetaDataMarkers::RelationToPlayer, 50);
-    WorldModelAction metaDataAction(WorldActionType::UPDATE, newEntityAction.GetEntity(), metaData);
-    actions.push_back(move(metaDataAction));
+    actions.emplace_back(WorldActionType::UPDATE, newEntityAction.GetEntity(),
+                         MetaData(MetaDataMarkers::RelationToPlayer, 50));
 
     candidates->emplace_back(actions, newEntityAction.GetEntity());
 
@@ -63,11 +61,9 @@ void ExploreRegionTemplate::gatherSolarSystemEntities(vector<PropertyCandidate> 
             newSolarSystem = action.GetEntity();
         }
         actions.push_back(action);
-        MetaData metaData;
-        metaData.SetValue(exploredPercent, 0);
+        MetaData metaData(exploredPercent, 0);
         metaData.SetValue(metaDataMarker, 1);  // so it does not get picked by another exploration quest
-        WorldModelAction metaDataAction(WorldActionType::UPDATE, action.GetEntity(), metaData);
-        actions.push_back(move(metaDataAction));
+        actions.emplace_back(WorldActionType::UPDATE, action.GetEntity(), metaData);
     }
     candidates->emplace_back(actions, newSolarSystem);
 
@@ -75,11 +71,9 @@ void ExploreRegionTemplate::gatherSolarSystemEntities(vector<PropertyCandidate> 
     for (auto entity : spaceModel.GetEntitiesWithType(SolarSystem::Type)) {
         auto entityData = spaceModel.GetMetaData(entity->GetId());
         if (!entityData.HasValue(metaDataMarker) && entityData.GetValue(exploredPercent) == 0) {
-            MetaData metaData;
-            metaData.SetValue(exploredPercent, 0);
+            MetaData metaData(exploredPercent, 0);
             metaData.SetValue(metaDataMarker, 1);
-            WorldModelAction modelAction(WorldActionType::UPDATE, entity, metaData);
-            candidates->emplace_back(modelAction);
+            candidates->emplace_back(WorldModelAction(WorldActionType::UPDATE, entity, metaData));
         }
     }
 }

@@ -7,6 +7,10 @@
 using namespace weave;
 using namespace std;
 
+MetaData::MetaData(std::string name, int value) {
+    SetValue(name, value);
+}
+
 bool MetaData::HasValue(const std::string &name) const {
     return data.count(name) > 0;
 }

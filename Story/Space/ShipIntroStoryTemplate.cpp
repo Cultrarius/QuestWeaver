@@ -25,9 +25,7 @@ StoryTemplateResult ShipIntroStoryTemplate::CreateStory(const EntityMap &require
     result.tokenMap = createTokenMapping(tokenEntityMap);
     result.rawText = rawText;
 
-    MetaData markedData;
-    markedData.SetValue(metaDataMarker, 1);
-    result.worldActions.emplace_back(WorldActionType::UPDATE, entity, markedData);
+    result.worldActions.emplace_back(WorldActionType::UPDATE, entity, MetaData(metaDataMarker, 1));
 
     return result;
 }

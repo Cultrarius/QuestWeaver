@@ -19,6 +19,17 @@ namespace weave {
      */
     class MetaData {
     public:
+
+        /*!
+         * Creates a new empty metadata object
+         */
+        MetaData() = default;
+
+        /*!
+         * Creates a new object with the given name-value pair already set.
+         */
+        MetaData(std::string name, int value);
+
         /*!
          * Returns true if this container holds a value for the given key.
          */

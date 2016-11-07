@@ -27,10 +27,12 @@ QuestTickResult HuntAndKillQuest::Tick(float, const WorldModel &worldModel) {
     auto targetData = worldModel.GetMetaData(targetShip);
     if (targetData.GetValue(MetaDataMarkers::Destroyed)) {
         if (sponsor) {
-            MetaData updated;
-            int newRelation = relationAdd + worldModel.GetMetaData(sponsor).GetValue(MetaDataMarkers::RelationToPlayer);
-            updated.SetValue(MetaDataMarkers::RelationToPlayer, newRelation > 100 ? 100 : newRelation);
-            worldChanges.emplace_back(WorldActionType::UPDATE, worldModel.GetEntityById(sponsor), updated);
+            auto updater = [](int oldVal) {
+                int newRelation = relationAdd + oldVal;
+                return newRelation > 100 ? 100 : newRelation;
+            };
+            WorldModelAction updated = worldModel.ChangeMetaData(sponsor, MetaDataMarkers::RelationToPlayer, updater);
+            worldChanges.push_back(updated);
         }
         return QuestTickResult(worldChanges, QuestModelAction(QuestActionType::SUCCEED, GetId()));
     }
@@ -38,8 +40,7 @@ QuestTickResult HuntAndKillQuest::Tick(float, const WorldModel &worldModel) {
     // move target to the quest solar system if necessary
     if (worldModel.GetEntityById(targetShip) &&
         (ID) targetData.GetValue(MetaDataMarkers::CurrentLocation) != solarSystem) {
-        MetaData updated;
-        updated.SetValue(MetaDataMarkers::CurrentLocation, solarSystem);
+        MetaData updated(MetaDataMarkers::CurrentLocation, solarSystem);
         worldChanges.emplace_back(WorldActionType::UPDATE, worldModel.GetEntityById(targetShip), updated);
     }
     return QuestTickResult(GetId(), worldChanges);

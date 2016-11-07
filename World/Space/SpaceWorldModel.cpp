@@ -202,8 +202,7 @@ std::vector<WorldModelAction> SpaceWorldModel::InitializeNewWorld() const {
         actions.push_back(newAgentAction);
         actions.push_back(CreateSpaceShip(dynamic_pointer_cast<SpaceAgent>(newAgentAction.GetEntity())));
 
-        MetaData metaData;
-        metaData.SetValue("relationToPlayer", rs->GetNormalIntInRange(65, 100));
+        MetaData metaData("relationToPlayer", rs->GetNormalIntInRange(65, 100));
         actions.emplace_back(WorldActionType::UPDATE, newAgentAction.GetEntity(), metaData);
     }
 
@@ -213,8 +212,7 @@ std::vector<WorldModelAction> SpaceWorldModel::InitializeNewWorld() const {
         actions.push_back(newAgentAction);
         actions.push_back(CreateSpaceShip(dynamic_pointer_cast<SpaceAgent>(newAgentAction.GetEntity())));
 
-        MetaData metaData;
-        metaData.SetValue("relationToPlayer", rs->GetNormalIntInRange(35, 65));
+        MetaData metaData("relationToPlayer", rs->GetNormalIntInRange(35, 65));
         actions.emplace_back(WorldActionType::UPDATE, newAgentAction.GetEntity(), metaData);
     }
 
@@ -224,8 +222,7 @@ std::vector<WorldModelAction> SpaceWorldModel::InitializeNewWorld() const {
         actions.push_back(newAgentAction);
         actions.push_back(CreateSpaceShip(dynamic_pointer_cast<SpaceAgent>(newAgentAction.GetEntity())));
 
-        MetaData metaData;
-        metaData.SetValue("relationToPlayer", rs->GetNormalIntInRange(0, 35));
+        MetaData metaData("relationToPlayer", rs->GetNormalIntInRange(0, 35));
         actions.emplace_back(WorldActionType::UPDATE, newAgentAction.GetEntity(), metaData);
     }
 

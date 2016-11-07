@@ -65,8 +65,7 @@ void ScanPlanetTemplate::gatherPlanetEntities(vector<PropertyCandidate> *candida
             newPlanet = action.GetEntity();
         }
         actions.push_back(action);
-        MetaData metaData;
-        metaData.SetValue(scanPercent, 0);
+        MetaData metaData(scanPercent, 0);
         metaData.SetValue(metaDataMarker, 1);  // so it does not get picked by another exploration quest
         WorldModelAction metaDataAction(WorldActionType::UPDATE, action.GetEntity(), metaData);
         actions.push_back(move(metaDataAction));
@@ -77,8 +76,7 @@ void ScanPlanetTemplate::gatherPlanetEntities(vector<PropertyCandidate> *candida
     for (auto entity : spaceModel.GetEntitiesWithType(Planet::Type)) {
         auto entityData = spaceModel.GetMetaData(entity->GetId());
         if (!entityData.HasValue(metaDataMarker) && entityData.GetValue(scanPercent) == 0) {
-            MetaData metaData;
-            metaData.SetValue(scanPercent, 0);
+            MetaData metaData(scanPercent, 0);
             metaData.SetValue(metaDataMarker, 1);
             WorldModelAction modelAction(WorldActionType::UPDATE, entity, metaData);
             candidates->emplace_back(modelAction);
@@ -92,10 +90,8 @@ void ScanPlanetTemplate::gatherSponsorEntities(vector<PropertyCandidate> *candid
     auto newEntityAction = spaceModel.CreateAgent();
     actions.push_back(newEntityAction);
 
-    MetaData metaData;
-    metaData.SetValue(MetaDataMarkers::RelationToPlayer, 50);
-    WorldModelAction metaDataAction(WorldActionType::UPDATE, newEntityAction.GetEntity(), metaData);
-    actions.push_back(move(metaDataAction));
+    MetaData metaData(MetaDataMarkers::RelationToPlayer, 50);
+    actions.emplace_back(WorldActionType::UPDATE, newEntityAction.GetEntity(), metaData);
 
     candidates->emplace_back(actions, newEntityAction.GetEntity());
 

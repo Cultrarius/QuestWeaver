@@ -285,8 +285,7 @@ TEST_CASE("StoryTemplates", "[story]") {
     }
 
     SECTION("Condition - does not have ...") {
-        MetaData metaData;
-        metaData.SetValue("someProperty", 1);
+        MetaData metaData("someProperty", 1);
         WorldModelAction changeAction(WorldActionType::UPDATE, testEntity, metaData);
         worldModel.Execute({changeAction});
         writer.RegisterTemplateFactory(
@@ -301,8 +300,7 @@ TEST_CASE("StoryTemplates", "[story]") {
         auto result = writer.CreateStory(StoryWriterParameters(graph, values), "entityLineSimple2");
         REQUIRE(result.text == "");
 
-        MetaData metaData;
-        metaData.SetValue("someProperty", 1);
+        MetaData metaData("someProperty", 1);
         WorldModelAction changeAction(WorldActionType::UPDATE, testEntity, metaData);
         worldModel.Execute({changeAction});
 
@@ -316,8 +314,7 @@ TEST_CASE("StoryTemplates", "[story]") {
         auto result = writer.CreateStory(StoryWriterParameters(graph, values), "conditionGreaterAndSmaller");
         REQUIRE(result.text == "");
 
-        MetaData metaData;
-        metaData.SetValue("someProperty", 10);
+        MetaData metaData("someProperty", 10);
         WorldModelAction changeAction(WorldActionType::UPDATE, testEntity, metaData);
         worldModel.Execute({changeAction});
 

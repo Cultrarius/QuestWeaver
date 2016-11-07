@@ -102,7 +102,7 @@ MetaData WorldModel::GetMetaData(ID entityId) const noexcept {
     return mapEntry == metaData.end() ? MetaData() : mapEntry->second;
 }
 
-std::vector<WorldModelAction> WorldModel::GetMetaDataHistoryForId(ID id) const noexcept {
+vector<WorldModelAction> WorldModel::GetMetaDataHistoryForId(ID id) const noexcept {
     vector<WorldModelAction> result;
     for (auto action : actionHistory) {
         if (action.GetEntity()->GetId() == id &&
@@ -114,18 +114,24 @@ std::vector<WorldModelAction> WorldModel::GetMetaDataHistoryForId(ID id) const n
     return result;
 }
 
-std::vector<WorldModelAction> WorldModel::GetHistory() const noexcept {
+vector<WorldModelAction> WorldModel::GetHistory() const noexcept {
     return actionHistory;
 }
 
-void WorldModel::AddListener(std::shared_ptr<WorldListener> listener) const noexcept {
+void WorldModel::AddListener(shared_ptr<WorldListener> listener) const noexcept {
     if (listener) {
         listeners.push_back(listener);
     }
 }
 
-void WorldModel::informListeners(const std::vector<WorldModelAction> &actions) {
+void WorldModel::informListeners(const vector<WorldModelAction> &actions) {
     for (auto &listener : listeners) {
         listener->WorldChanged(actions);
     }
+}
+
+WorldModelAction WorldModel::ChangeMetaData(ID entityId, string key, function<int(int)> updater) const {
+    auto entity = GetEntityById(entityId);
+    auto metaData = GetMetaData(entityId);
+    return WorldModelAction(WorldActionType::UPDATE, entity, MetaData(key, updater(metaData.GetValue(key))));
 }
