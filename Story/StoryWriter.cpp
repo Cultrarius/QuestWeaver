@@ -341,11 +341,8 @@ map<float, Story> StoryWriter::createWeightedStories(
 }
 
 void StoryWriter::applyFinalFormatting(Story *currentStory, string story) const {
-    regex spaces("[ \t\r]+");
     story = regex_replace(story, spaces, " ");
-    regex trim("^\\s*([\\s\\S]+?)\\s*$");
     story = regex_replace(story, trim, "$1");
-    regex newlines("\n\\s*\n\\s*\n");
     story = regex_replace(story, newlines, "\n\n");
 
     if (templateEngine.GetFormat() == FormatterType::HTML) {

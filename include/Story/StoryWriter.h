@@ -73,10 +73,12 @@ namespace weave {
         mutable bool isInitialized = false;
         mutable std::unordered_map<std::string, Nugget> nuggets;
 
+        const std::regex spaces = std::regex("[ \t\r]+", std::regex_constants::optimize);
+        const std::regex trim = std::regex("^\\s*([\\s\\S]+?)\\s*$", std::regex_constants::optimize);
+        const std::regex newlines = std::regex("\n\\s*\n\\s*\n", std::regex_constants::optimize);
+
         void initialize() const;
-
         void readNuggets() const;
-
         void checkValidNuggetJson(Json::Value root, std::string filePath) const;
 
         bool hasAll(std::set<std::string> requiredEntities,
