@@ -35,7 +35,7 @@ namespace weave {
         }
 
     private:
-        static const int relationAdd = 2;
+        static const int relationAdd = 5;
         ID targetLocation;
         ID sponsor;
 

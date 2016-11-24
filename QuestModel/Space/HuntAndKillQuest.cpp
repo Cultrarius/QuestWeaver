@@ -40,6 +40,7 @@ QuestTickResult HuntAndKillQuest::Tick(float, const WorldModel &worldModel) {
     // move target to the quest solar system if necessary
     if (worldModel.GetEntityById(targetShip) &&
         (ID) targetData.GetValue(MetaDataMarkers::CurrentLocation) != solarSystem) {
+        //TODO set location within the system
         MetaData updated(MetaDataMarkers::CurrentLocation, solarSystem);
         worldChanges.emplace_back(WorldActionType::UPDATE, worldModel.GetEntityById(targetShip), updated);
     }

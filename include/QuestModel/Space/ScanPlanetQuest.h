@@ -10,6 +10,7 @@ namespace weave {
     class ScanPlanetQuest : public Quest {
     public:
         static const std::string metaDataMarker;
+        static const int relationAdd = 2;
 
         ScanPlanetQuest(const std::string &title, const std::string &description, const std::string &story,
                         ID planetId, ID sponsorId);

@@ -2,6 +2,7 @@
 // Created by michael on 25.03.16.
 //
 
+#include <World/Space/MetaDataMarkers.h>
 #include "QuestModel/Space/ScanPlanetQuest.h"
 
 using namespace weave;
@@ -26,8 +27,16 @@ ScanPlanetQuest::ScanPlanetQuest(const string &title, const string &description,
 QuestTickResult ScanPlanetQuest::Tick(float, const WorldModel &worldModel) {
     int scanned = worldModel.GetMetaData(targetPlanet).GetValue(metaDataMarker);
     if (scanned >= 100) {
-        //TODO improve sponsor relationship
-        return QuestTickResult(QuestModelAction(QuestActionType::SUCCEED, GetId()));
+        vector<WorldModelAction> worldChanges;
+        if (sponsor) {
+            auto updater = [](int oldVal) {
+                int newRelation = relationAdd + oldVal;
+                return newRelation > 100 ? 100 : newRelation;
+            };
+            WorldModelAction updated = worldModel.ChangeMetaData(sponsor, MetaDataMarkers::RelationToPlayer, updater);
+            worldChanges.push_back(updated);
+        }
+        return QuestTickResult(worldChanges, QuestModelAction(QuestActionType::SUCCEED, GetId()));
     }
     return QuestTickResult(GetId());
 }
