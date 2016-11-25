@@ -95,4 +95,6 @@ namespace weave {
      * @ingroup internal
      */
     Json::Value readJsonFromFile(const char *fileName, const Directories &dirs);
+
+    std::vector<TextToken> tokenizeText(std::string rawText) noexcept;
 }

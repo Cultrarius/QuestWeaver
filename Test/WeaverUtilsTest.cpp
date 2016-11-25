@@ -245,3 +245,22 @@ TEST_CASE("Json Reader", "[utils]") {
         REQUIRE_THROWS_AS(readJsonFromFile("broken.qt", testDirs), ContractFailedException);
     }
 }
+
+TEST_CASE("StringTokenizer", "[utils]") {
+    SECTION("Read test tokens") {
+        string text = "ABC [def |g] {hij| klmn op | ööö} {{hallo}} {|} {test||123} uvw";
+        cout << text << endl;
+        auto tokens = tokenizeText(text);
+        for (auto token : tokens) {
+            cout << token.isMandatory << ": <" << token.rawTokenText << ">\n";
+            for (auto choice : token.content) {
+                cout << "  -> _" << choice << "_\n";
+            }
+        }
+        cout << "----------\n";
+        tokens = tokenizeText("{def}");
+        for (auto token : tokens) {
+            cout << token.isMandatory << ": <" << token.rawTokenText << ">\n";
+        }
+    }
+}

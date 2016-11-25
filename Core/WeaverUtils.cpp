@@ -4,6 +4,7 @@
 
 #include <Core/WeaverUtils.h>
 #include <fstream>
+#include <regex>
 
 using namespace std;
 using namespace weave;
@@ -101,4 +102,47 @@ Value weave::readJsonFromFile(const char *fileName, const Directories &dirs) {
     }
 
     return root;
+}
+
+vector<TextToken> weave::tokenizeText(string rawText) noexcept {
+    // Prepare tokenizer regexes
+    static string validContent = "[^}\\]|]*";  // valid content
+    static string tokenContent = "(" + validContent + "(?:\\|" + validContent + ")*)";  // single token
+    static string optionalToken = "\\{(" + tokenContent + ")\\}";
+    static string mandatoryToken = "\\[(" + tokenContent + ")\\]";
+    static string plainText = "([^\\[{]+)";
+
+    static regex tokenRegex("(" + optionalToken + "|" + mandatoryToken + "|" + plainText + ")");
+    static regex mandatoryRegex(mandatoryToken);
+    static regex optionalRegex(optionalToken);
+    static regex plainTextRegex(plainText);
+    static regex contentRegex(validContent);
+    static sregex_token_iterator iteratorEnd;
+
+    // Tokenize input
+    vector<TextToken> tokens;
+    sregex_token_iterator tokenIt(rawText.begin(), rawText.end(), tokenRegex);
+    while (tokenIt != iteratorEnd) {
+        string text = (*tokenIt).str();
+        vector<string> values;
+
+        smatch matchResult;
+        if (regex_match(text, matchResult, plainTextRegex)) {
+            values.push_back(text);
+            tokens.push_back({true, text, values});
+        } else {
+            bool isMandatory = regex_match(text, matchResult, mandatoryRegex);
+            if (!isMandatory) {
+                regex_match(text, matchResult, optionalRegex);
+            }
+            string content = matchResult[1].str();
+            sregex_token_iterator optionIt(content.begin(), content.end(), contentRegex);
+            copy_if(optionIt, iteratorEnd, back_inserter(values), [](const string& s) {return !s.empty();});
+            if (!values.empty()) {
+                tokens.push_back({isMandatory, text, values});
+            }
+        }
+        tokenIt++;
+    }
+    return tokens;
 }

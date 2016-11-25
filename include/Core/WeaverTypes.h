@@ -308,4 +308,10 @@ namespace weave {
             return "DefaultName" + std::to_string(static_cast<int>(nameType)) + std::to_string(random->GetInt());
         }
     };
+
+    struct TextToken {
+        bool isMandatory;
+        std::string rawTokenText;
+        std::vector<std::string> content;
+    };
 }
