@@ -1,7 +1,7 @@
 # QuestWeaver
 
 <a href='https://coveralls.io/github/Cultrarius/QuestWeaver?branch=master'><img src='https://coveralls.io/repos/github/Cultrarius/QuestWeaver/badge.svg?branch=master' alt='Coverage Status' /></a>
-<a href="https://creativecommons.org/publicdomain/zero/1.0/deed.de"><img src="https://img.shields.io/badge/license-CC0-green.svg"></a>
+<a href="http://unlicense.org/"><img src="https://img.shields.io/badge/license-Public%20Domain-blue.svg"></a>
 
 Procedurally generated quests and stories for computer games.
 
